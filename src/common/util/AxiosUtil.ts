@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: 'http://greyworm-endo-admin.spatialfrontlab.com/',
+  baseURL: 'https://greyworm-endo-admin.spatialfrontlab.com/',
 });
