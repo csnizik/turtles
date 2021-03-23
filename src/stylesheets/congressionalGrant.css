@@ -1,0 +1,22 @@
+li {
+    list-style-type: none;
+  }
+  li span {
+      text-decoration: underline;
+      text-transform:capitalize;
+      font-weight: 1000;
+      padding-right: 10px;
+  }
+
+  .awardee-list {
+    padding: 10px;
+    margin: 10px;
+  }
+  .appendix{
+      text-align: center;
+      
+  }
+  .top{
+    padding-top: 130px;
+    text-decoration: underline;
+  }
