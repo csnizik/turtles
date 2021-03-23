@@ -10,12 +10,7 @@ body {
  
 }
 .container {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
   width: 90%;
-  /* text-align: center; */
   border: 1px solid darkgrey;
   box-shadow: 5px 5px 5px 1px #ccc;
   border-radius: 5px;

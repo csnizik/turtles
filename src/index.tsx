@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CongressionalReport from './app/CongressionalReport';
+import CongressionalGrant from './app/CongressionalGrant';
 import './stylesheets/app.css';
 
-const App = () => {
-  return (
-    <div className='container'>
-      <CongressionalReport />
-    </div>
-  );
-};
+const App = () => (
+  <div className='container'>
+    <CongressionalGrant />
+  </div>
+);
 
 ReactDOM.render(<App />, document.getElementById('root'));
