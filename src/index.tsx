@@ -1,12 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CongressionalGrant from './app/CongressionalGrant';
+import App from './containers/app/App';
 import './stylesheets/app.css';
 
-const App = () => (
-  <div className='container'>
-    <CongressionalGrant />
-  </div>
+ReactDOM.render(
+  <App />, document.getElementById('root')
 );
-
-ReactDOM.render(<App />, document.getElementById('root'));

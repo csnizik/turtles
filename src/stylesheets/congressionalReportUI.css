@@ -1,62 +1,61 @@
-.heading{
-    font-size:6rem;
-    padding: 100px;
-    text-align: center;
-    margin: 100px;
-    font-weight: bold;
-    padding-bottom: 500px;
+.heading {
+  font-size:6rem;
+  padding: 100px;
+  text-align: center;
+  margin: 100px;
+  font-weight: bold;
+  padding-bottom: 500px;
 
 }
 
-.subHeading1, .subHeading2{
-    font-size: 2rem;
-    text-align: center;
-    padding: 400px ;
-    padding-bottom:0;
+.subHeading1, .subHeading2 {
+  font-size: 2rem;
+  text-align: center;
+  padding: 400px ;
+  padding-bottom:0;
 }
 
-.subHeading2{
-    padding-top:50px;
-    padding-bottom:400px;
+.subHeading2 {
+  padding-top:50px;
+  padding-bottom:400px;
 }
 
-.introductionHeading{
-    padding:10px;
-    font-size: 2rem;
-    font-weight: 1000;
+.introductionHeading {
+  padding:10px;
+  font-size: 2rem;
+  font-weight: 1000;
 }
 
-.introductionHeadingPara, .introductionHeadingParaList{
-    font-size:1.5rem;
-    padding:20px;
+.introductionHeadingPara, .introductionHeadingParaList {
+  font-size:1.5rem;
+  padding:20px;
 }
 
-.introductionHeadingParaList>li {
-    list-style-type:circle;
+.introductionHeadingParaList > li {
+  list-style-type:circle;
 }
 
 .introductionHeadingParaList {
-    padding-top: 0;
-    margin:0;
+  padding-top: 0;
+  margin:0;
 }
 
-.innerHeading{
-    text-decoration: underline;
+.innerHeading {
+  text-decoration: underline;
 }
 
-.orderedList>li{
-    list-style-type:upper-roman;
+.orderedList > li {
+  list-style-type:upper-roman;
 }
-.unorderedList>li{
-    list-style-type: square;
-}
-
-.table, th, td{
-    border: 1px solid black;
-    padding: 10px;
+.unorderedList > li {
+  list-style-type: square;
 }
 
-th{
-    font-size:1.5rem;
+.table, th, td {
+  border: 1px solid black;
+  padding: 10px;
 }
 
+th {
+  font-size:1.5rem;
+}
