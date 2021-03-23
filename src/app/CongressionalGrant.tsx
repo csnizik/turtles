@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import getReport from '../common/util/AxiosUtil';
-import {formatCurrency } from '../utils/formats';
+import { formatCurrency } from '../utils/formats';
 import '../stylesheets/congressionalGrant.css';
 import '../stylesheets/congressionalReportUI.css';
 
