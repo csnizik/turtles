@@ -1,21 +1,17 @@
 import 'regenerator-runtime/runtime';
 import React from 'react';
-import CongressionalGrant from '../app/CongressionalGrant'
+import Home from '../app/Home'
+import { BrowserRouter as Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import { act } from "react-dom/test-utils";
 
-// const sum = (x, y) => {
-//   return x + y;
-// }
-//
-// test('App loads', () => {
-//   expect(sum(1, 2)).toBe(3);
-// } )
-
-test('Should display the conents of the app component', async () => {
-  const { container } = await render(<CongressionalGrant />);
-  container.querySelector('.appendix.top');
-  await expect(screen.getByTestId('custom-element')).toBeDefined();
+test('Should display the conents of the home component', () => {
+  const { container } = render(
+    <Router>
+      <Home />
+    </Router>
+  );
+  container.querySelector('.home');
+  expect(screen.getByText('Access Reports')).toBeDefined();
 })
 
 module.exports = {};
