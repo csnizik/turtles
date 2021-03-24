@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import getReport from '../common/util/AxiosUtil';
 import { formatCurrency } from '../utils/formats';
 import '../stylesheets/congressionalGrant.css';
@@ -27,23 +28,25 @@ const CongressionalReport: React.FC = () => {
   const [grants, setGrants] = useState<IGrant[] | null>();
   const [mainContent, setMainContent] = useState<IMainContent | null>();
   const [grantSummary, setGrantSummary] = useState<IGrantSummary | null>();
+  const { year } = useParams<any>();
+
 
   const grantReport = async () => {
-    const { data } = await getReport.get('/congressionalReport/grant/123');
+    const { data } = await getReport.get(`/congressionalReport/grant/${year}`);
 
     setGrants(data);
   };
 
   const grantSummaryReport = async () => {
     const { data } = await getReport.get(
-      '/congressionalReport/grantSummary/123'
+      `/congressionalReport/grantSummary/${year}`
     );
     setGrantSummary(data);
   };
 
   const mainContentReport = async () => {
     const { data } = await getReport.get(
-      '/congressionalReport/mainContent/123'
+      `/congressionalReport/mainContent/${year}`
     );
     setMainContent(data);
   };
