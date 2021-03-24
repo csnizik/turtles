@@ -7,7 +7,7 @@ Instructions to setup project on your local machine.
 
 1. Clone project
 ```
-git clone https://beschtabrandon@bitbucket.org/gassomsfi/greyworm-epi.git
+git clone https://{your_user_name}@bitbucket.org/gassomsfi/greyworm-epi.git
 ```
 2. Install node packages
 ```
