@@ -18,3 +18,13 @@ body {
   height: 100%;
   overflow: wrap;
 }
+
+.home {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.reportLink {
+  border: 1px solid black;
+  padding: 10px;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
-import { IGrant } from '../containers/app/App';
+import { IGrant } from '../containers/GrantContainer';
+import { formatCurrency } from '../utils/formats';
 import '../stylesheets/congressionalGrant.css';
 import '../stylesheets/congressionalReportUI.css';
 
@@ -12,11 +13,14 @@ const CongressionalGrant = (props: any) => {
       )}
       <h1 className='appendix top'>Appendix:SHD 2020 Awarded Projects</h1>
       <p className='appendix'>
-        Total NRCS Funds Awarded: ${grantSummary && grantSummary.awards}
+        Total NRCS Funds Awarded:
+        {' '}
+        {grantSummary && formatCurrency(grantSummary.awards)}
       </p>
       <p className='appendix'>
-        Total Grantee Matching Contributions: $
-        {grantSummary && grantSummary.matching}
+        Total Grantee Matching Contributions:
+        {' '}
+        {grantSummary && formatCurrency(grantSummary.matching)}
       </p>
       <ul>
         {grants &&
@@ -32,7 +36,7 @@ const CongressionalGrant = (props: any) => {
                 {item.project}
               </li>
               <li>
-                <span>Award:</span>${item.award}
+                <span>Award:</span>{formatCurrency(item.award)}
               </li>
               <li>
                 <span>States Involved:</span>
