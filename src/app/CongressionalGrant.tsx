@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import getReport from '../common/util/AxiosUtil';
+import { formatCurrency } from '../utils/formats';
 import '../stylesheets/congressionalGrant.css';
 import '../stylesheets/congressionalReportUI.css';
 
@@ -26,36 +28,27 @@ const CongressionalReport: React.FC = () => {
   const [grants, setGrants] = useState<IGrant[] | null>();
   const [mainContent, setMainContent] = useState<IMainContent | null>();
   const [grantSummary, setGrantSummary] = useState<IGrantSummary | null>();
+  const { year } = useParams<any>();
 
- const grantReport = async () => {
-  try {
-    const { data } = await getReport.get('/congressionalReport/grant/123');
+
+  const grantReport = async () => {
+    const { data } = await getReport.get(`/congressionalReport/grant/${year}`);
+
     setGrants(data);
-  } catch (error) {
-    console.error(error);
-  }
   };
 
   const grantSummaryReport = async () => {
-    try {
-      const { data } = await getReport.get(
-        '/congressionalReport/grantSummary/123'
-      );
-      setGrantSummary(data);
-    } catch (error) {
-      console.error(error);
-    }
+    const { data } = await getReport.get(
+      `/congressionalReport/grantSummary/${year}`
+    );
+    setGrantSummary(data);
   };
 
   const mainContentReport = async () => {
-    try {
-      const { data } = await getReport.get(
-        '/congressionalReport/mainContent/123'
-      );
-      setMainContent(data);
-    } catch (error) {
-      console.error(error);
-    }
+    const { data } = await getReport.get(
+      `/congressionalReport/mainContent/${year}`
+    );
+    setMainContent(data);
   };
 
   useEffect(() => {
@@ -69,13 +62,16 @@ const CongressionalReport: React.FC = () => {
       {mainContent && (
         <div dangerouslySetInnerHTML={{ __html: mainContent.reportBody }}></div>
       )}
-      <h1 data-testid="custom-element" className='appendix top'>Appendix:SHD 2020 Awarded Projects</h1>
+      <h1 className='appendix top'>Appendix:SHD 2020 Awarded Projects</h1>
       <p className='appendix'>
-        Total NRCS Funds Awarded: ${grantSummary && grantSummary.awards}
+        Total NRCS Funds Awarded:
+        {' '}
+        {grantSummary && formatCurrency(grantSummary.awards)}
       </p>
       <p className='appendix'>
-        Total Grantee Matching Contributions: $
-        {grantSummary && grantSummary.matching}
+        Total Grantee Matching Contributions:
+        {' '}
+        {grantSummary && formatCurrency(grantSummary.matching)}
       </p>
       <ul>
         {grants &&
@@ -91,7 +87,7 @@ const CongressionalReport: React.FC = () => {
                 {item.project}
               </li>
               <li>
-                <span>Award:</span>${item.award}
+                <span>Award:</span>{formatCurrency(item.award)}
               </li>
               <li>
                 <span>States Involved:</span>
