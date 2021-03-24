@@ -27,7 +27,7 @@ const CongressionalReport: React.FC = () => {
   const [mainContent, setMainContent] = useState<IMainContent | null>();
   const [grantSummary, setGrantSummary] = useState<IGrantSummary | null>();
 
-  const grantReport = async () => {
+ const grantReport = async () => {
     try {
       const { data } = await getReport.get('/congressionalReport/grant/123');
 
