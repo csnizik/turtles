@@ -58,7 +58,7 @@ const CongressionalReport: React.FC = () => {
       {mainContent && (
         <div dangerouslySetInnerHTML={{ __html: mainContent.reportBody }}></div>
       )}
-      <h1 className='appendix top'>Appendix:SHD 2020 Awarded Projects</h1>
+      <h1 data-testid="custom-element" className='appendix top'>Appendix:SHD 2020 Awarded Projects</h1>
       <p className='appendix'>
         Total NRCS Funds Awarded: ${grantSummary && grantSummary.awards}
       </p>

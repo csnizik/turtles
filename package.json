@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
     "@types/jest": "^26.0.20",
     "@types/node": "^12.20.6",
@@ -44,6 +43,14 @@
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.12.1",
-    "jest": "^26.6.0"
+    "@testing-library/react": "^11.2.5",
+    "jest": "^26.6.0",
+    "regenerator-runtime": "^0.13.7"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__tests__/App.js",
+      "\\.(css|less)$": "<rootDir>/__tests__/App.js"
+    }
   }
 }
