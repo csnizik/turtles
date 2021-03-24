@@ -28,23 +28,44 @@ const CongressionalReport: React.FC = () => {
   const [grantSummary, setGrantSummary] = useState<IGrantSummary | null>();
 
   const grantReport = async () => {
-    const { data } = await getReport.get('/congressionalReport/grant/123');
+    try {
+      const { data } = await getReport.get('/congressionalReport/grant/123');
 
-    setGrants(data);
+      setGrants(data);
+} catch (error) {
+  console.log(error);
+  // expected output: ReferenceError: nonExistentFunction is not defined
+  // Note - error messages will vary depending on browser
+}
+
   };
 
   const grantSummaryReport = async () => {
-    const { data } = await getReport.get(
-      '/congressionalReport/grantSummary/123'
-    );
-    setGrantSummary(data);
+    try {
+      const { data } = await getReport.get(
+        '/congressionalReport/grantSummary/123'
+      );
+      setGrantSummary(data);
+    } catch (error) {
+    console.log(error);
+    // expected output: ReferenceError: nonExistentFunction is not defined
+    // Note - error messages will vary depending on browser
+    }
+
   };
 
   const mainContentReport = async () => {
-    const { data } = await getReport.get(
-      '/congressionalReport/mainContent/123'
-    );
-    setMainContent(data);
+    try {
+      const { data } = await getReport.get(
+        '/congressionalReport/mainContent/123'
+      );
+      setMainContent(data);
+} catch (error) {
+  console.log(error);
+  // expected output: ReferenceError: nonExistentFunction is not defined
+  // Note - error messages will vary depending on browser
+}
+
   };
 
   useEffect(() => {
