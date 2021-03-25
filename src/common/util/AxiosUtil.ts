@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const baseURL = 'https://greyworm-endo-admin.spatialfrontlab.com/';
+
 const baseRequest = axios.create({
-  baseURL: 'https://greyworm-endo-admin.spatialfrontlab.com/',
+  baseURL
 });
 
 export function getRequest(path: string) {
