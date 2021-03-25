@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { fromJS, Map, List } from 'immutable';
 import { useParams } from "react-router-dom";
 import getReport from '../common/util/AxiosUtil';
 import { formatCurrency } from '../utils/formats';
@@ -22,33 +23,34 @@ interface IMainContent {
 interface IGrantSummary {
   awards: number;
   matching: number;
+  size: number;
 }
 
 const CongressionalReport: React.FC = () => {
-  const [grants, setGrants] = useState<IGrant[] | null>();
+  const [grants, setGrants] = useState<IGrant[]>(List() as any);
   const [mainContent, setMainContent] = useState<IMainContent | null>();
-  const [grantSummary, setGrantSummary] = useState<IGrantSummary | null>();
+  const [grantSummary, setGrantSummary] = useState<IGrantSummary>(Map() as any);
   const { year } = useParams<any>();
 
 
   const grantReport = async () => {
     const { data } = await getReport.get(`/congressionalReport/grant/${year}`);
 
-    setGrants(data);
+    setGrants(fromJS(data));
   };
 
   const grantSummaryReport = async () => {
     const { data } = await getReport.get(
       `/congressionalReport/grantSummary/${year}`
     );
-    setGrantSummary(data);
+    setGrantSummary(fromJS(data));
   };
 
   const mainContentReport = async () => {
     const { data } = await getReport.get(
       `/congressionalReport/mainContent/${year}`
     );
-    setMainContent(data);
+    setMainContent(fromJS(data));
   };
 
   useEffect(() => {
@@ -57,49 +59,64 @@ const CongressionalReport: React.FC = () => {
     mainContentReport();
   }, []);
 
+  const renderGrants = () => {
+    if (!grants.size) return null;
+    return (
+      <ul>
+        { grants.map((item: IGrant) => (
+          <div className='awardee-list' key={item.id}>
+            <span>{item.id}</span>
+            <li>
+              <span>Grantee:</span>
+              {item.grantee}
+            </li>
+            <li>
+              <span>Project:</span>
+              {item.project}
+            </li>
+            <li>
+              <span>Award:</span>{formatCurrency(item.award)}
+            </li>
+            <li>
+              <span>States Involved:</span>
+              {item.states}
+            </li>
+            <li>
+              <span>Description:</span>
+              {item.description}
+            </li>
+          </div>
+        ))}
+      </ul>
+    )
+  }
+
+  const renderGrantSummarySection = () => {
+    if (!grantSummary.size) return null;
+    return (
+      <>
+        <p className='appendix'>
+          Total NRCS Funds Awarded:
+          {' '}
+          {formatCurrency(grantSummary.awards)}
+        </p>
+        <p className='appendix'>
+          Total Grantee Matching Contributions:
+          {' '}
+          {formatCurrency(grantSummary.matching)}
+        </p>
+      </>
+    )
+  }
+
   return (
     <div>
-      {mainContent && (
+      { mainContent && (
         <div dangerouslySetInnerHTML={{ __html: mainContent.reportBody }}></div>
       )}
       <h1 className='appendix top'>Appendix:SHD 2020 Awarded Projects</h1>
-      <p className='appendix'>
-        Total NRCS Funds Awarded:
-        {' '}
-        {grantSummary && formatCurrency(grantSummary.awards)}
-      </p>
-      <p className='appendix'>
-        Total Grantee Matching Contributions:
-        {' '}
-        {grantSummary && formatCurrency(grantSummary.matching)}
-      </p>
-      <ul>
-        {grants &&
-          grants.map((item: IGrant) => (
-            <div className='awardee-list' key={item.id}>
-              <span>{item.id}</span>
-              <li>
-                <span>Grantee:</span>
-                {item.grantee}
-              </li>
-              <li>
-                <span>Project:</span>
-                {item.project}
-              </li>
-              <li>
-                <span>Award:</span>{formatCurrency(item.award)}
-              </li>
-              <li>
-                <span>States Involved:</span>
-                {item.states}
-              </li>
-              <li>
-                <span>Description:</span>
-                {item.description}
-              </li>
-            </div>
-          ))}
-      </ul>
+      { renderGrantSummarySection() }
+      { renderGrants() }
     </div>
   );
 };
