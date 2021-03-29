@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
-import getReport from '../common/util/AxiosUtil';
+import { getReport } from '../common/util/AxiosUtil';
 import CongressionalGrant from '../components/CongressionalGrant';
 
 export interface IGrant {
@@ -30,21 +30,21 @@ const GrantContainer: React.FC = () => {
   const { year } = useParams<any>();
 
   const grantReport = async () => {
-    const { data } = await getReport.get(`/congressionalReport/grant/${year}`);
+    const { data } = await getReport(`grant/${year}`);
 
     setGrants(data);
   };
 
   const grantSummaryReport = async () => {
-    const { data } = await getReport.get(
-      `/congressionalReport/grantSummary/${year}`
+    const { data } = await getReport(
+      `grantSummary/${year}`
     );
     setGrantSummary(data);
   };
 
   const mainContentReport = async () => {
-    const { data } = await getReport.get(
-      `/congressionalReport/mainContent/${year}`
+    const { data } = await getReport(
+      `mainContent/${year}`
     );
     setMainContent(data);
   };
