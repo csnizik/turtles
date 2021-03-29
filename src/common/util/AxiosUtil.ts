@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const baseURL = 'https://greyworm-endo-admin.spatialfrontlab.com/';
+const baseURL = process.env.REACT_APP_BASE_URL
 
 const baseRequest = axios.create({
-  baseURL
+   baseURL,
 });
 
 export function getRequest(path: string) {

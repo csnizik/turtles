@@ -30,7 +30,6 @@ const CongressionalReport: React.FC = () => {
   const [grantSummary, setGrantSummary] = useState<IGrantSummary | null>();
   const { year } = useParams<any>();
 
-
   const grantReport = async () => {
     const { data } = await getReport(`grant/${year}`);
 
@@ -64,13 +63,11 @@ const CongressionalReport: React.FC = () => {
       )}
       <h1 className='appendix top'>Appendix:SHD 2020 Awarded Projects</h1>
       <p className='appendix'>
-        Total NRCS Funds Awarded:
-        {' '}
+        Total NRCS Funds Awarded:{' '}
         {grantSummary && formatCurrency(grantSummary.awards)}
       </p>
       <p className='appendix'>
-        Total Grantee Matching Contributions:
-        {' '}
+        Total Grantee Matching Contributions:{' '}
         {grantSummary && formatCurrency(grantSummary.matching)}
       </p>
       <ul>
@@ -87,7 +84,8 @@ const CongressionalReport: React.FC = () => {
                 {item.project}
               </li>
               <li>
-                <span>Award:</span>{formatCurrency(item.award)}
+                <span>Award:</span>
+                {formatCurrency(item.award)}
               </li>
               <li>
                 <span>States Involved:</span>
