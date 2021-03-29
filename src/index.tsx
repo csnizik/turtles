@@ -5,9 +5,9 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import CongressionalGrant from './app/CongressionalGrant';
-import Home from './app/Home';
-import MapComponent from './app/MapComponent';
+import GrantContainer from './containers/GrantContainer';
+import Home from './containers/Home';
+import MapComponent from './components/MapComponent';
 import './stylesheets/app.css';
 
 const App = () => (
@@ -21,7 +21,7 @@ const App = () => (
       </Route>
       <Route path="/congressionalReport/:year">
         <div className='container'>
-          <CongressionalGrant />
+          <GrantContainer />
         </div>
       </Route>
     </Switch>
