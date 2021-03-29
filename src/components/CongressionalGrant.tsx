@@ -40,7 +40,6 @@ const CongressionalGrant = (props: any) => {
   }
 
   const renderGrantSummarySection = () => {
-    console.log("Grant sum: ", grantSummary.size)
     if (!grantSummary.size) return null;
     return (
       <>
