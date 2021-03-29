@@ -6,7 +6,12 @@ import {
 const Home = () => {
   return (
     <div className='home'>
-      <Link className='reportLink' to='congressionalReport/2020'>Access Reports</Link>
+      <Link
+        className='reportLink'
+        to='congressionalReport/2020'
+      >
+        Access Reports
+      </Link>
     </div>
   );
 }
