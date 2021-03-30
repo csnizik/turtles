@@ -37,6 +37,7 @@ const GrantContainer: React.FC = () => {
 
   const grantReport = async () => {
     const { data } = await getReport(`grant/${year}`);
+    console.log("Environment",process.env.NODE_ENV)
 
     setGrants(fromJS(data));
   };

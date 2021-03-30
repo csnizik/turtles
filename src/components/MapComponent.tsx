@@ -15,6 +15,7 @@ interface MapProps {
 }
 
 const MapComponent = () => {
+  console.log("ENVIRONMENT--->",process.env.NODE_ENV, "URL--->", process.env.REACT_APP_BASE_URL)
   const mapRef = useRef({} as MapProps);
 
   useEffect(() => {
