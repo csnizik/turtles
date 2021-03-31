@@ -1,5 +1,15 @@
 import axios from 'axios';
 
-export default axios.create({
-  baseURL: 'https://greyworm-endo-admin.spatialfrontlab.com/',
+const baseURL = process.env.REACT_APP_BASE_URL
+
+const baseRequest = axios.create({
+   baseURL,
 });
+
+export function getRequest(path: string) {
+  return baseRequest.get(path);
+}
+
+export function getReport(path: string) {
+  return getRequest(`/congressionalReport/${path}`);
+}
