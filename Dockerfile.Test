@@ -11,4 +11,5 @@ RUN npm install --production
 COPY . .
 
 #CMD [ "npm", "test" ]
-RUN npm test --logger:trx --results-directory /src/testresult
+RUN npm test
+ #--logger:trx --results-directory /src/testresult
