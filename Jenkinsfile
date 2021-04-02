@@ -13,6 +13,7 @@ pipeline {
         SLAVE_NODE = "${env.BRANCH_NAME == "release" ? "CIG-Demo" : "CIG-Micro-Service"}"
         ENV_NAME = "${env.BRANCH_NAME}"
         ppcUrl =  "${env.BRANCH_NAME == "release" ? "https://greyworm-epi.spatialfrontlab.com" : "https://greyworm-epi-dev.spatialfrontlab.com"}"
+        envConfigCommand = "${env.BRANCH_NAME == "release" ? "mv .env.demo .env" : "mv .env.dev .env"
         httpStatus = ""
     }
    stages {
@@ -43,6 +44,7 @@ pipeline {
         }
         //build deploy image for develop and release branch only
         steps {
+          sh "${envConfigCommand}"
           sh "docker build -t greyworm-epi:${ENV_NAME} ."
           sh "docker tag greyworm-epi:${ENV_NAME} 766295386465.dkr.ecr.us-east-1.amazonaws.com/greyworm-epi:${ENV_NAME}"
         }
