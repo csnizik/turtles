@@ -27,6 +27,7 @@ pipeline {
       stage('Unit Test with Docker')
       {
         steps {
+          sh "docker rm greyworm-epi-jest"
           sh "docker build -f Dockerfile.Test -t greyworm-epi-test:${ENV_NAME} ."
           sh "docker create --name greyworm-epi-jest greyworm-epi-test:${ENV_NAME}"
 //           sh "docker cp greyworm-epi-jest:/src/testresult ./"
