@@ -54,7 +54,7 @@ const MapComponent = ({ searchText }: IMapProperties) => {
   }, [mapRef]);
 
   useEffect(() => {
-    console.log("queryLayer:", queryResults)
+    console.log("queryResults:", queryResults)
   }, [queryResults])
 
   useEffect(() => {
