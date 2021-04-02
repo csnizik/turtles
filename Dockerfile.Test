@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY ["package.json", "package-lock.json*", "./"]
 
-RUN npm install testing-library/react@11.2.5 -g --silent
+#RUN npm install testing-library/react@11.2.5 -g --silent
 RUN npm install --production
 
 COPY . .
