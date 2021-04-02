@@ -95,6 +95,7 @@ pipeline {
    }
    post {
      always {
+          echo "CI/CD pipeline finished"
 //        xunit([MSTest(deleteOutputFiles: true, failIfNotNew: true, pattern: 'testresult/*.trx', skipNoTestFiles: false, stopProcessingIfError: true)])
      }
      cleanup{
