@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import GrantContainer from './containers/GrantContainer';
 import Home from './containers/Home';
-import MapComponent from './components/MapComponent';
+import MapContainer from './containers/MapContainer';
 import './stylesheets/app.css';
 
 const App = () => (
@@ -17,7 +17,7 @@ const App = () => (
         <Home />
       </Route>
       <Route path="/map">
-        <MapComponent />
+        <MapContainer />
       </Route>
       <Route path="/congressionalReport/:year">
         <div className='container'>
