@@ -13,7 +13,7 @@ pipeline {
         SLAVE_NODE = "${env.BRANCH_NAME == "release" ? "CIG-Demo" : "CIG-Micro-Service"}"
         ENV_NAME = "${env.BRANCH_NAME}"
         ppcUrl =  "${env.BRANCH_NAME == "release" ? "https://greyworm-epi.spatialfrontlab.com" : "https://greyworm-epi-dev.spatialfrontlab.com"}"
-        envConfigCommand = "${env.BRANCH_NAME == "release" ? "mv .env.demo .env" : "mv .env.dev .env"
+        envConfigCommand = "${env.BRANCH_NAME == "release" ? "mv .env.demo .env" : "mv .env.dev .env"}"
         httpStatus = ""
     }
    stages {
