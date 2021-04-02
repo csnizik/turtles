@@ -95,7 +95,7 @@ pipeline {
    }
    post {
      always {
-       xunit([MSTest(deleteOutputFiles: true, failIfNotNew: true, pattern: 'testresult/*.trx', skipNoTestFiles: false, stopProcessingIfError: true)])
+//        xunit([MSTest(deleteOutputFiles: true, failIfNotNew: true, pattern: 'testresult/*.trx', skipNoTestFiles: false, stopProcessingIfError: true)])
      }
      cleanup{
         deleteDir()
