@@ -31,8 +31,8 @@ pipeline {
           sh "docker build -f Dockerfile.Test -t greyworm-epi-test:${ENV_NAME} ."
           sh "docker create --name greyworm-epi-jest greyworm-epi-test:${ENV_NAME}"
           sh "docker cp greyworm-epi-jest:/output/coverage/jest ./jest-result"
-          sh "ls -all jest-result"
-          sh "cat jest-result/cobertura-coverage.xml"
+//           sh "ls -all jest-result"
+//           sh "cat jest-result/cobertura-coverage.xml"
           sh "docker rm -f greyworm-epi-jest"
           sh "docker rmi -f greyworm-epi-test:${ENV_NAME}"
         }
