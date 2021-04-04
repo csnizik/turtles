@@ -28,15 +28,15 @@ pipeline {
       stage('Unit Test with Docker')
       {
         steps {
-          sh "docker rm greyworm-epi-jest"
-          sh "docker rmi greyworm-epi-test:${ENV_NAME}"
+          sh "docker rm -f greyworm-epi-jest"
+          sh "docker rmi -f greyworm-epi-test:${ENV_NAME}"
           sh "docker build -f Dockerfile.Test -t greyworm-epi-test:${ENV_NAME} ."
           sh "docker create --name greyworm-epi-jest greyworm-epi-test:${ENV_NAME}"
           sh "docker cp greyworm-epi-jest:/ ./container"
           sh "ls -all container/"
           sh "docker cp greyworm-epi-jest:/output/coverage/jest/cobertura-coverage.xml ./"
-          sh "docker rm greyworm-epi-jest"
-          sh "docker rmi greyworm-epi-test:${ENV_NAME}"
+          sh "docker rm -f greyworm-epi-jest"
+          sh "docker rmi -f greyworm-epi-test:${ENV_NAME}"
         }
         post {
             always {
