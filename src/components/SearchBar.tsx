@@ -1,14 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 interface ISearchProperties {
-  searchText: string,
+  searchText: string
   setSearchText: Function
 }
 
 const SearchBar = ({searchText, setSearchText}: ISearchProperties) => {
 
+  //const [searchText, setSearchText] = useState('');
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
+    const {value} = e.target
+    setSearchText(value);
+    console.log("Search Text-->",e.target.value)
   }
 
   const fireSearch = (e: React.MouseEvent<HTMLElement>) => {

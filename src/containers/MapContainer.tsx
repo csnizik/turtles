@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MapComponent from '../components/MapComponent';
 import SearchBar from '../components/SearchBar';
 import ListGroup from '../components/ListGroup';

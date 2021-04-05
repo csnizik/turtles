@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
+import Layer from "@arcgis/core/layers/Layer";
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import Graphic from 'esri/Graphic';
@@ -11,10 +12,12 @@ import {
   VIEW_DIV,
   MAP_ZOOM,
   CENTER_COORDINATES,
-  customFeatureLayer
+  statesLayerId,
+  statesLayerName
 } from '../common/constants.js'
 import { queryLayer } from '../common/util/MapUtil';
 import { usePrevious } from '../common/util/helperHooks';
+import { layer } from 'esri/views/3d/support/LayerPerformanceInfo';
 
 interface IMapProperties {
   searchText: string
@@ -28,15 +31,17 @@ const MapComponent = ({ searchText }: IMapProperties) => {
   const mapRef = useRef({} as MapProps);
   const [queryResults, setQueryResults] = useState<FeatureSet>();
 
+
   const previousSearchText = usePrevious(searchText);
-  const customLayer = new FeatureLayer({
-    url: customFeatureLayer
-  });
+  let statesLayer:Layer;
+  // const customLayer = new FeatureLayer({
+  //   url: customFeatureLayer
+  // });
 
   useEffect(() => {
     if (mapRef && mapRef.current) {
       esriConfig.portalUrl = `${process.env.REACT_APP_PORTAL_URL}`;
-      var portalWebMap = new WebMap({
+      const portalWebMap = new WebMap({
         portalItem: {
           id: process.env.REACT_APP_PORTAL_ID,
         },
@@ -49,7 +54,19 @@ const MapComponent = ({ searchText }: IMapProperties) => {
         zoom: MAP_ZOOM,
       });
 
-      portalWebMap.add(customLayer);
+      portalWebMap.when(function(){
+        console.log(statesLayerId);
+        statesLayer = portalWebMap.findLayerById(statesLayerId);
+        console.log(statesLayer.id);
+      });
+
+      // console.log(statesLayerId);
+      // statesLayer = portalWebMap.allLayers.find(function(layer) {
+      //   return layer.title === 'US States with CIG Projects View';
+      //  });
+
+      //statesLayer = portalWebMap.findLayerById(statesLayerId);
+      //portalWebMap.add(customLayer);
 
       mapRef.current.view = view;
     }
@@ -74,7 +91,7 @@ const MapComponent = ({ searchText }: IMapProperties) => {
   useEffect(() => {
     if (searchText && previousSearchText !== searchText) {
       queryLayer(
-        customLayer,
+        statesLayer,
         `state_name = '${searchText}'`,
         [ "state_name", "state_abbr", "objectid_1", "no_farms07" ]
       )
