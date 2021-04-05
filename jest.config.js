@@ -6,5 +6,6 @@ module.exports = {
   },
   moduleNameMapper: {
     '\\.(css|scss)$': '<rootDir>/src/__tests__/App.js',
-  }
+  },
+  "coverageReporters": ["json", "lcov", "text", "clover", "cobertura"]
 };

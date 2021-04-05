@@ -21,7 +21,7 @@ interface IMapProperties {
 }
 
 interface MapProps {
-  view: any
+  view: any;
 }
 
 const MapComponent = ({ searchText }: IMapProperties) => {
