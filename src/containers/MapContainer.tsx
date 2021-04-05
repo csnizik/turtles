@@ -15,7 +15,6 @@ const MapContainer = () => {
     .then(response => response.json())
     .then(data => {
       if (data) {
-        console.log("data: ", data)
         setStateList(data.features)
       }
     })

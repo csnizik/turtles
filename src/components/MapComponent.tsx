@@ -9,9 +9,7 @@ import "@arcgis/core/assets/esri/themes/light/main.css";
 import '../stylesheets/map.css';
 import {
   VIEW_DIV,
-  customFeatureLayer,
-  portalItemId,
-  portalUrl
+  customFeatureLayer
 } from '../common/constants.js'
 import { queryLayer } from '../common/util/MapUtil';
 import { usePrevious } from '../common/util/helperHooks';
@@ -34,11 +32,11 @@ const MapComponent = ({ searchText }: IMapProperties) => {
 
   useEffect(() => {
     if (mapRef && mapRef.current) {
-      esriConfig.portalUrl = portalUrl;
+      esriConfig.portalUrl = `${process.env.REACT_APP_PORTAL_URL}`;
       var portalWebMap = new WebMap({
         portalItem: {
-          id: portalItemId
-        }
+          id: process.env.REACT_APP_PORTAL_ID,
+        },
       });
 
       const view = new MapView({
@@ -67,10 +65,6 @@ const MapComponent = ({ searchText }: IMapProperties) => {
             features: [item],
             location: item.geometry.centroid
           });
-          // currentView.popup.open({
-          //   features: [item],
-          //   location: item.geometry.centroid
-          // });
         })
       }
     }
@@ -78,8 +72,6 @@ const MapComponent = ({ searchText }: IMapProperties) => {
 
   useEffect(() => {
     if (searchText && previousSearchText !== searchText) {
-      console.log("Prev: ", previousSearchText)
-      console.log("searchText: ", searchText)
       queryLayer(
         customLayer,
         `state_name = '${searchText}'`,
