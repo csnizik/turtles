@@ -12,6 +12,7 @@ const SearchBar = ({searchText, setSearchText}: ISearchProperties) => {
   }
 
   const fireSearch = (e: React.MouseEvent<HTMLElement>) => {
+    // TODO: Implement function
     console.log("Search button clicked")
   }
 

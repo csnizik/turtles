@@ -9,6 +9,8 @@ import "@arcgis/core/assets/esri/themes/light/main.css";
 import '../stylesheets/map.css';
 import {
   VIEW_DIV,
+  MAP_ZOOM,
+  CENTER_COORDINATES,
   customFeatureLayer
 } from '../common/constants.js'
 import { queryLayer } from '../common/util/MapUtil';
@@ -25,6 +27,7 @@ interface MapProps {
 const MapComponent = ({ searchText }: IMapProperties) => {
   const mapRef = useRef({} as MapProps);
   const [queryResults, setQueryResults] = useState<FeatureSet>();
+
   const previousSearchText = usePrevious(searchText);
   const customLayer = new FeatureLayer({
     url: customFeatureLayer
@@ -42,8 +45,8 @@ const MapComponent = ({ searchText }: IMapProperties) => {
       const view = new MapView({
         map: portalWebMap,
         container: VIEW_DIV,
-        center: [-87.62, 41.87],
-        zoom: 3,
+        center: CENTER_COORDINATES,
+        zoom: MAP_ZOOM,
       });
 
       portalWebMap.add(customLayer);
@@ -53,8 +56,6 @@ const MapComponent = ({ searchText }: IMapProperties) => {
   }, [mapRef]);
 
   useEffect(() => {
-    console.log("queryResults:", queryResults)
-    let highlightSelect: any;
     const currentView = mapRef.current.view;
     if (queryResults && queryResults.features && queryResults.features.length) {
       const item: any = queryResults.features[0];

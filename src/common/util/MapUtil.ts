@@ -1,3 +1,4 @@
+// Query Help: https://developers.arcgis.com/javascript/latest/sample-code/featurelayer-query-basic/
 export const queryLayer = (layer: any, whereClause: string, outputFields: string[]) => {
   var query = layer.createQuery();
   query.where = whereClause;

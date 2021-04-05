@@ -42,17 +42,24 @@ const ListGroup = ({stateList, searchText}: IListProps) => {
   return (
     <ul className="list-group" id="myGroup">
       {filteredStates.map((state: IStateProps, index: number) => {
+        const stateAttributes = state.attributes;
         return (
             <li
               key={index}
               className='list-group-item'
-              data-parent="#myGroup" data-toggle='collapse' data-target={`#collapseExample${index}`} aria-expanded="false" aria-controls={`#collapseExample${index}`}
+              data-parent="#myGroup"
+              data-toggle='collapse'
+              data-target={`#collapseExample${index}`}
+              aria-expanded="false"
+              aria-controls={`#collapseExample${index}`}
             >
-              {state.attributes.state_name}
+              {stateAttributes.state_name}
               <div className={`collapse`} id={`collapseExample${index}`}>
                 <div className="card card-body">
-                  <p>State Abbreviation: {state.attributes.state_abbr}</p>
-                  <p>Number of Farms: {state.attributes.no_farms07}</p>
+                  <p>State Abbreviation: {stateAttributes.state_abbr}</p>
+                  <p>Number of Farms: {stateAttributes.no_farms07}</p>
+                  <p>Number of Projects: {stateAttributes.no_projects}</p>
+                  <p>Average Farm Size: {stateAttributes.avg_size07}</p>
                 </div>
               </div>
           </li>
