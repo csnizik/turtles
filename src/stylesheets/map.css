@@ -1,3 +1,39 @@
 #viewDiv {
   height: 650px;
 }
+
+.qsr-map {
+  margin: 5px;
+}
+
+.arcgis-map {
+  padding-left: 0px;
+}
+
+.search-field {
+  display: flex;
+}
+
+.search-input {
+  flex: 0 0 60%;
+  -webkit-box-flex: 0;
+  max-width: 60%;
+}
+
+.search-btn {
+  flex: 0 0 15%;
+  -webkit-box-flex: 0;
+  max-width: 15%;
+}
+
+.list-group-item:hover {
+  cursor: pointer;
+}
+
+.card-body {
+  display: flex;
+}
+
+.card-body > p {
+  margin: 5px;
+}

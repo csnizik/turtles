@@ -12,28 +12,31 @@ const SearchBar = ({searchText, setSearchText}: ISearchProperties) => {
   }
 
   const fireSearch = (e: React.MouseEvent<HTMLElement>) => {
-
+    console.log("Search button clicked")
   }
 
   return (
-    <div className="row form-group search-field">
-      <label htmlFor="searchState">Search:</label>
+    <>
+    <label htmlFor="searchState">Keyword search</label>
+    <div className="form-group search-field">
       <input
         type="text"
-        className="form-control col-md-6"
+        className="form-control search-input"
         id="searchState"
         aria-describedby="searchHelp"
         onChange={handleSearch}
         value={searchText}
       />
       <button
-        className='btn btn-primary col-md-2'
+        className='btn btn-primary search-btn'
         type='button'
         onClick={fireSearch}
       >
-        Submit
+        <i className="fas fa-search" />
       </button>
     </div>
+
+    </>
   )
 }
 

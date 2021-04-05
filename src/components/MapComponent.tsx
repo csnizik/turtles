@@ -2,11 +2,12 @@ import { useEffect, useState, useRef } from 'react';
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
+import Graphic from 'esri/Graphic';
+import FeatureSet from 'esri/tasks/support/FeatureSet';
 import esriConfig from "@arcgis/core/config";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 import '../stylesheets/map.css';
 import {
-  MAP_ZOOM,
   VIEW_DIV,
   customFeatureLayer,
   portalItemId,
@@ -25,7 +26,7 @@ interface MapProps {
 
 const MapComponent = ({ searchText }: IMapProperties) => {
   const mapRef = useRef({} as MapProps);
-  const [queryResults, setQueryResults] = useState([]);
+  const [queryResults, setQueryResults] = useState<FeatureSet>();
   const previousSearchText = usePrevious(searchText);
   const customLayer = new FeatureLayer({
     url: customFeatureLayer
@@ -55,6 +56,24 @@ const MapComponent = ({ searchText }: IMapProperties) => {
 
   useEffect(() => {
     console.log("queryResults:", queryResults)
+    let highlightSelect: any;
+    const currentView = mapRef.current.view;
+    if (queryResults && queryResults.features && queryResults.features.length) {
+      const item: any = queryResults.features[0];
+      if (item) {
+        currentView.when(() => {
+          currentView.goTo(item);
+          currentView.popup.open({
+            features: [item],
+            location: item.geometry.centroid
+          });
+          // currentView.popup.open({
+          //   features: [item],
+          //   location: item.geometry.centroid
+          // });
+        })
+      }
+    }
   }, [queryResults])
 
   useEffect(() => {

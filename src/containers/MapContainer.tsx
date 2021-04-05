@@ -22,15 +22,24 @@ const MapContainer = () => {
   }, [])
 
   return (
-    <div className="qsr-map">
-      <SearchBar
-        searchText={searchText}
-        setSearchText={setSearchText}
-      />
-      <MapComponent
-        searchText={searchText}
-      />
-      <div className="webmap" id={VIEW_DIV} />
+    <div className="qsr-map row">
+      <div className="map-tools col-md-4">
+        <SearchBar
+          searchText={searchText}
+          setSearchText={setSearchText}
+        />
+        <hr />
+        <ListGroup
+          searchText={searchText}
+          stateList={stateList}
+        />
+      </div>
+      <div className="arcgis-map col-md-8">
+        <MapComponent
+          searchText={searchText}
+        />
+        <div className="webmap" id={VIEW_DIV} />
+      </div>
     </div>
   )
 }
