@@ -118,7 +118,6 @@ const SearchBar = ({
               className="form-control"
               id="stateDropdown"
               onChange={handleChangeState}
-              defaultValue={currentStateOption}
               value={currentStateOption}
             >
               <option value=''>
