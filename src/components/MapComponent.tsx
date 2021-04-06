@@ -59,6 +59,20 @@ const MapComponent = ({ searchText, queryResults, setQueryResults }: IMapPropert
 
       mapRef.current.view = view;
       mapRef.current.portalWebMap = portalWebMap;
+
+      view.when(() => {
+        view.on('pointer-up', function(event) {
+          view.hitTest(event).then(function(response) {
+          if (response.results.length) {
+          const result = response.results[0];
+          const graphic: Graphic = result.graphic;
+          const graphicAttributes = graphic.attributes;
+          console.log("Response on pointer up: ", result)
+          console.log("graphicAttributes! ", graphicAttributes);
+          }
+          })
+        })
+      })
     }
   }, [mapRef]);
 
