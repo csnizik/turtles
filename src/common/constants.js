@@ -19,3 +19,8 @@ export const statesLayerName = 'Number of CIG Projects by State';
 
 //export const customFeatureLayer =
 //  'https://age.spatialfrontgis.com/host/rest/services/Hosted/US_States_with_CIG_Projects_View/FeatureServer/0';
+
+export const searchOptionMap = {
+  projects: 'Projects',
+  location: 'Location'
+};
