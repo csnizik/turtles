@@ -19,24 +19,28 @@ import { queryLayer } from '../common/util/MapUtil';
 import { usePrevious } from '../common/util/helperHooks';
 import { layer } from 'esri/views/3d/support/LayerPerformanceInfo';
 
+
 interface IMapProperties {
   searchText: string
 }
 
 interface MapProps {
-  view: any;
+  view: MapView;
+  portalWebMap: WebMap;
 }
 
 const MapComponent = ({ searchText }: IMapProperties) => {
   const mapRef = useRef({} as MapProps);
   const [queryResults, setQueryResults] = useState<FeatureSet>();
+  const [view, setView] = useState(null);
 
 
   const previousSearchText = usePrevious(searchText);
-  let statesLayer:Layer;
-  // const customLayer = new FeatureLayer({
-  //   url: customFeatureLayer
-  // });
+
+
+  useEffect(() => {
+    
+  }, [view]);
 
   useEffect(() => {
     if (mapRef && mapRef.current) {
@@ -54,21 +58,8 @@ const MapComponent = ({ searchText }: IMapProperties) => {
         zoom: MAP_ZOOM,
       });
 
-      portalWebMap.when(function(){
-        console.log(statesLayerId);
-        statesLayer = portalWebMap.findLayerById(statesLayerId);
-        console.log(statesLayer.id);
-      });
-
-      // console.log(statesLayerId);
-      // statesLayer = portalWebMap.allLayers.find(function(layer) {
-      //   return layer.title === 'US States with CIG Projects View';
-      //  });
-
-      //statesLayer = portalWebMap.findLayerById(statesLayerId);
-      //portalWebMap.add(customLayer);
-
       mapRef.current.view = view;
+      mapRef.current.portalWebMap = portalWebMap;
     }
   }, [mapRef]);
 
@@ -90,12 +81,23 @@ const MapComponent = ({ searchText }: IMapProperties) => {
 
   useEffect(() => {
     if (searchText && previousSearchText !== searchText) {
-      queryLayer(
-        statesLayer,
-        `state_name = '${searchText}'`,
-        [ "state_name", "state_abbr", "objectid_1", "no_farms07" ]
-      )
-      .then((data: any) => setQueryResults(data))
+
+      let statesLayer:Layer;
+
+      mapRef.current.portalWebMap.when(function(){
+        console.log(statesLayerId);
+        statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
+        console.log(statesLayer.id);
+
+        queryLayer(
+          statesLayer,
+          `state_name = '${searchText}'`,
+          [ "state_name", "state_abbr", "objectid_1", "no_farms07" ]
+        )
+        .then((data: any) => setQueryResults(data))
+      });
+
+
     }
   }, [searchText])
 
