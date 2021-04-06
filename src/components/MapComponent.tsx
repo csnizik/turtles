@@ -3,8 +3,9 @@ import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import Layer from "@arcgis/core/layers/Layer";
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
-import Graphic from 'esri/Graphic';
-import FeatureSet from 'esri/tasks/support/FeatureSet';
+import Graphic from '@arcgis/core/Graphic';
+import FeatureSet from '@arcgis/core/tasks/support/FeatureSet';
+import RelationshipQuery from '@arcgis/core/tasks/support/RelationshipQuery';
 import esriConfig from "@arcgis/core/config";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 import '../stylesheets/map.css';
@@ -28,6 +29,10 @@ interface IMapProperties {
   queryResults: FeatureSet
 }
 
+// interface IRelatedTableResult {
+//     results: FeatureSet
+// }
+
 interface MapProps {
   view: MapView;
   portalWebMap: WebMap;
@@ -41,7 +46,9 @@ const MapComponent = ({
     setStateDropdownOption
   }: IMapProperties) => {
   const mapRef = useRef({} as MapProps);
+  const [relatedTableResults, setRelatedTableResults] = useState<Graphic[]>();
   const [view, setView] = useState(null);
+
   const previousSearchText = usePrevious(searchText);
   let statesLayer:Layer;
 
@@ -114,17 +121,50 @@ const MapComponent = ({
   }, [queryResults])
 
   useEffect(() => {
+    if (relatedTableResults && relatedTableResults.length) {
+      console.log(relatedTableResults);
+    }
+  }, [relatedTableResults])
+
+  useEffect(() => {
     if (searchText && previousSearchText !== searchText) {
 
+      let statesFLayer:FeatureLayer;
+      let objectIds:number[];
+
+
       mapRef.current.portalWebMap.when(function(){
+
         statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
         queryLayer(
           statesLayer,
           `state_name LIKE '${searchText}%'`,
           [ "state_name", "state_abbr", "objectid_1", "no_farms07" ]
         )
-        .then((data: any) => setQueryResults(data))
+        .then((data: FeatureSet) => {
+          setQueryResults(data);
+          statesFLayer = statesLayer as FeatureLayer;
+
+          if (data.features && data.features.length){
+            let relID:number = data.features[0].getObjectId();
+            statesFLayer = statesLayer as FeatureLayer;
+
+            console.log(statesFLayer.relationships);
+
+            statesFLayer.queryRelatedFeatures({
+              outFields: ["awardee_name", "awardee_state__territory"],
+              relationshipId: statesFLayer.relationships[0].id,
+              objectIds: [relID]
+            }).then((rdata: any) => {
+              setRelatedTableResults(rdata[relID].features);
+            })
+          }
+        });
+
+
+
       });
+
 
 
     }
