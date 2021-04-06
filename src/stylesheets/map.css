@@ -33,15 +33,15 @@
 }
 
 .search-input {
-  flex: 0 0 60%;
+  flex: 0 0 66%;
   -webkit-box-flex: 0;
-  max-width: 60%;
+  max-width: 66%;
 }
 
-.search-btn {
-  flex: 0 0 15%;
+.reset-search-btn {
+  flex: 0 0 18%;
   -webkit-box-flex: 0;
-  max-width: 15%;
+  max-width: 18%;
 }
 
 .list-group-item:hover {
@@ -50,6 +50,16 @@
 
 .search-results {
   padding: 10px;
+}
+
+.search-results-header > h3 {
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: 900;
+}
+
+.badge.badge-light {
+  font-size: 16px;
 }
 
 .card-body {

@@ -10,6 +10,7 @@ import {
 const MapContainer = () => {
   const [searchText, setSearchText] = useState('');
   const [stateList, setStateList] = useState([]);
+  const [currentStateOption, setStateDropdownOption] = useState<string>('');
   const [queryResults, setQueryResults] = useState<FeatureSet>();
 
   useEffect(() => {
@@ -31,6 +32,9 @@ const MapContainer = () => {
             searchText={searchText}
             setSearchText={setSearchText}
             setQueryResults={setQueryResults}
+            stateList={stateList}
+            setStateDropdownOption={setStateDropdownOption}
+            currentStateOption={currentStateOption}
           />
         </div>
         <div className="arcgis-map col-md-9">
@@ -38,6 +42,8 @@ const MapContainer = () => {
             searchText={searchText}
             queryResults={queryResults!}
             setQueryResults={setQueryResults}
+            currentStateOption={currentStateOption}
+            setStateDropdownOption={setStateDropdownOption}
           />
           <div className="webmap" id={VIEW_DIV} />
           <SearchResults

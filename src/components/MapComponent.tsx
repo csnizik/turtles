@@ -23,6 +23,8 @@ import { layer } from 'esri/views/3d/support/LayerPerformanceInfo';
 interface IMapProperties {
   searchText: string,
   setQueryResults: Function,
+  setStateDropdownOption: Function,
+  currentStateOption: string,
   queryResults: FeatureSet
 }
 
@@ -31,7 +33,13 @@ interface MapProps {
   portalWebMap: WebMap;
 }
 
-const MapComponent = ({ searchText, queryResults, setQueryResults }: IMapProperties) => {
+const MapComponent = ({
+    searchText,
+    queryResults,
+    setQueryResults,
+    currentStateOption,
+    setStateDropdownOption
+  }: IMapProperties) => {
   const mapRef = useRef({} as MapProps);
   const [view, setView] = useState(null);
   const previousSearchText = usePrevious(searchText);
@@ -71,6 +79,7 @@ const MapComponent = ({ searchText, queryResults, setQueryResults }: IMapPropert
             // Query stateLayer
             mapRef.current.portalWebMap.when(function(){
               statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
+              setStateDropdownOption(graphicAttributes.objectid_1);
               queryLayer(
                 statesLayer,
                 `objectid_1 = '${graphicAttributes.objectid_1}'`,
@@ -108,10 +117,7 @@ const MapComponent = ({ searchText, queryResults, setQueryResults }: IMapPropert
     if (searchText && previousSearchText !== searchText) {
 
       mapRef.current.portalWebMap.when(function(){
-        console.log(statesLayerId);
         statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
-        console.log(statesLayer.id);
-
         queryLayer(
           statesLayer,
           `state_name LIKE '${searchText}%'`,
@@ -122,7 +128,20 @@ const MapComponent = ({ searchText, queryResults, setQueryResults }: IMapPropert
 
 
     }
-  }, [searchText])
+
+    if (currentStateOption) {
+      mapRef.current.portalWebMap.when(function(){
+        statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
+
+        queryLayer(
+          statesLayer,
+          `objectid_1 = '${currentStateOption}'`,
+          [ "state_name", "state_abbr", "objectid_1", "no_farms07" ]
+        )
+        .then((data: any) => setQueryResults(data))
+      });
+    }
+  }, [searchText, currentStateOption])
 
   return null;
 }

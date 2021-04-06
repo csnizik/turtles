@@ -14,8 +14,23 @@ const SearchResults = ({ queryResults } : ISearchResultProps) => {
   }, [queryResults]);
 
   const renderResultsHeader = () => {
+
+    const stateName = (results.features && results.features.length === 1
+      && results.features[0].attributes.state_name) || '';
+
     return (
-      <h3>Search results</h3>
+      <div className='search-results-header'>
+        <h3>Search results</h3>
+        {stateName &&
+          <span
+            className="badge badge-light"
+          >
+            State:
+            {' '}
+            {stateName}
+          </span>
+        }
+      </div>
     )
   }
 
@@ -28,9 +43,18 @@ const SearchResults = ({ queryResults } : ISearchResultProps) => {
       {results && results.features.map((feature: any, index: number) => {
         return (
           <div key={feature.attributes.objectid_1}>
-            <p>State Abbreviation: {feature.attributes.state_abbr}</p>
-            <p>State Name: {feature.attributes.state_name}</p>
-            <p>Number of farms: {formatNumber(feature.attributes.no_farms07)}</p>
+            <p>
+              <strong>State Abbreviation: </strong>
+              {feature.attributes.state_abbr}
+            </p>
+            <p>
+              <strong>State Name: </strong>
+              {feature.attributes.state_name}
+            </p>
+            <p>
+              <strong>Number of farms: </strong>
+              {formatNumber(feature.attributes.no_farms07)}
+            </p>
             <hr />
           </div>
         )
