@@ -21,7 +21,9 @@ import { layer } from 'esri/views/3d/support/LayerPerformanceInfo';
 
 
 interface IMapProperties {
-  searchText: string
+  searchText: string,
+  setQueryResults: Function,
+  queryResults: FeatureSet
 }
 
 interface MapProps {
@@ -29,17 +31,14 @@ interface MapProps {
   portalWebMap: WebMap;
 }
 
-const MapComponent = ({ searchText }: IMapProperties) => {
+const MapComponent = ({ searchText, queryResults, setQueryResults }: IMapProperties) => {
   const mapRef = useRef({} as MapProps);
-  const [queryResults, setQueryResults] = useState<FeatureSet>();
   const [view, setView] = useState(null);
-
-
   const previousSearchText = usePrevious(searchText);
 
 
   useEffect(() => {
-    
+
   }, [view]);
 
   useEffect(() => {
@@ -91,7 +90,7 @@ const MapComponent = ({ searchText }: IMapProperties) => {
 
         queryLayer(
           statesLayer,
-          `state_name = '${searchText}'`,
+          `state_name LIKE '${searchText}%'`,
           [ "state_name", "state_abbr", "objectid_1", "no_farms07" ]
         )
         .then((data: any) => setQueryResults(data))
