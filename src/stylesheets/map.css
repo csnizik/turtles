@@ -1,5 +1,5 @@
 #viewDiv {
-  height: 1000px;
+  height: 475px;
   padding: 0;
   margin: 0;
   width: 100%;
@@ -24,24 +24,42 @@
   padding-left: 0px;
 }
 
+.nav-tabs {
+  margin-bottom: 25px;
+}
+
 .search-field {
   display: flex;
 }
 
 .search-input {
-  flex: 0 0 60%;
+  flex: 0 0 66%;
   -webkit-box-flex: 0;
-  max-width: 60%;
+  max-width: 66%;
 }
 
-.search-btn {
-  flex: 0 0 15%;
+.reset-search-btn {
+  flex: 0 0 18%;
   -webkit-box-flex: 0;
-  max-width: 15%;
+  max-width: 18%;
 }
 
 .list-group-item:hover {
   cursor: pointer;
+}
+
+.search-results {
+  padding: 10px;
+}
+
+.search-results-header > h3 {
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: 900;
+}
+
+.badge.badge-light {
+  font-size: 16px;
 }
 
 .card-body {

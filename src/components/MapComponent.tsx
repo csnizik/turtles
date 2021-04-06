@@ -1,9 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
+import Layer from "@arcgis/core/layers/Layer";
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
-import Graphic from 'esri/Graphic';
-import FeatureSet from 'esri/tasks/support/FeatureSet';
+import Graphic from '@arcgis/core/Graphic';
+import FeatureSet from '@arcgis/core/tasks/support/FeatureSet';
 import esriConfig from "@arcgis/core/config";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 import '../stylesheets/map.css';
@@ -11,32 +12,53 @@ import {
   VIEW_DIV,
   MAP_ZOOM,
   CENTER_COORDINATES,
-  customFeatureLayer
+  statesLayerId,
+  statesLayerName
 } from '../common/constants.js'
 import { queryLayer } from '../common/util/MapUtil';
 import { usePrevious } from '../common/util/helperHooks';
+import { layer } from 'esri/views/3d/support/LayerPerformanceInfo';
+
 
 interface IMapProperties {
-  searchText: string
+  searchText: string,
+  setQueryResults: Function,
+  setStateDropdownOption: Function,
+  currentStateOption: string,
+  queryResults: FeatureSet
 }
+
+// interface IRelatedTableResult {
+//     results: FeatureSet
+// }
 
 interface MapProps {
-  view: any;
+  view: MapView;
+  portalWebMap: WebMap;
 }
 
-const MapComponent = ({ searchText }: IMapProperties) => {
+const MapComponent = ({
+    searchText,
+    queryResults,
+    setQueryResults,
+    currentStateOption,
+    setStateDropdownOption
+  }: IMapProperties) => {
   const mapRef = useRef({} as MapProps);
-  const [queryResults, setQueryResults] = useState<FeatureSet>();
+  const [relatedTableResults, setRelatedTableResults] = useState<Graphic[]>();
+  const [view, setView] = useState(null);
 
   const previousSearchText = usePrevious(searchText);
-  const customLayer = new FeatureLayer({
-    url: customFeatureLayer
-  });
+  let statesLayer:Layer;
+
+  useEffect(() => {
+
+  }, [view]);
 
   useEffect(() => {
     if (mapRef && mapRef.current) {
       esriConfig.portalUrl = `${process.env.REACT_APP_PORTAL_URL}`;
-      var portalWebMap = new WebMap({
+      const portalWebMap = new WebMap({
         portalItem: {
           id: process.env.REACT_APP_PORTAL_ID,
         },
@@ -49,22 +71,48 @@ const MapComponent = ({ searchText }: IMapProperties) => {
         zoom: MAP_ZOOM,
       });
 
-      portalWebMap.add(customLayer);
-
       mapRef.current.view = view;
+      mapRef.current.portalWebMap = portalWebMap;
+
+      view.when(() => {
+        view.on('pointer-up', function(event) {
+          view.hitTest(event).then(function(response) {
+          if (response.results.length) {
+            const result = response.results[0];
+            const graphic: any = result.graphic;
+            const graphicAttributes = graphic.attributes;
+
+            // Query stateLayer
+            mapRef.current.portalWebMap.when(function(){
+              statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
+              setStateDropdownOption(graphicAttributes.objectid_1);
+              queryLayer(
+                statesLayer,
+                `objectid_1 = '${graphicAttributes.objectid_1}'`,
+                [ "state_name", "state_abbr", "objectid_1", "no_farms07" ]
+              )
+              .then((data: any) => {
+                setQueryResults(data)
+              })
+            });
+
+          }
+          })
+        })
+      })
     }
   }, [mapRef]);
 
   useEffect(() => {
     const currentView = mapRef.current.view;
     if (queryResults && queryResults.features && queryResults.features.length) {
-      const item: any = queryResults.features[0];
-      if (item) {
+      const state: any = queryResults.features[0];
+      if (state) {
         currentView.when(() => {
-          currentView.goTo(item);
+          currentView.goTo(state);
           currentView.popup.open({
-            features: [item],
-            location: item.geometry.centroid
+            features: [state],
+            location: state.geometry.centroid
           });
         })
       }
@@ -72,15 +120,58 @@ const MapComponent = ({ searchText }: IMapProperties) => {
   }, [queryResults])
 
   useEffect(() => {
-    if (searchText && previousSearchText !== searchText) {
-      queryLayer(
-        customLayer,
-        `state_name = '${searchText}'`,
-        [ "state_name", "state_abbr", "objectid_1", "no_farms07" ]
-      )
-      .then((data: any) => setQueryResults(data))
+    if (relatedTableResults && relatedTableResults.length) {
+      console.log(relatedTableResults);
     }
-  }, [searchText])
+  }, [relatedTableResults])
+
+  useEffect(() => {
+    if (searchText && previousSearchText !== searchText) {
+
+      let statesFLayer:FeatureLayer;
+
+      mapRef.current.portalWebMap.when(function(){
+
+        statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
+        queryLayer(
+          statesLayer,
+          `state_name LIKE '${searchText}%'`,
+          [ "state_name", "state_abbr", "objectid_1", "no_farms07" ]
+        )
+        .then((states: FeatureSet) => {
+          setQueryResults(states);
+
+          if (states.features && states.features.length == 1){
+            let relID:number = states.features[0].getObjectId();
+            statesFLayer = statesLayer as FeatureLayer;
+
+            statesFLayer.queryRelatedFeatures({
+              outFields: ["awardee_name", "awardee_state__territory"],
+              relationshipId: statesFLayer.relationships[0].id,
+              objectIds: [relID]
+            }).then((rdata: any) => {
+              setRelatedTableResults(rdata[relID].features);
+            })
+          }
+        });
+
+      });
+
+    }
+
+    if (currentStateOption) {
+      mapRef.current.portalWebMap.when(function(){
+        statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
+
+        queryLayer(
+          statesLayer,
+          `objectid_1 = '${currentStateOption}'`,
+          [ "state_name", "state_abbr", "objectid_1", "no_farms07" ]
+        )
+        .then((data: any) => setQueryResults(data))
+      });
+    }
+  }, [searchText, currentStateOption])
 
   return null;
 }
