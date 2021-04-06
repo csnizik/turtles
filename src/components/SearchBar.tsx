@@ -1,23 +1,21 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 interface ISearchProperties {
   searchText: string
-  setSearchText: Function
+  setSearchText: Function,
+  setQueryResults: Function
 }
 
-const SearchBar = ({searchText, setSearchText}: ISearchProperties) => {
-
-  //const [searchText, setSearchText] = useState('');
-
+const SearchBar = ({searchText, setQueryResults, setSearchText}: ISearchProperties) => {
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {value} = e.target
     setSearchText(value);
     console.log("Search Text-->",e.target.value)
   }
 
-  const fireSearch = (e: React.MouseEvent<HTMLElement>) => {
-    // TODO: Implement function
-    console.log("Search button clicked")
+  const resetSearch = () => {
+    setSearchText('');
+    setQueryResults(null);
   }
 
   return (
@@ -35,9 +33,9 @@ const SearchBar = ({searchText, setSearchText}: ISearchProperties) => {
       <button
         className='btn btn-primary search-btn'
         type='button'
-        onClick={fireSearch}
+        onClick={resetSearch}
       >
-        <i className="fas fa-search" />
+        <i className="fas fa-redo" />
       </button>
     </div>
 

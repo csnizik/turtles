@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MapComponent from '../components/MapComponent';
 import SearchBar from '../components/SearchBar';
-import ListGroup from '../components/ListGroup';
 import SearchResults from '../components/SearchResults';
 import FeatureSet from 'esri/tasks/support/FeatureSet';
 import {
@@ -31,14 +30,8 @@ const MapContainer = () => {
           <SearchBar
             searchText={searchText}
             setSearchText={setSearchText}
+            setQueryResults={setQueryResults}
           />
-          {/**
-            <hr />
-            <ListGroup
-              searchText={searchText}
-              stateList={stateList}
-            />
-          **/}
         </div>
         <div className="arcgis-map col-md-8">
           <MapComponent
@@ -49,9 +42,8 @@ const MapContainer = () => {
           <div className="webmap" id={VIEW_DIV} />
         </div>
       </div>
-      {/** Render search results **/}
       <SearchResults
-        queryResults={queryResults}
+        queryResults={queryResults!}
       />
     </>
   )
