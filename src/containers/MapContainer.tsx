@@ -26,25 +26,25 @@ const MapContainer = () => {
   return (
     <>
       <div className="qsr-map row">
-        <div className="map-tools col-md-4">
+        <div className="map-tools col-md-3">
           <SearchBar
             searchText={searchText}
             setSearchText={setSearchText}
             setQueryResults={setQueryResults}
           />
         </div>
-        <div className="arcgis-map col-md-8">
+        <div className="arcgis-map col-md-9">
           <MapComponent
             searchText={searchText}
             queryResults={queryResults!}
             setQueryResults={setQueryResults}
           />
           <div className="webmap" id={VIEW_DIV} />
+          <SearchResults
+            queryResults={queryResults!}
+          />
         </div>
       </div>
-      <SearchResults
-        queryResults={queryResults!}
-      />
     </>
   )
 }

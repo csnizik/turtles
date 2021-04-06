@@ -35,7 +35,7 @@ const MapComponent = ({ searchText, queryResults, setQueryResults }: IMapPropert
   const mapRef = useRef({} as MapProps);
   const [view, setView] = useState(null);
   const previousSearchText = usePrevious(searchText);
-
+  let statesLayer:Layer;
 
   useEffect(() => {
 
@@ -64,11 +64,23 @@ const MapComponent = ({ searchText, queryResults, setQueryResults }: IMapPropert
         view.on('pointer-up', function(event) {
           view.hitTest(event).then(function(response) {
           if (response.results.length) {
-          const result = response.results[0];
-          const graphic: Graphic = result.graphic;
-          const graphicAttributes = graphic.attributes;
-          console.log("Response on pointer up: ", result)
-          console.log("graphicAttributes! ", graphicAttributes);
+            const result = response.results[0];
+            const graphic: any = result.graphic;
+            const graphicAttributes = graphic.attributes;
+
+            // Query stateLayer
+            mapRef.current.portalWebMap.when(function(){
+              statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
+              queryLayer(
+                statesLayer,
+                `objectid_1 = '${graphicAttributes.objectid_1}'`,
+                [ "state_name", "state_abbr", "objectid_1", "no_farms07" ]
+              )
+              .then((data: any) => {
+                setQueryResults(data)
+              })
+            });
+
           }
           })
         })
@@ -94,8 +106,6 @@ const MapComponent = ({ searchText, queryResults, setQueryResults }: IMapPropert
 
   useEffect(() => {
     if (searchText && previousSearchText !== searchText) {
-
-      let statesLayer:Layer;
 
       mapRef.current.portalWebMap.when(function(){
         console.log(statesLayerId);

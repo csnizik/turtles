@@ -13,11 +13,17 @@ const SearchResults = ({ queryResults } : ISearchResultProps) => {
     setResult(queryResults);
   }, [queryResults]);
 
+  const renderResultsHeader = () => {
+    return (
+      <h3>Search results</h3>
+    )
+  }
+
   if (!results || !results.features.length) return null;
 
   return (
-    <div>
-      <h3>Search results</h3>
+    <div className='search-results'>
+      { renderResultsHeader() }
       <hr />
       {results && results.features.map((feature: any, index: number) => {
         return (

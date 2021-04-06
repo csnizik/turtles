@@ -24,6 +24,10 @@
   padding-left: 0px;
 }
 
+.nav-tabs {
+  margin-bottom: 25px;
+}
+
 .search-field {
   display: flex;
 }
@@ -42,6 +46,10 @@
 
 .list-group-item:hover {
   cursor: pointer;
+}
+
+.search-results {
+  padding: 10px;
 }
 
 .card-body {
