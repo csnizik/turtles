@@ -5,7 +5,6 @@ import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import Graphic from '@arcgis/core/Graphic';
 import FeatureSet from '@arcgis/core/tasks/support/FeatureSet';
-import RelationshipQuery from '@arcgis/core/tasks/support/RelationshipQuery';
 import esriConfig from "@arcgis/core/config";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 import '../stylesheets/map.css';
@@ -107,13 +106,13 @@ const MapComponent = ({
   useEffect(() => {
     const currentView = mapRef.current.view;
     if (queryResults && queryResults.features && queryResults.features.length) {
-      const item: any = queryResults.features[0];
-      if (item) {
+      const state: any = queryResults.features[0];
+      if (state) {
         currentView.when(() => {
-          currentView.goTo(item);
+          currentView.goTo(state);
           currentView.popup.open({
-            features: [item],
-            location: item.geometry.centroid
+            features: [state],
+            location: state.geometry.centroid
           });
         })
       }
@@ -130,8 +129,6 @@ const MapComponent = ({
     if (searchText && previousSearchText !== searchText) {
 
       let statesFLayer:FeatureLayer;
-      let objectIds:number[];
-
 
       mapRef.current.portalWebMap.when(function(){
 
@@ -141,15 +138,12 @@ const MapComponent = ({
           `state_name LIKE '${searchText}%'`,
           [ "state_name", "state_abbr", "objectid_1", "no_farms07" ]
         )
-        .then((data: FeatureSet) => {
-          setQueryResults(data);
-          statesFLayer = statesLayer as FeatureLayer;
+        .then((states: FeatureSet) => {
+          setQueryResults(states);
 
-          if (data.features && data.features.length){
-            let relID:number = data.features[0].getObjectId();
+          if (states.features && states.features.length == 1){
+            let relID:number = states.features[0].getObjectId();
             statesFLayer = statesLayer as FeatureLayer;
-
-            console.log(statesFLayer.relationships);
 
             statesFLayer.queryRelatedFeatures({
               outFields: ["awardee_name", "awardee_state__territory"],
@@ -161,11 +155,7 @@ const MapComponent = ({
           }
         });
 
-
-
       });
-
-
 
     }
 
