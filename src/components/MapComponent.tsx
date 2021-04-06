@@ -100,7 +100,7 @@ const MapComponent = ({ searchText }: IMapProperties) => {
         statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);      
         queryLayer(
           statesLayer,
-          `state_name = '${searchText}'`,
+          `state_name LIKE '${searchText}%'`,
           [ "state_name", "state_abbr", "objectid_1", "no_farms07" ]
         )
         .then((states: FeatureSet) => {
@@ -120,11 +120,7 @@ const MapComponent = ({ searchText }: IMapProperties) => {
           }
         });
 
-
-
       });
-
-
 
     }
   }, [searchText])
