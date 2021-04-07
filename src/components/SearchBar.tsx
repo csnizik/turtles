@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import SearchOption from './SearchOption';
 import { sortStateList } from '../common/util/helpers';
+import { searchOptionMap } from '../common/constants';
 
 interface ISearchProperties {
   searchText: string
@@ -33,8 +35,9 @@ const SearchBar = ({
     setStateDropdownOption('');
   }
 
-  const handleChangeSearchOption = (e: any) => {
-    setSearchOption(e.target.id);
+  const handleChangeSearchOption = (option: string) => {
+    setStateDropdownOption('')
+    setSearchOption(option);
   }
 
   const handleChangeState = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -83,24 +86,16 @@ const SearchBar = ({
   const renderSearchOptions = () => {
     return (
       <ul className="nav nav-tabs">
-        <li className="nav-item">
-          <button
-            className="nav-link"
-            id='projects'
-            onClick={handleChangeSearchOption}
-          >
-            Projects
-          </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="nav-link active"
-            id='location'
-            onClick={handleChangeSearchOption}
-          >
-            Location
-          </button>
-        </li>
+        {Object.keys(searchOptionMap).map(option => {
+          return (
+            <SearchOption
+              key={option}
+              currentSearchOption={currentSearchOption}
+              option={option}
+              handleSearchChange={handleChangeSearchOption}
+            />
+          )
+        })}
       </ul>
     );
   }

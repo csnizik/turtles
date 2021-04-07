@@ -126,7 +126,7 @@ const MapComponent = ({
   }, [relatedTableResults])
 
   useEffect(() => {
-    if (searchText && previousSearchText !== searchText) {
+    if (searchText && previousSearchText !== searchText && !currentStateOption) {
 
       let statesFLayer:FeatureLayer;
 

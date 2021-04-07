@@ -1,7 +1,7 @@
 #viewDiv {
   height: 475px;
-  padding: 0;
-  margin: 0;
+  padding: 0px 5px 0px 0px;
+  margin: 5px 0px 0px 0px;
   width: 100%;
 }
 
@@ -16,12 +16,20 @@
   opacity: 0.75;
 }
 
-.qsr-map {
-  margin: 5px;
+.map-tools {
+  margin: 5px 0px 0px 0px;
+}
+
+.map-tools > label {
+  margin-left: 15px;
 }
 
 .arcgis-map {
   padding-left: 0px;
+}
+
+.nav-link {
+  text-transform: capitalize;
 }
 
 .nav-tabs {
@@ -33,6 +41,7 @@
 }
 
 .search-input {
+  margin-left: 15px;
   flex: 0 0 66%;
   -webkit-box-flex: 0;
   max-width: 66%;
@@ -60,9 +69,11 @@
 
 .badge.badge-light {
   font-size: 16px;
+  background-color: #edeff2;
 }
 
 .card-body {
+  margin-left: 15px;
   display: flex;
 }
 
