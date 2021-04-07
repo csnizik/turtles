@@ -54,45 +54,50 @@ const MapComponent = ({
   const previousSearchText = usePrevious(searchText);
   let statesLayer:Layer;
 
-  let getProjectByState = function (state:Graphic, statesFLayer:FeatureLayer):any {
-    let relID:number = state.getObjectId();
-    let stateExtent:Extent = state.geometry.extent;
-    statesFLayer = statesLayer as FeatureLayer;
+  let getProjectByState = function (state:Graphic) {
+    mapRef.current.portalWebMap.when(function(){
+      statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
 
-    statesFLayer.queryRelatedFeatures({
-      outFields: ["agreement_no_", 
-                  "awardee_name", 
-                  "project_title",
-                  "funds_approved",
-                  "awardee_state__territory",
-                  "award_year",
-                  "resource_concern__broad_",
-                  "project_background",
-                  "deliverables"],
-      relationshipId: statesFLayer.relationships[0].id,
-      objectIds: [relID]
-    }).then((rdata) => {
-      let projects:IProject[] = [];
-      for(let feature  of rdata[relID].features){
-          let project ={} as IProject;
-          let feat = feature as Graphic;
+      let relID:number = state.getObjectId();
+      let stateExtent:Extent = state.geometry.extent;
+      let statesFLayer:FeatureLayer = statesLayer as FeatureLayer;
 
-          project.stateExtent = stateExtent;
-          project.agreementNumber = feat.getAttribute("agreement_no_");
-          project.awardeeName = feat.getAttribute("awardee_name");
-          project.title = feat.getAttribute("project_title");
-          project.funds = feat.getAttribute("funds_approved");
-          project.state = feat.getAttribute("awardee_state__territory");
-          project.year = feat.getAttribute("award_year");
-          project.resource = feat.getAttribute("resource_concern__broad_");
-          project.description = feat.getAttribute("project_background");
-          project.deliverables = feat.getAttribute("deliverables");
+      statesFLayer.queryRelatedFeatures({
+        outFields: ["agreement_no_", 
+                    "awardee_name", 
+                    "project_title",
+                    "funds_approved",
+                    "awardee_state__territory",
+                    "award_year",
+                    "resource_concern__broad_",
+                    "project_background",
+                    "deliverables"],
+        relationshipId: statesFLayer.relationships[0].id,
+        objectIds: [relID]
+      }).then((rdata) => {
+        let projects:IProject[] = [];
+        for(let feature  of rdata[relID].features){
+            let project ={} as IProject;
+            let feat = feature as Graphic;
 
-          projects.push(project);
-        }
+            project.stateExtent = stateExtent;
+            project.agreementNumber = feat.getAttribute("agreement_no_");
+            project.awardeeName = feat.getAttribute("awardee_name");
+            project.title = feat.getAttribute("project_title");
+            project.funds = feat.getAttribute("funds_approved");
+            project.state = feat.getAttribute("awardee_state__territory");
+            project.year = feat.getAttribute("award_year");
+            project.resource = feat.getAttribute("resource_concern__broad_");
+            project.description = feat.getAttribute("project_background");
+            project.deliverables = feat.getAttribute("deliverables");
 
-        return projects;
+            projects.push(project);
+          }
+          setRelatedTableResults(projects);
+
+      });
     });
+
   }
 
 
@@ -117,8 +122,14 @@ const MapComponent = ({
         zoom: MAP_ZOOM,
       });
 
+
+
       mapRef.current.view = view;
       mapRef.current.portalWebMap = portalWebMap;
+
+      mapRef.current.portalWebMap.when(function(){
+        statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
+      });
 
       view.when(() => {
         view.on('pointer-up', function(event) {
@@ -128,7 +139,6 @@ const MapComponent = ({
             const graphic: any = result.graphic;
             const graphicAttributes = graphic.attributes;
 
-            // Query stateLayer
             mapRef.current.portalWebMap.when(function(){
               statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
               setStateDropdownOption(graphicAttributes.objectid_1);
@@ -141,7 +151,6 @@ const MapComponent = ({
                 setQueryResults(data)
               })
             });
-
           }
           })
         })
@@ -156,10 +165,11 @@ const MapComponent = ({
       if (state) {
         currentView.when(() => {
           currentView.goTo(state);
-          currentView.popup.open({
-            features: [state],
-            location: state.geometry.centroid
-          });
+          getProjectByState(state);
+          //currentView.popup.open({
+          //   features: [state],
+          //   location: state.geometry.centroid
+          // });
         })
       }
     }
@@ -173,11 +183,7 @@ const MapComponent = ({
 
   useEffect(() => {
     if (searchText && previousSearchText !== searchText && !currentStateOption) {
-
-      let statesFLayer:FeatureLayer;
-
       mapRef.current.portalWebMap.when(function(){
-
         statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
         queryLayer(
           statesLayer,
@@ -190,21 +196,17 @@ const MapComponent = ({
           let stateExtent:Extent;
 
           if (states.features && states.features.length == 1){
-            const proj:IProject[] = getProjectByState(states.features[0],statesFLayer )
-            
-              setRelatedTableResults(proj);
+              getProjectByState(states.features[0])
+
             }
-          
         });
-
-       });
-
+      });
     }
 
     if (currentStateOption) {
+      
       mapRef.current.portalWebMap.when(function(){
         statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
-
         queryLayer(
           statesLayer,
           `objectid_1 = '${currentStateOption}'`,
