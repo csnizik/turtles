@@ -17,18 +17,29 @@ const ProjectListGroup = ({ relatedTableResults, setStateExtent }: IListProps) =
     setStateExtent(stateExtent);
   }
 
+  const getListItemText = (project: IProject) => {
+    return (
+      <p>
+        Awardee Name: {project.awardeeName}
+        <br />
+        <br />
+        States: {project.state}
+      </p>
+    )
+  }
+
   if (!relatedTableResults) return null;
 
   return (
     <ul className="list-group projects-data">
-      {relatedTableResults.map((project: any, index: number) => {
+      {relatedTableResults.map((project: IProject, index: number) => {
         return (
             <li
               key={index}
               className='list-group-item'
               onClick={() => handleProjectSelection(project.stateExtent)}
             >
-              {project.awardeeName}
+              {getListItemText(project)}
           </li>
         )
       })}
