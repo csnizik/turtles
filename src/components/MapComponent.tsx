@@ -5,6 +5,7 @@ import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import Graphic from '@arcgis/core/Graphic';
 import FeatureSet from '@arcgis/core/tasks/support/FeatureSet';
+import Extent from '@arcgis/core/geometry/Extent'
 import esriConfig from "@arcgis/core/config";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 import '../stylesheets/map.css';
@@ -18,6 +19,8 @@ import {
 import { queryLayer } from '../common/util/MapUtil';
 import { usePrevious } from '../common/util/helperHooks';
 import { layer } from 'esri/views/3d/support/LayerPerformanceInfo';
+
+import {IProject} from '../common/Types'
 
 
 interface IMapProperties {
@@ -45,7 +48,7 @@ const MapComponent = ({
     setStateDropdownOption
   }: IMapProperties) => {
   const mapRef = useRef({} as MapProps);
-  const [relatedTableResults, setRelatedTableResults] = useState<Graphic[]>();
+  const [relatedTableResults, setRelatedTableResults] = useState<IProject[]>();
   const [view, setView] = useState(null);
 
   const previousSearchText = usePrevious(searchText);
@@ -141,16 +144,50 @@ const MapComponent = ({
         .then((states: FeatureSet) => {
           setQueryResults(states);
 
+          let stateExtent:Extent;
+
           if (states.features && states.features.length == 1){
             let relID:number = states.features[0].getObjectId();
+            stateExtent = states.features[0].geometry.extent;
             statesFLayer = statesLayer as FeatureLayer;
 
             statesFLayer.queryRelatedFeatures({
-              outFields: ["awardee_name", "awardee_state__territory"],
+              outFields: ["agreement_no_", 
+                          "awardee_name", 
+                          "project_title",
+                          "funds_approved",
+                          "awardee_state__territory",
+                          "award_year",
+                          "resource_concern__broad_",
+                          "project_background",
+                          "deliverables"],
               relationshipId: statesFLayer.relationships[0].id,
               objectIds: [relID]
             }).then((rdata: any) => {
-              setRelatedTableResults(rdata[relID].features);
+
+              
+              let projects:IProject[] = [];
+              for(let feature  of rdata[relID].features)
+              {
+                 let project ={} as IProject;
+                 let feat = feature as Graphic;
+
+                 project.stateExtent = stateExtent;
+                 project.agreementNumber = feat.getAttribute("agreement_no_");
+                 project.awardeeName = feat.getAttribute("awardee_name");
+                 project.title = feat.getAttribute("project_title");
+                 project.funds = feat.getAttribute("funds_approved");
+                 project.state = feat.getAttribute("awardee_state__territory");
+                 project.year = feat.getAttribute("award_year");
+                 project.resource = feat.getAttribute("resource_concern__broad_");
+                 project.description = feat.getAttribute("project_background");
+                 project.deliverables = feat.getAttribute("deliverables");
+
+                 projects.push(project);
+
+                
+              }
+              setRelatedTableResults(projects);
             })
           }
         });
