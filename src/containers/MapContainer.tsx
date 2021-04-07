@@ -4,8 +4,7 @@ import SearchBar from '../components/SearchBar';
 import SearchResults from '../components/SearchResults';
 import ProjectListGroup from '../components/ProjectListGroup';
 import FeatureSet from 'esri/tasks/support/FeatureSet';
-import Extent from 'esri/geometry/Extent';
-import Graphic from '@arcgis/core/Graphic';
+import Extent from '@arcgis/core/geometry/Extent';
 import { IProject } from '../common/Types'
 import {
   VIEW_DIV
@@ -18,6 +17,7 @@ const MapContainer = () => {
   const [queryResults, setQueryResults] = useState<FeatureSet | null>(null);
   const [relatedTableResults, setRelatedTableResults] = useState<IProject[]>([]);
   const [stateExtent, setStateExtent] = useState<Extent>();
+  const [currentSearchOption, setSearchOption] = useState('location');
 
   useEffect(() => {
     if (!currentStateOption && !searchText && queryResults) {
@@ -50,6 +50,8 @@ const MapContainer = () => {
             currentStateOption={currentStateOption}
             setRelatedTableResults={setRelatedTableResults}
             setStateExtent={setStateExtent}
+            setSearchOption={setSearchOption}
+            currentSearchOption={currentSearchOption}
           />
           <ProjectListGroup
             relatedTableResults={relatedTableResults}
@@ -66,6 +68,7 @@ const MapContainer = () => {
             relatedTableResults={relatedTableResults}
             setRelatedTableResults={setRelatedTableResults}
             stateExtent={stateExtent!}
+            currentSearchOption={currentSearchOption}
           />
           <div className="webmap" id={VIEW_DIV} />
           <SearchResults

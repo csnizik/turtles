@@ -30,7 +30,8 @@ interface IMapProperties {
   queryResults: FeatureSet,
   setRelatedTableResults: Function,
   relatedTableResults: IProject[],
-  stateExtent: Extent
+  stateExtent: Extent,
+  currentSearchOption: string
 }
 
 interface MapProps {
@@ -46,7 +47,8 @@ const MapComponent = ({
     setStateDropdownOption,
     setRelatedTableResults,
     relatedTableResults,
-    stateExtent
+    stateExtent,
+    currentSearchOption
   }: IMapProperties) => {
   const mapRef = useRef({} as MapProps);
   const [view, setView] = useState(null);
@@ -126,7 +128,6 @@ const MapComponent = ({
       });
 
 
-
       mapRef.current.view = view;
       mapRef.current.portalWebMap = portalWebMap;
 
@@ -182,23 +183,27 @@ const MapComponent = ({
 
   useEffect(() => {
     if (searchText && previousSearchText !== searchText && !currentStateOption) {
-      mapRef.current.portalWebMap.when(function(){
-        statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
-        queryLayer(
-          statesLayer,
-          `state_name LIKE '${searchText}%'`,
-          [ "state_name", "state_abbr", "objectid_1", "no_farms07" ]
-        )
-        .then((states: FeatureSet) => {
-          setQueryResults(states);
+      if (currentSearchOption === 'projects') {
+        // TODO: do something
+      } else {
+        mapRef.current.portalWebMap.when(function(){
+          statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
+          queryLayer(
+            statesLayer,
+            `state_name LIKE '${searchText}%'`,
+            [ "state_name", "state_abbr", "objectid_1", "no_farms07" ]
+          )
+          .then((states: FeatureSet) => {
+            setQueryResults(states);
 
-          let stateExtent:Extent;
+            let stateExtent:Extent;
 
-          if (states.features && states.features.length == 1) {
-              getProjectByState(states.features[0])
-          }
+            if (states.features && states.features.length === 1) {
+                getProjectByState(states.features[0])
+            }
+          });
         });
-      });
+      }
     }
 
     if (currentStateOption) {
@@ -213,7 +218,7 @@ const MapComponent = ({
         .then((states: FeatureSet) => {
           setQueryResults(states);
           let stateExtent:Extent;
-          if (states.features && states.features.length == 1) {
+          if (states.features && states.features.length === 1) {
               getProjectByState(states.features[0])
           }
         })

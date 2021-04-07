@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Extent from '@arcgis/core/geometry/Extent';
 import { IProject } from '../common/Types';
 
@@ -19,10 +19,12 @@ const ProjectListGroup = ({
   const getListItemText = (project: IProject) => {
     return (
       <p>
-        Awardee Name: {project.awardeeName}
+        <strong>Project Title: </strong>
+        <small>{project.title}</small>
         <br />
         <br />
-        States: {project.state}
+        <strong>Location: </strong>
+        <small>{project.state}</small>
       </p>
     )
   }

@@ -1,5 +1,5 @@
 #viewDiv {
-  height: 575px;
+  height: 950px;
   padding: 0px 5px 0px 0px;
   margin: 5px 0px 0px 0px;
   width: 100%;
@@ -69,6 +69,8 @@
 
 .search-results {
   padding: 10px;
+  overflow-y: auto;
+  max-height: 350px;
 }
 
 .search-results-header > h3 {

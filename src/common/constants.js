@@ -5,10 +5,10 @@ export const BASE_MAP_OPTIONS = {
 };
 
 // Represents the level of detail at the center of the view.
-export const MAP_ZOOM = 5;
+export const MAP_ZOOM = 4;
 
-// Longitude / Latitude of Chicago, IL
-export const CENTER_COORDINATES = [-87.62, 41.87];
+// Longitude / Latitude for center of map
+export const CENTER_COORDINATES = [-96, 34];
 
 // Id for the ArcGis Map Element
 export const VIEW_DIV = 'viewDiv';

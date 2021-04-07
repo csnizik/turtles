@@ -11,7 +11,9 @@ interface ISearchProperties {
   stateList: any,
   currentStateOption: string
   setStateExtent: Function,
-  setRelatedTableResults: Function
+  setRelatedTableResults: Function,
+  currentSearchOption: string,
+  setSearchOption: Function
 }
 
 const SearchBar = ({
@@ -22,10 +24,11 @@ const SearchBar = ({
     setStateDropdownOption,
     currentStateOption,
     setStateExtent,
-    setRelatedTableResults
+    setRelatedTableResults,
+    currentSearchOption,
+    setSearchOption
   }: ISearchProperties) => {
 
-  const [currentSearchOption, setSearchOption] = useState('location');
   const sortedStateList = sortStateList(stateList);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,6 +51,7 @@ const SearchBar = ({
     setStateDropdownOption('');
     setSearchText('');
     setSearchOption(option);
+    setRelatedTableResults([]);
   }
 
   const handleChangeState = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -61,7 +65,7 @@ const SearchBar = ({
 
   const renderSearchForm = () => {
     const labelText = currentSearchOption === 'location'
-      ? 'Location search' : 'Projects search';
+      ? 'Location search' : 'Project number search';
     return (
       <>
         <label htmlFor="searchState">{labelText}</label>
@@ -150,23 +154,25 @@ const SearchBar = ({
       );
     }
 
-    if (currentSearchOption === 'projects') {
-      return (
-        <div className='card card-body bg-light'>
-          <div className="form-group">
-            <label htmlFor="projectNumber">
-              Project Number
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="projectNumber"
-              aria-describedby="projectNumberHelp"
-            />
+    {/**
+      if (currentSearchOption === 'projects') {
+        return (
+          <div className='card card-body bg-light'>
+            <div className="form-group">
+              <label htmlFor="projectNumber">
+                Project Title
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="projectNumber"
+                aria-describedby="projectNumberHelp"
+              />
+            </div>
           </div>
-        </div>
-      );
-    }
+        );
+      }
+    **/}
   }
 
   return (
