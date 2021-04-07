@@ -146,7 +146,15 @@ const MapComponent = ({
             statesFLayer = statesLayer as FeatureLayer;
 
             statesFLayer.queryRelatedFeatures({
-              outFields: ["awardee_name", "awardee_state__territory"],
+              outFields: ["agreement_no_", 
+                          "awardee_name", 
+                          "project_title",
+                          "funds_approved",
+                          "awardee_state__territory",
+                          "award_year",
+                          "resource_concern__broad_",
+                          "project_background",
+                          "deliverables"],
               relationshipId: statesFLayer.relationships[0].id,
               objectIds: [relID]
             }).then((rdata: any) => {
