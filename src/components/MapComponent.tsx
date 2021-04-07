@@ -19,6 +19,8 @@ import { queryLayer } from '../common/util/MapUtil';
 import { usePrevious } from '../common/util/helperHooks';
 import { layer } from 'esri/views/3d/support/LayerPerformanceInfo';
 
+import {IProject} from '../common/Types'
+
 
 interface IMapProperties {
   searchText: string,
