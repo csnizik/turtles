@@ -26,6 +26,7 @@ const SearchBar = ({
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {value} = e.target
+    setStateDropdownOption('')
     setSearchText(value);
   }
 
@@ -36,7 +37,8 @@ const SearchBar = ({
   }
 
   const handleChangeSearchOption = (option: string) => {
-    setStateDropdownOption('')
+    setStateDropdownOption('');
+    setSearchText('');
     setSearchOption(option);
   }
 
