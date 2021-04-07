@@ -77,7 +77,7 @@ const SearchBar = ({
             />
             <div className="input-group-append">
               <span className="input-group-text">
-                <i className="fas fa-search"></i>
+                <i className="fas fa-search" />
               </span>
             </div>
           </div>
