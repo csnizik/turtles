@@ -20,7 +20,7 @@ import { queryLayer } from '../common/util/MapUtil';
 import { usePrevious } from '../common/util/helperHooks';
 import { layer } from 'esri/views/3d/support/LayerPerformanceInfo';
 
-import {IProject} from '../common/Types'
+import { IProject } from '../common/Types'
 
 
 interface IMapProperties {
@@ -28,7 +28,9 @@ interface IMapProperties {
   setQueryResults: Function,
   setStateDropdownOption: Function,
   currentStateOption: string,
-  queryResults: FeatureSet
+  queryResults: FeatureSet,
+  setRelatedTableResults: Function,
+  relatedTableResults: IProject[]
 }
 
 // interface IRelatedTableResult {
@@ -45,10 +47,11 @@ const MapComponent = ({
     queryResults,
     setQueryResults,
     currentStateOption,
-    setStateDropdownOption
+    setStateDropdownOption,
+    setRelatedTableResults,
+    relatedTableResults
   }: IMapProperties) => {
   const mapRef = useRef({} as MapProps);
-  const [relatedTableResults, setRelatedTableResults] = useState<IProject[]>();
   const [view, setView] = useState(null);
 
   const previousSearchText = usePrevious(searchText);
@@ -152,8 +155,8 @@ const MapComponent = ({
             statesFLayer = statesLayer as FeatureLayer;
 
             statesFLayer.queryRelatedFeatures({
-              outFields: ["agreement_no_", 
-                          "awardee_name", 
+              outFields: ["agreement_no_",
+                          "awardee_name",
                           "project_title",
                           "funds_approved",
                           "awardee_state__territory",
@@ -165,7 +168,7 @@ const MapComponent = ({
               objectIds: [relID]
             }).then((rdata: any) => {
 
-              
+
               let projects:IProject[] = [];
               for(let feature  of rdata[relID].features)
               {
@@ -185,7 +188,7 @@ const MapComponent = ({
 
                  projects.push(project);
 
-                
+
               }
               setRelatedTableResults(projects);
             })
