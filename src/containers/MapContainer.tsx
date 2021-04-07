@@ -69,7 +69,7 @@ const MapContainer = () => {
           />
           <div className="webmap" id={VIEW_DIV} />
           <SearchResults
-            queryResults={queryResults!}
+            relatedTableResults={relatedTableResults}
           />
         </div>
       </div>
