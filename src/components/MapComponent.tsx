@@ -5,6 +5,7 @@ import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import Graphic from '@arcgis/core/Graphic';
 import FeatureSet from '@arcgis/core/tasks/support/FeatureSet';
+import Extent from '@arcgis/core/geometry/Extent'
 import esriConfig from "@arcgis/core/config";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 import '../stylesheets/map.css';
@@ -143,8 +144,11 @@ const MapComponent = ({
         .then((states: FeatureSet) => {
           setQueryResults(states);
 
+          let stateExtent:Extent;
+
           if (states.features && states.features.length == 1){
             let relID:number = states.features[0].getObjectId();
+            stateExtent = states.features[0].geometry.extent;
             statesFLayer = statesLayer as FeatureLayer;
 
             statesFLayer.queryRelatedFeatures({
@@ -161,11 +165,14 @@ const MapComponent = ({
               objectIds: [relID]
             }).then((rdata: any) => {
 
+              
               let projects:IProject[] = [];
               for(let feature  of rdata[relID].features)
               {
                  let project ={} as IProject;
                  let feat = feature as Graphic;
+
+                 project.stateExtent = stateExtent;
                  project.agreementNumber = feat.getAttribute("agreement_no_");
                  project.awardeeName = feat.getAttribute("awardee_name");
                  project.title = feat.getAttribute("project_title");
