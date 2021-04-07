@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { IProject } from '../common/Types'
+import Extent from '@arcgis/core/geometry/Extent';
+import { IProject } from '../common/Types';
 
 interface IListProps {
   relatedTableResults: IProject[],
@@ -12,7 +13,7 @@ interface IStateProps {
 
 const ProjectListGroup = ({ relatedTableResults, setStateExtent }: IListProps) => {
 
-  const handleProjectSelection = (stateExtent: any) => {
+  const handleProjectSelection = (stateExtent: Extent) => {
     setStateExtent(stateExtent);
   }
 

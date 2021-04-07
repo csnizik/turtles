@@ -5,7 +5,7 @@ import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import Graphic from '@arcgis/core/Graphic';
 import FeatureSet from '@arcgis/core/tasks/support/FeatureSet';
-import Extent from '@arcgis/core/geometry/Extent'
+import Extent from '@arcgis/core/geometry/Extent';
 import esriConfig from "@arcgis/core/config";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 import '../stylesheets/map.css';
@@ -31,7 +31,7 @@ interface IMapProperties {
   queryResults: FeatureSet,
   setRelatedTableResults: Function,
   relatedTableResults: IProject[],
-  stateExtent: any
+  stateExtent: Extent
 }
 
 // interface IRelatedTableResult {
@@ -220,7 +220,7 @@ const MapComponent = ({
 
           let stateExtent:Extent;
 
-          if (states.features && states.features.length == 1){
+          if (states.features && states.features.length == 1) {
             let relID:number = states.features[0].getObjectId();
             stateExtent = states.features[0].geometry.extent;
             statesFLayer = statesLayer as FeatureLayer;

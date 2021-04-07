@@ -4,6 +4,7 @@ import SearchBar from '../components/SearchBar';
 import SearchResults from '../components/SearchResults';
 import ProjectListGroup from '../components/ProjectListGroup';
 import FeatureSet from 'esri/tasks/support/FeatureSet';
+import Extent from 'esri/geometry/Extent';
 import Graphic from '@arcgis/core/Graphic';
 import { IProject } from '../common/Types'
 import {
@@ -16,7 +17,7 @@ const MapContainer = () => {
   const [currentStateOption, setStateDropdownOption] = useState<string>('');
   const [queryResults, setQueryResults] = useState<FeatureSet | null>(null);
   const [relatedTableResults, setRelatedTableResults] = useState<IProject[]>([]);
-  const [stateExtent, setStateExtent] = useState<any>();
+  const [stateExtent, setStateExtent] = useState<Extent>();
 
   useEffect(() => {
     if (!currentStateOption && !searchText && queryResults) {
