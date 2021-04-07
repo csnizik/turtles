@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import MapComponent from '../components/MapComponent';
 import SearchBar from '../components/SearchBar';
 import SearchResults from '../components/SearchResults';
+import ProjectListGroup from '../components/ProjectListGroup';
 import FeatureSet from 'esri/tasks/support/FeatureSet';
+import Extent from 'esri/geometry/Extent';
+import Graphic from '@arcgis/core/Graphic';
+import { IProject } from '../common/Types'
 import {
   VIEW_DIV
 } from '../common/constants.js';
@@ -12,6 +16,8 @@ const MapContainer = () => {
   const [stateList, setStateList] = useState([]);
   const [currentStateOption, setStateDropdownOption] = useState<string>('');
   const [queryResults, setQueryResults] = useState<FeatureSet | null>(null);
+  const [relatedTableResults, setRelatedTableResults] = useState<IProject[]>([]);
+  const [stateExtent, setStateExtent] = useState<Extent>();
 
   useEffect(() => {
     if (!currentStateOption && !searchText && queryResults) {
@@ -42,6 +48,12 @@ const MapContainer = () => {
             stateList={stateList}
             setStateDropdownOption={setStateDropdownOption}
             currentStateOption={currentStateOption}
+            setRelatedTableResults={setRelatedTableResults}
+            setStateExtent={setStateExtent}
+          />
+          <ProjectListGroup
+            relatedTableResults={relatedTableResults}
+            setStateExtent={setStateExtent}
           />
         </div>
         <div className="arcgis-map col-md-9">
@@ -51,6 +63,9 @@ const MapContainer = () => {
             setQueryResults={setQueryResults}
             currentStateOption={currentStateOption}
             setStateDropdownOption={setStateDropdownOption}
+            relatedTableResults={relatedTableResults}
+            setRelatedTableResults={setRelatedTableResults}
+            stateExtent={stateExtent!}
           />
           <div className="webmap" id={VIEW_DIV} />
           <SearchResults

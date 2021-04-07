@@ -1,5 +1,5 @@
 #viewDiv {
-  height: 475px;
+  height: 575px;
   padding: 0px 5px 0px 0px;
   margin: 5px 0px 0px 0px;
   width: 100%;
@@ -22,6 +22,16 @@
 
 .map-tools > label {
   margin-left: 15px;
+}
+
+.projects-data {
+  margin: 10px 0px 0px 15px;
+  overflow-y: auto;
+  max-height: 360px;
+}
+
+.projects-data > li {
+  cursor: pointer;
 }
 
 .arcgis-map {

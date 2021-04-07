@@ -5,7 +5,7 @@ import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import Graphic from '@arcgis/core/Graphic';
 import FeatureSet from '@arcgis/core/tasks/support/FeatureSet';
-import Extent from '@arcgis/core/geometry/Extent'
+import Extent from '@arcgis/core/geometry/Extent';
 import esriConfig from "@arcgis/core/config";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 import '../stylesheets/map.css';
@@ -19,7 +19,7 @@ import {
 import { queryLayer } from '../common/util/MapUtil';
 import { usePrevious } from '../common/util/helperHooks';
 
-import {IProject} from '../common/Types'
+import { IProject } from '../common/Types'
 
 
 interface IMapProperties {
@@ -27,7 +27,10 @@ interface IMapProperties {
   setQueryResults: Function,
   setStateDropdownOption: Function,
   currentStateOption: string,
-  queryResults: FeatureSet
+  queryResults: FeatureSet,
+  setRelatedTableResults: Function,
+  relatedTableResults: IProject[],
+  stateExtent: Extent
 }
 
 interface MapProps {
@@ -40,10 +43,12 @@ const MapComponent = ({
     queryResults,
     setQueryResults,
     currentStateOption,
-    setStateDropdownOption
+    setStateDropdownOption,
+    setRelatedTableResults,
+    relatedTableResults,
+    stateExtent
   }: IMapProperties) => {
   const mapRef = useRef({} as MapProps);
-  const [relatedTableResults, setRelatedTableResults] = useState<IProject[]>();
   const [view, setView] = useState(null);
 
   const previousSearchText = usePrevious(searchText);
@@ -58,8 +63,8 @@ const MapComponent = ({
       let statesFLayer:FeatureLayer = statesLayer as FeatureLayer;
 
       statesFLayer.queryRelatedFeatures({
-        outFields: ["agreement_no_", 
-                    "awardee_name", 
+        outFields: ["agreement_no_",
+                    "awardee_name",
                     "project_title",
                     "funds_approved",
                     "awardee_state__territory",
@@ -97,9 +102,12 @@ const MapComponent = ({
 
 
   useEffect(() => {
-    console.log("Hello")
-
-  }, [view]);
+    if (stateExtent && mapRef.current.view) {
+      mapRef.current.view.when(() => {
+        mapRef.current.view.goTo(stateExtent);
+      })
+    }
+  }, [stateExtent, mapRef]);
 
   useEffect(() => {
     if (mapRef && mapRef.current) {
@@ -186,16 +194,15 @@ const MapComponent = ({
 
           let stateExtent:Extent;
 
-          if (states.features && states.features.length == 1){
+          if (states.features && states.features.length == 1) {
               getProjectByState(states.features[0])
-
-            }
+          }
         });
       });
     }
 
     if (currentStateOption) {
-      
+      let statesFLayer:FeatureLayer;
       mapRef.current.portalWebMap.when(function(){
         statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
         queryLayer(
@@ -203,7 +210,13 @@ const MapComponent = ({
           `objectid_1 = '${currentStateOption}'`,
           [ "state_name", "state_abbr", "objectid_1", "no_farms07" ]
         )
-        .then((data: any) => setQueryResults(data))
+        .then((states: FeatureSet) => {
+          setQueryResults(states);
+          let stateExtent:Extent;
+          if (states.features && states.features.length == 1) {
+              getProjectByState(states.features[0])
+          }
+        })
       });
     }
   }, [searchText, currentStateOption])
