@@ -18,7 +18,7 @@ import {
 } from '../common/constants.js'
 import { queryLayer } from '../common/util/MapUtil';
 import { usePrevious } from '../common/util/helperHooks';
-import { layer } from 'esri/views/3d/support/LayerPerformanceInfo';
+//import { layer } from 'esri/views/3d/support/LayerPerformanceInfo';
 
 import {IProject} from '../common/Types'
 
@@ -54,7 +54,65 @@ const MapComponent = ({
   const previousSearchText = usePrevious(searchText);
   let statesLayer:Layer;
 
+  let getProjectByState = function (state:Graphic, statesFLayer:FeatureLayer):any {
+        let relID:number = state.getObjectId();
+                let stateExtent:Extent = state.geometry.extent;
+                statesFLayer = statesLayer as FeatureLayer;
+    
+                statesFLayer.queryRelatedFeatures({
+                  outFields: ["agreement_no_", 
+                              "awardee_name", 
+                              "project_title",
+                              "funds_approved",
+                              "awardee_state__territory",
+                              "award_year",
+                              "resource_concern__broad_",
+                              "project_background",
+                              "deliverables"],
+                  relationshipId: statesFLayer.relationships[0].id,
+                  objectIds: [relID]
+                }).then((rdata: any) => {
+    
+                  
+                  let projects:IProject[] = [];
+                  for(let feature  of rdata[relID].features)
+                  {
+                     let project ={} as IProject;
+                     let feat = feature as Graphic;
+    
+                     project.stateExtent = stateExtent;
+                     project.agreementNumber = feat.getAttribute("agreement_no_");
+                     project.awardeeName = feat.getAttribute("awardee_name");
+                     project.title = feat.getAttribute("project_title");
+                     project.funds = feat.getAttribute("funds_approved");
+                     project.state = feat.getAttribute("awardee_state__territory");
+                     project.year = feat.getAttribute("award_year");
+                     project.resource = feat.getAttribute("resource_concern__broad_");
+                     project.description = feat.getAttribute("project_background");
+                     project.deliverables = feat.getAttribute("deliverables");
+    
+                     projects.push(project);
+                     return projects;
+    
+                    
+                  }
+                }
+    
+    
+            }
+          }
+
+
+
+
+
+
+
+
+
+
   useEffect(() => {
+    console.log("Hello")
 
   }, [view]);
 
@@ -147,52 +205,14 @@ const MapComponent = ({
           let stateExtent:Extent;
 
           if (states.features && states.features.length == 1){
-            let relID:number = states.features[0].getObjectId();
-            stateExtent = states.features[0].geometry.extent;
-            statesFLayer = statesLayer as FeatureLayer;
-
-            statesFLayer.queryRelatedFeatures({
-              outFields: ["agreement_no_", 
-                          "awardee_name", 
-                          "project_title",
-                          "funds_approved",
-                          "awardee_state__territory",
-                          "award_year",
-                          "resource_concern__broad_",
-                          "project_background",
-                          "deliverables"],
-              relationshipId: statesFLayer.relationships[0].id,
-              objectIds: [relID]
-            }).then((rdata: any) => {
-
-              
-              let projects:IProject[] = [];
-              for(let feature  of rdata[relID].features)
-              {
-                 let project ={} as IProject;
-                 let feat = feature as Graphic;
-
-                 project.stateExtent = stateExtent;
-                 project.agreementNumber = feat.getAttribute("agreement_no_");
-                 project.awardeeName = feat.getAttribute("awardee_name");
-                 project.title = feat.getAttribute("project_title");
-                 project.funds = feat.getAttribute("funds_approved");
-                 project.state = feat.getAttribute("awardee_state__territory");
-                 project.year = feat.getAttribute("award_year");
-                 project.resource = feat.getAttribute("resource_concern__broad_");
-                 project.description = feat.getAttribute("project_background");
-                 project.deliverables = feat.getAttribute("deliverables");
-
-                 projects.push(project);
-
-                
-              }
-              setRelatedTableResults(projects);
-            })
-          }
+            const proj:IProject[] = getProjectByState(states.features[0],statesFLayer )
+            
+              setRelatedTableResults(proj);
+            }
+          
         });
 
-      });
+       });
 
     }
 
