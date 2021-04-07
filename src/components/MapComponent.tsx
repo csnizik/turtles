@@ -47,7 +47,7 @@ const MapComponent = ({
     setStateDropdownOption
   }: IMapProperties) => {
   const mapRef = useRef({} as MapProps);
-  const [relatedTableResults, setRelatedTableResults] = useState<Graphic[]>();
+  const [relatedTableResults, setRelatedTableResults] = useState<IProject[]>();
   const [view, setView] = useState(null);
 
   const previousSearchText = usePrevious(searchText);
@@ -160,7 +160,27 @@ const MapComponent = ({
               relationshipId: statesFLayer.relationships[0].id,
               objectIds: [relID]
             }).then((rdata: any) => {
-              setRelatedTableResults(rdata[relID].features);
+
+              let projects:IProject[] = [];
+              for(let feature  of rdata[relID].features)
+              {
+                 let project ={} as IProject;
+                 let feat = feature as Graphic;
+                 project.agreementNumber = feat.getAttribute("agreement_no_");
+                 project.awardeeName = feat.getAttribute("awardee_name");
+                 project.title = feat.getAttribute("project_title");
+                 project.funds = feat.getAttribute("funds_approved");
+                 project.state = feat.getAttribute("awardee_state__territory");
+                 project.year = feat.getAttribute("award_year");
+                 project.resource = feat.getAttribute("resource_concern__broad_");
+                 project.description = feat.getAttribute("project_background");
+                 project.deliverables = feat.getAttribute("deliverables");
+
+                 projects.push(project);
+
+                
+              }
+              setRelatedTableResults(projects);
             })
           }
         });
