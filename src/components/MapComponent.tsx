@@ -18,7 +18,6 @@ import {
 } from '../common/constants.js'
 import { queryLayer } from '../common/util/MapUtil';
 import { usePrevious } from '../common/util/helperHooks';
-//import { layer } from 'esri/views/3d/support/LayerPerformanceInfo';
 
 import {IProject} from '../common/Types'
 
@@ -30,10 +29,6 @@ interface IMapProperties {
   currentStateOption: string,
   queryResults: FeatureSet
 }
-
-// interface IRelatedTableResult {
-//     results: FeatureSet
-// }
 
 interface MapProps {
   view: MapView;
@@ -166,10 +161,6 @@ const MapComponent = ({
         currentView.when(() => {
           currentView.goTo(state);
           getProjectByState(state);
-          //currentView.popup.open({
-          //   features: [state],
-          //   location: state.geometry.centroid
-          // });
         })
       }
     }
