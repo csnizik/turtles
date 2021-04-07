@@ -18,7 +18,6 @@ import {
 } from '../common/constants.js'
 import { queryLayer } from '../common/util/MapUtil';
 import { usePrevious } from '../common/util/helperHooks';
-import { layer } from 'esri/views/3d/support/LayerPerformanceInfo';
 
 import {IProject} from '../common/Types'
 
@@ -30,10 +29,6 @@ interface IMapProperties {
   currentStateOption: string,
   queryResults: FeatureSet
 }
-
-// interface IRelatedTableResult {
-//     results: FeatureSet
-// }
 
 interface MapProps {
   view: MapView;
@@ -54,7 +49,55 @@ const MapComponent = ({
   const previousSearchText = usePrevious(searchText);
   let statesLayer:Layer;
 
+  let getProjectByState = function (state:Graphic) {
+    mapRef.current.portalWebMap.when(function(){
+      statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
+
+      let relID:number = state.getObjectId();
+      let stateExtent:Extent = state.geometry.extent;
+      let statesFLayer:FeatureLayer = statesLayer as FeatureLayer;
+
+      statesFLayer.queryRelatedFeatures({
+        outFields: ["agreement_no_", 
+                    "awardee_name", 
+                    "project_title",
+                    "funds_approved",
+                    "awardee_state__territory",
+                    "award_year",
+                    "resource_concern__broad_",
+                    "project_background",
+                    "deliverables"],
+        relationshipId: statesFLayer.relationships[0].id,
+        objectIds: [relID]
+      }).then((rdata) => {
+        let projects:IProject[] = [];
+        for(let feature  of rdata[relID].features){
+            let project ={} as IProject;
+            let feat = feature as Graphic;
+
+            project.stateExtent = stateExtent;
+            project.agreementNumber = feat.getAttribute("agreement_no_");
+            project.awardeeName = feat.getAttribute("awardee_name");
+            project.title = feat.getAttribute("project_title");
+            project.funds = feat.getAttribute("funds_approved");
+            project.state = feat.getAttribute("awardee_state__territory");
+            project.year = feat.getAttribute("award_year");
+            project.resource = feat.getAttribute("resource_concern__broad_");
+            project.description = feat.getAttribute("project_background");
+            project.deliverables = feat.getAttribute("deliverables");
+
+            projects.push(project);
+          }
+          setRelatedTableResults(projects);
+
+      });
+    });
+
+  }
+
+
   useEffect(() => {
+    console.log("Hello")
 
   }, [view]);
 
@@ -74,8 +117,14 @@ const MapComponent = ({
         zoom: MAP_ZOOM,
       });
 
+
+
       mapRef.current.view = view;
       mapRef.current.portalWebMap = portalWebMap;
+
+      mapRef.current.portalWebMap.when(function(){
+        statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
+      });
 
       view.when(() => {
         view.on('pointer-up', function(event) {
@@ -85,7 +134,6 @@ const MapComponent = ({
             const graphic: any = result.graphic;
             const graphicAttributes = graphic.attributes;
 
-            // Query stateLayer
             mapRef.current.portalWebMap.when(function(){
               statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
               setStateDropdownOption(graphicAttributes.objectid_1);
@@ -98,7 +146,6 @@ const MapComponent = ({
                 setQueryResults(data)
               })
             });
-
           }
           })
         })
@@ -113,10 +160,7 @@ const MapComponent = ({
       if (state) {
         currentView.when(() => {
           currentView.goTo(state);
-          currentView.popup.open({
-            features: [state],
-            location: state.geometry.centroid
-          });
+          getProjectByState(state);
         })
       }
     }
@@ -130,11 +174,7 @@ const MapComponent = ({
 
   useEffect(() => {
     if (searchText && previousSearchText !== searchText && !currentStateOption) {
-
-      let statesFLayer:FeatureLayer;
-
       mapRef.current.portalWebMap.when(function(){
-
         statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
         queryLayer(
           statesLayer,
@@ -147,59 +187,17 @@ const MapComponent = ({
           let stateExtent:Extent;
 
           if (states.features && states.features.length == 1){
-            let relID:number = states.features[0].getObjectId();
-            stateExtent = states.features[0].geometry.extent;
-            statesFLayer = statesLayer as FeatureLayer;
+              getProjectByState(states.features[0])
 
-            statesFLayer.queryRelatedFeatures({
-              outFields: ["agreement_no_", 
-                          "awardee_name", 
-                          "project_title",
-                          "funds_approved",
-                          "awardee_state__territory",
-                          "award_year",
-                          "resource_concern__broad_",
-                          "project_background",
-                          "deliverables"],
-              relationshipId: statesFLayer.relationships[0].id,
-              objectIds: [relID]
-            }).then((rdata: any) => {
-
-              
-              let projects:IProject[] = [];
-              for(let feature  of rdata[relID].features)
-              {
-                 let project ={} as IProject;
-                 let feat = feature as Graphic;
-
-                 project.stateExtent = stateExtent;
-                 project.agreementNumber = feat.getAttribute("agreement_no_");
-                 project.awardeeName = feat.getAttribute("awardee_name");
-                 project.title = feat.getAttribute("project_title");
-                 project.funds = feat.getAttribute("funds_approved");
-                 project.state = feat.getAttribute("awardee_state__territory");
-                 project.year = feat.getAttribute("award_year");
-                 project.resource = feat.getAttribute("resource_concern__broad_");
-                 project.description = feat.getAttribute("project_background");
-                 project.deliverables = feat.getAttribute("deliverables");
-
-                 projects.push(project);
-
-                
-              }
-              setRelatedTableResults(projects);
-            })
-          }
+            }
         });
-
       });
-
     }
 
     if (currentStateOption) {
+      
       mapRef.current.portalWebMap.when(function(){
         statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
-
         queryLayer(
           statesLayer,
           `objectid_1 = '${currentStateOption}'`,
