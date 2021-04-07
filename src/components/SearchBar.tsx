@@ -36,6 +36,7 @@ const SearchBar = ({
   }
 
   const handleChangeSearchOption = (option: string) => {
+    setStateDropdownOption('')
     setSearchOption(option);
   }
 
