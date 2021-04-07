@@ -7,11 +7,10 @@ interface IListProps {
   setStateExtent: Function
 }
 
-interface IStateProps {
-  attributes: any
-}
-
-const ProjectListGroup = ({ relatedTableResults, setStateExtent }: IListProps) => {
+const ProjectListGroup = ({
+  relatedTableResults,
+  setStateExtent
+}: IListProps) => {
 
   const handleProjectSelection = (stateExtent: Extent) => {
     setStateExtent(stateExtent);
@@ -39,7 +38,7 @@ const ProjectListGroup = ({ relatedTableResults, setStateExtent }: IListProps) =
               className='list-group-item'
               onClick={() => handleProjectSelection(project.stateExtent)}
             >
-              {getListItemText(project)}
+              { getListItemText(project) }
           </li>
         )
       })}
