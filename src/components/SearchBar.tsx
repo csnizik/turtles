@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SearchOption from './SearchOption';
-import { filterStateList } from '../common/util/helpers';
+import { sortStateList } from '../common/util/helpers';
 import { searchOptionMap } from '../common/constants';
 
 interface ISearchProperties {
@@ -22,7 +22,7 @@ const SearchBar = ({
   }: ISearchProperties) => {
 
   const [currentSearchOption, setSearchOption] = useState('location');
-  const sortedStateList = filterStateList(stateList);
+  const sortedStateList = sortStateList(stateList);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {value} = e.target
