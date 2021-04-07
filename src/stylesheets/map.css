@@ -24,6 +24,16 @@
   margin-left: 15px;
 }
 
+.projects-data {
+  margin: 10px 0px 0px 15px;
+  overflow-y: auto;
+  max-height: 360px;
+}
+
+.projects-data > li {
+  cursor: pointer;
+}
+
 .arcgis-map {
   padding-left: 0px;
 }

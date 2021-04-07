@@ -30,7 +30,8 @@ interface IMapProperties {
   currentStateOption: string,
   queryResults: FeatureSet,
   setRelatedTableResults: Function,
-  relatedTableResults: IProject[]
+  relatedTableResults: IProject[],
+  stateExtent: any
 }
 
 // interface IRelatedTableResult {
@@ -49,7 +50,8 @@ const MapComponent = ({
     currentStateOption,
     setStateDropdownOption,
     setRelatedTableResults,
-    relatedTableResults
+    relatedTableResults,
+    stateExtent
   }: IMapProperties) => {
   const mapRef = useRef({} as MapProps);
   const [view, setView] = useState(null);
@@ -58,8 +60,12 @@ const MapComponent = ({
   let statesLayer:Layer;
 
   useEffect(() => {
-
-  }, [view]);
+    if (stateExtent && mapRef.current.view) {
+      mapRef.current.view.when(() => {
+        mapRef.current.view.goTo(stateExtent);
+      })
+    }
+  }, [stateExtent, mapRef]);
 
   useEffect(() => {
     if (mapRef && mapRef.current) {
@@ -200,6 +206,7 @@ const MapComponent = ({
     }
 
     if (currentStateOption) {
+      let statesFLayer:FeatureLayer;
       mapRef.current.portalWebMap.when(function(){
         statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
 
@@ -208,7 +215,57 @@ const MapComponent = ({
           `objectid_1 = '${currentStateOption}'`,
           [ "state_name", "state_abbr", "objectid_1", "no_farms07" ]
         )
-        .then((data: any) => setQueryResults(data))
+        .then((states: FeatureSet) => {
+          setQueryResults(states);
+
+          let stateExtent:Extent;
+
+          if (states.features && states.features.length == 1){
+            let relID:number = states.features[0].getObjectId();
+            stateExtent = states.features[0].geometry.extent;
+            statesFLayer = statesLayer as FeatureLayer;
+
+            statesFLayer.queryRelatedFeatures({
+              outFields: ["agreement_no_",
+                          "awardee_name",
+                          "project_title",
+                          "funds_approved",
+                          "awardee_state__territory",
+                          "award_year",
+                          "resource_concern__broad_",
+                          "project_background",
+                          "deliverables"],
+              relationshipId: statesFLayer.relationships[0].id,
+              objectIds: [relID]
+            }).then((rdata: any) => {
+
+
+              let projects:IProject[] = [];
+              for(let feature  of rdata[relID].features)
+              {
+                 let project ={} as IProject;
+                 let feat = feature as Graphic;
+
+                 project.stateExtent = stateExtent;
+                 project.agreementNumber = feat.getAttribute("agreement_no_");
+                 project.awardeeName = feat.getAttribute("awardee_name");
+                 project.title = feat.getAttribute("project_title");
+                 project.funds = feat.getAttribute("funds_approved");
+                 project.state = feat.getAttribute("awardee_state__territory");
+                 project.year = feat.getAttribute("award_year");
+                 project.resource = feat.getAttribute("resource_concern__broad_");
+                 project.description = feat.getAttribute("project_background");
+                 project.deliverables = feat.getAttribute("deliverables");
+
+                 projects.push(project);
+
+
+              }
+              setRelatedTableResults(projects);
+            })
+          }
+
+        })
       });
     }
   }, [searchText, currentStateOption])

@@ -10,6 +10,8 @@ interface ISearchProperties {
   setStateDropdownOption: Function,
   stateList: any,
   currentStateOption: string
+  setStateExtent: Function,
+  setRelatedTableResults: Function
 }
 
 const SearchBar = ({
@@ -18,15 +20,21 @@ const SearchBar = ({
     setSearchText,
     stateList,
     setStateDropdownOption,
-    currentStateOption
+    currentStateOption,
+    setStateExtent,
+    setRelatedTableResults
   }: ISearchProperties) => {
 
   const [currentSearchOption, setSearchOption] = useState('location');
   const sortedStateList = sortStateList(stateList);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {value} = e.target
-    setStateDropdownOption('')
+    const {value} = e.target;
+    if (!value) {
+      setRelatedTableResults([]);
+      setStateExtent(null);
+    }
+    setStateDropdownOption('');
     setSearchText(value);
   }
 
@@ -43,6 +51,11 @@ const SearchBar = ({
   }
 
   const handleChangeState = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value } = e.target;
+    if (!value) {
+      setRelatedTableResults([]);
+      setStateExtent(null);
+    }
     setStateDropdownOption(e.target.value);
   }
 
