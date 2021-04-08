@@ -115,15 +115,34 @@ const MapComponent = ({
 
     mapRef.current.portalWebMap.when(function() {
       statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
-      queryLayer(
-        statesLayer,
-        stateWhereClause,
-        [ "state_name", "state_abbr", "objectid_1" ]
-      )
-      .then((states: Graphic) => {
-        mapRef.current.view.graphics.removeAll();
-        mapRef.current.view.graphics.add(states);
-      });
+
+      if (stateWhereClause.length){
+        queryLayer(
+          statesLayer,
+          stateWhereClause,
+          [ "state_name", "state_abbr", "objectid_1" ]
+        )
+        .then((states: FeatureSet) => {
+          if (states.features.length){
+            mapRef.current.view.graphics.removeAll();
+            let selectedStates:Graphic[] = [];
+            states.features.forEach(state => {
+              let selectedState = new Graphic({
+                geometry:state.geometry,
+                attributes:state.attributes,
+                symbol:{
+                  
+
+                }  
+              });
+
+              selectedStates.push(selectedState);
+            
+            });
+          }
+
+        });
+      }
 
     });
     // Then zoom to graphics and add them to the view
