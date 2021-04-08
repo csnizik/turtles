@@ -53,6 +53,17 @@ const MapComponent = ({
   const [view, setView] = useState(null);
 
   const previousSearchText = usePrevious(searchText);
+  const previousSearchOption = usePrevious(currentSearchOption);
+
+  useEffect(() => {
+    if (previousSearchOption && currentSearchOption !== previousSearchOption) {
+      if (mapRef.current.view.graphics) {
+        mapRef.current.view.graphics.removeAll();
+      }
+    }
+  }, [currentSearchOption])
+
+
   let statesLayer:Layer;
 
   let getProjectByState = function (state:Graphic) {
@@ -126,21 +137,30 @@ const MapComponent = ({
           if (states.features.length){
             mapRef.current.view.graphics.removeAll();
             let selectedStates:Graphic[] = [];
+            const stateSymbol: any = {
+              type: "simple-fill",  // autocasts as new SimpleFillSymbol()
+              color: [ 51,51, 204, 0.9 ],
+              style: "solid",
+              outline: {  // autocasts as new SimpleLineSymbol()
+                color: "white",
+                width: 1
+              }
+            };
             states.features.forEach(state => {
               let selectedState = new Graphic({
                 geometry:state.geometry,
                 attributes:state.attributes,
-                symbol:{
-                  
-
-                }  
+                symbol: stateSymbol
               });
 
               selectedStates.push(selectedState);
-            
+              mapRef.current.view.graphics.add(selectedState)
             });
-          }
 
+            if (selectedStates.length) {
+              mapRef.current.view.goTo(selectedStates);
+            }
+          }
         });
       }
 

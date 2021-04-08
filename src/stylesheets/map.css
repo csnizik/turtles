@@ -16,6 +16,16 @@
   opacity: 0.75;
 }
 
+.header-container {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+}
+
+.sfi-header {
+  height: 45px;
+}
+
 .map-tools {
   margin: 5px 0px 0px 0px;
 }
