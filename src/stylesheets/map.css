@@ -39,7 +39,7 @@
 .projects-data {
   margin: 10px 0px 0px 15px;
   overflow-y: auto;
-  max-height: 500px;
+  max-height: 485px;
 }
 
 .projects-data > li {
@@ -48,7 +48,6 @@
 
 .arcgis-map {
   padding-left: 0px;
-  /* height: 50px; */
 }
 
 .nav-link {
@@ -104,8 +103,4 @@
 
 .card-body > p {
   margin: 5px;
-}
-
-.search-result{
-  align-text: center;
 }
