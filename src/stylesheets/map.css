@@ -105,3 +105,7 @@
 .card-body > p {
   margin: 5px;
 }
+
+.search-result{
+  align-text: center;
+}

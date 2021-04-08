@@ -44,7 +44,7 @@ const ProjectListGroup = ({
 
   return (
     <>
-    {/* <h4 style={{margin:"auto"}}>Search Result</h4> */}
+    {relatedTableResults.length > 0 && <h4 style={{textAlign:'center', fontWeight:'bold'}}>Search Results</h4>}
     <ul className="list-group projects-data ">
       {resultsPaneFocus.map((project: IProject, index: number) => {
         return (
