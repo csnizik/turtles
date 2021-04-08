@@ -20,6 +20,7 @@ const MapContainer = () => {
   const [relatedTableResults, setRelatedTableResults] = useState<IProject[]>([]);
   const [stateExtent, setStateExtent] = useState<Extent>();
   const [currentSearchOption, setSearchOption] = useState('location');
+  const [resultsPaneFocus, setResultsPaneFocus] = useState<IProject[]>([]);
 
   useEffect(() => {
     if (!currentStateOption && !searchText && queryResults) {
@@ -54,10 +55,15 @@ const MapContainer = () => {
             setStateExtent={setStateExtent}
             setSearchOption={setSearchOption}
             currentSearchOption={currentSearchOption}
+            resultsPaneFocus={resultsPaneFocus}
+            setResultsPaneFocus={setResultsPaneFocus}
           />
           <ProjectListGroup
+            setRelatedTableResults={setRelatedTableResults}
             relatedTableResults={relatedTableResults}
             setStateExtent={setStateExtent}
+            resultsPaneFocus={resultsPaneFocus}
+            setResultsPaneFocus={setResultsPaneFocus}
           />
         </div>
         <div className="arcgis-map col-md-9">
@@ -71,10 +77,13 @@ const MapContainer = () => {
             setRelatedTableResults={setRelatedTableResults}
             stateExtent={stateExtent!}
             currentSearchOption={currentSearchOption}
+            resultsPaneFocus={resultsPaneFocus}
+            setResultsPaneFocus={setResultsPaneFocus}
           />
           <div className="webmap" id={VIEW_DIV} />
           <SearchResults
-            relatedTableResults={relatedTableResults}
+            resultsPaneFocus={resultsPaneFocus}
+            setResultsPaneFocus={setResultsPaneFocus}
           />
         </div>
       </div>

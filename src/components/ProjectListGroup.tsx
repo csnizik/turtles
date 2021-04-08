@@ -1,19 +1,30 @@
 import React from 'react';
 import Extent from '@arcgis/core/geometry/Extent';
 import { IProject } from '../common/Types';
+import '../stylesheets/map.css'
 
 interface IListProps {
+  setRelatedTableResults: Function,
   relatedTableResults: IProject[],
-  setStateExtent: Function
+  setStateExtent: Function,
+  resultsPaneFocus: IProject[],
+  setResultsPaneFocus: Function
 }
 
 const ProjectListGroup = ({
+  setRelatedTableResults,
   relatedTableResults,
-  setStateExtent
+  setStateExtent,
+  resultsPaneFocus, 
+  setResultsPaneFocus
 }: IListProps) => {
+
+  
 
   const handleProjectSelection = (stateExtent: Extent) => {
     setStateExtent(stateExtent);
+    
+    
   }
 
   const getListItemText = (project: IProject) => {
@@ -32,19 +43,31 @@ const ProjectListGroup = ({
   if (!relatedTableResults) return null;
 
   return (
-    <ul className="list-group projects-data">
-      {relatedTableResults.map((project: IProject, index: number) => {
+    <>
+    {relatedTableResults.length > 0 && <h4 style={{textAlign:'center', fontWeight:'bold'}}>Search Results</h4>}
+    <ul className="list-group projects-data ">
+      {resultsPaneFocus && resultsPaneFocus.map((project: IProject, index: number) => {
         return (
             <li
               key={index}
               className='list-group-item'
-              onClick={() => handleProjectSelection(project.stateExtent)}
+              onClick={() => {
+                handleProjectSelection(project.stateExtent);
+                setRelatedTableResults([project]);
+                setResultsPaneFocus([project]);
+                
+                
+                
+                
+              }}
+
             >
               { getListItemText(project) }
           </li>
         )
       })}
     </ul>
+    </>
   );
 }
 

@@ -30,7 +30,9 @@ interface IMapProperties {
   setRelatedTableResults: Function,
   relatedTableResults: IProject[],
   stateExtent: Extent,
-  currentSearchOption: string
+  currentSearchOption: string,
+  resultsPaneFocus: IProject[],
+  setResultsPaneFocus: Function
 }
 
 interface MapProps {
@@ -47,7 +49,9 @@ const MapComponent = ({
     setRelatedTableResults,
     relatedTableResults,
     stateExtent,
-    currentSearchOption
+    currentSearchOption,
+    resultsPaneFocus,
+    setResultsPaneFocus
   }: IMapProperties) => {
   const mapRef = useRef({} as MapProps);
   const [view, setView] = useState(null);
@@ -106,6 +110,8 @@ const MapComponent = ({
             projects.push(project);
           }
           setRelatedTableResults(projects);
+          setResultsPaneFocus(projects)
+          
 
 
       });
@@ -212,6 +218,7 @@ const MapComponent = ({
         }
 
         setRelatedTableResults(projects);
+        setResultsPaneFocus(projects)
 
 
         let stateCodes:string[] = [];
@@ -228,7 +235,7 @@ const MapComponent = ({
   }
 
 
-  //getProjectByAwardee
+ 
 
 
   useEffect(() => {
@@ -253,6 +260,7 @@ const MapComponent = ({
         container: VIEW_DIV,
         center: CENTER_COORDINATES,
         zoom: MAP_ZOOM,
+       
       });
 
 
