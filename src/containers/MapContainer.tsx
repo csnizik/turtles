@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MapComponent from '../components/MapComponent';
 import SideBar from '../components/SideBar';
+import Header from '../components/Header';
 import SearchResults from '../components/SearchResults';
 import ProjectListGroup from '../components/ProjectListGroup';
 import FeatureSet from '@arcgis/core/tasks/support/FeatureSet';
@@ -40,6 +41,7 @@ const MapContainer = () => {
 
   return (
     <>
+      <Header />
       <div className="qsr-map row">
         <div className="map-tools col-md-3">
           <SideBar
