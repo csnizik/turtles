@@ -16,7 +16,7 @@ interface ISearchProperties {
   setSearchOption: Function
 }
 
-const SearchBar = ({
+const SideBar = ({
     searchText,
     setQueryResults,
     setSearchText,
@@ -184,4 +184,4 @@ const SearchBar = ({
   )
 }
 
-export default SearchBar;
+export default SideBar;

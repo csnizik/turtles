@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MapComponent from '../components/MapComponent';
-import SearchBar from '../components/SearchBar';
+import SideBar from '../components/SideBar';
 import SearchResults from '../components/SearchResults';
 import ProjectListGroup from '../components/ProjectListGroup';
 import FeatureSet from 'esri/tasks/support/FeatureSet';
@@ -41,7 +41,7 @@ const MapContainer = () => {
     <>
       <div className="qsr-map row">
         <div className="map-tools col-md-3">
-          <SearchBar
+          <SideBar
             searchText={searchText}
             setSearchText={setSearchText}
             setQueryResults={setQueryResults}
