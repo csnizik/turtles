@@ -30,7 +30,9 @@ interface IMapProperties {
   setRelatedTableResults: Function,
   relatedTableResults: IProject[],
   stateExtent: Extent,
-  currentSearchOption: string
+  currentSearchOption: string,
+  resultsPaneFocus: IProject[],
+  setResultsPaneFocus: Function
 }
 
 interface MapProps {
@@ -47,7 +49,9 @@ const MapComponent = ({
     setRelatedTableResults,
     relatedTableResults,
     stateExtent,
-    currentSearchOption
+    currentSearchOption,
+    resultsPaneFocus,
+    setResultsPaneFocus
   }: IMapProperties) => {
   const mapRef = useRef({} as MapProps);
   const [view, setView] = useState(null);

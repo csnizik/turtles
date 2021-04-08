@@ -3,11 +3,13 @@ import Extent from '@arcgis/core/geometry/Extent';
 import { IProject } from '../common/Types';
 
 interface IListProps {
+  setRelatedTableResults: Function,
   relatedTableResults: IProject[],
   setStateExtent: Function
 }
 
 const ProjectListGroup = ({
+  setRelatedTableResults,
   relatedTableResults,
   setStateExtent
 }: IListProps) => {
@@ -38,7 +40,11 @@ const ProjectListGroup = ({
             <li
               key={index}
               className='list-group-item'
-              onClick={() => handleProjectSelection(project.stateExtent)}
+              onClick={() => {
+                handleProjectSelection(project.stateExtent);
+                setRelatedTableResults([project]);
+              }}
+
             >
               { getListItemText(project) }
           </li>

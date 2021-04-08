@@ -2,22 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { IProject } from '../common/Types';
 
 interface ISearchResultProps {
-  relatedTableResults : IProject[]
+  resultsPaneFocus: IProject[],
+  setResultsPaneFocus: Function
 }
 
-const SearchResults = ({ relatedTableResults } : ISearchResultProps) => {
-  const [results, setResult] = useState(relatedTableResults);
+const SearchResults = ({ resultsPaneFocus, setResultsPaneFocus } : ISearchResultProps) => {
+  const [results, setResult] = useState(resultsPaneFocus);
 
   useEffect(() => {
-    setResult(relatedTableResults);
-  }, [relatedTableResults]);
+    setResult(resultsPaneFocus);
+  }, [resultsPaneFocus]);
 
   const renderResults = () => {
-    if (!relatedTableResults || !relatedTableResults.length) return null;
+    if (!results || !results.length) return null;
 
     return (
       <div id='results' className='search-results-header card border-primary'>
-        <h3 className="card-header" data-toggle="collapse" data-target="#wrap">Projects from {relatedTableResults[0].state}</h3>
+        <h3 className="card-header" data-toggle="collapse" data-target="#wrap">Projects from {resultsPaneFocus[0].state}</h3>
         <div id="wrap" className='show'>
           { results.map(project => {
               return (
