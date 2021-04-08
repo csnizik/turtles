@@ -101,8 +101,32 @@ const MapComponent = ({
     });
   }
 
-  let selectStatesByProjectList = function (stateCodes:string[]){
+  let selectStatesByProjectList = function (stateCodes:string[]) {
 
+    // TODO: Query States layer and get all state graphic
+    let stateWhereClause: string = '';
+    for (let i = 0; i < stateCodes.length; i++) {
+      if (i != stateCodes.length - 1) {
+        stateWhereClause += `state_abbr = '${stateCodes[i]}' OR `;
+      } else {
+        stateWhereClause += `state_abbr = '${stateCodes[i]}'`;
+      }
+    }
+
+    mapRef.current.portalWebMap.when(function() {
+      statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
+      queryLayer(
+        statesLayer,
+        stateWhereClause,
+        [ "state_name", "state_abbr", "objectid_1" ]
+      )
+      .then((states: Graphic) => {
+        mapRef.current.view.graphics.removeAll();
+        mapRef.current.view.graphics.add(states);
+      });
+
+    });
+    // Then zoom to graphics and add them to the view
   }
 
 
@@ -157,7 +181,7 @@ const MapComponent = ({
         }
 
         selectStatesByProjectList(stateCodes);
-        
+
       })
     });
 
