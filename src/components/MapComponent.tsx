@@ -18,7 +18,7 @@ import {
 import { queryLayer } from '../common/util/MapUtil';
 import { usePrevious } from '../common/util/helperHooks';
 
-import { IProject } from '../common/Types'
+import { IProject } from '../common/Types';
 
 
 interface IMapProperties {
@@ -96,10 +96,76 @@ const MapComponent = ({
           }
           setRelatedTableResults(projects);
 
+
       });
     });
+  }
+
+  let selectStatesByProjectList = function (stateCodes:string[]){
 
   }
+
+
+
+  //getAllProjectAwardee
+  //SearchByAwardee
+  //getProjectByNumber
+  function getProjectByNumber(agreementNumber: string) {
+    mapRef.current.portalWebMap.when(function(){
+
+
+      let projectsTable = mapRef.current.portalWebMap.tables.getItemAt(0);
+      let projects:IProject[] = [];
+      //console.log(projectsTable);
+      queryLayer(
+        projectsTable,
+        `agreement_no_ = '${agreementNumber}'`,
+        ["agreement_no_",
+        "awardee_name",
+        "project_title",
+        "funds_approved",
+        "awardee_state__territory",
+        "award_year",
+        "resource_concern__broad_",
+        "project_background",
+        "deliverables"],
+      ).then((rprojects: FeatureSet) => {
+        for(let feature  of rprojects.features){
+          let project ={} as IProject;
+          let feat = feature as Graphic;
+
+          project.stateExtent = stateExtent;
+          project.agreementNumber = feat.getAttribute("agreement_no_");
+          project.awardeeName = feat.getAttribute("awardee_name");
+          project.title = feat.getAttribute("project_title");
+          project.funds = feat.getAttribute("funds_approved");
+          project.state = feat.getAttribute("awardee_state__territory");
+          project.year = feat.getAttribute("award_year");
+          project.resource = feat.getAttribute("resource_concern__broad_");
+          project.description = feat.getAttribute("project_background");
+          project.deliverables = feat.getAttribute("deliverables");
+
+          projects.push(project);
+        }
+
+        setRelatedTableResults(projects);
+
+
+        let stateCodes:string[] = [];
+        for (let i = 0; i < projects.length; i++) {
+          stateCodes.push(projects[i].state);
+        }
+
+        selectStatesByProjectList(stateCodes);
+        
+      })
+    });
+
+
+  }
+
+
+  //getProjectByAwardee
 
 
   useEffect(() => {
@@ -182,8 +248,9 @@ const MapComponent = ({
 
   useEffect(() => {
     if (searchText && previousSearchText !== searchText && !currentStateOption) {
+
       if (currentSearchOption === 'projects') {
-        // TODO: do something
+        getProjectByNumber(searchText);
       } else {
         mapRef.current.portalWebMap.when(function(){
           statesLayer = mapRef.current.portalWebMap.findLayerById(statesLayerId);
@@ -201,6 +268,7 @@ const MapComponent = ({
               getProjectByState(states.features[0])
             }
           });
+
         });
       }
     }
