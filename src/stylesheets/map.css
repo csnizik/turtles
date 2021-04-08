@@ -1,3 +1,112 @@
 #viewDiv {
-  height: 650px;
+  height: 950px;
+  padding: 0px 5px 0px 0px;
+  margin: 5px 0px 0px 0px;
+  width: 100%;
+  height: 800px;
+}
+
+#layerToggle {
+  top: 20px;
+  right: 20px;
+  position: absolute;
+  z-index: 99;
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px;
+  opacity: 0.75;
+}
+
+.header-container {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+}
+
+.sfi-header {
+  height: 45px;
+}
+
+.map-tools {
+  margin: 5px 0px 0px 0px;
+  height: 800px;
+}
+
+.map-tools > label {
+  margin-left: 15px;
+}
+
+.projects-data {
+  margin: 10px 0px 0px 15px;
+  overflow-y: auto;
+  max-height: 485px;
+}
+
+.projects-data > li {
+  cursor: pointer;
+}
+
+.side-bar-results > h5 {
+  margin: 10px 10px 0px 15px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.arcgis-map {
+  padding-left: 0px;
+}
+
+.nav-link {
+  text-transform: capitalize;
+}
+
+.nav-tabs {
+  margin-bottom: 25px;
+}
+
+.search-field {
+  display: flex;
+}
+
+.search-input {
+  margin-left: 15px;
+  flex: 0 0 66%;
+  -webkit-box-flex: 0;
+  max-width: 66%;
+}
+
+.reset-search-btn {
+  flex: 0 0 18%;
+  -webkit-box-flex: 0;
+  max-width: 18%;
+}
+
+.list-group-item:hover {
+  cursor: pointer;
+}
+
+.search-results {
+  padding: 10px;
+  overflow-y: auto;
+  max-height: 350px;
+}
+
+.search-results-header > h3 {
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: 900;
+}
+
+.badge.badge-light {
+  font-size: 16px;
+  background-color: #edeff2;
+}
+
+.card-body {
+  margin-left: 15px;
+  display: flex;
+}
+
+.card-body > p {
+  margin: 5px;
 }
