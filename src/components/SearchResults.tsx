@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { formatNumber } from '../common/util/formats';
-import FeatureSet from 'esri/tasks/support/FeatureSet';
 import { IProject } from '../common/Types';
-
 
 interface ISearchResultProps {
   relatedTableResults : IProject[]
@@ -27,7 +24,7 @@ const SearchResults = ({ relatedTableResults } : ISearchResultProps) => {
                 <div className="card border-dark m-3">
                   <div className="card-header"><h3>{project.title}</h3></div><br />
                   <div className="card-body">{project.description}</div>
-                  <br /><br />  
+                  <br /><br />
                 </div>
               )}
             )
