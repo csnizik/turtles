@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SearchOption from './SearchOption';
 import { sortStateList } from '../common/util/helpers';
 import { searchOptionMap } from '../common/constants';
+import { IProject } from '../common/Types';
 
 interface ISearchProperties {
   searchText: string
@@ -13,7 +14,9 @@ interface ISearchProperties {
   setStateExtent: Function,
   setRelatedTableResults: Function,
   currentSearchOption: string,
-  setSearchOption: Function
+  setSearchOption: Function,
+  resultsPaneFocus: IProject[],
+  setResultsPaneFocus: Function
 }
 
 const SideBar = ({
@@ -26,7 +29,9 @@ const SideBar = ({
     setStateExtent,
     setRelatedTableResults,
     currentSearchOption,
-    setSearchOption
+    setSearchOption,
+    resultsPaneFocus,
+    setResultsPaneFocus
   }: ISearchProperties) => {
 
   const sortedStateList = sortStateList(stateList);
@@ -35,6 +40,7 @@ const SideBar = ({
     const {value} = e.target;
     if (!value) {
       setRelatedTableResults([]);
+      setResultsPaneFocus([]);
       setStateExtent(null);
     }
     setStateDropdownOption('');
@@ -58,6 +64,7 @@ const SideBar = ({
     const { value } = e.target;
     if (!value) {
       setRelatedTableResults([]);
+      setResultsPaneFocus([])
       setStateExtent(null);
     }
     setStateDropdownOption(e.target.value);

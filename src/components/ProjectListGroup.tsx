@@ -5,17 +5,25 @@ import { IProject } from '../common/Types';
 interface IListProps {
   setRelatedTableResults: Function,
   relatedTableResults: IProject[],
-  setStateExtent: Function
+  setStateExtent: Function,
+  resultsPaneFocus: IProject[],
+  setResultsPaneFocus: Function
 }
 
 const ProjectListGroup = ({
   setRelatedTableResults,
   relatedTableResults,
-  setStateExtent
+  setStateExtent,
+  resultsPaneFocus, 
+  setResultsPaneFocus
 }: IListProps) => {
+
+  
 
   const handleProjectSelection = (stateExtent: Extent) => {
     setStateExtent(stateExtent);
+    
+    
   }
 
   const getListItemText = (project: IProject) => {
@@ -35,7 +43,7 @@ const ProjectListGroup = ({
 
   return (
     <ul className="list-group projects-data">
-      {relatedTableResults.map((project: IProject, index: number) => {
+      {resultsPaneFocus.map((project: IProject, index: number) => {
         return (
             <li
               key={index}
@@ -43,6 +51,11 @@ const ProjectListGroup = ({
               onClick={() => {
                 handleProjectSelection(project.stateExtent);
                 setRelatedTableResults([project]);
+                setResultsPaneFocus([project]);
+                
+                
+                
+                
               }}
 
             >

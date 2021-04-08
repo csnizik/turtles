@@ -99,6 +99,8 @@ const MapComponent = ({
             projects.push(project);
           }
           setRelatedTableResults(projects);
+          setResultsPaneFocus(projects)
+          
 
 
       });
@@ -153,6 +155,7 @@ const MapComponent = ({
         }
 
         setRelatedTableResults(projects);
+        setResultsPaneFocus(projects)
 
 
         let stateCodes:string[] = [];
