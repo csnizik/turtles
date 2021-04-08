@@ -235,7 +235,7 @@ const MapComponent = ({
   }
 
 
-  //getProjectByAwardee
+ 
 
 
   useEffect(() => {

@@ -46,7 +46,7 @@ const ProjectListGroup = ({
     <>
     {relatedTableResults.length > 0 && <h4 style={{textAlign:'center', fontWeight:'bold'}}>Search Results</h4>}
     <ul className="list-group projects-data ">
-      {resultsPaneFocus.map((project: IProject, index: number) => {
+      {resultsPaneFocus && resultsPaneFocus.map((project: IProject, index: number) => {
         return (
             <li
               key={index}

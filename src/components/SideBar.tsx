@@ -58,6 +58,7 @@ const SideBar = ({
     setSearchText('');
     setSearchOption(option);
     setRelatedTableResults([]);
+     setResultsPaneFocus('')
   }
 
   const handleChangeState = (e: React.ChangeEvent<HTMLSelectElement>) => {
