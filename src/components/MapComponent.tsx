@@ -260,6 +260,7 @@ const MapComponent = ({
         container: VIEW_DIV,
         center: CENTER_COORDINATES,
         zoom: MAP_ZOOM,
+       
       });
 
 

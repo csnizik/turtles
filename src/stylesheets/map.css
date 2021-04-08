@@ -3,6 +3,7 @@
   padding: 0px 5px 0px 0px;
   margin: 5px 0px 0px 0px;
   width: 100%;
+  height: 800px;
 }
 
 #layerToggle {
@@ -28,6 +29,7 @@
 
 .map-tools {
   margin: 5px 0px 0px 0px;
+  height: 800px;
 }
 
 .map-tools > label {
@@ -37,7 +39,7 @@
 .projects-data {
   margin: 10px 0px 0px 15px;
   overflow-y: auto;
-  max-height: 360px;
+  max-height: 500px;
 }
 
 .projects-data > li {
@@ -46,6 +48,7 @@
 
 .arcgis-map {
   padding-left: 0px;
+  /* height: 50px; */
 }
 
 .nav-link {

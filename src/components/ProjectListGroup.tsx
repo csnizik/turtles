@@ -1,6 +1,7 @@
 import React from 'react';
 import Extent from '@arcgis/core/geometry/Extent';
 import { IProject } from '../common/Types';
+import '../stylesheets/map.css'
 
 interface IListProps {
   setRelatedTableResults: Function,
@@ -42,7 +43,9 @@ const ProjectListGroup = ({
   if (!relatedTableResults) return null;
 
   return (
-    <ul className="list-group projects-data">
+    <>
+    {/* <h4 style={{margin:"auto"}}>Search Result</h4> */}
+    <ul className="list-group projects-data ">
       {resultsPaneFocus.map((project: IProject, index: number) => {
         return (
             <li
@@ -64,6 +67,7 @@ const ProjectListGroup = ({
         )
       })}
     </ul>
+    </>
   );
 }
 
