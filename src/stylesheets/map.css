@@ -46,6 +46,12 @@
   cursor: pointer;
 }
 
+.side-bar-results > h5 {
+  margin: 10px 10px 0px 15px;
+  text-align: left;
+  font-weight: bold;
+}
+
 .arcgis-map {
   padding-left: 0px;
 }

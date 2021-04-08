@@ -15,16 +15,14 @@ const ProjectListGroup = ({
   setRelatedTableResults,
   relatedTableResults,
   setStateExtent,
-  resultsPaneFocus, 
+  resultsPaneFocus,
   setResultsPaneFocus
 }: IListProps) => {
 
-  
+
 
   const handleProjectSelection = (stateExtent: Extent) => {
     setStateExtent(stateExtent);
-    
-    
   }
 
   const getListItemText = (project: IProject) => {
@@ -43,8 +41,12 @@ const ProjectListGroup = ({
   if (!relatedTableResults) return null;
 
   return (
-    <>
-    {relatedTableResults.length > 0 && <h4 style={{textAlign:'center', fontWeight:'bold'}}>Search Results</h4>}
+    <div className='side-bar-results'>
+    {relatedTableResults.length > 0 &&
+      <h5>
+        Search Results
+      </h5>
+    }
     <ul className="list-group projects-data ">
       {resultsPaneFocus && resultsPaneFocus.map((project: IProject, index: number) => {
         return (
@@ -55,19 +57,14 @@ const ProjectListGroup = ({
                 handleProjectSelection(project.stateExtent);
                 setRelatedTableResults([project]);
                 setResultsPaneFocus([project]);
-                
-                
-                
-                
               }}
-
             >
               { getListItemText(project) }
           </li>
         )
       })}
     </ul>
-    </>
+    </div>
   );
 }
 
