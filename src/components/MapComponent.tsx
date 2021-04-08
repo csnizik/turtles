@@ -310,6 +310,10 @@ const MapComponent = ({
   }, [relatedTableResults])
 
   useEffect(() => {
+    if (!searchText && previousSearchText) {
+      mapRef.current.view.graphics.removeAll();
+    }
+
     if (searchText && previousSearchText !== searchText && !currentStateOption) {
 
       if (currentSearchOption === 'projects') {
