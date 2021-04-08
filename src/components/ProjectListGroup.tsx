@@ -43,9 +43,9 @@ const ProjectListGroup = ({
   return (
     <div className='side-bar-results'>
     {relatedTableResults.length > 0 &&
-      <h4>
-      Search Results
-      </h4>
+      <h5>
+        Search Results
+      </h5>
     }
     <ul className="list-group projects-data ">
       {resultsPaneFocus && resultsPaneFocus.map((project: IProject, index: number) => {
