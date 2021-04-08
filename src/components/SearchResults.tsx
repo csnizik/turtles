@@ -16,13 +16,14 @@ const SearchResults = ({ resultsPaneFocus, setResultsPaneFocus } : ISearchResult
   }, [resultsPaneFocus]);
 
   const renderResults = () => {
-    if (results && results.length>0 ){ // resultsPaneFocus != []
+    if (resultsPaneFocus && resultsPaneFocus.length>0){ // resultsPaneFocus != []
+        if(typeof resultsPaneFocus === "undefined") return null ;
       resultsPaneFocus && console.log("Results---->",resultsPaneFocus)
     return (
       <div id='results' className='search-results-header card border-primary'>
-      {/* <h3 className="card-header" data-toggle="collapse" data-target="#wrap">Projects from {resultsPaneFocus && resultsPaneFocus[0].state}</h3> */}
+      <h3 className="card-header" data-toggle="collapse" data-target="#wrap">Projects from {resultsPaneFocus && resultsPaneFocus[0].state}</h3>
       <div id="wrap" className='show'>
-        { results.map(project => {
+        { resultsPaneFocus.map(project => {
             return (
               <div className="card border-dark m-3">
                 <div className="card-header"><h3>{project.title}</h3></div><br />
