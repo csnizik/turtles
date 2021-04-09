@@ -48,14 +48,13 @@ const ProjectListGroup = ({
       </h5>
     }
     <ul className="list-group projects-data ">
-      {resultsPaneFocus && resultsPaneFocus.map((project: IProject, index: number) => {
+      {relatedTableResults && relatedTableResults.map((project: IProject, index: number) => {
         return (
             <li
               key={index}
               className='list-group-item'
               onClick={() => {
                 handleProjectSelection(project.stateExtent);
-                setRelatedTableResults([project]);
                 setResultsPaneFocus([project]);
               }}
             >
