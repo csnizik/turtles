@@ -1,12 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 * {
-  padding:0px;
+  padding: 0px;
   font-family: Roboto;
   box-sizing: border-box;
 }
 body {
   background: white;
-
 }
 .container {
   width: 90%;
@@ -16,19 +15,4 @@ body {
   margin-top: 40px;
   height: 100%;
   overflow: wrap;
-}
-
-.home {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.reportLink {
-  border: 1px solid black;
-  padding: 10px;
-}
-
-.mapsLink {
-  border: 1px solid black;
-  padding: 10px;
 }

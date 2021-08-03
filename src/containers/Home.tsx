@@ -1,39 +1,11 @@
-import React from 'react';
-import {
-  Link
-} from "react-router-dom";
+import Header from "../components/Header";
 
 const Home = () => {
-  const renderReportsLink = () => {
-    return (
-      <Link
-        className='reportLink'
-        to='congressionalReport/2020'
-      >
-        Access Reports
-      </Link>
-    );
-  }
-
-  const renderMapsLink = () => {
-    return (
-      <Link
-        className='mapsLink'
-        to='map'
-      >
-        ArcGis Map
-      </Link>
-    )
-  }
-
   return (
-    <div className='home'>
-      { renderReportsLink() }
-      { renderMapsLink() }
+    <div className="home-page">
+      <Header />
     </div>
-  )
-
-
-}
+  );
+};
 
 export default Home;
