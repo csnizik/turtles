@@ -1,9 +1,18 @@
-import Header from '../../components/Header';
+import { useHistory } from 'react-router-dom';
+
+import CustomButton from '../../components/CustomButton/CustomButton';
 
 const Home = () => {
+  const history: any = useHistory();
+  const handleCustomSearch = () => {
+    history.push('search');
+  };
+
   return (
     <div className='home-page'>
-      <Header />
+      <CustomButton additionalClassName='margin-2' onClick={handleCustomSearch}>
+        Custom Search
+      </CustomButton>
     </div>
   );
 };
