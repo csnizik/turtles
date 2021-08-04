@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './containers/Home';
-import CustomSearchContainer from './containers/CustomSearchContainer/CustomSearchContainer';
-import Header from './components/Header/Header';
+import CustomSearchContainer from './containers/CustomSearchContainer';
+import Header from './components/Header';
 import './stylesheets/app.scss';
 
 const App = () => (

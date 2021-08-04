@@ -1,1 +1,1 @@
-export { default } from 'CustomSearchContainer';
+export { default } from './CustomSearchContainer';

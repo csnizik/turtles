@@ -46,6 +46,16 @@ header {
     color: $sfi-white;
     text-decoration: none;
   }
+
+  .nrcsLogo {
+    height: 1.8em;
+    width: 1.8em;
+    margin-right: 1em;
+  }
+
+  a:first-of-type {
+    margin-top: 0.2em;
+  }
 }
 
 /** USA flag logo **/

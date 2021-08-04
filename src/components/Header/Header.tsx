@@ -28,6 +28,7 @@ const Header = () => {
 
   const renderNavigationSection: Function = () => (
     <div className='navigation-bar'>
+      <img className='nrcsLogo' src='images/nrcs_logo.png' alt='NRCS Logo' />
       <Link to='/' className='usa-link margin-left-05'>
         Home
       </Link>
