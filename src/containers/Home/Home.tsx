@@ -1,7 +1,7 @@
-import './home.scss';
 import { useHistory } from 'react-router-dom';
-import ExploreBox from '../../components/ExploreBox';
+import ExploreBoxList from '../../components/ExploreBoxList';
 import CustomButton from '../../components/CustomButton';
+import './home.scss';
 
 const homeIntro =
   'Find information about resource concerns, conservation practices, and NRCS projects & initiatives.';
@@ -32,7 +32,7 @@ const Home = () => {
           </div>
         </div>
         <div className='explore-box'>
-          <ExploreBox />
+          <ExploreBoxList />
         </div>
       </main>
     </div>

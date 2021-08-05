@@ -31,7 +31,15 @@
     "consistent-return": "warn",
     "default-case": "warn",
     "import/newline-after-import": "warn",
-    "import/no-extraneous-dependencies": "warn",
+    "import/no-extraneous-dependencies": [
+      "warn",
+      {
+        "devDependencies": false,
+        "optionalDependencies": false,
+        "peerDependencies": false,
+        "packageDir": "./"
+      }
+    ],
     "import/no-unresolved": "warn",
     "import/prefer-default-export": "warn",
     "jsx-a11y/anchor-is-valid": "warn",
@@ -52,7 +60,7 @@
     "no-param-reassign": "warn",
     "no-restricted-syntax": "warn",
     "no-shadow": "warn",
-    "no-undef": "warn",
+    "no-undef": "off",
     "no-unused-vars": "warn",
     "no-var": "warn",
     "object-shorthand": "warn",

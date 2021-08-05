@@ -34,3 +34,16 @@ $h1-font-size: 42px;
 $h2-font-size: 32px;
 $h3-font-size: 22px;
 $h6-font-size: 13px;
+
+/** Responsive breakpoints **/
+$small-screen: 576px;
+$medium-screen: 768px;
+$large-screen: 992px;
+$extra-large-screen: 1200px;
+$extra-extra-large-screen: 1400px;
+// Mobile specific breakpoints
+$iphonex-screen: 812px;
+
+/** UI components **/
+$card-max-width: 1200px;
+$tab-background-color: #f0f0f0;
