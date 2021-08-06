@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import CustomTabs from '../../components/CustomTabs';
 import { searchOptionMap } from '../../common/typedconstants.common';
+import ConservationPracticeOverview from '../../components/ConservationPracticeOverview';
 
 // Tab styles come from the NRCS design system
 // Documentation: (https://koala-bandits.github.io/nrcs-design-system-storybook/?path=/story/components-tabs-nav--tabs-story)
@@ -35,6 +36,9 @@ const LocationContainer = () => {
     <TabContent activeTab={currentTabOption}>
       {currentTabOption === 0 && (
         <TabPane tabId={0}>{renderLocationContent()}</TabPane>
+      )}
+      {currentTabOption === 2 && (
+        <TabPane tabId={2}>{renderLocationContent()}{<ConservationPracticeOverview/>}</TabPane>
       )}
     </TabContent>
   );

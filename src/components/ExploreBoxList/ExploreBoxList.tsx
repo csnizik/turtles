@@ -1,4 +1,3 @@
-import CustomButton from '../CustomButton';
 import ExploreBox from '../ExploreBox';
 import { exploreBoxData } from '../../common/typedconstants.common';
 import './explore-box-list.scss';

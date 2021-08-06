@@ -9,7 +9,7 @@ const homeIntro =
 const Home = () => {
   const history: any = useHistory();
   const handleCustomSearch = () => {
-    history.push('search');
+  history.push('search');
   };
 
   return (

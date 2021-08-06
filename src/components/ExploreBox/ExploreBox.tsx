@@ -1,10 +1,11 @@
 import { useHistory } from 'react-router-dom';
 import CustomButton from '../CustomButton';
+import './explore-box.scss';
 
-const ExploreBox = ({ heading, button, description, ...otherProps }: any) => {
+const ExploreBox = ({ heading, button, description }: any) => {
   const history: any = useHistory();
   const handleExploreSearch = () => {
-    history.push('location');
+  history.push('location');
   };
   return (
     <div className='box'>
