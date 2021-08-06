@@ -1,0 +1,22 @@
+@import '../../stylesheets/variables';
+
+.usa-label.keyword-label {
+  font-weight: $medium-weight;
+}
+
+.search-by-location-section {
+  .location-search-header {
+    margin-bottom: 0.5rem;
+    font-weight: $medium-weight;
+  }
+  .side-by-side {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.usa-select {
+  &:disabled {
+    background-color: $medium-darkgrey;
+  }
+}

@@ -1,15 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getRequest } from '../../common/util/AxiosUtil';
 
 import './custom-search.scss';
 import CustomButton from '../../components/CustomButton';
+import SearchByLocation from '../../components/SearchByLocation';
+import { search, advancedSearch } from '../../common/constants';
 
-const customSearchIntro =
-  'Search for resource concerns, conservation practices, and NRCS projects & initiatives.';
+const customSearchIntro: string =
+  'Search for conservation practices and NRCS projects & initiatives.';
 
-const defaultSearchInput = { keywordInput: '' };
+const defaultSearchInput: any = {
+  keywordInput: '',
+  stateSelect: '',
+  countySelect: '',
+};
 
 const CustomSearchContainer = () => {
   const [searchInput, setSearchInput]: any = useState(defaultSearchInput);
+  const [statesList, setStatesList]: any = useState([]);
+
+  useEffect(() => {
+    async function fetchStateList() {
+      const response = await getRequest('/states');
+      setStatesList(response.data);
+    }
+
+    fetchStateList();
+  }, []);
 
   const handleSearch = () => {
     console.log('TODO: Submit form for search', searchInput);
@@ -20,34 +37,19 @@ const CustomSearchContainer = () => {
     setSearchInput({ ...searchInput, [name]: value });
   };
 
-  const renderSearchByKeywordInput = () => {
-    return (
-      <>
-        <label className='usa-label keyword-label' htmlFor='keywordValue'>
-          Search by Keyword(s)
-        </label>
-        <input
-          className='usa-input'
-          id='keywordValue'
-          name='keywordInput'
-          type='text'
-          placeholder='Enter keyword(s)'
-          onChange={handleInputChange}
-        />
-      </>
-    );
-  };
-
   return (
     <div className='custom-search'>
       <div className='custom-search-header'>
-        <h1>Custom Search</h1>
+        <h1>{advancedSearch}</h1>
         <p>{customSearchIntro}</p>
       </div>
-      {renderSearchByKeywordInput()}
-
-      <CustomButton additionalClassName='margin-top-2' onClick={handleSearch}>
-        Search
+      <SearchByLocation
+        statesList={statesList}
+        searchInput={searchInput}
+        handleInputChange={handleInputChange}
+      />
+      <CustomButton additionalClassName='margin-top-3' onClick={handleSearch}>
+        {search}
       </CustomButton>
     </div>
   );
