@@ -1,5 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import ExploreBoxList from '../../components/ExploreBoxList';
+import CustomResourceIssueList from '../../components/CustomResourceIssueList';
 import CustomButton from '../../components/CustomButton';
 import './home.scss';
 
@@ -34,7 +35,12 @@ const Home = () => {
         <div className='explore-box'>
           <ExploreBoxList />
         </div>
+        <div className='explore-box'>
+         <CustomResourceIssueList />
+        </div>
+        
       </main>
+        
     </div>
   );
 };
