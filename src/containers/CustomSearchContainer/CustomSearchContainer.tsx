@@ -7,7 +7,7 @@ import SearchByLocation from '../../components/SearchByLocation';
 import { search, advancedSearch } from '../../common/constants';
 
 const customSearchIntro: string =
-  'Search for conservation practices and NRCS projects & initiatives.';
+  'Search for information on practice impacts, practice extent, and impacts of practice implementation.';
 
 const defaultSearchInput: any = {
   keywordInput: '',
