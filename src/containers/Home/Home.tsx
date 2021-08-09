@@ -2,15 +2,16 @@ import { useHistory } from 'react-router-dom';
 import ExploreBoxList from '../../components/ExploreBoxList';
 import CustomResourceIssueList from '../../components/CustomResourceIssueList';
 import CustomButton from '../../components/CustomButton';
+import { advancedSearch } from '../../common/constants';
 import './home.scss';
 
-const homeIntro =
-  'Find information about resource concerns, conservation practices, and NRCS projects & initiatives.';
+const homeIntro: string =
+  'Find information about conservation practices and NRCS projects & initiatives.';
 
 const Home = () => {
   const history: any = useHistory();
   const handleCustomSearch = () => {
-    history.push('search');
+  history.push('search');
   };
 
   return (
@@ -21,14 +22,14 @@ const Home = () => {
       <main data-testid='home-content'>
         <div className='grid-row'>
           <div className='grid-col-6'>
-            <p className='margin-3 float-left'>{homeIntro}</p>
+            <p className='margin-left-6 margin-top-3 float-left'>{homeIntro}</p>
           </div>
           <div className='grid-col-4'>
             <CustomButton
-              additionalClassName='margin-2'
+              additionalClassName='margin-2 float-right'
               onClick={handleCustomSearch}
             >
-              Custom Search
+              {advancedSearch}
             </CustomButton>
           </div>
         </div>

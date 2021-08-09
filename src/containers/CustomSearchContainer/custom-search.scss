@@ -1,7 +1,7 @@
 @import '../../stylesheets/variables';
 
 .custom-search {
-  margin: 0em 0em 0em 1em;
+  margin: 0rem 0rem 0rem 1rem;
   .custom-search-header {
     h1 {
       margin: 40px 0px 10px 0px;
@@ -10,11 +10,11 @@
     }
     p {
       font-size: 17px;
-      margin-bottom: 40px;
+      font-weight: $medium-weight;
+      margin: 2rem 0rem 1rem -1rem;
+      background-color: $light-grey;
+      padding: 17px 0px 17px 17px;
+      border-top: solid $dark-grey 1px;   
     }
-  }
-
-  .usa-label.keyword-label {
-    font-weight: $medium-weight;
   }
 }
