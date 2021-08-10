@@ -1,41 +1,51 @@
 @import '../../stylesheets/variables';
 
 /** Home page **/
-.landing-page-image {
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  min-height: 350px;
-  height: auto;
-  background-repeat: no-repeat;
-  background-image: url('http://greyworm-epi-dev.spatialfrontlab.com/images/landing-page.png');
+.home-page {
+  .landing-page-image {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    min-height: 350px;
+    height: auto;
+    background-repeat: no-repeat;
+    background-image: url('http://greyworm-epi-dev.spatialfrontlab.com/images/landing-page.png');
 
-  h1 {
-    position: absolute;
-    top: 0.5em;
+    h1 {
+      position: absolute;
+      top: 0.5em;
+    }
   }
-}
 
-h3.landing-page-title {
-  margin-left: 0.6em;
-  position: absolute;
-  font-weight: $medium-weight;
-}
+  main {
+    .grid-col-6 {
+      p:first-of-type {
+        font-size: 17px;
+      }
+    }
+  }
 
-.jumbotron {
-  padding: 2rem 1rem;
-  margin-bottom: 2rem;
-  background-color: #e9ecef;
-  border-radius: 0.3rem;
-}
+  h3.landing-page-title {
+    margin-left: 0.6em;
+    position: absolute;
+    font-weight: $medium-weight;
+  }
 
-.explore-box {
-  margin: 1em 2em 2em 2em;
-}
+  .jumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color: $light-grey-4;
+    border-radius: 0.3rem;
+  }
 
-.divider {
-  background-color: 'grey';
-  height: 1;
-  margin: 40px 0px 24px 3rem;
-  width: 56%;
+  .explore-box {
+    margin: 1em 2em 2em 2em;
+  }
+
+  .divider {
+    background-color: $dark-grey;
+    height: 1;
+    margin: 40px 0px 24px 3rem;
+    width: 56%;
+  }
 }
