@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
-import { getRequest } from '../../common/util/AxiosUtil';
+import { useTranslation } from 'react-i18next';
 
+import { getRequest } from '../../common/util/AxiosUtil';
 import './custom-search.scss';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
 import LandUseSection from '../../components/LandUseSection';
-import { search, advancedSearch } from '../../common/constants';
-
-const customSearchIntro: string =
-  'Search for information on practice impacts, practice extent, and impacts of practice implementation.';
 
 const defaultSearchInput: any = {
   stateSelect: '',
@@ -19,6 +16,7 @@ const CustomSearchContainer = () => {
   const [searchInput, setSearchInput]: any = useState(defaultSearchInput);
   const [statesList, setStatesList]: any = useState([]);
   const [countyList, setCountyList]: any = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function fetchStateList() {
@@ -49,8 +47,8 @@ const CustomSearchContainer = () => {
   return (
     <div className='custom-search'>
       <div className='custom-search-header'>
-        <h1>{advancedSearch}</h1>
-        <p>{customSearchIntro}</p>
+        <h1>{t('search-page.advanced-search')}</h1>
+        <p>{t('search-page.intro')}</p>
       </div>
       <SearchByLocation
         statesList={statesList}
@@ -60,7 +58,7 @@ const CustomSearchContainer = () => {
       />
       <LandUseSection />
       <CustomButton additionalClassName='margin-top-3' onClick={handleSearch}>
-        {search}
+        {t('actions.search')}
       </CustomButton>
     </div>
   );

@@ -1,11 +1,13 @@
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { getRequest } from '../../common/util/AxiosUtil';
 import './location-search.scss';
 import CustomButton from '../CustomButton';
 
 const LocationSearch = ({ statesList }: any) => {
   const history: any = useHistory();
+  const { t } = useTranslation();
   const handleClick = () => {
     history.push('search');
   };
@@ -24,17 +26,14 @@ const LocationSearch = ({ statesList }: any) => {
 
   return (
     <div className='location-search-section'>
-      <h3>Explore by Location</h3>
-      <p className='p-style'>
-        State and county provides lorum ipsum dolor sit amet, consectetur
-        adipiscing elit. Aenean vehicula diam et diam tempor fringila
-      </p>
+      <h3>{t('location-search.explore-by-location')}</h3>
+      <p className='p-style'>{t('location-search.introductory-paragraph')}</p>
       <div className='location-label-grid'>
         <label className='usa-label' htmlFor='locationOptions'>
-          Select a state
+          {t('location-search.labels.select-state')}
         </label>
         <label className='usa-label' htmlFor='locationOptions'>
-          Select a county (Optional)
+          {t('location-search.labels.select-county')}
         </label>
       </div>
       <div className='location-search-grid'>
@@ -43,7 +42,7 @@ const LocationSearch = ({ statesList }: any) => {
           name='locationOptions'
           onChange={handleSelectState}
         >
-          <option>National (default)</option>
+          <option>{t('location-search.national')}</option>
           {statesList && statesList.length
             ? statesList.map((state: any) => {
                 return (
@@ -59,7 +58,7 @@ const LocationSearch = ({ statesList }: any) => {
           name='locationOptions'
           disabled={!countyList.length}
         >
-          <option>- Select -</option>
+          <option>{t('actions.select')}</option>
           {countyList && countyList.length
             ? countyList.map((county: any) => {
                 return (
@@ -70,7 +69,9 @@ const LocationSearch = ({ statesList }: any) => {
               })
             : null}
         </select>
-        <CustomButton onClick={handleClick}>Explore Location</CustomButton>
+        <CustomButton onClick={handleClick}>
+          {t('location-search.explore-location')}
+        </CustomButton>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import CustomSearchContainer from './containers/CustomSearchContainer';
 import LocationContainer from './containers/LocationContainer';
 import Header from './components/Header';
 import './stylesheets/app.scss';
+import './i18n';
 import 'nrcs-design-system/scss/nrcs-design-system.scss';
 
 const App = () => (
