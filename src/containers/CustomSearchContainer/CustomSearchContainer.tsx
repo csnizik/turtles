@@ -5,9 +5,10 @@ import './custom-search.scss';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
 import { search, advancedSearch } from '../../common/constants';
+import SearchByConservationPractice from '../../components/SearchByConservationPractice/SearchByConservationPractice';
 
 const customSearchIntro: string =
-  'Search for conservation practices and NRCS projects & initiatives.';
+  'Search for information on practice impacts, practice extent, and impacts of practice implementation.';
 
 const defaultSearchInput: any = {
   keywordInput: '',
@@ -34,6 +35,7 @@ const CustomSearchContainer = () => {
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
+    console.log(name, value);
     setSearchInput({ ...searchInput, [name]: value });
   };
 
@@ -48,6 +50,8 @@ const CustomSearchContainer = () => {
         searchInput={searchInput}
         handleInputChange={handleInputChange}
       />
+      <p>Search by Conservation Practice or Resource Concern</p>
+      <SearchByConservationPractice />
       <CustomButton additionalClassName='margin-top-3' onClick={handleSearch}>
         {search}
       </CustomButton>
