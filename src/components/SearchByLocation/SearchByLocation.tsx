@@ -1,6 +1,7 @@
 import './search-by-location.scss';
 
 const SearchByLocation = ({
+  countyList,
   searchInput,
   statesList,
   handleInputChange,
@@ -48,7 +49,15 @@ const SearchByLocation = ({
               disabled={!searchInput.stateSelect}
             >
               <option value=''>- Select county -</option>
-              <option value='County1'>County 1</option>
+              {countyList.length
+                ? countyList.map((county: any) => {
+                    return (
+                      <option key={county.countyCode} value={county.countyCode}>
+                        {county.countyDisplay}
+                      </option>
+                    );
+                  })
+                : null}
             </select>
           </div>
         </div>

@@ -34,7 +34,7 @@ const Home = () => {
       <main data-testid='home-content'>
         <div className='grid-row'>
           <div className='grid-col-6'>
-            <p className='margin-left-6 margin-top-3 float-left'>{homeIntro}</p>
+            <p className='margin-left-6 margin-top-3'>{homeIntro}</p>
           </div>
           <div className='grid-col-4'>
             <CustomButton

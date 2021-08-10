@@ -66,7 +66,11 @@ const SearchByConservationPractice = () => {
             <option value=''>- Select practice</option>
             {ConservationPractice.length
               ? ConservationPractice.map((item: IConservationPractice) => {
-                  return <option value={item.practice}>{item.practice}</option>;
+                  return (
+                    <option key={item.practice} value={item.practice}>
+                      {item.practice}
+                    </option>
+                  );
                 })
               : null}
           </select>

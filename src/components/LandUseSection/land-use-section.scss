@@ -1,0 +1,11 @@
+@import '../../stylesheets/variables';
+
+.usa-fieldset {
+  padding: 1em 0em;
+  background-color: $light-grey-2;
+  .land-use-grid {
+    display: grid;
+    grid-template-columns: 20rem 20rem 20rem;
+    gap: 2em;
+  }
+}
