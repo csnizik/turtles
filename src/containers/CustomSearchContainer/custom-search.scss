@@ -1,0 +1,20 @@
+@import '../../stylesheets/variables';
+
+.custom-search {
+  margin: 0rem 0rem 0rem 1rem;
+  .custom-search-header {
+    h1 {
+      margin: 40px 0px 10px 0px;
+      font-size: 42px;
+      font-weight: $heavy-weight;
+    }
+    p {
+      font-size: 17px;
+      font-weight: $medium-weight;
+      margin: 2rem 0rem 1rem -1rem;
+      background-color: $light-grey;
+      padding: 17px 0px 17px 17px;
+      border-top: solid $dark-grey 1px;   
+    }
+  }
+}

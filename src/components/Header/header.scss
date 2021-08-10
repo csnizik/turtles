@@ -1,0 +1,76 @@
+@import '../../stylesheets/variables';
+
+/** Page Title **/
+header {
+  .usda-header {
+    img {
+      width: 75px;
+      height: 75px;
+      vertical-align: baseline;
+    }
+  }
+
+  h1 {
+    color: $nrcs-dark;
+    font-size: 1.6em;
+  }
+}
+
+.government-banner {
+  align-self: center;
+  display: inline-block;
+}
+
+/** NRCS logo **/
+.row-flex-start {
+  img {
+    height: 80px;
+    margin-left: 1.6em;
+  }
+  div {
+    margin-left: 1em;
+  }
+}
+
+/** Nav Bar **/
+.navigation-bar {
+  display: flex;
+  justify-content: flex-start;
+  padding: 1em;
+  background-color: $usda-blue;
+  &:first-child {
+    border-right: 1px solid $sfi-white;
+    color: red;
+  }
+  .usa-link {
+    color: $sfi-white;
+    text-decoration: none;
+  }
+
+  .nrcsLogo {
+    height: 1.8em;
+    width: 1.8em;
+    margin-right: 1em;
+  }
+
+  a:first-of-type {
+    margin-top: 0.2em;
+  }
+}
+
+/** USA flag logo **/
+.header-container {
+  width: 100%;
+  margin: 0em 2em 0em 0em;
+  background-color: $sfi-dark-white;
+  height: 24px;
+
+  img {
+    height: 1rem;
+    width: 2rem;
+    margin-right: 1em;
+  }
+  a {
+    color: $link-color;
+  }
+}

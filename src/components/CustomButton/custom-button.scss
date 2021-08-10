@@ -1,0 +1,9 @@
+@import '../../stylesheets/variables';
+.usa-button {
+  background-color: $usda-blue;
+
+  color: $sfi-white;
+  &:hover {
+    background-color: $usda-dark-blue;
+  }
+}

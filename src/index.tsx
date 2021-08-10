@@ -1,28 +1,24 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
-import GrantContainer from './containers/GrantContainer';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './containers/Home';
-import MapContainer from './containers/MapContainer';
-import './stylesheets/app.css';
+import CustomSearchContainer from './containers/CustomSearchContainer';
+import LocationContainer from './containers/LocationContainer';
+import Header from './components/Header';
+import './stylesheets/app.scss';
+import 'nrcs-design-system/scss/nrcs-design-system.scss';
 
 const App = () => (
   <Router>
+    <Header />
     <Switch>
-      <Route exact path="/">
+      <Route exact path='/'>
         <Home />
       </Route>
-      <Route path="/map">
-        <MapContainer />
+      <Route path='/search'>
+        <CustomSearchContainer />
       </Route>
-      <Route path="/congressionalReport/:year">
-        <div className='container'>
-          <GrantContainer />
-        </div>
+      <Route path='/location'>
+        <LocationContainer />
       </Route>
     </Switch>
   </Router>
