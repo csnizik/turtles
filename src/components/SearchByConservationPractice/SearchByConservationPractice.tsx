@@ -16,10 +16,13 @@ const SearchByConservationPractice = () => {
   const [practiceState, setPracticeState] =
     useState<IConservationPractice>(intialState);
 
-  useEffect(() => {
-    setPracticeState({ practice: ConservationPractice, disabled: false });
-  }, [practiceState]);
-
+  const handleChange = (e) => {
+    if (e.target.value !== '') {
+      setPracticeState({ practice: ConservationPractice, disabled: false });
+      return;
+    }
+    setPracticeState({ ...practiceState, disabled: true });
+  };
   return (
     <div className='box-wrapper'>
       <div className='search-by-location-section'>
@@ -36,6 +39,7 @@ const SearchByConservationPractice = () => {
             id='practiceCategoryValue'
             name='practiceCategorySelect'
             placeholder='- Select practice category -'
+            onChange={handleChange}
           >
             <option value=''>All practices (default)</option>
             {ConservationPractice.length
@@ -61,13 +65,13 @@ const SearchByConservationPractice = () => {
             id='practiceValue'
             name='practiceSelect'
             placeholder='- Select practice -'
-            disabled
+            disabled={practiceState.disabled}
           >
             <option value=''>- Select practice</option>
             {ConservationPractice.length
-              ? ConservationPractice.map((item: IConservationPractice) => {
+              ? ConservationPractice.map((item: any) => {
                   return (
-                    <option key={item.practice} value={item.practice}>
+                    <option key={item.practiceCategory} value={item.practice}>
                       {item.practice}
                     </option>
                   );

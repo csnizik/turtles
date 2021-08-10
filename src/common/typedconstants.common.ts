@@ -1,8 +1,8 @@
 export const searchOptionMap: any = {
-  locationTab: { id: 0, displayName: 'Location' },
-  resourceConcernTab: { id: 1, displayName: 'Resource Concerns' },
-  conservationPracticesTab: { id: 2, displayName: 'Conservation Practices' },
-  projectsTab: { id: 3, displayName: 'Projects & Initiatives' },
+  Location: { id: 0, displayName: 'Location' },
+  ResourceConcern: { id: 1, displayName: 'Resource Concerns' },
+  ConservationPractices: { id: 2, displayName: 'Conservation Practices' },
+  Projects: { id: 3, displayName: 'Projects & Initiatives' },
 };
 
 export const exploreBoxData: any = [

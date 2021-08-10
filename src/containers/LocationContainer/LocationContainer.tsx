@@ -16,7 +16,7 @@ const tabStyleOptions: any = {
 
 const LocationContainer = () => {
   const [currentTabOption, setTabOption] = useState(
-    searchOptionMap.locationTab.id
+    searchOptionMap.Location.id
   );
   const history = useHistory();
 
