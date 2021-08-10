@@ -1,7 +1,10 @@
 import { useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { getRequest } from '../../common/util/AxiosUtil';
 import ExploreBoxList from '../../components/ExploreBoxList';
 import CustomResourceIssueList from '../../components/CustomResourceIssueList';
 import CustomButton from '../../components/CustomButton';
+import LocationSearch from '../../components/LocationSearch';
 import { advancedSearch } from '../../common/constants';
 import './home.scss';
 
@@ -11,8 +14,18 @@ const homeIntro: string =
 const Home = () => {
   const history: any = useHistory();
   const handleCustomSearch = () => {
-  history.push('search');
+    history.push('search');
   };
+
+  const [stateList, setStateList]: any = useState([]);
+
+  useEffect(() => {
+    async function fetchStateList() {
+      const response = await getRequest('/states');
+      setStateList(response.data);
+    }
+    fetchStateList();
+  }, []);
 
   return (
     <div className='home-page'>
@@ -33,6 +46,8 @@ const Home = () => {
             </CustomButton>
           </div>
         </div>
+        <LocationSearch statesList={stateList} />
+        <hr className='divider' />
         <div className='explore-box'>
           <ExploreBoxList />
         </div>
