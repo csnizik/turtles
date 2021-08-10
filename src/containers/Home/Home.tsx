@@ -51,6 +51,7 @@ const Home = () => {
           <ExploreBoxList />
         </div>
       </main>
+        
     </div>
   );
 };
