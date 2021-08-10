@@ -38,7 +38,10 @@ const LocationContainer = () => {
         <TabPane tabId={0}>{renderLocationContent()}</TabPane>
       )}
       {currentTabOption === 2 && (
-        <TabPane tabId={2}>{renderLocationContent()}{<ConservationPracticeOverview/>}</TabPane>
+        <TabPane tabId={2}>
+          {renderLocationContent()}
+          <ConservationPracticeOverview />
+        </TabPane>
       )}
     </TabContent>
   );
