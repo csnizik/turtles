@@ -18,7 +18,7 @@ const SearchByConservationPractice = () => {
 
   useEffect(() => {
     setPracticeState({ practice: ConservationPractice, disabled: false });
-  }, []);
+  }, [practiceState]);
 
   return (
     <div className='box-wrapper'>
@@ -66,11 +66,7 @@ const SearchByConservationPractice = () => {
             <option value=''>- Select practice</option>
             {ConservationPractice.length
               ? ConservationPractice.map((item: IConservationPractice) => {
-                  return (
-                    <option key={item.practice} value={item.practice}>
-                      {item.practice}
-                    </option>
-                  );
+                  return <option value={item.practice}>{item.practice}</option>;
                 })
               : null}
           </select>

@@ -1,1 +1,1 @@
-import { default } from './SearchByConservationPractice';
+export { default } from './SearchByConservationPractice';

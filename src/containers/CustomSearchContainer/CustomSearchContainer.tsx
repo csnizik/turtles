@@ -5,7 +5,7 @@ import './custom-search.scss';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
 import { search, advancedSearch } from '../../common/constants';
-import SearchByConservationPractice from '../../components/SearchByConservationPractice/SearchByConservationPractice';
+import SearchByConservationPractice from '../../components/SearchByConservationPractice';
 
 const customSearchIntro: string =
   'Search for information on practice impacts, practice extent, and impacts of practice implementation.';
@@ -35,7 +35,6 @@ const CustomSearchContainer = () => {
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setSearchInput({ ...searchInput, [name]: value });
   };
 
