@@ -2,7 +2,6 @@ import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getRequest } from '../../common/util/AxiosUtil';
 import ExploreBoxList from '../../components/ExploreBoxList';
-import CustomResourceIssueList from '../../components/CustomResourceIssueList';
 import CustomButton from '../../components/CustomButton';
 import LocationSearch from '../../components/LocationSearch';
 import { advancedSearch } from '../../common/constants';
@@ -51,10 +50,6 @@ const Home = () => {
         <div className='explore-box'>
           <ExploreBoxList />
         </div>
-        <div className='explore-box'>
-         <CustomResourceIssueList />
-        </div>
-        
       </main>
         
     </div>
