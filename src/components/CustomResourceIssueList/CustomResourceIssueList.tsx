@@ -1,6 +1,7 @@
 import CustomResourceIssue from '../CustomResourceIssue';
 import './custom-resource-issue-list.scss';
 
+// TODO: make component responsive
 interface ICustomResourceBoxData {
   id: number;
   resourceName: string;
