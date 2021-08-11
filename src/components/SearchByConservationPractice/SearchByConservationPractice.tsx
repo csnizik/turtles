@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ConservationPractice } from '../../common/typedconstants.common';
 import './conservation-practice.scss';
 
@@ -13,6 +14,7 @@ const intialState = {
 };
 
 const SearchByConservationPractice = () => {
+  const { t } = useTranslation();
   const [practiceState, setPracticeState] =
     useState<IConservationPractice>(intialState);
   const [secondState, setSecondState] =
@@ -38,10 +40,10 @@ const SearchByConservationPractice = () => {
           className='usa-label location-search-header'
           htmlFor='locationValue'
         >
-          Conservation Practice
+          {t('search-by-conservation-practice.heading')}
         </label>
         <div className='desktop:grid-col-8'>
-          <p>Select practice category</p>
+          <p>{t('search-by-conservation-practice.first-label-name')}</p>
           <select
             className='usa-select'
             id='practiceCategoryValue'
@@ -67,12 +69,11 @@ const SearchByConservationPractice = () => {
         </div>
 
         <div className='desktop:grid-col-8'>
-          <p>Select a practice (optional)</p>
+          <p>{t('search-by-conservation-practice.second-label-name')}</p>
           <select
             className='usa-select'
             id='practiceValue'
             name='practiceSelect'
-            placeholder='- Select practice -'
             disabled={secondState.disabled}
           >
             <option value=''>- Select practice</option>

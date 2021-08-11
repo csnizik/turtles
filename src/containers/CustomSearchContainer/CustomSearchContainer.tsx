@@ -57,7 +57,7 @@ const CustomSearchContainer = () => {
         countyList={countyList}
       />
       <LandUseSection />
-      <p>Search by Conservation Practice or Resource Concern</p>
+      <p>{t('search-by-conservation-practice.description')}</p>
       <SearchByConservationPractice />
       <CustomButton additionalClassName='margin-top-3' onClick={handleSearch}>
         {t('actions.search')}
