@@ -5,9 +5,21 @@
   padding: 2rem;
 }
 
+.location-search-container {
+  position: relative;
+
+  .divider {
+    position: absolute;
+    background-color: $dark-grey;
+    height: 1;
+    top: 96.5%;
+    margin-left: 4.5%;
+    width: 56%;
+  }
+}
+
 /** Location search grid **/
 .location-search-section {
-  width: 56.5%;
   border: 2px solid $light-grey-5;
   border-radius: 0.5em;
   padding: 2em;
@@ -15,12 +27,9 @@
   margin: 1rem 2.75rem;
   .location-search-grid {
     display: grid;
+    align-items: end;
     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     gap: 2em;
-  }
-  .location-label-grid {
-    display: grid;
-    grid-template-columns: 22rem 20rem;
   }
   .p-style {
     font-size: 14px;
@@ -28,7 +37,6 @@
   }
   .usa-button {
     margin-top: 0.45rem;
-    height: 40px;
     width: 65%;
   }
   .usa-select {

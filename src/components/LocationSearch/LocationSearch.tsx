@@ -25,54 +25,57 @@ const LocationSearch = ({ statesList }: any) => {
   };
 
   return (
-    <div className='location-search-section'>
-      <h3>{t('location-search.explore-by-location')}</h3>
-      <p className='p-style'>{t('location-search.introductory-paragraph')}</p>
-      <div className='location-label-grid'>
-        <label className='usa-label' htmlFor='locationOptions'>
-          {t('location-search.labels.select-state')}
-        </label>
-        <label className='usa-label' htmlFor='locationOptions'>
-          {t('location-search.labels.select-county')}
-        </label>
+    <div className='location-search-container'>
+      <div className='location-search-section'>
+        <h3>{t('location-search.explore-by-location')}</h3>
+        <p className='p-style'>{t('location-search.introductory-paragraph')}</p>
+        <div className='location-label-grid'>
+          <label className='usa-label' htmlFor='locationOptions'>
+            {t('location-search.labels.select-state')}
+          </label>
+          <label className='usa-label' htmlFor='locationOptions'>
+            {t('location-search.labels.select-county')}
+          </label>
+        </div>
+        <div className='location-search-grid'>
+          <select
+            className='usa-select'
+            name='locationOptions'
+            onChange={handleSelectState}
+          >
+            <option>{t('location-search.national')}</option>
+            {statesList && statesList.length
+              ? statesList.map((state: any) => {
+                  return (
+                    <option key={state.stateCode} value={state.stateCode}>
+                      {state.stateNameDisplay}
+                    </option>
+                  );
+                })
+              : null}
+          </select>
+          <select
+            className='usa-select'
+            name='locationOptions'
+            disabled={!countyList.length}
+          >
+            <option>{t('actions.select')}</option>
+            {countyList && countyList.length
+              ? countyList.map((county: any) => {
+                  return (
+                    <option key={county.countyCode} value={county.countyCode}>
+                      {county.countyDisplay}
+                    </option>
+                  );
+                })
+              : null}
+          </select>
+          <CustomButton onClick={handleClick}>
+            {t('location-search.explore-location')}
+          </CustomButton>
+        </div>
       </div>
-      <div className='location-search-grid'>
-        <select
-          className='usa-select'
-          name='locationOptions'
-          onChange={handleSelectState}
-        >
-          <option>{t('location-search.national')}</option>
-          {statesList && statesList.length
-            ? statesList.map((state: any) => {
-                return (
-                  <option key={state.stateCode} value={state.stateCode}>
-                    {state.stateNameDisplay}
-                  </option>
-                );
-              })
-            : null}
-        </select>
-        <select
-          className='usa-select'
-          name='locationOptions'
-          disabled={!countyList.length}
-        >
-          <option>{t('actions.select')}</option>
-          {countyList && countyList.length
-            ? countyList.map((county: any) => {
-                return (
-                  <option key={county.countyCode} value={county.countyCode}>
-                    {county.countyDisplay}
-                  </option>
-                );
-              })
-            : null}
-        </select>
-        <CustomButton onClick={handleClick}>
-          {t('location-search.explore-location')}
-        </CustomButton>
-      </div>
+      <hr className='divider' />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { getRequest } from '../../common/util/AxiosUtil';
 import ExploreBoxList from '../../components/ExploreBoxList';
 import CustomButton from '../../components/CustomButton';
 import LocationSearch from '../../components/LocationSearch';
+import CustomResourceIssueList from '../../components/CustomResourceIssueList';
 import './home.scss';
 
 const Home = () => {
@@ -34,22 +35,24 @@ const Home = () => {
           <div className='grid-col-6'>
             <p className='margin-left-6 margin-top-3'>{t('home-page.intro')}</p>
           </div>
-          <div className='grid-col-4'>
+          <div className='grid-col-4 grid-offset-2'>
             <CustomButton
-              additionalClassName='margin-2 float-right'
+              additionalClassName='margin-top-2 margin-right-4'
               onClick={handleCustomSearch}
             >
               {t('search-page.advanced-search')}
             </CustomButton>
           </div>
         </div>
-        <LocationSearch statesList={stateList} />
-        <hr className='divider' />
-        <div className='explore-box'>
-          <ExploreBoxList />
+
+        <div className='explore-box-grid'>
+          <LocationSearch statesList={stateList} />
+          <CustomResourceIssueList />
+          <div className='explore-box'>
+            <ExploreBoxList />
+          </div>
         </div>
       </main>
-        
     </div>
   );
 };
