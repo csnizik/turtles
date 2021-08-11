@@ -6,6 +6,7 @@ import CustomButton from '../../components/CustomButton';
 import LocationSearch from '../../components/LocationSearch';
 import { advancedSearch } from '../../common/constants';
 import './home.scss';
+import CustomResourceIssueList from '../../components/CustomResourceIssueList';
 
 const homeIntro: string =
   'Find information about conservation practices and NRCS projects & initiatives.';
@@ -45,13 +46,12 @@ const Home = () => {
             </CustomButton>
           </div>
         </div>
-        <LocationSearch statesList={stateList} />
-        <hr className='divider' />
-        <div className='explore-box'>
+        <div className='home-container'>
+          <LocationSearch statesList={stateList} />
+          <hr className='divider' />
           <ExploreBoxList />
         </div>
       </main>
-        
     </div>
   );
 };

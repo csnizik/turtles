@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ConservationPractice } from '../../common/typedconstants.common';
 import './conservation-practice.scss';
 
@@ -15,14 +15,22 @@ const intialState = {
 const SearchByConservationPractice = () => {
   const [practiceState, setPracticeState] =
     useState<IConservationPractice>(intialState);
+  const [secondState, setSecondState] =
+    useState<IConservationPractice>(intialState);
+
+  useEffect(() => {
+    setPracticeState({ ...practiceState, practice: ConservationPractice });
+    setSecondState({ ...secondState, practice: ConservationPractice });
+  }, []);
 
   const handleChange = (e) => {
     if (e.target.value !== '') {
-      setPracticeState({ practice: ConservationPractice, disabled: false });
-      return;
+      setSecondState({ practice: ConservationPractice, disabled: false });
+    } else {
+      setSecondState({ ...intialState });
     }
-    setPracticeState({ ...practiceState, disabled: true });
   };
+
   return (
     <div className='box-wrapper'>
       <div className='search-by-location-section'>
@@ -42,8 +50,8 @@ const SearchByConservationPractice = () => {
             onChange={handleChange}
           >
             <option value=''>All practices (default)</option>
-            {ConservationPractice.length
-              ? ConservationPractice.map((item: any) => {
+            {practiceState.practice.length
+              ? practiceState.practice.map((item: any) => {
                   console.log(item);
                   return (
                     <option
@@ -65,11 +73,11 @@ const SearchByConservationPractice = () => {
             id='practiceValue'
             name='practiceSelect'
             placeholder='- Select practice -'
-            disabled={practiceState.disabled}
+            disabled={secondState.disabled}
           >
             <option value=''>- Select practice</option>
-            {ConservationPractice.length
-              ? ConservationPractice.map((item: any) => {
+            {secondState.practice.length
+              ? secondState.practice.map((item: any) => {
                   return (
                     <option key={item.practiceCategory} value={item.practice}>
                       {item.practice}
