@@ -1,0 +1,13 @@
+{
+  "actions": {
+    "search": "Búsqueda"
+  },
+  "home-page": {
+    "intro": "Encuentre información sobre prácticas de conservación y proyectos e iniciativas de NRCS.",
+    "title": "NRCS On the Ground"
+  },
+  "search-page": {
+    "advanced-search": "Búsqueda Avanzada",
+    "intro": "Busque información sobre los impactos de la práctica, el alcance de la práctica y los impactos de la implementación de la práctica."
+  }
+}

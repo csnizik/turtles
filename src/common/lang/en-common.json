@@ -1,0 +1,32 @@
+{
+  "actions": {
+    "search": "Search",
+    "select": "- Select -"
+  },
+  "header": {
+    "disclaimer": "An official website of the United States government",
+    "home": "Home",
+    "here-how-you-know": "Here's how you know",
+    "nrcs": "Natural Resources Conservation Service",
+    "usda": "U.S DEPARTMENT OF AGRICULTURE"
+  },
+  "home-page": {
+    "intro": "Find information about conservation practices and NRCS projects & initiatives.",
+    "title": "NRCS On the Ground"
+  },
+  "search-page": {
+    "advanced-search": "Advanced Search",
+    "intro": "Search for information on practice impacts, practice extent, and impacts of practice implementation."
+  },
+  "location-search": {
+    "explore-by-location": "Explore by Location",
+    "explore-location": "Explore Location",
+    "national": "National (default)",
+    "introductory-paragraph": "State and county provides lorum ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula diam et diam tempor fringila",
+    "labels": {
+      "select-state": "Select a state",
+      "select-county": "Select a county (Optional)"
+    },
+    "search-by-location": "Search by Location"
+  }
+}

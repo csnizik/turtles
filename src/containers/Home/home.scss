@@ -23,6 +23,13 @@
         font-size: 17px;
       }
     }
+
+    .explore-box-grid {
+      display: grid;
+      grid-template-columns: 1fr 22rem;
+      justify-content: flex-start;
+      align-items: start;
+    }
   }
 
   h3.landing-page-title {
@@ -41,11 +48,25 @@
   .explore-box {
     margin: 1em 2em 2em 2em;
   }
+}
 
-  .divider {
-    background-color: $dark-grey;
-    height: 1;
-    margin: 40px 0px 24px 3rem;
-    width: 56%;
+/** Media Queries **/
+@media only screen and (min-width: $extra-large-screen) {
+  .home-page {
+    .grid-col-4 {
+      .usa-button.usa-button--base {
+        float: right;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $large-screen) {
+  .home-page {
+    .grid-col-4 {
+      .usa-button.usa-button--base {
+        margin-top: 4rem;
+      }
+    }
   }
 }

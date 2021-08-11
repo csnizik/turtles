@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import './search-by-location.scss';
 
 const SearchByLocation = ({
@@ -6,6 +8,7 @@ const SearchByLocation = ({
   statesList,
   handleInputChange,
 }: any) => {
+  const { t } = useTranslation();
   return (
     <>
       <div className='search-by-location-section'>
@@ -13,19 +16,18 @@ const SearchByLocation = ({
           className='usa-label location-search-header'
           htmlFor='locationValue'
         >
-          Search by Location
+          {t('location-search.search-by-location')}
         </label>
         <div className='side-by-side'>
           <div className='desktop:grid-col-4'>
-            <p>Select a state</p>
+            <p>{t('location-search.labels.select-state')}</p>
             <select
               className='usa-select'
               id='stateValue'
               name='stateSelect'
-              placeholder='National (default)'
               onChange={handleInputChange}
             >
-              <option value=''>National (default)</option>
+              <option value=''>{t('location-search.national')}</option>
               {statesList.length
                 ? statesList.map((state: any) => {
                     return (
@@ -39,16 +41,15 @@ const SearchByLocation = ({
           </div>
 
           <div className='desktop:grid-col-4'>
-            <p>Select a county (optional)</p>
+            <p>{t('location-search.labels.select-county')}</p>
             <select
               className='usa-select'
               id='countyValue'
               name='countySelect'
-              placeholder='- Select county -'
               onChange={handleInputChange}
               disabled={!searchInput.stateSelect}
             >
-              <option value=''>- Select county -</option>
+              <option value=''>{t('actions.select')}</option>
               {countyList.length
                 ? countyList.map((county: any) => {
                     return (
