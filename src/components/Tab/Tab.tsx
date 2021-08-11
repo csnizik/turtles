@@ -1,5 +1,8 @@
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 import { NavItem, NavLink } from 'reactstrap';
+
+import './tab.scss';
 
 interface ISearchOption {
   option: number;
@@ -31,7 +34,9 @@ const SearchOption = ({
           toggleTabs(option);
         }}
       >
-        {displayName}
+        <Link className='links' to={displayName.split(' ').join('')}>
+          {displayName}
+        </Link>
       </NavLink>
     </NavItem>
   );

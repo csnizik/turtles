@@ -1,8 +1,11 @@
-export const searchOptionMap: any = {
+export interface ISearchOptionMap {
+  [key: string]: any;
+}
+export const searchOptionMap: ISearchOptionMap = {
   Location: { id: 0, displayName: 'Location' },
-  ResourceConcern: { id: 1, displayName: 'Resource Concerns' },
+  ResourceConcerns: { id: 1, displayName: 'Resource Concerns' },
   ConservationPractices: { id: 2, displayName: 'Conservation Practices' },
-  Projects: { id: 3, displayName: 'Projects & Initiatives' },
+  ProjectsAndInitiatives: { id: 3, displayName: 'Projects And Initiatives' },
 };
 
 export const exploreBoxData: any = [
@@ -24,7 +27,7 @@ export const exploreBoxData: any = [
     boxHeading: 'Explore Projects & Initiatives',
     boxDescription:
       'NRCS sponsored Projects & Initatives definition lorum ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula diam et diam tempor fringilla.',
-    boxButton: 'Projects & Initiatives',
+    boxButton: 'Projects And Initiatives',
   },
 ];
 
