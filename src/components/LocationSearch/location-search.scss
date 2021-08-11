@@ -7,15 +7,6 @@
 
 .location-search-container {
   position: relative;
-
-  .divider {
-    position: absolute;
-    background-color: $dark-grey;
-    height: 1;
-    top: 96.5%;
-    margin-left: 4.5%;
-    width: 56%;
-  }
 }
 
 /** Location search grid **/
@@ -31,9 +22,13 @@
     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     gap: 2em;
   }
+  .location-label-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 0fr));
+  }
   .p-style {
-    font-size: 14px;
     margin: 0px;
+    width: 50%;
   }
   .usa-button {
     margin-top: 0.45rem;

@@ -9,7 +9,7 @@ const LocationSearch = ({ statesList }: any) => {
   const history: any = useHistory();
   const { t } = useTranslation();
   const handleClick = () => {
-    history.push('search');
+    history.push('Location');
   };
   const [countyList, setCountyList]: any = useState([]);
   const [selectedState, setSelectedState]: any = useState('');
@@ -75,7 +75,6 @@ const LocationSearch = ({ statesList }: any) => {
           </CustomButton>
         </div>
       </div>
-      <hr className='divider' />
     </div>
   );
 };
