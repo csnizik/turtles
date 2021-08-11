@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
 import { getRequest } from '../../common/util/AxiosUtil';
 import './custom-search.scss';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
 import LandUseSection from '../../components/LandUseSection';
+import SearchByConservationPractice from '../../components/SearchByConservationPractice';
 
 const defaultSearchInput: any = {
   stateSelect: '',
@@ -57,6 +57,8 @@ const CustomSearchContainer = () => {
         countyList={countyList}
       />
       <LandUseSection />
+      <p>{t('search-by-conservation-practice.description')}</p>
+      <SearchByConservationPractice />
       <CustomButton additionalClassName='margin-top-3' onClick={handleSearch}>
         {t('actions.search')}
       </CustomButton>
