@@ -28,5 +28,14 @@
       "select-county": "Select a county (Optional)"
     },
     "search-by-location": "Search by Location"
+  },
+  "resource-issues": {
+    "common-resource-issues": "Common Resource Issues"
+  },
+  "search-by-conservation-practice": {
+    "heading": "Conservation Practice",
+    "description": "Search by Conservation Practice or Resource Concern",
+    "first-label-name": "Select practice category",
+    "second-label-name": "Select a practice (optional)"
   }
 }

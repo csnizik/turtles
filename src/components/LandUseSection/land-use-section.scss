@@ -1,9 +1,12 @@
 @import '../../stylesheets/variables';
 
 .usa-fieldset {
-  padding: 1em 0em;
-  margin: 1em 0em;
-  background-color: $light-grey-205;
+  padding: 1em 0em 2em 1em;
+  background-color: $light-grey-2;
+  margin: 0 0 2em -1em;
+  .usa-legend {
+    font-size: 17px;
+  }
   .land-use-grid {
     display: grid;
     grid-template-columns: 20rem 20rem 20rem;

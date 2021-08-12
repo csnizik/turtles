@@ -1,6 +1,11 @@
 import './land-use-section.scss';
 
-const exampleLandUseData: any = [
+interface ILandUseData {
+  id: number;
+  label: string;
+}
+
+const exampleLandUseData: ILandUseData[] = [
   { id: 0, label: 'Crop' },
   { id: 1, label: 'Forest' },
   { id: 2, label: 'Farm and Other Rural' },
@@ -14,7 +19,7 @@ const LandUseSection = () => {
       <legend className='usa-legend'>Filter By Land Use</legend>
       <div className='land-use-grid'>
         {exampleLandUseData.length &&
-          exampleLandUseData.map((landType: any) => {
+          exampleLandUseData.map((landType: ILandUseData) => {
             return (
               <div className='usa-checkbox' key={landType.id}>
                 <input

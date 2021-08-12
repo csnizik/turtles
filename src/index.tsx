@@ -15,6 +15,7 @@ const CustomSearchContainer = lazy(
   () => import('./containers/CustomSearchContainer/CustomSearchContainer')
 );
 const LocationContainer = lazy(() => import('./containers/LocationContainer'));
+
 const App = () => (
   <Router>
     <Suspense fallback={<Spinner />}>
