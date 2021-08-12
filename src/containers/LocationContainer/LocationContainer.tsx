@@ -28,11 +28,13 @@ const LocationContainer = () => {
 
   const renderLocationContent = () => {
     return (
-      <Link to='/'>
-        <CustomButton className='btn btn-light '>
-          <i className='fas fa-arrow-left ' /> Back
-        </CustomButton>
-      </Link>
+      <div className='back-button'>
+        <Link to='/'>
+          <CustomButton className='btn btn-light '>
+            <i className='fas fa-arrow-left ' /> Back
+          </CustomButton>
+        </Link>
+      </div>
     );
   };
 
