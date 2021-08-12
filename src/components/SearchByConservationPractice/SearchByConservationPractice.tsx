@@ -34,7 +34,7 @@ const SearchByConservationPractice = () => {
   };
 
   return (
-    <div className='box-wrapper'>
+    <div className='practice-box-wrapper'>
       <div className='search-by-practice-section'>
         <label
           className='usa-label practice-label'
@@ -53,7 +53,6 @@ const SearchByConservationPractice = () => {
             <option value=''>All practices (default)</option>
             {practiceState.practice.length
               ? practiceState.practice.map((item: any) => {
-                  console.log(item);
                   return (
                     <option
                       key={item.practiceCategory}
@@ -75,7 +74,7 @@ const SearchByConservationPractice = () => {
             name='practiceSelect'
             disabled={secondState.disabled}
           >
-            <option value=''>- Select practice</option>
+            <option value=''>- Select practice -</option>
             {secondState.practice.length
               ? secondState.practice.map((item: any) => {
                   return (

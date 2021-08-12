@@ -4,6 +4,7 @@ import { getRequest } from '../../common/util/AxiosUtil';
 import './custom-search.scss';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
+import SearchByResourceConcern from '../../components/SearchByResourceConcern';
 import LandUseSection from '../../components/LandUseSection';
 import SearchByConservationPractice from '../../components/SearchByConservationPractice';
 
@@ -65,7 +66,10 @@ const CustomSearchContainer = () => {
       <p className='practice-description'>
         {t('search-by-conservation-practice.description')}
       </p>
-      <SearchByConservationPractice />
+      <div className='bottom-container'>
+        <SearchByConservationPractice />
+        <SearchByResourceConcern />
+      </div>
       <CustomButton
         additionalClassName='margin-top-3 margin-bottom-3'
         onClick={handleSearch}
