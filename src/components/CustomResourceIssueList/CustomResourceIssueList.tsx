@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import CustomResourceIssue from '../CustomResourceIssue';
 import './custom-resource-issue-list.scss';
 
@@ -7,8 +8,15 @@ interface ICustomResourceBoxData {
   resourceName: string;
 }
 
+interface IResourceIssue {
+  handleSelectResourceConcern: Function;
+  id: number;
+  resourceName: string;
+}
+
 const CustomResourceIssueList = () => {
-  const mockData = [
+  const { t } = useTranslation();
+  const mockData: IResourceIssue[] = [
     {
       handleSelectResourceConcern: () => {},
       id: 1,
@@ -28,7 +36,9 @@ const CustomResourceIssueList = () => {
 
   return (
     <div className='custom-resource-container'>
-      <p className='container-header'>Common Resource Issues</p>
+      <p className='container-header'>
+        {t('resource-issues.common-resource-issues')}
+      </p>
       <p className='container-text'>Some well known resource issues</p>
       {mockData.map((item: ICustomResourceBoxData) => {
         return (

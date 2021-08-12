@@ -35,10 +35,10 @@ const SearchByConservationPractice = () => {
 
   return (
     <div className='box-wrapper'>
-      <div className='search-by-location-section'>
+      <div className='search-by-practice-section'>
         <label
-          className='usa-label location-search-header'
-          htmlFor='locationValue'
+          className='usa-label practice-label'
+          htmlFor='practiceCategoryValue'
         >
           {t('search-by-conservation-practice.heading')}
         </label>
@@ -48,7 +48,6 @@ const SearchByConservationPractice = () => {
             className='usa-select'
             id='practiceCategoryValue'
             name='practiceCategorySelect'
-            placeholder='- Select practice category -'
             onChange={handleChange}
           >
             <option value=''>All practices (default)</option>

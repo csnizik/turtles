@@ -43,8 +43,8 @@ const LocationSearch = ({ statesList }: any) => {
             name='locationOptions'
             onChange={handleSelectState}
           >
-            <option>{t('location-search.national')}</option>
-            {statesList && statesList.length
+            <option value={-1}>{t('location-search.national')}</option>
+            {statesList.length
               ? statesList.map((state: any) => {
                   return (
                     <option key={state.stateCode} value={state.stateCode}>
@@ -59,8 +59,8 @@ const LocationSearch = ({ statesList }: any) => {
             name='locationOptions'
             disabled={!countyList.length}
           >
-            <option>{t('actions.select')}</option>
-            {countyList && countyList.length
+            <option value={-1}>{t('actions.select')}</option>
+            {countyList.length
               ? countyList.map((county: any) => {
                   return (
                     <option key={county.countyCode} value={county.countyCode}>

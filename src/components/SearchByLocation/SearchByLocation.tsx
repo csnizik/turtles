@@ -27,7 +27,7 @@ const SearchByLocation = ({
               name='stateSelect'
               onChange={handleInputChange}
             >
-              <option value=''>{t('location-search.national')}</option>
+              <option value={-1}>{t('location-search.national')}</option>
               {statesList.length
                 ? statesList.map((state: any) => {
                     return (
@@ -47,9 +47,9 @@ const SearchByLocation = ({
               id='countyValue'
               name='countySelect'
               onChange={handleInputChange}
-              disabled={!searchInput.stateSelect}
+              disabled={searchInput.stateSelect < 0}
             >
-              <option value=''>{t('actions.select')}</option>
+              <option value={-1}>{t('actions.select')}</option>
               {countyList.length
                 ? countyList.map((county: any) => {
                     return (
