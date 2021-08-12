@@ -46,6 +46,9 @@ const CustomSearchContainer = () => {
     const { name, value } = e.target;
     if (name === 'stateSelect' && value) {
       fetchCountyListPerStateCode(value);
+      if (searchInput.stateSelect >= 0 && searchInput.stateSelect !== value) {
+        setCountyList([]);
+      }
     }
     setSearchInput({ ...searchInput, [name]: value });
   };

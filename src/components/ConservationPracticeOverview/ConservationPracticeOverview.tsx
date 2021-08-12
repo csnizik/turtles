@@ -28,7 +28,7 @@ const ConservationPracticeOverview = () => {
             })} */}
             <div key={data[19].practiceId} className='full-component'>
               <div className='overview'>
-                <h4>{`Diversion 362`}</h4>
+                <h4>Diversion 362</h4>
                 <p>{data[19].practiceOverview}</p>
                 <h4>Practice Information</h4>
                 <p>{data[19].practiceInfo}</p>

@@ -12,7 +12,8 @@ const LocationSearch = ({ statesList }: any) => {
     history.push('Location');
   };
   const [countyList, setCountyList]: any = useState([]);
-  const [selectedState, setSelectedState]: any = useState('');
+  const [selectedState, setSelectedState]: any = useState(-1);
+  const [selectedCounty, setSelectedCounty]: any = useState(-1);
   async function fetchCountyListPerStateCode(stateCode: any) {
     const countyResponse = await getRequest(`/counties/${stateCode}`);
     setCountyList(countyResponse.data);
@@ -22,6 +23,13 @@ const LocationSearch = ({ statesList }: any) => {
     const stateVal = event.target.value;
     fetchCountyListPerStateCode(stateVal);
     setSelectedState(stateVal);
+    if (selectedState >= 0 && selectedCounty && selectedState !== stateVal) {
+      setCountyList([]);
+    }
+  };
+
+  const handleSelectCounty = (event: any) => {
+    setSelectedCounty(event.target.value);
   };
 
   return (
@@ -58,6 +66,7 @@ const LocationSearch = ({ statesList }: any) => {
             className='usa-select'
             name='locationOptions'
             disabled={!countyList.length}
+            onChange={handleSelectCounty}
           >
             <option value={-1}>{t('actions.select')}</option>
             {countyList.length
