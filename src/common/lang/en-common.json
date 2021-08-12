@@ -29,6 +29,9 @@
     },
     "search-by-location": "Search by Location"
   },
+  "resource-issues": {
+    "common-resource-issues": "Common Resource Issues"
+  },
   "search-by-conservation-practice": {
     "heading": "Conservation Practice",
     "description": "Search by Conservation Practice or Resource Concern",

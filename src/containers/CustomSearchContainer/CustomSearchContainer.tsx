@@ -6,10 +6,18 @@ import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
 import LandUseSection from '../../components/LandUseSection';
 import SearchByConservationPractice from '../../components/SearchByConservationPractice';
+<<<<<<< HEAD
+=======
 
-const defaultSearchInput: any = {
-  stateSelect: '',
-  countySelect: '',
+interface ISearchInput {
+  stateSelect: number;
+  countySelect: number;
+}
+>>>>>>> devRedo
+
+const defaultSearchInput: ISearchInput = {
+  stateSelect: -1,
+  countySelect: -1,
 };
 
 const CustomSearchContainer = () => {
@@ -57,9 +65,14 @@ const CustomSearchContainer = () => {
         countyList={countyList}
       />
       <LandUseSection />
-      <p>{t('search-by-conservation-practice.description')}</p>
+      <p className='practice-description'>
+        {t('search-by-conservation-practice.description')}
+      </p>
       <SearchByConservationPractice />
-      <CustomButton additionalClassName='margin-top-3' onClick={handleSearch}>
+      <CustomButton
+        additionalClassName='margin-top-3 margin-bottom-3'
+        onClick={handleSearch}
+      >
         {t('actions.search')}
       </CustomButton>
     </div>

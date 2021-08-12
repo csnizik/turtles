@@ -1,6 +1,7 @@
 import './conservation-practice-overview.scss';
 import { useGetPracticesQuery } from '../../Redux/services/api';
 import Spinner from '../Spinner/Spinner';
+import image from './image/diversion Image.jpeg';
 
 const ConservationPracticeOverview = () => {
   const { data, error, isLoading, isSuccess, isError } = useGetPracticesQuery();
@@ -12,7 +13,7 @@ const ConservationPracticeOverview = () => {
       {isSuccess && data && (
         <div className='document-box'>
           <ul className='list-document'>
-            {data.map((practice: any) => {
+            {/* {data.map((practice: any) => {
               return (
                 <div key={practice.practice_Id} className='full-component'>
                   <div className='overview'>
@@ -24,7 +25,16 @@ const ConservationPracticeOverview = () => {
                   <img alt='Practice' src={practice.practice_Image} />
                 </div>
               );
-            })}
+            })} */}
+            <div key={data[1].practiceId} className='full-component'>
+              <div className='overview'>
+                <h4>{`Diversion ${data[1].practiceCode}`}</h4>
+                <p>{data[1].practiceOverview}</p>
+                <h4>Practice Information</h4>
+                <p>{data[1].practiceInfo}</p>
+              </div>
+              <img alt='Practice' src={image} />
+            </div>
           </ul>
         </div>
       )}
