@@ -1,6 +1,6 @@
 @import '../../stylesheets/variables';
 
-.practice-box-wrapper {
+.resource-box-wrapper {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 2em;
@@ -10,7 +10,7 @@
   border-radius: 0.5em;
   background-color: $light-grey;
   padding: 0 2em 0 2em;
-  margin: 2em 2em 1em 0;
+  margin: 2em 1em 1em 0;
 
   .usa-label {
     font-weight: 500;

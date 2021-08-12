@@ -35,7 +35,12 @@
   "search-by-conservation-practice": {
     "heading": "Conservation Practice",
     "description": "Search by Conservation Practice or Resource Concern",
-    "first-label-name": "Select practice category",
+    "first-label-name": "Select a practice category",
     "second-label-name": "Select a practice (optional)"
+  },
+  "search-by-resource-concern": {
+    "heading": "Resource Concerns Related to Practices",
+    "first-label-name": "Select a resource category",
+    "second-label-name": "Select a resource concern (optional)"
   }
 }
