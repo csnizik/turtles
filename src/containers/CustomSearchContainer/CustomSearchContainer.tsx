@@ -6,14 +6,11 @@ import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
 import LandUseSection from '../../components/LandUseSection';
 import SearchByConservationPractice from '../../components/SearchByConservationPractice';
-<<<<<<< HEAD
-=======
 
 interface ISearchInput {
   stateSelect: number;
   countySelect: number;
 }
->>>>>>> devRedo
 
 const defaultSearchInput: ISearchInput = {
   stateSelect: -1,
