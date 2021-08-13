@@ -1,16 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import './variables';
+
 * {
   padding: 0px;
   font-family: Roboto;
   box-sizing: border-box;
 }
 body {
-  background: white;
+  background: $white !important;
 }
 .container {
   width: 90%;
-  border: 1px solid darkgrey;
-  box-shadow: 5px 5px 5px 1px #ccc;
+  border: 1px solid $dark-grey-1;
+  box-shadow: 5px 5px 5px 1px $medium-darkgrey;
   border-radius: 5px;
   margin-top: 40px;
   height: 100%;

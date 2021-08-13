@@ -1,24 +1,28 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { getRequest } from '../../common/util/AxiosUtil';
-
 import './custom-search.scss';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
+import SearchByResourceConcern from '../../components/SearchByResourceConcern';
 import LandUseSection from '../../components/LandUseSection';
-import { search, advancedSearch } from '../../common/constants';
+import SearchByConservationPractice from '../../components/SearchByConservationPractice';
 
-const customSearchIntro: string =
-  'Search for information on practice impacts, practice extent, and impacts of practice implementation.';
+interface ISearchInput {
+  stateSelect: number;
+  countySelect: number;
+}
 
-const defaultSearchInput: any = {
-  stateSelect: '',
-  countySelect: '',
+const defaultSearchInput: ISearchInput = {
+  stateSelect: -1,
+  countySelect: -1,
 };
 
 const CustomSearchContainer = () => {
   const [searchInput, setSearchInput]: any = useState(defaultSearchInput);
   const [statesList, setStatesList]: any = useState([]);
   const [countyList, setCountyList]: any = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function fetchStateList() {
@@ -42,6 +46,9 @@ const CustomSearchContainer = () => {
     const { name, value } = e.target;
     if (name === 'stateSelect' && value) {
       fetchCountyListPerStateCode(value);
+      if (searchInput.stateSelect >= 0 && searchInput.stateSelect !== value) {
+        setCountyList([]);
+      }
     }
     setSearchInput({ ...searchInput, [name]: value });
   };
@@ -49,8 +56,8 @@ const CustomSearchContainer = () => {
   return (
     <div className='custom-search'>
       <div className='custom-search-header'>
-        <h1>{advancedSearch}</h1>
-        <p>{customSearchIntro}</p>
+        <h1>{t('search-page.advanced-search')}</h1>
+        <p>{t('search-page.intro')}</p>
       </div>
       <SearchByLocation
         statesList={statesList}
@@ -59,8 +66,18 @@ const CustomSearchContainer = () => {
         countyList={countyList}
       />
       <LandUseSection />
-      <CustomButton additionalClassName='margin-top-3' onClick={handleSearch}>
-        {search}
+      <p className='practice-description'>
+        {t('search-by-conservation-practice.description')}
+      </p>
+      <div className='bottom-container'>
+        <SearchByConservationPractice />
+        <SearchByResourceConcern />
+      </div>
+      <CustomButton
+        additionalClassName='margin-top-3 margin-bottom-3'
+        onClick={handleSearch}
+      >
+        {t('actions.search')}
       </CustomButton>
     </div>
   );

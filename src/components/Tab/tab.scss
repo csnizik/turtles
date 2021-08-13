@@ -1,0 +1,9 @@
+@import '../../stylesheets/variables';
+.links {
+  color: $sfi-black;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

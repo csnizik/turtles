@@ -1,27 +1,44 @@
 import './conservation-practice-overview.scss';
-import { ConservationPracticeStandard } from '../../common/typedconstants.common';
+import { useGetPracticesQuery } from '../../Redux/services/api';
+import Spinner from '../Spinner/Spinner';
+import image from './image/diversion Image.jpeg';
 
 const ConservationPracticeOverview = () => {
+  const { data, error, isLoading, isSuccess, isError } = useGetPracticesQuery();
+
   return (
-    <div className='document-box'>
-      <ul className='list-document'>
-        {ConservationPracticeStandard.map((practice: any) => {
-          return (
-            <div key={practice.id} className='full-component'>
+    <>
+      {isLoading && <Spinner />}
+      {isError && error}
+      {isSuccess && data && (
+        <div className='document-box'>
+          <ul className='list-document'>
+            {/* {data.map((practice: any) => {
+              return (
+                <div key={practice.practice_Id} className='full-component'>
+                  <div className='overview'>
+                    <h4>{`${practice.practiceName} ${practice.practice_Code}`}</h4>
+                    <p>{practice.practice_Overview}</p>
+                    <h4>Practice Information</h4>
+                    <p>{practice.practice_Info}</p>
+                  </div>
+                  <img alt='Practice' src={practice.practice_Image} />
+                </div>
+              );
+            })} */}
+            <div key={data[19].practiceId} className='full-component'>
               <div className='overview'>
-                <h4>{`${practice.practiceName} ${practice.id}`}</h4>
-                <p>{practice.practiceOverview}</p>
+                <h4>Diversion 362</h4>
+                <p>{data[19].practiceOverview}</p>
                 <h4>Practice Information</h4>
-                {practice.practiceInformation.map((info: any) => {
-                  return <p>{info}</p>;
-                })}
+                <p>{data[19].practiceInfo}</p>
               </div>
-              <img alt='Practice' src={practice.image} />
+              <img alt='Practice' src={image} />
             </div>
-          );
-        })}
-      </ul>
-    </div>
+          </ul>
+        </div>
+      )}
+    </>
   );
 };
 

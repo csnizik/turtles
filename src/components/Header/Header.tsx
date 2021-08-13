@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import './header.scss';
 
 const Header = () => {
+  const { t } = useTranslation();
   const renderNRCSHeaderSection: Function = () => (
     <header>
       <div className='header-container row-flex-start'>
@@ -11,16 +13,16 @@ const Header = () => {
           src='images/usa-flag-logo.png'
           alt='USA Flag Logo'
         />
-        An official website of the United States government{' '}
-        <a href='/#'>Here&apos;s how you know</a>
+        {`${t('header.disclaimer')} `}
+        <a href='/#'>{t('header.here-how-you-know')}</a>
       </div>
       <div className='usda-header row-flex-start'>
         <img src='images/usda_logo_color.png' alt='USDA LOGO' />
         <div className='government-banner'>
           <h4 className='page-title' data-testid='page-title'>
-            Natural Resources Conservation Service
+            {t('header.nrcs')}
           </h4>
-          <p>U.S DEPARTMENT OF AGRICULTURE</p>
+          <p>{t('header.usda')}</p>
         </div>
       </div>
     </header>
@@ -30,7 +32,7 @@ const Header = () => {
     <div className='navigation-bar'>
       <img className='nrcsLogo' src='images/nrcs_logo.png' alt='NRCS Logo' />
       <Link to='/' className='usa-link margin-left-05'>
-        Home
+        {t('header.home')}
       </Link>
     </div>
   );

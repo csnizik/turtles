@@ -5,9 +5,13 @@
 }
 
 .search-by-location-section {
+  margin-bottom: 2em;
   .location-search-header {
     margin-bottom: 0.5rem;
+    color: $nrcs-dark;
     font-weight: $medium-weight;
+    font-size: 17px;
+    line-height: 1.3;
   }
   .side-by-side {
     display: flex;

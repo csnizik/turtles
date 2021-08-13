@@ -1,8 +1,11 @@
-export const searchOptionMap: any = {
-  locationTab: { id: 0, displayName: 'Location' },
-  resourceConcernTab: { id: 1, displayName: 'Resource Concerns' },
-  conservationPracticesTab: { id: 2, displayName: 'Conservation Practices' },
-  projectsTab: { id: 3, displayName: 'Projects & Initiatives' },
+export interface ISearchOptionMap {
+  [key: string]: any;
+}
+export const searchOptionMap: ISearchOptionMap = {
+  Location: { id: 0, displayName: 'Location' },
+  ResourceConcerns: { id: 1, displayName: 'Resource Concerns' },
+  ConservationPractices: { id: 2, displayName: 'Conservation Practices' },
+  ProjectsAndInitiatives: { id: 3, displayName: 'Projects And Initiatives' },
 };
 
 export const exploreBoxData: any = [
@@ -24,9 +27,47 @@ export const exploreBoxData: any = [
     boxHeading: 'Explore Projects & Initiatives',
     boxDescription:
       'NRCS sponsored Projects & Initatives definition lorum ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula diam et diam tempor fringilla.',
-    boxButton: 'Projects & Initiatives',
+    boxButton: 'Projects And Initiatives',
   },
 ];
+
+export const ConservationPractice: any = [
+  {
+    id: 0,
+    practiceCategory: "Cropland Soil Quality",
+    practice: "Access Control",
+  },
+  {
+    id: 1,
+    practiceCategory: "Grazing Land Conservation",
+    practice: "Brush Management",
+  },
+  {
+    id: 2,
+    practiceCategory: "Water Quality",
+    practice: "Composting Facility",
+  },
+  {
+    id: 3,
+    practiceCategory: "Forest Land Conservation",
+    practice: "Conservation Cover",
+  },
+  {
+    id: 4,
+    practiceCategory: "Wetlands",
+    practice: "Cover Crop",
+  },
+  {
+    id: 5,
+    practiceCategory: "Irrigition Efficiency",
+    practice: "Critical Area Planting",
+  },
+  {
+    id: 6,
+    practiceCategory: "Fish and Wildlife Habitat",
+    practice: "Diversion",
+  },
+]
 
 export const ConservationPracticeStandard: any = [
   {

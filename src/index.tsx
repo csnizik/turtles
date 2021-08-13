@@ -1,27 +1,44 @@
+import { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './containers/Home';
-import CustomSearchContainer from './containers/CustomSearchContainer';
-import LocationContainer from './containers/LocationContainer';
-import Header from './components/Header';
+import { Provider } from 'react-redux';
+import store from './Redux/store';
+import Spinner from './components/Spinner/Spinner';
+
 import './stylesheets/app.scss';
+import './i18n';
 import 'nrcs-design-system/scss/nrcs-design-system.scss';
+
+const Home = lazy(() => import('./containers/Home'));
+const Header = lazy(() => import('./components/Header/Header'));
+const CustomSearchContainer = lazy(
+  () => import('./containers/CustomSearchContainer/CustomSearchContainer')
+);
+const LocationContainer = lazy(() => import('./containers/LocationContainer'));
 
 const App = () => (
   <Router>
-    <Header />
-    <Switch>
-      <Route exact path='/'>
-        <Home />
-      </Route>
-      <Route path='/search'>
-        <CustomSearchContainer />
-      </Route>
-      <Route path='/location'>
-        <LocationContainer />
-      </Route>
-    </Switch>
+    <Suspense fallback={<Spinner />}>
+      <Header />
+      <Switch>
+        <Route exact path='/'>
+          <Home />
+        </Route>
+        <Route path='/search'>
+          <CustomSearchContainer />
+        </Route>
+        <Route path='/:name'>
+          <LocationContainer />
+        </Route>
+      </Switch>
+    </Suspense>
   </Router>
 );
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const rootNode = document.getElementById('root');
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  rootNode
+);

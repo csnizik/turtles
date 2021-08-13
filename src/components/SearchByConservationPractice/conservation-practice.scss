@@ -1,0 +1,23 @@
+@import '../../stylesheets/variables';
+
+.practice-box-wrapper {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2em;
+  text-align: left;
+  width: 50%;
+  border: 2px solid $philippine-silver;
+  border-radius: 0.5em;
+  background-color: $light-grey;
+  padding: 0 2em 0 2em;
+  margin: 2em 2em 1em 0;
+
+  .usa-label {
+    font-weight: 500;
+    color: black;
+  }
+
+  .usa-select {
+    margin: 0 0 1em 0;
+  }
+}

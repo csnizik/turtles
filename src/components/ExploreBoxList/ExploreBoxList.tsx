@@ -8,7 +8,6 @@ interface IExploreBoxData {
   boxDescription: string;
   boxButton: string;
 }
-
 const ExploreBoxList = () => {
   return exploreBoxData.map((item: IExploreBoxData) => (
     <div key={item.id} className='full-grid'>
