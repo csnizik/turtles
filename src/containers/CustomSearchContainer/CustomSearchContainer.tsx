@@ -54,7 +54,7 @@ const CustomSearchContainer = () => {
   };
 
   return (
-    <div className='custom-search'>
+    <div data-testid='custom-search-container' className='custom-search'>
       <div className='custom-search-header'>
         <h1>{t('search-page.advanced-search')}</h1>
         <p>{t('search-page.intro')}</p>
@@ -74,6 +74,7 @@ const CustomSearchContainer = () => {
         <SearchByResourceConcern />
       </div>
       <CustomButton
+        ariaLabel='search'
         additionalClassName='margin-top-3 margin-bottom-3'
         onClick={handleSearch}
       >
