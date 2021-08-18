@@ -14,7 +14,7 @@
   border: 2px solid $light-grey-5;
   border-radius: 0.5em;
   padding: 2em;
-  background-color: $lighter-grey;
+  background-color: $white;
   margin: 1rem 2.75rem;
   .location-search-grid {
     display: grid;
@@ -25,13 +25,20 @@
   .location-label-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 0fr));
+<<<<<<< HEAD
+=======
+    label {
+      font-size: 17px;
+      font-weight: $medium-weight;
+      color: $nrcs-dark;
+    }
+>>>>>>> fdf4be4845ec579fa68c98113997e53401969bb9
   }
   .p-style {
     margin: 0px;
     width: 50%;
   }
   .usa-button {
-    margin-top: 0.45rem;
     width: 65%;
   }
   .usa-select {

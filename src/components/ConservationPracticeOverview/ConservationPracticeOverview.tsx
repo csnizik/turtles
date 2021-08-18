@@ -26,12 +26,12 @@ const ConservationPracticeOverview = () => {
                 </div>
               );
             })} */}
-            <div key={data[1].practiceId} className='full-component'>
+            <div key={data[19].practiceId} className='full-component'>
               <div className='overview'>
-                <h4>{`Diversion ${data[1].practiceCode}`}</h4>
-                <p>{data[1].practiceOverview}</p>
+                <h4>Diversion 362</h4>
+                <p>{data[19].practiceOverview}</p>
                 <h4>Practice Information</h4>
-                <p>{data[1].practiceInfo}</p>
+                <p>{data[19].practiceInfo}</p>
               </div>
               <img alt='Practice' src={image} />
             </div>

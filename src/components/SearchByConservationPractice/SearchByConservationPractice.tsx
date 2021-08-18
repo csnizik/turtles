@@ -19,26 +19,33 @@ const SearchByConservationPractice = () => {
     useState<IConservationPractice>(intialState);
   const [secondState, setSecondState] =
     useState<IConservationPractice>(intialState);
+  const [selectedPractice, setSelectedPractice] = useState(-1);
 
   useEffect(() => {
     setPracticeState({ ...practiceState, practice: ConservationPractice });
     setSecondState({ ...secondState, practice: ConservationPractice });
-  }, []);
+  }, [selectedPractice]);
 
   const handleChange = (e) => {
-    if (e.target.value !== '') {
-      setSecondState({ practice: ConservationPractice, disabled: false });
+    const practiceVal = e.target.value;
+    if (practiceVal !== '') {
+      setSelectedPractice(practiceVal);
+      if (selectedPractice >= 0 && practiceVal !== selectedPractice) {
+        setSecondState({ ...intialState, disabled: false });
+      } else {
+        setSecondState({ practice: ConservationPractice, disabled: false });
+      }
     } else {
       setSecondState({ ...intialState });
     }
   };
 
   return (
-    <div className='box-wrapper'>
-      <div className='search-by-location-section'>
+    <div className='practice-box-wrapper'>
+      <div className='search-by-practice-section'>
         <label
-          className='usa-label location-search-header'
-          htmlFor='locationValue'
+          className='usa-label practice-label'
+          htmlFor='practiceCategoryValue'
         >
           {t('search-by-conservation-practice.heading')}
         </label>
@@ -48,19 +55,14 @@ const SearchByConservationPractice = () => {
             className='usa-select'
             id='practiceCategoryValue'
             name='practiceCategorySelect'
-            placeholder='- Select practice category -'
             onChange={handleChange}
           >
             <option value=''>All practices (default)</option>
             {practiceState.practice.length
-              ? practiceState.practice.map((item: any) => {
-                  console.log(item);
+              ? practiceState.practice.map((practice: any) => {
                   return (
-                    <option
-                      key={item.practiceCategory}
-                      value={item.practiceCategory}
-                    >
-                      {item.practiceCategory}
+                    <option key={practice.practiceCategory} value={practice.id}>
+                      {practice.practiceCategory}
                     </option>
                   );
                 })
@@ -72,11 +74,11 @@ const SearchByConservationPractice = () => {
           <p>{t('search-by-conservation-practice.second-label-name')}</p>
           <select
             className='usa-select'
-            id='practiceValue'
-            name='practiceSelect'
+            id='specificPracticeValue'
+            name='specificPracticeSelect'
             disabled={secondState.disabled}
           >
-            <option value=''>- Select practice</option>
+            <option value=''>- Select practice -</option>
             {secondState.practice.length
               ? secondState.practice.map((item: any) => {
                   return (

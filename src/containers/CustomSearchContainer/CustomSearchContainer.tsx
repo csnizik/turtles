@@ -4,12 +4,18 @@ import { getRequest } from '../../common/util/AxiosUtil';
 import './custom-search.scss';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
+import SearchByResourceConcern from '../../components/SearchByResourceConcern';
 import LandUseSection from '../../components/LandUseSection';
 import SearchByConservationPractice from '../../components/SearchByConservationPractice';
 
-const defaultSearchInput: any = {
-  stateSelect: '',
-  countySelect: '',
+interface ISearchInput {
+  stateSelect: number;
+  countySelect: number;
+}
+
+const defaultSearchInput: ISearchInput = {
+  stateSelect: -1,
+  countySelect: -1,
 };
 
 const CustomSearchContainer = () => {
@@ -40,12 +46,15 @@ const CustomSearchContainer = () => {
     const { name, value } = e.target;
     if (name === 'stateSelect' && value) {
       fetchCountyListPerStateCode(value);
+      if (searchInput.stateSelect >= 0 && searchInput.stateSelect !== value) {
+        setCountyList([]);
+      }
     }
     setSearchInput({ ...searchInput, [name]: value });
   };
 
   return (
-    <div className='custom-search'>
+    <div data-testid='custom-search-container' className='custom-search'>
       <div className='custom-search-header'>
         <h1>{t('search-page.advanced-search')}</h1>
         <p>{t('search-page.intro')}</p>
@@ -57,9 +66,18 @@ const CustomSearchContainer = () => {
         countyList={countyList}
       />
       <LandUseSection />
-      <p>{t('search-by-conservation-practice.description')}</p>
-      <SearchByConservationPractice />
-      <CustomButton additionalClassName='margin-top-3' onClick={handleSearch}>
+      <p className='practice-description'>
+        {t('search-by-conservation-practice.description')}
+      </p>
+      <div className='bottom-container'>
+        <SearchByConservationPractice />
+        <SearchByResourceConcern />
+      </div>
+      <CustomButton
+        ariaLabel='search'
+        additionalClassName='margin-top-3 margin-bottom-3'
+        onClick={handleSearch}
+      >
         {t('actions.search')}
       </CustomButton>
     </div>

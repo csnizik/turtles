@@ -17,4 +17,17 @@
       border-top: solid $dark-grey 1px;
     }
   }
+
+  .practice-description {
+    font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial,
+      sans-serif;
+    color: $nrcs-dark;
+    font-weight: $medium-weight;
+    font-size: 17px;
+    line-height: 1.3;
+  }
+  .bottom-container {
+    display: flex;
+    justify-content: space-between;
+  }
 }
