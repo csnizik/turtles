@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import CustomButton from '../CustomButton';
 import { ConservationPractice } from '../../common/typedconstants.common';
 import { IConservationPracticeDropdown } from '../../common/types';
 import './find-by-practice.scss';
+
+const homePagePracticeImage: string =
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5B-LQ-QdFXKeJgU9W0wxxffcnPg3FS8ox4Q&usqp=CAU';
 
 const intialState = {
   practice: [],
@@ -17,6 +21,10 @@ const FindByPractices = () => {
   const [secondState, setSecondState] =
     useState<IConservationPracticeDropdown>(intialState);
   const [selectedPractice, setSelectedPractice] = useState(-1);
+
+  const handleFindPractices = () => {
+    // TODO: Figure out where 'Find Practices' redirects to...
+  };
 
   useEffect(() => {
     setPracticeState({ ...practiceState, practice: ConservationPractice });
@@ -86,12 +94,12 @@ const FindByPractices = () => {
               : null}
           </select>
         </div>
+        <CustomButton onClick={handleFindPractices}>
+          {t('find-by-practice.find-practices')}
+        </CustomButton>
       </div>
-      <div className='grid-col-4'>
-        <img
-          src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5B-LQ-QdFXKeJgU9W0wxxffcnPg3FS8ox4Q&usqp=CAU'
-          alt='Soil'
-        />
+      <div className='grid-col-4 grid-offset-1'>
+        <img src={homePagePracticeImage} alt='Soil' />
       </div>
     </div>
   );

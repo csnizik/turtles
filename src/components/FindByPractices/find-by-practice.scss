@@ -28,6 +28,15 @@
     }
   }
 
+  .grid-col-7 {
+    .usa-button:first-of-type {
+      color: $usda-blue;
+      background: $white;
+      border: 0.2rem solid $usda-blue;
+      border-radius: 0.25rem;
+    }
+  }
+
   .grid-col-4 {
     img:first-of-type {
       float: right;

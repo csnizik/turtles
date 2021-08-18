@@ -7,11 +7,14 @@
 
 /** Location search grid **/
 .location-search-container {
-  padding: 2rem;
+  padding: 2rem 2rem 2rem 0rem;
   background-color: $white;
   margin: 1rem 2.75rem;
   .grid-col-8 {
     padding: 1rem 0rem 0rem 2rem;
+    p.p-style {
+      margin-bottom: 0.25rem;
+    }
   }
   .state-county-grid {
     display: grid;

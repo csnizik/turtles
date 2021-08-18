@@ -33,7 +33,7 @@ const Home = () => {
       <main data-testid='home-content'>
         <div className='grid-row'>
           <div className='grid-col-6'>
-            <p className='margin-left-6 margin-top-3'>{t('home-page.intro')}</p>
+            <p className='margin-left-4 margin-top-3'>{t('home-page.intro')}</p>
           </div>
           <div className='grid-col-4 grid-offset-2'>
             <CustomButton
