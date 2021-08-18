@@ -20,7 +20,9 @@ const SearchByLocation = ({
         </label>
         <div className='side-by-side'>
           <div className='desktop:grid-col-4'>
-            <p>{t('location-search.labels.select-state')}</p>
+            <label htmlFor='stateValue'>
+              {t('location-search.labels.select-state')}
+            </label>
             <select
               className='usa-select'
               id='stateValue'
@@ -41,7 +43,9 @@ const SearchByLocation = ({
           </div>
 
           <div className='desktop:grid-col-4'>
-            <p>{t('location-search.labels.select-county')}</p>
+            <label htmlFor='countyValue'>
+              {t('location-search.labels.select-county')}
+            </label>
             <select
               className='usa-select'
               id='countyValue'

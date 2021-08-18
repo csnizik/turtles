@@ -56,7 +56,7 @@ const CustomSearchContainer = () => {
   return (
     <div data-testid='custom-search-container' className='custom-search'>
       <div className='custom-search-header'>
-        <h1>{t('search-page.advanced-search')}</h1>
+        <h1>{t('search-page.quick-search')}</h1>
         <p>{t('search-page.intro')}</p>
       </div>
       <SearchByLocation

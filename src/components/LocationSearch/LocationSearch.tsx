@@ -2,6 +2,7 @@ import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getRequest } from '../../common/util/AxiosUtil';
+import { IStateDropdownOption } from '../../common/types';
 import './location-search.scss';
 import CustomButton from '../CustomButton';
 
@@ -12,7 +13,7 @@ const LocationSearch = ({ statesList }: any) => {
     history.push('Location');
   };
   const [countyList, setCountyList]: any = useState([]);
-  const [selectedState, setSelectedState]: any = useState(-1);
+  const [selectedState, setSelectedState]: any = useState<number>(-1);
   const [selectedCounty, setSelectedCounty]: any = useState(-1);
   async function fetchCountyListPerStateCode(stateCode: any) {
     const countyResponse = await getRequest(`/counties/${stateCode}`);
@@ -33,9 +34,12 @@ const LocationSearch = ({ statesList }: any) => {
   };
 
   return (
-    <div className='location-search-container'>
-      <div className='location-search-section'>
-        <h3>{t('location-search.explore-by-location')}</h3>
+    <div className='grid-row location-search-container'>
+      <div className='grid-col-4'>
+        <img src='images/homePageUSMap.png' alt='Map of the United States' />
+      </div>
+      <div className='grid-col-8'>
+        <h2>{t('location-search.explore-by-location')}</h2>
         <p className='p-style'>{t('location-search.introductory-paragraph')}</p>
         <div className='location-label-grid'>
           <label className='usa-label' htmlFor='locationOptions'>
@@ -45,7 +49,7 @@ const LocationSearch = ({ statesList }: any) => {
             {t('location-search.labels.select-county')}
           </label>
         </div>
-        <div className='location-search-grid'>
+        <div className='state-county-grid'>
           <select
             className='usa-select'
             name='locationOptions'
@@ -53,7 +57,7 @@ const LocationSearch = ({ statesList }: any) => {
           >
             <option value={-1}>{t('location-search.national')}</option>
             {statesList.length
-              ? statesList.map((state: any) => {
+              ? statesList.map((state: IStateDropdownOption) => {
                   return (
                     <option key={state.stateCode} value={state.stateCode}>
                       {state.stateNameDisplay}
@@ -79,10 +83,10 @@ const LocationSearch = ({ statesList }: any) => {
                 })
               : null}
           </select>
-          <CustomButton onClick={handleClick}>
-            {t('location-search.explore-location')}
-          </CustomButton>
         </div>
+        <CustomButton onClick={handleClick}>
+          {t('location-search.explore-location')}
+        </CustomButton>
       </div>
     </div>
   );

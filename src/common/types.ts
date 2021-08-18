@@ -17,4 +17,13 @@ export interface IConservationPractice {
   practiceInfo: string;
 }
 
+export interface IConservationPracticeDropdown {
+  practice: Array<any>;
+  disabled: boolean;
+}
 
+export interface IStateDropdownOption {
+  stateCode: string;
+  stateAbbreviation: string;
+  stateNameDisplay: string;
+}
