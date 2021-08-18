@@ -25,14 +25,11 @@
   .location-label-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 0fr));
-<<<<<<< HEAD
-=======
     label {
       font-size: 17px;
       font-weight: $medium-weight;
       color: $nrcs-dark;
     }
->>>>>>> fdf4be4845ec579fa68c98113997e53401969bb9
   }
   .p-style {
     margin: 0px;

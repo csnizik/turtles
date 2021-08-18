@@ -1,4 +1,6 @@
 import './land-use-section.scss';
+import { Tooltip } from 'reactstrap';
+import { useState } from 'react';
 
 interface ILandUseData {
   id: number;
@@ -6,14 +8,23 @@ interface ILandUseData {
 }
 
 const exampleLandUseData: ILandUseData[] = [
-  { id: 0, label: 'Crop' },
-  { id: 1, label: 'Forest' },
-  { id: 2, label: 'Farm and Other Rural' },
-  { id: 3, label: 'Range' },
+  { id: 0, label: 'Cropland' },
+  { id: 1, label: 'Rangeland' },
+  { id: 2, label: 'Developed Land / Urban Ag' },
+  { id: 3, label: 'Forestland' },
   { id: 4, label: 'Pasture' },
+  { id: 5, label: 'Other Farm and Rural Land' },
 ];
 
 const LandUseSection = () => {
+  const [tooltipOpen, setTooltipOpen] = useState([false]);
+  const toggle = (event) => {
+    const index = parseInt(event.target.id.split('tooltip')[1], 10);
+    const newTipOpen = [...tooltipOpen];
+    newTipOpen[index] = !newTipOpen[index];
+    setTooltipOpen(newTipOpen);
+  };
+
   return (
     <fieldset className='usa-fieldset'>
       <legend className='usa-legend'>Filter By Land Use</legend>
@@ -35,6 +46,20 @@ const LandUseSection = () => {
                 >
                   {landType.label}
                 </label>
+                <i
+                  className='fas fa-info-circle'
+                  aria-hidden='true'
+                  id={`tooltip${landType.id}`}
+                />
+
+                <Tooltip
+                  placement='right'
+                  isOpen={tooltipOpen[landType.id]}
+                  target={`tooltip${landType.id}`}
+                  toggle={toggle}
+                >
+                  Hello World
+                </Tooltip>
               </div>
             );
           })}
