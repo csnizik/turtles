@@ -21,6 +21,7 @@
     }
   },
   "rules": {
+    "spaced-comment": "off",
     "arrow-body-style": "off",
     "import/extensions": "off",
     "linebreak-style": "off",

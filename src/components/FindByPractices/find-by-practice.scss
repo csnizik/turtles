@@ -1,0 +1,38 @@
+@import '../../stylesheets/variables';
+
+.find-practice-container {
+  padding: 2rem;
+  background-color: $light-grey-205;
+  .practice-label-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    label {
+      font-size: 1.063rem;
+      font-weight: $medium-weight;
+      color: $nrcs-dark;
+    }
+    label:nth-of-type(2) {
+      padding-left: 1rem;
+    }
+  }
+  .practice-select-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+    select {
+      margin: 0rem 0rem 2rem 0rem;
+      align-self: center;
+      &:disabled {
+        background-color: $medium-darkgrey;
+      }
+    }
+  }
+
+  .grid-col-4 {
+    img:first-of-type {
+      float: right;
+      height: 24rem;
+      width: 32rem;
+    }
+  }
+}

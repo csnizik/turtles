@@ -2,10 +2,10 @@ import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getRequest } from '../../common/util/AxiosUtil';
-import ExploreBoxList from '../../components/ExploreBoxList';
 import CustomButton from '../../components/CustomButton';
 import LocationSearch from '../../components/LocationSearch';
-import CustomResourceIssueList from '../../components/CustomResourceIssueList';
+import FindByPractices from '../../components/FindByPractices';
+import { IStateDropdownOption } from '../../common/types';
 import './home.scss';
 
 const Home = () => {
@@ -15,7 +15,7 @@ const Home = () => {
     history.push('search');
   };
 
-  const [stateList, setStateList]: any = useState([]);
+  const [stateList, setStateList] = useState<IStateDropdownOption[]>([]);
 
   useEffect(() => {
     async function fetchStateList() {
@@ -40,18 +40,12 @@ const Home = () => {
               additionalClassName='margin-top-2 margin-right-4'
               onClick={handleCustomSearch}
             >
-              {t('search-page.advanced-search')}
+              {t('search-page.quick-search')}
             </CustomButton>
           </div>
         </div>
-
-        <div className='explore-box-grid'>
-          <LocationSearch statesList={stateList} />
-          <CustomResourceIssueList />
-          <div className='explore-box'>
-            <ExploreBoxList />
-          </div>
-        </div>
+        <LocationSearch statesList={stateList} />
+        <FindByPractices />
       </main>
     </div>
   );
