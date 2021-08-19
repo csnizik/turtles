@@ -12,4 +12,12 @@
     grid-template-columns: 20rem 20rem 20rem;
     gap: 2em;
   }
+  .usa-checkbox {
+    display: flex;
+    margin: 0rem 0rem 0rem -2.1rem;
+    i {
+      margin: 0.5rem 0rem 0rem 0.5rem;
+      align-self: center;
+    }
+  }
 }
