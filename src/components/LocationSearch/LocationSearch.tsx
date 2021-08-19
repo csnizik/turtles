@@ -42,17 +42,18 @@ const LocationSearch = ({ statesList }: any) => {
         <h2>{t('location-search.explore-by-location')}</h2>
         <p className='p-style'>{t('location-search.introductory-paragraph')}</p>
         <div className='location-label-grid'>
-          <label className='usa-label' htmlFor='locationOptions'>
+          <label className='usa-label' htmlFor='stateSelect'>
             {t('location-search.labels.select-state')}
           </label>
-          <label className='usa-label' htmlFor='locationOptions'>
+          <label className='usa-label' htmlFor='countySelect'>
             {t('location-search.labels.select-county')}
           </label>
         </div>
         <div className='state-county-grid'>
           <select
             className='usa-select'
-            name='locationOptions'
+            id='stateSelect'
+            name='stateOptions'
             onChange={handleSelectState}
           >
             <option value={-1}>{t('location-search.national')}</option>
@@ -68,7 +69,8 @@ const LocationSearch = ({ statesList }: any) => {
           </select>
           <select
             className='usa-select'
-            name='locationOptions'
+            id='countySelect'
+            name='countyOptions'
             disabled={!countyList.length}
             onChange={handleSelectCounty}
           >
