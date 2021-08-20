@@ -1,0 +1,10 @@
+@import '../../stylesheets/variables';
+
+.results-page {
+  .list-group:first-of-type {
+    display: flex;
+    .list-group-item {
+      height: 4rem;
+    }
+  }
+}
