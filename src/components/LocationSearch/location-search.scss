@@ -1,25 +1,26 @@
 @import '../../stylesheets/variables';
 
-.box-style {
-  background-color: $sfi-white;
-  padding: 2rem;
-}
-
 /** Location search grid **/
 .location-search-container {
-  padding: 2rem 2rem 2rem 0rem;
+  padding: 2rem 2rem 4rem 0rem;
   background-color: $white;
-  margin: 1rem 2.75rem;
-  .grid-col-8 {
-    padding: 1rem 0rem 0rem 2rem;
+  margin: 1rem 2.25rem;
+  .img-row,
+  .content-row {
+    margin: 2.5rem 0rem 0rem 0rem;
+  }
+
+  .content-row {
+    margin: 2.5rem 0rem 0rem 3.5rem;
     p.p-style {
       margin-bottom: 0.25rem;
     }
   }
+
   .state-county-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 2rem;
+    gap: 1.875rem;
     select {
       margin: 0rem 0rem 2rem 0rem;
       align-self: center;
@@ -43,6 +44,31 @@
   .usa-select {
     &:disabled {
       background-color: $medium-darkgrey;
+    }
+  }
+}
+
+@media only screen and (max-width: $extra-extra-large-screen) {
+  .location-search-container {
+    div:first-of-type {
+      margin-top: 2rem;
+    }
+  }
+}
+
+@media only screen and (max-width: $large-screen) {
+  .location-search-container {
+    div:first-of-type {
+      display: contents;
+      img {
+        margin-bottom: 2rem;
+      }
+    }
+    .usa-button {
+      width: 60%;
+    }
+    .state-county-grid {
+      grid-template-columns: repeat(1, 1fr);
     }
   }
 }

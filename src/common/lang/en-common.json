@@ -38,13 +38,13 @@
     "common-resource-issues": "Common Resource Issues"
   },
   "search-by-conservation-practice": {
-    "heading": "Conservation Practice",
-    "description": "Search by Conservation Practice or Resource Concern",
+    "heading": "by Conservation Practice",
+    "description": "Search for Conservation Practices",
     "first-label-name": "Select a practice category",
     "second-label-name": "Select a practice (optional)"
   },
   "search-by-resource-concern": {
-    "heading": "Resource Concerns Related to Practices",
+    "heading": "by Resource Concerns Treated",
     "first-label-name": "Select a resource category",
     "second-label-name": "Select a resource concern (optional)"
   }

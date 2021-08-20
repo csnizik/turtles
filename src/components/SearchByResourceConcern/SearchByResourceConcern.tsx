@@ -2,8 +2,12 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getRequest } from '../../common/util/AxiosUtil';
 import './search-by-resource-concern.scss';
+import { disableState, enableState } from '../../Redux/Slice/disableSlice';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 
 const SearchByResourceConcern = () => {
+  const dispatchRequest = useAppDispatch();
+  const status = useAppSelector((state) => state.disableSlice.disablePractice);
   const { t } = useTranslation();
   const [resourceConcerns, setResourceConcerns] = useState<any[]>([]);
   const [resourceConcernsSubgroups, setResourceConcernsSubgroups] = useState<
@@ -45,8 +49,10 @@ const SearchByResourceConcern = () => {
     setSelectedResourceCategory(value);
     if (e.target.value !== '') {
       getResourceConcernsSubgroups(value);
+      dispatchRequest(disableState());
     } else {
       setResourceConcernsSubgroups([]);
+      dispatchRequest(enableState());
     }
   };
 
@@ -69,6 +75,7 @@ const SearchByResourceConcern = () => {
             className='usa-select'
             id='resourceConcernCategoryValue'
             name='resourceConcernCategorySelect'
+            disabled={status}
             onChange={handleChange}
             value={selectedResourceCategory}
           >

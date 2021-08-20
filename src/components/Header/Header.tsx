@@ -6,7 +6,10 @@ import './header.scss';
 const Header = () => {
   const { t } = useTranslation();
   const renderNRCSHeaderSection: Function = () => (
-    <header>
+    <header
+      className='usa-banner-header'
+      aria-label='Official United States Government Website Disclaimer'
+    >
       <div className='header-container row-flex-start'>
         <img
           className='flex-align-self-center'
@@ -14,7 +17,9 @@ const Header = () => {
           alt='USA Flag Logo'
         />
         {`${t('header.disclaimer')} `}
-        <a href='/#'>{t('header.here-how-you-know')}</a>
+        <a href='/#' aria-expanded='false' aria-controls='gov-banner'>
+          {t('header.here-how-you-know')}
+        </a>
       </div>
       <div className='usda-header row-flex-start'>
         <img src='images/usda_logo_color.png' alt='USDA LOGO' />
