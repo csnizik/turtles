@@ -3,32 +3,8 @@
 .find-practice-container {
   padding: 2rem;
   background-color: $light-grey-205;
-  .practice-label-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    label {
-      font-size: 1.063rem;
-      font-weight: $medium-weight;
-      color: $nrcs-dark;
-    }
-    label:nth-of-type(2) {
-      padding-left: 1rem;
-    }
-  }
-  .practice-select-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 2rem;
-    select {
-      margin: 0rem 0rem 2rem 0rem;
-      align-self: center;
-      &:disabled {
-        background-color: $medium-darkgrey;
-      }
-    }
-  }
 
-  .grid-col-7 {
+  div:first-of-type {
     .usa-button:first-of-type {
       color: $usda-blue;
       background: $white;
@@ -37,11 +13,56 @@
     }
   }
 
-  .grid-col-4 {
+  .content-row {
+    margin-top: 4rem;
+    .practice-label-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      label {
+        font-size: 1.063rem;
+        font-weight: $medium-weight;
+        color: $nrcs-dark;
+      }
+      label:nth-of-type(2) {
+        padding-left: 1rem;
+      }
+    }
+    .practice-select-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 2rem;
+      select {
+        margin: 0rem 0rem 2rem 0rem;
+        align-self: center;
+        &:disabled {
+          background-color: $medium-darkgrey;
+        }
+      }
+    }
+  }
+  .practice-image {
     img:first-of-type {
+      margin-top: 3rem;
       float: right;
       height: 24rem;
       width: 32rem;
+    }
+  }
+}
+
+/** Media Queries **/
+@media only screen and (max-width: $large-screen) {
+  .find-practice-container {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    .usa-button {
+      width: 60%;
+    }
+    .practice-image {
+      align-items: center;
+      img {
+        margin-bottom: 2rem;
+      }
     }
   }
 }
