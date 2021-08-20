@@ -9,14 +9,6 @@ interface ILandUseData {
 }
 
 const exampleLandUseData: ILandUseData[] = [
-<<<<<<< HEAD
-  { id: 0, label: 'Cropland' },
-  { id: 1, label: 'Rangeland' },
-  { id: 2, label: 'Developed Land / Urban Ag' },
-  { id: 3, label: 'Forestland' },
-  { id: 4, label: 'Pasture' },
-  { id: 5, label: 'Other Farm and Rural Land' },
-=======
   {
     id: 0,
     label: 'Cropland',
@@ -50,17 +42,11 @@ const exampleLandUseData: ILandUseData[] = [
     label: 'Other Farm and Rural Land',
     description: 'Sample description of Other Farm and Rural land.',
   },
->>>>>>> 5643bed5db38c2c1940ae634b9e97c4cb6b92308
 ];
 
 const LandUseSection = () => {
   const [tooltipOpen, setTooltipOpen] = useState([false]);
-<<<<<<< HEAD
-  const toggle = (event) => {
-    const index = parseInt(event.target.id.split('tooltip')[1], 10);
-=======
   const toggleTooltip = (index) => {
->>>>>>> 5643bed5db38c2c1940ae634b9e97c4cb6b92308
     const newTipOpen = [...tooltipOpen];
     newTipOpen[index] = !newTipOpen[index];
     setTooltipOpen(newTipOpen);
@@ -97,15 +83,9 @@ const LandUseSection = () => {
                   placement='right'
                   isOpen={tooltipOpen[landType.id]}
                   target={`tooltip${landType.id}`}
-<<<<<<< HEAD
-                  toggle={toggle}
-                >
-                  Hello World
-=======
                   toggle={() => toggleTooltip(landType.id)}
                 >
                   {landType.description}
->>>>>>> 5643bed5db38c2c1940ae634b9e97c4cb6b92308
                 </Tooltip>
               </div>
             );
