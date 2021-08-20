@@ -3,6 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { ConservationPractice } from '../../common/typedconstants.common';
 import { IConservationPracticeDropdown } from '../../common/types';
 import './conservation-practice.scss';
+import {
+  disableSecondState,
+  enableSecondState,
+} from '../../Redux/Slice/disableSlice';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 
 const intialState = {
   practice: [],
@@ -10,6 +15,8 @@ const intialState = {
 };
 
 const SearchByConservationPractice = () => {
+  const dispatch = useAppDispatch();
+  const result = useAppSelector((State) => State.disableSlice.disableResource);
   const { t } = useTranslation();
   const [practiceState, setPracticeState] =
     useState<IConservationPracticeDropdown>(intialState);
@@ -25,6 +32,7 @@ const SearchByConservationPractice = () => {
   const handleChange = (e) => {
     const practiceVal = e.target.value;
     if (practiceVal !== '') {
+      dispatch(disableSecondState());
       setSelectedPractice(practiceVal);
       if (selectedPractice >= 0 && practiceVal !== selectedPractice) {
         setSecondState({ ...intialState, disabled: false });
@@ -33,6 +41,7 @@ const SearchByConservationPractice = () => {
       }
     } else {
       setSecondState({ ...intialState });
+      dispatch(enableSecondState());
     }
   };
 
@@ -51,6 +60,7 @@ const SearchByConservationPractice = () => {
             className='usa-select'
             id='practiceCategoryValue'
             name='practiceCategorySelect'
+            disabled={result}
             onChange={handleChange}
           >
             <option value=''>All practices (default)</option>
