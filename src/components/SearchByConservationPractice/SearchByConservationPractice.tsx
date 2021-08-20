@@ -26,7 +26,8 @@ const SearchByConservationPractice = () => {
   }, []);
 
   const handleChange = (e) => {
-    if (e.target.value !== '') {
+    const { value } = e.target;
+    if (value !== '') {
       setSecondState({ practice: ConservationPractice, disabled: false });
     } else {
       setSecondState({ ...intialState });
@@ -54,7 +55,6 @@ const SearchByConservationPractice = () => {
             <option value=''>All practices (default)</option>
             {practiceState.practice.length
               ? practiceState.practice.map((item: any) => {
-                  console.log(item);
                   return (
                     <option
                       key={item.practiceCategory}

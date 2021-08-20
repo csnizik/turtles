@@ -2,12 +2,15 @@ import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getRequest } from '../../common/util/AxiosUtil';
+import { useGetCountyListQuery } from '../../Redux/services/api';
 import './location-search.scss';
 import CustomButton from '../CustomButton';
 
 const LocationSearch = ({ statesList }: any) => {
   const history: any = useHistory();
   const { t } = useTranslation();
+  // const { data, error, isLoading, isSuccess, isError } =
+  // useGetCountyListQuery();
   const handleClick = () => {
     history.push('search');
   };

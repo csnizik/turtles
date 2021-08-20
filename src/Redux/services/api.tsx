@@ -3,6 +3,7 @@ import { baseURL } from '../../common/util/AxiosUtil';
 import {
   IConservationPractice,
   IResourceConcernList,
+  ICountyList,
 } from '../../common/types';
 
 export const api = createApi({
@@ -15,7 +16,14 @@ export const api = createApi({
     getPractices: builder.query<IConservationPractice[], void>({
       query: () => '/nationalOverviews/all',
     }),
+    getCountyList: builder.query<ICountyList[], string>({
+      query: (stateCode) => `/counties/${stateCode}`,
+    }),
   }),
 });
 
-export const { useGetResourcesQuery, useGetPracticesQuery } = api;
+export const {
+  useGetResourcesQuery,
+  useGetPracticesQuery,
+  useGetCountyListQuery,
+} = api;
