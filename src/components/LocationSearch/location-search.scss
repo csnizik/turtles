@@ -2,9 +2,9 @@
 
 /** Location search grid **/
 .location-search-container {
-  padding: 2rem 2rem 4rem 0rem;
+  padding: 2rem 2rem 2rem 0rem;
   background-color: $white;
-  margin: 1rem 2.25rem;
+  margin: 3rem 2.25rem;
   .img-row,
   .content-row {
     margin: 2.5rem 0rem 0rem 0rem;
@@ -12,8 +12,12 @@
 
   .content-row {
     margin: 2.5rem 0rem 0rem 3.5rem;
+    h2.h2-style {
+      font-weight: 900;
+    }
     p.p-style {
       margin-bottom: 0.25rem;
+      font-weight: 700;
     }
   }
 

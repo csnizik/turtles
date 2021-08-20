@@ -39,7 +39,7 @@ const LocationSearch = ({ statesList }: any) => {
         <img src='images/homePageUSMap.png' alt='Map of the United States' />
       </div>
       <div className='tablet:grid-col-7 tablet:grid-offset-1 content-row'>
-        <h2>{t('location-search.explore-by-location')}</h2>
+        <h2 className='h2-style'>{t('location-search.explore-by-location')}</h2>
         <p className='p-style'>{t('location-search.introductory-paragraph')}</p>
         <div className='location-label-grid'>
           <label className='usa-label' htmlFor='stateSelect'>

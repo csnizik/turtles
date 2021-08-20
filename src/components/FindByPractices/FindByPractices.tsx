@@ -47,7 +47,7 @@ const FindByPractices = () => {
   return (
     <div className='grid-row find-practice-container'>
       <div className='tablet:grid-col-7 content-row'>
-        <h2>{t('find-by-practice.heading')}</h2>
+        <h2 className='h2-style'>{t('find-by-practice.heading')}</h2>
         <p className='p-style'>{t('find-by-practice.intro')}</p>
         <div className='practice-label-grid'>
           <label className='usa-label' htmlFor='categoryOptions'>
