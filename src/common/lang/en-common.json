@@ -11,28 +11,41 @@
     "usda": "U.S DEPARTMENT OF AGRICULTURE"
   },
   "home-page": {
-    "intro": "Find information about conservation practices and NRCS projects & initiatives.",
+    "intro": "Know what you're looking for?  Do a quick search and find information fast.",
     "title": "NRCS On the Ground"
   },
+  "find-by-practice": {
+    "find-practices": "Find Practices",
+    "heading": "Find U.S. Conservation Practices",
+    "intro": "A conservation practice is a specific treatment, such as a structural or vegetative measure, or management technique, commonly used to meet specific needs in planning and implementing conservation, for which standards and specifications have been developed."
+  },
   "search-page": {
-    "advanced-search": "Advanced Search",
-    "intro": "Search for information on practice impacts, practice extent, and impacts of practice implementation."
+    "intro": "Search for information on practice impacts, practice extent, and impacts of practice implementation.",
+    "quick-search": "Quick Search"
   },
   "location-search": {
-    "explore-by-location": "Explore by Location",
+    "explore-by-location": "Explore Conservation Activities by Location",
     "explore-location": "Explore Location",
     "national": "National (default)",
-    "introductory-paragraph": "State and county provides lorum ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula diam et diam tempor fringila",
+    "introductory-paragraph": "Find conservation practices and NRCS sponsored projects & initiatives in your location.",
     "labels": {
       "select-state": "Select a state",
-      "select-county": "Select a county (Optional)"
+      "select-county": "Select a county (optional)"
     },
     "search-by-location": "Search by Location"
   },
+  "resource-issues": {
+    "common-resource-issues": "Common Resource Issues"
+  },
   "search-by-conservation-practice": {
-    "heading": "Conservation Practice",
-    "description": "Search by Conservation Practice or Resource Concern",
-    "first-label-name": "Select practice category",
+    "heading": "by Conservation Practice",
+    "description": "Search for Conservation Practices",
+    "first-label-name": "Select a practice category",
     "second-label-name": "Select a practice (optional)"
+  },
+  "search-by-resource-concern": {
+    "heading": "by Resource Concerns Treated",
+    "first-label-name": "Select a resource category",
+    "second-label-name": "Select a resource concern (optional)"
   }
 }

@@ -20,14 +20,16 @@ const SearchByLocation = ({
         </label>
         <div className='side-by-side'>
           <div className='desktop:grid-col-4'>
-            <p>{t('location-search.labels.select-state')}</p>
+            <label htmlFor='stateValue'>
+              {t('location-search.labels.select-state')}
+            </label>
             <select
               className='usa-select'
               id='stateValue'
               name='stateSelect'
               onChange={handleInputChange}
             >
-              <option value=''>{t('location-search.national')}</option>
+              <option value={-1}>{t('location-search.national')}</option>
               {statesList.length
                 ? statesList.map((state: any) => {
                     return (
@@ -41,15 +43,17 @@ const SearchByLocation = ({
           </div>
 
           <div className='desktop:grid-col-4'>
-            <p>{t('location-search.labels.select-county')}</p>
+            <label htmlFor='countyValue'>
+              {t('location-search.labels.select-county')}
+            </label>
             <select
               className='usa-select'
               id='countyValue'
               name='countySelect'
               onChange={handleInputChange}
-              disabled={!searchInput.stateSelect}
+              disabled={searchInput.stateSelect < 0}
             >
-              <option value=''>{t('actions.select')}</option>
+              <option value={-1}>{t('actions.select')}</option>
               {countyList.length
                 ? countyList.map((county: any) => {
                     return (

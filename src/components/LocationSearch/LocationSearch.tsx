@@ -12,10 +12,11 @@ const LocationSearch = ({ statesList }: any) => {
   // const { data, error, isLoading, isSuccess, isError } =
   // useGetCountyListQuery();
   const handleClick = () => {
-    history.push('search');
+    history.push('Location');
   };
   const [countyList, setCountyList]: any = useState([]);
-  const [selectedState, setSelectedState]: any = useState('');
+  const [selectedState, setSelectedState]: any = useState<number>(-1);
+  const [selectedCounty, setSelectedCounty]: any = useState(-1);
   async function fetchCountyListPerStateCode(stateCode: any) {
     const countyResponse = await getRequest(`/counties/${stateCode}`);
     setCountyList(countyResponse.data);
@@ -25,30 +26,41 @@ const LocationSearch = ({ statesList }: any) => {
     const stateVal = event.target.value;
     fetchCountyListPerStateCode(stateVal);
     setSelectedState(stateVal);
+    if (selectedState >= 0 && selectedCounty && selectedState !== stateVal) {
+      setCountyList([]);
+    }
+  };
+
+  const handleSelectCounty = (event: any) => {
+    setSelectedCounty(event.target.value);
   };
 
   return (
-    <div className='location-search-container'>
-      <div className='location-search-section'>
-        <h3>{t('location-search.explore-by-location')}</h3>
+    <div className='grid-row location-search-container'>
+      <div className='grid-col-4'>
+        <img src='images/homePageUSMap.png' alt='Map of the United States' />
+      </div>
+      <div className='grid-col-8'>
+        <h2>{t('location-search.explore-by-location')}</h2>
         <p className='p-style'>{t('location-search.introductory-paragraph')}</p>
         <div className='location-label-grid'>
-          <label className='usa-label' htmlFor='locationOptions'>
+          <label className='usa-label' htmlFor='stateSelect'>
             {t('location-search.labels.select-state')}
           </label>
-          <label className='usa-label' htmlFor='locationOptions'>
+          <label className='usa-label' htmlFor='countySelect'>
             {t('location-search.labels.select-county')}
           </label>
         </div>
-        <div className='location-search-grid'>
+        <div className='state-county-grid'>
           <select
             className='usa-select'
-            name='locationOptions'
+            id='stateSelect'
+            name='stateOptions'
             onChange={handleSelectState}
           >
-            <option>{t('location-search.national')}</option>
-            {statesList && statesList.length
-              ? statesList.map((state: any) => {
+            <option value={-1}>{t('location-search.national')}</option>
+            {statesList.length
+              ? statesList.map((state: IStateDropdownOption) => {
                   return (
                     <option key={state.stateCode} value={state.stateCode}>
                       {state.stateNameDisplay}
@@ -59,11 +71,13 @@ const LocationSearch = ({ statesList }: any) => {
           </select>
           <select
             className='usa-select'
-            name='locationOptions'
+            id='countySelect'
+            name='countyOptions'
             disabled={!countyList.length}
+            onChange={handleSelectCounty}
           >
-            <option>{t('actions.select')}</option>
-            {countyList && countyList.length
+            <option value={-1}>{t('actions.select')}</option>
+            {countyList.length
               ? countyList.map((county: any) => {
                   return (
                     <option key={county.countyCode} value={county.countyCode}>
@@ -73,12 +87,11 @@ const LocationSearch = ({ statesList }: any) => {
                 })
               : null}
           </select>
-          <CustomButton onClick={handleClick}>
-            {t('location-search.explore-location')}
-          </CustomButton>
         </div>
+        <CustomButton onClick={handleClick}>
+          {t('location-search.explore-location')}
+        </CustomButton>
       </div>
-      <hr className='divider' />
     </div>
   );
 };
