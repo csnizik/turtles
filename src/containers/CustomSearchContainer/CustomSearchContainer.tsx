@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
 import { getRequest } from '../../common/util/AxiosUtil';
 import './custom-search.scss';
 import CustomButton from '../../components/CustomButton';
@@ -23,6 +24,7 @@ const CustomSearchContainer = () => {
   const [statesList, setStatesList]: any = useState([]);
   const [countyList, setCountyList]: any = useState([]);
   const { t } = useTranslation();
+  const history: any = useHistory();
 
   useEffect(() => {
     async function fetchStateList() {
@@ -39,7 +41,7 @@ const CustomSearchContainer = () => {
   }
 
   const handleSearch = () => {
-    console.log('TODO: Submit form for search', searchInput);
+    history.push('search-results');
   };
 
   const handleInputChange = (e: any) => {
