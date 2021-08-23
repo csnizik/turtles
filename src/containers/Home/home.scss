@@ -9,7 +9,7 @@
   }
 
   .jumbotron {
-    padding: 2rem 1rem;
+    padding: 2rem 2rem;
     background-color: $light-grey-4;
     border-radius: 0.3rem;
   }
@@ -26,6 +26,7 @@
     h1 {
       position: absolute;
       top: 0.5em;
+      font-weight: 900;
     }
   }
 
@@ -43,6 +44,7 @@
       .grid-col-6 {
         p:first-of-type {
           font-size: 22px;
+          font-weight: 900;
         }
       }
     }

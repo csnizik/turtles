@@ -23,8 +23,12 @@
     "intro": "Search for information on practice impacts, practice extent, and impacts of practice implementation.",
     "quick-search": "Quick Search"
   },
+  "search-results-page": {
+    "header": "Search Results",
+    "conservation-practices": "Conservation Practices"
+  },
   "location-search": {
-    "explore-by-location": "Explore Conservation Activities by Location",
+    "explore-by-location": "Explore NRCS Activities by Location",
     "explore-location": "Explore Location",
     "national": "National (default)",
     "introductory-paragraph": "Find conservation practices and NRCS sponsored projects & initiatives in your location.",

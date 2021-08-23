@@ -35,7 +35,7 @@ const Home = () => {
           <div className='grid-col-6'>
             <p className='margin-left-4 margin-top-3'>{t('home-page.intro')}</p>
           </div>
-          <div className='grid-col-4 grid-offset-2'>
+          <div className='grid-col-4 grid-offset-1 tablet:grid-col-4 tablet:grid-offset-2'>
             <CustomButton
               additionalClassName='margin-top-2 margin-right-4'
               onClick={handleCustomSearch}

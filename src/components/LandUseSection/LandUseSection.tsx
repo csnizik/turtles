@@ -12,36 +12,35 @@ const exampleLandUseData: ILandUseData[] = [
   {
     id: 0,
     label: 'Cropland',
-    description:
-      'Includes areas used for the production of adapted crops for harvest',
+    description: 'Areas used for the production of adapted crops for harvest.',
   },
   {
     id: 1,
     label: 'Rangeland',
     description:
-      'Lands on which the indigenous vegetation is predominately grasses, grass-like plants, forbs, and possibly shrubs or dispersed trees',
+      'Lands on which the indigenous vegetation is predominately grasses, grass-like plants, forbs, and possibly shrubs or dispersed trees.',
   },
   {
     id: 2,
     label: 'Developed Land / Urban Ag',
-    description: 'Sample description of Developed Land / Urban Ag',
+    description: 'Sample description of Developed Land / Urban Ag.',
   },
   {
     id: 3,
     label: 'Forestland',
     description:
-      'Forest lands provide clean air, carbon sequestration, climate change buffering, flood protection, wildlife habitat, recreation and aesthetic enjoyment.',
+      'Areas composed of an overstory of tree canopy and an understory that is divided into shrub and forb layers.',
   },
   {
     id: 4,
     label: 'Pasture',
     description:
-      'Vegetation cover comprised primarily of introduced or enhanced native forage species that is used for livestock grazing',
+      'Vegetation cover comprised primarily of introduced or enhanced native forage species that is used for livestock grazing.',
   },
   {
     id: 5,
     label: 'Other Farm and Rural Land',
-    description: 'Sample description of Other Farm and Rural land',
+    description: 'Sample description of Other Farm and Rural land.',
   },
 ];
 
