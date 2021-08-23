@@ -7,6 +7,7 @@ import SearchByLocation from '../../components/SearchByLocation';
 import SearchByResourceConcern from '../../components/SearchByResourceConcern';
 import LandUseSection from '../../components/LandUseSection';
 import SearchByConservationPractice from '../../components/SearchByConservationPractice';
+import LocationSearch from '../../components/LocationSearch';
 
 interface ISearchInput {
   stateSelect: number;
@@ -59,12 +60,7 @@ const CustomSearchContainer = () => {
         <h1>{t('search-page.quick-search')}</h1>
         <p>{t('search-page.intro')}</p>
       </div>
-      <SearchByLocation
-        statesList={statesList}
-        searchInput={searchInput}
-        handleInputChange={handleInputChange}
-        countyList={countyList}
-      />
+      <SearchByLocation />
       <LandUseSection />
       <p className='practice-description'>
         {t('search-by-conservation-practice.description')}

@@ -36,9 +36,9 @@ const LocationSearch = () => {
     setIsDisabled(false);
   };
 
-  const handleSelectCounty = (event: any) => {
-    setSelectedCounty(event.target.value);
-  };
+  // const handleSelectCounty = (event: any) => {
+  //   setSelectedCounty(event.target.value);
+  // };
 
   return (
     <div className='grid-row location-search-container'>
@@ -79,7 +79,7 @@ const LocationSearch = () => {
             id='countySelect'
             name='countyOptions'
             disabled={isDisabled}
-            onChange={handleSelectCounty}
+            // onChange={handleSelectCounty}
           >
             <option value={-1}>{t('actions.select')}</option>
             {countyStatus.isSuccess &&
