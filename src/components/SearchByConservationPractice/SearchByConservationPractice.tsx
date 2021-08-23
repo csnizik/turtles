@@ -30,11 +30,6 @@ const SearchByConservationPractice = () => {
   }, [selectedPractice]);
 
   const handleChange = (e) => {
-<<<<<<< HEAD
-    const { value } = e.target;
-    if (value !== '') {
-      setSecondState({ practice: ConservationPractice, disabled: false });
-=======
     const practiceVal = e.target.value;
     if (practiceVal !== '') {
       dispatch(disableSecondState());
@@ -44,7 +39,6 @@ const SearchByConservationPractice = () => {
       } else {
         setSecondState({ practice: ConservationPractice, disabled: false });
       }
->>>>>>> devRedo
     } else {
       setSecondState({ ...intialState });
       dispatch(enableSecondState());
@@ -71,11 +65,7 @@ const SearchByConservationPractice = () => {
           >
             <option value=''>All practices (default)</option>
             {practiceState.practice.length
-<<<<<<< HEAD
-              ? practiceState.practice.map((item: any) => {
-=======
               ? practiceState.practice.map((practice: any) => {
->>>>>>> devRedo
                   return (
                     <option key={practice.practiceCategory} value={practice.id}>
                       {practice.practiceCategory}

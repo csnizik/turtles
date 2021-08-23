@@ -4,6 +4,7 @@ import {
   IConservationPractice,
   IResourceConcernList,
   ICountyList,
+  IStateDropdownOption,
 } from '../../common/types';
 
 export const api = createApi({
@@ -16,6 +17,9 @@ export const api = createApi({
     getPractices: builder.query<IConservationPractice[], void>({
       query: () => '/nationalOverviews/all',
     }),
+    getStateList: builder.query<IStateDropdownOption[], void>({
+      query: () => `/states`,
+    }),
     getCountyList: builder.query<ICountyList[], string>({
       query: (stateCode) => `/counties/${stateCode}`,
     }),
@@ -26,4 +30,5 @@ export const {
   useGetResourcesQuery,
   useGetPracticesQuery,
   useGetCountyListQuery,
+  useGetStateListQuery,
 } = api;

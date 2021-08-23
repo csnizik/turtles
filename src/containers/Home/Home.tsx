@@ -44,7 +44,7 @@ const Home = () => {
             </CustomButton>
           </div>
         </div>
-        <LocationSearch statesList={stateList} />
+        <LocationSearch />
         <FindByPractices />
       </main>
     </div>

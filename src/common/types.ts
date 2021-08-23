@@ -25,3 +25,14 @@ export interface ICountyList {
   countyCode: string;
   countyDisplay: string;
 }
+
+export interface IConservationPracticeDropdown {
+  practice: Array<any>;
+  disabled: boolean;
+}
+
+export interface IStateDropdownOption {
+  stateCode: string;
+  stateAbbreviation: string;
+  stateNameDisplay: string;
+}

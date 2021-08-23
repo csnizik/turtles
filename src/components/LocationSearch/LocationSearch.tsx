@@ -1,34 +1,39 @@
 import { useHistory } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { getRequest } from '../../common/util/AxiosUtil';
-import { useGetCountyListQuery } from '../../Redux/services/api';
+import { IStateDropdownOption } from '../../common/types';
+import {
+  useGetCountyListQuery,
+  useGetStateListQuery,
+} from '../../Redux/services/api';
 import './location-search.scss';
 import CustomButton from '../CustomButton';
 
-const LocationSearch = ({ statesList }: any) => {
+const LocationSearch = () => {
   const history: any = useHistory();
   const { t } = useTranslation();
-  // const { data, error, isLoading, isSuccess, isError } =
-  // useGetCountyListQuery();
+
   const handleClick = () => {
     history.push('Location');
   };
-  const [countyList, setCountyList]: any = useState([]);
+  const [isDisabled, setIsDisabled]: any = useState(true);
+
   const [selectedState, setSelectedState]: any = useState<number>(-1);
   const [selectedCounty, setSelectedCounty]: any = useState(-1);
-  async function fetchCountyListPerStateCode(stateCode: any) {
-    const countyResponse = await getRequest(`/counties/${stateCode}`);
-    setCountyList(countyResponse.data);
-  }
+
+  const countyStatus = useGetCountyListQuery(selectedState);
+  const stateStatus = useGetStateListQuery();
+
+  useEffect(() => {
+    if (selectedState < 0) {
+      setIsDisabled(true);
+    }
+  }, [selectedState]);
 
   const handleSelectState = (event: any) => {
     const stateVal = event.target.value;
-    fetchCountyListPerStateCode(stateVal);
     setSelectedState(stateVal);
-    if (selectedState >= 0 && selectedCounty && selectedState !== stateVal) {
-      setCountyList([]);
-    }
+    setIsDisabled(false);
   };
 
   const handleSelectCounty = (event: any) => {
@@ -59,33 +64,33 @@ const LocationSearch = ({ statesList }: any) => {
             onChange={handleSelectState}
           >
             <option value={-1}>{t('location-search.national')}</option>
-            {statesList.length
-              ? statesList.map((state: IStateDropdownOption) => {
-                  return (
-                    <option key={state.stateCode} value={state.stateCode}>
-                      {state.stateNameDisplay}
-                    </option>
-                  );
-                })
-              : null}
+            {stateStatus.isSuccess &&
+              stateStatus.data &&
+              stateStatus.data.map((state: IStateDropdownOption) => {
+                return (
+                  <option key={state.stateCode} value={state.stateCode}>
+                    {state.stateNameDisplay}
+                  </option>
+                );
+              })}
           </select>
           <select
             className='usa-select'
             id='countySelect'
             name='countyOptions'
-            disabled={!countyList.length}
+            disabled={isDisabled}
             onChange={handleSelectCounty}
           >
             <option value={-1}>{t('actions.select')}</option>
-            {countyList.length
-              ? countyList.map((county: any) => {
-                  return (
-                    <option key={county.countyCode} value={county.countyCode}>
-                      {county.countyDisplay}
-                    </option>
-                  );
-                })
-              : null}
+            {countyStatus.isSuccess &&
+              countyStatus.data &&
+              countyStatus.data.map((county: any) => {
+                return (
+                  <option key={county.countyCode} value={county.countyCode}>
+                    {county.countyDisplay}
+                  </option>
+                );
+              })}
           </select>
         </div>
         <CustomButton onClick={handleClick}>
