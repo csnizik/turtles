@@ -1,10 +1,22 @@
 @import '../../stylesheets/variables';
 
 .results-page {
+  h1:first-of-type {
+    margin: 40px 0px 10px 20px;
+    font-size: 42px;
+    font-weight: $heavy-weight;
+  }
   .list-group:first-of-type {
+    margin: 0rem 1.5rem;
     display: flex;
     .list-group-item {
       height: 4rem;
+    }
+  }
+
+  .practice-accordion {
+    h3 {
+      margin: 2rem 1.5rem;
     }
   }
 }
