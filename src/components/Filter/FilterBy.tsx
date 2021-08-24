@@ -1,5 +1,11 @@
+import './filter-by.scss';
 const FilterBy = () => {
-  return <div>Hello</div>;
+  return (
+    <div className='filter-by-container'>
+      <span aria-label='Filter By'>Filter by:</span>
+      <hr className='filter-by-border' />
+    </div>
+  );
 };
 
 export default FilterBy;

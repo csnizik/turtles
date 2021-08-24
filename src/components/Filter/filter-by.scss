@@ -1,0 +1,15 @@
+@import '../../stylesheets/variables';
+
+.filter-by-container {
+  max-width: 80%;
+  min-height: 106px;
+  margin: 0 auto;
+  border: 1px solid $light-grey-5;
+  border-radius: 9px;
+  span {
+    padding: 3.5rem 1.563rem;
+  }
+  .filter-by-border {
+    min-width: 80%;
+  }
+}

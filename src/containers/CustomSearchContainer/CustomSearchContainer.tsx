@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
 import SearchByResourceConcern from '../../components/SearchByResourceConcern';
@@ -41,13 +42,15 @@ const CustomSearchContainer = () => {
         <SearchByConservationPractice />
         <SearchByResourceConcern />
       </div>
-      <CustomButton
-        ariaLabel='search'
-        additionalClassName='margin-top-3 margin-bottom-3'
-        onClick={handleSearch}
-      >
-        {t('actions.search')}
-      </CustomButton>
+      <Link to='/search-results'>
+        <CustomButton
+          ariaLabel='search'
+          additionalClassName='margin-top-3 margin-bottom-3'
+          onClick={handleSearch}
+        >
+          {t('actions.search')}
+        </CustomButton>
+      </Link>
     </div>
   );
 };

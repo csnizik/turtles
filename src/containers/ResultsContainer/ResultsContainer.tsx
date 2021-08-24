@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import './results.scss';
 import PracticeRow from '../../components/PracticeRow';
+import FilterBy from '../../components/Filter/FilterBy';
 
 export const practiceList: any = [
   {
@@ -115,6 +116,7 @@ const ResultsContainer = () => {
     <div className='results-page'>
       <h1>{t('search-results-page.header')}</h1>
       <hr />
+      <FilterBy />
       {renderPracticeAccordion()}
     </div>
   );
