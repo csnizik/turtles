@@ -27,3 +27,13 @@ export interface IStateDropdownOption {
   stateAbbreviation: string;
   stateNameDisplay: string;
 }
+
+export interface IAccordion {
+  id: number;
+  practiceCategory: string;
+  practiceCategoryDesc: string;
+  practiceCategoryLink: string;
+  practice: string;
+  practiceDesc: string;
+  practiceLink: string;
+}
