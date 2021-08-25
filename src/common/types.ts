@@ -17,6 +17,15 @@ export interface IConservationPractice {
   practiceInfo: string;
 }
 
+export interface ICountyList {
+  stateCountyCode: string;
+  stateCode: string;
+  stateAbbr: string;
+  stateName: string;
+  countyCode: string;
+  countyDisplay: string;
+}
+
 export interface IConservationPracticeDropdown {
   practice: Array<any>;
   disabled: boolean;

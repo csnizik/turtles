@@ -1,11 +1,8 @@
 import { useHistory } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { getRequest } from '../../common/util/AxiosUtil';
 import CustomButton from '../../components/CustomButton';
 import LocationSearch from '../../components/LocationSearch';
 import FindByPractices from '../../components/FindByPractices';
-import { IStateDropdownOption } from '../../common/types';
 import './home.scss';
 
 const Home = () => {
@@ -14,16 +11,6 @@ const Home = () => {
   const handleCustomSearch = () => {
     history.push('search');
   };
-
-  const [stateList, setStateList] = useState<IStateDropdownOption[]>([]);
-
-  useEffect(() => {
-    async function fetchStateList() {
-      const response = await getRequest('/states');
-      setStateList(response.data);
-    }
-    fetchStateList();
-  }, []);
 
   return (
     <div className='home-page'>
@@ -44,7 +31,7 @@ const Home = () => {
             </CustomButton>
           </div>
         </div>
-        <LocationSearch statesList={stateList} />
+        <LocationSearch />
         <FindByPractices />
       </main>
     </div>
