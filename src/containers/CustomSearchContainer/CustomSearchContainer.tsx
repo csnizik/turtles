@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import CustomButton from '../../components/CustomButton';
@@ -8,19 +7,7 @@ import LandUseSection from '../../components/LandUseSection';
 import SearchByConservationPractice from '../../components/SearchByConservationPractice';
 import './custom-search.scss';
 
-interface ISearchInput {
-  stateSelect: number;
-  countySelect: number;
-}
-
-const defaultSearchInput: ISearchInput = {
-  stateSelect: -1,
-  countySelect: -1,
-};
-
 const CustomSearchContainer = () => {
-  const [searchInput, setSearchInput]: any = useState(defaultSearchInput);
-
   const { t } = useTranslation();
 
   const handleSearch = () => {

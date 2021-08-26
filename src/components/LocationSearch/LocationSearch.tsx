@@ -19,7 +19,6 @@ const LocationSearch = () => {
   const [isDisabled, setIsDisabled]: any = useState(true);
 
   const [selectedState, setSelectedState]: any = useState<number>(-1);
-  const [selectedCounty, setSelectedCounty]: any = useState(-1);
 
   const countyStatus = useGetCountyListQuery(selectedState);
   const stateStatus = useGetStateListQuery();
@@ -35,10 +34,6 @@ const LocationSearch = () => {
     setSelectedState(stateVal);
     setIsDisabled(false);
   };
-
-  // const handleSelectCounty = (event: any) => {
-  //   setSelectedCounty(event.target.value);
-  // };
 
   return (
     <div className='grid-row location-search-container'>
@@ -79,7 +74,6 @@ const LocationSearch = () => {
             id='countySelect'
             name='countyOptions'
             disabled={isDisabled}
-            // onChange={handleSelectCounty}
           >
             <option value={-1}>{t('actions.select')}</option>
             {countyStatus.isSuccess &&

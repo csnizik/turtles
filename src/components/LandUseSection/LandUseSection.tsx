@@ -1,91 +1,76 @@
-import './land-use-section.scss';
+import { useState, useEffect } from 'react';
 import { Tooltip } from 'reactstrap';
-import { useState } from 'react';
 
-interface ILandUseData {
-  id: number;
-  label: string;
-  description: string;
-}
-
-const exampleLandUseData: ILandUseData[] = [
-  {
-    id: 0,
-    label: 'Cropland',
-    description: 'Areas used for the production of adapted crops for harvest.',
-  },
-  {
-    id: 1,
-    label: 'Rangeland',
-    description:
-      'Lands on which the indigenous vegetation is predominately grasses, grass-like plants, forbs, and possibly shrubs or dispersed trees.',
-  },
-  {
-    id: 2,
-    label: 'Developed Land / Urban Ag',
-    description: 'Sample description of Developed Land / Urban Ag.',
-  },
-  {
-    id: 3,
-    label: 'Forestland',
-    description:
-      'Areas composed of an overstory of tree canopy and an understory that is divided into shrub and forb layers.',
-  },
-  {
-    id: 4,
-    label: 'Pasture',
-    description:
-      'Vegetation cover comprised primarily of introduced or enhanced native forage species that is used for livestock grazing.',
-  },
-  {
-    id: 5,
-    label: 'Other Farm and Rural Land',
-    description: 'Sample description of Other Farm and Rural land.',
-  },
-];
+import { ILandUseOption } from '../../common/types';
+import './land-use-section.scss';
+import { useGetLandUseOptionsQuery } from '../../Redux/services/api';
 
 const LandUseSection = () => {
-  const [tooltipOpen, setTooltipOpen] = useState([false]);
-  const toggleTooltip = (index) => {
-    const newTipOpen = [...tooltipOpen];
-    newTipOpen[index] = !newTipOpen[index];
-    setTooltipOpen(newTipOpen);
+  const landUseOptions: any = useGetLandUseOptionsQuery();
+  const landUseData: ILandUseOption[] = landUseOptions.data || [];
+  const [tooltipOpen, setTooltipOpen]: any = useState([]);
+
+  useEffect(() => {
+    if (landUseData.length) {
+      const toolTipMap: any =
+        landUseData.length &&
+        landUseData.map((item: ILandUseOption) => {
+          return { id: item.landUseCategoryID, displayTooltip: false };
+        });
+      setTooltipOpen(toolTipMap);
+    }
+  }, [landUseData]);
+
+  const toggleTooltip = (index: number) => {
+    const updatedTooltips = tooltipOpen.map((tooltip: any) => {
+      return tooltip.id === index
+        ? { ...tooltip, displayTooltip: !tooltip.displayTooltip }
+        : tooltip;
+    });
+    setTooltipOpen(updatedTooltips);
   };
 
   return (
     <fieldset className='usa-fieldset'>
       <legend className='usa-legend'>Filter By Land Use</legend>
       <div className='land-use-grid'>
-        {exampleLandUseData.length &&
-          exampleLandUseData.map((landType: ILandUseData) => {
+        {landUseOptions.isSuccess &&
+          landUseData.length &&
+          tooltipOpen.length &&
+          landUseData.map((landType: ILandUseOption) => {
+            const landId: number = landType.landUseCategoryID;
+            const tooltipIndex: number = tooltipOpen.findIndex(
+              (tooltip: any) => {
+                return tooltip.id === landId;
+              }
+            );
             return (
-              <div className='usa-checkbox' key={landType.id}>
+              <div className='usa-checkbox' key={landId}>
                 <input
                   className='usa-checkbox__input'
-                  id={`landUseExample${landType.id}`}
+                  id={`landUseOption${landId}`}
                   type='checkbox'
                   name='land-use'
-                  value={landType.id}
+                  value={landId}
                 />
                 <label
                   className='usa-checkbox__label'
-                  htmlFor={`landUseExample${landType.id}`}
+                  htmlFor={`landUseOption${landId}`}
                 >
-                  {landType.label}
+                  {landType.landUseCategoryName}
                 </label>
                 <i
                   className='fas fa-info-circle'
                   aria-hidden='true'
-                  id={`tooltip${landType.id}`}
+                  id={`tooltip${landId}`}
                 />
-
                 <Tooltip
                   placement='right'
-                  isOpen={tooltipOpen[landType.id]}
-                  target={`tooltip${landType.id}`}
-                  toggle={() => toggleTooltip(landType.id)}
+                  isOpen={tooltipOpen[tooltipIndex].displayTooltip}
+                  target={`tooltip${landId}`}
+                  toggle={() => toggleTooltip(landId)}
                 >
-                  {landType.description}
+                  {landType.landUseCategoryDesc}
                 </Tooltip>
               </div>
             );

@@ -36,3 +36,9 @@ export interface IStateDropdownOption {
   stateAbbreviation: string;
   stateNameDisplay: string;
 }
+
+export interface ILandUseOption {
+  landUseCategoryID: number;
+  landUseCategoryName: string;
+  landUseCategoryDesc: string;
+}

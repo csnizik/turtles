@@ -5,6 +5,7 @@ import {
   IResourceConcernList,
   ICountyList,
   IStateDropdownOption,
+  ILandUseOption,
 } from '../../common/types';
 
 export const api = createApi({
@@ -23,6 +24,9 @@ export const api = createApi({
     getCountyList: builder.query<ICountyList[], string>({
       query: (stateCode) => `/counties/${stateCode}`,
     }),
+    getLandUseOptions: builder.query<ILandUseOption[], void>({
+      query: () => '/categories',
+    }),
   }),
 });
 
@@ -31,4 +35,5 @@ export const {
   useGetPracticesQuery,
   useGetCountyListQuery,
   useGetStateListQuery,
+  useGetLandUseOptionsQuery,
 } = api;

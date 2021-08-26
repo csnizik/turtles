@@ -1,30 +1,10 @@
 @import '../../stylesheets/variables';
 
-.filter-inactive {
-  max-width: 80%;
-  min-height: 60px;
-  margin: 0 auto;
-  border: 1px solid $light-grey-5;
-  border-radius: 9px;
-  p.filter-style {
-    margin: 1rem 0rem 1rem 2rem;
-  }
-  .filter-by-grid {
-    display: grid;
-    grid-template-columns: 6rem 8rem 8rem 14rem 14rem;
-    gap: 1rem;
-  }
-  .filter-select {
-    border: 0rem;
-  }
-}
-
 .filter-by-container {
   max-width: 80%;
-  min-height: 106px;
   margin: 0 auto;
   border: 1px solid $light-grey-5;
-  border-radius: 9px;
+  border-radius: 0.56rem;
   p.filter-style {
     margin-left: 2rem;
   }
@@ -47,9 +27,13 @@
       grid-template-columns: 6rem 2rem;
       background-color: $usda-light-blue;
       border: 1px solid $usda-light-blue;
-      border-radius: 9px;
+      border-radius: 0.56rem;
       height: 2rem;
       padding: 0.25rem;
+      align-items: baseline;
+      p:first-of-type {
+        margin-left: 1rem;
+      }
     }
   }
   .filter-select {
@@ -62,7 +46,7 @@
   }
   .clear-style {
     margin-top: 0.75rem;
-    color: blue;
+    color: $link-color;
     text-decoration-line: underline;
   }
 }
