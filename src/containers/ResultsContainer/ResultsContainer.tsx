@@ -8,8 +8,10 @@ const ResultsContainer = () => {
 
   return (
     <div className='results-page'>
-      <h1>{t('search-results-page.header')}</h1>
-      <hr />
+      <div className='search-title'>
+        <h1>{t('search-results-page.header')}</h1>
+        <hr />
+      </div>
       <FilterBy />
       <Accordion />
     </div>

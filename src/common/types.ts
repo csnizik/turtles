@@ -38,18 +38,22 @@ export interface IStateDropdownOption {
 }
 
 export type Practice = {
-  practiceid: number;
-  practiceName: string;
-  practiceDesc: string;
-  practiceLink: string;
+  practiceId: number,
+  practiceName: string,
+  practiceDescription: string,
+  practiceLink: string,
 }
 
 export interface IAccordion {
-  id: number;
-  practiceCategory: string;
-  practiceCategoryDesc: string;
-  practiceCategoryLink: string;
-  practices: Array<Practice>;
+    practiceCategoryId: number,
+    stateAbbr: string,
+    landUseName: string,
+    conservationPracticeSelected: string,
+    resourceConcernSelected: number,
+    practiceCategoryName: string,
+    practiceCategoryDescription: string,
+    practiceCategoryLink: string,
+    practices: Array<Practice>
 }
 
 export interface ILandUseOption {

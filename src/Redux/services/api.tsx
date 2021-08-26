@@ -20,7 +20,7 @@ export const api = createApi({
       query: () => '/nationalOverviews/all',
     }),
     getNationalPractices: builder.query<IAccordion[], void>({
-      query: () => '/stored_procedures​/LandUseSearch',
+      query: () => '/stored_procedures/search',
     }),
     getStateList: builder.query<IStateDropdownOption[], void>({
       query: () => `/states`,

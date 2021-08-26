@@ -1,6 +1,10 @@
 @import '../../stylesheets/variables';
 
 .results-page {
+  background-color: $light-grey-205;
+  .search-title {
+    background-color: $white;
+  }
   h1 {
     font-size: $h1-font-size;
     margin: 0 2.188rem 2.188rem 2.188rem;
