@@ -23,7 +23,7 @@ const SearchByResourceConcern = () => {
       const response: any = await getRequest('/resourceConcern/concern');
       setResourceConcerns(response.data.length > 0 ? response.data : []);
     } catch (error) {
-      throw new Error('Resource Concern Request Error');
+      // throw new Error('Resource Concern Request Error');
     }
   };
 
