@@ -24,8 +24,9 @@
     "quick-search": "Quick Search"
   },
   "search-results-page": {
-    "header": "Search Results",
-    "conservation-practices": "Conservation Practices"
+    "header": "Quick Search Results",
+    "conservation-practices": "Conservation Practices",
+    "project-initiatives": "Projects & Initiatives"
   },
   "location-search": {
     "explore-by-location": "Explore NRCS Activities by Location",
