@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { baseURL } from '../../common/util/AxiosUtil';
 import {
+  IAccordion,
   IConservationPractice,
   IResourceConcernList,
 } from '../../common/types';
@@ -15,7 +16,14 @@ export const api = createApi({
     getPractices: builder.query<IConservationPractice[], void>({
       query: () => '/nationalOverviews/all',
     }),
+    getNationalPractices: builder.query<IAccordion[], void>({
+      query: () => '/stored_procedures​/LandUseSearch',
+    }),
   }),
 });
 
-export const { useGetResourcesQuery, useGetPracticesQuery } = api;
+export const {
+  useGetResourcesQuery,
+  useGetPracticesQuery,
+  useGetNationalPracticesQuery,
+} = api;

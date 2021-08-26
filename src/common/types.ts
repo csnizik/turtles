@@ -28,12 +28,17 @@ export interface IStateDropdownOption {
   stateNameDisplay: string;
 }
 
+export type Practice = {
+  practiceid: number;
+  practiceName: string;
+  practiceDesc: string;
+  practiceLink: string;
+}
+
 export interface IAccordion {
   id: number;
   practiceCategory: string;
   practiceCategoryDesc: string;
   practiceCategoryLink: string;
-  practice: string;
-  practiceDesc: string;
-  practiceLink: string;
+  practices: Array<Practice>;
 }
