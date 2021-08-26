@@ -11,9 +11,7 @@ import 'nrcs-design-system/scss/nrcs-design-system.scss';
 
 const Home = lazy(() => import('./containers/Home'));
 const Header = lazy(() => import('./components/Header/Header'));
-const ResultsContainer = lazy(
-  () => import('./containers/ResultsContainer/ResultsContainer')
-);
+const ResultsContainer = lazy(() => import('./containers/ResultsContainer'));
 const CustomSearchContainer = lazy(
   () => import('./containers/CustomSearchContainer/CustomSearchContainer')
 );
