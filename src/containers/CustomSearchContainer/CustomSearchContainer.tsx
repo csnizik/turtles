@@ -1,58 +1,16 @@
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
-import { getRequest } from '../../common/util/AxiosUtil';
-import './custom-search.scss';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
 import SearchByResourceConcern from '../../components/SearchByResourceConcern';
 import LandUseSection from '../../components/LandUseSection';
 import SearchByConservationPractice from '../../components/SearchByConservationPractice';
-
-interface ISearchInput {
-  stateSelect: number;
-  countySelect: number;
-}
-
-const defaultSearchInput: ISearchInput = {
-  stateSelect: -1,
-  countySelect: -1,
-};
+import './custom-search.scss';
 
 const CustomSearchContainer = () => {
-  const [searchInput, setSearchInput]: any = useState(defaultSearchInput);
-  const [statesList, setStatesList]: any = useState([]);
-  const [countyList, setCountyList]: any = useState([]);
   const { t } = useTranslation();
-  const history: any = useHistory();
-
-  useEffect(() => {
-    async function fetchStateList() {
-      const response = await getRequest('/states');
-      setStatesList(response.data);
-    }
-
-    fetchStateList();
-  }, []);
-
-  async function fetchCountyListPerStateCode(stateCode: any) {
-    const countyResponse = await getRequest(`/counties/${stateCode}`);
-    setCountyList(countyResponse.data);
-  }
 
   const handleSearch = () => {
-    history.push('search-results');
-  };
-
-  const handleInputChange = (e: any) => {
-    const { name, value } = e.target;
-    if (name === 'stateSelect' && value) {
-      fetchCountyListPerStateCode(value);
-      if (searchInput.stateSelect >= 0 && searchInput.stateSelect !== value) {
-        setCountyList([]);
-      }
-    }
-    setSearchInput({ ...searchInput, [name]: value });
+    console.log('TODO: Submit form for search');
   };
 
   return (
@@ -61,12 +19,7 @@ const CustomSearchContainer = () => {
         <h1>{t('search-page.quick-search')}</h1>
         <p>{t('search-page.intro')}</p>
       </div>
-      <SearchByLocation
-        statesList={statesList}
-        searchInput={searchInput}
-        handleInputChange={handleInputChange}
-        countyList={countyList}
-      />
+      <SearchByLocation />
       <LandUseSection />
       <p className='practice-description'>
         {t('search-by-conservation-practice.description')}

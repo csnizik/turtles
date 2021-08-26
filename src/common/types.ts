@@ -17,6 +17,15 @@ export interface IConservationPractice {
   practiceInfo: string;
 }
 
+export interface ICountyList {
+  stateCountyCode: string;
+  stateCode: string;
+  stateAbbr: string;
+  stateName: string;
+  countyCode: string;
+  countyDisplay: string;
+}
+
 export interface IConservationPracticeDropdown {
   practice: Array<any>;
   disabled: boolean;
@@ -28,6 +37,7 @@ export interface IStateDropdownOption {
   stateNameDisplay: string;
 }
 
+<<<<<<< HEAD
 export type Practice = {
   practiceid: number;
   practiceName: string;
@@ -41,4 +51,10 @@ export interface IAccordion {
   practiceCategoryDesc: string;
   practiceCategoryLink: string;
   practices: Array<Practice>;
+=======
+export interface ILandUseOption {
+  landUseCategoryID: number;
+  landUseCategoryName: string;
+  landUseCategoryDesc: string;
+>>>>>>> devRedo
 }

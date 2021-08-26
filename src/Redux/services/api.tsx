@@ -4,6 +4,9 @@ import {
   IAccordion,
   IConservationPractice,
   IResourceConcernList,
+  ICountyList,
+  IStateDropdownOption,
+  ILandUseOption,
 } from '../../common/types';
 
 export const api = createApi({
@@ -19,6 +22,15 @@ export const api = createApi({
     getNationalPractices: builder.query<IAccordion[], void>({
       query: () => '/stored_procedures​/LandUseSearch',
     }),
+    getStateList: builder.query<IStateDropdownOption[], void>({
+      query: () => `/states`,
+    }),
+    getCountyList: builder.query<ICountyList[], string>({
+      query: (stateCode) => `/counties/${stateCode}`,
+    }),
+    getLandUseOptions: builder.query<ILandUseOption[], void>({
+      query: () => '/categories',
+    }),
   }),
 });
 
@@ -26,4 +38,7 @@ export const {
   useGetResourcesQuery,
   useGetPracticesQuery,
   useGetNationalPracticesQuery,
+  useGetCountyListQuery,
+  useGetStateListQuery,
+  useGetLandUseOptionsQuery,
 } = api;
