@@ -7,14 +7,14 @@ interface IFilterData {
 }
 
 const exampleFilterData: IFilterData[] = [
-  {
-    id: 0,
-    label: 'Cropland',
-  },
-  {
-    id: 1,
-    label: 'Virginia',
-  },
+  // {
+  //   id: 0,
+  //   label: 'Cropland',
+  // },
+  // {
+  //   id: 1,
+  //   label: 'Virginia',
+  // },
 ];
 
 const FilterBy = () => {
@@ -29,6 +29,11 @@ const FilterBy = () => {
   const handleClearAllFilter = () => {
     setActiveFilters([]);
   };
+  const handleAddFilter = (filter: string) => {
+    const updatedFilters: any = [...activeFilterList];
+    updatedFilters.push({ id: updatedFilters.length, label: filter });
+    setActiveFilters(updatedFilters);
+  };
   return (
     <div className='filter-by-container'>
       <div className='filter-by-grid'>
@@ -39,6 +44,7 @@ const FilterBy = () => {
           className='usa-select filter-select'
           id='locationOptions'
           name='locationSelect'
+          onClick={() => handleAddFilter('Location')}
         >
           <option value={-1}>Location</option>
         </select>
@@ -46,6 +52,7 @@ const FilterBy = () => {
           className='usa-select filter-select'
           id='locationOptions'
           name='locationSelect'
+          onClick={() => handleAddFilter('Land')}
         >
           <option value={-1}>Land use</option>
         </select>
@@ -53,6 +60,7 @@ const FilterBy = () => {
           className='usa-select filter-select'
           id='locationOptions'
           name='locationSelect'
+          onClick={() => handleAddFilter('Practice')}
         >
           <option value={-1}>Conservation Practice</option>
         </select>
@@ -60,6 +68,7 @@ const FilterBy = () => {
           className='usa-select filter-select'
           id='locationOptions'
           name='locationSelect'
+          onClick={() => handleAddFilter('Concern')}
         >
           <option value={-1}>Resource Concern Treated</option>
         </select>
@@ -76,7 +85,7 @@ const FilterBy = () => {
                   (filterType: IFilterData, index: number) => {
                     return (
                       <div className='filter-box' key={filterType.id}>
-                        <p>{filterType.label}</p>
+                        <p className='filter-label'>{filterType.label}</p>
                         <i
                           aria-label='Clear filter'
                           className='fas fa-times'

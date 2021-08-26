@@ -1,8 +1,8 @@
 @import '../../stylesheets/variables';
 
 .filter-by-container {
-  max-width: 80%;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0 2.188rem;
   border: 1px solid $light-grey-5;
   border-radius: 0.56rem;
   p.filter-style {
@@ -15,6 +15,7 @@
   }
   p.filter-style {
     margin: 1rem 0rem 1rem 2rem;
+    font-weight: bold;
   }
   .filter-grid {
     display: grid;
@@ -22,6 +23,9 @@
     gap: 1rem;
     margin-top: 1rem;
     .filter-box {
+      p.filter-label {
+        font-weight: bold;
+      }
       margin-top: 0.5rem;
       display: grid;
       grid-template-columns: 6rem 2rem;
