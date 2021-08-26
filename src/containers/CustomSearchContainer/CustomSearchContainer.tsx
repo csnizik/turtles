@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-
 import { Link } from 'react-router-dom';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';

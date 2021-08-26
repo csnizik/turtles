@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { baseURL } from '../../common/util/AxiosUtil';
 import {
+  IAccordion,
   IConservationPractice,
   IResourceConcernList,
   ICountyList,
@@ -18,6 +19,9 @@ export const api = createApi({
     getPractices: builder.query<IConservationPractice[], void>({
       query: () => '/nationalOverviews/all',
     }),
+    getNationalPractices: builder.query<IAccordion[], void>({
+      query: () => '/stored_procedures​/LandUseSearch',
+    }),
     getStateList: builder.query<IStateDropdownOption[], void>({
       query: () => `/states`,
     }),
@@ -33,6 +37,7 @@ export const api = createApi({
 export const {
   useGetResourcesQuery,
   useGetPracticesQuery,
+  useGetNationalPracticesQuery,
   useGetCountyListQuery,
   useGetStateListQuery,
   useGetLandUseOptionsQuery,

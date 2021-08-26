@@ -2,9 +2,11 @@
 
 .filter-by-container {
   max-width: 100%;
-  margin: 0 2.188rem;
+  position: sticky;
+  margin: -2.188rem 2.188rem 0 2.188rem;
   border: 1px solid $light-grey-5;
   border-radius: 0.56rem;
+  background-color: $white;
   p.filter-style {
     margin-left: 2rem;
   }

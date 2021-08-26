@@ -23,7 +23,6 @@ const FilterBy = () => {
     const updatedFilters: any = activeFilterList.filter((filter: any) => {
       return filter.id !== indexToRemove;
     });
-    console.log('Updated filters: ', updatedFilters);
     setActiveFilters(updatedFilters);
   };
   const handleClearAllFilter = () => {
@@ -70,7 +69,7 @@ const FilterBy = () => {
           name='locationSelect'
           onClick={() => handleAddFilter('Concern')}
         >
-          <option value={-1}>Resource Concern Treated</option>
+          <option value={-1}>Related Resource Concern</option>
         </select>
       </div>
       {activeFilterList.length ? (

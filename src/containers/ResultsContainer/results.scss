@@ -1,22 +1,11 @@
 @import '../../stylesheets/variables';
 
 .results-page {
-  h1:first-of-type {
-    margin: 2.5rem 0rem 0.625rem 1.25rem;
-    font-size: 2.625rem;
-    font-weight: $heavy-weight;
-  }
-  .list-group:first-of-type {
-    margin: 0rem 1.5rem;
+  h1 {
+    font-size: $h1-font-size;
+    margin: 0 2.188rem 2.188rem 2.188rem;
     display: flex;
-    .list-group-item {
-      height: 4rem;
-    }
-  }
-
-  .practice-accordion {
-    h3 {
-      margin: 2rem 1.5rem;
-    }
+    padding: 2.5rem 0 1.25rem 0;
+    font-weight: 900;
   }
 }
