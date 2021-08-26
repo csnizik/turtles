@@ -27,3 +27,15 @@
     background-color: $medium-darkgrey;
   }
 }
+
+@media only screen and (max-width: $small-screen) {
+  .search-by-location-section {
+    .side-by-side {
+      display: flex;
+      flex-direction: column;
+      grid-gap: 1.875rem;
+      gap: 1.875rem;
+      margin-right: 2rem;
+    }
+  }
+}
