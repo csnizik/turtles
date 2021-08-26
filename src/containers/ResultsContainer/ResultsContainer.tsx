@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import Accordion from '../../components/Accordion';
+import Accordion from '../../components/ResultAccordion';
 import './results.scss';
 import FilterBy from '../../components/Filter/FilterBy';
 

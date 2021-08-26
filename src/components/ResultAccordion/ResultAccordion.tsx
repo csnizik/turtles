@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom';
 //import { Spinner } from 'reactstrap';
 import { ConservationPracticeResult } from '../../common/typedconstants.common';
 import { IAccordion, Practice } from '../../common/types';
-import './accordion.scss';
+import './result-accordion.scss';
 //import { useGetNationalPracticesQuery } from '../../Redux/services/api';
+
+//Commented code is for API request in the future
 
 const Accordion = () => {
   // const { data, isLoading, isSuccess, isError, error } =
