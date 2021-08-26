@@ -2,25 +2,14 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-//import { Spinner } from 'reactstrap';
-import { ConservationPracticeResult } from '../../common/typedconstants.common';
+import { Spinner } from 'reactstrap';
 import { IAccordion, Practice } from '../../common/types';
 import './result-accordion.scss';
-//import { useGetNationalPracticesQuery } from '../../Redux/services/api';
-
-//Commented code is for API request in the future
+import { useGetNationalPracticesQuery } from '../../Redux/services/api';
 
 const Accordion = () => {
-  // const { data, isLoading, isSuccess, isError, error } =
-  //   useGetNationalPracticesQuery();
-
-  const [resultsContainer, setResultsContainer] = useState(
-    ConservationPracticeResult
-  );
-
-  // const [resultsContainer, setResultsContainer] = useState(
-  //   data
-  // );
+  const { data, isLoading, isSuccess, isError, error } =
+    useGetNationalPracticesQuery();
 
   const { t } = useTranslation();
 
@@ -44,88 +33,96 @@ const Accordion = () => {
 
   return (
     <>
-      {/* {isLoading && <Spinner />}
+      {isLoading && <Spinner />}
       {isError && error}
       {isSuccess && data && (
-        <> */}
-      <div className='top-title'>
-        <h4>{t('search-results-page.conservation-practices')}</h4>
-      </div>
-      <div className='accordion-section'>
-        {resultsContainer.map((item: IAccordion) => {
-          const chevronClassName = classNames('fas', {
-            'fas fa-chevron-right': tab !== item.id,
-            'fas fa-chevron-down': tab === item.id,
-          });
-          const accordionClass = classNames({
-            'accordion-container': tab !== item.id,
-            'accordion-container-blue': tab === item.id,
-          });
-          return (
-            <>
-              <div className={accordionClass}>
-                <li key={item.id}>
-                  <i
-                    className={chevronClassName}
-                    onClick={() => toggle(item.id)}
-                    role='presentation'
-                  />
-                  <div className='accordion-data'>
-                    <h4>{item.practiceCategory}</h4>
-                    <div>
-                      {tab === item.id && <p>{item.practiceCategoryDesc}</p>}
-                      {tab === item.id && (
-                        <p>
-                          <Link to={item.practiceCategoryLink}>
-                            {item.practiceCategory} Details
-                          </Link>
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </li>
-              </div>
-              {tab === item.id && (
-                <div className='child-accordion-container'>
-                  {item.practices.map((ele: Practice) => {
-                    const childChevronClassName = classNames('fas', {
-                      'fa-chevron-right': toggleChildTab !== ele.practiceid,
-                      'fa-chevron-down': toggleChildTab === ele.practiceid,
-                    });
-                    return (
-                      <li
-                        key={ele.practiceid}
-                        onClick={() => toggleChild(ele.practiceid)}
+        <>
+          <div className='top-title'>
+            <h4>{t('search-results-page.conservation-practices')}</h4>
+          </div>
+          <div className='accordion-section'>
+            {data.map((item: IAccordion) => {
+              const chevronClassName = classNames('fas', {
+                'fas fa-chevron-right': tab !== item.practiceCategoryId,
+                'fas fa-chevron-down': tab === item.practiceCategoryId,
+              });
+              const accordionClass = classNames({
+                'accordion-container': tab !== item.practiceCategoryId,
+                'accordion-container-blue': tab === item.practiceCategoryId,
+              });
+              return (
+                <>
+                  <div className={accordionClass}>
+                    <li key={item.practiceCategoryId}>
+                      <i
+                        className={chevronClassName}
+                        onClick={() => toggle(item.practiceCategoryId)}
                         role='presentation'
-                      >
-                        <i className={childChevronClassName} />
-                        <div className='child-data'>
-                          <h4>{ele.practiceName}</h4>
-                          <div>
-                            {toggleChildTab === ele.practiceid && (
-                              <p>{ele.practiceDesc}</p>
-                            )}
-                            {toggleChildTab === ele.practiceid && (
-                              <p>
-                                <Link to={ele.practiceLink}>
-                                  {ele.practiceName} Details
-                                </Link>
-                              </p>
-                            )}
-                          </div>
+                      />
+                      <div className='accordion-data'>
+                        <h4>{item.practiceCategoryName}</h4>
+                        <div>
+                          {tab === item.practiceCategoryId && (
+                            <p>
+                              {item.practiceCategoryDescription ||
+                                'No description Available'}
+                            </p>
+                          )}
+                          {tab === item.practiceCategoryId && (
+                            <p>
+                              <Link to={item.practiceCategoryLink}>
+                                {item.practiceCategoryName} Details
+                              </Link>
+                            </p>
+                          )}
                         </div>
-                      </li>
-                    );
-                  })}
-                  <hr />
-                </div>
-              )}
-            </>
-          );
-        })}
-      </div>
-      {/* </>
-      )} */}
+                      </div>
+                    </li>
+                  </div>
+                  {tab === item.practiceCategoryId && (
+                    <div className='child-accordion-container'>
+                      {item.practices.map((ele: Practice) => {
+                        const childChevronClassName = classNames('fas', {
+                          'fa-chevron-right': toggleChildTab !== ele.practiceId,
+                          'fa-chevron-down': toggleChildTab === ele.practiceId,
+                        });
+                        return (
+                          <li
+                            key={ele.practiceId}
+                            onClick={() => toggleChild(ele.practiceId)}
+                            role='presentation'
+                          >
+                            <i className={childChevronClassName} />
+                            <div className='child-data'>
+                              <h4>{ele.practiceName}</h4>
+                              <div>
+                                {toggleChildTab === ele.practiceId && (
+                                  <p>
+                                    {ele.practiceDescription ||
+                                      'No description Available'}
+                                  </p>
+                                )}
+                                {toggleChildTab === ele.practiceId && (
+                                  <p>
+                                    <Link to={ele.practiceLink}>
+                                      {ele.practiceName} Details
+                                    </Link>
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                          </li>
+                        );
+                      })}
+                      <hr />
+                    </div>
+                  )}
+                </>
+              );
+            })}
+          </div>
+        </>
+      )}
       {/* For demo Purpose */}
       <div className='top-title'>
         <h4>{t('search-results-page.project-initiatives')}</h4>
