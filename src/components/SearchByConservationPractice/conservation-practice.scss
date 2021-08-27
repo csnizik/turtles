@@ -5,11 +5,11 @@
   grid-template-columns: repeat(1, 1fr);
   gap: 2em;
   text-align: left;
-  width: 50%;
+  width: 100%;
   border: 2px solid $philippine-silver;
   border-radius: 0.5em;
   background-color: $light-grey;
-  padding: 0 2em 0 2em;
+  padding: 0 2rem 0 2.25rem;
   margin: 2em 2em 1em 0;
 
   .usa-label {

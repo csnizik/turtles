@@ -2,7 +2,19 @@
 
 /** Home page **/
 .home-page {
+  h3.landing-page-title {
+    margin-left: 0.6em;
+    position: absolute;
+    font-weight: $medium-weight;
+  }
+
+  .jumbotron {
+    padding: 2rem 2rem;
+    background-color: $light-grey-4;
+    border-radius: 0.3rem;
+  }
   .landing-page-image {
+    margin-bottom: 0rem;
     position: relative;
     background-size: cover;
     background-position: center;
@@ -14,39 +26,28 @@
     h1 {
       position: absolute;
       top: 0.5em;
+      font-weight: 900;
     }
   }
 
   main {
-    .grid-col-6 {
-      p:first-of-type {
-        font-size: 17px;
+    .grid-col-4 {
+      .usa-button {
+        color: $usda-blue;
+        background: $white;
+        border: 0.2rem solid $usda-blue;
+        border-radius: 0.25rem;
       }
     }
-
-    .explore-box-grid {
-      display: grid;
-      grid-template-columns: 1fr 22rem;
-      justify-content: flex-start;
-      align-items: start;
+    .grid-row:first-of-type {
+      background: $light-grey-205;
+      .grid-col-6 {
+        p:first-of-type {
+          font-size: 22px;
+          font-weight: 900;
+        }
+      }
     }
-  }
-
-  h3.landing-page-title {
-    margin-left: 0.6em;
-    position: absolute;
-    font-weight: $medium-weight;
-  }
-
-  .jumbotron {
-    padding: 2rem 1rem;
-    margin-bottom: 2rem;
-    background-color: $light-grey-4;
-    border-radius: 0.3rem;
-  }
-
-  .explore-box {
-    margin: 1em 2em 2em 2em;
   }
 }
 

@@ -4,8 +4,8 @@
 header {
   .usda-header {
     img {
-      width: 75px;
-      height: 75px;
+      width: 4.688rem;
+      height: 4.688rem;
       vertical-align: baseline;
     }
   }
@@ -44,7 +44,6 @@ header {
   }
   .usa-link {
     color: $sfi-white;
-    text-decoration: none;
   }
 
   .nrcsLogo {
@@ -61,9 +60,9 @@ header {
 /** USA flag logo **/
 .header-container {
   width: 100%;
-  margin: 0em 2em 0em 0em;
+  margin: 0rem 2rem 0rem 0rem;
   background-color: $sfi-dark-white;
-  height: 24px;
+  height: auto;
 
   img {
     height: 1rem;

@@ -4,16 +4,16 @@
   margin: 0rem 0rem 0rem 1rem;
   .custom-search-header {
     h1 {
-      margin: 40px 0px 10px 0px;
+      margin: 2.5rem 0rem 2.5rem 1.25rem;
       font-size: 42px;
       font-weight: $heavy-weight;
     }
     p {
       font-size: 17px;
       font-weight: $medium-weight;
-      margin: 2rem 0rem 1rem -1rem;
+      margin: 2rem 0rem 0rem -1rem;
       background-color: $sfi-white;
-      padding: 17px 0px 17px 17px;
+      padding: 2.5rem 0rem 2.5rem 2.25rem;
       border-top: solid $dark-grey 1px;
     }
   }
@@ -25,9 +25,28 @@
     font-weight: $medium-weight;
     font-size: 17px;
     line-height: 1.3;
+    margin: 1.25rem 0rem 0rem -1rem;
+    padding: 0rem 0rem 0rem 2.25rem;
   }
   .bottom-container {
+    margin: 0rem 0rem 1.75rem -1rem;
+    padding: 0rem 0rem 0rem 2.25rem;
     display: flex;
     justify-content: space-between;
+  }
+
+  @media only screen and (max-width: $small-screen) {
+    .bottom-container {
+      margin: 0rem 2rem 1.75rem -1rem;
+      padding: 0rem 0rem 0rem 2.25rem;
+      display: block;
+    }
+  }
+  .mobile-btn-width {
+    width: 88%;
+  }
+
+  .mobile-btn-left {
+    margin-left: 1rem;
   }
 }

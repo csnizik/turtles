@@ -1,0 +1,15 @@
+@import '../../stylesheets/variables';
+
+.results-page {
+  background-color: $light-grey-205;
+  .search-title {
+    background-color: $white;
+  }
+  h1 {
+    font-size: $h1-font-size;
+    margin: 0 2.188rem 2.188rem 2.188rem;
+    display: flex;
+    padding: 2.5rem 0 1.25rem 0;
+    font-weight: 900;
+  }
+}

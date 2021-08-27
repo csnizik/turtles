@@ -1,70 +1,40 @@
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { getRequest } from '../../common/util/AxiosUtil';
-import './custom-search.scss';
+import useBreakpoint from 'use-breakpoint';
+import { Link } from 'react-router-dom';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
 import SearchByResourceConcern from '../../components/SearchByResourceConcern';
 import LandUseSection from '../../components/LandUseSection';
 import SearchByConservationPractice from '../../components/SearchByConservationPractice';
+import './custom-search.scss';
 
-interface ISearchInput {
-  stateSelect: number;
-  countySelect: number;
-}
+ const BREAKPOINTS = { mobile: 0, tablet: 768, desktop: 1280 }
 
-const defaultSearchInput: ISearchInput = {
-  stateSelect: -1,
-  countySelect: -1,
-};
 
 const CustomSearchContainer = () => {
-  const [searchInput, setSearchInput]: any = useState(defaultSearchInput);
-  const [statesList, setStatesList]: any = useState([]);
-  const [countyList, setCountyList]: any = useState([]);
   const { t } = useTranslation();
+  const { breakpoint, maxWidth, minWidth } = useBreakpoint(BREAKPOINTS);
+  const handleSearch = () => {
+    console.log('TODO: Submit form for search');
+  };
 
-  useEffect(() => {
-    async function fetchStateList() {
-      const response = await getRequest('/states');
-      setStatesList(response.data);
+  const buttonStyles = () => {
+    let styles;
+    if (breakpoint !== 'mobile'){
+      styles = 'margin-top-3 margin-bottom-3 mobile-btn-left';
+    }else {
+      styles = 'margin-top-3 margin-bottom-3 mobile-btn-left mobile-btn-width'
     }
-
-    fetchStateList();
-  }, []);
-
-  async function fetchCountyListPerStateCode(stateCode: any) {
-    const countyResponse = await getRequest(`/counties/${stateCode}`);
-    setCountyList(countyResponse.data);
+    return styles;
   }
 
-  const handleSearch = () => {
-    console.log('TODO: Submit form for search', searchInput);
-  };
-
-  const handleInputChange = (e: any) => {
-    const { name, value } = e.target;
-    if (name === 'stateSelect' && value) {
-      fetchCountyListPerStateCode(value);
-      if (searchInput.stateSelect >= 0 && searchInput.stateSelect !== value) {
-        setCountyList([]);
-      }
-    }
-    setSearchInput({ ...searchInput, [name]: value });
-  };
-
   return (
-    <div className='custom-search'>
+    <div data-testid='custom-search-container' className='custom-search'>
       <div className='custom-search-header'>
-        <h1>{t('search-page.advanced-search')}</h1>
+        <h1>{t('search-page.quick-search')}</h1>
         <p>{t('search-page.intro')}</p>
       </div>
-      <SearchByLocation
-        statesList={statesList}
-        searchInput={searchInput}
-        handleInputChange={handleInputChange}
-        countyList={countyList}
-      />
+      <SearchByLocation />
       <LandUseSection />
       <p className='practice-description'>
         {t('search-by-conservation-practice.description')}
@@ -73,12 +43,15 @@ const CustomSearchContainer = () => {
         <SearchByConservationPractice />
         <SearchByResourceConcern />
       </div>
-      <CustomButton
-        additionalClassName='margin-top-3 margin-bottom-3'
-        onClick={handleSearch}
-      >
-        {t('actions.search')}
-      </CustomButton>
+      <Link to='/search-results'>
+        <CustomButton
+          ariaLabel='search'
+          additionalClassName={buttonStyles()}
+          onClick={handleSearch}
+        >
+          {t('actions.search')}
+        </CustomButton>
+      </Link>
     </div>
   );
 };
