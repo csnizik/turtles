@@ -5,7 +5,7 @@ import './search-by-resource-concern.scss';
 import { disableState, enableState } from '../../Redux/Slice/disableSlice';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 
-const SearchByResourceConcern = () => {
+const SearchByResourceConcern = ({ searchInput, handleInputChange }: any) => {
   const dispatchRequest = useAppDispatch();
   const status = useAppSelector((state) => state.disableSlice.disablePractice);
   const { t } = useTranslation();
@@ -13,10 +13,6 @@ const SearchByResourceConcern = () => {
   const [resourceConcernsSubgroups, setResourceConcernsSubgroups] = useState<
     any[]
   >([]);
-  const [selectedResourceCategory, setSelectedResourceCategory] =
-    useState<string>('');
-  const [selectedResourceSubgroup, setSelectedResourceSubgroup] =
-    useState<string>('');
 
   const getResourceConcerns = async () => {
     try {
@@ -46,7 +42,7 @@ const SearchByResourceConcern = () => {
 
   const handleChange = (e) => {
     const { value }: any = e.target;
-    setSelectedResourceCategory(value);
+    handleInputChange(e);
     if (e.target.value !== '') {
       getResourceConcernsSubgroups(value);
       dispatchRequest(disableState());
@@ -57,7 +53,7 @@ const SearchByResourceConcern = () => {
   };
 
   const handleSubgroupChange = (e) => {
-    setSelectedResourceSubgroup(e.target.value);
+    handleInputChange(e);
   };
 
   return (
@@ -74,10 +70,10 @@ const SearchByResourceConcern = () => {
           <select
             className='usa-select'
             id='resourceConcernCategoryValue'
-            name='resourceConcernCategorySelect'
+            name='selectedResourceCategory'
             disabled={status}
             onChange={handleChange}
-            value={selectedResourceCategory}
+            value={searchInput.selectedResourceCategory}
           >
             <option value=''>All resource concerns (default)</option>
             {resourceConcerns.length
@@ -100,10 +96,10 @@ const SearchByResourceConcern = () => {
           <select
             className='usa-select'
             id='resourceConcernValue'
-            name='resourceConcernSelect'
-            disabled={selectedResourceCategory === ''}
+            name='selectedResourceSubgroup'
+            disabled={searchInput.selectedResourceCategory === ''}
             onChange={handleSubgroupChange}
-            value={selectedResourceSubgroup}
+            value={searchInput.selectedResourceSubgroup}
           >
             <option value=''>- Select resource concern -</option>
             {resourceConcernsSubgroups.length

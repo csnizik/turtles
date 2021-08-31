@@ -6,7 +6,7 @@ import disableSlice from './Slice/disableSlice';
 const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
-    disableSlice
+    disableSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware),
