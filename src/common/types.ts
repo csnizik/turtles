@@ -61,3 +61,7 @@ export interface ILandUseOption {
   landUseCategoryName: string;
   landUseCategoryDesc: string;
 }
+
+export interface IPracticeMedia {
+  videoLink: string;
+}

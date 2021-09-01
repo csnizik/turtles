@@ -7,6 +7,7 @@ import {
   ICountyList,
   IStateDropdownOption,
   ILandUseOption,
+  IPracticeMedia,
 } from '../../common/types';
 
 export const api = createApi({
@@ -31,6 +32,9 @@ export const api = createApi({
     getLandUseOptions: builder.query<ILandUseOption[], void>({
       query: () => '/categories',
     }),
+    getPracticeVideoLink: builder.query<IPracticeMedia, void>({
+      query: () => '/practiceMedia',
+    }),
   }),
 });
 
@@ -41,4 +45,5 @@ export const {
   useGetCountyListQuery,
   useGetStateListQuery,
   useGetLandUseOptionsQuery,
+  useGetPracticeVideoLinkQuery,
 } = api;
