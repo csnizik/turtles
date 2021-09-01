@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Tooltip } from 'reactstrap';
 
 import { ILandUseOption } from '../../common/types';
 import './land-use-section.scss';
 import { useGetLandUseOptionsQuery } from '../../Redux/services/api';
 
-const LandUseSection = () => {
+const LandUseSection = ({ handleInputChange }: any) => {
   const landUseOptions: any = useGetLandUseOptionsQuery();
   const landUseData: ILandUseOption[] = landUseOptions.data || [];
   const [tooltipOpen, setTooltipOpen]: any = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (landUseData.length) {
@@ -32,7 +34,9 @@ const LandUseSection = () => {
 
   return (
     <fieldset className='usa-fieldset'>
-      <legend className='usa-legend'>Filter By Land Use</legend>
+      <legend className='usa-legend'>
+        {t('search-page.filter-by-land-use')}
+      </legend>
       <div className='land-use-grid'>
         {landUseOptions.isSuccess &&
           landUseData.length &&
@@ -50,7 +54,8 @@ const LandUseSection = () => {
                   className='usa-checkbox__input'
                   id={`landUseOption${landId}`}
                   type='checkbox'
-                  name='land-use'
+                  name='selectedLandUseIds'
+                  onChange={handleInputChange}
                   value={landId}
                 />
                 <label

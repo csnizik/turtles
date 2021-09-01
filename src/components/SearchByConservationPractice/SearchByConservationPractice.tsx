@@ -14,7 +14,10 @@ const intialState = {
   disabled: true,
 };
 
-const SearchByConservationPractice = () => {
+const SearchByConservationPractice = ({
+  searchInput,
+  handleInputChange,
+}: any) => {
   const dispatch = useAppDispatch();
   const result = useAppSelector((State) => State.disableSlice.disableResource);
   const { t } = useTranslation();
@@ -22,19 +25,19 @@ const SearchByConservationPractice = () => {
     useState<IConservationPracticeDropdown>(intialState);
   const [secondState, setSecondState] =
     useState<IConservationPracticeDropdown>(intialState);
-  const [selectedPractice, setSelectedPractice] = useState(-1);
 
   useEffect(() => {
     setPracticeState({ ...practiceState, practice: ConservationPractice });
     setSecondState({ ...secondState, practice: ConservationPractice });
-  }, [selectedPractice]);
+  }, [searchInput]);
 
   const handleChange = (e) => {
     const practiceVal = e.target.value;
+    const practiceCategory = searchInput.selectedPracticeCategory;
     if (practiceVal !== '') {
       dispatch(disableSecondState());
-      setSelectedPractice(practiceVal);
-      if (selectedPractice >= 0 && practiceVal !== selectedPractice) {
+      handleInputChange(e);
+      if (practiceCategory && practiceVal !== practiceCategory) {
         setSecondState({ ...intialState, disabled: false });
       } else {
         setSecondState({ practice: ConservationPractice, disabled: false });
@@ -59,9 +62,10 @@ const SearchByConservationPractice = () => {
           <select
             className='usa-select'
             id='practiceCategoryValue'
-            name='practiceCategorySelect'
+            name='selectedPracticeCategory'
             disabled={result}
             onChange={handleChange}
+            value={searchInput.selectedPracticeCategory}
           >
             <option value=''>All practices (default)</option>
             {practiceState.practice.length
@@ -81,8 +85,9 @@ const SearchByConservationPractice = () => {
           <select
             className='usa-select'
             id='specificPracticeValue'
-            name='specificPracticeSelect'
+            name='selectedPractice'
             disabled={secondState.disabled}
+            value={searchInput.selectedPractice}
           >
             <option value=''>- Select practice -</option>
             {secondState.practice.length
