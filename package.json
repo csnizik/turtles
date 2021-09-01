@@ -57,7 +57,7 @@
     "build": "npm run copy && react-scripts build",
     "test": "jest --colors --coverage",
     "eject": "react-scripts eject",
-    "copy": "copy -r ../node_modules/@arcgis/core/assets ../public/assets"
+    "copy": "cp -r ../node_modules/@arcgis/core/assets ../public/assets"
   },
   "eslintConfig": {
     "extends": [
