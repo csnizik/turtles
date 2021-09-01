@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import './header.scss';
@@ -33,12 +33,19 @@ const Header = () => {
     </header>
   );
 
+  const { pathname } = useLocation();
+
   const renderNavigationSection: Function = () => (
     <div className='navigation-bar'>
       <img className='nrcsLogo' src='images/nrcs_logo.png' alt='NRCS Logo' />
       <Link to='/' className='usa-link margin-left-05'>
         {t('header.home')}
       </Link>
+      {pathname !== '/' && pathname !== '/search' && (
+        <Link to='/search' className='usa-link float-right'>
+          {t('header.search')}
+        </Link>
+      )}
     </div>
   );
 

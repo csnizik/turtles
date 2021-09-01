@@ -8,6 +8,7 @@ import Spinner from './components/Spinner/Spinner';
 import './stylesheets/app.scss';
 import './i18n';
 import 'nrcs-design-system/scss/nrcs-design-system.scss';
+import ResultsContainer from './containers/ResultsContainer';
 
 const Home = lazy(() => import('./containers/Home'));
 const Header = lazy(() => import('./components/Header/Header'));
@@ -24,8 +25,11 @@ const App = () => (
         <Route exact path='/'>
           <Home />
         </Route>
-        <Route path='/search'>
+        <Route exact path='/search'>
           <CustomSearchContainer />
+        </Route>
+        <Route exact path='/search-results'>
+          <ResultsContainer />
         </Route>
         <Route path='/:name'>
           <LocationContainer />
