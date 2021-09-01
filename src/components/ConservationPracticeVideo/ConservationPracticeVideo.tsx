@@ -1,17 +1,18 @@
 import './conservation-practice-video.scss';
 //import {useGetPracticeVideoLinkQuery} from '../../Redux/services/api';
-import newLinkIcon from './image/newLink Icon.svg';
+import newLinkIcon from './image/newLinkIcon.svg';
 
 const ConservationPracticeVideo = () => {
     // const { data } = useGetPracticeVideoLinkQuery();
 
   return (
-    <section className='media-box'>
+    <section className='media-box' data-testid='video-box-container'>
       <div className='content'>
         <h2>Conservation at Work</h2>
         <div className='full-component'>
           <div className='video-media'>
             <iframe
+            data-testid='video-iframe'
             className='video'
             src='https://www.youtube.com/embed/NLoEkcbsJLo'
             frameBorder='1'
