@@ -47,7 +47,7 @@ const CustomSearch = ({ setSearchToggle }: ICustomSearchProps) => {
   };
 
   const handleSearch = () => {
-    console.log('TODO: Submit form for search', searchInput);
+    //console.log('TODO: Submit form for search', searchInput);
     setSearchToggle(true);
   };
 
