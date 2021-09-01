@@ -53,7 +53,7 @@
   "scripts": {
     "start": "npm run copy && react-scripts start",
     "build": "npm run copy && react-scripts build",
-    "test": "jest --colors --coverage --coverageDirectory=/output/coverage/jest",
+    "test": "jest --colors --coverage",
     "eject": "react-scripts eject",
     "copy": "cp -r ./node_modules/@arcgis/core/assets ./public/assets"
   },
