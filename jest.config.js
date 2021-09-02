@@ -3,11 +3,21 @@ module.exports = {
   transform: {
     '^.+\\.(ts|tsx)?$': 'ts-jest',
     '^.+\\.(js|jsx)$': 'babel-jest',
+    '^.+\\.jsx?$': 'babel-jest',
+    '^.+\\.svg$': 'jest-svg-transformer',
   },
   transformIgnorePatterns: ['node_modules/(?!@arcgis/.*)'],
   moduleNameMapper: {
     '\\.(css|scss)$': '<rootDir>/src/__tests__/App.js',
   },
   setupFilesAfterEnv: ['./src/setupTestSuite.js'],
+  testMatch: ['**/?(*.)+(spec|test).[jt]s?(x)'],
+  coverageDirectory: '<rootDir>/src/__tests__/coverage',
   coverageReporters: ['json', 'lcov', 'text', 'clover', 'cobertura'],
+  // use below option to show all files in specified folders in coverage
+  // report including files not touched by unit tests
+  // collectCoverageFrom: [
+  //   'src/components/*/*.{js,ts,tsx}',
+  //   'src/containers/*/*.{js,ts,tsx}',
+  // ],
 };

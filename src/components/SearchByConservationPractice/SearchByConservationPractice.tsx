@@ -34,6 +34,12 @@ const SearchByConservationPractice = ({
   const handleChange = (e) => {
     const practiceVal = e.target.value;
     const practiceCategory = searchInput.selectedPracticeCategory;
+    if (practiceVal === '' && searchInput.selectedPracticeCategory) {
+      e.target = { name: 'selectedPractice', value: '', ...e.target };
+      handleInputChange(e);
+    } else {
+      handleInputChange(e);
+    }
     if (practiceVal !== '') {
       dispatch(disableSecondState());
       handleInputChange(e);
@@ -58,7 +64,9 @@ const SearchByConservationPractice = ({
           {t('search-by-conservation-practice.heading')}
         </label>
         <div className='desktop:grid-col-8'>
-          <p>{t('search-by-conservation-practice.first-label-name')}</p>
+          <p className='margin-top-2'>
+            {t('search-by-conservation-practice.first-label-name')}
+          </p>
           <select
             className='usa-select'
             id='practiceCategoryValue'
@@ -81,13 +89,16 @@ const SearchByConservationPractice = ({
         </div>
 
         <div className='desktop:grid-col-8'>
-          <p>{t('search-by-conservation-practice.second-label-name')}</p>
+          <p className='margin-top-4'>
+            {t('search-by-conservation-practice.second-label-name')}
+          </p>
           <select
             className='usa-select'
             id='specificPracticeValue'
             name='selectedPractice'
             disabled={secondState.disabled}
             value={searchInput.selectedPractice}
+            onChange={handleChange}
           >
             <option value=''>- Select practice -</option>
             {secondState.practice.length
