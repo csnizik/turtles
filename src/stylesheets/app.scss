@@ -21,7 +21,7 @@ body {
 
 .usa-link {
   text-decoration: none;
-  &:hover {
+  &:hover :focus {
     text-decoration: none;
     cursor: pointer;
   }
