@@ -1,0 +1,43 @@
+@import '../../stylesheets/variables';
+
+.conservation-practice {
+  background-color: $sfi-dark-white;
+  margin: 1rem 0rem 0rem 0rem;
+  .conservation-practice-header {
+    h2 {
+      font-size: $h2-font-size;
+      font-weight: $heavy-weight;
+      margin: 1rem 0rem 1rem 1rem;
+      padding-top: 2rem;
+     
+    }
+
+    p {
+      font-weight: $medium-weight;
+      margin: 1rem 0rem 0rem 1rem;  
+    }
+  }
+  .explore-box {
+      margin: 3.75rem 1rem 5rem 1rem;
+      border: solid $dark-grey 1px;
+      height: 50rem;
+      width: 98%;
+      border-radius: 1rem;
+      background-color: $white;
+    .internal-box {
+      border: solid $dark-grey 1px;
+      height: 44rem;
+      width: 97.5%;
+      background-color: $sfi-white;
+      margin: 1.5rem 1.5rem 1rem 1.5rem;
+      border-radius: 1rem;
+    }  
+    .link {
+      text-align: right;
+      margin-right: 1rem;
+    }
+
+
+  }
+
+}
