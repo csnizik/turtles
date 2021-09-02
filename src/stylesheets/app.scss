@@ -18,3 +18,11 @@ body {
   height: 100%;
   overflow: wrap;
 }
+
+.usa-link {
+  text-decoration: none;
+  &:hover :focus {
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
