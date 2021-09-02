@@ -1,6 +1,6 @@
 import React from 'react';
-import CustomSearchContainer from '../containers/CustomSearchContainer';
-import { cleanup, render, screen } from '../common/test-utils/test_utils';
+import CustomSearchContainer from '.';
+import { cleanup, render, screen } from '../../common/test-utils/test_utils';
 
 test('adds 1 + 2 to equal 3', () => {
   expect(1 + 2).toBe(3);
@@ -20,6 +20,7 @@ test('adds 1 + 2 to equal 3', () => {
 //   });
 
 //   test('Custom search page should contain a search button', () => {
-//     expect(screen.getByRole('button', { name: 'search' }));
+//     expect(screen.getByTestId('custom-search-button')).toBeDefined();
+//     // expect(screen.getByRole('button', { name: 'search' }));
 //   });
 // });
