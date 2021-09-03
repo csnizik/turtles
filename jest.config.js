@@ -3,6 +3,8 @@ module.exports = {
   transform: {
     '^.+\\.(ts|tsx)?$': 'ts-jest',
     '^.+\\.(js|jsx)$': 'babel-jest',
+    '^.+\\.jsx?$': 'babel-jest',
+    '^.+\\.svg$': 'jest-svg-transformer',
   },
   transformIgnorePatterns: ['node_modules/(?!@arcgis/.*)'],
   moduleNameMapper: {

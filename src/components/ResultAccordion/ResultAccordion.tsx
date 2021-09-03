@@ -6,8 +6,11 @@ import { Spinner } from 'reactstrap';
 import { IAccordion, Practice } from '../../common/types';
 import './result-accordion.scss';
 import { useGetNationalPracticesQuery } from '../../Redux/services/api';
+import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
+import { useAppDispatch } from '../../Redux/hooks/hooks';
 
 const Accordion = () => {
+  const dispatch = useAppDispatch();
   const { data, isLoading, isSuccess, isError, error } =
     useGetNationalPracticesQuery();
 
@@ -31,6 +34,10 @@ const Accordion = () => {
     return settoggleChildTab(id);
   };
 
+  const handlePracticeCategorySelection = (id: number) => {
+    dispatch(setPracticeCategory(id));
+  };
+
   return (
     <>
       {isLoading && <Spinner />}
@@ -41,47 +48,53 @@ const Accordion = () => {
             <h4>{t('search-results-page.conservation-practices')}</h4>
           </div>
           <div className='accordion-section'>
-            {data.map((item: IAccordion) => {
+            {data.map((practiceCategory: IAccordion) => {
+              const categoryId: number = practiceCategory.practiceCategoryId;
               const chevronClassName = classNames('fas', {
-                'fas fa-chevron-right': tab !== item.practiceCategoryId,
-                'fas fa-chevron-down': tab === item.practiceCategoryId,
+                'fas fa-chevron-right': tab !== categoryId,
+                'fas fa-chevron-down': tab === categoryId,
               });
               const accordionClass = classNames({
-                'accordion-container': tab !== item.practiceCategoryId,
-                'accordion-container-blue': tab === item.practiceCategoryId,
+                'accordion-container': tab !== categoryId,
+                'accordion-container-blue': tab === categoryId,
               });
               return (
                 <>
                   <div className={accordionClass}>
-                    <li key={item.practiceCategoryId}>
+                    <li key={categoryId}>
                       <i
                         className={chevronClassName}
-                        onClick={() => toggle(item.practiceCategoryId)}
+                        onClick={() =>
+                          toggle(practiceCategory.practiceCategoryId)
+                        }
                         role='presentation'
                       />
                       <div className='accordion-data'>
-                        <h4>{item.practiceCategoryName}</h4>
+                        <h4>{practiceCategory.practiceCategoryName}</h4>
                         <div>
-                          {tab === item.practiceCategoryId && (
+                          {tab === categoryId && (
                             <p>
-                              {item.practiceCategoryDescription ||
+                              {practiceCategory.practiceCategoryDescription ||
                                 'No description Available'}
                             </p>
                           )}
-                          {tab === item.practiceCategoryId && (
-                            <p>
-                              <Link to={item.practiceCategoryLink}>
-                                {item.practiceCategoryName} Details
-                              </Link>
-                            </p>
+                          {tab === categoryId && (
+                            <Link
+                              to={practiceCategory.practiceCategoryLink}
+                              onClick={() =>
+                                handlePracticeCategorySelection(categoryId)
+                              }
+                            >
+                              {practiceCategory.practiceCategoryName} Details
+                            </Link>
                           )}
                         </div>
                       </div>
                     </li>
                   </div>
-                  {tab === item.practiceCategoryId && (
+                  {tab === categoryId && (
                     <div className='child-accordion-container'>
-                      {item.practices.map((ele: Practice) => {
+                      {practiceCategory.practices.map((ele: Practice) => {
                         const childChevronClassName = classNames('fas', {
                           'fa-chevron-right': toggleChildTab !== ele.practiceId,
                           'fa-chevron-down': toggleChildTab === ele.practiceId,

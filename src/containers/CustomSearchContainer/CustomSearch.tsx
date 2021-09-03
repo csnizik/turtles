@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import useBreakpoint from 'use-breakpoint';
 import { useTranslation } from 'react-i18next';
 
+import Header from '../../components/Header';
 import BREAKPOINTS from '../../common/constants';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
@@ -47,26 +47,28 @@ const CustomSearch = ({ setSearchToggle }: ICustomSearchProps) => {
   };
 
   const handleSearch = () => {
-    console.log('TODO: Submit form for search', searchInput);
+    //console.log('TODO: Submit form for search', searchInput);
     setSearchToggle(true);
   };
 
-  const buttonStyles = () => {
+  const searchButtonStyles = () => {
     let styles;
     if (breakpoint !== 'mobile') {
-      styles = 'margin-top-3 margin-bottom-3 mobile-btn-left';
+      styles = 'margin-top-3 margin-bottom-3 margin-left-4';
     } else {
-      styles = 'margin-top-3 margin-bottom-3 mobile-btn-left mobile-btn-width';
+      styles = 'margin-top-3 margin-bottom-3 mobile-btn-width';
     }
     return styles;
   };
 
   return (
     <div data-testid='custom-search-container' className='custom-search'>
-      <div className='custom-search-header'>
-        <h1>{t('search-page.quick-search')}</h1>
-        <p>{t('search-page.intro')}</p>
-      </div>
+      <Header
+        priority='1'
+        headerText={t('search-page.quick-search')}
+        paragraphText={t('search-page.intro')}
+        parentClassNames='custom-search-header'
+      />
       <SearchByLocation
         searchInput={searchInput}
         handleInputChange={handleInputChange}
@@ -88,15 +90,15 @@ const CustomSearch = ({ setSearchToggle }: ICustomSearchProps) => {
           handleInputChange={handleInputChange}
         />
       </div>
-      <Link to='/search-results'>
+      <div className='grid-row search-button-row'>
         <CustomButton
           ariaLabel='search'
-          additionalClassName={buttonStyles()}
+          additionalClassName={searchButtonStyles()}
           onClick={handleSearch}
         >
           {t('actions.search')}
         </CustomButton>
-      </Link>
+      </div>
     </div>
   );
 };

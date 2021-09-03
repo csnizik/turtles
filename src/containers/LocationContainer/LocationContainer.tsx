@@ -1,14 +1,14 @@
 import { TabContent, TabPane } from 'reactstrap';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import CustomTabs from '../../components/CustomTabs';
 import { searchOptionMap } from '../../common/typedconstants.common';
 
-import ConservationPracticeOverview from '../../components/ConservationPracticeOverview';
 import ResourceConcernList from '../../components/ResourceConcernList/ResourceConcernList';
 import CustomButton from '../../components/CustomButton';
-
+import { useAppSelector } from '../../Redux/hooks/hooks';
 import './location-search.scss';
+import ConservationPracticeContainer from '../ConservationPracticeContainer';
 
 // Tab styles come from the NRCS design system
 // Documentation: (https://koala-bandits.github.io/nrcs-design-system-storybook/?path=/story/components-tabs-nav--tabs-story)
@@ -21,10 +21,17 @@ const tabStyleOptions: any = {
 
 const LocationContainer = () => {
   const { name }: any = useParams();
-
+  const selectedPracticeCategory: number = useAppSelector(
+    (state) => state.practiceSlice.selectedPracticeCategory
+  );
   const option = searchOptionMap[name];
-
   const [currentTabOption, setTabOption] = useState(option?.id);
+
+  useEffect(() => {
+    if (selectedPracticeCategory >= 0 && !currentTabOption) {
+      setTabOption(2);
+    }
+  }, [selectedPracticeCategory]);
 
   const renderLocationContent = () => {
     return (
@@ -52,7 +59,7 @@ const LocationContainer = () => {
       {currentTabOption === 2 && (
         <TabPane tabId={2}>
           {renderLocationContent()}
-          <ConservationPracticeOverview />
+          <ConservationPracticeContainer />
         </TabPane>
       )}
       {currentTabOption === 3 && (
