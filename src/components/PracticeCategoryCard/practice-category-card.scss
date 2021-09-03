@@ -1,0 +1,38 @@
+@import '../../stylesheets/variables';
+.card {
+  width: 30.9375rem;
+  min-height: 10.625rem;
+  background: $sfi-white;
+  box-sizing: border-box;
+  @include colored-top-box;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.title {
+  font-weight: $medium-weight;
+  font-size: 1.25rem;
+  color: #005ea2;
+  line-height: 1.61125rem;
+  margin-top: 0.625rem;
+}
+
+.body {
+  font-weight: $medium-light-weight;
+  font-size: 1rem;
+  color: $nrcs-dark;
+  line-height: 1.625rem;
+}
+
+.icon {
+  height: 2.25rem;
+  width: 2.25rem;
+  margin-right: 1rem;
+}
+
+.top-container {
+  display: flex;
+  align-items: center;
+  margin-top: 1.1875rem;
+  margin-bottom: 0.375rem;
+}

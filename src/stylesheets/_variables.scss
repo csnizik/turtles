@@ -30,6 +30,7 @@ $link-color: #0071bc;
 /** Font Weights **/
 $lighter-weight: 300;
 $light-weight: 375;
+$medium-light-weight: 400;
 $medium-weight: 500;
 $semi-heavy-weight: 650;
 $heavy-weight: 750;
@@ -55,3 +56,11 @@ $iphonex-screen: 812px;
 /** UI components **/
 $card-max-width: 1200px;
 $tab-background-color: #f0f0f0;
+
+/** Mixins **/
+@mixin colored-top-box {
+  border: 0.0625rem solid #b2b2b2;
+  border-bottom-left-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+  border-top: 0.3125rem solid $usda-blue;
+}
