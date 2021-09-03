@@ -1,10 +1,11 @@
 import './conservation-practice-overview.scss';
-import { useGetPracticesQuery } from '../../Redux/services/api';
+import { useGetAllPracticesQuery } from '../../Redux/services/api';
 import Spinner from '../Spinner/Spinner';
 import image from './image/diversion Image.jpeg';
 
 const ConservationPracticeOverview = () => {
-  const { data, error, isLoading, isSuccess, isError } = useGetPracticesQuery();
+  const { data, error, isLoading, isSuccess, isError } =
+    useGetAllPracticesQuery();
 
   return (
     <>

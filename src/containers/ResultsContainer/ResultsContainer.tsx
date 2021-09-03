@@ -13,7 +13,7 @@ const ResultsContainer = () => {
         <hr />
       </div>
       <FilterBy />
-      <Accordion />
+      {/* <Accordion /> */}
     </div>
   );
 };

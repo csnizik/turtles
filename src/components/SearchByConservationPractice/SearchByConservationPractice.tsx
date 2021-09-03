@@ -1,51 +1,67 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ConservationPractice } from '../../common/typedconstants.common';
-import { IConservationPracticeDropdown } from '../../common/types';
+import {
+  IPracticeCategoryDropdown,
+  IPractice,
+  IPracticeCategory,
+  IPracticeDropdown,
+} from '../../common/types';
 import './conservation-practice.scss';
 import {
   disableSecondState,
   enableSecondState,
 } from '../../Redux/Slice/disableSlice';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
+import {
+  useGetPracticeCategoryQuery,
+  useGetPracticeQuery,
+} from '../../Redux/services/api';
 
 const intialState = {
   practice: [],
   disabled: true,
 };
 
-const SearchByConservationPractice = ({
-  searchInput,
-  handleInputChange,
-}: any) => {
+const SearchByConservationPractice = () => {
   const dispatch = useAppDispatch();
   const result = useAppSelector((State) => State.disableSlice.disableResource);
   const { t } = useTranslation();
-  const [practiceState, setPracticeState] =
-    useState<IConservationPracticeDropdown>(intialState);
-  const [secondState, setSecondState] =
-    useState<IConservationPracticeDropdown>(intialState);
+  const [practiceState, setPracticeState] = useState<any>(intialState);
+  const [secondState, setSecondState] = useState<any>(intialState);
+  const [selectedPractice, setSelectedPractice] = useState(-1);
+  const [selectedSubPractice, setSelectedSubPractice] = useState('');
+
+  const practiceCategory = useGetPracticeCategoryQuery();
+  const practice = useGetPracticeQuery(selectedPractice);
 
   useEffect(() => {
-    setPracticeState({ ...practiceState, practice: ConservationPractice });
-    setSecondState({ ...secondState, practice: ConservationPractice });
-  }, [searchInput]);
+    setPracticeState({ ...practiceState, practice: practiceCategory.data });
+    setSecondState({ ...secondState, practice: practice.data });
+  }, [selectedPractice]);
 
   const handleChange = (e) => {
     const practiceVal = e.target.value;
-    const practiceCategory = searchInput.selectedPracticeCategory;
+    // setSelectedSubPractice(practiceVal);
     if (practiceVal !== '') {
       dispatch(disableSecondState());
-      handleInputChange(e);
-      if (practiceCategory && practiceVal !== practiceCategory) {
+      setSelectedPractice(practiceVal);
+      if (selectedPractice >= 0 && practiceVal !== selectedPractice) {
         setSecondState({ ...intialState, disabled: false });
       } else {
-        setSecondState({ practice: ConservationPractice, disabled: false });
+        setSecondState({ practice: practice.data, disabled: false });
       }
     } else {
       setSecondState({ ...intialState });
+      setSelectedSubPractice('');
       dispatch(enableSecondState());
     }
+  };
+
+  const handlePracticeChange = (e) => {
+    const { value } = e.target;
+    console.log('SubGroup', value);
+    setSelectedSubPractice(value);
   };
 
   return (
@@ -62,21 +78,23 @@ const SearchByConservationPractice = ({
           <select
             className='usa-select'
             id='practiceCategoryValue'
-            name='selectedPracticeCategory'
+            name='practiceCategorySelect'
             disabled={result}
             onChange={handleChange}
-            value={searchInput.selectedPracticeCategory}
           >
             <option value=''>All practices (default)</option>
-            {practiceState.practice.length
-              ? practiceState.practice.map((practice: any) => {
-                  return (
-                    <option key={practice.practiceCategory} value={practice.id}>
-                      {practice.practiceCategory}
-                    </option>
-                  );
-                })
-              : null}
+            {practiceCategory.isSuccess &&
+              practiceCategory.data &&
+              practiceCategory.data.map((item: IPracticeCategory) => {
+                return (
+                  <option
+                    key={item.practiceCategoryId}
+                    value={item.practiceCategoryId}
+                  >
+                    {item.practiceCategoryName}
+                  </option>
+                );
+              })}
           </select>
         </div>
 
@@ -85,20 +103,21 @@ const SearchByConservationPractice = ({
           <select
             className='usa-select'
             id='specificPracticeValue'
-            name='selectedPractice'
+            name='specificPracticeSelect'
             disabled={secondState.disabled}
-            value={searchInput.selectedPractice}
+            onChange={handlePracticeChange}
+            value={selectedSubPractice}
           >
             <option value=''>- Select practice -</option>
-            {secondState.practice.length
-              ? secondState.practice.map((item: any) => {
-                  return (
-                    <option key={item.practiceCategory} value={item.practice}>
-                      {item.practice}
-                    </option>
-                  );
-                })
-              : null}
+            {practice.isSuccess &&
+              practice.data &&
+              practice.data.map((item: IPractice) => {
+                return (
+                  <option key={item.practiceCode} value={item.practiceId}>
+                    {item.practiceName}
+                  </option>
+                );
+              })}
           </select>
         </div>
       </div>

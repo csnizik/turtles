@@ -79,10 +79,7 @@ const CustomSearch = ({ setSearchToggle }: ICustomSearchProps) => {
         {t('search-by-conservation-practice.description')}
       </p>
       <div className='bottom-container'>
-        <SearchByConservationPractice
-          searchInput={searchInput}
-          handleInputChange={handleInputChange}
-        />
+        <SearchByConservationPractice />
         <SearchByResourceConcern
           searchInput={searchInput}
           handleInputChange={handleInputChange}
