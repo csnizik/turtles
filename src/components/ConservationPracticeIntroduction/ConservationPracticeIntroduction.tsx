@@ -1,4 +1,4 @@
-import './conservation-practice.scss';
+import './conservation-practice-introduction.scss';
 import { Link } from 'react-router-dom';
 import image from './image/open-in-new.svg';
 
@@ -16,6 +16,9 @@ const ConservationPractice = () => {
         <div className='internal-box' />
         <div className='link'>
           <Link
+             style={{
+              textDecoration: 'none'
+             }}
             to={{
               pathname:
                 'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/programs/financial/eqip/',
