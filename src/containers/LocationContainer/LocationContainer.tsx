@@ -8,11 +8,7 @@ import ResourceConcernList from '../../components/ResourceConcernList/ResourceCo
 import CustomButton from '../../components/CustomButton';
 
 import './location-search.scss';
-<<<<<<< HEAD
-import PracticeCard from '../../components/PracticeCard';
-=======
 import ConservationPracticeContainer from '../ConservationPracticeContainer';
->>>>>>> devRedo
 
 // Tab styles come from the NRCS design system
 // Documentation: (https://koala-bandits.github.io/nrcs-design-system-storybook/?path=/story/components-tabs-nav--tabs-story)
