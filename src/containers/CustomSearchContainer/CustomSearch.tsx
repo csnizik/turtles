@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import useBreakpoint from 'use-breakpoint';
 import { useTranslation } from 'react-i18next';
 
@@ -92,15 +91,13 @@ const CustomSearch = ({ setSearchToggle }: ICustomSearchProps) => {
         />
       </div>
       <div className='grid-row search-button-row'>
-        <Link to='/search-results'>
-          <CustomButton
-            ariaLabel='search'
-            additionalClassName={searchButtonStyles()}
-            onClick={handleSearch}
-          >
-            {t('actions.search')}
-          </CustomButton>
-        </Link>
+        <CustomButton
+          ariaLabel='search'
+          additionalClassName={searchButtonStyles()}
+          onClick={handleSearch}
+        >
+          {t('actions.search')}
+        </CustomButton>
       </div>
     </div>
   );
