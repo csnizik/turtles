@@ -1,40 +1,44 @@
 @import '../../stylesheets/variables';
 
 .document-box {
-  margin: 1em 1em 1.5em 1em;
-  background-color: $sfi-white;
+  margin: 3.75rem 2.188rem 5rem;
 
   .list-document {
     text-align: left;
     padding: 0;
-    background-color: $sfi-white;
-    height: 100%;
+    margin: 0;
 
     .full-component {
       display: flex;
+      height: 20vw;
 
       .overview {
         width: 70%;
-        margin-right: 5em;
+        margin-right: 1.875em;
+        overflow: auto;
+      }
+
+      img {
+        height: auto;
       }
     }
 
     h4 {
       font-size: 25px;
-      font-weight: $medium-weight;
+      font-weight: $semi-heavy-weight;
       font-style: normal;
-      padding-bottom: 0.5em;
+      padding-bottom: 0.625rem;
     }
 
     p {
-      font-weight: $medium-weight;
-      margin: 0 0 1em 0;
+      font-weight: $light-weight;
+      margin: 0 0 1.875em 0;
     }
 
-    img {
-      width: 25%;
-      height: 15%;
-      float: right;
+    p:last-child {
+      margin: 0;
     }
   }
 }
+
+

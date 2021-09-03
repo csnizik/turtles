@@ -13,7 +13,7 @@ describe('Land use section is rendered correctly', () => {
 
   test('Should display the group of checkboxes', () => {
     expect(
-      screen.getByRole('group', { name: 'Filter By Land Use' })
+      screen.getByRole('group', { name: 'search-page.filter-by-land-use' })
     ).toBeDefined();
   });
 });

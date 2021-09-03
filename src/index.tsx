@@ -8,9 +8,12 @@ import Spinner from './components/Spinner/Spinner';
 import './stylesheets/app.scss';
 import './i18n';
 import 'nrcs-design-system/scss/nrcs-design-system.scss';
+import ResultsContainer from './containers/ResultsContainer';
 
 const Home = lazy(() => import('./containers/Home'));
-const Header = lazy(() => import('./components/Header/Header'));
+const GovernmentBanner = lazy(
+  () => import('./components/GovernmentBanner/GovernmentBanner')
+);
 const CustomSearchContainer = lazy(
   () => import('./containers/CustomSearchContainer/CustomSearchContainer')
 );
@@ -19,13 +22,16 @@ const LocationContainer = lazy(() => import('./containers/LocationContainer'));
 const App = () => (
   <Router>
     <Suspense fallback={<Spinner />}>
-      <Header />
+      <GovernmentBanner />
       <Switch>
         <Route exact path='/'>
           <Home />
         </Route>
-        <Route path='/search'>
+        <Route exact path='/search'>
           <CustomSearchContainer />
+        </Route>
+        <Route exact path='/search-results'>
+          <ResultsContainer />
         </Route>
         <Route path='/:name'>
           <LocationContainer />
