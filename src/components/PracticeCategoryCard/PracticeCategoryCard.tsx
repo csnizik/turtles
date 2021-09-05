@@ -1,17 +1,20 @@
 import './practice-category-card.scss';
-import { ReactComponent as PlaceholderIcon } from './placeholder-icon-36.svg';
+import image from './placeholder-icon-36.svg';
 
 interface ICategoryData {
     title: string;
     body: string;
+    id: string;
+    selectPractice: any;
 }
 
-const PracticeCategoryCard = ({ title, body }:ICategoryData) => {
+const PracticeCategoryCard = ({ title, body, id, selectPractice }:ICategoryData) => {
     
     return (
         <div className='card'>
+            <button className='btn-cover' onClick={() => { selectPractice(id)}}>.</button>
             <div className='top-container'>
-            <div className='icon'><PlaceholderIcon/></div> 
+                <img className='icon' alt='conservation practice icon' src={image} />
                 <div className='title'>{title}</div>
                 </div>
             <div className='body'>{body}</div>

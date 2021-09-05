@@ -17,5 +17,12 @@
 }
 
 .categoryCard {
-  margin-bottom: 0.625rem;
+  margin-bottom: 1.875rem;
+  margin-right: 1.25rem;
+}
+
+.card-container {
+  display: flex;
+  max-width: 65rem;
+  flex-wrap: wrap;
 }
