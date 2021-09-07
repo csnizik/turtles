@@ -16,6 +16,7 @@ const ConservationPractice = () => {
         <div className='internal-box' />
         <div className='link'>
           <Link
+              aria-label='environmental quality incentives program opens in new window'
              style={{
               textDecoration: 'none'
              }}
@@ -26,7 +27,7 @@ const ConservationPractice = () => {
             target='_blank'
           >
             Explore more practice data
-            <img alt='Explore' src={image} />
+            <img alt='link opens new window' src={image} />
           </Link>
         </div>
       </div>
