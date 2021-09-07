@@ -17,9 +17,9 @@ const ConservationPractice = () => {
         <div className='link'>
           <Link
               aria-label='environmental quality incentives program opens in new window'
-            //  style={{
-            //   textDecoration: 'none'
-            //  }}
+             style={{
+              textDecoration: 'none'
+             }}
             to={{
               pathname:
                 'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/programs/financial/eqip/',
