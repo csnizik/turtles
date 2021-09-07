@@ -16,9 +16,10 @@ const ConservationPractice = () => {
         <div className='internal-box' />
         <div className='link'>
           <Link
-             style={{
-              textDecoration: 'none'
-             }}
+              aria-label='environmental quality incentives program opens in new window'
+            //  style={{
+            //   textDecoration: 'none'
+            //  }}
             to={{
               pathname:
                 'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/programs/financial/eqip/',
@@ -26,7 +27,7 @@ const ConservationPractice = () => {
             target='_blank'
           >
             Explore more practice data
-            <img alt='Explore' src={image} />
+            <img alt='link opens new window' src={image} />
           </Link>
         </div>
       </div>

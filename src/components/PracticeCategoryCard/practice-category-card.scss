@@ -1,15 +1,15 @@
 @import '../../stylesheets/variables';
 .card {
-  width: 30.9375rem;
   min-height: 10.625rem;
   background: $sfi-white;
   box-sizing: border-box;
   @include colored-top-box;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+  flex: 0 0 100%;
 }
 
-.title {
+.practice-category-name {
   font-weight: $medium-weight;
   font-size: 1.25rem;
   color: #005ea2;
@@ -17,7 +17,7 @@
   margin-top: 0.625rem;
 }
 
-.body {
+.practice-category-display {
   font-weight: $medium-light-weight;
   font-size: 1rem;
   color: $nrcs-dark;
@@ -43,4 +43,5 @@
   margin-left: -1rem;
   border: none;
   background-color: rgba(0, 0, 0, 0);
+  color: rgba(0, 0, 0, 0);
 }

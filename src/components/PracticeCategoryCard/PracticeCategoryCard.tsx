@@ -2,22 +2,22 @@ import './practice-category-card.scss';
 import image from './placeholder-icon-36.svg';
 
 interface ICategoryData {
-    title: string;
-    body: string;
-    id: string;
+    practiceCategoryName: string;
+    practiceCategoryDisplay: string;
+    practiceCategoryId: string;
     selectPractice: any;
 }
 
-const PracticeCategoryCard = ({ title, body, id, selectPractice }:ICategoryData) => {
+const PracticeCategoryCard = ({ practiceCategoryName, practiceCategoryDisplay, practiceCategoryId, selectPractice }:ICategoryData) => {
     
     return (
         <div className='card'>
-            <button className='btn-cover' onClick={() => { selectPractice(id)}}>.</button>
+            <button className='btn-cover' onClick={() => { selectPractice(practiceCategoryId) }}>{practiceCategoryName}</button>
             <div className='top-container'>
                 <img className='icon' alt='conservation practice icon' src={image} />
-                <div className='title'>{title}</div>
+                <div className='practice-category-name'>{practiceCategoryName}</div>
                 </div>
-            <div className='body'>{body}</div>
+            <div className='practice-category-display'>{practiceCategoryDisplay}</div>
         </div>
     )
 

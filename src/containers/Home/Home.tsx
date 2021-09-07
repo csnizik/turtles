@@ -3,6 +3,7 @@ import Header from '../../components/Header';
 import LocationSearch from '../../components/LocationSearch';
 import FindByPractices from '../../components/FindByPractices';
 import QuickSearchBar from '../../components/QuickSearchBar';
+import ConservationPracticeLandingScreen from '../../components/ConservationPracticeLandingScreen';
 import './home.scss';
 
 const Home = () => {
@@ -27,6 +28,7 @@ const Home = () => {
         priority='1'
       />
       {renderMainContent()}
+      <ConservationPracticeLandingScreen />
     </div>
   );
 };

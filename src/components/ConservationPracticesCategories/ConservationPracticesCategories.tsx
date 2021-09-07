@@ -1,35 +1,29 @@
 import PracticeCategoriesCard from '../PracticeCategoryCard';
-import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
-import { useAppDispatch } from '../../Redux/hooks/hooks';
 import './conservation-practices-categories.scss';
 
 interface ICategoryData {
-    title: string;
-    body: string;
-    id: string
+    practiceCategoryName: string;
+    practiceCategoryDisplay: string;
+    practiceCategoryId: string
 }
 
 interface ICategories {
     categories: ICategoryData[];
+    selectPractice: Function;
 }
 
-const ConservationPracticesCategories = ({ categories }: ICategories) => {
+const ConservationPracticesCategories = ({ categories, selectPractice }: ICategories) => {
 
-     const dispatch = useAppDispatch();
     
-    const selectPractice = (id) => {
-        console.log("SelectedPractice id: ", id)
-        dispatch(setPracticeCategory(id));
-    }
     return (
         <div className='categoryListContainer'>
             <div className='headerText'>Conservation Practice Categories</div>
             <div className='introText'>Conservation Practice Categories introduction ...</div>
-            <div className='card-container'>
+            <ul className='card-container'>
                 {categories.map((category:ICategoryData) => {
-                    return <div className='categoryCard'> <PracticeCategoriesCard selectPractice={selectPractice} title={category.title} body={category.body} id={category.id}/></div>
+                    return <li className='categoryCard'> <PracticeCategoriesCard selectPractice={selectPractice} practiceCategoryName={category.practiceCategoryName} practiceCategoryDisplay={category.practiceCategoryDisplay} practiceCategoryId={category.practiceCategoryId}/></li>
                 })}
-            </div>
+            </ul>
     </div>
 )
 }
