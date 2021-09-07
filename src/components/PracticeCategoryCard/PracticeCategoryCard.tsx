@@ -17,7 +17,7 @@ const PracticeCategoryCard = ({ practiceCategoryName, practiceCategoryDisplay, p
                 <img className='icon' alt='conservation practice icon' src={image} />
                 <div className='practice-category-name'>{practiceCategoryName}</div>
                 </div>
-            <div className='practice-category-display'>{practiceCategoryDisplay}</div>
+            <div className='practice-categoryisplay'>{practiceCategoryDisplay}</div>
         </div>
     )
 

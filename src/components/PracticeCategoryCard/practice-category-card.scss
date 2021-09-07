@@ -12,7 +12,7 @@
 .practice-category-name {
   font-weight: $medium-weight;
   font-size: 1.25rem;
-  color: #005ea2;
+  color: $dark-blue;
   line-height: 1.61125rem;
   margin-top: 0.625rem;
 }
@@ -42,6 +42,6 @@
   position: absolute;
   margin-left: -1rem;
   border: none;
-  background-color: rgba(0, 0, 0, 0);
-  color: rgba(0, 0, 0, 0);
+  background-color: $transparent;
+  color: $transparent;
 }
