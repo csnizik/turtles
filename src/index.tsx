@@ -30,6 +30,12 @@ const App = () => (
         <Route exact path='/search'>
           <CustomSearchContainer />
         </Route>
+        <Route path='/search-results'>
+          <ResultsContainer />
+        </Route>
+        <Route path='/:name'>
+          <LocationContainer />
+        </Route>
       </Switch>
     </Suspense>
   </Router>

@@ -1,68 +1,98 @@
-import { TabContent, TabPane } from 'reactstrap';
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import CustomTabs from '../CustomTabs';
-import { searchOptionMap } from '../../common/typedconstants.common';
-import { useAppSelector } from '../../Redux/hooks/hooks';
-import ConservationPracticeContainer from '../../containers/ConservationPracticeContainer';
+import { useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { IStateDropdownOption } from '../../common/types';
+import {
+  useGetCountyListQuery,
+  useGetStateListQuery,
+} from '../../Redux/services/api';
 import './location-search.scss';
+import CustomButton from '../CustomButton';
 
-// Tab styles come from the NRCS design system
-// Documentation: (https://koala-bandits.github.io/nrcs-design-system-storybook/?path=/story/components-tabs-nav--tabs-story)
-// 0 represents default tab style
-// 1 represnts FPAC tab style
-const tabStyleOptions: any = {
-  default: 0,
-  fpacStyle: 1,
-};
+const LocationSearch = () => {
+  const history: any = useHistory();
+  const { t } = useTranslation();
 
-const LocationContainer = () => {
-  const { name }: any = useParams();
-  const selectedPracticeCategory: number = useAppSelector(
-    (state) => state.practiceSlice.selectedPracticeCategory
-  );
+  const handleClick = () => {
+    history.push('Location');
+  };
+  const [isDisabled, setIsDisabled]: any = useState(true);
 
-  const selectedPractice: number = useAppSelector(
-    (state) => state.practiceSlice.selectedSpecficPractice
-  );
-  const option = searchOptionMap[name];
-  const [currentTabOption, setTabOption] = useState(option?.id);
+  const [selectedState, setSelectedState]: any = useState<number>(-1);
+
+  const countyStatus = useGetCountyListQuery(selectedState);
+  const stateStatus = useGetStateListQuery();
 
   useEffect(() => {
-    if (
-      (selectedPracticeCategory >= 0 && !currentTabOption) ||
-      selectedPractice
-    ) {
-      setTabOption(1);
+    if (selectedState < 0) {
+      setIsDisabled(true);
     }
-  }, []);
+  }, [selectedState]);
 
-  const renderTabContent = () => (
-    <TabContent activeTab={currentTabOption}>
-      {currentTabOption === 0 && <TabPane tabId={0} />}
-      {currentTabOption === 1 && (
-        <TabPane tabId={1}>
-          <ConservationPracticeContainer
-            currentPracticeCategoryId={selectedPracticeCategory}
-            currentSpecificPractice={selectedPractice}
-          />
-        </TabPane>
-      )}
-      {currentTabOption === 2 && <TabPane tabId={2} />}
-    </TabContent>
-  );
+  const handleSelectState = (event: any) => {
+    const stateVal = event.target.value;
+    setSelectedState(stateVal);
+    setIsDisabled(false);
+  };
+
   return (
-    <>
-      <CustomTabs
-        tabStyleOption={tabStyleOptions.default}
-        searchOptionList={searchOptionMap}
-        currOption={currentTabOption}
-        handleChangeSearchOption={setTabOption}
-      />
-
-      {renderTabContent()}
-    </>
+    <div className='grid-row location-search-container'>
+      <div className='desktop:grid-col-4 img-row'>
+        <img src='images/homePageUSMap.png' alt='Map of the United States' />
+      </div>
+      <div className='desktop:grid-col-7 content-row'>
+        <h2>{t('location-search.explore-by-location')}</h2>
+        <p className='p-style'>{t('location-search.introductory-paragraph')}</p>
+        <div className='location-label-grid'>
+          <label className='usa-label' htmlFor='stateSelect'>
+            {t('location-search.labels.select-state')}
+          </label>
+          <label className='usa-label' htmlFor='countySelect'>
+            {t('location-search.labels.select-county')}
+          </label>
+        </div>
+        <div className='state-county-grid'>
+          <select
+            className='usa-select'
+            id='stateSelect'
+            name='stateOptions'
+            onChange={handleSelectState}
+          >
+            <option value={-1}>{t('location-search.national')}</option>
+            {stateStatus.isSuccess &&
+              stateStatus.data &&
+              stateStatus.data.map((state: IStateDropdownOption) => {
+                return (
+                  <option key={state.stateCode} value={state.stateCode}>
+                    {state.stateNameDisplay}
+                  </option>
+                );
+              })}
+          </select>
+          <select
+            className='usa-select'
+            id='countySelect'
+            name='countyOptions'
+            disabled={isDisabled}
+          >
+            <option value={-1}>{t('actions.select')}</option>
+            {countyStatus.isSuccess &&
+              countyStatus.data &&
+              countyStatus.data.map((county: any) => {
+                return (
+                  <option key={county.countyCode} value={county.countyCode}>
+                    {county.countyDisplay}
+                  </option>
+                );
+              })}
+          </select>
+        </div>
+        <CustomButton onClick={handleClick}>
+          {t('location-search.explore-location')}
+        </CustomButton>
+      </div>
+    </div>
   );
 };
 
-export default LocationContainer;
+export default LocationSearch;
