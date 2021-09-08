@@ -7,7 +7,7 @@ import {
   ICountyList,
   IStateDropdownOption,
   ILandUseOption,
-  IPracticeMedia,
+  IPracticeVideo,
 } from '../../common/types';
 
 export const api = createApi({
@@ -17,8 +17,8 @@ export const api = createApi({
     getResources: builder.query<IResourceConcernList[], void>({
       query: () => '/resourceConcern/concern',
     }),
-    getPractices: builder.query<IConservationPractice[], void>({
-      query: () => '/nationalOverviews/all',
+    getNationalOverviewByPractice: builder.query<IConservationPractice, void>({
+      query: (practiceId) => `/nationalPracticeOverview/${practiceId}`,
     }),
     getNationalPractices: builder.query<IAccordion[], void>({
       query: () => '/stored_procedures/search',
@@ -32,15 +32,15 @@ export const api = createApi({
     getLandUseOptions: builder.query<ILandUseOption[], void>({
       query: () => '/categories',
     }),
-    getPracticeVideoLink: builder.query<IPracticeMedia, void>({
-      query: () => '/practiceMedia',
+    getPracticeVideoLink: builder.query<IPracticeVideo[], void>({
+      query: (practiceId) => `/video/${practiceId}`,
     }),
   }),
 });
 
 export const {
   useGetResourcesQuery,
-  useGetPracticesQuery,
+  useGetNationalOverviewByPracticeQuery,
   useGetNationalPracticesQuery,
   useGetCountyListQuery,
   useGetStateListQuery,

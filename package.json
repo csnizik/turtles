@@ -45,13 +45,12 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "jest-svg-transformer": "^1.0.0",
     "prettier": "2.3.2"
   },
   "scripts": {
     "start": "npm run copy && react-scripts start",
     "build": "npm run copy && react-scripts build",
-    "test": "jest --colors --coverage",
+    "test": "jest --colors --coverage --coverageDirectory=/output/coverage/jest",
     "eject": "react-scripts eject",
     "copy": "cp -r ./node_modules/@arcgis/core/assets ./public/assets"
   },

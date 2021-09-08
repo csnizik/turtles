@@ -5,10 +5,10 @@ import './conservation-practice-container.scss';
 const ConservationPracticeContainer = () => {
 
     return (
-      <>
-        <ConservationPracticeOverview/>
-        <ConservationPracticeVideo/>
-      </>
+      <div>
+        <ConservationPracticeOverview selectedPracticeId={9}/>
+        <ConservationPracticeVideo selectedPracticeId={9}/>
+      </div>
     )
 }
 

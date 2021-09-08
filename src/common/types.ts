@@ -11,8 +11,7 @@ export interface IResourceConcernList {
 
 export interface IConservationPractice {
   practiceId: number;
-  practiceCode: string;
-  prcaticeImage?: string;
+  practiceImage: string;
   practiceOverview: string;
   practiceInfo: string;
 }
@@ -62,6 +61,9 @@ export interface ILandUseOption {
   landUseCategoryDesc: string;
 }
 
-export interface IPracticeMedia {
+export interface IPracticeVideo {
+  videoId: number;
+  videoName: string;
+  videoDescription: string;
   videoLink: string;
 }
