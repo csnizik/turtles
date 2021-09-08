@@ -2,318 +2,329 @@ export interface ISearchOptionMap {
   [key: string]: any;
 }
 export const searchOptionMap: ISearchOptionMap = {
-  Location: { id: 0, displayName: 'Location' },
-  ResourceConcerns: { id: 1, displayName: 'Resource Concerns' },
-  ConservationPractices: { id: 2, displayName: 'Conservation Practices' },
-  ProjectsAndInitiatives: { id: 3, displayName: 'Projects And Initiatives' },
+  Location: { id: 0, displayName: 'Overview' },
+  ConservationPractices: { id: 1, displayName: 'Conservation Practices' },
+  ProjectsAndInitiatives: { id: 2, displayName: 'Projects And Initiatives' },
 };
 
 export const ConservationPractice: any = [
   {
     id: 0,
-    practiceCategory: "Cropland Soil Quality",
-    practice: "Access Control",
+    practiceCategory: 'Cropland Soil Quality',
+    practice: 'Access Control',
   },
   {
     id: 1,
-    practiceCategory: "Grazing Land Conservation",
-    practice: "Brush Management",
+    practiceCategory: 'Grazing Land Conservation',
+    practice: 'Brush Management',
   },
   {
     id: 2,
-    practiceCategory: "Water Quality",
-    practice: "Composting Facility",
+    practiceCategory: 'Water Quality',
+    practice: 'Composting Facility',
   },
   {
     id: 3,
-    practiceCategory: "Forest Land Conservation",
-    practice: "Conservation Cover",
+    practiceCategory: 'Forest Land Conservation',
+    practice: 'Conservation Cover',
   },
   {
     id: 4,
-    practiceCategory: "Wetlands",
-    practice: "Cover Crop",
+    practiceCategory: 'Wetlands',
+    practice: 'Cover Crop',
   },
   {
     id: 5,
-    practiceCategory: "Irrigition Efficiency",
-    practice: "Critical Area Planting",
+    practiceCategory: 'Irrigition Efficiency',
+    practice: 'Critical Area Planting',
   },
   {
     id: 6,
-    practiceCategory: "Fish and Wildlife Habitat",
-    practice: "Diversion",
+    practiceCategory: 'Fish and Wildlife Habitat',
+    practice: 'Diversion',
   },
-]
+];
 
 export const ConservationPracticeResult: any = [
   {
     id: 0,
-    practiceCategory: "Cropland Soil Quality",
-    practiceCategoryDesc: "Healthy soil is critical to successful agriculture and is vital to produce the food and fiber we use every day. When soil issues arise, from soil organism habitat degradation to erosion to nutrient depletion, they can have long-term and costly impacts to soil health and production goals.",
-    practiceCategoryLink: "Cropland Soil Quality details",
-    practices: [{
-      practiceid: 1,      
-      practiceName: "Alley Cropping",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 2,
-      practiceName: "Conservation Cover",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 3,  
-      practiceName: "Conservation Crop Rotation",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 4,  
-      practiceName: "Contour Buffer Strips",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 5,  
-      practiceName: "Contour Farming",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 6,  
-      practiceName: "Contour Orchard and Other Perennial Crops",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 7,  
-      practiceName: "Controlled Traffic Farming",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 8,  
-      practiceName: "Cover Crop",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 9,  
-      practiceName: "Critical Area Planting",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 10,  
-      practiceName: "Cross Wind Ridges",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 11,  
-      practiceName: "Cross Wind Trap Strips",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 12,  
-      practiceName: "Deep Tillage",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 13,  
-      practiceName: "Diversion",
-      practiceDesc: "A diversion is an earthen channel that is installed across a slope with a supporting ridge on the downhill side.",
-      practiceLink: "Diversion details",
-    },
-    {
-      practiceid: 14,  
-      practiceName: "Field Border",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-
-  ]},
+    practiceCategory: 'Cropland Soil Quality',
+    practiceCategoryDesc:
+      'Healthy soil is critical to successful agriculture and is vital to produce the food and fiber we use every day. When soil issues arise, from soil organism habitat degradation to erosion to nutrient depletion, they can have long-term and costly impacts to soil health and production goals.',
+    practiceCategoryLink: 'Cropland Soil Quality details',
+    practices: [
+      {
+        practiceid: 1,
+        practiceName: 'Alley Cropping',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 2,
+        practiceName: 'Conservation Cover',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 3,
+        practiceName: 'Conservation Crop Rotation',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 4,
+        practiceName: 'Contour Buffer Strips',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 5,
+        practiceName: 'Contour Farming',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 6,
+        practiceName: 'Contour Orchard and Other Perennial Crops',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 7,
+        practiceName: 'Controlled Traffic Farming',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 8,
+        practiceName: 'Cover Crop',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 9,
+        practiceName: 'Critical Area Planting',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 10,
+        practiceName: 'Cross Wind Ridges',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 11,
+        practiceName: 'Cross Wind Trap Strips',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 12,
+        practiceName: 'Deep Tillage',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 13,
+        practiceName: 'Diversion',
+        practiceDesc:
+          'A diversion is an earthen channel that is installed across a slope with a supporting ridge on the downhill side.',
+        practiceLink: 'Diversion details',
+      },
+      {
+        practiceid: 14,
+        practiceName: 'Field Border',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+    ],
+  },
   {
     id: 1,
-    practiceCategory: "Cropland Soil Health & Sustainability",
-    practiceCategoryDesc: "Healthy soil is critical to successful agriculture and is vital to produce the food and fiber we use every day. When soil issues arise, from soil organism habitat degradation to erosion to nutrient depletion, they can have long-term and costly impacts to soil health and production goals.",
-    practiceCategoryLink: "Grazing Land Conservation Details",
-    practices: [{
-      practiceid: 1,
-      practiceName: "Brush Management",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {      
-      practiceid: 2,
-      practiceName: "Composting Facility",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 3,
-      practiceName: "Contour Buffer Strips",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-  ]
-},
+    practiceCategory: 'Cropland Soil Health & Sustainability',
+    practiceCategoryDesc:
+      'Healthy soil is critical to successful agriculture and is vital to produce the food and fiber we use every day. When soil issues arise, from soil organism habitat degradation to erosion to nutrient depletion, they can have long-term and costly impacts to soil health and production goals.',
+    practiceCategoryLink: 'Grazing Land Conservation Details',
+    practices: [
+      {
+        practiceid: 1,
+        practiceName: 'Brush Management',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 2,
+        practiceName: 'Composting Facility',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 3,
+        practiceName: 'Contour Buffer Strips',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+    ],
+  },
   {
     id: 2,
-    practiceCategory: "Fish and Wildlife Habitat",
-    practiceCategoryDesc: "Healthy soil is critical to successful agriculture and is vital to produce the food and fiber we use every day. When soil issues arise, from soil organism habitat degradation to erosion to nutrient depletion, they can have long-term and costly impacts to soil health and production goals.",
-    practiceCategoryLink: "Water Quality Details",
-    practices: [{
-      practiceid: 1,
-      practiceName: "Cover Crop",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {      
-      practiceid: 2,
-      practiceName: "Critical Area Planting",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 3,
-      practiceName: "Diversion",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-  ]
+    practiceCategory: 'Fish and Wildlife Habitat',
+    practiceCategoryDesc:
+      'Healthy soil is critical to successful agriculture and is vital to produce the food and fiber we use every day. When soil issues arise, from soil organism habitat degradation to erosion to nutrient depletion, they can have long-term and costly impacts to soil health and production goals.',
+    practiceCategoryLink: 'Water Quality Details',
+    practices: [
+      {
+        practiceid: 1,
+        practiceName: 'Cover Crop',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 2,
+        practiceName: 'Critical Area Planting',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 3,
+        practiceName: 'Diversion',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+    ],
   },
   {
     id: 3,
-    practiceCategory: "Forest Land Conservation",
-    practiceCategoryDesc: "Description",
-    practiceCategoryLink: "Link Here",
-    practices: [{
-      practiceid: 1,
-      practiceName: "Brush Management",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {      
-      practiceid: 2,
-      practiceName: "Composting Facility",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 3,
-      practiceName: "Contour Buffer Strips",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-  ]
+    practiceCategory: 'Forest Land Conservation',
+    practiceCategoryDesc: 'Description',
+    practiceCategoryLink: 'Link Here',
+    practices: [
+      {
+        practiceid: 1,
+        practiceName: 'Brush Management',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 2,
+        practiceName: 'Composting Facility',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 3,
+        practiceName: 'Contour Buffer Strips',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+    ],
   },
   {
     id: 4,
-    practiceCategory: "Grazing Land Conservation",
-    practiceCategoryDesc: "Description",
-    practiceCategoryLink: "Link Here",
-    practices: [{
-      practiceid: 1,
-      practiceName: "Cover Crop",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {      
-      practiceid: 2,
-      practiceName: "Critical Area Planting",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 3,
-      practiceName: "Diversion",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-  ]
+    practiceCategory: 'Grazing Land Conservation',
+    practiceCategoryDesc: 'Description',
+    practiceCategoryLink: 'Link Here',
+    practices: [
+      {
+        practiceid: 1,
+        practiceName: 'Cover Crop',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 2,
+        practiceName: 'Critical Area Planting',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 3,
+        practiceName: 'Diversion',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+    ],
   },
   {
     id: 5,
-    practiceCategory: "Irrigation Efficiency",
-    practiceCategoryDesc: "Description",
-    practiceCategoryLink: "Link Here",
-    practices: [{
-      practiceid: 1,
-      practiceName: "Brush Management",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {      
-      practiceid: 2,
-      practiceName: "Composting Facility",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 3,
-      practiceName: "Contour Buffer Strips",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-  ]
+    practiceCategory: 'Irrigation Efficiency',
+    practiceCategoryDesc: 'Description',
+    practiceCategoryLink: 'Link Here',
+    practices: [
+      {
+        practiceid: 1,
+        practiceName: 'Brush Management',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 2,
+        practiceName: 'Composting Facility',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 3,
+        practiceName: 'Contour Buffer Strips',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+    ],
   },
   {
     id: 6,
-    practiceCategory: "Water Quality",
-    practiceCategoryDesc: "Description",
-    practiceCategoryLink: "Link Here",
-    practices: [{
-      practiceid: 1,
-      practiceName: "Cover Crop",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {      
-      practiceid: 2,
-      practiceName: "Critical Area Planting",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 3,
-      practiceName: "Diversion",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-  ]
+    practiceCategory: 'Water Quality',
+    practiceCategoryDesc: 'Description',
+    practiceCategoryLink: 'Link Here',
+    practices: [
+      {
+        practiceid: 1,
+        practiceName: 'Cover Crop',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 2,
+        practiceName: 'Critical Area Planting',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 3,
+        practiceName: 'Diversion',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+    ],
   },
   {
     id: 7,
-    practiceCategory: "Wetlands",
-    practiceCategoryDesc: "Description",
-    practiceCategoryLink: "Link Here",
-    practices: [{
-      practiceid: 1,
-      practiceName: "Brush Management",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {      
-      practiceid: 2,
-      practiceName: "Composting Facility",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-    {
-      practiceid: 3,
-      practiceName: "Contour Buffer Strips",
-      practiceDesc: "Practice Description",
-      practiceLink: "Practice Link Here",
-    },
-  ]
+    practiceCategory: 'Wetlands',
+    practiceCategoryDesc: 'Description',
+    practiceCategoryLink: 'Link Here',
+    practices: [
+      {
+        practiceid: 1,
+        practiceName: 'Brush Management',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 2,
+        practiceName: 'Composting Facility',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+      {
+        practiceid: 3,
+        practiceName: 'Contour Buffer Strips',
+        practiceDesc: 'Practice Description',
+        practiceLink: 'Practice Link Here',
+      },
+    ],
   },
-]
+];
 
 export const ConservationPracticeStandard: any = [
   {

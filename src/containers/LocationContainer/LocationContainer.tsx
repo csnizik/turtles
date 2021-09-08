@@ -1,14 +1,11 @@
 import { TabContent, TabPane } from 'reactstrap';
 import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import CustomTabs from '../../components/CustomTabs';
 import { searchOptionMap } from '../../common/typedconstants.common';
-
-import ResourceConcernList from '../../components/ResourceConcernList/ResourceConcernList';
-import CustomButton from '../../components/CustomButton';
 import { useAppSelector } from '../../Redux/hooks/hooks';
-import './location-search.scss';
 import ConservationPracticeContainer from '../ConservationPracticeContainer';
+import './location-search.scss';
 
 // Tab styles come from the NRCS design system
 // Documentation: (https://koala-bandits.github.io/nrcs-design-system-storybook/?path=/story/components-tabs-nav--tabs-story)
@@ -24,47 +21,33 @@ const LocationContainer = () => {
   const selectedPracticeCategory: number = useAppSelector(
     (state) => state.practiceSlice.selectedPracticeCategory
   );
+  const selectedPractice: number = useAppSelector(
+    (state) => state.practiceSlice.selectedSpecficPractice
+  );
   const option = searchOptionMap[name];
   const [currentTabOption, setTabOption] = useState(option?.id);
 
   useEffect(() => {
-    if (selectedPracticeCategory >= 0 && !currentTabOption) {
-      setTabOption(2);
+    if (
+      (selectedPracticeCategory >= 0 && !currentTabOption) ||
+      selectedPractice
+    ) {
+      setTabOption(1);
     }
-  }, [selectedPracticeCategory]);
-
-  const renderLocationContent = () => {
-    return (
-      <div className='back-button'>
-        <Link to='/'>
-          <CustomButton className='btn btn-light '>
-            <i className='fas fa-arrow-left ' /> Back
-          </CustomButton>
-        </Link>
-      </div>
-    );
-  };
+  }, [selectedPracticeCategory, selectedPractice]);
 
   const renderTabContent = () => (
     <TabContent activeTab={currentTabOption}>
-      {currentTabOption === 0 && (
-        <TabPane tabId={0}>{renderLocationContent()}</TabPane>
-      )}
+      {currentTabOption === 0 && <TabPane tabId={0} />}
       {currentTabOption === 1 && (
         <TabPane tabId={1}>
-          {renderLocationContent()}
-          <ResourceConcernList />
+          <ConservationPracticeContainer
+            currentPracticeCategoryId={selectedPracticeCategory}
+            currentSpecificPractice={selectedPractice}
+          />
         </TabPane>
       )}
-      {currentTabOption === 2 && (
-        <TabPane tabId={2}>
-          {renderLocationContent()}
-          <ConservationPracticeContainer />
-        </TabPane>
-      )}
-      {currentTabOption === 3 && (
-        <TabPane tabId={3}>{renderLocationContent()}</TabPane>
-      )}
+      {currentTabOption === 2 && <TabPane tabId={2} />}
     </TabContent>
   );
   return (

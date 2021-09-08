@@ -1,13 +1,21 @@
 import ConservationPracticeOverview from '../../components/ConservationPracticeOverview';
 import ConservationPracticeVideo from '../../components/ConservationPracticeVideo';
+import PracticeBreadcrumbs from '../../components/PracticeBreadcrumbs';
 import './conservation-practice-container.scss';
 
-const ConservationPracticeContainer = () => {
+const ConservationPracticeContainer = ({
+  currentSpecificPractice,
+  currentPracticeCategoryId,
+}: any) => {
   return (
-    <div>
+    <>
+      <PracticeBreadcrumbs
+        currentPracticeCategoryId={currentPracticeCategoryId}
+        currentSpecificPractice={currentSpecificPractice}
+      />
       <ConservationPracticeOverview selectedPracticeId={9} />
       <ConservationPracticeVideo selectedPracticeId={9} />
-    </div>
+    </>
   );
 };
 
