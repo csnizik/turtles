@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import useBreakpoint from 'use-breakpoint';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import BREAKPOINTS from '../../common/constants';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
@@ -8,7 +9,6 @@ import SearchByResourceConcern from '../../components/SearchByResourceConcern';
 import LandUseSection from '../../components/LandUseSection';
 import SearchByConservationPractice from '../../components/SearchByConservationPractice';
 import { ISearchData } from '../../common/types';
-import { Link } from 'react-router-dom';
 
 const defaultSearchInput: ISearchData = {
   resource_concern_category_id: null,
