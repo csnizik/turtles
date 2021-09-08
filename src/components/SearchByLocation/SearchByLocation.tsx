@@ -8,22 +8,43 @@ import {
 
 import './search-by-location.scss';
 
-const SearchByLocation = ({ searchInput, handleInputChange }: any) => {
+const SearchByLocation = ({ setSearchInput }: any) => {
   const { t } = useTranslation();
 
   const [isDisabled, setIsDisabled]: any = useState(true);
+  const [stateId, setStateId]: any = useState();
   const stateStatus = useGetStateListQuery();
-  const countyStatus = useGetCountyListQuery(searchInput.selectedStateId);
+  const countyStatus = useGetCountyListQuery(stateId);
 
   useEffect(() => {
-    if (!searchInput.selectedStateId) {
-      setIsDisabled(true);
+    const id = `${stateId}000`;
+    if (stateId) {
+      setSearchInput((prevState) => ({
+        ...prevState,
+        state_county_code: id,
+      }));
+    } else {
+      setSearchInput((prevState) => ({
+        ...prevState,
+        state_county_code: null,
+      }));
     }
-  }, [searchInput]);
+  }, [isDisabled, stateId]);
 
   const handleSelectState = (event: any) => {
-    handleInputChange(event);
+    const { value } = event.target;
+
+    setStateId(value);
     setIsDisabled(false);
+  };
+
+  const handleCountySelect = (event: any) => {
+    const { value } = event.target;
+
+    setSearchInput((prevState) => ({
+      ...prevState,
+      state_county_code: `${value}`,
+    }));
   };
 
   return (
@@ -44,7 +65,6 @@ const SearchByLocation = ({ searchInput, handleInputChange }: any) => {
             id='stateValue'
             name='selectedStateId'
             onChange={handleSelectState}
-            value={searchInput.selectedStateId}
           >
             <option value=''>{t('location-search.national')}</option>
             {stateStatus.isSuccess &&
@@ -68,8 +88,7 @@ const SearchByLocation = ({ searchInput, handleInputChange }: any) => {
             id='countyValue'
             name='selectedCountyId'
             disabled={isDisabled}
-            onChange={handleInputChange}
-            value={searchInput.selectedCountyId}
+            onChange={handleCountySelect}
           >
             <option value=''>{t('actions.select')}</option>
             {countyStatus.isSuccess &&
