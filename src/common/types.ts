@@ -10,10 +10,9 @@ export interface IResourceConcernList {
   image: string;
 }
 
-export interface IAllConservationPractice {
+export interface IConservationPractice {
   practiceId: number;
-  practiceCode: string;
-  prcaticeImage?: string;
+  practiceImage: string;
   practiceOverview: string;
   practiceInfo: string;
 }
@@ -75,4 +74,10 @@ export interface ISearchData {
   practice_id?: number | null;
   state_county_code?: string | null;
   land_use_list?: string | null;
+}
+export interface IPracticeVideo {
+  videoId: number;
+  videoName: string;
+  videoDescription: string;
+  videoLink: string;
 }

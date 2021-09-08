@@ -29,26 +29,6 @@
       font-weight: 900;
     }
   }
-
-  main {
-    .grid-col-4 {
-      .usa-button {
-        color: $usda-blue;
-        background: $white;
-        border: 0.2rem solid $usda-blue;
-        border-radius: 0.25rem;
-      }
-    }
-    .grid-row:first-of-type {
-      background: $light-grey-205;
-      .grid-col-6 {
-        p:first-of-type {
-          font-size: 22px;
-          font-weight: 900;
-        }
-      }
-    }
-  }
 }
 
 /** Media Queries **/

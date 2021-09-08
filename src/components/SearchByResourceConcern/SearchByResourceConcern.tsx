@@ -111,7 +111,9 @@ const SearchByResourceConcern = ({ setSearchInput }: any) => {
           {t('search-by-resource-concern.heading')}
         </label>
         <div className='desktop:grid-col-8'>
-          <p>{t('search-by-resource-concern.first-label-name')}</p>
+          <p className='margin-top-2'>
+            {t('search-by-resource-concern.first-label-name')}
+          </p>
           <select
             className='usa-select'
             id='resourceConcernCategoryValue'
@@ -136,7 +138,9 @@ const SearchByResourceConcern = ({ setSearchInput }: any) => {
         </div>
 
         <div className='desktop:grid-col-8'>
-          <p>{t('search-by-resource-concern.second-label-name')}</p>
+          <p className='margin-top-4'>
+            {t('search-by-resource-concern.second-label-name')}
+          </p>
           <select
             className='usa-select'
             id='resourceConcernValue'

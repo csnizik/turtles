@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import useBreakpoint from 'use-breakpoint';
 import { useTranslation } from 'react-i18next';
 import BREAKPOINTS from '../../common/constants';
@@ -9,6 +8,7 @@ import SearchByResourceConcern from '../../components/SearchByResourceConcern';
 import LandUseSection from '../../components/LandUseSection';
 import SearchByConservationPractice from '../../components/SearchByConservationPractice';
 import { ISearchData } from '../../common/types';
+import { Link } from 'react-router-dom';
 
 const defaultSearchInput: ISearchData = {
   resource_concern_category_id: null,
@@ -31,12 +31,12 @@ const CustomSearch = ({ setSearchToggle }: ICustomSearchProps) => {
 
   const handleSearch = () => {};
 
-  const buttonStyles = () => {
+  const searchButtonStyles = () => {
     let styles;
     if (breakpoint !== 'mobile') {
-      styles = 'margin-top-3 margin-bottom-3 mobile-btn-left';
+      styles = 'margin-top-3 margin-bottom-3 margin-left-4';
     } else {
-      styles = 'margin-top-3 margin-bottom-3 mobile-btn-left mobile-btn-width';
+      styles = 'margin-top-3 margin-bottom-3 mobile-btn-width';
     }
     return styles;
   };
@@ -65,7 +65,7 @@ const CustomSearch = ({ setSearchToggle }: ICustomSearchProps) => {
       >
         <CustomButton
           ariaLabel='search'
-          additionalClassName={buttonStyles()}
+          additionalClassName={searchButtonStyles()}
           onClick={handleSearch}
         >
           {t('actions.search')}

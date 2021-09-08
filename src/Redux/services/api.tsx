@@ -2,13 +2,14 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { baseURL } from '../../common/util/AxiosUtil';
 import {
   IPractice,
-  IAllConservationPractice,
   IResourceConcernList,
   ICountyList,
   IStateDropdownOption,
   ILandUseOption,
   IPracticeCategory,
   ISearchData,
+  IPracticeVideo,
+  IConservationPractice,
 } from '../../common/types';
 
 export const api = createApi({
@@ -19,12 +20,10 @@ export const api = createApi({
     getResources: builder.query<IResourceConcernList[], void>({
       query: () => '/resourceConcern/concern',
     }),
-    getAllPractices: builder.query<IAllConservationPractice[], void>({
-      query: () => '/nationalOverviews/all',
+    getNationalOverviewByPractice: builder.query<IConservationPractice, void>({
+      query: (practiceId) => `/nationalPracticeOverview/${practiceId}`,
     }),
-    // getNationalPractices: builder.query<IPractice[], void>({
-    //   query: () => '/stored_procedures/search',
-    // }),
+
     getStateList: builder.query<IStateDropdownOption[], void>({
       query: () => `/states`,
     }),
@@ -51,17 +50,20 @@ export const api = createApi({
         body: data,
       }),
     }),
+    getPracticeVideoLink: builder.query<IPracticeVideo[], void>({
+      query: (practiceId) => `/video/${practiceId}`,
+    }),
   }),
 });
 
 export const {
   useGetResourcesQuery,
-  useGetAllPracticesQuery,
-  // useGetNationalPracticesQuery,
-  useGetCountyListQuery,
-  useGetStateListQuery,
-  useGetLandUseOptionsQuery,
   useGetPracticeCategoryQuery,
   useGetPracticeQuery,
   usePostSearchDataQuery,
+  useGetNationalOverviewByPracticeQuery,
+  useGetCountyListQuery,
+  useGetStateListQuery,
+  useGetLandUseOptionsQuery,
+  useGetPracticeVideoLinkQuery,
 } = api;

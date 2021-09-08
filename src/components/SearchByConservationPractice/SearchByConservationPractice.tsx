@@ -100,7 +100,9 @@ const SearchByConservationPractice = ({
           {t('search-by-conservation-practice.heading')}
         </label>
         <div className='desktop:grid-col-8'>
-          <p>{t('search-by-conservation-practice.first-label-name')}</p>
+          <p className='margin-top-2'>
+            {t('search-by-conservation-practice.first-label-name')}
+          </p>
           <select
             className='usa-select'
             id='practiceCategoryValue'
@@ -125,7 +127,9 @@ const SearchByConservationPractice = ({
         </div>
 
         <div className='desktop:grid-col-8'>
-          <p>{t('search-by-conservation-practice.second-label-name')}</p>
+          <p className='margin-top-4'>
+            {t('search-by-conservation-practice.second-label-name')}
+          </p>
           <select
             className='usa-select'
             id='specificPracticeValue'
