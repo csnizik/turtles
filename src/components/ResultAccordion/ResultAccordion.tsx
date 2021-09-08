@@ -9,7 +9,7 @@ import {
   setSpecificPractice,
 } from '../../Redux/Slice/practiceSlice';
 import { usePostSearchDataQuery } from '../../Redux/services/api';
-import { useAppDispatch } from '../../Redux/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 
 import { Practice } from '../../common/types';
 import './result-accordion.scss';
@@ -17,6 +17,9 @@ import './result-accordion.scss';
 const Accordion = () => {
   const location: any = useLocation();
   const dispatch = useAppDispatch();
+  const selectedPractice: number = useAppSelector(
+    (state) => state.practiceSlice.selectedSpecficPractice
+  );
   const sharedState = location?.state?.detail;
 
   const { data, error, isLoading, isSuccess, isError } =
@@ -43,6 +46,10 @@ const Accordion = () => {
   };
 
   const handlePracticeCategorySelection = (categoryId: number) => {
+    if (selectedPractice >= 0) {
+      dispatch(setSpecificPractice(-1));
+    }
+
     dispatch(setPracticeCategory(categoryId));
   };
 
