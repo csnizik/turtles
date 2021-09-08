@@ -1,18 +1,19 @@
 import classNames from 'classnames';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import { Spinner } from 'reactstrap';
-import { IAccordion, Practice } from '../../common/types';
+import { Link, useLocation } from 'react-router-dom';
+
+import { Practice } from '../../common/types';
 import './result-accordion.scss';
-import { useGetNationalPracticesQuery } from '../../Redux/services/api';
-import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
-import { useAppDispatch } from '../../Redux/hooks/hooks';
+import { usePostSearchDataQuery } from '../../Redux/services/api';
+import Spinner from '../Spinner/Spinner';
 
 const Accordion = () => {
-  const dispatch = useAppDispatch();
-  const { data, isLoading, isSuccess, isError, error } =
-    useGetNationalPracticesQuery();
+  const location: any = useLocation();
+  const sharedState = location?.state?.detail;
+
+  const { data, error, isLoading, isSuccess, isError } =
+    usePostSearchDataQuery(sharedState);
 
   const { t } = useTranslation();
 
@@ -34,10 +35,6 @@ const Accordion = () => {
     return settoggleChildTab(id);
   };
 
-  const handlePracticeCategorySelection = (id: number) => {
-    dispatch(setPracticeCategory(id));
-  };
-
   return (
     <>
       {isLoading && <Spinner />}
@@ -48,53 +45,52 @@ const Accordion = () => {
             <h4>{t('search-results-page.conservation-practices')}</h4>
           </div>
           <div className='accordion-section'>
-            {data.map((practiceCategory: IAccordion) => {
-              const categoryId: number = practiceCategory.practiceCategoryId;
+            {data.map((item: any) => {
               const chevronClassName = classNames('fas', {
-                'fas fa-chevron-right': tab !== categoryId,
-                'fas fa-chevron-down': tab === categoryId,
+                'fas fa-chevron-right': tab !== item.practiceCategoryId,
+                'fas fa-chevron-down': tab === item.practiceCategoryId,
               });
               const accordionClass = classNames({
-                'accordion-container': tab !== categoryId,
-                'accordion-container-blue': tab === categoryId,
+                'accordion-container': tab !== item.practiceCategoryId,
+                'accordion-container-blue': tab === item.practiceCategoryId,
               });
               return (
                 <>
-                  <div className={accordionClass}>
-                    <li key={categoryId}>
+                  <div key={item.practiceCategoryId} className={accordionClass}>
+                    <li key={item.practiceCategoryId}>
                       <i
                         className={chevronClassName}
-                        onClick={() =>
-                          toggle(practiceCategory.practiceCategoryId)
-                        }
+                        onClick={() => toggle(item.practiceCategoryId)}
                         role='presentation'
                       />
                       <div className='accordion-data'>
-                        <h4>{practiceCategory.practiceCategoryName}</h4>
+                        <h4>{item.practiceCategoryName}</h4>
                         <div>
-                          {tab === categoryId && (
+                          {tab === item.practiceCategoryId && (
                             <p>
-                              {practiceCategory.practiceCategoryDescription ||
+                              {item.practiceCategoryDescription ||
                                 'No description Available'}
                             </p>
                           )}
-                          {tab === categoryId && (
-                            <Link
-                              to={practiceCategory.practiceCategoryLink}
-                              onClick={() =>
-                                handlePracticeCategorySelection(categoryId)
-                              }
-                            >
-                              {practiceCategory.practiceCategoryName} Details
-                            </Link>
+                          {tab === item.practiceCategoryId && (
+                            <p>
+                              <Link
+                                to={{
+                                  pathname: item.practiceCategoryName,
+                                  state: { detail: item.practiceCategoryId },
+                                }}
+                              >
+                                {item.practiceCategoryName} Details
+                              </Link>
+                            </p>
                           )}
                         </div>
                       </div>
                     </li>
                   </div>
-                  {tab === categoryId && (
+                  {tab === item.practiceCategoryId && (
                     <div className='child-accordion-container'>
-                      {practiceCategory.practices.map((ele: Practice) => {
+                      {item.practices.map((ele: Practice) => {
                         const childChevronClassName = classNames('fas', {
                           'fa-chevron-right': toggleChildTab !== ele.practiceId,
                           'fa-chevron-down': toggleChildTab === ele.practiceId,
@@ -136,7 +132,7 @@ const Accordion = () => {
           </div>
         </>
       )}
-      {/* For demo Purpose */}
+      {/*  For demo Purpose  */}
       <div className='top-title'>
         <h4>{t('search-results-page.project-initiatives')}</h4>
       </div>

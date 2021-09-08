@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import CustomButton from '../CustomButton';
 import { ConservationPractice } from '../../common/typedconstants.common';
-import { IConservationPracticeDropdown } from '../../common/types';
+import { IPracticeCategoryDropdown } from '../../common/types';
 import './find-by-practice.scss';
 
 const homePagePracticeImage: string =
@@ -17,9 +17,9 @@ const intialState = {
 const FindByPractices = () => {
   const { t } = useTranslation();
   const [practiceState, setPracticeState] =
-    useState<IConservationPracticeDropdown>(intialState);
+    useState<IPracticeCategoryDropdown>(intialState);
   const [secondState, setSecondState] =
-    useState<IConservationPracticeDropdown>(intialState);
+    useState<IPracticeCategoryDropdown>(intialState);
   const [selectedPractice, setSelectedPractice] = useState(-1);
 
   const handleFindPractices = () => {

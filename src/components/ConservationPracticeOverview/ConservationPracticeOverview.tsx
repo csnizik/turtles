@@ -1,9 +1,10 @@
 import './conservation-practice-overview.scss';
-import { useGetNationalOverviewByPracticeQuery} from '../../Redux/services/api';
+import { useGetNationalOverviewByPracticeQuery } from '../../Redux/services/api';
 import Spinner from '../Spinner/Spinner';
 
-const ConservationPracticeOverview = ({selectedPracticeId} : any) => {
-  const { data, error, isLoading, isSuccess, isError } = useGetNationalOverviewByPracticeQuery(selectedPracticeId);
+const ConservationPracticeOverview = ({ selectedPracticeId }: any) => {
+  const { data, error, isLoading, isSuccess, isError } =
+    useGetNationalOverviewByPracticeQuery(selectedPracticeId);
 
   return (
     <>
@@ -19,8 +20,9 @@ const ConservationPracticeOverview = ({selectedPracticeId} : any) => {
                 <h4>Practice Information</h4>
                 <p>{data.practiceInfo}</p>
               </div>
-              <img alt='Practice'
-              src= {`data:image/png;base64,${data.practiceImage}`}
+              <img
+                alt='Practice'
+                src={`data:image/png;base64,${data.practiceImage}`}
               />
             </div>
           </ul>

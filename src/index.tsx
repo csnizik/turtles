@@ -17,6 +17,7 @@ const CustomSearchContainer = lazy(
   () => import('./containers/CustomSearchContainer/CustomSearchContainer')
 );
 const LocationContainer = lazy(() => import('./containers/LocationContainer'));
+const ResultsContainer = lazy(() => import('./containers/ResultsContainer'));
 
 const App = () => (
   <Router>
@@ -26,8 +27,11 @@ const App = () => (
         <Route exact path='/'>
           <Home />
         </Route>
-        <Route path='/search'>
+        <Route exact path='/search'>
           <CustomSearchContainer />
+        </Route>
+        <Route path='/search-results'>
+          <ResultsContainer />
         </Route>
         <Route path='/:name'>
           <LocationContainer />

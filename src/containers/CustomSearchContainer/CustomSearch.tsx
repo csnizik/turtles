@@ -1,23 +1,22 @@
 import { useState } from 'react';
 import useBreakpoint from 'use-breakpoint';
 import { useTranslation } from 'react-i18next';
-
-import Header from '../../components/Header';
+import { Link } from 'react-router-dom';
 import BREAKPOINTS from '../../common/constants';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
 import SearchByResourceConcern from '../../components/SearchByResourceConcern';
 import LandUseSection from '../../components/LandUseSection';
 import SearchByConservationPractice from '../../components/SearchByConservationPractice';
+import { ISearchData } from '../../common/types';
 
-const defaultSearchInput: any = {
-  selectedStateId: '',
-  selectedCountyId: '',
-  selectedLandUseIds: [],
-  selectedPracticeCategory: '',
-  selectedPractice: '',
-  selectedResourceCategory: '',
-  selectedResourceSubgroup: '',
+const defaultSearchInput: ISearchData = {
+  resource_concern_category_id: null,
+  resource_concern_id: null,
+  practice_category_id: null,
+  practice_id: null,
+  state_county_code: null,
+  land_use_list: null,
 };
 
 interface ICustomSearchProps {
@@ -27,29 +26,10 @@ interface ICustomSearchProps {
 const CustomSearch = ({ setSearchToggle }: ICustomSearchProps) => {
   const { t } = useTranslation();
   const { breakpoint } = useBreakpoint(BREAKPOINTS);
-  const [searchInput, setSearchInput]: any = useState(defaultSearchInput);
+  const [searchInput, setSearchInput] =
+    useState<ISearchData>(defaultSearchInput);
 
-  const handleInputChange = (e: any) => {
-    const { name, value, checked } = e.target;
-    let landUseSelections = searchInput.selectedLandUseIds;
-    if (name.includes('selectedLandUseIds')) {
-      if (!checked && landUseSelections.includes(value)) {
-        landUseSelections = landUseSelections.filter((landUse: any) => {
-          return landUse.landUseCategoryID === value;
-        });
-      } else if (!landUseSelections.includes(value)) {
-        landUseSelections.push(value);
-      }
-      setSearchInput({ ...searchInput, selectedLandUseIds: landUseSelections });
-    } else {
-      setSearchInput({ ...searchInput, [name]: value });
-    }
-  };
-
-  const handleSearch = () => {
-    //console.log('TODO: Submit form for search', searchInput);
-    setSearchToggle(true);
-  };
+  const handleSearch = () => {};
 
   const searchButtonStyles = () => {
     let styles;
@@ -63,34 +43,26 @@ const CustomSearch = ({ setSearchToggle }: ICustomSearchProps) => {
 
   return (
     <div data-testid='custom-search-container' className='custom-search'>
-      <Header
-        priority='1'
-        headerText={t('search-page.quick-search')}
-        paragraphText={t('search-page.intro')}
-        parentClassNames='custom-search-header'
-      />
-      <SearchByLocation
-        searchInput={searchInput}
-        handleInputChange={handleInputChange}
-      />
-      <LandUseSection
-        searchInput={searchInput}
-        handleInputChange={handleInputChange}
-      />
+      <div className='custom-search-header'>
+        <h1>{t('search-page.quick-search')}</h1>
+        <p>{t('search-page.intro')}</p>
+      </div>
+
+      <SearchByLocation setSearchInput={setSearchInput} />
+      <LandUseSection setSearchInput={setSearchInput} />
       <p className='practice-description'>
         {t('search-by-conservation-practice.description')}
       </p>
       <div className='bottom-container'>
-        <SearchByConservationPractice
-          searchInput={searchInput}
-          handleInputChange={handleInputChange}
-        />
-        <SearchByResourceConcern
-          searchInput={searchInput}
-          handleInputChange={handleInputChange}
-        />
+        <SearchByConservationPractice setSearchInput={setSearchInput} />
+        <SearchByResourceConcern setSearchInput={setSearchInput} />
       </div>
-      <div className='grid-row search-button-row'>
+      <Link
+        to={{
+          pathname: '/search-results',
+          state: { detail: searchInput },
+        }}
+      >
         <CustomButton
           ariaLabel='search'
           additionalClassName={searchButtonStyles()}
@@ -98,7 +70,7 @@ const CustomSearch = ({ setSearchToggle }: ICustomSearchProps) => {
         >
           {t('actions.search')}
         </CustomButton>
-      </div>
+      </Link>
     </div>
   );
 };

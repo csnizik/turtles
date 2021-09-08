@@ -3,13 +3,12 @@ import ConservationPracticeVideo from '../../components/ConservationPracticeVide
 import './conservation-practice-container.scss';
 
 const ConservationPracticeContainer = () => {
-
-    return (
-      <div>
-        <ConservationPracticeOverview selectedPracticeId={9}/>
-        <ConservationPracticeVideo selectedPracticeId={9}/>
-      </div>
-    )
-}
+  return (
+    <div>
+      <ConservationPracticeOverview selectedPracticeId={9} />
+      <ConservationPracticeVideo selectedPracticeId={9} />
+    </div>
+  );
+};
 
 export default ConservationPracticeContainer;

@@ -5,19 +5,28 @@ import './search-by-resource-concern.scss';
 import { disableState, enableState } from '../../Redux/Slice/disableSlice';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 
-const SearchByResourceConcern = ({ searchInput, handleInputChange }: any) => {
+const initialState = {
+  resources: [],
+  disabled: true,
+};
+const SearchByResourceConcern = ({ setSearchInput }: any) => {
   const dispatchRequest = useAppDispatch();
   const status = useAppSelector((state) => state.disableSlice.disablePractice);
   const { t } = useTranslation();
-  const [resourceConcerns, setResourceConcerns] = useState<any[]>([]);
-  const [resourceConcernsSubgroups, setResourceConcernsSubgroups] = useState<
-    any[]
-  >([]);
+  const [resourceConcerns, setResourceConcerns] = useState<any>(initialState);
+  const [resourceConcernsSubgroups, setResourceConcernsSubgroups] =
+    useState<any>(initialState);
+  const [selectedResourceCategory, setSelectedResourceCategory] = useState(-1);
+  const [selectedResourceConcern, setSelectedResourceConcern] = useState(-1);
 
   const getResourceConcerns = async () => {
     try {
       const response: any = await getRequest('/resourceConcern/concern');
-      setResourceConcerns(response.data.length > 0 ? response.data : []);
+      setResourceConcerns({
+        ...resourceConcerns,
+        resources: response.data.length > 0 ? response.data : [],
+        disabled: false,
+      });
     } catch (error) {
       // throw new Error('Resource Concern Request Error');
     }
@@ -28,9 +37,11 @@ const SearchByResourceConcern = ({ searchInput, handleInputChange }: any) => {
       const response: any = await getRequest(
         `/resourceConcern/concern/category/${swapaCategory}`
       );
-      setResourceConcernsSubgroups(
-        response.data.length > 0 ? response.data : []
-      );
+      setResourceConcernsSubgroups({
+        ...resourceConcernsSubgroups,
+        resources: response.data.length > 0 ? response.data : [],
+        disabled: false,
+      });
     } catch (error) {
       throw new Error('Resource Concern Subgroup Request Error');
     }
@@ -40,20 +51,54 @@ const SearchByResourceConcern = ({ searchInput, handleInputChange }: any) => {
     getResourceConcerns();
   }, []);
 
+  useEffect(() => {
+    if (selectedResourceCategory === -1) {
+      setSearchInput((prevState) => ({
+        ...prevState,
+        resource_concern_category_id: null,
+      }));
+    } else {
+      setSearchInput((prevState) => ({
+        ...prevState,
+        resource_concern_category_id: +selectedResourceCategory,
+      }));
+    }
+  }, [selectedResourceCategory]);
+
+  useEffect(() => {
+    if (selectedResourceConcern === -1) {
+      setSearchInput((prevState) => ({
+        ...prevState,
+        resource_concern_id: null,
+      }));
+    } else {
+      setSearchInput((prevState) => ({
+        ...prevState,
+        resource_concern_id: +selectedResourceConcern,
+      }));
+    }
+  }, [selectedResourceConcern]);
+
   const handleChange = (e) => {
     const { value }: any = e.target;
-    handleInputChange(e);
-    if (e.target.value !== '') {
+
+    if (value !== '') {
+      setSelectedResourceCategory(+value);
       getResourceConcernsSubgroups(value);
       dispatchRequest(disableState());
     } else {
-      setResourceConcernsSubgroups([]);
+      setResourceConcernsSubgroups(initialState);
+      setSelectedResourceCategory(-1);
       dispatchRequest(enableState());
     }
   };
 
   const handleSubgroupChange = (e) => {
-    handleInputChange(e);
+    const { value } = e.target;
+    setSelectedResourceConcern(value);
+    if (value === '') {
+      setSelectedResourceConcern(-1);
+    }
   };
 
   return (
@@ -75,11 +120,10 @@ const SearchByResourceConcern = ({ searchInput, handleInputChange }: any) => {
             name='selectedResourceCategory'
             disabled={status}
             onChange={handleChange}
-            value={searchInput.selectedResourceCategory}
           >
             <option value=''>All resource concerns (default)</option>
-            {resourceConcerns.length
-              ? resourceConcerns.map((item: any) => {
+            {resourceConcerns.resources.length
+              ? resourceConcerns.resources.map((item: any) => {
                   return (
                     <option
                       key={item.resourceConcernId}
@@ -101,13 +145,13 @@ const SearchByResourceConcern = ({ searchInput, handleInputChange }: any) => {
             className='usa-select'
             id='resourceConcernValue'
             name='selectedResourceSubgroup'
-            disabled={searchInput.selectedResourceCategory === ''}
+            disabled={resourceConcernsSubgroups.disabled}
             onChange={handleSubgroupChange}
-            value={searchInput.selectedResourceSubgroup}
+            value={selectedResourceConcern}
           >
             <option value=''>- Select resource concern -</option>
-            {resourceConcernsSubgroups.length
-              ? resourceConcernsSubgroups.map((item: any) => {
+            {resourceConcernsSubgroups.resources.length
+              ? resourceConcernsSubgroups.resources.map((item: any) => {
                   return (
                     <option
                       key={item.resourceConcernId}
