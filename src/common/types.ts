@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export interface IResourceConcernList {
   resourceConcernId: number;
   resourceConcernName: string;
@@ -65,4 +66,13 @@ export interface ILandUseOption {
   landUseCategoryID: number;
   landUseCategoryName: string;
   landUseCategoryDesc: string;
+}
+
+export interface ISearchData {
+  resource_concern_category_id: number | null;
+  resource_concern_id: number | null;
+  practice_category_id: number | null;
+  practice_id: number | null;
+  state_county_code: string | null;
+  land_use_list: string | null;
 }

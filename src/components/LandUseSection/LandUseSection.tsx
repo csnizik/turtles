@@ -6,10 +6,12 @@ import { ILandUseOption } from '../../common/types';
 import './land-use-section.scss';
 import { useGetLandUseOptionsQuery } from '../../Redux/services/api';
 
-const LandUseSection = ({ handleInputChange }: any) => {
+const LandUseSection = ({ handleInputChange, setSearchInput }: any) => {
   const landUseOptions: any = useGetLandUseOptionsQuery();
   const landUseData: ILandUseOption[] = landUseOptions.data || [];
   const [tooltipOpen, setTooltipOpen]: any = useState([]);
+  const [landUse, setLandUse]: any = useState(null);
+  const [check, setCheck] = useState(false);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -22,6 +24,45 @@ const LandUseSection = ({ handleInputChange }: any) => {
       setTooltipOpen(toolTipMap);
     }
   }, [landUseData]);
+
+  useEffect(() => {
+    setSearchInput((prevState) => ({
+      ...prevState,
+      land_use_list: landUse,
+    }));
+    if (landUse === '') {
+      setSearchInput((prevState) => ({
+        ...prevState,
+        land_use_list: null,
+      }));
+    }
+  }, [landUse]);
+
+  const handleLandUse = (e) => {
+    const { value, checked } = e.target;
+
+    if (checked) {
+      if (landUse || (landUse && landUse.indexOf(value) === -1)) {
+        setCheck(!check);
+        setLandUse((prevState) => `${prevState},${value}`);
+      } else {
+        setCheck(!check);
+        setLandUse(`${value}`);
+      }
+      setSearchInput((prevState) => ({
+        ...prevState,
+        land_use_list: landUse,
+      }));
+    } else {
+      const landUseArr = landUse.split(',');
+      if (landUseArr.includes(value)) {
+        const filteredLandUse = landUseArr?.filter((landId: any) => {
+          return landId !== value;
+        });
+        setLandUse(filteredLandUse.join(','));
+      }
+    }
+  };
 
   const toggleTooltip = (index: number) => {
     const updatedTooltips = tooltipOpen.map((tooltip: any) => {
@@ -55,7 +96,8 @@ const LandUseSection = ({ handleInputChange }: any) => {
                   id={`landUseOption${landId}`}
                   type='checkbox'
                   name='selectedLandUseIds'
-                  onChange={handleInputChange}
+                  defaultChecked={check}
+                  onClick={handleLandUse}
                   value={landId}
                 />
                 <label

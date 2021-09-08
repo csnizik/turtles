@@ -8,6 +8,7 @@ import {
   IStateDropdownOption,
   ILandUseOption,
   IPracticeCategory,
+  ISearchData,
 } from '../../common/types';
 
 export const api = createApi({
@@ -42,6 +43,14 @@ export const api = createApi({
     getPractice: builder.query<IPractice[], number>({
       query: (id) => `/practice/catagories/practices?id=${id}`,
     }),
+    //!Post request for Search
+    postSearchData: builder.query<ISearchData, object>({
+      query: (data) => ({
+        url: '/stored_procedures/search',
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -54,4 +63,5 @@ export const {
   useGetLandUseOptionsQuery,
   useGetPracticeCategoryQuery,
   useGetPracticeQuery,
+  usePostSearchDataQuery,
 } = api;

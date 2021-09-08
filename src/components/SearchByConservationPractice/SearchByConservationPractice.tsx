@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ConservationPractice } from '../../common/typedconstants.common';
 import {
@@ -6,6 +6,7 @@ import {
   IPractice,
   IPracticeCategory,
   IPracticeDropdown,
+  ISearchData,
 } from '../../common/types';
 import './conservation-practice.scss';
 import {
@@ -22,15 +23,21 @@ const intialState = {
   practice: [],
   disabled: true,
 };
-
-const SearchByConservationPractice = () => {
+type ISearchByConservationPractice = {
+  setSearchInput: Dispatch<SetStateAction<ISearchData>>;
+  handleInputChange: (e: any) => void;
+};
+const SearchByConservationPractice = ({
+  setSearchInput,
+  handleInputChange,
+}: ISearchByConservationPractice) => {
   const dispatch = useAppDispatch();
   const result = useAppSelector((State) => State.disableSlice.disableResource);
   const { t } = useTranslation();
   const [practiceState, setPracticeState] = useState<any>(intialState);
   const [secondState, setSecondState] = useState<any>(intialState);
   const [selectedPractice, setSelectedPractice] = useState(-1);
-  const [selectedSubPractice, setSelectedSubPractice] = useState('');
+  const [selectedSubPractice, setSelectedSubPractice] = useState(-1);
 
   const practiceCategory = useGetPracticeCategoryQuery();
   const practice = useGetPracticeQuery(selectedPractice);
@@ -38,9 +45,35 @@ const SearchByConservationPractice = () => {
   useEffect(() => {
     setPracticeState({ ...practiceState, practice: practiceCategory.data });
     setSecondState({ ...secondState, practice: practice.data });
+
+    if (selectedPractice === -1) {
+      setSearchInput((prevState) => ({
+        ...prevState,
+        practice_category_id: null,
+      }));
+    } else {
+      setSearchInput((prevState) => ({
+        ...prevState,
+        practice_category_id: selectedPractice,
+      }));
+    }
   }, [selectedPractice]);
 
-  const handleChange = (e) => {
+  useEffect(() => {
+    if (selectedSubPractice === -1) {
+      setSearchInput((prevState) => ({
+        ...prevState,
+        practice_id: null,
+      }));
+    } else {
+      setSearchInput((prevState) => ({
+        ...prevState,
+        practice_id: selectedSubPractice,
+      }));
+    }
+  }, [selectedSubPractice]);
+
+  const handlePracticeCategoryChange = (e) => {
     const practiceVal = e.target.value;
     // setSelectedSubPractice(practiceVal);
     if (practiceVal !== '') {
@@ -53,14 +86,14 @@ const SearchByConservationPractice = () => {
       }
     } else {
       setSecondState({ ...intialState });
-      setSelectedSubPractice('');
+      setSelectedSubPractice(-1);
+      setSelectedPractice(-1);
       dispatch(enableSecondState());
     }
   };
 
   const handlePracticeChange = (e) => {
     const { value } = e.target;
-    console.log('SubGroup', value);
     setSelectedSubPractice(value);
   };
 
@@ -80,7 +113,7 @@ const SearchByConservationPractice = () => {
             id='practiceCategoryValue'
             name='practiceCategorySelect'
             disabled={result}
-            onChange={handleChange}
+            onChange={handlePracticeCategoryChange}
           >
             <option value=''>All practices (default)</option>
             {practiceCategory.isSuccess &&
