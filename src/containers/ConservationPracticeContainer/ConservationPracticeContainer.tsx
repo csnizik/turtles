@@ -13,17 +13,8 @@ const ConservationPracticeContainer = ({
         currentPracticeCategoryId={currentPracticeCategoryId}
         currentSpecificPractice={currentSpecificPractice}
       />
-      {currentPracticeCategoryId && currentSpecificPractice < 0 && (
-        <>
-          <p>Display practice category overview</p>
-        </>
-      )}
-      {currentSpecificPractice >= 0 && (
-        <>
-          <ConservationPracticeOverview selectedPracticeId={9} />
-          <ConservationPracticeVideo selectedPracticeId={9} />{' '}
-        </>
-      )}
+      <ConservationPracticeOverview selectedPracticeId={9} />
+      <ConservationPracticeVideo selectedPracticeId={9} />{' '}
     </>
   );
 };
