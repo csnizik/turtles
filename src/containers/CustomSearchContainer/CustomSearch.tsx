@@ -93,6 +93,7 @@ const CustomSearch = ({ setSearchToggle }: ICustomSearchProps) => {
         />
         <SearchByResourceConcern
           searchInput={searchInput}
+          setSearchInput={setSearchInput}
           handleInputChange={handleInputChange}
         />
       </div>

@@ -95,6 +95,9 @@ const SearchByConservationPractice = ({
   const handlePracticeChange = (e) => {
     const { value } = e.target;
     setSelectedSubPractice(value);
+    if (value === '') {
+      setSelectedSubPractice(-1);
+    }
   };
 
   return (
