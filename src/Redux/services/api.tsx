@@ -44,7 +44,7 @@ export const api = createApi({
       query: (id) => `/practice/catagories/practices?id=${id}`,
     }),
     //!Post request for Search
-    postSearchData: builder.query<ISearchData, object>({
+    postSearchData: builder.query<ISearchData[], object>({
       query: (data) => ({
         url: '/stored_procedures/search',
         method: 'POST',

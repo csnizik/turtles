@@ -1,13 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ConservationPractice } from '../../common/typedconstants.common';
-import {
-  IPracticeCategoryDropdown,
-  IPractice,
-  IPracticeCategory,
-  IPracticeDropdown,
-  ISearchData,
-} from '../../common/types';
+import { IPractice, IPracticeCategory, ISearchData } from '../../common/types';
 import './conservation-practice.scss';
 import {
   disableSecondState,
@@ -25,11 +18,9 @@ const intialState = {
 };
 type ISearchByConservationPractice = {
   setSearchInput: Dispatch<SetStateAction<ISearchData>>;
-  handleInputChange: (e: any) => void;
 };
 const SearchByConservationPractice = ({
   setSearchInput,
-  handleInputChange,
 }: ISearchByConservationPractice) => {
   const dispatch = useAppDispatch();
   const result = useAppSelector((State) => State.disableSlice.disableResource);
@@ -54,7 +45,7 @@ const SearchByConservationPractice = ({
     } else {
       setSearchInput((prevState) => ({
         ...prevState,
-        practice_category_id: selectedPractice,
+        practice_category_id: +selectedPractice,
       }));
     }
   }, [selectedPractice]);
@@ -68,14 +59,13 @@ const SearchByConservationPractice = ({
     } else {
       setSearchInput((prevState) => ({
         ...prevState,
-        practice_id: selectedSubPractice,
+        practice_id: +selectedSubPractice,
       }));
     }
   }, [selectedSubPractice]);
 
   const handlePracticeCategoryChange = (e) => {
     const practiceVal = e.target.value;
-    // setSelectedSubPractice(practiceVal);
     if (practiceVal !== '') {
       dispatch(disableSecondState());
       setSelectedPractice(practiceVal);
@@ -94,7 +84,7 @@ const SearchByConservationPractice = ({
 
   const handlePracticeChange = (e) => {
     const { value } = e.target;
-    setSelectedSubPractice(value);
+    setSelectedSubPractice(+value);
     if (value === '') {
       setSelectedSubPractice(-1);
     }

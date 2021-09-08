@@ -1,22 +1,15 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IStateDropdownOption } from '../../common/types';
 import {
   useGetCountyListQuery,
   useGetStateListQuery,
 } from '../../Redux/services/api';
-import { DataContext } from '../../containers/CustomSearchContainer/CustomSearch';
 
 import './search-by-location.scss';
 
-const SearchByLocation = ({
-  searchInput,
-  handleInputChange,
-  setSearchInput,
-}: any) => {
+const SearchByLocation = ({ setSearchInput }: any) => {
   const { t } = useTranslation();
-  // const data: any = useContext(DataContext);
-  // console.log('Context Data', data);
 
   const [isDisabled, setIsDisabled]: any = useState(true);
   const [stateId, setStateId]: any = useState();
@@ -40,7 +33,7 @@ const SearchByLocation = ({
 
   const handleSelectState = (event: any) => {
     const { value } = event.target;
-    handleInputChange(event);
+
     setStateId(value);
     setIsDisabled(false);
   };
@@ -72,7 +65,6 @@ const SearchByLocation = ({
             id='stateValue'
             name='selectedStateId'
             onChange={handleSelectState}
-            value={searchInput.selectedStateId}
           >
             <option value=''>{t('location-search.national')}</option>
             {stateStatus.isSuccess &&
@@ -97,7 +89,6 @@ const SearchByLocation = ({
             name='selectedCountyId'
             disabled={isDisabled}
             onChange={handleCountySelect}
-            value={searchInput.selectedCountyId}
           >
             <option value=''>{t('actions.select')}</option>
             {countyStatus.isSuccess &&

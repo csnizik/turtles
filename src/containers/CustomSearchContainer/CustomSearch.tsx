@@ -1,8 +1,7 @@
-import { createContext, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useBreakpoint from 'use-breakpoint';
 import { useTranslation } from 'react-i18next';
-
 import BREAKPOINTS from '../../common/constants';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
@@ -24,36 +23,13 @@ interface ICustomSearchProps {
   setSearchToggle: Function;
 }
 
-export const DataContext: any = createContext('');
-
 const CustomSearch = ({ setSearchToggle }: ICustomSearchProps) => {
   const { t } = useTranslation();
   const { breakpoint } = useBreakpoint(BREAKPOINTS);
   const [searchInput, setSearchInput] =
     useState<ISearchData>(defaultSearchInput);
 
-  const handleInputChange = (e: any) => {
-    // const { name, value, checked } = e.target;
-    // let landUseSelections = searchInput.land_use_list;
-    // if (name.includes('selectedLandUseIds')) {
-    // if (!checked &&  landUseSelections?.includes(value)) {
-    //   landUseSelections = landUseSelections?.filter((landUse: any) => {
-    //     return landUse.landUseCategoryID === value;
-    //   });
-    //   } else if (!landUseSelections?.includes(value)) {
-    //     landUseSelections.push(value);
-    //   }
-    //   setSearchInput({ ...searchInput, selectedLandUseIds: landUseSelections });
-    // } else {
-    //   setSearchInput({ ...searchInput, [name]: value });
-    // }
-    console.log('HandleInputChange is running');
-  };
-
-  const handleSearch = () => {
-    console.log('TODO: Submit form for search', searchInput);
-    setSearchToggle(true);
-  };
+  const handleSearch = () => {};
 
   const buttonStyles = () => {
     let styles;
@@ -72,32 +48,21 @@ const CustomSearch = ({ setSearchToggle }: ICustomSearchProps) => {
         <p>{t('search-page.intro')}</p>
       </div>
 
-      {/* <DataContext.Provider value={[searchInput, setSearchInput]}> */}
-      <SearchByLocation
-        searchInput={searchInput}
-        setSearchInput={setSearchInput}
-        handleInputChange={handleInputChange}
-      />
-      <LandUseSection
-        searchInput={searchInput}
-        setSearchInput={setSearchInput}
-        handleInputChange={handleInputChange}
-      />
+      <SearchByLocation setSearchInput={setSearchInput} />
+      <LandUseSection setSearchInput={setSearchInput} />
       <p className='practice-description'>
         {t('search-by-conservation-practice.description')}
       </p>
       <div className='bottom-container'>
-        <SearchByConservationPractice
-          setSearchInput={setSearchInput}
-          handleInputChange={handleInputChange}
-        />
-        <SearchByResourceConcern
-          searchInput={searchInput}
-          setSearchInput={setSearchInput}
-          handleInputChange={handleInputChange}
-        />
+        <SearchByConservationPractice setSearchInput={setSearchInput} />
+        <SearchByResourceConcern setSearchInput={setSearchInput} />
       </div>
-      <Link to='/search-results'>
+      <Link
+        to={{
+          pathname: '/search-results',
+          state: { detail: searchInput },
+        }}
+      >
         <CustomButton
           ariaLabel='search'
           additionalClassName={buttonStyles()}
@@ -106,7 +71,6 @@ const CustomSearch = ({ setSearchToggle }: ICustomSearchProps) => {
           {t('actions.search')}
         </CustomButton>
       </Link>
-      {/* </DataContext.Provider> */}
     </div>
   );
 };

@@ -2,23 +2,14 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getRequest } from '../../common/util/AxiosUtil';
 import './search-by-resource-concern.scss';
-import {
-  disableState,
-  disableSecondState,
-  enableSecondState,
-  enableState,
-} from '../../Redux/Slice/disableSlice';
+import { disableState, enableState } from '../../Redux/Slice/disableSlice';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 
 const initialState = {
   resources: [],
   disabled: true,
 };
-const SearchByResourceConcern = ({
-  searchInput,
-  handleInputChange,
-  setSearchInput,
-}: any) => {
+const SearchByResourceConcern = ({ setSearchInput }: any) => {
   const dispatchRequest = useAppDispatch();
   const status = useAppSelector((state) => state.disableSlice.disablePractice);
   const { t } = useTranslation();
@@ -34,6 +25,7 @@ const SearchByResourceConcern = ({
       setResourceConcerns({
         ...resourceConcerns,
         resources: response.data.length > 0 ? response.data : [],
+        disabled: false,
       });
     } catch (error) {
       // throw new Error('Resource Concern Request Error');
@@ -68,7 +60,7 @@ const SearchByResourceConcern = ({
     } else {
       setSearchInput((prevState) => ({
         ...prevState,
-        resource_concern_category_id: selectedResourceCategory,
+        resource_concern_category_id: +selectedResourceCategory,
       }));
     }
   }, [selectedResourceCategory]);
@@ -82,16 +74,16 @@ const SearchByResourceConcern = ({
     } else {
       setSearchInput((prevState) => ({
         ...prevState,
-        resource_concern_id: selectedResourceConcern,
+        resource_concern_id: +selectedResourceConcern,
       }));
     }
   }, [selectedResourceConcern]);
 
   const handleChange = (e) => {
     const { value }: any = e.target;
-    handleInputChange(e);
+
     if (value !== '') {
-      setSelectedResourceCategory(value);
+      setSelectedResourceCategory(+value);
       getResourceConcernsSubgroups(value);
       dispatchRequest(disableState());
     } else {
@@ -103,7 +95,6 @@ const SearchByResourceConcern = ({
 
   const handleSubgroupChange = (e) => {
     const { value } = e.target;
-    handleInputChange(e);
     setSelectedResourceConcern(value);
     if (value === '') {
       setSelectedResourceConcern(-1);
@@ -127,7 +118,6 @@ const SearchByResourceConcern = ({
             name='selectedResourceCategory'
             disabled={status}
             onChange={handleChange}
-            // value={searchInput.selectedResourceCategory}
           >
             <option value=''>All resource concerns (default)</option>
             {resourceConcerns.resources.length

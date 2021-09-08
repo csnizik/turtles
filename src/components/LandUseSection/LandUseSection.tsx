@@ -6,7 +6,7 @@ import { ILandUseOption } from '../../common/types';
 import './land-use-section.scss';
 import { useGetLandUseOptionsQuery } from '../../Redux/services/api';
 
-const LandUseSection = ({ handleInputChange, setSearchInput }: any) => {
+const LandUseSection = ({ setSearchInput }: any) => {
   const landUseOptions: any = useGetLandUseOptionsQuery();
   const landUseData: ILandUseOption[] = landUseOptions.data || [];
   const [tooltipOpen, setTooltipOpen]: any = useState([]);
