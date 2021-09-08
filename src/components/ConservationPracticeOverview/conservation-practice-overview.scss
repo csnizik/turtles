@@ -10,16 +10,17 @@
 
     .full-component {
       display: flex;
-      height: 20vw;
 
       .overview {
         width: 70%;
         margin-right: 1.875em;
-        overflow: auto;
+        min-height: 20vw;
       }
 
       img {
         height: auto;
+        max-height: 20vw;
+        width: 30%;
       }
     }
 

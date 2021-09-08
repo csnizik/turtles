@@ -6,9 +6,9 @@ test('adds 1 + 2 to equal 3', () => {
   expect(1 + 2).toBe(3);
 });
 
-// afterEach(() => {
-//   cleanup();
-// });
+afterEach(() => {
+  cleanup();
+});
 
 // describe('Custom search container is rendered correctly', () => {
 //   beforeEach(() => {
