@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-
 import PracticeBreadcrumbs from '../../components/PracticeBreadcrumbs';
 import IndividualPracticeContainer from './IndividualPracticeContainer';
 import ConservationPracticeLandingScreen from '../../components/ConservationPracticeLandingScreen';
@@ -37,6 +36,7 @@ const ConservationPracticeContainer = ({
       );
     }
     if (viewType === 'practiceCategories') {
+      // TODO: Return container / components for Practice Categories here
       return <p>Display practice category page</p>;
     }
     if (viewType === 'individualPractice') {

@@ -1,6 +1,7 @@
 import { TabContent, TabPane } from 'reactstrap';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+import { useGetStateListQuery } from '../../Redux/services/api';
 import CustomTabs from '../../components/CustomTabs';
 import { searchOptionMap } from '../../common/typedconstants.common';
 import { useAppSelector } from '../../Redux/hooks/hooks';
@@ -18,6 +19,8 @@ const tabStyleOptions: any = {
 
 const LocationContainer = () => {
   const { name }: any = useParams();
+  const location: any = useLocation();
+  const stateStatus = useGetStateListQuery();
   const selectedPracticeCategory: number = useAppSelector(
     (state) => state.practiceSlice.selectedPracticeCategory
   );
@@ -26,6 +29,15 @@ const LocationContainer = () => {
   );
   const option = searchOptionMap[name];
   const [currentTabOption, setTabOption] = useState(option?.id);
+
+  const selectedStateCode = location.state.selectedStateId;
+  const selectedState =
+    selectedStateCode &&
+    stateStatus.isSuccess &&
+    stateStatus.data &&
+    stateStatus.data.find((state: any) => {
+      return state.stateCode === selectedStateCode;
+    });
 
   useEffect(() => {
     if (
@@ -55,6 +67,7 @@ const LocationContainer = () => {
       <CustomTabs
         tabStyleOption={tabStyleOptions.default}
         searchOptionList={searchOptionMap}
+        currentSelectedState={selectedState}
         currOption={currentTabOption}
         handleChangeSearchOption={setTabOption}
       />

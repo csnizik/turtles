@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IStateDropdownOption } from '../../common/types';
@@ -87,9 +87,17 @@ const LocationSearch = () => {
               })}
           </select>
         </div>
-        <CustomButton onClick={handleClick}>
-          {t('location-search.explore-location')}
-        </CustomButton>
+
+        <Link
+          to={{
+            pathname: 'Location',
+            state: { selectedStateId: selectedState },
+          }}
+        >
+          <CustomButton onClick={handleClick}>
+            {t('location-search.explore-location')}
+          </CustomButton>
+        </Link>
       </div>
     </div>
   );

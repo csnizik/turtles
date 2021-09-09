@@ -9,6 +9,7 @@ interface ISearchOption {
   displayName: string;
   currentSearchOption: number;
   handleSearchChange: Function;
+  currentSelectedStateName: string;
 }
 
 const SearchOption = ({
@@ -16,6 +17,7 @@ const SearchOption = ({
   option,
   currentSearchOption,
   handleSearchChange,
+  currentSelectedStateName,
 }: ISearchOption) => {
   const listItemClassNames = classNames({
     active: option === currentSearchOption,
@@ -23,6 +25,13 @@ const SearchOption = ({
 
   const toggleTabs = (tab: number) => {
     handleSearchChange(tab);
+  };
+
+  const getTabTitle = () => {
+    if (option === 0 && currentSelectedStateName) {
+      return `${currentSelectedStateName} ${displayName}`;
+    }
+    return displayName;
   };
 
   return (
@@ -35,7 +44,7 @@ const SearchOption = ({
         }}
       >
         <Link className='links' to={displayName.split(' ').join('')}>
-          {displayName}
+          {getTabTitle()}
         </Link>
       </NavLink>
     </NavItem>
