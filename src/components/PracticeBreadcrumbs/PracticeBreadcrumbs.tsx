@@ -45,14 +45,13 @@ const PracticeBreadcrumbs = ({
       }
     }
   };
-  console.log(currentPractice);
   return (
     <nav
       className='usa-breadcrumb margin-top-1 margin-left-3 crumbs-container'
       aria-label='Conservation practice breadcrumbs'
     >
       <ol className='usa-breadcrumb__list'>
-        {currentPractice ? (
+        {currentPracticeCategory ? (
           <>
             <li
               className='usa-breadcrumb__list-item'
