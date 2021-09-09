@@ -32,8 +32,6 @@ const LocationContainer = () => {
 
   const selectedStateCode = location?.state?.selectedStateId;
 
-  console.log('Selected state id: ', selectedStateCode);
-
   const selectedState =
     selectedStateCode &&
     stateStatus.isSuccess &&
