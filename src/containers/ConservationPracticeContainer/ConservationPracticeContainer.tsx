@@ -77,6 +77,7 @@ const ConservationPracticeContainer = ({
   return (
     <>
       <PracticeBreadcrumbs
+        currentView={practiceViewType}
         setPracticeViewType={setPracticeViewType}
         currentPracticeCategory={currentPracticeCategory}
         currentSpecificPractice={currentSpecificPractice}
