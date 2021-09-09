@@ -30,7 +30,7 @@ const LocationContainer = () => {
   const option = searchOptionMap[name];
   const [currentTabOption, setTabOption] = useState(option?.id);
 
-  const selectedStateCode = location.state.selectedStateId;
+  const selectedStateCode = location?.state?.selectedStateId;
   const selectedState =
     selectedStateCode &&
     stateStatus.isSuccess &&
