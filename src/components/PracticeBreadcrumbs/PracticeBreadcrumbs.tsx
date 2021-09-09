@@ -3,6 +3,7 @@ import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
 import './practice-breadcrumbs.scss';
 
 const PracticeBreadcrumbs = ({
+  currentView,
   setPracticeViewType,
   currentSpecificPractice,
   currentPracticeCategory,
@@ -80,7 +81,7 @@ const PracticeBreadcrumbs = ({
           <li />
         )}
 
-        {currentPractice ? (
+        {currentPractice && currentView.individualPractice ? (
           <li className='usa-breadcrumb__list-item'>
             <button type='button' className='usa-breadcrumb__link btn btn-link'>
               <span>{currentPractice.practiceName}</span>
