@@ -31,6 +31,9 @@ const LocationContainer = () => {
   const [currentTabOption, setTabOption] = useState(option?.id);
 
   const selectedStateCode = location?.state?.selectedStateId;
+
+  console.log('Selected state id: ', selectedStateCode);
+
   const selectedState =
     selectedStateCode &&
     stateStatus.isSuccess &&
@@ -54,6 +57,7 @@ const LocationContainer = () => {
       {currentTabOption === 1 && (
         <TabPane tabId={1}>
           <ConservationPracticeContainer
+            selectedStateCode={selectedStateCode}
             currentPracticeCategoryId={selectedPracticeCategory}
             currentSpecificPractice={selectedPractice}
           />

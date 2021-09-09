@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { usePostSearchDataQuery } from '../../Redux/services/api';
 import PracticeBreadcrumbs from '../../components/PracticeBreadcrumbs';
+import PracticeCategoryContainer from './PracticeCategoryContainer';
 import IndividualPracticeContainer from './IndividualPracticeContainer';
 import ConservationPracticeLandingScreen from '../../components/ConservationPracticeLandingScreen';
 import './conservation-practice-container.scss';
@@ -13,9 +16,25 @@ const defaultPracticeViews = {
 const ConservationPracticeContainer = ({
   currentSpecificPractice,
   currentPracticeCategoryId,
+  selectedStateCode,
 }: any) => {
   const [practiceViewType, setPracticeViewType] =
     useState(defaultPracticeViews);
+  const location: any = useLocation();
+
+  const sharedState = location?.state?.detail;
+
+  const { data, isSuccess } = usePostSearchDataQuery({
+    practice_id: sharedState,
+  });
+  const currentPracticeCategory: any =
+    isSuccess &&
+    data &&
+    currentPracticeCategoryId >= 0 &&
+    data.find(
+      (practice: any) =>
+        practice.practiceCategoryId === currentPracticeCategoryId
+    );
 
   useEffect(() => {
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
@@ -31,13 +50,18 @@ const ConservationPracticeContainer = ({
     if (viewType === 'allPractices') {
       return (
         <ConservationPracticeLandingScreen
+          stateCode={selectedStateCode}
           setPracticeViewType={setPracticeViewType}
         />
       );
     }
     if (viewType === 'practiceCategories') {
       // TODO: Return container / components for Practice Categories here
-      return <p>Display practice category page</p>;
+      return (
+        <PracticeCategoryContainer
+          currentPracticeCategory={currentPracticeCategory}
+        />
+      );
     }
     if (viewType === 'individualPractice') {
       return <IndividualPracticeContainer />;
@@ -54,7 +78,7 @@ const ConservationPracticeContainer = ({
     <>
       <PracticeBreadcrumbs
         setPracticeViewType={setPracticeViewType}
-        currentPracticeCategoryId={currentPracticeCategoryId}
+        currentPracticeCategory={currentPracticeCategory}
         currentSpecificPractice={currentSpecificPractice}
       />
       {renderPracticeContainerContent(currentViewType)}
