@@ -1,29 +1,12 @@
-import { useLocation } from 'react-router-dom';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
-import { usePostSearchDataQuery } from '../../Redux/services/api';
 import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
 
 const PracticeBreadcrumbs = ({
   setPracticeViewType,
   currentSpecificPractice,
-  currentPracticeCategoryId,
+  currentPracticeCategory,
 }: any) => {
   const dispatch = useAppDispatch();
-  const location: any = useLocation();
-
-  const sharedState = location?.state?.detail;
-
-  const { data, isSuccess } = usePostSearchDataQuery({
-    practice_id: sharedState,
-  });
-  const currentPracticeCategory: any =
-    isSuccess &&
-    data &&
-    currentPracticeCategoryId >= 0 &&
-    data.find(
-      (practice: any) =>
-        practice.practiceCategoryId === currentPracticeCategoryId
-    );
   const currentPractice =
     currentPracticeCategory &&
     currentPracticeCategory.practices.find(
