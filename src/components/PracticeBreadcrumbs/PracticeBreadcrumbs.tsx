@@ -1,11 +1,14 @@
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useAppDispatch } from '../../Redux/hooks/hooks';
 import { usePostSearchDataQuery } from '../../Redux/services/api';
+import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
 
 const PracticeBreadcrumbs = ({
+  setPracticeViewType,
   currentSpecificPractice,
   currentPracticeCategoryId,
 }: any) => {
-  const history: any = useHistory();
+  const dispatch = useAppDispatch();
   const location: any = useLocation();
 
   const sharedState = location?.state?.detail;
@@ -16,6 +19,7 @@ const PracticeBreadcrumbs = ({
   const currentPracticeCategory: any =
     isSuccess &&
     data &&
+    currentPracticeCategoryId >= 0 &&
     data.find(
       (practice: any) =>
         practice.practiceCategoryId === currentPracticeCategoryId
@@ -27,9 +31,28 @@ const PracticeBreadcrumbs = ({
     );
 
   const handleNavigateBreadcrumb = (breadcrumbId: number) => {
+    const defaultPracticeViews = {
+      allPractices: false,
+      practiceCategories: false,
+      individualPractice: false,
+    };
     switch (breadcrumbId) {
+      // Selected 'Conservation Practices'
       case 0: {
-        history.push('/search');
+        dispatch(setPracticeCategory(-1));
+        setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
+        break;
+      }
+      // Selected a practice category
+      case 1: {
+        setPracticeViewType({
+          ...defaultPracticeViews,
+          practiceCategories: true,
+        });
+        break;
+      }
+      // Selected an individual / specfic practice (Eg. 'Cover Crow')
+      case 2: {
         break;
       }
       default: {
@@ -59,7 +82,12 @@ const PracticeBreadcrumbs = ({
           </button>
         </li>
         {currentPracticeCategory ? (
-          <li className='usa-breadcrumb__list-item'>
+          <li
+            className='usa-breadcrumb__list-item'
+            onClick={() => handleNavigateBreadcrumb(1)}
+            onKeyUp={() => handleNavigateBreadcrumb(1)}
+            role='presentation'
+          >
             <button type='button' className='usa-breadcrumb__link btn btn-link'>
               <span>{currentPracticeCategory.practiceCategoryName}</span>
             </button>
