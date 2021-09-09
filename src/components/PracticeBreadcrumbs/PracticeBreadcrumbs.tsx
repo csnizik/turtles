@@ -1,5 +1,6 @@
 import { useAppDispatch } from '../../Redux/hooks/hooks';
 import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
+import './practice-breadcrumbs.scss';
 
 const PracticeBreadcrumbs = ({
   setPracticeViewType,
@@ -46,7 +47,7 @@ const PracticeBreadcrumbs = ({
 
   return (
     <nav
-      className='usa-breadcrumb margin-top-1 margin-left-3'
+      className='usa-breadcrumb margin-top-1 margin-left-3 crumbs-container'
       aria-label='Conservation practice breadcrumbs'
     >
       <ol className='usa-breadcrumb__list'>
@@ -75,7 +76,9 @@ const PracticeBreadcrumbs = ({
               <span>{currentPracticeCategory.practiceCategoryName}</span>
             </button>
           </li>
-        ) : null}
+        ) : (
+          <li />
+        )}
 
         {currentPractice ? (
           <li className='usa-breadcrumb__list-item'>
