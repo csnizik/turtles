@@ -26,7 +26,6 @@ const ConservationPracticesCategories = ({
         {categories.map((category: ICategoryData) => {
           return (
             <li className='categoryCard'>
-              {' '}
               <PracticeCategoriesCard
                 selectPractice={selectPractice}
                 practiceCategoryName={category.practiceCategoryName}
