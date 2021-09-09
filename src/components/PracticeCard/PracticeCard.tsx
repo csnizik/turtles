@@ -26,8 +26,6 @@ const PracticeCardDetails = ({ setPracticeCardState }: any) => {
   const { data, error, isLoading, isSuccess, isError } =
     usePostSearchDataQuery(praticestate);
 
-  console.log(data);
-
   return (
     <div className='heading'>
       <h2>{data && data[0]?.practices?.length} Practices</h2>
@@ -40,7 +38,14 @@ const PracticeCardDetails = ({ setPracticeCardState }: any) => {
                 <div className='full-document-box'>
                   <div className='list-box'>
                     <div className='info-box'>
-                      <Link to='#' onClick={handleRender}>
+                      <Link
+                        to={{
+                          state: {
+                            detail: practice.practiceId,
+                          },
+                        }}
+                        onClick={handleRender}
+                      >
                         <h4>{practice.practiceName}</h4>
                       </Link>
                       <p>{practice.practiceDescription}</p>

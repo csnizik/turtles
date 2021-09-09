@@ -117,14 +117,13 @@ const Accordion = ({ setPracticeCardState }: any) => {
                                 {toggleChildTab === ele.practiceId && (
                                   <p>
                                     <Link
-                                      to='#'
-                                      // {{
-                                      //   pathname: '#',
-                                      //   state: {
-                                      //     detail: ele.practiceId,
-                                      //   },
-                                      // }}
-                                      onClick={handleConservationRender}
+                                      to={{
+                                        pathname: '/ConservationPractices',
+                                        state: {
+                                          detail: ele.practiceId,
+                                        },
+                                      }}
+                                      // onClick={handleConservationRender}
                                     >
                                       {ele.practiceName} Details
                                     </Link>
