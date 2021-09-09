@@ -9,7 +9,6 @@ import CustomButton from '../../components/CustomButton';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import './location-search.scss';
 import ConservationPracticeContainer from '../ConservationPracticeContainer';
-import PracticeCard from '../../components/PracticeCard';
 
 // Tab styles come from the NRCS design system
 // Documentation: (https://koala-bandits.github.io/nrcs-design-system-storybook/?path=/story/components-tabs-nav--tabs-story)
@@ -76,7 +75,6 @@ const LocationContainer = () => {
         currOption={currentTabOption}
         handleChangeSearchOption={setTabOption}
       />
-      <PracticeCard />
       {renderTabContent()}
     </>
   );

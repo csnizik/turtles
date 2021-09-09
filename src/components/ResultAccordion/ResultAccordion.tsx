@@ -2,13 +2,12 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
-
 import { Practice } from '../../common/types';
 import './result-accordion.scss';
 import { usePostSearchDataQuery } from '../../Redux/services/api';
 import Spinner from '../Spinner/Spinner';
 
-const Accordion = () => {
+const Accordion = ({ setPracticeCardState }: any) => {
   const location: any = useLocation();
   const sharedState = location?.state?.detail;
 
@@ -33,6 +32,10 @@ const Accordion = () => {
   const toggleChild = (id: any) => {
     if (toggleChildTab === id) return settoggleChildTab(null);
     return settoggleChildTab(id);
+  };
+
+  const handleConservationRender = () => {
+    setPracticeCardState(false);
   };
 
   return (
@@ -64,7 +67,7 @@ const Accordion = () => {
                         role='presentation'
                       />
                       <div className='accordion-data'>
-                        <h4>{item.practiceCategoryName}</h4>
+                        <h4>{`${item.practiceCategoryName} (${item.practices.length})`}</h4>
                         <div>
                           {tab === item.practiceCategoryId && (
                             <p>
@@ -76,7 +79,7 @@ const Accordion = () => {
                             <p>
                               <Link
                                 to={{
-                                  pathname: item.practiceCategoryName,
+                                  pathname: '/ConservationPractices',
                                   state: { detail: item.practiceCategoryId },
                                 }}
                               >
@@ -113,7 +116,16 @@ const Accordion = () => {
                                 )}
                                 {toggleChildTab === ele.practiceId && (
                                   <p>
-                                    <Link to={ele.practiceLink}>
+                                    <Link
+                                      to='#'
+                                      // {{
+                                      //   pathname: '#',
+                                      //   state: {
+                                      //     detail: ele.practiceId,
+                                      //   },
+                                      // }}
+                                      onClick={handleConservationRender}
+                                    >
                                       {ele.practiceName} Details
                                     </Link>
                                   </p>

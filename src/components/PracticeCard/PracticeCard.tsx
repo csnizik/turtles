@@ -1,44 +1,61 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { usePostSearchDataQuery } from '../../Redux/services/api';
 import './practice-card.scss';
-// import { usePostSearchDataQuery } from '../../Redux/services/api';
-// import { ISearchData } from '../../common/types';
+import Spinner from '../Spinner/Spinner';
 
-const PracticeCardDetails = () => {
-  // const location: any = useLocation ();
+const PracticeCardDetails = ({ setPracticeCardState }: any) => {
+  const initialState = {
+    practice_category_id: 0,
+  };
 
-  // const sharedState = practiceCategoryId
+  const location: any = useLocation();
 
-  // const {data, error, isLoading, isSucess, isError} =
-  // usePostSearchDataQuery(sharedState);
+  const sharedState = location?.state?.detail;
+
+  const [praticestate, setPracticestate] = useState(initialState);
+
+  const handleRender = () => {
+    setPracticeCardState(true);
+  };
+
+  useEffect(() => {
+    setPracticestate({ practice_category_id: sharedState });
+  }, []);
+
+  const { data, error, isLoading, isSuccess, isError } =
+    usePostSearchDataQuery(praticestate);
+
+  console.log(data);
 
   return (
-    <>
-      <h2>36 Practices</h2>
-      {/* {data.map((practice: ISearchData) => {})} */}
-      <div className='full-document-box'>
-        <div className='list-box'>
-          <div className='info-box'>
-            <Link
-              to={{
-                pathname: '#',
-                // location: practiceId,
-              }}
-            >
-              <h4>Alley Cropping</h4>
-            </Link>
-            <p>
-              Alley cropping is an agroforestry practice where agricultural or
-              horticultural crops are grown in the alleyways between widely
-              spaced rows of woody plants.
-            </p>
-          </div>
-          <img
-            src='images/practice_placeholder.png'
-            alt='Practice Description'
-          />
-        </div>
-      </div>
-    </>
+    <div className='heading'>
+      <h2>{data && data[0]?.practices?.length} Practices</h2>
+      {isLoading && <Spinner />}
+      {isError && error}
+      {isSuccess && data && (
+        <>
+          {data[0]?.practices
+            ? data[0].practices.map((practice: any) => (
+                <div className='full-document-box'>
+                  <div className='list-box'>
+                    <div className='info-box'>
+                      <Link to='#' onClick={handleRender}>
+                        <h4>{practice.practiceName}</h4>
+                      </Link>
+                      <p>{practice.practiceDescription}</p>
+                    </div>
+                    <img
+                      src='images/practice_placeholder.png'
+                      alt='Practice Description'
+                    />
+                  </div>
+                </div>
+              ))
+            : []}
+        </>
+      )}
+    </div>
   );
 };
 

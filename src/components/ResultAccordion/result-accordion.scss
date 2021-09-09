@@ -41,6 +41,11 @@ hr {
       padding: 1em;
       border-bottom: 1px solid $philippine-silver;
 
+      .fa,
+      .fas {
+        padding: 5px 0 0 0;
+      }
+
       .accordion-data {
         flex-direction: column;
         align-items: start;
@@ -104,6 +109,11 @@ hr {
       padding: 1em 1em 1em 0;
       margin: 0 3rem 0 3rem;
       border-bottom: 1px solid $philippine-silver;
+
+      .fa,
+      .fas {
+        padding: 5px 0 0 0;
+      }
 
       &:last-of-type {
         border-bottom: none;

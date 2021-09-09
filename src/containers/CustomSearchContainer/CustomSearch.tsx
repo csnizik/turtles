@@ -17,6 +17,7 @@ const defaultSearchInput: ISearchData = {
   practice_id: null,
   state_county_code: null,
   land_use_list: null,
+  practices: null,
 };
 
 interface ICustomSearchProps {

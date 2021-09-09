@@ -74,6 +74,7 @@ export interface ISearchData {
   practice_id?: number | null;
   state_county_code?: string | null;
   land_use_list?: string | null;
+  practices?: Array<Practice> | null | undefined;
 }
 export interface IPracticeVideo {
   videoId: number;
