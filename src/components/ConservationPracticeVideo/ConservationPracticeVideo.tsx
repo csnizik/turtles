@@ -18,9 +18,9 @@ const ConservationPracticeVideo = ( {selectedPracticeId} : any) => {
               className='video'
               src={data[0].videoLink}
               frameBorder='1'
-              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; X-Frame-Options'
               allowFullScreen
-              title='Embedded youtube'
+              title={`${data[0].videoName} Embedded Video`}
               />
             </div>
             <div className='video-description'>
@@ -32,7 +32,7 @@ const ConservationPracticeVideo = ( {selectedPracticeId} : any) => {
                     href='https://www.farmers.gov/conservation/conservation-at-work/all'
                     target='_blank' rel='noopener noreferrer'
                     // eslint-disable-next-line global-require
-                    >All Conservation at Work videos <img alt='Link' src={require('./image/newLinkIcon.svg').default}/></a>
+                    >All Conservation at Work videos <img alt='All Conservation at Work videos' src={require('./image/newLinkIcon.svg').default}/></a>
               </div>
             </div>
           </div>
