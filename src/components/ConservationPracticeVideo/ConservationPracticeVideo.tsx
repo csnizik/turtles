@@ -5,6 +5,12 @@ import Spinner from '../Spinner/Spinner';
 const ConservationPracticeVideo = ( {selectedPracticeId} : any) => {
   const { data, error, isLoading, isSuccess, isError } = useGetPracticeVideoLinkQuery(selectedPracticeId);
 
+  const youtubeParser = (url: any) => {
+    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match&&match[7].length===11)? `http://www.youtube.com/embed/${match[7]}` : url;
+  }
+
   return (
     <section className='media-box' data-testid='video-box-container'>
       {isLoading && <Spinner />}
@@ -16,8 +22,7 @@ const ConservationPracticeVideo = ( {selectedPracticeId} : any) => {
             <div className='video-media' data-testid='video-media'>
               <iframe
               className='video'
-              // src={data[0].videoLink}
-              src='https://www.farmers.gov/conservation/conservation-at-work/all'
+              src={youtubeParser(`${data[0].videoLink}`)}
               frameBorder='1'
               allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
               allowFullScreen
@@ -32,7 +37,8 @@ const ConservationPracticeVideo = ( {selectedPracticeId} : any) => {
                 <a
                     href='https://www.farmers.gov/conservation/conservation-at-work/all'
                     target='_blank' rel='noopener noreferrer'
-                    >All Conservation at Work videos <img alt='Link' src='./image/newLinkIcon.svg'/></a>
+                    // eslint-disable-next-line global-require
+                    >All Conservation at Work videos <img alt='Link' src={require('./image/newLinkIcon.svg').default}/></a>
               </div>
             </div>
           </div>
