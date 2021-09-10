@@ -24,20 +24,19 @@ const Accordion = () => {
 
   const { data, error, isLoading, isSuccess, isError } =
     usePostSearchDataQuery(sharedState);
-
-  const { t } = useTranslation();
-
   const [toggleChildTab, settoggleChildTab] = useState(null);
 
   const [tab, setTab] = useState(null);
 
-  const toggle = (id: any) => {
-    if (tab === id) {
+  const { t } = useTranslation();
+
+  const toggleExpandCategory = (categoryId: any) => {
+    if (tab === categoryId) {
       settoggleChildTab(null);
       return setTab(null);
     }
     settoggleChildTab(null);
-    return setTab(id);
+    return setTab(categoryId);
   };
 
   const toggleChild = (id: any) => {
@@ -71,47 +70,47 @@ const Accordion = () => {
             <h4>{t('search-results-page.conservation-practices')}</h4>
           </div>
           <div className='accordion-section'>
-            {data.map((item: any) => {
+            {data.map((practiceCategory: any) => {
+              const categoryId = practiceCategory.practiceCategoryId;
               const chevronClassName = classNames('fas', {
-                'fas fa-chevron-right': tab !== item.practiceCategoryId,
-                'fas fa-chevron-down': tab === item.practiceCategoryId,
+                'fas fa-chevron-right': tab !== categoryId,
+                'fas fa-chevron-down': tab === categoryId,
               });
               const accordionClass = classNames({
-                'accordion-container': tab !== item.practiceCategoryId,
-                'accordion-container-blue': tab === item.practiceCategoryId,
+                'accordion-container': tab !== categoryId,
+                'accordion-container-blue': tab === categoryId,
               });
               return (
                 <>
-                  <div key={item.practiceCategoryId} className={accordionClass}>
-                    <li key={item.practiceCategoryId}>
+                  <div key={categoryId} className={accordionClass}>
+                    <li key={categoryId}>
                       <i
                         className={chevronClassName}
-                        onClick={() => toggle(item.practiceCategoryId)}
+                        onClick={() => toggleExpandCategory(categoryId)}
                         role='presentation'
                       />
                       <div className='accordion-data'>
-                        <h4>{item.practiceCategoryName}</h4>
+                        <h4>{practiceCategory.practiceCategoryName}</h4>
                         <div>
-                          {tab === item.practiceCategoryId && (
+                          {tab === categoryId && (
                             <p>
-                              {item.practiceCategoryDescription ||
+                              {practiceCategory.practiceCategoryDescription ||
                                 'No description Available'}
                             </p>
                           )}
-                          {tab === item.practiceCategoryId && (
+                          {tab === categoryId && (
                             <p>
                               <Link
                                 to={{
-                                  pathname: item.practiceCategoryName,
-                                  state: { detail: item.practiceCategoryId },
+                                  pathname:
+                                    practiceCategory.practiceCategoryName,
+                                  state: { detail: categoryId },
                                 }}
                                 onClick={() =>
-                                  handlePracticeCategorySelection(
-                                    item.practiceCategoryId
-                                  )
+                                  handlePracticeCategorySelection(categoryId)
                                 }
                               >
-                                {item.practiceCategoryName} Details
+                                {practiceCategory.practiceCategoryName} Details
                               </Link>
                             </p>
                           )}
@@ -119,9 +118,9 @@ const Accordion = () => {
                       </div>
                     </li>
                   </div>
-                  {tab === item.practiceCategoryId && (
+                  {tab === categoryId && (
                     <div className='child-accordion-container'>
-                      {item.practices.map((ele: Practice) => {
+                      {practiceCategory.practices.map((ele: Practice) => {
                         const childChevronClassName = classNames('fas', {
                           'fa-chevron-right': toggleChildTab !== ele.practiceId,
                           'fa-chevron-down': toggleChildTab === ele.practiceId,
@@ -148,7 +147,7 @@ const Accordion = () => {
                                       to={ele.practiceLink}
                                       onClick={() =>
                                         handleSpecificPracticeSelection(
-                                          item.practiceCategoryId,
+                                          categoryId,
                                           ele.practiceId
                                         )
                                       }
