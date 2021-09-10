@@ -22,8 +22,6 @@ const ConservationPracticeContainer = ({
   const [practiceViewType, setPracticeViewType] =
     useState(defaultPracticeViews);
 
-  const [zebra, setZebra] = useState(true);
-
   const location: any = useLocation();
 
   const sharedState = location?.state?.detail;
@@ -41,7 +39,6 @@ const ConservationPracticeContainer = ({
     );
 
   useEffect(() => {
-    console.log('Container->', currentPracticeCategoryId);
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
       setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
     } else if (currentPracticeCategoryId >= 0 && currentSpecificPractice < 0) {
