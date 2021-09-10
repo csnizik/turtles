@@ -41,6 +41,7 @@ const ConservationPracticeContainer = ({
     );
 
   useEffect(() => {
+    console.log('Container->', currentPracticeCategoryId);
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
       setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
     } else if (currentPracticeCategoryId >= 0 && currentSpecificPractice < 0) {
@@ -48,7 +49,7 @@ const ConservationPracticeContainer = ({
     } else if (currentSpecificPractice >= 0) {
       setPracticeViewType({ ...practiceViewType, individualPractice: true });
     }
-  }, [currentPracticeCategoryId]);
+  }, [currentPracticeCategoryId, currentSpecificPractice]);
 
   const renderPracticeContainerContent = (viewType: string) => {
     if (viewType === 'allPractices') {
@@ -66,7 +67,7 @@ const ConservationPracticeContainer = ({
           <PracticeCategoryContainer
             currentPracticeCategory={currentPracticeCategory}
           />
-          <PracticeCard />
+          <PracticeCard setPracticeViewType={setPracticeViewType} />
         </>
       );
     }

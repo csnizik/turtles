@@ -20,7 +20,7 @@ const SearchOption = ({
 }: ISearchOption) => {
   const listItemClassNames = classNames({
     active: option === currentSearchOption,
-    disabled: option === 0 || option === 2,
+    // disabled: option === 0 || option === 2,
   });
 
   const toggleTabs = (tab: number) => {

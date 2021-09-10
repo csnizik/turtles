@@ -4,9 +4,12 @@ import { useAppDispatch } from '../../Redux/hooks/hooks';
 import { usePostSearchDataQuery } from '../../Redux/services/api';
 import './practice-card.scss';
 import Spinner from '../Spinner/Spinner';
-import { setSpecificPractice } from '../../Redux/Slice/practiceSlice';
+import {
+  setSpecificPractice,
+  setPracticeCategory,
+} from '../../Redux/Slice/practiceSlice';
 
-const PracticeCardDetails = () => {
+const PracticeCardDetails = ({ selectPractice, setPracticeViewType }: any) => {
   const initialState = {
     practice_category_id: 0,
   };
@@ -19,8 +22,14 @@ const PracticeCardDetails = () => {
 
   const [praticestate, setPracticestate] = useState(initialState);
 
-  const handleRender = (practiceId: number) => {
+  const handleRender = (practiceId: number, practiceCategoryId: number) => {
     dispatch(setSpecificPractice(practiceId));
+    dispatch(setPracticeCategory(practiceCategoryId));
+    setPracticeViewType({
+      allPractices: false,
+      practiceCategories: false,
+      individualPractice: true,
+    });
   };
 
   useEffect(() => {
@@ -30,26 +39,28 @@ const PracticeCardDetails = () => {
   const { data, error, isLoading, isSuccess, isError } =
     usePostSearchDataQuery(praticestate);
 
+  const practiceCategory: any = data && data[0];
+
   return (
     <div className='heading'>
-      <h2>{data && data[0]?.practices?.length} Practices</h2>
+      <h2>{practiceCategory?.practices?.length} Practices</h2>
       {isLoading && <Spinner />}
       {isError && error}
       {isSuccess && data && (
         <>
-          {data[0]?.practices
-            ? data[0].practices.map((practice: any) => (
+          {practiceCategory?.practices
+            ? practiceCategory.practices.map((practice: any) => (
                 <div className='full-document-box'>
                   <div className='list-box'>
                     <div className='info-box'>
                       <Link
-                        to={{
-                          pathname: '/ConservationPractices',
-                          state: {
-                            detail: practice.practiceName,
-                          },
-                        }}
-                        onClick={() => handleRender(practice.practiceId)}
+                        to='/ConservationPractices'
+                        onClick={() =>
+                          handleRender(
+                            practice.practiceId,
+                            practiceCategory.practiceCategoryId
+                          )
+                        }
                       >
                         <h4>{practice.practiceName}</h4>
                       </Link>

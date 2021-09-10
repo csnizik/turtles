@@ -28,7 +28,7 @@ hr {
   border-bottom: none;
 
   h4 {
-    margin-left: 1rem;
+    margin: 0 0 0 1rem;
     display: flex;
   }
 
@@ -57,8 +57,7 @@ hr {
 
         p {
           text-align: left;
-          margin: 1em;
-          padding: 1.25rem 0 0.938rem 0;
+          margin: 1.25rem 0 1.25rem 1rem;
           &:last-of-type {
             padding-bottom: 1.875rem;
           }
@@ -88,11 +87,7 @@ hr {
 
         p {
           text-align: left;
-          margin: 1em;
-          padding: 1.25rem 0 0.938rem 0;
-          &:last-of-type {
-            padding-bottom: 1.875rem;
-          }
+          margin: 1.25rem 0 1.25rem 1rem;
         }
       }
     }
@@ -131,11 +126,7 @@ hr {
 
         p {
           text-align: left;
-          margin: 1em;
-          padding: 0.938rem 0 0.938rem 0;
-          &:last-of-type {
-            padding-bottom: 0.125rem;
-          }
+          margin: 1.25rem 0 1.25rem 1rem;
         }
       }
     }
