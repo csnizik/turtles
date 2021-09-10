@@ -1,4 +1,4 @@
-import PracticeCategoryCard from '../PracticeCategoryCard';
+import PracticeCategoriesCard from '../PracticeCategoryCard';
 import './conservation-practices-categories.scss';
 
 interface ICategoryData {
@@ -22,20 +22,23 @@ const ConservationPracticesCategories = ({
       <div className='introText'>
         Conservation Practice Categories introduction ...
       </div>
-      <ul className='card-container'>
-        {categories.map((category: ICategoryData) => {
-          return (
-            <li className='categoryCard'>
-              <PracticeCategoryCard
+      {categories.length > 0 ? (
+        <div className='card-container'>
+          {categories.map((category: ICategoryData) => {
+            return (
+              <PracticeCategoriesCard
+                key={category.practiceCategoryId}
                 selectPractice={selectPractice}
                 practiceCategoryName={category.practiceCategoryName}
                 practiceCategoryDisplay={category.practiceCategoryDisplay}
                 practiceCategoryId={category.practiceCategoryId}
               />
-            </li>
-          );
-        })}
-      </ul>
+            );
+          })}
+        </div>
+      ) : (
+        <h3>No Practice Category data available.</h3>
+      )}
     </div>
   );
 };

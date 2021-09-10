@@ -16,25 +16,10 @@
   margin-bottom: 1.875rem;
 }
 
-.categoryCard {
-  margin-bottom: 1.875rem;
-  margin-right: 1.25rem;
-  list-style-type: none;
-  display: flex;
-  width: 100%;
-
-  @media (min-width: 40rem) {
-    width: 50%;
-  }
-  @media (min-width: 56rem) {
-    width: 46%;
-  }
-}
-
 .card-container {
   display: flex;
-  max-width: 67rem;
   flex-wrap: wrap;
   padding-left: 0;
   margin-right: 0;
+  margin-left: -1rem;
 }

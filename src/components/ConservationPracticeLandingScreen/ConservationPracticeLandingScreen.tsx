@@ -31,9 +31,10 @@ const ConservationPracticeLandingScreen = ({
     try {
       let code: any = stateCode.toString();
       code = code.length === 1 ? `0${code}` : code;
-      const response: any = await getRequest(`/practice/category/${code}`);
-      setCategories(response.data.length > 0 ? response.data : []);
-      console.log(response.data);
+      const response: any = (await getRequest(
+        `/practice/category/${code}`
+      )) || { data: [] };
+      setCategories(response.data);
     } catch (error) {
       // throw new Error('practice categories Request Error');
     }

@@ -50,9 +50,6 @@ const ConservationPracticeContainer = ({
     }
   }, [currentPracticeCategoryId]);
 
-  // setZebra(false);
-  // console.log('zebra', zebra);
-
   const renderPracticeContainerContent = (viewType: string) => {
     if (viewType === 'allPractices') {
       return (
