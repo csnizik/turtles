@@ -1,30 +1,100 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import ConservationPracticeOverview from '../../components/ConservationPracticeOverview';
-import ConservationPracticeVideo from '../../components/ConservationPracticeVideo';
-import PracticeCard from '../../components/PracticeCard';
+import { usePostSearchDataQuery } from '../../Redux/services/api';
+import PracticeBreadcrumbs from '../../components/PracticeBreadcrumbs';
+import PracticeCategoryContainer from './PracticeCategoryContainer';
+import IndividualPracticeContainer from './IndividualPracticeContainer';
+import ConservationPracticeLandingScreen from '../../components/ConservationPracticeLandingScreen';
 import './conservation-practice-container.scss';
+import PracticeCard from '../../components/PracticeCard';
 
-const ConservationPracticeContainer = () => {
+const defaultPracticeViews = {
+  allPractices: false,
+  practiceCategories: false,
+  individualPractice: false,
+};
+
+const ConservationPracticeContainer = ({
+  currentSpecificPractice,
+  currentPracticeCategoryId,
+  selectedStateCode,
+}: any) => {
+  const [practiceViewType, setPracticeViewType] =
+    useState(defaultPracticeViews);
+
+  const [zebra, setZebra] = useState(true);
+
   const location: any = useLocation();
 
-  const id = location?.state?.detail;
+  const sharedState = location?.state?.detail;
 
-  console.log(id);
+  const { data, isSuccess } = usePostSearchDataQuery({
+    practice_id: sharedState,
+  });
+  const currentPracticeCategory: any =
+    isSuccess &&
+    data &&
+    currentPracticeCategoryId >= 0 &&
+    data.find(
+      (practice: any) =>
+        practice.practiceCategoryId === currentPracticeCategoryId
+    );
 
-  const [practiceCardState, setPracticeCardState] = useState(false);
+  useEffect(() => {
+    if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
+      setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
+    } else if (currentPracticeCategoryId >= 0 && currentSpecificPractice < 0) {
+      setPracticeViewType({ ...practiceViewType, practiceCategories: true });
+    } else if (currentSpecificPractice >= 0) {
+      setPracticeViewType({ ...practiceViewType, individualPractice: true });
+    }
+  }, [currentPracticeCategoryId]);
+
+  // setZebra(false);
+  // console.log('zebra', zebra);
+
+  const renderPracticeContainerContent = (viewType: string) => {
+    if (viewType === 'allPractices') {
+      return (
+        <ConservationPracticeLandingScreen
+          stateCode={selectedStateCode}
+          setPracticeViewType={setPracticeViewType}
+          zebra
+        />
+      );
+    }
+    if (viewType === 'practiceCategories') {
+      // TODO: Return container / components for Practice Categories here
+      return (
+        <>
+          <PracticeCategoryContainer
+            currentPracticeCategory={currentPracticeCategory}
+          />
+          <PracticeCard />
+        </>
+      );
+    }
+    if (viewType === 'individualPractice') {
+      return <IndividualPracticeContainer />;
+    }
+  };
+
+  const viewTypeList = Object.keys(practiceViewType);
+  const currentViewType =
+    viewTypeList.find((view: string) => {
+      return practiceViewType[view];
+    }) || 'allPractices';
 
   return (
-    <div>
-      {!practiceCardState ? (
-        <PracticeCard setPracticeCardState={setPracticeCardState} />
-      ) : (
-        <>
-          <ConservationPracticeOverview selectedPracticeId={id} />
-          <ConservationPracticeVideo selectedPracticeId={id} />
-        </>
-      )}
-    </div>
+    <>
+      <PracticeBreadcrumbs
+        currentView={practiceViewType}
+        setPracticeViewType={setPracticeViewType}
+        currentPracticeCategory={currentPracticeCategory}
+        currentSpecificPractice={currentSpecificPractice}
+      />
+      {renderPracticeContainerContent(currentViewType)}
+    </>
   );
 };
 

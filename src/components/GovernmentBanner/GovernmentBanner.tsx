@@ -1,10 +1,21 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import {
+  setPracticeCategory,
+  setSpecificPractice,
+} from '../../Redux/Slice/practiceSlice';
+import { useAppDispatch } from '../../Redux/hooks/hooks';
 
 import './gov-banner.scss';
 
 const GovernmentBanner = () => {
   const { t } = useTranslation();
+  const { pathname } = useLocation();
+  const dispatch = useAppDispatch();
+  const handleNavigateHome = () => {
+    dispatch(setPracticeCategory(-1));
+    dispatch(setSpecificPractice(-1));
+  };
   const renderNRCSHeaderSection: Function = () => (
     <header
       className='usa-banner-header'
@@ -36,9 +47,18 @@ const GovernmentBanner = () => {
   const renderNavigationSection: Function = () => (
     <div className='navigation-bar'>
       <img className='nrcsLogo' src='images/nrcs_logo.png' alt='NRCS Logo' />
-      <Link to='/' className='usa-link margin-left-05'>
+      <Link
+        to='/'
+        onClick={handleNavigateHome}
+        className='usa-link margin-left-05'
+      >
         {t('header.home')}
       </Link>
+      {pathname !== '/' && pathname !== '/search' && (
+        <Link to='/search' className='usa-link float-right'>
+          {t('header.search')}
+        </Link>
+      )}
     </div>
   );
 

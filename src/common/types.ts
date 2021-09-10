@@ -15,6 +15,9 @@ export interface IConservationPractice {
   practiceImage: string;
   practiceOverview: string;
   practiceInfo: string;
+  practiceName: string;
+  practiceCode: string;
+
 }
 
 export interface ICountyList {

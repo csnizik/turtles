@@ -15,7 +15,7 @@ const ConservationPracticeOverview = ({ selectedPracticeId }: any) => {
           <ul className='list-document'>
             <div key={data.practiceId} className='full-component'>
               <div className='overview' data-testid='overview-container'>
-                <h4>Cover Crop (Code 340)</h4>
+                <h4>{`${data.practiceName} (${data.practiceCode})`}</h4>
                 <p>{data.practiceOverview}</p>
                 <h4>Practice Information</h4>
                 <p>{data.practiceInfo}</p>

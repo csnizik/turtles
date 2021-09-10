@@ -2,13 +2,23 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
+import Spinner from '../Spinner/Spinner';
+import {
+  setPracticeCategory,
+  setSpecificPractice,
+} from '../../Redux/Slice/practiceSlice';
+import { usePostSearchDataQuery } from '../../Redux/services/api';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
+
 import { Practice } from '../../common/types';
 import './result-accordion.scss';
-import { usePostSearchDataQuery } from '../../Redux/services/api';
-import Spinner from '../Spinner/Spinner';
 
 const Accordion = ({ setPracticeCardState }: any) => {
   const location: any = useLocation();
+  const dispatch = useAppDispatch();
+  const selectedPractice: number = useAppSelector(
+    (state) => state.practiceSlice.selectedSpecficPractice
+  );
   const sharedState = location?.state?.detail;
 
   const { data, error, isLoading, isSuccess, isError } =
@@ -34,8 +44,20 @@ const Accordion = ({ setPracticeCardState }: any) => {
     return settoggleChildTab(id);
   };
 
-  const handleConservationRender = () => {
-    setPracticeCardState(false);
+  const handlePracticeCategorySelection = (categoryId: number) => {
+    if (selectedPractice >= 0) {
+      dispatch(setSpecificPractice(-1));
+    }
+
+    dispatch(setPracticeCategory(categoryId));
+  };
+
+  const handleSpecificPracticeSelection = (
+    categoryId: number,
+    practiceId: number
+  ) => {
+    dispatch(setPracticeCategory(categoryId));
+    dispatch(setSpecificPractice(practiceId));
   };
 
   return (
@@ -82,6 +104,11 @@ const Accordion = ({ setPracticeCardState }: any) => {
                                   pathname: '/ConservationPractices',
                                   state: { detail: item.practiceCategoryId },
                                 }}
+                                onClick={() =>
+                                  handlePracticeCategorySelection(
+                                    item.practiceCategoryId
+                                  )
+                                }
                               >
                                 {item.practiceCategoryName} Details
                               </Link>
@@ -117,13 +144,13 @@ const Accordion = ({ setPracticeCardState }: any) => {
                                 {toggleChildTab === ele.practiceId && (
                                   <p>
                                     <Link
-                                      to={{
-                                        pathname: '/ConservationPractices',
-                                        state: {
-                                          detail: ele.practiceId,
-                                        },
-                                      }}
-                                      // onClick={handleConservationRender}
+                                      to='/ConservationPractices'
+                                      onClick={() =>
+                                        handleSpecificPracticeSelection(
+                                          item.practiceCategoryId,
+                                          ele.practiceId
+                                        )
+                                      }
                                     >
                                       {ele.practiceName} Details
                                     </Link>

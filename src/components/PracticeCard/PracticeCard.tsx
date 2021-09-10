@@ -1,13 +1,17 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useAppDispatch } from '../../Redux/hooks/hooks';
 import { usePostSearchDataQuery } from '../../Redux/services/api';
 import './practice-card.scss';
 import Spinner from '../Spinner/Spinner';
+import { setSpecificPractice } from '../../Redux/Slice/practiceSlice';
 
-const PracticeCardDetails = ({ setPracticeCardState }: any) => {
+const PracticeCardDetails = () => {
   const initialState = {
     practice_category_id: 0,
   };
+
+  const dispatch = useAppDispatch();
 
   const location: any = useLocation();
 
@@ -15,8 +19,8 @@ const PracticeCardDetails = ({ setPracticeCardState }: any) => {
 
   const [praticestate, setPracticestate] = useState(initialState);
 
-  const handleRender = () => {
-    setPracticeCardState(true);
+  const handleRender = (practiceId: number) => {
+    dispatch(setSpecificPractice(practiceId));
   };
 
   useEffect(() => {
@@ -40,11 +44,12 @@ const PracticeCardDetails = ({ setPracticeCardState }: any) => {
                     <div className='info-box'>
                       <Link
                         to={{
+                          pathname: '/ConservationPractices',
                           state: {
-                            detail: practice.practiceId,
+                            detail: practice.practiceName,
                           },
                         }}
-                        onClick={handleRender}
+                        onClick={() => handleRender(practice.practiceId)}
                       >
                         <h4>{practice.practiceName}</h4>
                       </Link>

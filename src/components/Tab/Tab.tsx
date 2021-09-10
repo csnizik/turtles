@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { NavItem, NavLink } from 'reactstrap';
-
 import './tab.scss';
 
 interface ISearchOption {
@@ -9,6 +8,7 @@ interface ISearchOption {
   displayName: string;
   currentSearchOption: number;
   handleSearchChange: Function;
+  currentSelectedStateName: string;
 }
 
 const SearchOption = ({
@@ -16,13 +16,22 @@ const SearchOption = ({
   option,
   currentSearchOption,
   handleSearchChange,
+  currentSelectedStateName,
 }: ISearchOption) => {
   const listItemClassNames = classNames({
     active: option === currentSearchOption,
+    disabled: option === 0 || option === 2,
   });
 
   const toggleTabs = (tab: number) => {
     handleSearchChange(tab);
+  };
+
+  const getTabTitle = () => {
+    if (option === 0 && currentSelectedStateName) {
+      return `${currentSelectedStateName} ${displayName}`;
+    }
+    return displayName;
   };
 
   return (
@@ -35,7 +44,7 @@ const SearchOption = ({
         }}
       >
         <Link className='links' to={displayName.split(' ').join('')}>
-          {displayName}
+          {getTabTitle()}
         </Link>
       </NavLink>
     </NavItem>
