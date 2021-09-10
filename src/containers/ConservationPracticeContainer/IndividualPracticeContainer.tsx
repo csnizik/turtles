@@ -3,7 +3,7 @@ import ConservationPracticeOverview from '../../components/ConservationPracticeO
 import ConservationPracticeVideo from '../../components/ConservationPracticeVideo';
 
 const IndividualPracticeContainer = () => {
-  const state = useAppSelector(s=> s);
+  const state = useAppSelector((s) => s);
   const id = state.practiceSlice.selectedSpecficPractice;
 
   return (

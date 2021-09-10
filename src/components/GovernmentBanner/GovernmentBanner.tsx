@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   setPracticeCategory,
@@ -10,6 +10,7 @@ import './gov-banner.scss';
 
 const GovernmentBanner = () => {
   const { t } = useTranslation();
+  const { pathname } = useLocation();
   const dispatch = useAppDispatch();
   const handleNavigateHome = () => {
     dispatch(setPracticeCategory(-1));
@@ -53,6 +54,11 @@ const GovernmentBanner = () => {
       >
         {t('header.home')}
       </Link>
+      {pathname !== '/' && pathname !== '/search' && (
+        <Link to='/search' className='usa-link float-right'>
+          {t('header.search')}
+        </Link>
+      )}
     </div>
   );
 

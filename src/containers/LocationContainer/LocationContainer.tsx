@@ -73,7 +73,6 @@ const LocationContainer = () => {
         currOption={currentTabOption}
         handleChangeSearchOption={setTabOption}
       />
-
       {renderTabContent()}
     </>
   );

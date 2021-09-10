@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { getRequest } from '../../common/util/AxiosUtil';
 import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
 import { useAppDispatch } from '../../Redux/hooks/hooks';

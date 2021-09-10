@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
-
 import Spinner from '../Spinner/Spinner';
 import {
   setPracticeCategory,
@@ -14,7 +13,7 @@ import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import { Practice } from '../../common/types';
 import './result-accordion.scss';
 
-const Accordion = () => {
+const Accordion = ({ setPracticeCardState }: any) => {
   const location: any = useLocation();
   const dispatch = useAppDispatch();
   const selectedPractice: number = useAppSelector(
@@ -144,7 +143,7 @@ const Accordion = () => {
                                 {toggleChildTab === ele.practiceId && (
                                   <p>
                                     <Link
-                                      to={ele.practiceLink}
+                                      to='/ConservationPractices'
                                       onClick={() =>
                                         handleSpecificPracticeSelection(
                                           categoryId,

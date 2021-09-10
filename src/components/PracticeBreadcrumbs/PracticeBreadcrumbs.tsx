@@ -82,7 +82,9 @@ const PracticeBreadcrumbs = ({
           </>
         )}
 
-        {currentPracticeCategory && currentView.individualPractice ? (
+        {currentPracticeCategory &&
+        currentView.individualPractice &&
+        currentPractice ? (
           <>
             <li
               className='usa-breadcrumb__list-item'

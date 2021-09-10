@@ -6,6 +6,7 @@ import PracticeCategoryContainer from './PracticeCategoryContainer';
 import IndividualPracticeContainer from './IndividualPracticeContainer';
 import ConservationPracticeLandingScreen from '../../components/ConservationPracticeLandingScreen';
 import './conservation-practice-container.scss';
+import PracticeCard from '../../components/PracticeCard';
 
 const defaultPracticeViews = {
   allPractices: false,
@@ -20,6 +21,7 @@ const ConservationPracticeContainer = ({
 }: any) => {
   const [practiceViewType, setPracticeViewType] =
     useState(defaultPracticeViews);
+
   const location: any = useLocation();
 
   const sharedState = location?.state?.detail;
@@ -44,7 +46,7 @@ const ConservationPracticeContainer = ({
     } else if (currentSpecificPractice >= 0) {
       setPracticeViewType({ ...practiceViewType, individualPractice: true });
     }
-  }, [currentPracticeCategoryId]);
+  }, [currentPracticeCategoryId, currentSpecificPractice]);
 
   const renderPracticeContainerContent = (viewType: string) => {
     if (viewType === 'allPractices') {
@@ -58,9 +60,12 @@ const ConservationPracticeContainer = ({
     if (viewType === 'practiceCategories') {
       // TODO: Return container / components for Practice Categories here
       return (
-        <PracticeCategoryContainer
-          currentPracticeCategory={currentPracticeCategory}
-        />
+        <>
+          <PracticeCategoryContainer
+            currentPracticeCategory={currentPracticeCategory}
+          />
+          <PracticeCard setPracticeViewType={setPracticeViewType} />
+        </>
       );
     }
     if (viewType === 'individualPractice') {
