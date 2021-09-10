@@ -13,7 +13,6 @@ const intro: string =
 const ConservationPracticeLandingScreen = ({
   setPracticeViewType,
   stateCode,
-  zebra,
 }: any) => {
   const [categories, setCategories] = useState([]);
 
@@ -40,11 +39,9 @@ const ConservationPracticeLandingScreen = ({
     }
   };
 
-  // console.log(zebra);
-
   useEffect(() => {
     getPractices();
-  }, [zebra]);
+  }, []);
 
   return (
     <div>

@@ -59,7 +59,6 @@ const ConservationPracticeContainer = ({
         <ConservationPracticeLandingScreen
           stateCode={selectedStateCode}
           setPracticeViewType={setPracticeViewType}
-          zebra
         />
       );
     }
