@@ -67,14 +67,6 @@ const PracticeBreadcrumbs = ({
                 <span>Conservation Practices</span>
               </button>
             </li>
-            <li
-              className='usa-breadcrumb__list-item'
-              onClick={() => handleNavigateBreadcrumb(1)}
-              onKeyUp={() => handleNavigateBreadcrumb(1)}
-              role='presentation'
-            >
-              <span>{currentPracticeCategory.practiceCategoryName}</span>
-            </li>
           </>
         ) : (
           <>
@@ -109,7 +101,16 @@ const PracticeBreadcrumbs = ({
               <span>{currentPractice.practiceName}</span>
             </li>
           </>
-        ) : null}
+        ) : (
+          <li
+            className='usa-breadcrumb__list-item'
+            onClick={() => handleNavigateBreadcrumb(1)}
+            onKeyUp={() => handleNavigateBreadcrumb(1)}
+            role='presentation'
+          >
+            <span>{currentPracticeCategory.practiceCategoryName}</span>
+          </li>
+        )}
       </ol>
     </nav>
   );
