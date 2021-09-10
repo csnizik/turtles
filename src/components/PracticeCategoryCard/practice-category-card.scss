@@ -6,7 +6,12 @@
   @include colored-top-box;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
-  flex: 0 0 100%;
+  flex: 0 0 48%;
+  margin-bottom: 1.875rem;
+  margin-left: 1.25rem;
+  @media (max-width: $medium-screen) {
+    flex: 0 0 90%;
+  }
 }
 
 .practice-category-name {

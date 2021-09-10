@@ -22,20 +22,20 @@ const ConservationPracticesCategories = ({
       <div className='introText'>
         Conservation Practice Categories introduction ...
       </div>
-      <ul className='card-container'>
+      {categories.length > 0 ? <div className='card-container'>
         {categories.map((category: ICategoryData) => {
           return (
-            <li className='categoryCard'>
-              <PracticeCategoriesCard
+            <PracticeCategoriesCard
+               key={category.practiceCategoryId}
                 selectPractice={selectPractice}
                 practiceCategoryName={category.practiceCategoryName}
                 practiceCategoryDisplay={category.practiceCategoryDisplay}
                 practiceCategoryId={category.practiceCategoryId}
               />
-            </li>
           );
         })}
-      </ul>
+      </div>
+        : <h3>No Practice Category data available.</h3>}
     </div>
   );
 };
