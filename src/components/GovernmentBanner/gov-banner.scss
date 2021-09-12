@@ -34,7 +34,6 @@ header {
 
 /** Nav Bar **/
 .navigation-bar {
-  display: flex;
   justify-content: flex-start;
   padding: 1em;
   background-color: $usda-blue;
@@ -54,6 +53,13 @@ header {
 
   a:first-of-type {
     margin-top: 0.2em;
+  }
+  .usa-link {
+    text-decoration: none;
+    &:hover :focus {
+      text-decoration: none;
+      cursor: pointer;
+    }
   }
 }
 

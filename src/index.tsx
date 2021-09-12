@@ -10,22 +10,24 @@ import './i18n';
 import 'nrcs-design-system/scss/nrcs-design-system.scss';
 
 const Home = lazy(() => import('./containers/Home'));
-const Header = lazy(() => import('./components/Header/Header'));
-const ResultsContainer = lazy(() => import('./containers/ResultsContainer'));
+const GovernmentBanner = lazy(
+  () => import('./components/GovernmentBanner/GovernmentBanner')
+);
 const CustomSearchContainer = lazy(
   () => import('./containers/CustomSearchContainer/CustomSearchContainer')
 );
 const LocationContainer = lazy(() => import('./containers/LocationContainer'));
+const ResultsContainer = lazy(() => import('./containers/ResultsContainer'));
 
 const App = () => (
   <Router>
     <Suspense fallback={<Spinner />}>
-      <Header />
+      <GovernmentBanner />
       <Switch>
         <Route exact path='/'>
           <Home />
         </Route>
-        <Route path='/search'>
+        <Route exact path='/search'>
           <CustomSearchContainer />
         </Route>
         <Route path='/search-results'>

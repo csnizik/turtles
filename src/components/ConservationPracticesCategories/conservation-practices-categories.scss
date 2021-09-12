@@ -1,0 +1,25 @@
+@import '../../stylesheets/variables';
+.categoryListContainer {
+  background-color: $white;
+}
+
+.headerText {
+  font-weight: $medium-weight;
+  font-size: 2rem;
+  color: $nrcs-dark;
+}
+
+.introText {
+  font-weight: $medium-light-weight;
+  font-size: 1rem;
+  color: $nrcs-dark;
+  margin-bottom: 1.875rem;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-right: 0;
+  margin-left: -1rem;
+}

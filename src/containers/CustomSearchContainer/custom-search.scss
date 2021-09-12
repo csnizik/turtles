@@ -42,11 +42,12 @@
       display: block;
     }
   }
-  .mobile-btn-width {
-    width: 88%;
-  }
 
-  .mobile-btn-left {
-    margin-left: 1rem;
+  .search-button-row {
+    margin-left: -1rem;
+    background: $light-grey-205;
+    .mobile-btn-width {
+      width: 88%;
+    }
   }
 }

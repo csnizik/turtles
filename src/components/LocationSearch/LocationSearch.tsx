@@ -12,19 +12,14 @@ import CustomButton from '../CustomButton';
 const LocationSearch = () => {
   const history: any = useHistory();
   const { t } = useTranslation();
-
-  const handleClick = () => {
-    history.push('Location');
-  };
   const [isDisabled, setIsDisabled]: any = useState(true);
-
-  const [selectedState, setSelectedState]: any = useState<number>(-1);
-
+  // '00' represents National
+  const [selectedState, setSelectedState]: any = useState<string>('00');
   const countyStatus = useGetCountyListQuery(selectedState);
   const stateStatus = useGetStateListQuery();
 
   useEffect(() => {
-    if (selectedState < 0) {
+    if (!selectedState || selectedState === '00') {
       setIsDisabled(true);
     }
   }, [selectedState]);
@@ -33,6 +28,13 @@ const LocationSearch = () => {
     const stateVal = event.target.value;
     setSelectedState(stateVal);
     setIsDisabled(false);
+  };
+
+  const handleClick = () => {
+    history.push({
+      pathname: 'category-practice',
+      state: { selectedStateId: selectedState },
+    });
   };
 
   return (
@@ -58,7 +60,7 @@ const LocationSearch = () => {
             name='stateOptions'
             onChange={handleSelectState}
           >
-            <option value={-1}>{t('location-search.national')}</option>
+            <option value='00'>{t('location-search.national')}</option>
             {stateStatus.isSuccess &&
               stateStatus.data &&
               stateStatus.data.map((state: IStateDropdownOption) => {
@@ -87,6 +89,7 @@ const LocationSearch = () => {
               })}
           </select>
         </div>
+
         <CustomButton onClick={handleClick}>
           {t('location-search.explore-location')}
         </CustomButton>

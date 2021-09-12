@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Tooltip } from 'reactstrap';
 
 import { ILandUseOption } from '../../common/types';
 import './land-use-section.scss';
 import { useGetLandUseOptionsQuery } from '../../Redux/services/api';
 
-const LandUseSection = () => {
+const LandUseSection = ({ setSearchInput }: any) => {
   const landUseOptions: any = useGetLandUseOptionsQuery();
   const landUseData: ILandUseOption[] = landUseOptions.data || [];
   const [tooltipOpen, setTooltipOpen]: any = useState([]);
+  const [landUse, setLandUse]: any = useState(null);
+  const [check, setCheck] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (landUseData.length) {
@@ -21,6 +25,45 @@ const LandUseSection = () => {
     }
   }, [landUseData]);
 
+  useEffect(() => {
+    setSearchInput((prevState) => ({
+      ...prevState,
+      land_use_list: landUse,
+    }));
+    if (landUse === '') {
+      setSearchInput((prevState) => ({
+        ...prevState,
+        land_use_list: null,
+      }));
+    }
+  }, [landUse]);
+
+  const handleLandUse = (e) => {
+    const { value, checked } = e.target;
+
+    if (checked) {
+      if (landUse || (landUse && landUse.indexOf(value) === -1)) {
+        setCheck(!check);
+        setLandUse((prevState) => `${prevState},${value}`);
+      } else {
+        setCheck(!check);
+        setLandUse(`${value}`);
+      }
+      setSearchInput((prevState) => ({
+        ...prevState,
+        land_use_list: landUse,
+      }));
+    } else {
+      const landUseArr = landUse.split(',');
+      if (landUseArr.includes(value)) {
+        const filteredLandUse = landUseArr?.filter((landId: any) => {
+          return landId !== value;
+        });
+        setLandUse(filteredLandUse.join(','));
+      }
+    }
+  };
+
   const toggleTooltip = (index: number) => {
     const updatedTooltips = tooltipOpen.map((tooltip: any) => {
       return tooltip.id === index
@@ -32,7 +75,9 @@ const LandUseSection = () => {
 
   return (
     <fieldset className='usa-fieldset'>
-      <legend className='usa-legend'>Filter By Land Use</legend>
+      <legend className='usa-legend'>
+        {t('search-page.filter-by-land-use')}
+      </legend>
       <div className='land-use-grid'>
         {landUseOptions.isSuccess &&
           landUseData.length &&
@@ -50,7 +95,9 @@ const LandUseSection = () => {
                   className='usa-checkbox__input'
                   id={`landUseOption${landId}`}
                   type='checkbox'
-                  name='land-use'
+                  name='selectedLandUseIds'
+                  defaultChecked={check}
+                  onClick={handleLandUse}
                   value={landId}
                 />
                 <label

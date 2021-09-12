@@ -1,0 +1,45 @@
+@import '../../stylesheets/variables';
+
+.heading {
+  h2 {
+    margin: 5rem 0 1.25rem 2.188rem;
+  }
+
+  .full-document-box {
+    margin: 0 2.188rem 1.875rem 2.188rem;
+
+    .list-box {
+      border-right: 2px solid $light-grey-5;
+      border-left: 2px solid $light-grey-5;
+      border-bottom: 2px solid $light-grey-5;
+      border-top: 6px solid $usda-blue;
+      border-radius: 0.5em;
+      text-align: left;
+      background-color: $white;
+      display: grid;
+      grid-template-columns: 6fr 1fr;
+
+      .info-box {
+        padding: 1.25rem 1.563rem 0rem 1.563rem;
+
+        a {
+          text-decoration: none;
+        }
+      }
+
+      img {
+        min-width: 300px;
+        min-height: 200px;
+        border-radius: 0 0.3em 0.3em 0;
+        margin: -1px 0 -1px 0;
+      }
+
+      h4 {
+        font-size: 25px;
+        font-weight: 500;
+        font-style: normal;
+        padding-bottom: 0.625rem;
+      }
+    }
+  }
+}

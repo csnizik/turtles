@@ -7,3 +7,9 @@
     text-decoration: none;
   }
 }
+
+.nav-link {
+  &.disabled {
+    background-color: $light-grey-3 !important;
+  }
+}
