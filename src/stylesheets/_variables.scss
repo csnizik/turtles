@@ -48,6 +48,8 @@ $body-font-size: 1.0625rem;
 $h1-font-size: 42px;
 $h2-font-size: 32px;
 $h3-font-size: 22px;
+$h4-font-size: 16px;
+$h5-font-size: 14px;
 $h6-font-size: 13px;
 
 /** Responsive breakpoints **/
@@ -62,6 +64,11 @@ $iphonex-screen: 812px;
 /** UI components **/
 $card-max-width: 1200px;
 $tab-background-color: #f0f0f0;
+
+/** Padding Size  **/
+$short-space-size: 0.625rem;
+$middle-space-size: 1.25rem;
+$large-space-size: 2.188rem;
 
 /** Mixins **/
 @mixin colored-top-box {

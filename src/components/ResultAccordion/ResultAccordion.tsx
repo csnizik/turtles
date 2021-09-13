@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import { Practice } from '../../common/types';
 import './result-accordion.scss';
 
-const Accordion = ({ setPracticeCardState }: any) => {
+const Accordion = () => {
   const location: any = useLocation();
   const dispatch = useAppDispatch();
   const selectedPractice: number = useAppSelector(

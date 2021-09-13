@@ -85,3 +85,10 @@ export interface IPracticeVideo {
   videoDescription: string;
   videoLink: string;
 }
+
+export interface IRCCategory{
+  stateCode: number;
+  practiceId: string;
+  rcCategoryId: number;
+  rcCategoryName: string;
+}
