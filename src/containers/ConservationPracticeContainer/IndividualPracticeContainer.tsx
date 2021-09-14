@@ -11,7 +11,7 @@ const IndividualPracticeContainer = () => {
     <>
       <ConservationPracticeOverview selectedPracticeId={id} />
       <ConservationPracticeVideo selectedPracticeId={id} />
-      <ResourceConcernTreated />
+      <ResourceConcernTreated selectedStateCode='01' selectedPracticeId={id} />
       {' '}
     </>
   );

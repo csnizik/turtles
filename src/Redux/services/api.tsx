@@ -54,7 +54,7 @@ export const api = createApi({
     getPracticeVideoLink: builder.query<IPracticeVideo[], void>({
       query: (practiceId) => `/video/${practiceId}`,
     }),
-    getRelatedResourceConcernCategory: builder.query<IRCCategory[], IRCCategory>({
+    getRelatedResourceConcernCategory: builder.query<IRCCategory, IRCCategory>({
       query: (data) => `/relatedResourceConcernCategory?stateCode='${data.stateCode}'&practiceId=${data.practiceId}`,
     }),
   }),
@@ -70,4 +70,5 @@ export const {
   useGetStateListQuery,
   useGetLandUseOptionsQuery,
   useGetPracticeVideoLinkQuery,
+  useGetRelatedResourceConcernCategoryQuery,
 } = api;
