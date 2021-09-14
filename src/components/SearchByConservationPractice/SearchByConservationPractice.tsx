@@ -50,12 +50,17 @@ const SearchByConservationPractice = () => {
       <div className='search-by-practice-section'>
         <label
           className='usa-label practice-label'
-          htmlFor='practiceCategoryValue'
+          // htmlFor='practiceCategoryValue'
         >
           {t('search-by-conservation-practice.heading')}
         </label>
         <div className='desktop:grid-col-8'>
-          <p>{t('search-by-conservation-practice.first-label-name')}</p>
+          <label
+            className='usa-label practice-label'
+            htmlFor='practiceCategoryValue'
+          >
+            <p>{t('search-by-conservation-practice.first-label-name')}</p>
+          </label>
           <select
             className='usa-select'
             id='practiceCategoryValue'
@@ -77,7 +82,12 @@ const SearchByConservationPractice = () => {
         </div>
 
         <div className='desktop:grid-col-8'>
-          <p>{t('search-by-conservation-practice.second-label-name')}</p>
+          <label
+            className='usa-label practice-label'
+            htmlFor='specificPracticeValue'
+          >
+            <p>{t('search-by-conservation-practice.second-label-name')}</p>
+          </label>
           <select
             className='usa-select'
             id='specificPracticeValue'

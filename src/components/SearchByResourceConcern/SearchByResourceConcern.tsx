@@ -70,7 +70,12 @@ const SearchByResourceConcern = () => {
           {t('search-by-resource-concern.heading')}
         </label>
         <div className='desktop:grid-col-8'>
-          <p>{t('search-by-resource-concern.first-label-name')}</p>
+          <label
+            className='usa-label resource-search-header'
+            htmlFor='resourceConcernCategoryValue'
+          >
+            <p>{t('search-by-resource-concern.first-label-name')}</p>
+          </label>
           <select
             className='usa-select'
             id='resourceConcernCategoryValue'
@@ -96,7 +101,12 @@ const SearchByResourceConcern = () => {
         </div>
 
         <div className='desktop:grid-col-8'>
-          <p>{t('search-by-resource-concern.second-label-name')}</p>
+          <label
+            className='usa-label resource-search-header'
+            htmlFor='resourceConcernValue'
+          >
+            <p>{t('search-by-resource-concern.second-label-name')}</p>
+          </label>
           <select
             className='usa-select'
             id='resourceConcernValue'
