@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useAppDispatch } from '../../Redux/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import { usePostSearchDataQuery } from '../../Redux/services/api';
 import './practice-card.scss';
 import Spinner from '../Spinner/Spinner';
@@ -9,12 +9,16 @@ import {
   setPracticeCategory,
 } from '../../Redux/Slice/practiceSlice';
 
-const PracticeCardDetails = ({ selectPractice, setPracticeViewType }: any) => {
+const PracticeCardDetails = ({ setPracticeViewType }: any) => {
   const initialState = {
     practice_category_id: 0,
   };
 
   const dispatch = useAppDispatch();
+
+  const practiceCategoryId = useAppSelector(
+    (state) => state.practiceSlice.selectedPracticeCategory
+  );
 
   const location: any = useLocation();
 
@@ -35,6 +39,10 @@ const PracticeCardDetails = ({ selectPractice, setPracticeViewType }: any) => {
   useEffect(() => {
     setPracticestate({ practice_category_id: sharedState });
   }, []);
+
+  useEffect(() => {
+    setPracticestate({ practice_category_id: practiceCategoryId });
+  }, [practiceCategoryId]);
 
   const { data, error, isLoading, isSuccess, isError } =
     usePostSearchDataQuery(praticestate);
