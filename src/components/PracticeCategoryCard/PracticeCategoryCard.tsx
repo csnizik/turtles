@@ -17,6 +17,7 @@ const PracticeCategoryCard = ({
   return (
     <div className='card'>
       <button
+        type='button'
         className='btn-cover'
         onClick={() => {
           selectPractice(practiceCategoryId);

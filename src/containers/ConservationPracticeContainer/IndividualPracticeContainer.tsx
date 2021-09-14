@@ -1,6 +1,7 @@
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import ConservationPracticeOverview from '../../components/ConservationPracticeOverview';
 import ConservationPracticeVideo from '../../components/ConservationPracticeVideo';
+import ResourceConcernTreated from '../../components/ResourceConcernTreated';
 
 const IndividualPracticeContainer = () => {
   const state = useAppSelector((s) => s);
@@ -9,7 +10,9 @@ const IndividualPracticeContainer = () => {
   return (
     <>
       <ConservationPracticeOverview selectedPracticeId={id} />
-      <ConservationPracticeVideo selectedPracticeId={id} />{' '}
+      <ConservationPracticeVideo selectedPracticeId={id} />
+      <ResourceConcernTreated />
+      {' '}
     </>
   );
 };

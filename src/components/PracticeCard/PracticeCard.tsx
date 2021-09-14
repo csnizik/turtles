@@ -9,7 +9,7 @@ import {
   setPracticeCategory,
 } from '../../Redux/Slice/practiceSlice';
 
-const PracticeCardDetails = ({ selectPractice, setPracticeViewType }: any) => {
+const PracticeCardDetails = (setPracticeViewType : any) => {
   const initialState = {
     practice_category_id: 0,
   };
@@ -50,28 +50,28 @@ const PracticeCardDetails = ({ selectPractice, setPracticeViewType }: any) => {
         <>
           {practiceCategory?.practices
             ? practiceCategory.practices.map((practice: any) => (
-                <div className='full-document-box'>
-                  <div className='list-box'>
-                    <div className='info-box'>
-                      <Link
-                        to='/ConservationPractices'
-                        onClick={() =>
-                          handleRender(
-                            practice.practiceId,
-                            practiceCategory.practiceCategoryId
-                          )
-                        }
-                      >
-                        <h4>{practice.practiceName}</h4>
-                      </Link>
-                      <p>{practice.practiceDescription}</p>
-                    </div>
-                    <img
-                      src='images/practice_placeholder.png'
-                      alt='Practice Description'
-                    />
+              <div className='full-document-box'>
+                <div className='list-box'>
+                  <div className='info-box'>
+                    <Link
+                      to='/ConservationPractices'
+                      onClick={() =>
+                        handleRender(
+                          practice.practiceId,
+                          practiceCategory.practiceCategoryId
+                        )
+                      }
+                    >
+                      <h4>{practice.practiceName}</h4>
+                    </Link>
+                    <p>{practice.practiceDescription}</p>
                   </div>
+                  <img
+                    src='images/practice_placeholder.png'
+                    alt='Practice Description'
+                  />
                 </div>
+              </div>
               ))
             : []}
         </>
