@@ -57,7 +57,8 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
       {isSuccess && data && (
         <>
           {practiceCategory?.practices
-            ? practiceCategory.practices.map((practice: any) => (
+            ? // eslint-disable-next-line
+              practiceCategory.practices.map((practice: any) => (
                 <div className='full-document-box'>
                   <div className='list-box'>
                     <div className='info-box'>
