@@ -2,7 +2,7 @@ import { useState } from 'react';
 import useBreakpoint from 'use-breakpoint';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import BREAKPOINTS from '../../common/constants';
+import { BREAKPOINTS } from '../../common/constants';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
 import SearchByResourceConcern from '../../components/SearchByResourceConcern';
@@ -20,19 +20,13 @@ const defaultSearchInput: ISearchData = {
   practices: null,
 };
 
-interface ICustomSearchProps {
-  setSearchToggle: Function;
-}
-
-const CustomSearch = ({ setSearchToggle }: ICustomSearchProps) => {
+const CustomSearch = ({ setSearchToggle }: any) => {
   const { t } = useTranslation();
   const { breakpoint } = useBreakpoint(BREAKPOINTS);
   const [searchInput, setSearchInput] =
     useState<ISearchData>(defaultSearchInput);
   
   setSearchToggle(false);/* Added for removing `'setSearchToggle' not used` warnings. Please Change this line in the future.*/
-
-  const handleSearch = () => {};
 
   const searchButtonStyles = () => {
     let styles;
@@ -69,7 +63,7 @@ const CustomSearch = ({ setSearchToggle }: ICustomSearchProps) => {
         <CustomButton
           ariaLabel='search'
           additionalClassName={searchButtonStyles()}
-          onClick={handleSearch}
+          onClick={() => setSearchToggle(false)}
         >
           {t('actions.search')}
         </CustomButton>

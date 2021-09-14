@@ -1,0 +1,15 @@
+@import '../../stylesheets/variables';
+
+.obligations,
+.arces-implemented {
+  background: $light-grey-205;
+  height: 26rem;
+  width: 96%;
+
+  .obligation-graph,
+  .acres-graph {
+    height: 18rem;
+    width: 96%;
+    background: $white;
+  }
+}
