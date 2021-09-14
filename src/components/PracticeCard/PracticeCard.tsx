@@ -16,7 +16,7 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
 
   const dispatch = useAppDispatch();
 
-  const practiceCategoryId = useAppSelector(
+  const selectedPracticeCategoryId = useAppSelector(
     (state) => state.practiceSlice.selectedPracticeCategory
   );
 
@@ -26,7 +26,7 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
 
   const [praticestate, setPracticestate] = useState(initialState);
 
-  const handleRender = (practiceId: number, practiceCategoryId: number) => {
+  const handleChange = (practiceId: number, practiceCategoryId: number) => {
     dispatch(setSpecificPractice(practiceId));
     dispatch(setPracticeCategory(practiceCategoryId));
     setPracticeViewType({
@@ -41,8 +41,8 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
   }, []);
 
   useEffect(() => {
-    setPracticestate({ practice_category_id: practiceCategoryId });
-  }, [practiceCategoryId]);
+    setPracticestate({ practice_category_id: selectedPracticeCategoryId });
+  }, [selectedPracticeCategoryId]);
 
   const { data, error, isLoading, isSuccess, isError } =
     usePostSearchDataQuery(praticestate);
@@ -64,7 +64,7 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
                       <Link
                         to='/ConservationPractices'
                         onClick={() =>
-                          handleRender(
+                          handleChange(
                             practice.practiceId,
                             practiceCategory.practiceCategoryId
                           )

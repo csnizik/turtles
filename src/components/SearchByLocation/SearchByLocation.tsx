@@ -5,16 +5,19 @@ import {
   useGetCountyListQuery,
   useGetStateListQuery,
 } from '../../Redux/services/api';
-
+import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 import './search-by-location.scss';
 
 const SearchByLocation = ({ setSearchInput }: any) => {
   const { t } = useTranslation();
 
   const [isDisabled, setIsDisabled]: any = useState(true);
-  const [stateId, setStateId]: any = useState();
-  const stateStatus = useGetStateListQuery();
+  const [stateId, setStateId]: any = useState<string>(
+    DEFAULT_NATIONAL_LOCATION
+  );
+  const [countyId, setCountyId]: any = useState<string>('');
   const countyStatus = useGetCountyListQuery(stateId);
+  const stateStatus = useGetStateListQuery();
 
   useEffect(() => {
     const id = `${stateId}000`;
@@ -33,14 +36,13 @@ const SearchByLocation = ({ setSearchInput }: any) => {
 
   const handleSelectState = (event: any) => {
     const { value } = event.target;
-
     setStateId(value);
     setIsDisabled(false);
   };
 
   const handleCountySelect = (event: any) => {
     const { value } = event.target;
-
+    setCountyId(value);
     setSearchInput((prevState) => ({
       ...prevState,
       state_county_code: `${value}`,
@@ -65,6 +67,7 @@ const SearchByLocation = ({ setSearchInput }: any) => {
             id='stateValue'
             name='selectedStateId'
             onChange={handleSelectState}
+            value={stateId}
           >
             <option value=''>{t('location-search.national')}</option>
             {stateStatus.isSuccess &&
@@ -89,6 +92,7 @@ const SearchByLocation = ({ setSearchInput }: any) => {
             name='selectedCountyId'
             disabled={isDisabled}
             onChange={handleCountySelect}
+            value={countyId}
           >
             <option value=''>{t('actions.select')}</option>
             {countyStatus.isSuccess &&

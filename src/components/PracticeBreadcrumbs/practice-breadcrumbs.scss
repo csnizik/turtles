@@ -5,4 +5,10 @@
   margin-top: 0rem;
   margin-left: 0rem;
   padding-left: 1.5rem;
+
+  .usa-breadcrumb__list-item {
+    :last-child {
+      padding-left: 0.4em;
+    }
+  }
 }

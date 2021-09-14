@@ -71,6 +71,7 @@ const ConservationPracticeContainer = ({
     if (viewType === 'individualPractice') {
       return <IndividualPracticeContainer />;
     }
+    return null;
   };
 
   const viewTypeList = Object.keys(practiceViewType);
