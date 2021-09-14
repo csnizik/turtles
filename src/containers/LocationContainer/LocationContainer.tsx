@@ -16,7 +16,7 @@ const tabStyleOptions: any = {
   default: 0,
   fpacStyle: 1,
 };
-// ccomment
+
 const LocationContainer = () => {
   const { name }: any = useParams();
   const location: any = useLocation();
