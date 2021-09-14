@@ -14,9 +14,9 @@
 
     p {
         font-weight: $medium-light-weight;
-        font-size: 16px;
+        font-size: $h4-font-size;
         line-height: 22.4px;
-        margin-top: 0.625rem;
+        margin-top: $short-space-size;
         margin-bottom: 0;
     }
 
@@ -29,7 +29,7 @@
 
         h4 {
           font-weight: $medium-light-weight;
-          margin: 0 0 0 0.625rem;
+          margin: 0 0 0 $short-space-size;
           font-size: 17px;
           line-height: 20px;
         }
@@ -41,7 +41,7 @@
             align-items:center;
             display: flex;
             cursor: pointer;
-            padding: 0.625rem 1rem 0.625rem 1rem;
+            padding: $short-space-size 1rem $short-space-size 1rem;
             border-bottom: 1px solid $philippine-silver;
 
             .fa, .fas {
@@ -60,7 +60,7 @@
   border-top: 0;
   
   .single-content {
-    padding: $middle-space-size $large-space-size;
+    padding: $medium-space-size $large-space-size;
     padding-bottom: 0;
     display: flex;
 
@@ -74,7 +74,7 @@
     p {
       font-size: $h5-font-size;
       line-height: $h4-font-size;
-      margin-bottom: $middle-space-size;
+      margin-bottom: $medium-space-size;
     }
 
     .content-description {

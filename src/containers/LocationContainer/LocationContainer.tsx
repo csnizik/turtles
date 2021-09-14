@@ -61,7 +61,7 @@ const LocationContainer = () => {
           />
         </TabPane>
       )}
-      {currentTabOption === 2} 
+      {currentTabOption === 2 && <TabPane tabId={2}/> } 
     </TabContent>
   );
   return (

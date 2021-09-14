@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useAppDispatch } from '../../Redux/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import { usePostSearchDataQuery } from '../../Redux/services/api';
 import './practice-card.scss';
 import Spinner from '../Spinner/Spinner';
@@ -9,12 +9,16 @@ import {
   setPracticeCategory,
 } from '../../Redux/Slice/practiceSlice';
 
-const PracticeCardDetails = (setPracticeViewType : any) => {
+const PracticeCardDetails = ({ setPracticeViewType }: any) => {
   const initialState = {
     practice_category_id: 0,
   };
 
   const dispatch = useAppDispatch();
+
+  const selectedPracticeCategoryId = useAppSelector(
+    (state) => state.practiceSlice.selectedPracticeCategory
+  );
 
   const location: any = useLocation();
 
@@ -22,7 +26,7 @@ const PracticeCardDetails = (setPracticeViewType : any) => {
 
   const [praticestate, setPracticestate] = useState(initialState);
 
-  const handleRender = (practiceId: number, practiceCategoryId: number) => {
+  const handleChange = (practiceId: number, practiceCategoryId: number) => {
     dispatch(setSpecificPractice(practiceId));
     dispatch(setPracticeCategory(practiceCategoryId));
     setPracticeViewType({
@@ -35,6 +39,10 @@ const PracticeCardDetails = (setPracticeViewType : any) => {
   useEffect(() => {
     setPracticestate({ practice_category_id: sharedState });
   }, []);
+
+  useEffect(() => {
+    setPracticestate({ practice_category_id: selectedPracticeCategoryId });
+  }, [selectedPracticeCategoryId]);
 
   const { data, error, isLoading, isSuccess, isError } =
     usePostSearchDataQuery(praticestate);
@@ -49,29 +57,30 @@ const PracticeCardDetails = (setPracticeViewType : any) => {
       {isSuccess && data && (
         <>
           {practiceCategory?.practices
-            ? practiceCategory.practices.map((practice: any) => (
-              <div className='full-document-box'>
-                <div className='list-box'>
-                  <div className='info-box'>
-                    <Link
-                      to='/ConservationPractices'
-                      onClick={() =>
-                        handleRender(
-                          practice.practiceId,
-                          practiceCategory.practiceCategoryId
-                        )
-                      }
-                    >
-                      <h4>{practice.practiceName}</h4>
-                    </Link>
-                    <p>{practice.practiceDescription}</p>
+            ? // eslint-disable-next-line
+              practiceCategory.practices.map((practice: any) => (
+                <div className='full-document-box'>
+                  <div className='list-box'>
+                    <div className='info-box'>
+                      <Link
+                        to='/ConservationPractices'
+                        onClick={() =>
+                          handleChange(
+                            practice.practiceId,
+                            practiceCategory.practiceCategoryId
+                          )
+                        }
+                      >
+                        <h4>{practice.practiceName}</h4>
+                      </Link>
+                      <p>{practice.practiceDescription}</p>
+                    </div>
+                    <img
+                      src='images/practice_placeholder.png'
+                      alt='Practice Description'
+                    />
                   </div>
-                  <img
-                    src='images/practice_placeholder.png'
-                    alt='Practice Description'
-                  />
                 </div>
-              </div>
               ))
             : []}
         </>

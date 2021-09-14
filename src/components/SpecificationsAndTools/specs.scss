@@ -1,0 +1,12 @@
+@import '../../stylesheets/variables';
+
+.specs-and-tools {
+  background: $light-grey-205;
+
+  .national-specs {
+    background: $white;
+    a:first-of-type {
+      text-decoration: none;
+    }
+  }
+}

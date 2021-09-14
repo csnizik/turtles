@@ -1,0 +1,10 @@
+@import '../../stylesheets/variables';
+
+.projects-container {
+  background: $light-grey-205;
+  .projects-content {
+    height: 20rem;
+    width: 96%;
+    background: $white;
+  }
+}

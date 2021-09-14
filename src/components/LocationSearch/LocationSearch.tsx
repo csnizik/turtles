@@ -6,6 +6,8 @@ import {
   useGetCountyListQuery,
   useGetStateListQuery,
 } from '../../Redux/services/api';
+import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
+
 import './location-search.scss';
 import CustomButton from '../CustomButton';
 
@@ -14,21 +16,34 @@ const LocationSearch = () => {
   const { t } = useTranslation();
   const [isDisabled, setIsDisabled]: any = useState(true);
   // '00' represents National
-  const [selectedState, setSelectedState]: any = useState<string>('00');
+  const [selectedState, setSelectedState]: any = useState<string>(
+    DEFAULT_NATIONAL_LOCATION
+  );
+  const [selectedCounty, setSelectedCounty]: any = useState<string>('');
   const countyStatus = useGetCountyListQuery(selectedState);
   const stateStatus = useGetStateListQuery();
+
+  const handleDropdownSelection = (event: any) => {
+    const { name, value } = event.target;
+    if (name === 'stateOptions' && value) {
+      setSelectedState(value);
+      setIsDisabled(false);
+      if (!selectedCounty && countyStatus.isSuccess && countyStatus.data) {
+        // Once a state is selected, default counties to 'All Counties'
+        setSelectedCounty(countyStatus.data[0].countyCode);
+      } else if (selectedState && selectedState !== value && selectedCounty) {
+        setSelectedCounty('');
+      }
+    } else if (name === 'countyOptions') {
+      setSelectedCounty(value);
+    }
+  };
 
   useEffect(() => {
     if (!selectedState || selectedState === '00') {
       setIsDisabled(true);
     }
   }, [selectedState]);
-
-  const handleSelectState = (event: any) => {
-    const stateVal = event.target.value;
-    setSelectedState(stateVal);
-    setIsDisabled(false);
-  };
 
   const handleClick = () => {
     history.push({
@@ -58,7 +73,8 @@ const LocationSearch = () => {
             className='usa-select'
             id='stateSelect'
             name='stateOptions'
-            onChange={handleSelectState}
+            onChange={handleDropdownSelection}
+            value={selectedState}
           >
             <option value='00'>{t('location-search.national')}</option>
             {stateStatus.isSuccess &&
@@ -75,9 +91,11 @@ const LocationSearch = () => {
             className='usa-select'
             id='countySelect'
             name='countyOptions'
+            onChange={handleDropdownSelection}
             disabled={isDisabled}
+            value={selectedCounty}
           >
-            <option value={-1}>{t('actions.select')}</option>
+            <option value=''>{t('actions.select')}</option>
             {countyStatus.isSuccess &&
               countyStatus.data &&
               countyStatus.data.map((county: any) => {
