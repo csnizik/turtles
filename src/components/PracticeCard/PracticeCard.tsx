@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useAppDispatch } from '../../Redux/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import { usePostSearchDataQuery } from '../../Redux/services/api';
 import './practice-card.scss';
 import Spinner from '../Spinner/Spinner';
@@ -16,13 +16,17 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
 
   const dispatch = useAppDispatch();
 
+  const selectedPracticeCategoryId = useAppSelector(
+    (state) => state.practiceSlice.selectedPracticeCategory
+  );
+
   const location: any = useLocation();
 
   const sharedState = location?.state?.detail;
 
   const [praticestate, setPracticestate] = useState(initialState);
 
-  const handleRender = (practiceId: number, practiceCategoryId: number) => {
+  const handleChange = (practiceId: number, practiceCategoryId: number) => {
     dispatch(setSpecificPractice(practiceId));
     dispatch(setPracticeCategory(practiceCategoryId));
     setPracticeViewType({
@@ -35,6 +39,10 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
   useEffect(() => {
     setPracticestate({ practice_category_id: sharedState });
   }, []);
+
+  useEffect(() => {
+    setPracticestate({ practice_category_id: selectedPracticeCategoryId });
+  }, [selectedPracticeCategoryId]);
 
   const { data, error, isLoading, isSuccess, isError } =
     usePostSearchDataQuery(praticestate);
@@ -57,7 +65,7 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
                       <Link
                         to='/ConservationPractices'
                         onClick={() =>
-                          handleRender(
+                          handleChange(
                             practice.practiceId,
                             practiceCategory.practiceCategoryId
                           )
