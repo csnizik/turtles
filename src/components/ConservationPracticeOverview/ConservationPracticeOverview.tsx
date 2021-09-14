@@ -1,11 +1,13 @@
 import './conservation-practice-overview.scss';
-import { useGetNationalOverviewByPracticeQuery } from '../../Redux/services/api';
 import Spinner from '../Spinner/Spinner';
 
-const ConservationPracticeOverview = ({ selectedPracticeId }: any) => {
-  const { data, error, isLoading, isSuccess, isError } =
-    useGetNationalOverviewByPracticeQuery(selectedPracticeId);
-
+const ConservationPracticeOverview = ({
+  data,
+  error,
+  isLoading,
+  isSuccess,
+  isError,
+}: any) => {
   return (
     <>
       {isLoading && <Spinner />}
