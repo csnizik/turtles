@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import CustomButton from '../CustomButton';
+import { useAppDispatch } from '../../Redux/hooks/hooks';
 import {
   IPractice,
   IPracticeCategory,
@@ -12,6 +13,7 @@ import {
   useGetPracticeCategoryQuery,
   useGetPracticeQuery,
 } from '../../Redux/services/api';
+import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
 
 const homePagePracticeImage: string =
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5B-LQ-QdFXKeJgU9W0wxxffcnPg3FS8ox4Q&usqp=CAU';
@@ -23,6 +25,7 @@ const intialState = {
 const FindByPractices = () => {
   const { t } = useTranslation();
   const history = useHistory();
+  const dispatch = useAppDispatch();
   const [secondState, setSecondState] =
     useState<IPracticeDropdown>(intialState);
   const [selectedPractice, setSelectedPractice] = useState(-1);
@@ -34,7 +37,7 @@ const FindByPractices = () => {
   const practiceCategory = useGetPracticeCategoryQuery();
   const subPractice = useGetPracticeQuery(selectedPractice);
 
-  const handleChange = (e) => {
+  const handleCategoryChange = (e) => {
     const practiceVal = e.target.value;
     if (practiceVal !== '') {
       setSelectedPractice(practiceVal);
@@ -46,7 +49,9 @@ const FindByPractices = () => {
     } else {
       setSecondState({ ...intialState });
     }
+    dispatch(setPracticeCategory(+practiceVal));
   };
+
   return (
     <div className='grid-row find-practice-container'>
       <div className='tablet:grid-col-7 content-row'>
@@ -66,7 +71,7 @@ const FindByPractices = () => {
             id='categoryOptions'
             name='categorySelect'
             value={selectedPractice}
-            onChange={handleChange}
+            onChange={handleCategoryChange}
           >
             <option value={-1}>All practices (default)</option>
             {practiceCategory.isSuccess && practiceCategory.data
