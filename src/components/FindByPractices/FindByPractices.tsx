@@ -1,37 +1,38 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-
 import CustomButton from '../CustomButton';
-import { ConservationPractice } from '../../common/typedconstants.common';
-import { IPracticeCategoryDropdown } from '../../common/types';
+import {
+  IPractice,
+  IPracticeCategory,
+  IPracticeDropdown,
+} from '../../common/types';
 import './find-by-practice.scss';
+import {
+  useGetPracticeCategoryQuery,
+  useGetPracticeQuery,
+} from '../../Redux/services/api';
 
 const homePagePracticeImage: string =
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5B-LQ-QdFXKeJgU9W0wxxffcnPg3FS8ox4Q&usqp=CAU';
 
 const intialState = {
-  practice: [],
   disabled: true,
 };
 
 const FindByPractices = () => {
   const { t } = useTranslation();
   const history = useHistory();
-  const [practiceState, setPracticeState] =
-    useState<IPracticeCategoryDropdown>(intialState);
   const [secondState, setSecondState] =
-    useState<IPracticeCategoryDropdown>(intialState);
+    useState<IPracticeDropdown>(intialState);
   const [selectedPractice, setSelectedPractice] = useState(-1);
 
   const handleFindPractices = () => {
     history.push('/ConservationPractices');
   };
 
-  useEffect(() => {
-    setPracticeState({ ...practiceState, practice: ConservationPractice });
-    setSecondState({ ...secondState, practice: ConservationPractice });
-  }, [selectedPractice]);
+  const practiceCategory = useGetPracticeCategoryQuery();
+  const subPractice = useGetPracticeQuery(selectedPractice);
 
   const handleChange = (e) => {
     const practiceVal = e.target.value;
@@ -40,7 +41,7 @@ const FindByPractices = () => {
       if (selectedPractice >= 0 && practiceVal !== selectedPractice) {
         setSecondState({ ...intialState, disabled: false });
       } else {
-        setSecondState({ practice: ConservationPractice, disabled: false });
+        setSecondState({ disabled: false });
       }
     } else {
       setSecondState({ ...intialState });
@@ -68,11 +69,14 @@ const FindByPractices = () => {
             onChange={handleChange}
           >
             <option value={-1}>All practices (default)</option>
-            {practiceState.practice.length
-              ? practiceState.practice.map((practice: any) => {
+            {practiceCategory.isSuccess && practiceCategory.data
+              ? practiceCategory.data.map((practice: IPracticeCategory) => {
                   return (
-                    <option key={practice.practiceCategory} value={practice.id}>
-                      {practice.practiceCategory}
+                    <option
+                      key={practice.practiceCategoryId}
+                      value={practice.practiceCategoryId}
+                    >
+                      {practice.practiceCategoryName}
                     </option>
                   );
                 })
@@ -85,11 +89,11 @@ const FindByPractices = () => {
             disabled={secondState.disabled || selectedPractice < 0}
           >
             <option value=''>- Select practice -</option>
-            {secondState.practice.length
-              ? secondState.practice.map((item: any) => {
+            {subPractice.isSuccess && subPractice.data
+              ? subPractice.data.map((item: IPractice) => {
                   return (
-                    <option key={item.practiceCategory} value={item.practice}>
-                      {item.practice}
+                    <option key={item.practiceId} value={item.practiceId}>
+                      {item.practiceName}
                     </option>
                   );
                 })
