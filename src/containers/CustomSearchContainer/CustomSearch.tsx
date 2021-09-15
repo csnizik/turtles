@@ -25,6 +25,8 @@ const CustomSearch = ({ setSearchToggle }: any) => {
   const { breakpoint } = useBreakpoint(BREAKPOINTS);
   const [searchInput, setSearchInput] =
     useState<ISearchData>(defaultSearchInput);
+  
+  setSearchToggle(false);/* Added for removing `'setSearchToggle' not used` warnings. Please Change this line in the future.*/
 
   const searchButtonStyles = () => {
     let styles;
