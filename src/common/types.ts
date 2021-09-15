@@ -44,7 +44,7 @@ export interface IPractice {
   practiceId: number;
 }
 export interface IPracticeDropdown {
-  practice: Array<IPractice>;
+  practice?: Array<IPractice>;
   disabled: boolean;
 }
 
