@@ -87,8 +87,25 @@ export interface IPracticeVideo {
 }
 
 export interface IRCCategory{
-  stateCode: number;
-  practiceId: string;
+  stateCode: string;
+  practiceId: number;
+  result: Array<IRCResult>; 
+}
+
+export interface IRCResult{
   rcCategoryId: number;
   rcCategoryName: string;
+  resourceConcerns: Array<IRCConcern>;
+}
+
+export interface IRCConcern{
+  rcId: number;
+  rcName: string;
+  rcDescription: string;
+  relatedLandUses: Array<IRCLandUse>;
+}
+
+export interface IRCLandUse{
+  landUseId: number;
+  landUseName: string;
 }

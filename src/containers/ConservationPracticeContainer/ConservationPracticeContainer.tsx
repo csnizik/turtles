@@ -69,7 +69,7 @@ const ConservationPracticeContainer = ({
       );
     }
     if (viewType === 'individualPractice') {
-      return <IndividualPracticeContainer />;
+      return <IndividualPracticeContainer stateCode={selectedStateCode}/>;
     }
     return null;
   };

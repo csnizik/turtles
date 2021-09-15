@@ -49,6 +49,17 @@
               line-height: 20px;
             }
           }
+
+          .accordion-data {
+            h4 {
+              font-weight: $semi-heavy-weight;
+            }
+
+            .num-rc-count {
+              font-weight: $medium-weight;
+              color: $sfi-black;
+            }
+          }
         }
     }
 }
@@ -58,6 +69,7 @@
   border: 1px solid $philippine-silver;
   border-left: 3px solid $usda-blue;
   border-top: 0;
+  border-right: 0;
   
   .single-content {
     padding: $medium-space-size $large-space-size;
@@ -68,6 +80,7 @@
       font-size: $h4-font-size;
       line-height: 19px;
       font-weight: $semi-heavy-weight;
+      margin: 0;
       margin-bottom: $short-space-size;
     }
 
