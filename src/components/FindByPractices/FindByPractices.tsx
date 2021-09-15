@@ -13,7 +13,10 @@ import {
   useGetPracticeCategoryQuery,
   useGetPracticeQuery,
 } from '../../Redux/services/api';
-import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
+import {
+  setPracticeCategory,
+  setSpecificPractice,
+} from '../../Redux/Slice/practiceSlice';
 
 const homePagePracticeImage: string =
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5B-LQ-QdFXKeJgU9W0wxxffcnPg3FS8ox4Q&usqp=CAU';
@@ -29,6 +32,7 @@ const FindByPractices = () => {
   const [secondState, setSecondState] =
     useState<IPracticeDropdown>(intialState);
   const [selectedPractice, setSelectedPractice] = useState(-1);
+  const [selectedSubPractice, setSelectedSubPractice] = useState(-1);
 
   const handleFindPractices = () => {
     history.push('/ConservationPractices');
@@ -50,6 +54,12 @@ const FindByPractices = () => {
       setSecondState({ ...intialState });
     }
     dispatch(setPracticeCategory(+practiceVal));
+  };
+
+  const handlePracticeChange = (e) => {
+    const practiceSubVal = e.target.value;
+    setSelectedSubPractice(practiceSubVal);
+    dispatch(setSpecificPractice(+practiceSubVal));
   };
 
   return (
@@ -92,6 +102,8 @@ const FindByPractices = () => {
             id='practiceOptions'
             name='practiceSelect'
             disabled={secondState.disabled || selectedPractice < 0}
+            value={selectedSubPractice}
+            onChange={handlePracticeChange}
           >
             <option value=''>- Select practice -</option>
             {subPractice.isSuccess && subPractice.data
