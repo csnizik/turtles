@@ -49,6 +49,17 @@
               line-height: 20px;
             }
           }
+
+          .accordion-data {
+            h4 {
+              font-weight: $semi-heavy-weight;
+            }
+
+            .num-rc-count {
+              font-weight: $medium-weight;
+              color: $sfi-black;
+            }
+          }
         }
     }
 }
