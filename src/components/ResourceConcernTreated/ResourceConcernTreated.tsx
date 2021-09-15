@@ -38,7 +38,8 @@ const ResourceConcernTreated = ( {selectedStateCode,selectedPracticeId} : any ) 
       {isSuccess && data && (
       <section className='document-box'>
         <h2>Resource Concerns Treated</h2>
-        <p>NRCS conservation activities are carried out according to a conservation plan 
+        <p data-testid='rc-description'>
+          NRCS conservation activities are carried out according to a conservation plan 
           developed with the producer that identifies the appropriate conservation practice or 
           practices to address the resource concerns affecting their farm, ranch, or forest. 
           The resource concerns addressed by this practice are listed below.
@@ -53,7 +54,7 @@ const ResourceConcernTreated = ( {selectedStateCode,selectedPracticeId} : any ) 
             });
             return (
 
-              <div className='accordion-container' key={categoryId}>
+              <div className='accordion-container' key={categoryId} data-testid='rc-accordion'>
                 <li key={categoryId}>
                   <i
                     className={chevronClassName}

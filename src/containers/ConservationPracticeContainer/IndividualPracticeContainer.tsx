@@ -8,7 +8,7 @@ import SpecificationsAndTools from '../../components/SpecificationsAndTools';
 import ResourceConcernTreated from '../../components/ResourceConcernTreated';
 import ProjectsAndInitiatives from '../../components/ProjectsAndInitiatives';
 
-const IndividualPracticeContainer = () => {
+const IndividualPracticeContainer = (stateCode: any) => {
   const state = useAppSelector((s) => s);
   const practiceId: any = state.practiceSlice.selectedSpecficPractice;
   const { data, error, isLoading, isSuccess, isError } =
@@ -24,7 +24,7 @@ const IndividualPracticeContainer = () => {
         isLoading={isLoading}
       />
       <ConservationPracticeVideo selectedPracticeId={practiceId} />
-      <ResourceConcernTreated selectedStateCode='01' selectedPracticeId={practiceId} />
+      <ResourceConcernTreated selectedStateCode={stateCode} selectedPracticeId={practiceId} />
       <ImplementationExtent data={data} isSuccess={isSuccess} />
       <SpecificationsAndTools data={data} isSuccess={isSuccess} />
       <ApplicationImpacts data={data} isSuccess={isSuccess} />
