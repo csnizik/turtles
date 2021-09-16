@@ -47,6 +47,7 @@ const FindByPractices = () => {
       setSelectedPractice(practiceVal);
       if (selectedPractice >= 0 && practiceVal !== selectedPractice) {
         setSecondState({ ...intialState, disabled: false });
+        dispatch(setSpecificPractice(-1));
       } else {
         setSecondState({ disabled: false });
       }
@@ -105,7 +106,7 @@ const FindByPractices = () => {
             value={selectedSubPractice}
             onChange={handlePracticeChange}
           >
-            <option value=''>- Select practice -</option>
+            <option value={-1}>- Select practice -</option>
             {subPractice.isSuccess && subPractice.data
               ? subPractice.data.map((item: IPractice) => {
                   return (
