@@ -44,13 +44,18 @@ const FindByPractices = () => {
   const handleCategoryChange = (e) => {
     const practiceVal = e.target.value;
     if (practiceVal !== '') {
+      console.log('outside if->');
       setSelectedPractice(practiceVal);
       if (selectedPractice >= 0 && practiceVal !== selectedPractice) {
         setSecondState({ ...intialState, disabled: false });
+        dispatch(setSpecificPractice(-1));
+        console.log('inside if->');
       } else {
         setSecondState({ disabled: false });
+        console.log('inside else->');
       }
     } else {
+      console.log('outside else->');
       setSecondState({ ...intialState });
     }
     dispatch(setPracticeCategory(+practiceVal));
@@ -105,7 +110,7 @@ const FindByPractices = () => {
             value={selectedSubPractice}
             onChange={handlePracticeChange}
           >
-            <option value=''>- Select practice -</option>
+            <option value={-1}>- Select practice -</option>
             {subPractice.isSuccess && subPractice.data
               ? subPractice.data.map((item: IPractice) => {
                   return (
