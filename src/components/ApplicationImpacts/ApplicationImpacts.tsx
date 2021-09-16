@@ -1,4 +1,3 @@
-import Header from '../Header';
 import './application-impacts.scss';
 
 interface IApplicationImpactProps {
@@ -21,14 +20,10 @@ const ApplicationImpacts = ({ data, isSuccess }: IApplicationImpactProps) => {
   if (!isSuccess) return null;
 
   return (
-    <div className='padding-top-4 padding-bottom-4'>
-      <Header
-        headerText={getHeaderText()}
-        parentClassNames='margin-3'
-        paragraphText={intro}
-        priority='1'
-      />
-      <div className='impacts-content margin-3' />
+    <div className='app-impact-parent'>
+      <h2>{getHeaderText()}</h2>
+      <h4>{intro}</h4>
+      <div className='impacts-content'/>
     </div>
   );
 };

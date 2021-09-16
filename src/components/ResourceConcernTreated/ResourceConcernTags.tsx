@@ -22,25 +22,25 @@ const ResourceConcernTags = ( category : any) => {
       <div className='content-tag'>
         <div className='tags'>
           <img 
-            className={ dataSet.has('Crop')? 'displaying-image' : 'hidden-image'}
+            className={ dataSet.has('Cropland')? 'displaying-image' : 'hidden-image'}
             alt='Cropland Icon'
             // eslint-disable-next-line global-require
             src={require('./image/Cropland-IconPlaceholder.svg').default}
           />
           <img 
-            className={ dataSet.has('Urban')? 'displaying-image' : 'hidden-image'}
+            className={ dataSet.has('Developed land/Urban Ag')? 'displaying-image' : 'hidden-image'}
             alt='Developedland Icon'
             // eslint-disable-next-line global-require
             src={require('./image/DevelopedLand-and-UrbanAg-IconPlaceholder.svg').default}
           />
           <img 
-            className={ dataSet.has('Forest')? 'displaying-image' : 'hidden-image'}
+            className={ dataSet.has('Forestland')? 'displaying-image' : 'hidden-image'}
             alt='Forestland Icon'
             // eslint-disable-next-line global-require
             src={require('./image/Forestland-IconPlaceholder.svg').default}
           />
           <img 
-            className={ dataSet.has('Rural')? 'displaying-image' : 'hidden-image'}
+            className={ dataSet.has('Other Farm and Rural Land')? 'displaying-image' : 'hidden-image'}
             alt='Other farms and Rural land Icon'
             // eslint-disable-next-line global-require
             src={require('./image/OtherFarm-and-RuralLand-IconPlaceholder.svg').default}
@@ -50,6 +50,12 @@ const ResourceConcernTags = ( category : any) => {
             alt='Pasture Icon'
             // eslint-disable-next-line global-require
             src={require('./image/Pasture-IconPlaceholder.svg').default}
+          />
+          <img 
+            className={ dataSet.has('Rangeland')? 'displaying-image' : 'hidden-image'}
+            alt='Rangeland Icon'
+            // eslint-disable-next-line global-require
+            src={require('./image/Rangeland-IconPlaceholder.svg').default}
           />
         </div>
       </div>

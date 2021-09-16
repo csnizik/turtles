@@ -1,6 +1,6 @@
 @import '../../stylesheets/variables';
 
-.document-box {
+.rc-treated-box {
     padding: 5rem 2.188rem 5rem;
     margin: 0;
     background-color: $sfi-dark-white;
@@ -57,7 +57,8 @@
 
             .num-rc-count {
               font-weight: $medium-weight;
-              color: $sfi-black;
+              color: $dark-grey;
+              padding-left: 3px;
             }
           }
         }

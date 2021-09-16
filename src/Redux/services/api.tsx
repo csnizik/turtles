@@ -11,6 +11,7 @@ import {
   IPracticeVideo,
   IConservationPractice,
   IRCCategory,
+  IRCRequestBody,
 } from '../../common/types';
 
 export const api = createApi({
@@ -46,7 +47,7 @@ export const api = createApi({
     //!Post request for Search
     postSearchData: builder.query<ISearchData[], ISearchData>({
       query: (data) => ({
-        url: '/stored_procedures/search',
+        url: '/practiceSearch',
         method: 'POST',
         body: data,
       }),
@@ -54,8 +55,8 @@ export const api = createApi({
     getPracticeVideoLink: builder.query<IPracticeVideo[], void>({
       query: (practiceId) => `/video/${practiceId}`,
     }),
-    getRelatedResourceConcernCategory: builder.query<IRCCategory, IRCCategory>({
-      query: (data) => `/relatedResourceConcernCategory?stateCode='${data.stateCode}'&practiceId=${data.practiceId}`,
+    getRelatedResourceConcernCategory: builder.query<IRCCategory, IRCRequestBody>({
+      query: (data) => `/relatedResourceConcernCategory?stateCode=${data.stateCode}&practiceId=${data.practiceId}`, 
     }),
   }),
 });
