@@ -8,6 +8,7 @@ import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
 import ConservationPracticeContainer from '../ConservationPracticeContainer';
 import './location-search.scss';
 import { currentState } from '../../Redux/Slice/stateSlice';
+import TabTitle from '../../components/TabTitle';
 
 // Tab styles come from the NRCS design system
 // Documentation: (https://koala-bandits.github.io/nrcs-design-system-storybook/?path=/story/components-tabs-nav--tabs-story)
@@ -21,6 +22,7 @@ const tabStyleOptions: any = {
 const LocationContainer = () => {
   const { name }: any = useParams();
   const location: any = useLocation();
+  const stateInfo = useAppSelector((state: any) => state?.stateSlice);
   const stateStatus = useGetStateListQuery();
   const selectedPracticeCategory: number = useAppSelector(
     (state) => state.practiceSlice.selectedPracticeCategory
@@ -73,6 +75,10 @@ const LocationContainer = () => {
   );
   return (
     <>
+      <TabTitle
+        stateName={stateInfo?.stateNameDisplay}
+        currentTab={option?.displayName}
+      />
       <CustomTabs
         tabStyleOption={tabStyleOptions.default}
         searchOptionList={searchOptionMap}

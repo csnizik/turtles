@@ -35,19 +35,15 @@ const LocationSearch = () => {
   const handleDropdownSelection = (event: any) => {
     const { name, value } = event.target;
     if (name === 'stateOptions' && value) {
-      console.log('first if');
       setSelectedState(value);
       setIsDisabled(false);
       if (!selectedCounty && countyStatus.isSuccess && countyStatus.data) {
-        console.log('second if');
         // Once a state is selected, default counties to 'All Counties'
         setSelectedCounty(countyStatus.data[0].countyCode);
       } else if (selectedState && selectedState !== value && selectedCounty) {
-        console.log('first else');
         setSelectedCounty('');
       }
     } else if (name === 'countyOptions') {
-      console.log('second else');
       setSelectedCounty(value);
     } else {
       dispatch(currentState(initialState));
