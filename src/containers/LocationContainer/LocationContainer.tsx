@@ -4,9 +4,10 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useGetStateListQuery } from '../../Redux/services/api';
 import CustomTabs from '../../components/CustomTabs';
 import { searchOptionMap } from '../../common/typedconstants.common';
-import { useAppSelector } from '../../Redux/hooks/hooks';
+import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
 import ConservationPracticeContainer from '../ConservationPracticeContainer';
 import './location-search.scss';
+import { currentState } from '../../Redux/Slice/stateSlice';
 
 // Tab styles come from the NRCS design system
 // Documentation: (https://koala-bandits.github.io/nrcs-design-system-storybook/?path=/story/components-tabs-nav--tabs-story)
@@ -40,6 +41,12 @@ const LocationContainer = () => {
       return state.stateCode === selectedStateCode;
     });
 
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(currentState(selectedState));
+  }, [selectedState]);
+
   useEffect(() => {
     if (
       (selectedPracticeCategory >= 0 && !currentTabOption) ||
@@ -61,7 +68,7 @@ const LocationContainer = () => {
           />
         </TabPane>
       )}
-      {currentTabOption === 2 && <TabPane tabId={2}/> } 
+      {currentTabOption === 2 && <TabPane tabId={2} />}
     </TabContent>
   );
   return (

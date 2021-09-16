@@ -3,12 +3,14 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { api } from './services/api';
 import disableSlice from './Slice/disableSlice';
 import practiceSlice from './Slice/practiceSlice';
+import stateSlice from './Slice/stateSlice';
 
 const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
     disableSlice,
     practiceSlice,
+    stateSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware),

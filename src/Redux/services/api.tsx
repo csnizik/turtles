@@ -46,7 +46,7 @@ export const api = createApi({
     //!Post request for Search
     postSearchData: builder.query<ISearchData[], ISearchData>({
       query: (data) => ({
-        url: '/stored_procedures/search',
+        url: '/practiceSearch',
         method: 'POST',
         body: data,
       }),
@@ -55,7 +55,8 @@ export const api = createApi({
       query: (practiceId) => `/video/${practiceId}`,
     }),
     getRelatedResourceConcernCategory: builder.query<IRCCategory, IRCCategory>({
-      query: (data) => `/relatedResourceConcernCategory?stateCode='${data.stateCode}'&practiceId=${data.practiceId}`,
+      query: (data) =>
+        `/relatedResourceConcernCategory?stateCode='${data.stateCode}'&practiceId=${data.practiceId}`,
     }),
   }),
 });
