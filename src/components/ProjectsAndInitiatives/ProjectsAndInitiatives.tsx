@@ -1,4 +1,3 @@
-import Header from '../Header';
 import './projects-initiatives.scss';
 
 interface IProjectsAndInitiativesProps {
@@ -23,14 +22,10 @@ const ProjectsAndInitiatives = ({
 
   if (!isSuccess) return null;
   return (
-    <div className='projects-container padding-top-4 padding-bottom-4'>
-      <Header
-        headerText={getHeaderText()}
-        parentClassNames='margin-3 padding-top-4'
-        paragraphText={intro}
-        priority='1'
-      />
-      <div className='projects-content margin-3' />
+    <div className='projects-initiative-parent'>
+      <h2>{getHeaderText()}</h2>
+      <h4>{intro}</h4>
+      <div className='projects-initiative-content' />
     </div>
   );
 };
