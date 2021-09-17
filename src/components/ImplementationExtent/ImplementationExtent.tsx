@@ -1,4 +1,3 @@
-import Header from '../Header';
 import './implementation-extent.scss';
 
 interface IImplementationExtentProps {
@@ -23,28 +22,24 @@ const ImplementationExtent = ({
 
   const renderObligations = () => {
     return (
-      <div className='obligations margin-3'>
-        <Header
-          headerText='Obligations and Practices Implemented from 2014 - 2020'
-          parentClassNames='margin-3 padding-top-4'
-          priority='4'
-        />
-        <hr />
-        <div className='obligation-graph margin-3' />
+      <div className='obligations'>
+        <h3>Obligations and Practices Implemented from 2014 - 2020</h3>
+        <hr/>
+        <div className='graph-container'>
+          <div className='obligation-graph' />
+        </div>
       </div>
     );
   };
 
   const renderAcresImplemented = () => {
     return (
-      <div className='arces-implemented margin-3'>
-        <Header
-          headerText='Acres Implemented from 2014 - 2020'
-          parentClassNames='margin-3 padding-top-4'
-          priority='4'
-        />
-        <hr />
-        <div className='acres-graph margin-3' />
+      <div className='arces-implemented'>
+        <h3>Acres Implemented from 2014 - 2020</h3>
+        <hr/>
+        <div className='graph-container'>
+          <div className='acres-graph' />
+        </div>
       </div>
     );
   };
@@ -52,13 +47,9 @@ const ImplementationExtent = ({
   if (!isSuccess) return null;
 
   return (
-    <div className='padding-bottom-6'>
-      <Header
-        headerText={getHeaderText()}
-        parentClassNames='margin-3 padding-top-4'
-        paragraphText={intro}
-        priority='1'
-      />
+    <div className='ie-parent'>
+      <h2>{getHeaderText()}</h2>
+      <h4>{intro}</h4>
       <div className='extent-content'>
         {renderObligations()}
         {renderAcresImplemented()}

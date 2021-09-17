@@ -4,7 +4,10 @@ export interface ISearchOptionMap {
 export const searchOptionMap: ISearchOptionMap = {
   Overview: { id: 0, displayName: 'Overview' },
   ConservationPractices: { id: 1, displayName: 'Conservation Practices' },
-  ProjectsAndInitiatives: { id: 2, displayName: 'Projects And Initiatives' },
+  ProjectsAndInitiatives: {
+    id: 2,
+    displayName: 'Projects And Initiatives',
+  },
 };
 
 export const ConservationPractice: any = [
@@ -44,4 +47,3 @@ export const ConservationPractice: any = [
     practice: 'Diversion',
   },
 ];
-

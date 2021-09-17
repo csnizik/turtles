@@ -86,9 +86,12 @@ export interface IPracticeVideo {
   videoLink: string;
 }
 
-export interface IRCCategory{
+export interface IRCRequestBody{
   stateCode: string;
   practiceId: number;
+}
+
+export interface IRCCategory{
   result: Array<IRCResult>; 
 }
 

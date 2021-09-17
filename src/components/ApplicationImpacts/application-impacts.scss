@@ -1,7 +1,31 @@
 @import '../../stylesheets/variables';
 
 .impacts-content {
-  height: 20rem;
-  width: 96%;
+  height: 36.5rem;
+  margin-top: 1.875rem;
   background: $light-grey-205;
+  border: 1px solid $philippine-silver;
+  border-radius: 6px;
+}
+
+.app-impact-parent {
+  padding: 5rem $large-space-size;
+
+  h2, h4 {
+    margin: 0;
+    padding: 0;
+  }
+
+  h2 {
+    font-weight: $semi-heavy-weight;
+    font-size: $h2-font-size;
+    line-height: 37.5px;
+  }
+
+  h4 {
+    padding-top: 0.625rem;
+    font-weight: $medium-light-weight;
+    font-size: $h4-font-size;
+    line-height: 22.4px;
+  }
 }

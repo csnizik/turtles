@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { usePostSearchDataQuery } from '../../Redux/services/api';
+import ConservationPracticeLandingScreen from '../../components/ConservationPracticeLandingScreen';
+import IndividualPracticeContainer from './IndividualPracticeContainer';
 import PracticeBreadcrumbs from '../../components/PracticeBreadcrumbs';
 import PracticeCategoryContainer from './PracticeCategoryContainer';
-import IndividualPracticeContainer from './IndividualPracticeContainer';
-import ConservationPracticeLandingScreen from '../../components/ConservationPracticeLandingScreen';
-import './conservation-practice-container.scss';
 import PracticeCard from '../../components/PracticeCard';
+import './conservation-practice-container.scss';
 
 const defaultPracticeViews = {
   allPractices: false,
@@ -69,7 +69,7 @@ const ConservationPracticeContainer = ({
       );
     }
     if (viewType === 'individualPractice') {
-      return <IndividualPracticeContainer stateCode={selectedStateCode}/>;
+      return <IndividualPracticeContainer stateCode={selectedStateCode} />;
     }
     return null;
   };
