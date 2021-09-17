@@ -2,13 +2,13 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { NavItem, NavLink } from 'reactstrap';
 import './tab.scss';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 
 interface ISearchOption {
   option: number;
   displayName: string;
   currentSearchOption: number;
   handleSearchChange: Function;
-  currentSelectedStateName: string;
 }
 
 const SearchOption = ({
@@ -16,7 +16,6 @@ const SearchOption = ({
   option,
   currentSearchOption,
   handleSearchChange,
-  currentSelectedStateName,
 }: ISearchOption) => {
   const listItemClassNames = classNames({
     active: option === currentSearchOption,
@@ -27,11 +26,12 @@ const SearchOption = ({
     handleSearchChange(tab);
   };
 
+  const selectedstate = useAppSelector(
+    (state) => state.stateSlice.stateAbbreviation
+  );
+
   const getTabTitle = () => {
-    if (option === 0 && currentSelectedStateName) {
-      return `${currentSelectedStateName} ${displayName}`;
-    }
-    return displayName;
+    return `${selectedstate || 'U.S.'} ${displayName}`;
   };
 
   return (

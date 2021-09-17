@@ -71,7 +71,7 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
                           )
                         }
                       >
-                        <h4>{practice.practiceName}</h4>
+                        <h3>{practice.practiceName}</h3>
                       </Link>
                       <p>{practice.practiceDescription}</p>
                     </div>

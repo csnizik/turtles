@@ -4,9 +4,11 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useGetStateListQuery } from '../../Redux/services/api';
 import CustomTabs from '../../components/CustomTabs';
 import { searchOptionMap } from '../../common/typedconstants.common';
-import { useAppSelector } from '../../Redux/hooks/hooks';
+import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
 import ConservationPracticeContainer from '../ConservationPracticeContainer';
 import './location-search.scss';
+import { currentState } from '../../Redux/Slice/stateSlice';
+import TabTitle from '../../components/TabTitle';
 
 // Tab styles come from the NRCS design system
 // Documentation: (https://koala-bandits.github.io/nrcs-design-system-storybook/?path=/story/components-tabs-nav--tabs-story)
@@ -20,6 +22,7 @@ const tabStyleOptions: any = {
 const LocationContainer = () => {
   const { name }: any = useParams();
   const location: any = useLocation();
+  const stateInfo = useAppSelector((state: any) => state?.stateSlice);
   const stateStatus = useGetStateListQuery();
   const selectedPracticeCategory: number = useAppSelector(
     (state) => state.practiceSlice.selectedPracticeCategory
@@ -39,6 +42,12 @@ const LocationContainer = () => {
     stateStatus.data.find((state: any) => {
       return state.stateCode === selectedStateCode;
     });
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(currentState(selectedState));
+  }, []);
 
   useEffect(() => {
     if (
@@ -61,15 +70,18 @@ const LocationContainer = () => {
           />
         </TabPane>
       )}
-      {currentTabOption === 2 && <TabPane tabId={2}/> } 
+      {currentTabOption === 2 && <TabPane tabId={2} />}
     </TabContent>
   );
   return (
     <>
+      <TabTitle
+        stateName={stateInfo?.stateNameDisplay}
+        currentTab={option?.displayName}
+      />
       <CustomTabs
         tabStyleOption={tabStyleOptions.default}
         searchOptionList={searchOptionMap}
-        currentSelectedState={selectedState}
         currOption={currentTabOption}
         handleChangeSearchOption={setTabOption}
       />

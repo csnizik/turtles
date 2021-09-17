@@ -7,7 +7,6 @@ interface ISubjectProps {
   tabStyleOption: number;
   searchOptionList: any;
   handleChangeSearchOption: Function;
-  currentSelectedState: any;
 }
 
 interface INavigationOptions {
@@ -17,7 +16,6 @@ interface INavigationOptions {
 
 const CustomTabs = ({
   currOption,
-  currentSelectedState,
   searchOptionList,
   handleChangeSearchOption,
   tabStyleOption,
@@ -34,9 +32,6 @@ const CustomTabs = ({
             <Tab
               key={option}
               currentSearchOption={currOption}
-              currentSelectedStateName={
-                currentSelectedState && currentSelectedState.stateNameDisplay
-              }
               option={searchOptionList[option].id}
               displayName={searchOptionList[option].displayName}
               handleSearchChange={handleChangeSearchOption}

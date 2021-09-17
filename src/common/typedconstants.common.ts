@@ -2,7 +2,7 @@ export interface ISearchOptionMap {
   [key: string]: any;
 }
 export const searchOptionMap: ISearchOptionMap = {
-  Location: { id: 0, displayName: 'Overview' },
+  Overview: { id: 0, displayName: 'Overview' },
   ConservationPractices: { id: 1, displayName: 'Conservation Practices' },
   ProjectsAndInitiatives: {
     id: 2,

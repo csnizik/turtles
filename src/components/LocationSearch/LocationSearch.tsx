@@ -10,6 +10,14 @@ import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 
 import './location-search.scss';
 import CustomButton from '../CustomButton';
+import { useAppDispatch } from '../../Redux/hooks/hooks';
+import { currentState } from '../../Redux/Slice/stateSlice';
+
+const initialState = {
+  stateNameDisplay: 'U.S.',
+  stateCode: '00',
+  stateAbbreviation: 'U.S.',
+};
 
 const LocationSearch = () => {
   const history: any = useHistory();
@@ -22,6 +30,7 @@ const LocationSearch = () => {
   const [selectedCounty, setSelectedCounty]: any = useState<string>('');
   const countyStatus = useGetCountyListQuery(selectedState);
   const stateStatus = useGetStateListQuery();
+  const dispatch = useAppDispatch();
 
   const handleDropdownSelection = (event: any) => {
     const { name, value } = event.target;
@@ -36,6 +45,8 @@ const LocationSearch = () => {
       }
     } else if (name === 'countyOptions') {
       setSelectedCounty(value);
+    } else {
+      dispatch(currentState(initialState));
     }
   };
 
@@ -47,7 +58,7 @@ const LocationSearch = () => {
 
   const handleClick = () => {
     history.push({
-      pathname: 'category-practice',
+      pathname: '/ConservationPractices',
       state: { selectedStateId: selectedState },
     });
   };
