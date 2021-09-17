@@ -101,8 +101,7 @@ const Accordion = () => {
                             <p>
                               <Link
                                 to={{
-                                  pathname:
-                                    practiceCategory.practiceCategoryName,
+                                  pathname: '/ConservationPractices',
                                   state: { detail: categoryId },
                                 }}
                                 onClick={() =>
