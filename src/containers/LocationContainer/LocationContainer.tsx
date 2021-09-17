@@ -47,7 +47,7 @@ const LocationContainer = () => {
 
   useEffect(() => {
     dispatch(currentState(selectedState));
-  }, [selectedState]);
+  }, []);
 
   useEffect(() => {
     if (
@@ -82,7 +82,6 @@ const LocationContainer = () => {
       <CustomTabs
         tabStyleOption={tabStyleOptions.default}
         searchOptionList={searchOptionMap}
-        currentSelectedState={selectedState}
         currOption={currentTabOption}
         handleChangeSearchOption={setTabOption}
       />
