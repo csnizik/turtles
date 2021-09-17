@@ -56,7 +56,6 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
       ) : (
         <h2>{practiceCategory?.practices?.length} Practice</h2>
       )}
-      {/* <h2>{practiceCategory?.practices?.length} Practices</h2> */}
       {isLoading && <Spinner />}
       {isError && error}
       {isSuccess && data && (
