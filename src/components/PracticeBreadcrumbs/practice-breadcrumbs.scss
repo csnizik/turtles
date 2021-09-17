@@ -7,6 +7,11 @@
   padding-left: 1.5rem;
 
   .usa-breadcrumb__list-item {
+    .practice-title {
+      font-size: 2rem;
+      padding: 0.5em 0.5em 0 1em;
+      font-weight: 900;
+    }
     :last-child {
       padding-left: 0.4em;
     }

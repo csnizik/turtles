@@ -13,7 +13,7 @@ const ConservationPracticeOverview = ({
       {isLoading && <Spinner />}
       {isError && error}
       {isSuccess && data && (
-        <section className='document-box'>
+        <section className='practice-box'>
           <ul className='list-document'>
             <div key={data.practiceId} className='full-component'>
               <div className='overview' data-testid='overview-container'>

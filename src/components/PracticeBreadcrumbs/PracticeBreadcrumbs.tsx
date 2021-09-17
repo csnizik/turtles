@@ -101,6 +101,7 @@ const PracticeBreadcrumbs = ({
             </li>
             <li className='usa-breadcrumb__list-item'>
               <span>{currentPractice.practiceName}</span>
+              <h3 className='practice-title'>{currentPractice.practiceName}</h3>
             </li>
           </>
         ) : (
