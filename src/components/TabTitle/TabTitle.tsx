@@ -5,7 +5,7 @@ const TabTitle = ({ stateName, currentTab }: any) => {
     <header>
       <div className='tab-title-container'>
         <h1 className='tab-title-name'>
-          {stateName || 'U.S.'} {currentTab}
+          {stateName || 'U.S.'} {currentTab || 'Overview'}
         </h1>
       </div>
     </header>
