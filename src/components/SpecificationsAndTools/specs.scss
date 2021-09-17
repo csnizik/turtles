@@ -4,7 +4,8 @@
   background: $light-grey-205;
   padding: 5rem $large-space-size;
 
-  h2, h4 {
+  h2,
+  h4 {
     margin: 0;
     padding: 0;
   }
@@ -21,9 +22,7 @@
     font-size: $h4-font-size;
     line-height: 22.4px;
   }
-  
 }
-
 
 .national-specs {
   background: $white;
@@ -47,7 +46,7 @@
     margin: 0;
   }
 
-  a{
+  a {
     text-decoration: none;
     font-size: $h3-font-size;
     line-height: 31px;
@@ -59,5 +58,11 @@
     width: fit-content;
     margin-left: auto;
     margin-right: 0;
+
+    a:first-of-type {
+      img {
+        margin: 0rem 0rem 0.2rem 0.5rem;
+      }
+    }
   }
 }
