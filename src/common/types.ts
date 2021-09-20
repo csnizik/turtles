@@ -112,3 +112,9 @@ export interface IRCLandUse{
   landUseId: number;
   landUseName: string;
 }
+
+export interface IConservationPracticeSections {
+  sectionId: number;
+  sectionName: string,
+  anchorLink: string,
+}

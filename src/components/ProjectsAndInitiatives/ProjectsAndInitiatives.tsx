@@ -22,7 +22,7 @@ const ProjectsAndInitiatives = ({
 
   if (!isSuccess) return null;
   return (
-    <div className='projects-initiative-parent'>
+    <div className='projects-initiative-parent' id='Projects&Initiatives'>
       <h2>{getHeaderText()}</h2>
       <h4>{intro}</h4>
       <div className='projects-initiative-content' />

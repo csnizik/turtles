@@ -24,7 +24,7 @@ const ImplementationExtent = ({
     return (
       <div className='obligations'>
         <h3>Obligations and Practices Implemented from 2014 - 2020</h3>
-        <hr/>
+        <hr />
         <div className='graph-container'>
           <div className='obligation-graph' />
         </div>
@@ -36,7 +36,7 @@ const ImplementationExtent = ({
     return (
       <div className='arces-implemented'>
         <h3>Acres Implemented from 2014 - 2020</h3>
-        <hr/>
+        <hr />
         <div className='graph-container'>
           <div className='acres-graph' />
         </div>
@@ -47,7 +47,7 @@ const ImplementationExtent = ({
   if (!isSuccess) return null;
 
   return (
-    <div className='ie-parent'>
+    <div className='ie-parent' id='SupportPractice'>
       <h2>{getHeaderText()}</h2>
       <h4>{intro}</h4>
       <div className='extent-content'>

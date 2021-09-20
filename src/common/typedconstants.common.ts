@@ -10,40 +10,31 @@ export const searchOptionMap: ISearchOptionMap = {
   },
 };
 
-export const ConservationPractice: any = [
+export const ConservationPracticeSections: any = [
   {
-    id: 0,
-    practiceCategory: 'Cropland Soil Quality',
-    practice: 'Access Control',
+    sectionId: 0,
+    sectionName: "Resource Concerns Treated",
+    anchorLink: "#ResourceConcernsTreated",
   },
   {
-    id: 1,
-    practiceCategory: 'Grazing Land Conservation',
-    practice: 'Brush Management',
-  },
+    sectionId: 1,
+    sectionName: "Support for this Practice",
+    anchorLink: "#SupportPractice",
+  },  
   {
-    id: 2,
-    practiceCategory: 'Water Quality',
-    practice: 'Composting Facility',
-  },
+    sectionId: 2,
+    sectionName: "Practice Specifications and Tools",
+    anchorLink: "#PracticeSpecifications",
+  },  
   {
-    id: 3,
-    practiceCategory: 'Forest Land Conservation',
-    practice: 'Conservation Cover',
-  },
+    sectionId: 3,
+    sectionName: "Impacts of Applying this Practice",
+    anchorLink: "#ImpactsPractice",
+  },  
   {
-    id: 4,
-    practiceCategory: 'Wetlands',
-    practice: 'Cover Crop',
+    sectionId: 4,
+    sectionName: "Practice Projects & Initiatives",
+    anchorLink: "#Projects&Initiatives",
   },
-  {
-    id: 5,
-    practiceCategory: 'Irrigition Efficiency',
-    practice: 'Critical Area Planting',
-  },
-  {
-    id: 6,
-    practiceCategory: 'Fish and Wildlife Habitat',
-    practice: 'Diversion',
-  },
-];
+]
+

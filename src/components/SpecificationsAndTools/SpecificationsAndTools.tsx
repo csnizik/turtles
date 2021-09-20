@@ -7,8 +7,8 @@ interface ISpecAndToolsProps {
 
 const intro: string =
   'NRCS technical standards guide proper implementation of recommended practices.  Each practice also has a payment schedule that determines how much financial assistance is available for beginning or installing it. The following links provide details about practice standards and payment schedules specific to your region.';
-const promptText:  string = 
-  'You can find national conservation practice standards, overviews, conservation practice effects and network effects diagrams on the NRCS website.'
+const promptText: string =
+  'You can find national conservation practice standards, overviews, conservation practice effects and network effects diagrams on the NRCS website.';
 
 const SpecificationsAndTools = ({ data, isSuccess }: ISpecAndToolsProps) => {
   const getHeaderText = () => {
@@ -26,11 +26,17 @@ const SpecificationsAndTools = ({ data, isSuccess }: ISpecAndToolsProps) => {
         <h5>{promptText}</h5>
         <div className='link'>
           <a
-              href='https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/cp/ncps/?cid=nrcs143_026849'
-              target='_blank' rel='noopener noreferrer'
-              aria-label='Current NRCS National Conservation Practices link'
+            href='https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/cp/ncps/?cid=nrcs143_026849'
+            target='_blank'
+            rel='noopener noreferrer'
+            aria-label='Current NRCS National Conservation Practices link'
+          >
+            NRCS National Conservation Practices
+            <img
+              alt='All Conservation at Work videos'
               // eslint-disable-next-line global-require
-              >NRCS National Conservation Practices<img alt='All Conservation at Work videos' src={require('./image/newLinkIcon.svg').default}/>
+              src={require('./image/newLinkIcon.svg').default}
+            />
           </a>
         </div>
       </div>
@@ -40,7 +46,7 @@ const SpecificationsAndTools = ({ data, isSuccess }: ISpecAndToolsProps) => {
   if (!isSuccess) return null;
 
   return (
-    <div className='st-parent'>
+    <div className='st-parent' id='PracticeSpecifications'>
       <h2>{getHeaderText()}</h2>
       <h4>{intro}</h4>
       {renderNationalSpecs()}
