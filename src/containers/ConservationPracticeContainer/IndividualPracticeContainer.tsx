@@ -7,6 +7,7 @@ import ImplementationExtent from '../../components/ImplementationExtent';
 import SpecificationsAndTools from '../../components/SpecificationsAndTools';
 import ResourceConcernTreated from '../../components/ResourceConcernTreated';
 import ProjectsAndInitiatives from '../../components/ProjectsAndInitiatives';
+import HorizontalScroll from '../../components/HorizontalScroll';
 
 const IndividualPracticeContainer = (stateCode: any) => {
   const state = useAppSelector((s) => s);
@@ -16,6 +17,7 @@ const IndividualPracticeContainer = (stateCode: any) => {
 
   return (
     <>
+      <HorizontalScroll />
       <ConservationPracticeOverview
         data={data}
         error={error}
@@ -24,7 +26,10 @@ const IndividualPracticeContainer = (stateCode: any) => {
         isLoading={isLoading}
       />
       <ConservationPracticeVideo selectedPracticeId={practiceId} />
-      <ResourceConcernTreated selectedStateCode={stateCode} selectedPracticeId={practiceId} />
+      <ResourceConcernTreated
+        selectedStateCode={stateCode}
+        selectedPracticeId={practiceId}
+      />
       <ImplementationExtent data={data} isSuccess={isSuccess} />
       <SpecificationsAndTools data={data} isSuccess={isSuccess} />
       <ApplicationImpacts data={data} isSuccess={isSuccess} />

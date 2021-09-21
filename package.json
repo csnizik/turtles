@@ -28,7 +28,7 @@
     "ts-jest": "^26.5.4",
     "typescript": "^4.2.3",
     "use-breakpoint": "^2.0.1",
-    "uswds": "^2.12.0"
+    "uswds": "^2.12.1"
   },
   "devDependencies": {
     "@types/arcgis-js-api": "^4.18.0",

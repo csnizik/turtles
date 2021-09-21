@@ -1,0 +1,36 @@
+@import '../../stylesheets/variables';
+
+.horizontal-scroll {
+  .top-border {
+    margin: 0;
+  }
+
+  .scroll_container {
+    display: flex;
+    overflow-x: auto;
+    margin: 0 2.188rem 0 2.188rem;
+
+    .title {
+      padding: 1.25rem 1rem 0 0;
+      min-width: max-content;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .skin_option {
+      padding: 1.25rem 1.5rem 1.25rem 0;
+      min-width: max-content;
+      font-weight: 900;
+      margin: 0;
+    }
+  }
+
+  hr {
+    color: solid $philippine-silver;
+    height: 1px;
+    margin: 0 2.188rem 0 2.188rem;
+    border-top: none;
+  }
+}
