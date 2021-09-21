@@ -9,6 +9,8 @@ import SearchByResourceConcern from '../../components/SearchByResourceConcern';
 import LandUseSection from '../../components/LandUseSection';
 import SearchByConservationPractice from '../../components/SearchByConservationPractice';
 import { ISearchData } from '../../common/types';
+import { useAppDispatch } from '../../Redux/hooks/hooks';
+import { setSearch } from '../../Redux/Slice/practiceSlice';
 
 const defaultSearchInput: ISearchData = {
   resource_concern_category_id: null,
@@ -25,8 +27,13 @@ const CustomSearch = ({ setSearchToggle }: any) => {
   const { breakpoint } = useBreakpoint(BREAKPOINTS);
   const [searchInput, setSearchInput] =
     useState<ISearchData>(defaultSearchInput);
-  
-  setSearchToggle(false);/* Added for removing `'setSearchToggle' not used` warnings. Please Change this line in the future.*/
+
+  const dispatch = useAppDispatch();
+
+  const handleSearch = () => {
+    setSearchToggle(false);
+    dispatch(setSearch(searchInput));
+  };
 
   const searchButtonStyles = () => {
     let styles;
@@ -63,7 +70,7 @@ const CustomSearch = ({ setSearchToggle }: any) => {
         <CustomButton
           ariaLabel='search'
           additionalClassName={searchButtonStyles()}
-          onClick={() => setSearchToggle(false)}
+          onClick={() => handleSearch()}
         >
           {t('actions.search')}
         </CustomButton>

@@ -32,13 +32,13 @@ const practiceSlice = createSlice({
     setSpecificPractice(state, action) {
       state.selectedSpecficPractice = action.payload;
     },
-    setSearchInput(state, action) {
+    setSearch(state, action) {
       state.searchInput = action.payload;
     },
   },
 });
 
 /* eslint-disable no-param-reassign */
-export const { setPracticeCategory, setSpecificPractice, setSearchInput } =
+export const { setPracticeCategory, setSpecificPractice, setSearch } =
   practiceSlice.actions;
 export default practiceSlice.reducer;
