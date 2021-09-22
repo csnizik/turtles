@@ -8,7 +8,7 @@ import {
 import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 import './search-by-location.scss';
 
-const SearchByLocation = ({ setSearchInput }: any) => {
+const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
   const { t } = useTranslation();
 
   const [isDisabled, setIsDisabled]: any = useState(true);
@@ -16,8 +16,9 @@ const SearchByLocation = ({ setSearchInput }: any) => {
     DEFAULT_NATIONAL_LOCATION
   );
   const [countyId, setCountyId]: any = useState<string>('');
-  const countyStatus = useGetCountyListQuery(stateId);
-  const stateStatus = useGetStateListQuery();
+  const countyStatus: any = useGetCountyListQuery(stateId);
+  const stateStatus: any = useGetStateListQuery();
+  //const state = stateStatus?.data[1].stateName;
 
   useEffect(() => {
     const id = `${stateId}000`;
@@ -36,8 +37,15 @@ const SearchByLocation = ({ setSearchInput }: any) => {
 
   const handleSelectState = (event: any) => {
     const { value } = event.target;
+    console.log(event.action);
     setStateId(value);
     setIsDisabled(false);
+    //console.log(countyStatus.data[0].stateName);
+    //console.log(value);
+    setSearchInfo((prevState) => ({
+      ...prevState,
+      state: countyStatus.data[0].stateName,
+    }));
   };
 
   const handleCountySelect = (event: any) => {
@@ -74,7 +82,11 @@ const SearchByLocation = ({ setSearchInput }: any) => {
               stateStatus.data &&
               stateStatus.data.map((state: IStateDropdownOption) => {
                 return (
-                  <option key={state.stateCode} value={state.stateCode}>
+                  <option
+                    key={state.stateCode}
+                    value={state.stateCode}
+                    //name={state.stateNameDisplay}
+                  >
                     {state.stateNameDisplay}
                   </option>
                 );

@@ -17,7 +17,6 @@ export interface IConservationPractice {
   practiceInfo: string;
   practiceName: string;
   practiceCode: string;
-
 }
 
 export interface ICountyList {
@@ -79,6 +78,16 @@ export interface ISearchData {
   land_use_list?: string | null;
   practices?: Array<Practice> | null | undefined;
 }
+
+export interface ISearchInfo {
+  resource_concern_category?: string | null;
+  resource_concern?: string | null;
+  practice_category?: string | null;
+  practice?: string | null;
+  state?: string | null;
+  land_use_list?: string | null;
+}
+
 export interface IPracticeVideo {
   videoId: number;
   videoName: string;
@@ -86,35 +95,35 @@ export interface IPracticeVideo {
   videoLink: string;
 }
 
-export interface IRCRequestBody{
+export interface IRCRequestBody {
   stateCode: string;
   practiceId: number;
 }
 
-export interface IRCCategory{
-  result: Array<IRCResult>; 
+export interface IRCCategory {
+  result: Array<IRCResult>;
 }
 
-export interface IRCResult{
+export interface IRCResult {
   rcCategoryId: number;
   rcCategoryName: string;
   resourceConcerns: Array<IRCConcern>;
 }
 
-export interface IRCConcern{
+export interface IRCConcern {
   rcId: number;
   rcName: string;
   rcDescription: string;
   relatedLandUses: Array<IRCLandUse>;
 }
 
-export interface IRCLandUse{
+export interface IRCLandUse {
   landUseId: number;
   landUseName: string;
 }
 
 export interface IConservationPracticeSections {
   sectionId: number;
-  sectionName: string,
-  anchorLink: string,
+  sectionName: string;
+  anchorLink: string;
 }

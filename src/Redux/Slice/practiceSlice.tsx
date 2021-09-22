@@ -4,6 +4,7 @@ interface IPracticeSlice {
   selectedPracticeCategory: number;
   selectedSpecficPractice: number;
   searchInput: any;
+  searchInfo?: any;
 }
 
 const defaultSearchInput: any = {
@@ -35,10 +36,17 @@ const practiceSlice = createSlice({
     setSearch(state, action) {
       state.searchInput = action.payload;
     },
+    setSearchInfo(state, action) {
+      state.searchInfo = action.payload;
+    },
   },
 });
 
 /* eslint-disable no-param-reassign */
-export const { setPracticeCategory, setSpecificPractice, setSearch } =
-  practiceSlice.actions;
+export const {
+  setPracticeCategory,
+  setSpecificPractice,
+  setSearch,
+  setSearchInfo,
+} = practiceSlice.actions;
 export default practiceSlice.reducer;

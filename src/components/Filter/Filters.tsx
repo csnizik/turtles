@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import './filters.scss';
 import { Link } from 'react-router-dom';
+import { Spinner } from 'reactstrap';
 import CustomButton from '../CustomButton';
 import { ISearchData } from '../../common/types';
+import { useAppSelector } from '../../Redux/hooks/hooks';
+import { usePostSearchDataQuery } from '../../Redux/services/api';
 
 interface IFilterData {
   id: number;
@@ -30,42 +33,65 @@ const defaultSearchInput: ISearchData = {
 };
 
 const FilterBy = () => {
-  const [activeFilterList, setActiveFilters]: any = useState(exampleFilterData);
   const [searchInput, setSearchInput] =
     useState<ISearchData>(defaultSearchInput);
+  const searchInputData = useAppSelector(
+    (state) => state.practiceSlice.searchInfo
+  );
+  const { data, error, isLoading, isSuccess, isError } =
+    usePostSearchDataQuery(searchInputData);
+  console.log(searchInputData);
+  const information: any = data && data;
   const handleClick = () => {
     return 0;
   };
   return (
     <div className='filter-by-container'>
       <>
-        <hr className='filter-by-border' />
-        <div className='grid-row'>
-          <p aria-label='Filter By' className='filter-style'>
-            Active Filters:
-          </p>
-          {activeFilterList.length
-            ? activeFilterList.map((filterType: IFilterData, index: number) => {
-                return (
-                  <div className='filter-box' key={filterType.id}>
-                    <p className='filter-label'>{filterType.label}</p>
+        {isLoading && <Spinner />}
+        {isError && error}
+        {isSuccess && data && (
+          <>
+            {information?.map((item: any) => (
+              <div className='grid-row'>
+                <p aria-label='Filter By' className='filter-style'>
+                  Active Filters:
+                </p>
+
+                <div className='filter-box'>
+                  <p className='p-label'>Location:{item.stateAbbr}</p>
+                </div>
+                <div className='filter-box'>
+                  <p className='p-label'>
+                    Land Use:{item.practiceCategoryName}
+                  </p>
+                </div>
+                {searchInputData.practice_category_id ? (
+                  <div className='filter-box'>
+                    <p className='p-label'>Conservation Practice(s):</p>
                   </div>
-                );
-              })
-            : null}
-          <div className='grid-col-5 grid-offset-1 tablet:grid-col-2 tablet:grid-offset-9'>
-            <Link
-              to={{
-                pathname: '/search',
-                state: { detail: searchInput },
-              }}
-            >
-              <CustomButton onClick={() => handleClick()}>
-                Back to Quick Search
-              </CustomButton>
-            </Link>
-          </div>
-        </div>
+                ) : (
+                  <div className='filter-box'>
+                    <p className='p-label'>Resource Concern(s) Treated:</p>
+                  </div>
+                )}
+
+                <div className='grid-col-5 grid-offset-1 tablet:grid-col-2 tablet:grid-offset-5'>
+                  <Link
+                    to={{
+                      pathname: '/search',
+                      state: { detail: searchInput },
+                    }}
+                  >
+                    <CustomButton onClick={() => handleClick()}>
+                      Back to Quick Search
+                    </CustomButton>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </>
+        )}
       </>
     </div>
   );

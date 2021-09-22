@@ -8,9 +8,9 @@ import SearchByLocation from '../../components/SearchByLocation';
 import SearchByResourceConcern from '../../components/SearchByResourceConcern';
 import LandUseSection from '../../components/LandUseSection';
 import SearchByConservationPractice from '../../components/SearchByConservationPractice';
-import { ISearchData } from '../../common/types';
+import { ISearchData, ISearchInfo } from '../../common/types';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
-import { setSearch } from '../../Redux/Slice/practiceSlice';
+import { setSearch, setSearchInfo } from '../../Redux/Slice/practiceSlice';
 
 const defaultSearchInput: ISearchData = {
   resource_concern_category_id: null,
@@ -21,20 +21,31 @@ const defaultSearchInput: ISearchData = {
   land_use_list: null,
   practices: null,
 };
+const defaultSearchInfo: ISearchInfo = {
+  resource_concern_category: null,
+  resource_concern: null,
+  practice_category: null,
+  practice: null,
+  state: null,
+  land_use_list: null,
+};
 
 const CustomSearch = ({ setSearchToggle }: any) => {
   const { t } = useTranslation();
   const { breakpoint } = useBreakpoint(BREAKPOINTS);
   const [searchInput, setSearchInput] =
     useState<ISearchData>(defaultSearchInput);
+  const [searchedInfo, setSearchedInfo] =
+    useState<ISearchInfo>(defaultSearchInfo);
 
   const dispatch = useAppDispatch();
 
   const handleSearch = () => {
     //setSearchToggle(false);
     dispatch(setSearch(searchInput));
+    dispatch(setSearchInfo(searchedInfo));
   };
-
+  console.log('string', searchedInfo);
   const searchButtonStyles = () => {
     let styles;
     if (breakpoint !== 'mobile') {
@@ -52,7 +63,10 @@ const CustomSearch = ({ setSearchToggle }: any) => {
         <p>{t('search-page.intro')}</p>
       </div>
 
-      <SearchByLocation setSearchInput={setSearchInput} />
+      <SearchByLocation
+        setSearchInput={setSearchInput}
+        setSearchInfo={setSearchedInfo}
+      />
       <LandUseSection setSearchInput={setSearchInput} />
       <p className='practice-description'>
         {t('search-by-conservation-practice.description')}
