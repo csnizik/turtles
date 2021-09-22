@@ -31,7 +31,7 @@ const CustomSearch = ({ setSearchToggle }: any) => {
   const dispatch = useAppDispatch();
 
   const handleSearch = () => {
-    setSearchToggle(false);
+    //setSearchToggle(false);
     dispatch(setSearch(searchInput));
   };
 
