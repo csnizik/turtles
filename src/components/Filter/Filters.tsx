@@ -52,44 +52,52 @@ const FilterBy = () => {
         {isError && error}
         {isSuccess && data && (
           <>
-            {information?.map((item: any) => (
-              <div className='grid-row'>
-                <p aria-label='Filter By' className='filter-style'>
-                  Active Filters:
-                </p>
+            <div className='grid-row'>
+              <p aria-label='Filter By' className='filter-style'>
+                Active Filters:
+              </p>
 
-                <div className='filter-box'>
-                  <p className='p-label'>Location:{item.stateAbbr}</p>
-                </div>
-                <div className='filter-box'>
-                  <p className='p-label'>
-                    Land Use:{item.practiceCategoryName}
-                  </p>
-                </div>
-                {searchInputData.practice_category_id ? (
-                  <div className='filter-box'>
-                    <p className='p-label'>Conservation Practice(s):</p>
-                  </div>
-                ) : (
-                  <div className='filter-box'>
-                    <p className='p-label'>Resource Concern(s) Treated:</p>
-                  </div>
-                )}
-
-                <div className='grid-col-5 grid-offset-1 tablet:grid-col-2 tablet:grid-offset-5'>
-                  <Link
-                    to={{
-                      pathname: '/search',
-                      state: { detail: searchInput },
-                    }}
-                  >
-                    <CustomButton onClick={() => handleClick()}>
-                      Back to Quick Search
-                    </CustomButton>
-                  </Link>
+              <div className='filter-box'>
+                <p className='p-label'>Location:</p>
+                <div className='filter-pill'>
+                  <p className='filter-label'>{searchInputData.state}</p>
                 </div>
               </div>
-            ))}
+              <div className='filter-box'>
+                <p className='p-label'>Land Use:</p>
+                <div className='filter-pill'>
+                  <p className='filter-label'>Placeholder</p>
+                </div>
+              </div>
+              {searchInputData.practice_category_id ? (
+                <div className='filter-box'>
+                  <p className='p-label'>Conservation Practice(s):</p>
+                  <div className='filter-pill'>
+                    <p className='filter-label'>Placeholder</p>
+                  </div>
+                </div>
+              ) : (
+                <div className='filter-box'>
+                  <p className='p-label'>Resource Concern(s) Treated:</p>
+                  <div className='filter-pill'>
+                    <p className='filter-label'>Placeholder</p>
+                  </div>
+                </div>
+              )}
+
+              <div className='tablet:grid-col-2 tablet:grid-offset-2'>
+                <Link
+                  to={{
+                    pathname: '/search',
+                    state: { detail: searchInput },
+                  }}
+                >
+                  <CustomButton onClick={() => handleClick()}>
+                    Back to Quick Search
+                  </CustomButton>
+                </Link>
+              </div>
+            </div>
           </>
         )}
       </>
