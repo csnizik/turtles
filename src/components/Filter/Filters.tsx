@@ -1,27 +1,10 @@
 import { useState } from 'react';
 import './filters.scss';
 import { Link } from 'react-router-dom';
-import { Spinner } from 'reactstrap';
 import CustomButton from '../CustomButton';
 import { ISearchData } from '../../common/types';
 import { useAppSelector } from '../../Redux/hooks/hooks';
-import { usePostSearchDataQuery } from '../../Redux/services/api';
 
-interface IFilterData {
-  id: number;
-  label: string;
-}
-
-const exampleFilterData: IFilterData[] = [
-  // {
-  //   id: 0,
-  //   label: 'Cropland',
-  // },
-  // {
-  //   id: 1,
-  //   label: 'Virginia',
-  // },
-];
 const defaultSearchInput: ISearchData = {
   resource_concern_category_id: null,
   resource_concern_id: null,
@@ -39,11 +22,6 @@ const FilterBy = () => {
     (state) => state.practiceSlice.searchInfo
   );
 
-  console.log('Search Input==>', searchInputData);
-  // const { data, error, isLoading, isSuccess, isError } =
-  //   usePostSearchDataQuery(searchInputData);
-
-  // const information: any = data && data;
   const handleClick = () => {
     return 0;
   };

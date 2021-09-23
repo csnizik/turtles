@@ -40,7 +40,7 @@ const defaultSearchInfo: ISearchInfo = {
   land_use_list: null,
 };
 
-const CustomSearch = ({ setSearchToggle }: any) => {
+const CustomSearch = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { breakpoint } = useBreakpoint(BREAKPOINTS);

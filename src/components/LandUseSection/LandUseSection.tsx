@@ -49,7 +49,6 @@ const LandUseSection = ({ setSearchInput, setSearchInfo }: any) => {
 
   const handleLandUse = (e) => {
     const { value, checked, name } = e.target;
-    console.log('Land Use Name-->', name);
 
     if (checked) {
       if (landUse || (landUse && landUse.indexOf(value) === -1)) {
@@ -91,10 +90,8 @@ const LandUseSection = ({ setSearchInput, setSearchInfo }: any) => {
           ...prevState,
           land_use_list: filteredLandUseName,
         }));
-        console.log(filteredLandUseName);
       }
     } else {
-      console.log('else state');
       setSearchInfo((prevState) => ({
         ...prevState,
         land_use_list: null,

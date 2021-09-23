@@ -1,8 +1,8 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 // import { IPractice, IPracticeCategory } from '../../common/types';
 import classNames from 'classnames';
-import { IPractice, IPracticeCategory, ISearchData } from '../../common/types';
+import { IPractice, IPracticeCategory } from '../../common/types';
 import { intialPracticeState } from '../../common/typedconstants.common';
 import './conservation-practice.scss';
 import {
@@ -15,14 +15,6 @@ import {
   useGetPracticeQuery,
 } from '../../Redux/services/api';
 
-type ISearchByConservationPractice = {
-  secondState: any;
-  setSecondState: Function;
-  selectedResourceCategory: number;
-  setSearchInput: Dispatch<SetStateAction<ISearchData>>;
-  selectedPractice: any;
-  setSelectedPractice: Dispatch<SetStateAction<any>>;
-};
 const SearchByConservationPractice = ({
   selectedResourceCategory,
   secondState,
@@ -78,7 +70,6 @@ const SearchByConservationPractice = ({
   const handlePracticeCategoryChange = (e) => {
     const { value } = e.target;
     const practiceVal = value.split(',');
-    console.log('Practice Val-->', practiceVal);
     if (practiceVal[0] !== '') {
       dispatch(disablePracticeDropdown());
       setSelectedPractice({ id: practiceVal[0] });
@@ -106,7 +97,6 @@ const SearchByConservationPractice = ({
   const handlePracticeChange = (e) => {
     const { value } = e.target;
     const subPracticeVal = value.split(',');
-    console.log('Practice Value', subPracticeVal[0]);
     setSelectedSubPractice(subPracticeVal[0]);
     setSearchInfo((prevState) => ({
       ...prevState,

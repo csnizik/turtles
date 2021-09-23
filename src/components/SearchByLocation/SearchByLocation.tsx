@@ -13,10 +13,7 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
   const [stateId, setStateId]: any = useState<any>({
     DEFAULT_NATIONAL_LOCATION,
   });
-  const [countyId, setCountyId]: any = useState<string>('');
-  // const countyStatus: any = useGetCountyListQuery(stateId);
   const stateStatus: any = useGetStateListQuery();
-  //const state = stateStatus?.data[1].stateName;
   const clearBtnClassNames = classNames(
     'btn',
     'btn-link',
@@ -45,12 +42,8 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
   const handleSelectState = (event: any) => {
     const { value } = event.target;
     const id = value.split(',');
-    // console.log('Value-->', id);
     setStateId(id[0]);
-    // setStateId(value);
     setIsDisabled(false);
-    //console.log(countyStatus.data[0].stateName);
-    //console.log(value);
     setSearchInfo((prevState) => ({
       ...prevState,
       state: id[1],
