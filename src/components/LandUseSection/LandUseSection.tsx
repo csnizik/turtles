@@ -11,6 +11,7 @@ const LandUseSection = ({ setSearchInput, setSearchInfo }: any) => {
   const landUseData: ILandUseOption[] = landUseOptions.data || [];
   const [tooltipOpen, setTooltipOpen]: any = useState([]);
   const [landUse, setLandUse]: any = useState(null);
+  const [landUseName, setLandUseName]: any = useState(null);
   const [check, setCheck] = useState(false);
   const { t } = useTranslation();
 
@@ -44,28 +45,53 @@ const LandUseSection = ({ setSearchInput, setSearchInfo }: any) => {
 
     if (checked) {
       if (landUse || (landUse && landUse.indexOf(value) === -1)) {
+        console.log('before->', landUseName);
         setCheck(!check);
         setLandUse((prevState) => `${prevState},${value}`);
+        setLandUseName((prevState) => `${prevState},${name}`);
         setSearchInfo((prevState) => ({
           ...prevState,
-          land_use_list: name,
+          land_use_list: landUseName,
         }));
       } else {
         setCheck(!check);
         setLandUse(`${value}`);
+        setLandUseName(`${name}`);
+        setSearchInfo((prevState) => ({
+          ...prevState,
+          land_use_list: name,
+        }));
       }
       setSearchInput((prevState) => ({
         ...prevState,
         land_use_list: landUse,
       }));
-    } else {
+    } else if (!checked) {
       const landUseArr = landUse.split(',');
+      const landUseNameArr = landUseName.split(',');
       if (landUseArr.includes(value)) {
         const filteredLandUse = landUseArr?.filter((landId: any) => {
           return landId !== value;
         });
         setLandUse(filteredLandUse.join(','));
       }
+      if (landUseNameArr.includes(name)) {
+        const filteredLandUseName = landUseNameArr?.filter((landName: any) => {
+          return landName !== name;
+        });
+        setLandUseName(filteredLandUseName.join(','));
+        setSearchInfo((prevState) => ({
+          ...prevState,
+          land_use_list: filteredLandUseName,
+        }));
+        console.log(filteredLandUseName);
+      }
+    } else {
+      console.log('else state');
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        land_use_list: null,
+      }));
     }
   };
 

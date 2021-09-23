@@ -7,6 +7,10 @@
   border: 1px solid $light-grey-5;
   border-radius: 0.56rem;
   background-color: $white;
+  width: auto;
+  .grid-row {
+    justify-content: auto;
+  }
   .filter-box {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -20,19 +24,21 @@
     .filter-pill {
       p.filter-label {
         font-weight: bold;
-        margin-left: 2rem;
-        width: 100%;
+        // margin-left: 2rem;
+        padding: 0 5px 0 5px;
+        text-align: center;
+        width: auto;
       }
       margin-left: 2rem;
       margin-top: 0.5rem;
-      display: grid;
-      grid-template-columns: 6rem 2rem;
+      // display: grid;
+      // grid-template-columns: 6rem 2rem;
       background-color: $usda-light-blue;
       border: 1px solid $usda-light-blue;
       border-radius: 0.56rem;
       height: 2rem;
       padding: 0.25rem;
-      align-items: baseline;
+      // align-items: baseline;
     }
   }
   .usa-button {
@@ -44,6 +50,7 @@
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
     width: 15rem;
+    float: right;
   }
   p.filter-style {
     margin-left: 2rem;

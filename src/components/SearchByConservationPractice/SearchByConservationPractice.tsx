@@ -1,11 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  IPractice,
-  IPracticeCategory,
-  ISearchData,
-  ISearchInfo,
-} from '../../common/types';
+import { IPractice, IPracticeCategory } from '../../common/types';
 import './conservation-practice.scss';
 import {
   disableSecondState,
@@ -35,7 +30,7 @@ const SearchByConservationPractice = ({
   const [practiceState, setPracticeState] = useState<any>(intialState);
   const [secondState, setSecondState] = useState<any>(intialState);
   const [selectedPractice, setSelectedPractice] = useState(-1);
-  const [selectedSubPractice, setSelectedSubPractice] = useState(-1);
+  const [selectedSubPractice, setSelectedSubPractice] = useState({ id: -1 });
 
   const practiceCategory = useGetPracticeCategoryQuery();
   const practice = useGetPracticeQuery(selectedPractice);
@@ -58,7 +53,7 @@ const SearchByConservationPractice = ({
   }, [selectedPractice]);
 
   useEffect(() => {
-    if (selectedSubPractice === -1) {
+    if (selectedSubPractice.id === -1) {
       setSearchInput((prevState) => ({
         ...prevState,
         practice_id: null,
@@ -89,23 +84,31 @@ const SearchByConservationPractice = ({
       }
     } else {
       setSecondState({ ...intialState });
-      setSelectedSubPractice(-1);
+      setSelectedSubPractice({ id: -1 });
       setSelectedPractice(-1);
       dispatch(enableSecondState());
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        practice_category: null,
+      }));
     }
   };
 
   const handlePracticeChange = (e) => {
     const { value } = e.target;
     const subPracticeVal = value.split(',');
-    console.log('Practice Value', typeof +subPracticeVal[0]);
-    setSelectedSubPractice(+subPracticeVal[0]);
+    console.log('Practice Value', subPracticeVal[0]);
+    setSelectedSubPractice(subPracticeVal[0]);
     setSearchInfo((prevState) => ({
       ...prevState,
       practice: subPracticeVal[1],
     }));
-    if (value === '') {
-      setSelectedSubPractice(-1);
+    if (subPracticeVal[0] === '') {
+      setSelectedSubPractice({ id: -1 });
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        practice: null,
+      }));
     }
   };
 
@@ -136,7 +139,7 @@ const SearchByConservationPractice = ({
                 return (
                   <option
                     key={item.practiceCategoryId}
-                    value={`${item.practiceCategoryId}, ${item.practiceCategoryName}`}
+                    value={`${item.practiceCategoryId},${item.practiceCategoryName}`}
                   >
                     {item.practiceCategoryName}
                   </option>
@@ -155,7 +158,7 @@ const SearchByConservationPractice = ({
             name='specificPracticeSelect'
             disabled={secondState.disabled}
             onChange={handlePracticeChange}
-            value={selectedSubPractice}
+            value={selectedSubPractice.id}
           >
             <option value=''>- Select practice -</option>
             {practice.isSuccess &&
@@ -164,7 +167,7 @@ const SearchByConservationPractice = ({
                 return (
                   <option
                     key={item.practiceCode}
-                    value={`${item.practiceId}, ${item.practiceName}`}
+                    value={`${item.practiceId},${item.practiceName}`}
                   >
                     {item.practiceName}
                   </option>
