@@ -82,7 +82,7 @@ const Accordion = () => {
               return (
                 <>
                   <div key={categoryId} className={accordionClass}>
-                    <li key={categoryId}>
+                    <li>
                       <i
                         className={chevronClassName}
                         onClick={() => toggleExpandCategory(categoryId)}

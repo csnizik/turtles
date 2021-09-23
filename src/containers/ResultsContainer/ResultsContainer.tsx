@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import Accordion from '../../components/ResultAccordion';
-import Filters from '../../components/Filter/Filters';
+import Filters from '../../components/Filter';
 import './results.scss';
 
 const ResultsContainer = () => {
