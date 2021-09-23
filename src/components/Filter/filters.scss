@@ -38,6 +38,7 @@
       border-radius: 0.56rem;
       height: 2rem;
       padding: 0.25rem;
+      width: fit-content;
       // align-items: baseline;
     }
   }
@@ -51,6 +52,9 @@
     margin-bottom: 0.5rem;
     width: 15rem;
     float: right;
+    :hover {
+      background: $light-grey-5;
+    }
   }
   p.filter-style {
     margin-left: 2rem;

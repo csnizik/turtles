@@ -85,7 +85,8 @@ const FilterBy = () => {
                     </p>
                   </div>
                 </div>
-              ) : (
+              ) : null}
+              {searchInputData.resource_concern_category ? (
                 <div className='filter-box'>
                   <p className='p-label'>Resource Concern(s) Treated:</p>
                   <div className='filter-pill'>
@@ -95,7 +96,7 @@ const FilterBy = () => {
                     </p>
                   </div>
                 </div>
-              )}
+              ) : null}
 
               <div className='tablet:grid-col-2 tablet:grid-offset-2'>
                 <Link
