@@ -10,6 +10,7 @@ const PracticeBreadcrumbs = ({
   setPracticeViewType,
   currentSpecificPractice,
   currentPracticeCategory,
+  handleCreateReport,
 }: any) => {
   const dispatch = useAppDispatch();
   const currentPractice =
@@ -93,7 +94,14 @@ const PracticeBreadcrumbs = ({
             </li>
             <li className='usa-breadcrumb__list-item'>
               <span>{currentPractice.practiceName}</span>
-              <h3 className='practice-title'>{currentPractice.practiceName}</h3>
+              <div className='practice-title-w-button'>
+                <h3 className='practice-title'>{currentPractice.practiceName}</h3>
+                <div className='create-report-button'>
+                  <button onClick={handleCreateReport} type='button'>
+                    Create a Custom Report
+                  </button>
+                </div>
+              </div>
             </li>
           </>
         ) : (

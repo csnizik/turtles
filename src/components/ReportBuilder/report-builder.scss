@@ -1,0 +1,35 @@
+@import '../../stylesheets/variables';
+
+.builder-container {
+  width: 43%;
+  display: inline-block;
+  .checkbox-container {
+    border-bottom: 1px solid $philippine-silver;
+    padding-bottom: $medium-space-size;
+  }
+
+  .usa-checkbox {
+    padding-bottom: $short-space-size;
+  }
+
+  .pdf-button {
+    border: 1px solid $dark-blue;
+    border-radius: 4px;
+    background-color: $white;
+    width: 113px;
+    height: 43px;
+    color: $usda-blue;
+    margin-top: $large-space-size;
+
+    font-weight: $heavy-weight;
+    font-size: $h4-font-size;
+  }
+}
+
+.swapa-checkbox-list {
+  margin-left: 2.1875rem;
+
+  .usa-checkbox {
+    padding-bottom: $short-space-size;
+  }
+}

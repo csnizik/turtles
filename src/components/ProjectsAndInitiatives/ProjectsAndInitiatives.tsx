@@ -1,3 +1,4 @@
+import DummyTableauImage from '../ResourceConcernTreated/DummyTableauImage';
 import './projects-initiatives.scss';
 
 interface IProjectsAndInitiativesProps {
@@ -25,7 +26,9 @@ const ProjectsAndInitiatives = ({
     <div className='projects-initiative-parent' id='Projects&Initiatives'>
       <h2>{getHeaderText()}</h2>
       <h4>{intro}</h4>
-      <div className='projects-initiative-content' />
+      <div className='projects-initiative-content'>
+        <DummyTableauImage />
+      </div>
     </div>
   );
 };

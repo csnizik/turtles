@@ -137,3 +137,20 @@
   }
 
 }
+
+.obligation-graph,
+.acres-graph,
+.impacts-content,
+.projects-initiative-content {
+  height: 24rem;
+  background: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  img {
+    flex-shrink: 0;
+    max-height: 90%;
+  }
+}

@@ -4,20 +4,26 @@ import { useGetRelatedResourceConcernCategoryQuery } from '../../Redux/services/
 import DetailedDescription from './DetailedDescription';
 import Spinner from '../Spinner/Spinner';
 import './resource-concern-treated.scss';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 
 const ResourceConcernTreated = ({
   selectedStateCode,
   selectedPracticeId,
+  rcRef,
 }: any) => {
   const initialFilter = {
-    stateCode: selectedStateCode.stateCode,
-    practiceId: selectedPracticeId,
+    stateCode: selectedStateCode,
+    practiceId: selectedPracticeId
   };
 
   const [tab, setTab] = useState(null);
 
   const { data, error, isLoading, isSuccess, isError } =
     useGetRelatedResourceConcernCategoryQuery(initialFilter);
+
+  const fromPdfReport = useAppSelector(
+    (state) => state.pdfGenSlice.enablePdfGen
+  );
 
   const toggleExpandCategory = (categoryId: any) => {
     if (tab === categoryId) {
@@ -31,14 +37,14 @@ const ResourceConcernTreated = ({
   const renderAccordionSection = (rcCa: any) => {
     const rc = rcCa;
 
-    if (rc.result.length < 1) return null;
+    if (!rc || !rc.result || rc.result.length < 1) return null;
     return (
-      <div className='accordion-section'>
+      <div className='accordion-section' ref={rcRef}>
         {rc.result.map((rcCategory: any) => {
           const categoryId = rcCategory.rcCategoryId;
-          const chevronClassName = classNames('fas', {
-            'fas fa-chevron-right': tab !== categoryId,
+          const chevronClassName = fromPdfReport ? 'fas fa-chevron-down' : classNames('fas', {
             'fas fa-chevron-down': tab === categoryId,
+            'fas fa-chevron-right': tab !== categoryId,
           });
           return (
             <div
@@ -46,6 +52,7 @@ const ResourceConcernTreated = ({
               key={categoryId}
               data-testid='rc-accordion'
             >
+              <p className='hidden-content'>{categoryId}</p>
               <li key={categoryId}>
                 <i
                   className={chevronClassName}
@@ -59,10 +66,8 @@ const ResourceConcernTreated = ({
                   </h4>
                 </div>
               </li>
-              {tab === categoryId && (
-                <DetailedDescription
-                  resourceConcerns={rcCategory.resourceConcerns}
-                />
+              {(tab === categoryId || fromPdfReport) && (
+                <DetailedDescription resourceConcerns={rcCategory.resourceConcerns} />
               )}
             </div>
           );
