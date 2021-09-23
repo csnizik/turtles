@@ -6,14 +6,14 @@ import { useGetStateListQuery } from '../../Redux/services/api';
 import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 import './search-by-location.scss';
 
-const SearchByLocation = ({ setSearchInput }: any) => {
+const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
   const { t } = useTranslation();
 
   const [isDisabled, setIsDisabled]: any = useState(true);
-  const [stateId, setStateId]: any = useState<string>(
-    DEFAULT_NATIONAL_LOCATION
-  );
-  const stateStatus = useGetStateListQuery();
+  const [stateId, setStateId]: any = useState<any>({
+    DEFAULT_NATIONAL_LOCATION,
+  });
+  const stateStatus: any = useGetStateListQuery();
   const clearBtnClassNames = classNames(
     'btn',
     'btn-link',
@@ -26,7 +26,7 @@ const SearchByLocation = ({ setSearchInput }: any) => {
 
   useEffect(() => {
     const id = `${stateId}000`;
-    if (stateId) {
+    if (stateId.id) {
       setSearchInput((prevState) => ({
         ...prevState,
         state_county_code: id,
@@ -41,8 +41,13 @@ const SearchByLocation = ({ setSearchInput }: any) => {
 
   const handleSelectState = (event: any) => {
     const { value } = event.target;
-    setStateId(value);
+    const id = value.split(',');
+    setStateId(id[0]);
     setIsDisabled(false);
+    setSearchInfo((prevState) => ({
+      ...prevState,
+      state: id[1],
+    }));
   };
 
   const handleClearLocation = () => {
@@ -78,14 +83,19 @@ const SearchByLocation = ({ setSearchInput }: any) => {
             id='stateValue'
             name='selectedStateId'
             onChange={handleSelectState}
-            value={stateId}
+            value={stateId.id}
           >
             <option value=''>{t('location-search.national')}</option>
             {stateStatus.isSuccess &&
               stateStatus.data &&
               stateStatus.data.map((state: IStateDropdownOption) => {
                 return (
-                  <option key={state.stateCode} value={state.stateCode}>
+                  <option
+                    key={state.stateCode}
+                    value={`${state.stateCode},${state.stateNameDisplay} `}
+                    // value={state.stateCode}
+                    //name={state.stateNameDisplay}
+                  >
                     {state.stateNameDisplay}
                   </option>
                 );

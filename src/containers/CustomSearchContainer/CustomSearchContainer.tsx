@@ -8,7 +8,7 @@ const CustomSearchContainer = () => {
   if (searchToggle) {
     return <CustomSearchResults />;
   }
-  return <CustomSearch setSearchToggle={setSearchToggle} />;
+  return <CustomSearch />;
 };
 
 export default CustomSearchContainer;
