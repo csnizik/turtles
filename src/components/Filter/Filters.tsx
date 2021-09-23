@@ -90,27 +90,27 @@ const FilterBy = () => {
                 <div className='filter-box'>
                   <p className='p-label'>Resource Concern(s) Treated:</p>
                   <div className='filter-pill'>
-                    <p className='filter-label'>Placeholder</p>
+                    <p className='filter-label'>
+                      {searchInputData.resource_concern ||
+                        searchInputData.resource_concern_category}
+                    </p>
                   </div>
                 </div>
               ) : null}
-
-              <div className='tablet:grid-col-2 tablet:grid-offset-2'>
-                <Link
-                  to={{
-                    pathname: '/search',
-                    state: { detail: searchInput },
-                  }}
-                >
-                  <CustomButton onClick={() => handleClick()}>
-                    Back to Quick Search
-                  </CustomButton>
-                </Link>
-              </div>
             </div>
           </>
         )}
       </>
+      <Link
+        to={{
+          pathname: '/search',
+          state: { detail: searchInput },
+        }}
+      >
+        <CustomButton onClick={() => handleClick()}>
+          Back to Quick Search
+        </CustomButton>
+      </Link>
     </div>
   );
 };

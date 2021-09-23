@@ -8,9 +8,8 @@
   border-radius: 0.56rem;
   background-color: $white;
   width: auto;
-  .grid-row {
-    justify-content: auto;
-  }
+  display: flex;
+  justify-content: space-between;
   .filter-box {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -44,8 +43,7 @@
     border: 0.2rem solid $usda-blue;
     border-radius: 0.25rem;
     align-self: flex-end;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
+    margin: 1.5rem 1.5rem 1.5rem 1.5rem;
     width: 15rem;
     float: right;
     &:hover {
