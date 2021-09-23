@@ -98,7 +98,6 @@ const SearchByResourceConcern = ({
   const handleChange = (e) => {
     const { value }: any = e.target;
     const concernCategory = value.split(',');
-    console.log('Resources Value-->', concernCategory);
 
     if (concernCategory[0] !== '') {
       setSelectedResourceCategory(+concernCategory[0]);

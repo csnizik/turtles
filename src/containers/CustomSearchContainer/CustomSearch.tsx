@@ -48,8 +48,10 @@ const CustomSearch = ({ setSearchToggle }: any) => {
     useState<ISearchData>(defaultSearchInput);
   const [searchedInfo, setSearchedInfo] =
     useState<ISearchInfo>(defaultSearchInfo);
-  const [selectedPractice, setSelectedPractice] = useState(-1);
-  const [selectedResourceCategory, setSelectedResourceCategory] = useState(-1);
+  const [selectedPractice, setSelectedPractice] = useState({ id: -1 });
+  const [selectedResourceCategory, setSelectedResourceCategory] = useState({
+    id: -1,
+  });
   const [resourceConcernsSubgroups, setResourceConcernsSubgroups] =
     useState<any>(initialResourceState);
   const [secondState, setSecondState] = useState<any>(intialPracticeState);
@@ -60,14 +62,14 @@ const CustomSearch = ({ setSearchToggle }: any) => {
     'clear-button',
     'margin-left-1',
     {
-      selected: selectedPractice >= 0,
+      selected: selectedPractice.id >= 0,
     }
   );
 
   const handleClearPracticeAndConcerns = () => {
     if (practiceCategory || selectedResourceCategory) {
-      setSelectedPractice(-1);
-      setSelectedResourceCategory(-1);
+      setSelectedPractice({ id: -1 });
+      setSelectedResourceCategory({ id: -1 });
     }
     dispatch(enableResourceDropdown());
     dispatch(enablePracticeDropdown());
@@ -123,7 +125,7 @@ const CustomSearch = ({ setSearchToggle }: any) => {
           selectedResourceCategory={selectedResourceCategory}
           secondState={secondState}
           setSecondState={setSecondState}
-          selectedPractice={selectedPractice}
+          selectedPractice={selectedPractice.id}
           setSelectedPractice={setSelectedPractice}
           setSearchInput={setSearchInput}
           setSearchInfo={setSearchedInfo}
@@ -132,8 +134,8 @@ const CustomSearch = ({ setSearchToggle }: any) => {
           resourceConcernsSubgroups={resourceConcernsSubgroups}
           setResourceConcernsSubgroups={setResourceConcernsSubgroups}
           setSelectedResourceCategory={setSelectedResourceCategory}
-          selectedResourceCategory={selectedResourceCategory}
-          selectedPractice={selectedPractice}
+          selectedResourceCategory={selectedResourceCategory.id}
+          selectedPractice={selectedPractice.id}
           setSearchInput={setSearchInput}
           setSearchInfo={setSearchedInfo}
         />

@@ -48,7 +48,7 @@ const SearchByConservationPractice = ({
     setPracticeState({ ...practiceState, practice: practiceCategory.data });
     setSecondState({ ...secondState, practice: practice.data });
 
-    if (selectedPractice === -1) {
+    if (selectedPractice.id === -1) {
       setSearchInput((prevState) => ({
         ...prevState,
         practice_category_id: null,
@@ -81,7 +81,7 @@ const SearchByConservationPractice = ({
     console.log('Practice Val-->', practiceVal);
     if (practiceVal[0] !== '') {
       dispatch(disablePracticeDropdown());
-      setSelectedPractice(practiceVal[0]);
+      setSelectedPractice({ id: practiceVal[0] });
       setSearchInfo((prevState) => ({
         ...prevState,
         practice_category: practiceVal[1],
@@ -94,7 +94,7 @@ const SearchByConservationPractice = ({
     } else {
       setSecondState({ ...intialPracticeState });
       setSelectedSubPractice({ id: -1 });
-      setSelectedPractice(-1);
+      setSelectedPractice({ id: -1 });
       dispatch(enablePracticeDropdown());
       setSearchInfo((prevState) => ({
         ...prevState,
@@ -140,7 +140,7 @@ const SearchByConservationPractice = ({
             name='practiceCategorySelect'
             disabled={result}
             onChange={handlePracticeCategoryChange}
-            value={selectedPractice}
+            value={selectedPractice.id}
           >
             <option value=''>All practices (default)</option>
             {practiceCategory.isSuccess &&
