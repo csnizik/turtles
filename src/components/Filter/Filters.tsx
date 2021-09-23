@@ -60,20 +60,29 @@ const FilterBy = () => {
               <div className='filter-box'>
                 <p className='p-label'>Location:</p>
                 <div className='filter-pill'>
-                  <p className='filter-label'>{searchInputData.state}</p>
+                  <p className='filter-label'>
+                    {searchInputData.state || 'National'}
+                  </p>
                 </div>
               </div>
-              <div className='filter-box'>
-                <p className='p-label'>Land Use:</p>
-                <div className='filter-pill'>
-                  <p className='filter-label'>Placeholder</p>
+              {searchInputData.land_use_list ? (
+                <div className='filter-box'>
+                  <p className='p-label'>Land Use:</p>
+                  <div className='filter-pill'>
+                    <p className='filter-label'>
+                      {searchInputData.land_use_list}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              {searchInputData.practice_category_id ? (
+              ) : null}
+              {searchInputData.practice_category ? (
                 <div className='filter-box'>
                   <p className='p-label'>Conservation Practice(s):</p>
                   <div className='filter-pill'>
-                    <p className='filter-label'>Placeholder</p>
+                    <p className='filter-label'>
+                      {searchInputData.practice ||
+                        searchInputData.practice_category}
+                    </p>
                   </div>
                 </div>
               ) : null}
