@@ -38,70 +38,71 @@ const FilterBy = () => {
   const searchInputData = useAppSelector(
     (state) => state.practiceSlice.searchInfo
   );
-  const { data, error, isLoading, isSuccess, isError } =
-    usePostSearchDataQuery(searchInputData);
-  console.log(searchInputData);
-  const information: any = data && data;
+
+  console.log('Search Input==>', searchInputData);
+  // const { data, error, isLoading, isSuccess, isError } =
+  //   usePostSearchDataQuery(searchInputData);
+
+  // const information: any = data && data;
   const handleClick = () => {
     return 0;
   };
   return (
-    <div className='filter-by-container'>
-      <>
-        {isLoading && <Spinner />}
-        {isError && error}
-        {isSuccess && data && (
-          <>
-            <div className='grid-row'>
-              <p aria-label='Filter By' className='filter-style'>
-                Active Filters:
-              </p>
+    <div>Hello</div>
+    // <div className='filter-by-container'>
+    //   <>
+    //     {searchInputData && (
+    //       <>
+    //         <div className='grid-row'>
+    //           <p aria-label='Filter By' className='filter-style'>
+    //             Active Filters:
+    //           </p>
 
-              <div className='filter-box'>
-                <p className='p-label'>Location:</p>
-                <div className='filter-pill'>
-                  <p className='filter-label'>{searchInputData.state}</p>
-                </div>
-              </div>
-              <div className='filter-box'>
-                <p className='p-label'>Land Use:</p>
-                <div className='filter-pill'>
-                  <p className='filter-label'>Placeholder</p>
-                </div>
-              </div>
-              {searchInputData.practice_category_id ? (
-                <div className='filter-box'>
-                  <p className='p-label'>Conservation Practice(s):</p>
-                  <div className='filter-pill'>
-                    <p className='filter-label'>Placeholder</p>
-                  </div>
-                </div>
-              ) : (
-                <div className='filter-box'>
-                  <p className='p-label'>Resource Concern(s) Treated:</p>
-                  <div className='filter-pill'>
-                    <p className='filter-label'>Placeholder</p>
-                  </div>
-                </div>
-              )}
+    //           <div className='filter-box'>
+    //             <p className='p-label'>Location:</p>
+    //             <div className='filter-pill'>
+    //               <p className='filter-label'>{searchInputData.state}</p>
+    //             </div>
+    //           </div>
+    //           <div className='filter-box'>
+    //             <p className='p-label'>Land Use:</p>
+    //             <div className='filter-pill'>
+    //               <p className='filter-label'>Placeholder</p>
+    //             </div>
+    //           </div>
+    //           {searchInputData.practice_category_id ? (
+    //             <div className='filter-box'>
+    //               <p className='p-label'>Conservation Practice(s):</p>
+    //               <div className='filter-pill'>
+    //                 <p className='filter-label'>Placeholder</p>
+    //               </div>
+    //             </div>
+    //           ) : (
+    //             <div className='filter-box'>
+    //               <p className='p-label'>Resource Concern(s) Treated:</p>
+    //               <div className='filter-pill'>
+    //                 <p className='filter-label'>Placeholder</p>
+    //               </div>
+    //             </div>
+    //           )}
 
-              <div className='tablet:grid-col-2 tablet:grid-offset-2'>
-                <Link
-                  to={{
-                    pathname: '/search',
-                    state: { detail: searchInput },
-                  }}
-                >
-                  <CustomButton onClick={() => handleClick()}>
-                    Back to Quick Search
-                  </CustomButton>
-                </Link>
-              </div>
-            </div>
-          </>
-        )}
-      </>
-    </div>
+    //           <div className='tablet:grid-col-2 tablet:grid-offset-2'>
+    //             <Link
+    //               to={{
+    //                 pathname: '/search',
+    //                 state: { detail: searchInput },
+    //               }}
+    //             >
+    //               <CustomButton onClick={() => handleClick()}>
+    //                 Back to Quick Search
+    //               </CustomButton>
+    //             </Link>
+    //           </div>
+    //         </div>
+    //       </>
+    //     )}
+    //   </>
+    // </div>
   );
 };
 

@@ -12,9 +12,9 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
   const { t } = useTranslation();
 
   const [isDisabled, setIsDisabled]: any = useState(true);
-  const [stateId, setStateId]: any = useState<string>(
-    DEFAULT_NATIONAL_LOCATION
-  );
+  const [stateId, setStateId]: any = useState<any>({
+    DEFAULT_NATIONAL_LOCATION,
+  });
   const [countyId, setCountyId]: any = useState<string>('');
   const countyStatus: any = useGetCountyListQuery(stateId);
   const stateStatus: any = useGetStateListQuery();
@@ -22,7 +22,7 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
 
   useEffect(() => {
     const id = `${stateId}000`;
-    if (stateId) {
+    if (stateId.id) {
       setSearchInput((prevState) => ({
         ...prevState,
         state_county_code: id,
@@ -37,14 +37,16 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
 
   const handleSelectState = (event: any) => {
     const { value } = event.target;
-    console.log(event.action);
-    setStateId(value);
+    const id = value.split(',');
+    // console.log('Value-->', id);
+    setStateId(id[0]);
+    // setStateId(value);
     setIsDisabled(false);
     //console.log(countyStatus.data[0].stateName);
     //console.log(value);
     setSearchInfo((prevState) => ({
       ...prevState,
-      state: countyStatus.data[0].stateName,
+      state: id[1],
     }));
   };
 
@@ -75,7 +77,7 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
             id='stateValue'
             name='selectedStateId'
             onChange={handleSelectState}
-            value={stateId}
+            value={stateId.id}
           >
             <option value=''>{t('location-search.national')}</option>
             {stateStatus.isSuccess &&
@@ -84,7 +86,8 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
                 return (
                   <option
                     key={state.stateCode}
-                    value={state.stateCode}
+                    value={`${state.stateCode},${state.stateNameDisplay} `}
+                    // value={state.stateCode}
                     //name={state.stateNameDisplay}
                   >
                     {state.stateNameDisplay}

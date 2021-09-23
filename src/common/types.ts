@@ -100,14 +100,9 @@ export interface IRCRequestBody {
   practiceId: number;
 }
 
-export interface IRCCategory {
-  result: Array<IRCResult>;
-}
-
-export interface IRCResult {
-  rcCategoryId: number;
-  rcCategoryName: string;
-  resourceConcerns: Array<IRCConcern>;
+export interface IRCLandUse {
+  landUseId: number;
+  landUseName: string;
 }
 
 export interface IRCConcern {
@@ -117,9 +112,14 @@ export interface IRCConcern {
   relatedLandUses: Array<IRCLandUse>;
 }
 
-export interface IRCLandUse {
-  landUseId: number;
-  landUseName: string;
+export interface IRCResult {
+  rcCategoryId: number;
+  rcCategoryName: string;
+  resourceConcerns: Array<IRCConcern>;
+}
+
+export interface IRCCategory {
+  result: Array<IRCResult>;
 }
 
 export interface IConservationPracticeSections {
