@@ -75,7 +75,10 @@ const CustomSearch = ({ setSearchToggle }: any) => {
         {t('search-by-conservation-practice.description')}
       </p>
       <div className='bottom-container'>
-        <SearchByConservationPractice setSearchInput={setSearchInput} />
+        <SearchByConservationPractice
+          setSearchInput={setSearchInput}
+          setSearchInfo={setSearchedInfo}
+        />
         <SearchByResourceConcern setSearchInput={setSearchInput} />
       </div>
       <Link

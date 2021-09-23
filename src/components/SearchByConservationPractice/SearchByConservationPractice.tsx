@@ -1,6 +1,11 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { IPractice, IPracticeCategory, ISearchData } from '../../common/types';
+import {
+  IPractice,
+  IPracticeCategory,
+  ISearchData,
+  ISearchInfo,
+} from '../../common/types';
 import './conservation-practice.scss';
 import {
   disableSecondState,
@@ -16,12 +21,14 @@ const intialState = {
   practice: [],
   disabled: true,
 };
-type ISearchByConservationPractice = {
-  setSearchInput: Dispatch<SetStateAction<ISearchData>>;
-};
+// type ISearchByConservationPractice = {
+//   setSearchInput: Dispatch<SetStateAction<ISearchData>>;
+//   setSearchInfo: Dispatch<SetStateAction<ISearchInfo>>;
+// };
 const SearchByConservationPractice = ({
   setSearchInput,
-}: ISearchByConservationPractice) => {
+  setSearchInfo,
+}: any) => {
   const dispatch = useAppDispatch();
   const result = useAppSelector((State) => State.disableSlice.disableResource);
   const { t } = useTranslation();
@@ -65,11 +72,17 @@ const SearchByConservationPractice = ({
   }, [selectedSubPractice]);
 
   const handlePracticeCategoryChange = (e) => {
-    const practiceVal = e.target.value;
-    if (practiceVal !== '') {
+    const { value } = e.target;
+    const practiceVal = value.split(',');
+    console.log('Practice Val-->', practiceVal);
+    if (practiceVal[0] !== '') {
       dispatch(disableSecondState());
-      setSelectedPractice(practiceVal);
-      if (selectedPractice >= 0 && practiceVal !== selectedPractice) {
+      setSelectedPractice(practiceVal[0]);
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        practice_category: practiceVal[1],
+      }));
+      if (selectedPractice >= 0 && practiceVal[0] !== selectedPractice) {
         setSecondState({ ...intialState, disabled: false });
       } else {
         setSecondState({ practice: practice.data, disabled: false });
@@ -84,7 +97,13 @@ const SearchByConservationPractice = ({
 
   const handlePracticeChange = (e) => {
     const { value } = e.target;
-    setSelectedSubPractice(+value);
+    const subPracticeVal = value.split(',');
+    console.log('Practice Value', typeof +subPracticeVal[0]);
+    setSelectedSubPractice(+subPracticeVal[0]);
+    setSearchInfo((prevState) => ({
+      ...prevState,
+      practice: subPracticeVal[1],
+    }));
     if (value === '') {
       setSelectedSubPractice(-1);
     }
@@ -117,7 +136,7 @@ const SearchByConservationPractice = ({
                 return (
                   <option
                     key={item.practiceCategoryId}
-                    value={item.practiceCategoryId}
+                    value={`${item.practiceCategoryId}, ${item.practiceCategoryName}`}
                   >
                     {item.practiceCategoryName}
                   </option>
@@ -143,7 +162,10 @@ const SearchByConservationPractice = ({
               practice.data &&
               practice.data.map((item: IPractice) => {
                 return (
-                  <option key={item.practiceCode} value={item.practiceId}>
+                  <option
+                    key={item.practiceCode}
+                    value={`${item.practiceId}, ${item.practiceName}`}
+                  >
                     {item.practiceName}
                   </option>
                 );
