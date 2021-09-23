@@ -79,7 +79,10 @@ const CustomSearch = ({ setSearchToggle }: any) => {
           setSearchInput={setSearchInput}
           setSearchInfo={setSearchedInfo}
         />
-        <SearchByResourceConcern setSearchInput={setSearchInput} />
+        <SearchByResourceConcern
+          setSearchInput={setSearchInput}
+          setSearchInfo={setSearchedInfo}
+        />
       </div>
       <Link
         to={{

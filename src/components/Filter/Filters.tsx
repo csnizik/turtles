@@ -60,29 +60,20 @@ const FilterBy = () => {
               <div className='filter-box'>
                 <p className='p-label'>Location:</p>
                 <div className='filter-pill'>
-                  <p className='filter-label'>
-                    {searchInputData.state || 'National'}
-                  </p>
+                  <p className='filter-label'>{searchInputData.state}</p>
                 </div>
               </div>
-              {searchInputData.land_use_list ? (
-                <div className='filter-box'>
-                  <p className='p-label'>Land Use:</p>
-                  <div className='filter-pill'>
-                    <p className='filter-label'>
-                      {searchInputData.land_use_list}
-                    </p>
-                  </div>
+              <div className='filter-box'>
+                <p className='p-label'>Land Use:</p>
+                <div className='filter-pill'>
+                  <p className='filter-label'>Placeholder</p>
                 </div>
-              ) : null}
-              {searchInputData.practice_category ? (
+              </div>
+              {searchInputData.practice_category_id ? (
                 <div className='filter-box'>
                   <p className='p-label'>Conservation Practice(s):</p>
                   <div className='filter-pill'>
-                    <p className='filter-label'>
-                      {searchInputData.practice ||
-                        searchInputData.practice_category}
-                    </p>
+                    <p className='filter-label'>Placeholder</p>
                   </div>
                 </div>
               ) : null}
@@ -90,10 +81,7 @@ const FilterBy = () => {
                 <div className='filter-box'>
                   <p className='p-label'>Resource Concern(s) Treated:</p>
                   <div className='filter-pill'>
-                    <p className='filter-label'>
-                      {searchInputData.resource_concern ||
-                        searchInputData.resource_concern_category}
-                    </p>
+                    <p className='filter-label'>Placeholder</p>
                   </div>
                 </div>
               ) : null}
