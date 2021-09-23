@@ -45,7 +45,7 @@ const CustomSearch = ({ setSearchToggle }: any) => {
     dispatch(setSearch(searchInput));
     dispatch(setSearchInfo(searchedInfo));
   };
-  console.log('string', searchedInfo);
+
   const searchButtonStyles = () => {
     let styles;
     if (breakpoint !== 'mobile') {
@@ -67,7 +67,10 @@ const CustomSearch = ({ setSearchToggle }: any) => {
         setSearchInput={setSearchInput}
         setSearchInfo={setSearchedInfo}
       />
-      <LandUseSection setSearchInput={setSearchInput} />
+      <LandUseSection
+        setSearchInput={setSearchInput}
+        setSearchInfo={setSearchedInfo}
+      />
       <p className='practice-description'>
         {t('search-by-conservation-practice.description')}
       </p>

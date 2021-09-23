@@ -6,7 +6,7 @@ import { ILandUseOption } from '../../common/types';
 import './land-use-section.scss';
 import { useGetLandUseOptionsQuery } from '../../Redux/services/api';
 
-const LandUseSection = ({ setSearchInput }: any) => {
+const LandUseSection = ({ setSearchInput, setSearchInfo }: any) => {
   const landUseOptions: any = useGetLandUseOptionsQuery();
   const landUseData: ILandUseOption[] = landUseOptions.data || [];
   const [tooltipOpen, setTooltipOpen]: any = useState([]);
@@ -39,12 +39,17 @@ const LandUseSection = ({ setSearchInput }: any) => {
   }, [landUse]);
 
   const handleLandUse = (e) => {
-    const { value, checked } = e.target;
+    const { value, checked, name } = e.target;
+    console.log('Land Use Name-->', name);
 
     if (checked) {
       if (landUse || (landUse && landUse.indexOf(value) === -1)) {
         setCheck(!check);
         setLandUse((prevState) => `${prevState},${value}`);
+        setSearchInfo((prevState) => ({
+          ...prevState,
+          land_use_list: name,
+        }));
       } else {
         setCheck(!check);
         setLandUse(`${value}`);
@@ -95,7 +100,7 @@ const LandUseSection = ({ setSearchInput }: any) => {
                   className='usa-checkbox__input'
                   id={`landUseOption${landId}`}
                   type='checkbox'
-                  name='selectedLandUseIds'
+                  name={landType.landUseCategoryName}
                   defaultChecked={check}
                   onClick={handleLandUse}
                   value={landId}
