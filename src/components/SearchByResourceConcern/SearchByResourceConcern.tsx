@@ -1,23 +1,39 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import classNames from 'classnames';
 import { getRequest } from '../../common/util/AxiosUtil';
-import './search-by-resource-concern.scss';
-import { disableState, enableState } from '../../Redux/Slice/disableSlice';
-import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
+import { initialResourceState } from '../../common/typedconstants.common';
 
-const initialState = {
-  resources: [],
-  disabled: true,
-};
-const SearchByResourceConcern = ({ setSearchInput, setSearchInfo }: any) => {
+import {
+  disableResourceDropdown,
+  enableResourceDropdown,
+} from '../../Redux/Slice/disableSlice';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
+import './search-by-resource-concern.scss';
+
+// const initialState = {
+//   resources: [],
+//   disabled: true,
+// };
+const SearchByResourceConcern = ({
+  setSearchInput,
+  setSearchInfo,
+  resourceConcernsSubgroups,
+  setResourceConcernsSubgroups,
+  selectedResourceCategory,
+  setSelectedResourceCategory,
+  selectedPractice,
+}: any) => {
   const dispatchRequest = useAppDispatch();
   const status = useAppSelector((state) => state.disableSlice.disablePractice);
   const { t } = useTranslation();
-  const [resourceConcerns, setResourceConcerns] = useState<any>(initialState);
-  const [resourceConcernsSubgroups, setResourceConcernsSubgroups] =
-    useState<any>(initialState);
-  const [selectedResourceCategory, setSelectedResourceCategory] = useState(-1);
+  const [resourceConcerns, setResourceConcerns] =
+    useState<any>(initialResourceState);
   const [selectedResourceConcern, setSelectedResourceConcern] = useState(-1);
+
+  const wrapperClassNames = classNames('resource-box-wrapper', {
+    'practice-selected': selectedPractice >= 0,
+  });
 
   const getResourceConcerns = async () => {
     try {
@@ -87,15 +103,15 @@ const SearchByResourceConcern = ({ setSearchInput, setSearchInfo }: any) => {
     if (concernCategory[0] !== '') {
       setSelectedResourceCategory(+concernCategory[0]);
       getResourceConcernsSubgroups(concernCategory[0]);
-      dispatchRequest(disableState());
+      dispatchRequest(disableResourceDropdown());
       setSearchInfo((prevState) => ({
         ...prevState,
         resource_concern_category: concernCategory[1],
       }));
     } else {
-      setResourceConcernsSubgroups(initialState);
+      setResourceConcernsSubgroups(initialResourceState);
       setSelectedResourceCategory(-1);
-      dispatchRequest(enableState());
+      dispatchRequest(enableResourceDropdown());
       setSearchInfo((prevState) => ({
         ...prevState,
         resource_concern_category: null,
@@ -121,7 +137,7 @@ const SearchByResourceConcern = ({ setSearchInput, setSearchInfo }: any) => {
   };
 
   return (
-    <div className='resource-box-wrapper'>
+    <div className={wrapperClassNames}>
       <div className='search-by-resource-section'>
         <label
           className='usa-label resource-search-header'
@@ -139,6 +155,7 @@ const SearchByResourceConcern = ({ setSearchInput, setSearchInfo }: any) => {
             name='selectedResourceCategory'
             disabled={status}
             onChange={handleChange}
+            value={selectedResourceCategory}
           >
             <option value=''>All resource concerns (default)</option>
             {resourceConcerns.resources.length
