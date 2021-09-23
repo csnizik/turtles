@@ -31,8 +31,16 @@ const LandUseSection = ({ setSearchInput, setSearchInfo }: any) => {
       ...prevState,
       land_use_list: landUse,
     }));
+    setSearchInfo((prevState) => ({
+      ...prevState,
+      land_use_list: landUseName,
+    }));
     if (landUse === '') {
       setSearchInput((prevState) => ({
+        ...prevState,
+        land_use_list: null,
+      }));
+      setSearchInfo((prevState) => ({
         ...prevState,
         land_use_list: null,
       }));
@@ -45,7 +53,6 @@ const LandUseSection = ({ setSearchInput, setSearchInfo }: any) => {
 
     if (checked) {
       if (landUse || (landUse && landUse.indexOf(value) === -1)) {
-        console.log('before->', landUseName);
         setCheck(!check);
         setLandUse((prevState) => `${prevState},${value}`);
         setLandUseName((prevState) => `${prevState},${name}`);
