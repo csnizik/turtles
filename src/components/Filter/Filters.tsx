@@ -60,6 +60,7 @@ const FilterBy = () => {
               <div className='filter-box'>
                 <p className='p-label'>Location:</p>
                 <div className='filter-pill'>
+<<<<<<< Updated upstream
                   <p className='filter-label'>
                     {searchInputData.state || 'National'}
                   </p>
@@ -83,16 +84,36 @@ const FilterBy = () => {
                       {searchInputData.practice ||
                         searchInputData.practice_category}
                     </p>
+=======
+                  <p className='filter-label'>{searchInputData.state}</p>
+                </div>
+              </div>
+              <div className='filter-box'>
+                <p className='p-label'>Land Use:</p>
+                <div className='filter-pill'>
+                  <p className='filter-label'>Placeholder</p>
+                </div>
+              </div>
+              {searchInputData.practice_category_id ? (
+                <div className='filter-box'>
+                  <p className='p-label'>Conservation Practice(s):</p>
+                  <div className='filter-pill'>
+                    <p className='filter-label'>Placeholder</p>
+>>>>>>> Stashed changes
                   </div>
                 </div>
               ) : (
                 <div className='filter-box'>
                   <p className='p-label'>Resource Concern(s) Treated:</p>
                   <div className='filter-pill'>
+<<<<<<< Updated upstream
                     <p className='filter-label'>
                       {searchInputData.resource_concern ||
                         searchInputData.resource_concern_category}
                     </p>
+=======
+                    <p className='filter-label'>Placeholder</p>
+>>>>>>> Stashed changes
                   </div>
                 </div>
               )}

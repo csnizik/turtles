@@ -9,7 +9,7 @@ const initialState = {
   resources: [],
   disabled: true,
 };
-const SearchByResourceConcern = ({ setSearchInput }: any) => {
+const SearchByResourceConcern = ({ setSearchInput, setSearchInfo }: any) => {
   const dispatchRequest = useAppDispatch();
   const status = useAppSelector((state) => state.disableSlice.disablePractice);
   const { t } = useTranslation();
@@ -81,24 +81,43 @@ const SearchByResourceConcern = ({ setSearchInput }: any) => {
 
   const handleChange = (e) => {
     const { value }: any = e.target;
+    const concernCategory = value.split(',');
+    console.log('Resources Value-->', concernCategory);
 
-    if (value !== '') {
-      setSelectedResourceCategory(+value);
-      getResourceConcernsSubgroups(value);
+    if (concernCategory[0] !== '') {
+      setSelectedResourceCategory(+concernCategory[0]);
+      getResourceConcernsSubgroups(concernCategory[0]);
       dispatchRequest(disableState());
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        resource_concern_category: concernCategory[1],
+      }));
     } else {
       setResourceConcernsSubgroups(initialState);
       setSelectedResourceCategory(-1);
       dispatchRequest(enableState());
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        resource_concern_category: null,
+      }));
     }
   };
 
   const handleSubgroupChange = (e) => {
     const { value } = e.target;
+    const concern = value.split(',');
     setSelectedResourceConcern(value);
-    if (value === '') {
+    if (concern[0] === '') {
       setSelectedResourceConcern(-1);
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        resource_concern: null,
+      }));
     }
+    setSearchInfo((prevState) => ({
+      ...prevState,
+      resource_concern: concern[1],
+    }));
   };
 
   return (
@@ -127,7 +146,7 @@ const SearchByResourceConcern = ({ setSearchInput }: any) => {
                   return (
                     <option
                       key={item.resourceConcernId}
-                      value={item.resourceConcernId}
+                      value={`${item.resourceConcernId},${item.resourceConcernName}`}
                     >
                       {item.resourceConcernName}
                     </option>
@@ -155,7 +174,7 @@ const SearchByResourceConcern = ({ setSearchInput }: any) => {
                   return (
                     <option
                       key={item.resourceConcernId}
-                      value={item.resourceConcernId}
+                      value={`${item.resourceConcernId},${item.resourceConcernName}`}
                     >
                       {item.resourceConcernName}
                     </option>

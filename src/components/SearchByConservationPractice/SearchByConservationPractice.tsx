@@ -97,7 +97,11 @@ const SearchByConservationPractice = ({
   const handlePracticeChange = (e) => {
     const { value } = e.target;
     const subPracticeVal = value.split(',');
+<<<<<<< Updated upstream
     console.log('Practice Value', subPracticeVal[0]);
+=======
+    console.log('Practice Value', typeof +subPracticeVal[0]);
+>>>>>>> Stashed changes
     setSelectedSubPractice(subPracticeVal[0]);
     setSearchInfo((prevState) => ({
       ...prevState,
