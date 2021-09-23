@@ -24,22 +24,18 @@
     .filter-pill {
       p.filter-label {
         font-weight: bold;
-        // margin-left: 2rem;
         padding: 0 5px 0 5px;
         text-align: center;
         width: auto;
       }
       margin-left: 2rem;
       margin-top: 0.5rem;
-      // display: grid;
-      // grid-template-columns: 6rem 2rem;
       background-color: $usda-light-blue;
       border: 1px solid $usda-light-blue;
       border-radius: 0.56rem;
       height: 2rem;
       padding: 0.25rem;
       width: fit-content;
-      // align-items: baseline;
     }
   }
   .usa-button {
@@ -52,8 +48,9 @@
     margin-bottom: 0.5rem;
     width: 15rem;
     float: right;
-    :hover {
-      background: $light-grey-5;
+    &:hover {
+      background: $usda-blue;
+      color: $white;
     }
   }
   p.filter-style {
