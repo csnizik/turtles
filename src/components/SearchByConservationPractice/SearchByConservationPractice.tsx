@@ -1,10 +1,12 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import classNames from 'classnames';
 import { IPractice, IPracticeCategory, ISearchData } from '../../common/types';
+import { intialPracticeState } from '../../common/typedconstants.common';
 import './conservation-practice.scss';
 import {
-  disableSecondState,
-  enableSecondState,
+  disablePracticeDropdown,
+  enablePracticeDropdown,
 } from '../../Redux/Slice/disableSlice';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import {
@@ -12,23 +14,30 @@ import {
   useGetPracticeQuery,
 } from '../../Redux/services/api';
 
-const intialState = {
-  practice: [],
-  disabled: true,
-};
 type ISearchByConservationPractice = {
+  secondState: any;
+  setSecondState: Function;
+  selectedResourceCategory: number;
   setSearchInput: Dispatch<SetStateAction<ISearchData>>;
+  selectedPractice: any;
+  setSelectedPractice: Dispatch<SetStateAction<any>>;
 };
 const SearchByConservationPractice = ({
+  selectedResourceCategory,
+  secondState,
+  setSecondState,
+  selectedPractice,
+  setSelectedPractice,
   setSearchInput,
 }: ISearchByConservationPractice) => {
   const dispatch = useAppDispatch();
   const result = useAppSelector((State) => State.disableSlice.disableResource);
   const { t } = useTranslation();
-  const [practiceState, setPracticeState] = useState<any>(intialState);
-  const [secondState, setSecondState] = useState<any>(intialState);
-  const [selectedPractice, setSelectedPractice] = useState(-1);
+  const [practiceState, setPracticeState] = useState<any>(intialPracticeState);
   const [selectedSubPractice, setSelectedSubPractice] = useState(-1);
+  const wrapperClassNames = classNames('practice-box-wrapper', {
+    'resource-selected': selectedResourceCategory >= 0,
+  });
 
   const practiceCategory = useGetPracticeCategoryQuery();
   const practice = useGetPracticeQuery(selectedPractice);
@@ -67,18 +76,18 @@ const SearchByConservationPractice = ({
   const handlePracticeCategoryChange = (e) => {
     const practiceVal = e.target.value;
     if (practiceVal !== '') {
-      dispatch(disableSecondState());
+      dispatch(disablePracticeDropdown());
       setSelectedPractice(practiceVal);
       if (selectedPractice >= 0 && practiceVal !== selectedPractice) {
-        setSecondState({ ...intialState, disabled: false });
+        setSecondState({ ...intialPracticeState, disabled: false });
       } else {
         setSecondState({ practice: practice.data, disabled: false });
       }
     } else {
-      setSecondState({ ...intialState });
+      setSecondState({ ...intialPracticeState });
       setSelectedSubPractice(-1);
       setSelectedPractice(-1);
-      dispatch(enableSecondState());
+      dispatch(enablePracticeDropdown());
     }
   };
 
@@ -91,7 +100,7 @@ const SearchByConservationPractice = ({
   };
 
   return (
-    <div className='practice-box-wrapper'>
+    <div className={wrapperClassNames}>
       <div className='search-by-practice-section'>
         <label
           className='usa-label practice-label'
@@ -109,6 +118,7 @@ const SearchByConservationPractice = ({
             name='practiceCategorySelect'
             disabled={result}
             onChange={handlePracticeCategoryChange}
+            value={selectedPractice}
           >
             <option value=''>All practices (default)</option>
             {practiceCategory.isSuccess &&

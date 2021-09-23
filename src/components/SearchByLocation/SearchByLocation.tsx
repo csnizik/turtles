@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import classNames from 'classnames';
 import { IStateDropdownOption } from '../../common/types';
-import {
-  useGetCountyListQuery,
-  useGetStateListQuery,
-} from '../../Redux/services/api';
+import { useGetStateListQuery } from '../../Redux/services/api';
 import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 import './search-by-location.scss';
 
@@ -15,9 +13,16 @@ const SearchByLocation = ({ setSearchInput }: any) => {
   const [stateId, setStateId]: any = useState<string>(
     DEFAULT_NATIONAL_LOCATION
   );
-  const [countyId, setCountyId]: any = useState<string>('');
-  const countyStatus = useGetCountyListQuery(stateId);
   const stateStatus = useGetStateListQuery();
+  const clearBtnClassNames = classNames(
+    'btn',
+    'btn-link',
+    'clear-button',
+    'margin-left-1',
+    {
+      selected: stateId !== '',
+    }
+  );
 
   useEffect(() => {
     const id = `${stateId}000`;
@@ -40,23 +45,29 @@ const SearchByLocation = ({ setSearchInput }: any) => {
     setIsDisabled(false);
   };
 
-  const handleCountySelect = (event: any) => {
-    const { value } = event.target;
-    setCountyId(value);
-    setSearchInput((prevState) => ({
-      ...prevState,
-      state_county_code: `${value}`,
-    }));
+  const handleClearLocation = () => {
+    if (stateId) {
+      setStateId('');
+    }
   };
 
   return (
     <div className='search-by-location-section'>
-      <label
-        className='usa-label location-search-header'
-        htmlFor='locationValue'
-      >
-        {t('location-search.search-by-location')}
-      </label>
+      <div className='search-labels'>
+        <label
+          className='usa-label location-search-header'
+          htmlFor='locationValue'
+        >
+          {t('location-search.search-by-location')}
+        </label>
+        <button
+          className={clearBtnClassNames}
+          type='button'
+          onClick={handleClearLocation}
+        >
+          {t('actions.clear')}
+        </button>
+      </div>
       <div className='side-by-side'>
         <div className='desktop:grid-col-4'>
           <label htmlFor='stateValue'>
@@ -76,34 +87,6 @@ const SearchByLocation = ({ setSearchInput }: any) => {
                 return (
                   <option key={state.stateCode} value={state.stateCode}>
                     {state.stateNameDisplay}
-                  </option>
-                );
-              })}
-          </select>
-        </div>
-
-        <div className='desktop:grid-col-4'>
-          <label htmlFor='countyValue'>
-            {t('location-search.labels.select-county')}
-          </label>
-          <select
-            className='usa-select'
-            id='countyValue'
-            name='selectedCountyId'
-            disabled={isDisabled}
-            onChange={handleCountySelect}
-            value={countyId}
-          >
-            <option value=''>{t('actions.select')}</option>
-            {countyStatus.isSuccess &&
-              countyStatus.data &&
-              countyStatus.data.map((county: any) => {
-                return (
-                  <option
-                    key={county.stateCountyCode}
-                    value={county.stateCountyCode}
-                  >
-                    {county.countyDisplay}
                   </option>
                 );
               })}

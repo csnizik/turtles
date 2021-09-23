@@ -1,5 +1,6 @@
 {
   "actions": {
+    "clear": "Clear",
     "search": "Search",
     "select": "- Select -"
   },
@@ -45,13 +46,13 @@
     "common-resource-issues": "Common Resource Issues"
   },
   "search-by-conservation-practice": {
-    "heading": "by Conservation Practice",
-    "description": "Search for Conservation Practices",
+    "heading": "Conservation Practice",
+    "description": "Search by Conservation Practice or Resource Concern Treated",
     "first-label-name": "Select a practice category",
     "second-label-name": "Select a practice (optional)"
   },
   "search-by-resource-concern": {
-    "heading": "by Resource Concerns Treated",
+    "heading": "Resource Concerns Treated",
     "first-label-name": "Select a resource category",
     "second-label-name": "Select a resource concern (optional)"
   }

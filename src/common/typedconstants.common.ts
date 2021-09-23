@@ -13,28 +13,37 @@ export const searchOptionMap: ISearchOptionMap = {
 export const ConservationPracticeSections: any = [
   {
     sectionId: 0,
-    sectionName: "Resource Concerns Treated",
-    anchorLink: "#ResourceConcernsTreated",
+    sectionName: 'Resource Concerns Treated',
+    anchorLink: '#ResourceConcernsTreated',
   },
   {
     sectionId: 1,
-    sectionName: "Support for this Practice",
-    anchorLink: "#SupportPractice",
-  },  
+    sectionName: 'Support for this Practice',
+    anchorLink: '#SupportPractice',
+  },
   {
     sectionId: 2,
-    sectionName: "Practice Specifications and Tools",
-    anchorLink: "#PracticeSpecifications",
-  },  
+    sectionName: 'Practice Specifications and Tools',
+    anchorLink: '#PracticeSpecifications',
+  },
   {
     sectionId: 3,
-    sectionName: "Impacts of Applying this Practice",
-    anchorLink: "#ImpactsPractice",
-  },  
+    sectionName: 'Impacts of Applying this Practice',
+    anchorLink: '#ImpactsPractice',
+  },
   {
     sectionId: 4,
-    sectionName: "Practice Projects & Initiatives",
-    anchorLink: "#Projects&Initiatives",
+    sectionName: 'Practice Projects & Initiatives',
+    anchorLink: '#Projects&Initiatives',
   },
-]
+];
 
+export const intialPracticeState: any = {
+  practice: [],
+  disabled: true,
+};
+
+export const initialResourceState = {
+  resources: [],
+  disabled: true,
+};

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface IdisableState {
+interface IdisableResourceDropdown {
   disableResource: boolean;
   disablePractice: boolean;
 }
@@ -8,23 +8,23 @@ interface IdisableState {
 const initialState = {
   disableResource: false,
   disablePractice: false,
-} as IdisableState;
+} as IdisableResourceDropdown;
 
 /* eslint-disable no-param-reassign */
 const disableSlice = createSlice({
   name: 'disable',
   initialState,
   reducers: {
-    disableState(state) {
+    disableResourceDropdown(state) {
       state.disableResource = true;
     },
-    disableSecondState(state) {
+    disablePracticeDropdown(state) {
       state.disablePractice = true;
     },
-    enableState(state) {
+    enableResourceDropdown(state) {
       state.disableResource = false;
     },
-    enableSecondState(state) {
+    enablePracticeDropdown(state) {
       state.disablePractice = false;
     },
   },
@@ -32,9 +32,9 @@ const disableSlice = createSlice({
 /* eslint-disable no-param-reassign */
 
 export const {
-  disableState,
-  disableSecondState,
-  enableState,
-  enableSecondState,
+  disableResourceDropdown,
+  disablePracticeDropdown,
+  enableResourceDropdown,
+  enablePracticeDropdown,
 } = disableSlice.actions;
 export default disableSlice.reducer;
