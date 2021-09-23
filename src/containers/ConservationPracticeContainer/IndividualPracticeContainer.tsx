@@ -12,9 +12,10 @@ import HorizontalScroll from '../../components/HorizontalScroll';
 const IndividualPracticeContainer = (stateCode: any) => {
   const state = useAppSelector((s) => s);
   const practiceId: any = state.practiceSlice.selectedSpecficPractice;
+  const selectedStateCode: any = stateCode;
   const { data, error, isLoading, isSuccess, isError } =
     useGetNationalOverviewByPracticeQuery(practiceId);
-
+  
   return (
     <>
       <HorizontalScroll />
@@ -27,7 +28,7 @@ const IndividualPracticeContainer = (stateCode: any) => {
       />
       <ConservationPracticeVideo selectedPracticeId={practiceId} />
       <ResourceConcernTreated
-        selectedStateCode={stateCode}
+        selectedStateCode={selectedStateCode.stateCode}
         selectedPracticeId={practiceId}
       />
       <ImplementationExtent data={data} isSuccess={isSuccess} />

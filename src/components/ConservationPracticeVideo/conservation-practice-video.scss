@@ -23,10 +23,22 @@
         
         .video-media {
           margin-right: 3.125rem;
+          display: flex;
+          flex-direction: column;
   
           .video {
             height: 18vw;
             width: 32vw;
+          }
+          img {
+            max-height: 26.5625rem;
+            max-width: 14.899375rem;
+            width: auto;
+            height: auto;
+          }
+
+          .video-outer-link {
+            margin-top: $medium-space-size;
           }
         }
   
