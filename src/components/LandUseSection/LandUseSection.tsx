@@ -6,11 +6,12 @@ import { ILandUseOption } from '../../common/types';
 import './land-use-section.scss';
 import { useGetLandUseOptionsQuery } from '../../Redux/services/api';
 
-const LandUseSection = ({ setSearchInput }: any) => {
+const LandUseSection = ({ setSearchInput, setSearchInfo }: any) => {
   const landUseOptions: any = useGetLandUseOptionsQuery();
   const landUseData: ILandUseOption[] = landUseOptions.data || [];
   const [tooltipOpen, setTooltipOpen]: any = useState([]);
   const [landUse, setLandUse]: any = useState(null);
+  const [landUseName, setLandUseName]: any = useState(null);
   const [check, setCheck] = useState(false);
   const { t } = useTranslation();
 
@@ -30,8 +31,16 @@ const LandUseSection = ({ setSearchInput }: any) => {
       ...prevState,
       land_use_list: landUse,
     }));
+    setSearchInfo((prevState) => ({
+      ...prevState,
+      land_use_list: landUseName,
+    }));
     if (landUse === '') {
       setSearchInput((prevState) => ({
+        ...prevState,
+        land_use_list: null,
+      }));
+      setSearchInfo((prevState) => ({
         ...prevState,
         land_use_list: null,
       }));
@@ -39,28 +48,54 @@ const LandUseSection = ({ setSearchInput }: any) => {
   }, [landUse]);
 
   const handleLandUse = (e) => {
-    const { value, checked } = e.target;
+    const { value, checked, name } = e.target;
 
     if (checked) {
       if (landUse || (landUse && landUse.indexOf(value) === -1)) {
         setCheck(!check);
         setLandUse((prevState) => `${prevState},${value}`);
+        setLandUseName((prevState) => `${prevState},${name}`);
+        setSearchInfo((prevState) => ({
+          ...prevState,
+          land_use_list: landUseName,
+        }));
       } else {
         setCheck(!check);
         setLandUse(`${value}`);
+        setLandUseName(`${name}`);
+        setSearchInfo((prevState) => ({
+          ...prevState,
+          land_use_list: name,
+        }));
       }
       setSearchInput((prevState) => ({
         ...prevState,
         land_use_list: landUse,
       }));
-    } else {
+    } else if (!checked) {
       const landUseArr = landUse.split(',');
+      const landUseNameArr = landUseName.split(',');
       if (landUseArr.includes(value)) {
         const filteredLandUse = landUseArr?.filter((landId: any) => {
           return landId !== value;
         });
         setLandUse(filteredLandUse.join(','));
       }
+      if (landUseNameArr.includes(name)) {
+        const filteredLandUseName = landUseNameArr?.filter((landName: any) => {
+          return landName !== name;
+        });
+        setLandUseName(filteredLandUseName.join(','));
+        setSearchInfo((prevState) => ({
+          ...prevState,
+          land_use_list: filteredLandUseName,
+        }));
+      }
+    } else {
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        land_use_list: null,
+      }));
     }
   };
 
@@ -95,7 +130,7 @@ const LandUseSection = ({ setSearchInput }: any) => {
                   className='usa-checkbox__input'
                   id={`landUseOption${landId}`}
                   type='checkbox'
-                  name='selectedLandUseIds'
+                  name={landType.landUseCategoryName}
                   defaultChecked={check}
                   onClick={handleLandUse}
                   value={landId}

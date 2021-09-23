@@ -18,9 +18,9 @@ import SearchByLocation from '../../components/SearchByLocation';
 import SearchByResourceConcern from '../../components/SearchByResourceConcern';
 import LandUseSection from '../../components/LandUseSection';
 import SearchByConservationPractice from '../../components/SearchByConservationPractice';
-import { ISearchData } from '../../common/types';
+import { ISearchData, ISearchInfo } from '../../common/types';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
-import { setSearch } from '../../Redux/Slice/practiceSlice';
+import { setSearch, setSearchInfo } from '../../Redux/Slice/practiceSlice';
 
 const defaultSearchInput: ISearchData = {
   resource_concern_category_id: null,
@@ -31,15 +31,27 @@ const defaultSearchInput: ISearchData = {
   land_use_list: null,
   practices: null,
 };
+const defaultSearchInfo: ISearchInfo = {
+  resource_concern_category: null,
+  resource_concern: null,
+  practice_category: null,
+  practice: null,
+  state: null,
+  land_use_list: null,
+};
 
-const CustomSearch = ({ setSearchToggle }: any) => {
+const CustomSearch = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { breakpoint } = useBreakpoint(BREAKPOINTS);
   const [searchInput, setSearchInput] =
     useState<ISearchData>(defaultSearchInput);
-  const [selectedPractice, setSelectedPractice] = useState(-1);
-  const [selectedResourceCategory, setSelectedResourceCategory] = useState(-1);
+  const [searchedInfo, setSearchedInfo] =
+    useState<ISearchInfo>(defaultSearchInfo);
+  const [selectedPractice, setSelectedPractice] = useState({ id: -1 });
+  const [selectedResourceCategory, setSelectedResourceCategory] = useState({
+    id: -1,
+  });
   const [resourceConcernsSubgroups, setResourceConcernsSubgroups] =
     useState<any>(initialResourceState);
   const [secondState, setSecondState] = useState<any>(intialPracticeState);
@@ -50,14 +62,14 @@ const CustomSearch = ({ setSearchToggle }: any) => {
     'clear-button',
     'margin-left-1',
     {
-      selected: selectedPractice >= 0,
+      selected: selectedPractice.id >= 0,
     }
   );
 
   const handleClearPracticeAndConcerns = () => {
     if (practiceCategory || selectedResourceCategory) {
-      setSelectedPractice(-1);
-      setSelectedResourceCategory(-1);
+      setSelectedPractice({ id: -1 });
+      setSelectedResourceCategory({ id: -1 });
     }
     dispatch(enableResourceDropdown());
     dispatch(enablePracticeDropdown());
@@ -66,8 +78,9 @@ const CustomSearch = ({ setSearchToggle }: any) => {
   };
 
   const handleSearch = () => {
-    setSearchToggle(false);
+    //setSearchToggle(false);
     dispatch(setSearch(searchInput));
+    dispatch(setSearchInfo(searchedInfo));
   };
 
   const searchButtonStyles = () => {
@@ -86,8 +99,15 @@ const CustomSearch = ({ setSearchToggle }: any) => {
         <h1>{t('search-page.quick-search')}</h1>
         <p>{t('search-page.intro')}</p>
       </div>
-      <SearchByLocation setSearchInput={setSearchInput} />
-      <LandUseSection setSearchInput={setSearchInput} />
+
+      <SearchByLocation
+        setSearchInput={setSearchInput}
+        setSearchInfo={setSearchedInfo}
+      />
+      <LandUseSection
+        setSearchInput={setSearchInput}
+        setSearchInfo={setSearchedInfo}
+      />
       <div className='practice-labels'>
         <p className='practice-description'>
           {t('search-by-conservation-practice.description')}
@@ -105,17 +125,19 @@ const CustomSearch = ({ setSearchToggle }: any) => {
           selectedResourceCategory={selectedResourceCategory}
           secondState={secondState}
           setSecondState={setSecondState}
-          selectedPractice={selectedPractice}
+          selectedPractice={selectedPractice.id}
           setSelectedPractice={setSelectedPractice}
           setSearchInput={setSearchInput}
+          setSearchInfo={setSearchedInfo}
         />
         <SearchByResourceConcern
           resourceConcernsSubgroups={resourceConcernsSubgroups}
           setResourceConcernsSubgroups={setResourceConcernsSubgroups}
           setSelectedResourceCategory={setSelectedResourceCategory}
-          selectedResourceCategory={selectedResourceCategory}
-          selectedPractice={selectedPractice}
+          selectedResourceCategory={selectedResourceCategory.id}
+          selectedPractice={selectedPractice.id}
           setSearchInput={setSearchInput}
+          setSearchInfo={setSearchedInfo}
         />
       </div>
       <Link
