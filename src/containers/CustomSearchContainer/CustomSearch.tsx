@@ -78,7 +78,6 @@ const CustomSearch = () => {
   };
 
   const handleSearch = () => {
-    //setSearchToggle(false);
     dispatch(setSearch(searchInput));
     dispatch(setSearchInfo(searchedInfo));
   };
@@ -149,7 +148,7 @@ const CustomSearch = () => {
         <CustomButton
           ariaLabel='search'
           additionalClassName={searchButtonStyles()}
-          onClick={() => handleSearch()}
+          onClick={handleSearch}
         >
           {t('actions.search')}
         </CustomButton>
