@@ -30,9 +30,9 @@ describe('Resource Concerns Treated section is rendered correctly', () => {
         expect(screen.queryByTestId('rc-description')).toBeDefined();
     });
   
-    test('Should display an accordion for users to click', () => {
-        expect(screen.queryByTestId('rc-accordion')).toBeDefined();
-    });
+    // test('Should display an accordion for users to click', () => {
+    //     expect(screen.queryByTestId('rc-accordion')).toBeDefined();
+    // });
 
     // test('Should display an accordion that face to the right', () => {
     //     let {container} = render(<ResourceConcernTreated selectedStateCode='01' selectedPracticeId={1}/>);
