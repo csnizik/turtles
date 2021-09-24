@@ -67,13 +67,11 @@ const SearchByResourceConcern = ({
 
   useEffect(() => {
     if (selectedResourceCategory === -1) {
-      console.log('Concern if==>', selectedResourceCategory);
       setSearchInput((prevState) => ({
         ...prevState,
         resource_concern_category_id: null,
       }));
     } else {
-      console.log('Concern else==>', selectedResourceCategory);
       setSearchInput((prevState) => ({
         ...prevState,
         resource_concern_category_id: +selectedResourceCategory,
