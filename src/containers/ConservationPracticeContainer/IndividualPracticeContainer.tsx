@@ -9,13 +9,13 @@ import ResourceConcernTreated from '../../components/ResourceConcernTreated';
 import ProjectsAndInitiatives from '../../components/ProjectsAndInitiatives';
 import HorizontalScroll from '../../components/HorizontalScroll';
 
-const IndividualPracticeContainer = (stateCode: any) => {
+const IndividualPracticeContainer = () => {
   const state = useAppSelector((s) => s);
   const practiceId: any = state.practiceSlice.selectedSpecficPractice;
-  const selectedStateCode: any = stateCode;
+  const stateCode = state?.practiceSlice.searchInput.state_county_code;
   const { data, error, isLoading, isSuccess, isError } =
     useGetNationalOverviewByPracticeQuery(practiceId);
-  
+
   return (
     <>
       <HorizontalScroll />
@@ -28,7 +28,7 @@ const IndividualPracticeContainer = (stateCode: any) => {
       />
       <ConservationPracticeVideo selectedPracticeId={practiceId} />
       <ResourceConcernTreated
-        selectedStateCode={selectedStateCode.stateCode}
+        selectedStateCode={stateCode}
         selectedPracticeId={practiceId}
       />
       <ImplementationExtent data={data} isSuccess={isSuccess} />

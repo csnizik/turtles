@@ -8,7 +8,10 @@ import PracticeCategoryContainer from './PracticeCategoryContainer';
 import PracticeCard from '../../components/PracticeCard';
 import ReportPreviewCreator from '../../components/ReportPreviewCreator';
 import './conservation-practice-container.scss';
-import { disablePdfGenState, enablePdfGenState } from '../../Redux/Slice/pdfGenSlice';
+import {
+  disablePdfGenState,
+  enablePdfGenState,
+} from '../../Redux/Slice/pdfGenSlice';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
 
 const defaultPracticeViews = {
@@ -48,15 +51,14 @@ const ConservationPracticeContainer = ({
     );
 
   const handleCreateReport = () => {
-    if(openModal) {
+    if (openModal) {
       setOpenModal(false);
-      dispatch(disablePdfGenState()); 
-      setCleanModal(pre => !pre)
-    }  
-    else {
-      setOpenModal(true); 
+      dispatch(disablePdfGenState());
+      setCleanModal((pre) => !pre);
+    } else {
+      setOpenModal(true);
       dispatch(enablePdfGenState());
-      } 
+    }
   };
 
   useEffect(() => {
@@ -90,7 +92,7 @@ const ConservationPracticeContainer = ({
       );
     }
     if (viewType === 'individualPractice') {
-      return <IndividualPracticeContainer stateCode={selectedStateCode} />;
+      return <IndividualPracticeContainer />;
     }
     return null;
   };
@@ -112,12 +114,12 @@ const ConservationPracticeContainer = ({
       />
 
       <div className='overlay'>
-        <ReportPreviewCreator 
-          selectedStateCode={selectedStateCode} 
+        <ReportPreviewCreator
+          selectedStateCode={selectedStateCode}
           openModal={openModal}
           handleCreateReport={handleCreateReport}
           cleanModal={cleanModal}
-      />
+        />
       </div>
       {renderPracticeContainerContent(currentViewType)}
     </>
