@@ -26,7 +26,7 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
 
   useEffect(() => {
     const id = `${stateId}000`;
-    if (stateId.id) {
+    if (stateId) {
       setSearchInput((prevState) => ({
         ...prevState,
         state_county_code: id,

@@ -23,6 +23,7 @@ const Accordion = () => {
 
   const { data, error, isLoading, isSuccess, isError } =
     usePostSearchDataQuery(sharedState);
+
   const [toggleChildTab, settoggleChildTab] = useState(null);
 
   const [tab, setTab] = useState(null);
