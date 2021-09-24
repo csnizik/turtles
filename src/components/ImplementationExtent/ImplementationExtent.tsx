@@ -1,3 +1,4 @@
+import DummyTableauImage from '../ResourceConcernTreated/DummyTableauImage';
 import './implementation-extent.scss';
 
 interface IImplementationExtentProps {
@@ -11,7 +12,8 @@ const intro: string =
 const ImplementationExtent = ({
   data,
   isSuccess,
-}: IImplementationExtentProps) => {
+}: IImplementationExtentProps
+) => {
   const getHeaderText = () => {
     const practiceName = (data && data.practiceName) || '';
     if (practiceName) {
@@ -26,7 +28,9 @@ const ImplementationExtent = ({
         <h3>Obligations and Practices Implemented from 2014 - 2020</h3>
         <hr />
         <div className='graph-container'>
-          <div className='obligation-graph' />
+          <div className='obligation-graph'>
+            <DummyTableauImage />
+          </div>
         </div>
       </div>
     );
@@ -38,7 +42,9 @@ const ImplementationExtent = ({
         <h3>Acres Implemented from 2014 - 2020</h3>
         <hr />
         <div className='graph-container'>
-          <div className='acres-graph' />
+          <div className='acres-graph'>
+            <DummyTableauImage />
+          </div>
         </div>
       </div>
     );

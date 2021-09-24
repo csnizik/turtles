@@ -1,3 +1,4 @@
+import DummyTableauImage from '../ResourceConcernTreated/DummyTableauImage';
 import './application-impacts.scss';
 
 interface IApplicationImpactProps {
@@ -23,7 +24,9 @@ const ApplicationImpacts = ({ data, isSuccess }: IApplicationImpactProps) => {
     <div className='app-impact-parent' id='ImpactsPractice'>
       <h2>{getHeaderText()}</h2>
       <h4>{intro}</h4>
-      <div className='impacts-content' />
+      <div className='impacts-content'>
+        <DummyTableauImage />
+      </div>
     </div>
   );
 };
