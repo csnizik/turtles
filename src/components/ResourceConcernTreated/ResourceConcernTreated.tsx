@@ -13,7 +13,7 @@ const ResourceConcernTreated = ({
 }: any) => {
   const initialFilter = {
     stateCode: selectedStateCode,
-    practiceId: selectedPracticeId
+    practiceId: selectedPracticeId,
   };
 
   const [tab, setTab] = useState(null);
@@ -42,10 +42,12 @@ const ResourceConcernTreated = ({
       <div className='accordion-section' ref={rcRef}>
         {rc.result.map((rcCategory: any) => {
           const categoryId = rcCategory.rcCategoryId;
-          const chevronClassName = fromPdfReport ? 'fas fa-chevron-down' : classNames('fas', {
-            'fas fa-chevron-down': tab === categoryId,
-            'fas fa-chevron-right': tab !== categoryId,
-          });
+          const chevronClassName = fromPdfReport
+            ? 'fas fa-chevron-down'
+            : classNames('fas', {
+                'fas fa-chevron-down': tab === categoryId,
+                'fas fa-chevron-right': tab !== categoryId,
+              });
           return (
             <div
               className='accordion-container'
@@ -67,7 +69,9 @@ const ResourceConcernTreated = ({
                 </div>
               </li>
               {(tab === categoryId || fromPdfReport) && (
-                <DetailedDescription resourceConcerns={rcCategory.resourceConcerns} />
+                <DetailedDescription
+                  resourceConcerns={rcCategory.resourceConcerns}
+                />
               )}
             </div>
           );

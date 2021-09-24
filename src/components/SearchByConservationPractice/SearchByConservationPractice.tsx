@@ -40,7 +40,7 @@ const SearchByConservationPractice = ({
     setPracticeState({ ...practiceState, practice: practiceCategory.data });
     setSecondState({ ...secondState, practice: practice.data });
 
-    if (selectedPractice.id === -1) {
+    if (selectedPractice === -1) {
       setSearchInput((prevState) => ({
         ...prevState,
         practice_category_id: null,
