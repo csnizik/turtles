@@ -31,6 +31,8 @@ const ConservationPracticeContainer = ({
 
   const [openModal, setOpenModal] = useState(false);
 
+  const [cleanModal, setCleanModal] = useState(false);
+
   const sharedState = location?.state?.detail;
 
   const { data, isSuccess } = usePostSearchDataQuery({
@@ -48,7 +50,8 @@ const ConservationPracticeContainer = ({
   const handleCreateReport = () => {
     if(openModal) {
       setOpenModal(false);
-      dispatch(disablePdfGenState());  
+      dispatch(disablePdfGenState()); 
+      setCleanModal(pre => !pre)
     }  
     else {
       setOpenModal(true); 
@@ -113,6 +116,7 @@ const ConservationPracticeContainer = ({
           selectedStateCode={selectedStateCode} 
           openModal={openModal}
           handleCreateReport={handleCreateReport}
+          cleanModal={cleanModal}
       />
       </div>
       {renderPracticeContainerContent(currentViewType)}
