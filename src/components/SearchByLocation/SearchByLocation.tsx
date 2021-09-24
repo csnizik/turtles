@@ -9,7 +9,9 @@ import './search-by-location.scss';
 const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
   const { t } = useTranslation();
   const [isDisabled, setIsDisabled]: any = useState(true);
-  const [stateId, setStateId]: any = useState<any>(DEFAULT_NATIONAL_LOCATION);
+  const [stateId, setStateId]: any = useState<any>({
+    id: DEFAULT_NATIONAL_LOCATION,
+  });
   const stateStatus: any = useGetStateListQuery();
   const clearBtnClassNames = classNames(
     'btn',
@@ -49,7 +51,8 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
 
   const handleClearLocation = () => {
     if (stateId) {
-      setStateId('');
+      console.log('CLear Button');
+      setStateId({ id: DEFAULT_NATIONAL_LOCATION });
     }
   };
 
