@@ -51,7 +51,6 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
 
   const handleClearLocation = () => {
     if (stateId) {
-      console.log('CLear Button');
       setStateId({ id: DEFAULT_NATIONAL_LOCATION });
     }
   };

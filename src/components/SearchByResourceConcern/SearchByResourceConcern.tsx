@@ -67,13 +67,11 @@ const SearchByResourceConcern = ({
 
   useEffect(() => {
     if (selectedResourceCategory === -1) {
-      console.log('Concern if==>', selectedResourceCategory);
       setSearchInput((prevState) => ({
         ...prevState,
         resource_concern_category_id: null,
       }));
     } else {
-      console.log('Concern else==>', selectedResourceCategory);
       setSearchInput((prevState) => ({
         ...prevState,
         resource_concern_category_id: +selectedResourceCategory,
@@ -100,7 +98,10 @@ const SearchByResourceConcern = ({
     const concernCategory = value.split(',');
 
     if (concernCategory[0] !== '') {
-      setSelectedResourceCategory({ id: +concernCategory[0] });
+      setSelectedResourceCategory({
+        ...selectedResourceCategory,
+        id: +concernCategory[0],
+      });
       getResourceConcernsSubgroups(concernCategory[0]);
       dispatchRequest(disableResourceDropdown());
       setSearchInfo((prevState) => ({
@@ -118,10 +119,35 @@ const SearchByResourceConcern = ({
     }
   };
 
+  // const handleSubgroupChange = (e) => {
+  //   const { value } = e.target;
+  //   const concern = value.split(',');
+  //   console.log('Concern', concern);
+
+  //   if (concern[0] !== '') {
+  //     console.log("Conern{0} !==''");
+  //     setSelectedResourceConcern({
+  //       id: +concern[0],
+  //     });
+  //     setSearchInfo((prevState) => ({
+  //       ...prevState,
+  //       resource_concern: concern[1],
+  //     }));
+  //   } else {
+  //     console.log("Conern{0} ===''");
+  //     setSelectedResourceConcern({ id: -1 });
+  //     setSearchInfo((prevState) => ({
+  //       ...prevState,
+  //       resource_concern: null,
+  //     }));
+  //   }
+  // };
+
   const handleSubgroupChange = (e) => {
     const { value } = e.target;
     const concern = value.split(',');
-    setSelectedResourceConcern({ id: concern[0] });
+
+    setSelectedResourceConcern({ id: +concern[0] });
     if (concern[0] === '') {
       setSelectedResourceConcern({ id: -1 });
       setSearchInfo((prevState) => ({
@@ -154,7 +180,7 @@ const SearchByResourceConcern = ({
             name='selectedResourceCategory'
             disabled={status}
             onChange={handleChange}
-            value={selectedResourceCategory.id}
+            value={selectedResourceCategory?.id}
           >
             <option value=''>All resource concerns (default)</option>
             {resourceConcerns.resources.length
@@ -182,7 +208,7 @@ const SearchByResourceConcern = ({
             name='selectedResourceSubgroup'
             disabled={resourceConcernsSubgroups.disabled}
             onChange={handleSubgroupChange}
-            value={selectedResourceConcern.id}
+            // value={+selectedResourceConcern.id}
           >
             <option value=''>- Select resource concern -</option>
             {resourceConcernsSubgroups.resources.length
