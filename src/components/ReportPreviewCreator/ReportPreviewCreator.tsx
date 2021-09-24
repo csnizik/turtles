@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Modal, ModalBody } from 'reactstrap';
 import html2pdf from "html2pdf.js";
 import './report-preview-creator.scss';
@@ -21,7 +21,7 @@ interface DomParent {
 
 const subTitle: string = `Select the information you'd like to include in your report:`
 
-const ReportPreviewCreator = ({ selectedStateCode, openModal, handleCreateReport }: any) => {
+const ReportPreviewCreator = ({ selectedStateCode, openModal,  handleCreateReport, cleanModal }: any) => {
   const [rcTreatedInputs, setRcTreatedInputs] = useState(new Set());
   const [childArr, setChildArr] = useState<DomParent>();
   const [choiceInputs, setChoiceInputs] = useState({
@@ -31,6 +31,17 @@ const ReportPreviewCreator = ({ selectedStateCode, openModal, handleCreateReport
     input4: false,
     input5: false,
   });
+
+  useEffect(() => {
+    setRcTreatedInputs(new Set());
+    setChoiceInputs({
+      input1: false,
+      input2: false,
+      input3: false,
+      input4: false,
+      input5: false,
+    })
+  }, [cleanModal])
 
   const rcRef = useRef();
   const stateCode = {
