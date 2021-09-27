@@ -9,7 +9,9 @@ import './search-by-location.scss';
 const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
   const { t } = useTranslation();
   const [isDisabled, setIsDisabled]: any = useState(true);
-  const [stateId, setStateId]: any = useState<any>(DEFAULT_NATIONAL_LOCATION);
+  const [stateId, setStateId]: any = useState<any>({
+    id: DEFAULT_NATIONAL_LOCATION,
+  });
   const stateStatus: any = useGetStateListQuery();
   const clearBtnClassNames = classNames(
     'btn',
@@ -22,8 +24,8 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
   );
 
   useEffect(() => {
-    const id = `${stateId}000`;
     if (stateId) {
+      const id = `${stateId.id}000`;
       setSearchInput((prevState) => ({
         ...prevState,
         state_county_code: id,
