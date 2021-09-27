@@ -1,0 +1,27 @@
+@import '../../stylesheets/variables';
+
+.preview-container {
+  margin-left: 6%;
+  width: 50%;
+}
+
+.pdf-preview {
+
+  h3 {
+    margin-bottom: $medium-space-size;
+    font-weight: 600;
+    font-size: $h3-font-size;
+    line-height: 25.78px;
+  }
+
+  .content-container {
+    border: 0.06rem solid $light-grey-5;
+    border-radius: 0.1rem;
+    box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
+    height: 40rem;
+    overflow-y: auto;
+  }
+
+
+}
+

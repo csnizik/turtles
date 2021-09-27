@@ -1,0 +1,156 @@
+@import '../../stylesheets/variables';
+
+.rc-treated-box {
+    padding: 5rem 2.188rem 5rem;
+    margin: 0;
+    background-color: $sfi-dark-white;
+
+    h2 {
+        font-weight: $semi-heavy-weight;
+        font-size: $h2-font-size;
+        line-height: 37.5px;
+        margin: 0;
+    }
+
+    p {
+        font-weight: $medium-light-weight;
+        font-size: $h4-font-size;
+        line-height: 22.4px;
+        margin-top: $short-space-size;
+        margin-bottom: 0;
+    }
+
+    .accordion-section {
+        margin: 1.875rem 0 0 0;
+        position: relative;
+        background: $light-grey;
+        border: 1px solid $philippine-silver;
+        border-bottom: 0;
+
+        h4 {
+          font-weight: $medium-light-weight;
+          margin: 0 0 0 $short-space-size;
+          font-size: 17px;
+          line-height: 20px;
+        }
+      
+        .accordion-container {
+          height: fit-content;
+
+          li {
+            align-items:center;
+            display: flex;
+            cursor: pointer;
+            padding: $short-space-size 1rem $short-space-size 1rem;
+            border-bottom: 1px solid $philippine-silver;
+
+            .fa, .fas {
+              padding: 0;
+              line-height: 20px;
+            }
+          }
+
+          .accordion-data {
+            h4 {
+              font-weight: $semi-heavy-weight;
+            }
+
+            .num-rc-count {
+              font-weight: $medium-weight;
+              color: $dark-grey;
+              padding-left: 3px;
+            }
+          }
+        }
+    }
+}
+
+.child-accordion {
+  background-color: $white;
+  border: 1px solid $philippine-silver;
+  border-left: 3px solid $usda-blue;
+  border-top: 0;
+  border-right: 0;
+  
+  .single-content {
+    padding: $medium-space-size $large-space-size;
+    padding-bottom: 0;
+    display: flex;
+
+    h4 {
+      font-size: $h4-font-size;
+      line-height: 19px;
+      font-weight: $semi-heavy-weight;
+      margin: 0;
+      margin-bottom: $short-space-size;
+    }
+
+    p {
+      font-size: $h5-font-size;
+      line-height: $h4-font-size;
+      margin-bottom: $medium-space-size;
+    }
+
+    .content-description {
+      width: 54%;
+      border-bottom: 1px solid $philippine-silver;
+    }
+  
+    .content-tag {
+      width: 46%;
+      border-bottom: 1px solid $philippine-silver;
+      display: flex;
+      flex-direction: row;
+      align-items:center;
+
+      .tags {
+        margin-left: auto;
+        margin-right: 0;
+        width: auto;
+      }
+
+      .tags:first-child {
+        padding-left: 1.875rem;
+      }
+
+      .displaying-image {
+        width: 80px;
+        padding-left: 20px;
+        float: right;
+      }
+
+      .hidden-image {
+        display: none;
+      }
+      
+    }
+  }
+
+  .single-content:last-child {
+    .content-description {
+      border: 0;
+    }
+
+    .content-tag {
+      border: 0;
+    }
+  }
+
+}
+
+.obligation-graph,
+.acres-graph,
+.impacts-content,
+.projects-initiative-content {
+  height: 24rem;
+  background: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  img {
+    flex-shrink: 0;
+    max-height: 90%;
+  }
+}

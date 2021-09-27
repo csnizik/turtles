@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
 import { getRequest } from '../../common/util/AxiosUtil';
 import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
@@ -15,6 +14,7 @@ const ConservationPracticeLandingScreen = ({
   stateCode,
 }: any) => {
   const [categories, setCategories] = useState([]);
+  const mountedRef = useRef(true)
 
   const dispatch = useAppDispatch();
 
@@ -34,14 +34,19 @@ const ConservationPracticeLandingScreen = ({
       const response: any = (await getRequest(
         `/practice/category/${code}`
       )) || { data: [] };
+      if(!mountedRef.current) return null;
       setCategories(response.data);
     } catch (error) {
       // throw new Error('practice categories Request Error');
     }
+    return null;
   };
 
   useEffect(() => {
     getPractices();
+    return () => { 
+      mountedRef.current = false
+    }
   }, []);
 
   return (

@@ -1,6 +1,8 @@
 @import '../../stylesheets/variables';
 
 .heading {
+  margin: 0 0 1em 0;
+
   h2 {
     margin: 5rem 0 1.25rem 2.188rem;
   }
@@ -34,9 +36,9 @@
         margin: -1px 0 -1px 0;
       }
 
-      h4 {
+      h3 {
         font-size: 25px;
-        font-weight: 500;
+        font-weight: 900;
         font-style: normal;
         padding-bottom: 0.625rem;
       }

@@ -5,4 +5,37 @@
   margin-top: 0rem;
   margin-left: 0rem;
   padding-left: 1.5rem;
+
+  .practice-title-w-button {
+    display: flex;
+    padding: 0.5em 0.5em 0 1em;
+    margin-bottom: 0.5rem;
+
+    .practice-title {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 900;
+      width: 50%;
+    }
+
+    .practice-title:last-child {
+      padding-left: 0.4em;
+    }
+
+    .create-report-button {
+      width: 50%;
+      display: flex;
+      button {
+        margin-left: auto;
+        margin-right: $large-space-size;
+
+        width: 13.3125rem;
+        height: 2.6875rem;
+        background-color: $usda-blue;
+        color: $white;
+        border-radius: 0.25rem; 
+      }
+    }
+  }
+  
 }

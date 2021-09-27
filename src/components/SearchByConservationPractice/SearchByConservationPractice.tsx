@@ -1,10 +1,13 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { IPractice, IPracticeCategory, ISearchData } from '../../common/types';
+// import { IPractice, IPracticeCategory } from '../../common/types';
+import classNames from 'classnames';
+import { IPractice, IPracticeCategory } from '../../common/types';
+import { intialPracticeState } from '../../common/typedconstants.common';
 import './conservation-practice.scss';
 import {
-  disableSecondState,
-  enableSecondState,
+  disablePracticeDropdown,
+  enablePracticeDropdown,
 } from '../../Redux/Slice/disableSlice';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import {
@@ -12,23 +15,23 @@ import {
   useGetPracticeQuery,
 } from '../../Redux/services/api';
 
-const intialState = {
-  practice: [],
-  disabled: true,
-};
-type ISearchByConservationPractice = {
-  setSearchInput: Dispatch<SetStateAction<ISearchData>>;
-};
 const SearchByConservationPractice = ({
+  selectedResourceCategory,
+  secondState,
+  setSecondState,
+  selectedPractice,
+  setSelectedPractice,
   setSearchInput,
-}: ISearchByConservationPractice) => {
+  setSearchInfo,
+}: any) => {
   const dispatch = useAppDispatch();
   const result = useAppSelector((State) => State.disableSlice.disableResource);
   const { t } = useTranslation();
-  const [practiceState, setPracticeState] = useState<any>(intialState);
-  const [secondState, setSecondState] = useState<any>(intialState);
-  const [selectedPractice, setSelectedPractice] = useState(-1);
-  const [selectedSubPractice, setSelectedSubPractice] = useState(-1);
+  const [practiceState, setPracticeState] = useState<any>(intialPracticeState);
+  const [selectedSubPractice, setSelectedSubPractice] = useState({ id: -1 });
+  const wrapperClassNames = classNames('practice-box-wrapper', {
+    'resource-selected': selectedResourceCategory >= 0,
+  });
 
   const practiceCategory = useGetPracticeCategoryQuery();
   const practice = useGetPracticeQuery(selectedPractice);
@@ -51,7 +54,7 @@ const SearchByConservationPractice = ({
   }, [selectedPractice]);
 
   useEffect(() => {
-    if (selectedSubPractice === -1) {
+    if (selectedSubPractice.id === -1) {
       setSearchInput((prevState) => ({
         ...prevState,
         practice_id: null,
@@ -65,33 +68,51 @@ const SearchByConservationPractice = ({
   }, [selectedSubPractice]);
 
   const handlePracticeCategoryChange = (e) => {
-    const practiceVal = e.target.value;
-    if (practiceVal !== '') {
-      dispatch(disableSecondState());
-      setSelectedPractice(practiceVal);
-      if (selectedPractice >= 0 && practiceVal !== selectedPractice) {
-        setSecondState({ ...intialState, disabled: false });
+    const { value } = e.target;
+    const practiceVal = value.split(',');
+    if (practiceVal[0] !== '') {
+      dispatch(disablePracticeDropdown());
+      setSelectedPractice({ id: practiceVal[0] });
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        practice_category: practiceVal[1],
+      }));
+      if (selectedPractice >= 0 && practiceVal[0] !== selectedPractice) {
+        setSecondState({ ...intialPracticeState, disabled: false });
       } else {
         setSecondState({ practice: practice.data, disabled: false });
       }
     } else {
-      setSecondState({ ...intialState });
-      setSelectedSubPractice(-1);
-      setSelectedPractice(-1);
-      dispatch(enableSecondState());
+      setSecondState({ ...intialPracticeState });
+      setSelectedSubPractice({ id: -1 });
+      setSelectedPractice({ id: -1 });
+      dispatch(enablePracticeDropdown());
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        practice_category: null,
+      }));
     }
   };
 
   const handlePracticeChange = (e) => {
     const { value } = e.target;
-    setSelectedSubPractice(+value);
-    if (value === '') {
-      setSelectedSubPractice(-1);
+    const subPracticeVal = value.split(',');
+    setSelectedSubPractice(subPracticeVal[0]);
+    setSearchInfo((prevState) => ({
+      ...prevState,
+      practice: subPracticeVal[1],
+    }));
+    if (subPracticeVal[0] === '') {
+      setSelectedSubPractice({ id: -1 });
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        practice: null,
+      }));
     }
   };
 
   return (
-    <div className='practice-box-wrapper'>
+    <div className={wrapperClassNames}>
       <div className='search-by-practice-section'>
         <label
           className='usa-label practice-label'
@@ -109,6 +130,7 @@ const SearchByConservationPractice = ({
             name='practiceCategorySelect'
             disabled={result}
             onChange={handlePracticeCategoryChange}
+            value={selectedPractice.id}
           >
             <option value=''>All practices (default)</option>
             {practiceCategory.isSuccess &&
@@ -117,7 +139,7 @@ const SearchByConservationPractice = ({
                 return (
                   <option
                     key={item.practiceCategoryId}
-                    value={item.practiceCategoryId}
+                    value={`${item.practiceCategoryId},${item.practiceCategoryName}`}
                   >
                     {item.practiceCategoryName}
                   </option>
@@ -136,14 +158,17 @@ const SearchByConservationPractice = ({
             name='specificPracticeSelect'
             disabled={secondState.disabled}
             onChange={handlePracticeChange}
-            value={selectedSubPractice}
+            value={selectedSubPractice.id}
           >
             <option value=''>- Select practice -</option>
             {practice.isSuccess &&
               practice.data &&
               practice.data.map((item: IPractice) => {
                 return (
-                  <option key={item.practiceCode} value={item.practiceId}>
+                  <option
+                    key={item.practiceCode}
+                    value={`${item.practiceId},${item.practiceName}`}
+                  >
                     {item.practiceName}
                   </option>
                 );

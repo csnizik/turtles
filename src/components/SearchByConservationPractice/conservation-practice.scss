@@ -8,7 +8,7 @@
   width: 100%;
   border: 2px solid $philippine-silver;
   border-radius: 0.5em;
-  background-color: $light-grey;
+  background-color: $sfi-white;
   padding: 0 2rem 0 2.25rem;
   margin: 2em 2em 1em 0;
 
@@ -18,5 +18,8 @@
   }
   .usa-select {
     margin: 0 0 1rem 0;
+  }
+  &.resource-selected {
+    background: $medium-darkgrey;
   }
 }

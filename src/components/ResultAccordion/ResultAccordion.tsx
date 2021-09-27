@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import { Practice } from '../../common/types';
 import './result-accordion.scss';
 
-const Accordion = ({ setPracticeCardState }: any) => {
+const Accordion = () => {
   const location: any = useLocation();
   const dispatch = useAppDispatch();
   const selectedPractice: number = useAppSelector(
@@ -23,6 +23,7 @@ const Accordion = ({ setPracticeCardState }: any) => {
 
   const { data, error, isLoading, isSuccess, isError } =
     usePostSearchDataQuery(sharedState);
+
   const [toggleChildTab, settoggleChildTab] = useState(null);
 
   const [tab, setTab] = useState(null);
@@ -82,7 +83,7 @@ const Accordion = ({ setPracticeCardState }: any) => {
               return (
                 <>
                   <div key={categoryId} className={accordionClass}>
-                    <li key={categoryId}>
+                    <li>
                       <i
                         className={chevronClassName}
                         onClick={() => toggleExpandCategory(categoryId)}
@@ -101,8 +102,7 @@ const Accordion = ({ setPracticeCardState }: any) => {
                             <p>
                               <Link
                                 to={{
-                                  pathname:
-                                    practiceCategory.practiceCategoryName,
+                                  pathname: '/ConservationPractices',
                                   state: { detail: categoryId },
                                 }}
                                 onClick={() =>

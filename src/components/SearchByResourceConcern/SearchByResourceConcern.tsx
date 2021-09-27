@@ -1,23 +1,37 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import classNames from 'classnames';
 import { getRequest } from '../../common/util/AxiosUtil';
-import './search-by-resource-concern.scss';
-import { disableState, enableState } from '../../Redux/Slice/disableSlice';
-import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
+import { initialResourceState } from '../../common/typedconstants.common';
 
-const initialState = {
-  resources: [],
-  disabled: true,
-};
-const SearchByResourceConcern = ({ setSearchInput }: any) => {
+import {
+  disableResourceDropdown,
+  enableResourceDropdown,
+} from '../../Redux/Slice/disableSlice';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
+import './search-by-resource-concern.scss';
+
+const SearchByResourceConcern = ({
+  setSearchInput,
+  setSearchInfo,
+  resourceConcernsSubgroups,
+  setResourceConcernsSubgroups,
+  selectedResourceCategory,
+  setSelectedResourceCategory,
+  selectedPractice,
+}: any) => {
   const dispatchRequest = useAppDispatch();
   const status = useAppSelector((state) => state.disableSlice.disablePractice);
   const { t } = useTranslation();
-  const [resourceConcerns, setResourceConcerns] = useState<any>(initialState);
-  const [resourceConcernsSubgroups, setResourceConcernsSubgroups] =
-    useState<any>(initialState);
-  const [selectedResourceCategory, setSelectedResourceCategory] = useState(-1);
-  const [selectedResourceConcern, setSelectedResourceConcern] = useState(-1);
+  const [resourceConcerns, setResourceConcerns] =
+    useState<any>(initialResourceState);
+  const [selectedResourceConcern, setSelectedResourceConcern] = useState({
+    id: -1,
+  });
+
+  const wrapperClassNames = classNames('resource-box-wrapper', {
+    'practice-selected': selectedPractice >= 0,
+  });
 
   const getResourceConcerns = async () => {
     try {
@@ -66,7 +80,7 @@ const SearchByResourceConcern = ({ setSearchInput }: any) => {
   }, [selectedResourceCategory]);
 
   useEffect(() => {
-    if (selectedResourceConcern === -1) {
+    if (selectedResourceConcern.id === -1) {
       setSearchInput((prevState) => ({
         ...prevState,
         resource_concern_id: null,
@@ -74,35 +88,81 @@ const SearchByResourceConcern = ({ setSearchInput }: any) => {
     } else {
       setSearchInput((prevState) => ({
         ...prevState,
-        resource_concern_id: +selectedResourceConcern,
+        resource_concern_id: +selectedResourceConcern.id,
       }));
     }
   }, [selectedResourceConcern]);
 
   const handleChange = (e) => {
     const { value }: any = e.target;
+    const concernCategory = value.split(',');
 
-    if (value !== '') {
-      setSelectedResourceCategory(+value);
-      getResourceConcernsSubgroups(value);
-      dispatchRequest(disableState());
+    if (concernCategory[0] !== '') {
+      setSelectedResourceCategory({
+        ...selectedResourceCategory,
+        id: +concernCategory[0],
+      });
+      getResourceConcernsSubgroups(concernCategory[0]);
+      dispatchRequest(disableResourceDropdown());
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        resource_concern_category: concernCategory[1],
+      }));
     } else {
-      setResourceConcernsSubgroups(initialState);
+      setResourceConcernsSubgroups(initialResourceState);
       setSelectedResourceCategory(-1);
-      dispatchRequest(enableState());
+      dispatchRequest(enableResourceDropdown());
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        resource_concern_category: null,
+      }));
     }
   };
+
+  // const handleSubgroupChange = (e) => {
+  //   const { value } = e.target;
+  //   const concern = value.split(',');
+  //   console.log('Concern', concern);
+
+  //   if (concern[0] !== '') {
+  //     console.log("Conern{0} !==''");
+  //     setSelectedResourceConcern({
+  //       id: +concern[0],
+  //     });
+  //     setSearchInfo((prevState) => ({
+  //       ...prevState,
+  //       resource_concern: concern[1],
+  //     }));
+  //   } else {
+  //     console.log("Conern{0} ===''");
+  //     setSelectedResourceConcern({ id: -1 });
+  //     setSearchInfo((prevState) => ({
+  //       ...prevState,
+  //       resource_concern: null,
+  //     }));
+  //   }
+  // };
 
   const handleSubgroupChange = (e) => {
     const { value } = e.target;
-    setSelectedResourceConcern(value);
-    if (value === '') {
-      setSelectedResourceConcern(-1);
+    const concern = value.split(',');
+
+    setSelectedResourceConcern({ id: +concern[0] });
+    if (concern[0] === '') {
+      setSelectedResourceConcern({ id: -1 });
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        resource_concern: null,
+      }));
     }
+    setSearchInfo((prevState) => ({
+      ...prevState,
+      resource_concern: concern[1],
+    }));
   };
 
   return (
-    <div className='resource-box-wrapper'>
+    <div className={wrapperClassNames}>
       <div className='search-by-resource-section'>
         <label
           className='usa-label resource-search-header'
@@ -120,6 +180,7 @@ const SearchByResourceConcern = ({ setSearchInput }: any) => {
             name='selectedResourceCategory'
             disabled={status}
             onChange={handleChange}
+            value={selectedResourceCategory?.id}
           >
             <option value=''>All resource concerns (default)</option>
             {resourceConcerns.resources.length
@@ -127,7 +188,7 @@ const SearchByResourceConcern = ({ setSearchInput }: any) => {
                   return (
                     <option
                       key={item.resourceConcernId}
-                      value={item.resourceConcernId}
+                      value={`${item.resourceConcernId},${item.resourceConcernName}`}
                     >
                       {item.resourceConcernName}
                     </option>
@@ -147,7 +208,7 @@ const SearchByResourceConcern = ({ setSearchInput }: any) => {
             name='selectedResourceSubgroup'
             disabled={resourceConcernsSubgroups.disabled}
             onChange={handleSubgroupChange}
-            value={selectedResourceConcern}
+            // value={+selectedResourceConcern.id}
           >
             <option value=''>- Select resource concern -</option>
             {resourceConcernsSubgroups.resources.length
@@ -155,7 +216,7 @@ const SearchByResourceConcern = ({ setSearchInput }: any) => {
                   return (
                     <option
                       key={item.resourceConcernId}
-                      value={item.resourceConcernId}
+                      value={`${item.resourceConcernId},${item.resourceConcernName}`}
                     >
                       {item.resourceConcernName}
                     </option>

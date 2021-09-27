@@ -5,14 +5,22 @@ import {
   setSpecificPractice,
 } from '../../Redux/Slice/practiceSlice';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
+import { currentState } from '../../Redux/Slice/stateSlice';
 
 import './gov-banner.scss';
+
+const initialState = {
+  stateNameDisplay: 'U.S.',
+  stateCode: '00',
+  stateAbbreviation: 'U.S.',
+};
 
 const GovernmentBanner = () => {
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
   const handleNavigateHome = () => {
+    dispatch(currentState(initialState));
     dispatch(setPracticeCategory(-1));
     dispatch(setSpecificPractice(-1));
   };
