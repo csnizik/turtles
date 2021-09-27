@@ -65,10 +65,11 @@ const SearchByResourceConcern = () => {
       <div className='search-by-resource-section'>
         <label
           className='usa-label resource-search-header'
-          htmlFor='locationValue'
+          aria-labelledby='resourceConcernCategoryValue resourceConcernValue'
         >
           {t('search-by-resource-concern.heading')}
         </label>
+
         <div className='desktop:grid-col-8'>
           <label
             className='usa-label resource-search-header'

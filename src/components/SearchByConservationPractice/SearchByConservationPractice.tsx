@@ -50,7 +50,7 @@ const SearchByConservationPractice = () => {
       <div className='search-by-practice-section'>
         <label
           className='usa-label practice-label'
-          // htmlFor='practiceCategoryValue'
+          aria-labelledby='practiceCategoryValue specificPracticeValue'
         >
           {t('search-by-conservation-practice.heading')}
         </label>
