@@ -64,7 +64,7 @@ const FindByPractices = () => {
   };
 
   return (
-    <div className='grid-row find-practice-container'>
+    <section className='grid-row find-practice-container'>
       <div className='tablet:grid-col-7 content-row'>
         <h2 className='h2-style'>{t('find-by-practice.heading')}</h2>
         <p className='p-style'>{t('find-by-practice.intro')}</p>
@@ -125,7 +125,7 @@ const FindByPractices = () => {
       <div className='tablet:grid-col-4 tablet:grid-offset-1 practice-image'>
         <img src={homePagePracticeImage} alt='Soil' />
       </div>
-    </div>
+    </section>
   );
 };
 

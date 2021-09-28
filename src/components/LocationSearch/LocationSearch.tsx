@@ -64,7 +64,7 @@ const LocationSearch = () => {
   };
 
   return (
-    <div className='grid-row location-search-container'>
+    <section className='grid-row location-search-container'>
       <div className='desktop:grid-col-4 img-row'>
         <img src='images/homePageUSMap.png' alt='Map of the United States' />
       </div>
@@ -123,7 +123,7 @@ const LocationSearch = () => {
           {t('location-search.explore-location')}
         </CustomButton>
       </div>
-    </div>
+    </section>
   );
 };
 

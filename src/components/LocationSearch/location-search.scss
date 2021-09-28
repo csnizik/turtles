@@ -2,9 +2,10 @@
 
 /** Location search grid **/
 .location-search-container {
-  padding: 2rem 2rem 2rem 0rem;
+  min-width: 100vw;
+  padding: 2rem 2rem 2rem 2.188rem;
   background-color: $white;
-  margin: 3rem 2.25rem;
+
   .img-row,
   .content-row {
     margin: 2.5rem 0rem 0rem 0rem;
