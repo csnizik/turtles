@@ -1,0 +1,73 @@
+@import '../../stylesheets/variables';
+
+.ie-parent {
+  padding: 5rem $large-space-size;
+
+  h2, h4 {
+    margin: 0;
+    padding: 0;
+  }
+
+  h2 {
+    font-weight: $semi-heavy-weight;
+    font-size: $h2-font-size;
+    line-height: 37.5px;
+  }
+
+  h4 {
+    padding-top: 0.625rem;
+    font-weight: $medium-light-weight;
+    font-size: $h4-font-size;
+    line-height: 22.4px;
+  }
+}
+
+.obligations,
+.arces-implemented {
+  background: $light-grey-205;
+
+  .obligation-graph,
+  .acres-graph {
+    height: 24rem;
+    background: $white;
+  }
+}
+
+.obligations,
+.arces-implemented {
+  margin-top: 1.875rem;
+  border: 1px solid $philippine-silver;
+  border-radius: 6px;
+
+  h3 {
+    padding: 1.875rem 1.875rem 1.25rem;
+    margin: 0;
+    line-height: 26px;
+    font-size: 22px;
+    font-weight: $medium-weight;
+  }
+
+  hr {
+    margin: 0;
+  }
+
+  .graph-container {
+    background: $light-grey-205;
+    height: 27.75rem;
+  }
+
+  .obligation-graph,
+  .acres-graph {
+    margin: 1.875rem;
+    border: 1px solid $philippine-silver;
+    border-radius: 6px;
+  }
+}
+
+.arces-implemented {
+  margin-top: 2.5rem;
+}
+
+.hidden-content {
+  display: none;
+}

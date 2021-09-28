@@ -1,8 +1,7 @@
 @import '../../stylesheets/variables';
 
 .usa-fieldset {
-  padding: 1.25rem 0rem 1.75rem 2.25rem;
-  background-color: $light-grey-2;
+  padding: 0rem 0rem 1.75rem 2.25rem;
   margin: 0 0 0rem -1rem;
   .usa-legend {
     margin-top: 0rem;
@@ -19,6 +18,14 @@
     i {
       margin: 0.5rem 0rem 0rem 0.5rem;
       align-self: center;
+    }
+  }
+}
+
+@media only screen and (max-width: $large-screen) {
+  .usa-fieldset {
+    .land-use-grid {
+      grid-template-columns: repeat(1, 1fr);
     }
   }
 }

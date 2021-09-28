@@ -1,1 +1,1 @@
-export { default } from './FilterBy.tsx';
+export { default } from './Filters.tsx';

@@ -1,0 +1,11 @@
+@import '../../stylesheets/variables';
+
+.tab-title-container {
+  padding: 2.5rem 2.188rem;
+
+  .tab-title-name {
+    font-size: 2.625rem;
+    font-weight: 900;
+    line-height: 3.0625rem;
+  }
+}

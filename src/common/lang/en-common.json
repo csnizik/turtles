@@ -1,11 +1,13 @@
 {
   "actions": {
+    "clear": "Clear",
     "search": "Search",
     "select": "- Select -"
   },
   "header": {
     "disclaimer": "An official website of the United States government",
     "home": "NRCS On the Ground",
+    "search": "Quick Search",
     "here-how-you-know": "Here's how you know",
     "nrcs": "Natural Resources Conservation Service",
     "usda": "U.S DEPARTMENT OF AGRICULTURE"
@@ -21,11 +23,13 @@
   },
   "search-page": {
     "intro": "Search for information on practice impacts, practice extent, and impacts of practice implementation.",
-    "quick-search": "Quick Search"
+    "quick-search": "Quick Search",
+    "filter-by-land-use": "Filter By Land Use"
   },
   "search-results-page": {
-    "header": "Search Results",
-    "conservation-practices": "Conservation Practices"
+    "header": "Quick Search Results",
+    "conservation-practices": "Conservation Practices",
+    "project-initiatives": "Projects & Initiatives"
   },
   "location-search": {
     "explore-by-location": "Explore NRCS Activities by Location",
@@ -42,13 +46,13 @@
     "common-resource-issues": "Common Resource Issues"
   },
   "search-by-conservation-practice": {
-    "heading": "by Conservation Practice",
-    "description": "Search for Conservation Practices",
+    "heading": "Conservation Practice",
+    "description": "Search by Conservation Practice or Resource Concern Treated",
     "first-label-name": "Select a practice category",
     "second-label-name": "Select a practice (optional)"
   },
   "search-by-resource-concern": {
-    "heading": "by Resource Concerns Treated",
+    "heading": "Resource Concerns Treated",
     "first-label-name": "Select a resource category",
     "second-label-name": "Select a resource concern (optional)"
   }
