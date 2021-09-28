@@ -146,6 +146,7 @@ const SearchByResourceConcern = ({
         >
           {t('search-by-resource-concern.heading')}
         </label>
+
         <div className='desktop:grid-col-8'>
           <label
             className='usa-label resource-search-header'
