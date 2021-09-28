@@ -119,30 +119,6 @@ const SearchByResourceConcern = ({
     }
   };
 
-  // const handleSubgroupChange = (e) => {
-  //   const { value } = e.target;
-  //   const concern = value.split(',');
-  //   console.log('Concern', concern);
-
-  //   if (concern[0] !== '') {
-  //     console.log("Conern{0} !==''");
-  //     setSelectedResourceConcern({
-  //       id: +concern[0],
-  //     });
-  //     setSearchInfo((prevState) => ({
-  //       ...prevState,
-  //       resource_concern: concern[1],
-  //     }));
-  //   } else {
-  //     console.log("Conern{0} ===''");
-  //     setSelectedResourceConcern({ id: -1 });
-  //     setSearchInfo((prevState) => ({
-  //       ...prevState,
-  //       resource_concern: null,
-  //     }));
-  //   }
-  // };
-
   const handleSubgroupChange = (e) => {
     const { value } = e.target;
     const concern = value.split(',');
@@ -166,14 +142,19 @@ const SearchByResourceConcern = ({
       <div className='search-by-resource-section'>
         <label
           className='usa-label resource-search-header'
-          htmlFor='locationValue'
+          aria-labelledby='resourceConcernCategoryValue resourceConcernValue'
         >
           {t('search-by-resource-concern.heading')}
         </label>
         <div className='desktop:grid-col-8'>
-          <p className='margin-top-2'>
-            {t('search-by-resource-concern.first-label-name')}
-          </p>
+          <label
+            className='usa-label resource-search-header'
+            htmlFor='resourceConcernCategoryValue'
+          >
+            <p className='margin-top-2'>
+              {t('search-by-resource-concern.first-label-name')}
+            </p>
+          </label>
           <select
             className='usa-select'
             id='resourceConcernCategoryValue'
@@ -199,9 +180,14 @@ const SearchByResourceConcern = ({
         </div>
 
         <div className='desktop:grid-col-8'>
-          <p className='margin-top-4'>
-            {t('search-by-resource-concern.second-label-name')}
-          </p>
+          <label
+            className='usa-label resource-search-header'
+            htmlFor='resourceConcernValue'
+          >
+            <p className='margin-top-4'>
+              {t('search-by-resource-concern.second-label-name')}
+            </p>
+          </label>
           <select
             className='usa-select'
             id='resourceConcernValue'

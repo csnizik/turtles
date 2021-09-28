@@ -116,14 +116,20 @@ const SearchByConservationPractice = ({
       <div className='search-by-practice-section'>
         <label
           className='usa-label practice-label'
-          htmlFor='practiceCategoryValue'
+          aria-labelledby='practiceCategoryValue specificPracticeValue'
         >
           {t('search-by-conservation-practice.heading')}
         </label>
         <div className='desktop:grid-col-8'>
-          <p className='margin-top-2'>
-            {t('search-by-conservation-practice.first-label-name')}
-          </p>
+          <label
+            className='usa-label practice-label'
+            htmlFor='practiceCategoryValue'
+          >
+            <p className='margin-top-2'>
+              {t('search-by-conservation-practice.first-label-name')}
+            </p>
+          </label>
+
           <select
             className='usa-select'
             id='practiceCategoryValue'
@@ -149,9 +155,14 @@ const SearchByConservationPractice = ({
         </div>
 
         <div className='desktop:grid-col-8'>
-          <p className='margin-top-4'>
-            {t('search-by-conservation-practice.second-label-name')}
-          </p>
+          <label
+            className='usa-label practice-label'
+            htmlFor='specificPracticeValue'
+          >
+            <p className='margin-top-4'>
+              {t('search-by-conservation-practice.second-label-name')}
+            </p>
+          </label>
           <select
             className='usa-select'
             id='specificPracticeValue'
