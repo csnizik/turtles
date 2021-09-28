@@ -13,6 +13,13 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
     id: DEFAULT_NATIONAL_LOCATION,
   });
   const stateStatus: any = useGetStateListQuery();
+
+  const stateName = stateStatus?.data?.find((state) => {
+    const name = stateId.id === state.stateCode;
+    return name;
+  });
+  console.log('State Status-->', stateName?.stateNameDisplay);
+
   const clearBtnClassNames = classNames(
     'btn',
     'btn-link',
@@ -24,8 +31,9 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
   );
 
   useEffect(() => {
+    const id = `${stateId.id}000`;
+
     if (stateId) {
-      const id = `${stateId.id}000`;
       setSearchInput((prevState) => ({
         ...prevState,
         state_county_code: id,
@@ -40,12 +48,12 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
 
   const handleSelectState = (event: any) => {
     const { value } = event.target;
-    const id = value.split(',');
-    setStateId(id[0]);
+    const name = stateName?.stateNameDisplay;
+    setStateId({ id: value });
     setIsDisabled(false);
     setSearchInfo((prevState) => ({
       ...prevState,
-      state: id[1],
+      state: name,
     }));
   };
 
@@ -89,12 +97,7 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
               stateStatus.data &&
               stateStatus.data.map((state: IStateDropdownOption) => {
                 return (
-                  <option
-                    key={state.stateCode}
-                    value={`${state.stateCode},${state.stateNameDisplay} `}
-                    // value={state.stateCode}
-                    //name={state.stateNameDisplay}
-                  >
+                  <option key={state.stateCode} value={state.stateCode}>
                     {state.stateNameDisplay}
                   </option>
                 );

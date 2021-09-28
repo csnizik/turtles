@@ -80,6 +80,7 @@ const CustomSearch = () => {
   const handleSearch = () => {
     dispatch(setSearch(searchInput));
     dispatch(setSearchInfo(searchedInfo));
+    console.log('Search Info', searchedInfo);
   };
 
   const searchButtonStyles = () => {
