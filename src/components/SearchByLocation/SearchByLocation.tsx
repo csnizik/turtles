@@ -34,7 +34,7 @@ const SearchByLocation = () => {
       <div className='search-by-location-section'>
         <label
           className='usa-label location-search-header'
-          htmlFor='locationValue'
+          aria-labelledby='stateValue countyValue'
         >
           {t('location-search.search-by-location')}
         </label>
