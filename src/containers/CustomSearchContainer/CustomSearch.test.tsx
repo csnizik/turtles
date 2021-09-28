@@ -1,5 +1,5 @@
 import React from 'react';
-import CustomSearchContainer from '.';
+import CustomSearch from '.';
 import { cleanup, render, screen } from '../../common/test-utils/test_utils';
 
 test('adds 1 + 2 to equal 3', () => {
@@ -12,7 +12,7 @@ afterEach(() => {
 
 // describe('Custom search container is rendered correctly', () => {
 //   beforeEach(() => {
-//     render(<CustomSearchContainer />);
+//     render(<CustomSearch />);
 //   });
 
 //   test('Should display the contents of the custom search container', () => {
@@ -21,6 +21,6 @@ afterEach(() => {
 
 //   test('Custom search page should contain a search button', () => {
 //     expect(screen.getByTestId('custom-search-button')).toBeDefined();
-//     // expect(screen.getByRole('button', { name: 'search' }));
+//     // expect(screen.getByRole('button', { name: 'search', hidden: true }));
 //   });
 // });

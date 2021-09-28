@@ -6,14 +6,12 @@ afterEach(() => {
 });
 
 // describe('ConservationPracticeIntroduction is rendered correctly', () => {
-   
-    
 //   beforeEach(() => {
-//       render(<ConservationPracticeIntroduction />);
+//     render(<ConservationPracticeIntroduction />);
 //   });
 
 //   test('Should display the contents of ConservationPracticeIntroduction', () => {
-//         expect(screen.getByTestId('introduction-content')).toBeDefined();
+//     expect(screen.getByTestId('introduction-content')).toBeDefined();
 //   });
 // });
 test('adds 1 + 2 to equal 3', () => {
