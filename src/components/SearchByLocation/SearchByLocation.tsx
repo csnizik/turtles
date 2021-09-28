@@ -65,7 +65,7 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
       <div className='search-labels'>
         <label
           className='usa-label location-search-header'
-          htmlFor='locationValue'
+          aria-labelledby='stateValue'
         >
           {t('location-search.search-by-location')}
         </label>
