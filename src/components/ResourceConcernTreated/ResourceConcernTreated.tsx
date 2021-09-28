@@ -17,7 +17,6 @@ const ResourceConcernTreated = ({
   };
 
   const [tab, setTab] = useState(null);
-
   const { data, error, isLoading, isSuccess, isError } =
     useGetRelatedResourceConcernCategoryQuery(initialFilter);
 
