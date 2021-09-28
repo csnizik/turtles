@@ -14,12 +14,6 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
   });
   const stateStatus: any = useGetStateListQuery();
 
-  const stateName = stateStatus?.data?.find((state) => {
-    const name = stateId.id === state.stateCode;
-    return name;
-  });
-  console.log('State Status-->', stateName?.stateNameDisplay);
-
   const clearBtnClassNames = classNames(
     'btn',
     'btn-link',
@@ -32,11 +26,19 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
 
   useEffect(() => {
     const id = `${stateId.id}000`;
+    const findStateName = stateStatus?.data?.find((state) => {
+      const name = stateId.id === state.stateCode;
+      return name;
+    })?.stateNameDisplay;
 
     if (stateId) {
       setSearchInput((prevState) => ({
         ...prevState,
         state_county_code: id,
+      }));
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        state: findStateName,
       }));
     } else {
       setSearchInput((prevState) => ({
@@ -48,13 +50,8 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
 
   const handleSelectState = (event: any) => {
     const { value } = event.target;
-    const name = stateName?.stateNameDisplay;
     setStateId({ id: value });
     setIsDisabled(false);
-    setSearchInfo((prevState) => ({
-      ...prevState,
-      state: name,
-    }));
   };
 
   const handleClearLocation = () => {
