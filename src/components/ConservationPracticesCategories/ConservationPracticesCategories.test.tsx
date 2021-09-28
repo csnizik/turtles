@@ -20,20 +20,16 @@ describe('ConservationPracticesCategories is rendered correctly', () => {
     },
   ];
 
-  //   beforeEach(() => {
-  //     render(
-  //       <ConservationPracticesCategories
-  //         categories={categories}
-  //         selectPractice={selectPractice}
-  //       />
-  //     );
-  //   });
+  beforeEach(() => {
+    render(
+      <ConservationPracticesCategories
+        categories={categories}
+        selectPractice={selectPractice}
+      />
+    );
+  });
 
-  //   test('Should display the contents of ConservationPracticesCategories', () => {
-  //     expect(screen.getByTestId('practice-content')).toBeDefined();
-  //   });
-  // });
-  test('adds 1 + 2 to equal 3', () => {
-    expect(1 + 2).toBe(3);
+  test('Should display the contents of ConservationPracticesCategories', () => {
+    expect(screen.getByTestId('practice-content')).toBeDefined();
   });
 });

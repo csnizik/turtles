@@ -5,15 +5,17 @@ afterEach(() => {
   cleanup();
 });
 
-// describe('ConservationPracticeIntroduction is rendered correctly', () => {
-//   beforeEach(() => {
-//     render(<ConservationPracticeIntroduction />);
-//   });
+describe('ConservationPracticeIntroduction is rendered correctly', () => {
+  beforeEach(() => {
+    render(
+      <ConservationPracticeIntroduction
+        introductionParagraph='This is the intro paragraph'
+        title='Conservation Practice'
+      />
+    );
+  });
 
-//   test('Should display the contents of ConservationPracticeIntroduction', () => {
-//     expect(screen.getByTestId('introduction-content')).toBeDefined();
-//   });
-// });
-test('adds 1 + 2 to equal 3', () => {
-  expect(1 + 2).toBe(3);
+  test('Should display the contents of ConservationPracticeIntroduction', () => {
+    expect(screen.getByTestId('introduction-content')).toBeDefined();
+  });
 });

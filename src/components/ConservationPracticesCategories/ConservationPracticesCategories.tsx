@@ -17,7 +17,7 @@ const ConservationPracticesCategories = ({
   selectPractice,
 }: ICategories) => {
   return (
-    <div className='categoryListContainer'>
+    <div data-testid='practice-content' className='categoryListContainer'>
       <div className='headerText'>Conservation Practice Categories</div>
       <div className='introText'>
         Conservation Practice Categories introduction ...
