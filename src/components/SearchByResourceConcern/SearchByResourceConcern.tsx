@@ -95,18 +95,22 @@ const SearchByResourceConcern = ({
 
   const handleChange = (e) => {
     const { value }: any = e.target;
-    const concernCategory = value.split(',');
-
-    if (concernCategory[0] !== '') {
+    const foundConcernCategory =
+      resourceConcerns.resources &&
+      resourceConcerns.resources.find((concern: any) => {
+        return concern.resourceConcernId === +value;
+      });
+    if (value !== '') {
       setSelectedResourceCategory({
         ...selectedResourceCategory,
-        id: +concernCategory[0],
+        id: +value,
       });
-      getResourceConcernsSubgroups(concernCategory[0]);
+      getResourceConcernsSubgroups(value);
       dispatchRequest(disableResourceDropdown());
       setSearchInfo((prevState) => ({
         ...prevState,
-        resource_concern_category: concernCategory[1],
+        resource_concern_category:
+          foundConcernCategory?.resourceConcernName || null,
       }));
     } else {
       setResourceConcernsSubgroups(initialResourceState);
@@ -121,10 +125,14 @@ const SearchByResourceConcern = ({
 
   const handleSubgroupChange = (e) => {
     const { value } = e.target;
-    const concern = value.split(',');
+    const foundConcern =
+      resourceConcernsSubgroups.resources &&
+      resourceConcernsSubgroups.resources.find((concern) => {
+        return concern.resourceConcernId === +value;
+      });
 
-    setSelectedResourceConcern({ id: +concern[0] });
-    if (concern[0] === '') {
+    setSelectedResourceConcern({ id: +value });
+    if (value === '') {
       setSelectedResourceConcern({ id: -1 });
       setSearchInfo((prevState) => ({
         ...prevState,
@@ -133,7 +141,7 @@ const SearchByResourceConcern = ({
     }
     setSearchInfo((prevState) => ({
       ...prevState,
-      resource_concern: concern[1],
+      resource_concern: foundConcern?.resourceConcernName,
     }));
   };
 
@@ -170,7 +178,7 @@ const SearchByResourceConcern = ({
                   return (
                     <option
                       key={item.resourceConcernId}
-                      value={`${item.resourceConcernId},${item.resourceConcernName}`}
+                      value={item.resourceConcernId}
                     >
                       {item.resourceConcernName}
                     </option>
@@ -195,7 +203,7 @@ const SearchByResourceConcern = ({
             name='selectedResourceSubgroup'
             disabled={resourceConcernsSubgroups.disabled}
             onChange={handleSubgroupChange}
-            // value={+selectedResourceConcern.id}
+            value={+selectedResourceConcern.id}
           >
             <option value=''>- Select resource concern -</option>
             {resourceConcernsSubgroups.resources.length
@@ -203,7 +211,7 @@ const SearchByResourceConcern = ({
                   return (
                     <option
                       key={item.resourceConcernId}
-                      value={`${item.resourceConcernId},${item.resourceConcernName}`}
+                      value={item.resourceConcernId}
                     >
                       {item.resourceConcernName}
                     </option>

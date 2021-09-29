@@ -13,8 +13,8 @@ const Home = lazy(() => import('./containers/Home'));
 const GovernmentBanner = lazy(
   () => import('./components/GovernmentBanner/GovernmentBanner')
 );
-const CustomSearchContainer = lazy(
-  () => import('./containers/CustomSearchContainer/CustomSearchContainer')
+const CustomSearch = lazy(
+  () => import('./containers/CustomSearchContainer/CustomSearch')
 );
 const LocationContainer = lazy(() => import('./containers/LocationContainer'));
 const ResultsContainer = lazy(() => import('./containers/ResultsContainer'));
@@ -28,7 +28,7 @@ const App = () => (
           <Home />
         </Route>
         <Route exact path='/search'>
-          <CustomSearchContainer />
+          <CustomSearch />
         </Route>
         <Route path='/search-results'>
           <ResultsContainer />
