@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useBreakpoint from 'use-breakpoint';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
@@ -7,7 +7,6 @@ import {
   enableResourceDropdown,
   enablePracticeDropdown,
 } from '../../Redux/Slice/disableSlice';
-import { useGetPracticeCategoryQuery } from '../../Redux/services/api';
 import { BREAKPOINTS } from '../../common/constants';
 import {
   intialPracticeState,
@@ -21,6 +20,7 @@ import SearchByConservationPractice from '../../components/SearchByConservationP
 import { ISearchData, ISearchInfo } from '../../common/types';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
 import { setSearch, setSearchInfo } from '../../Redux/Slice/practiceSlice';
+import './custom-search.scss';
 
 const defaultSearchInput: ISearchData = {
   resource_concern_category_id: null,
@@ -55,7 +55,6 @@ const CustomSearch = () => {
   const [resourceConcernsSubgroups, setResourceConcernsSubgroups] =
     useState<any>(initialResourceState);
   const [secondState, setSecondState] = useState<any>(intialPracticeState);
-  const practiceCategory = useGetPracticeCategoryQuery();
   const clearBtnClassNames = classNames(
     'btn',
     'btn-link',
@@ -67,7 +66,7 @@ const CustomSearch = () => {
   );
 
   const handleClearPracticeAndConcerns = () => {
-    if (practiceCategory || selectedResourceCategory) {
+    if (selectedPractice?.id || selectedResourceCategory) {
       setSelectedPractice({ id: -1 });
       setSelectedResourceCategory({ id: -1 });
     }
@@ -77,9 +76,23 @@ const CustomSearch = () => {
     setSecondState({ ...intialPracticeState, disabled: true });
   };
 
+  const handleEvent = () => {
+    handleClearPracticeAndConcerns();
+  };
+
+  useEffect(() => {
+    window.addEventListener('navigateHome', handleEvent);
+
+    return () => {
+      window.removeEventListener('navigateHome', handleEvent);
+    };
+  });
+
   const handleSearch = () => {
     dispatch(setSearch(searchInput));
     dispatch(setSearchInfo(searchedInfo));
+    dispatch(enableResourceDropdown());
+    dispatch(enablePracticeDropdown());
   };
 
   const searchButtonStyles = () => {

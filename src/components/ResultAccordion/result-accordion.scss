@@ -115,6 +115,13 @@ hr {
         padding: 1em 1em 0 0;
       }
 
+      .single-child-data {
+        p {
+          padding: 2rem 0rem 0rem 1rem;
+          margin-bottom: 0rem;
+        }
+      }
+
       .child-data {
         flex-direction: column;
         align-items: start;

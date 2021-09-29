@@ -19,7 +19,9 @@ const GovernmentBanner = () => {
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
+
   const handleNavigateHome = () => {
+    window.dispatchEvent(new Event('navigateHome'));
     dispatch(currentState(initialState));
     dispatch(setPracticeCategory(-1));
     dispatch(setSpecificPractice(-1));

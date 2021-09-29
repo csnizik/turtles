@@ -1,23 +1,9 @@
-import { useState } from 'react';
 import './filters.scss';
 import { Link } from 'react-router-dom';
 import CustomButton from '../CustomButton';
-import { ISearchData } from '../../common/types';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 
-const defaultSearchInput: ISearchData = {
-  resource_concern_category_id: null,
-  resource_concern_id: null,
-  practice_category_id: null,
-  practice_id: null,
-  state_county_code: null,
-  land_use_list: null,
-  practices: null,
-};
-
 const FilterBy = () => {
-  const [searchInput, setSearchInput] =
-    useState<ISearchData>(defaultSearchInput);
   const searchInputData = useAppSelector(
     (state) => state.practiceSlice.searchInfo
   );
@@ -82,7 +68,6 @@ const FilterBy = () => {
       <Link
         to={{
           pathname: '/search',
-          state: { detail: searchInput },
         }}
       >
         <CustomButton onClick={() => handleClick()}>
