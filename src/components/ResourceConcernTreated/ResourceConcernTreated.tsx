@@ -21,7 +21,7 @@ const ResourceConcernTreated = ({
     useGetRelatedResourceConcernCategoryQuery(initialFilter);
 
   const fromPdfReport = useAppSelector(
-    (state) => state.pdfGenSlice.enablePdfGen
+    (state) => state?.pdfGenSlice?.enablePdfGen
   );
 
   const toggleExpandCategory = (categoryId: any) => {
