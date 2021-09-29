@@ -13,11 +13,11 @@ const QuickSearchBar = () => {
   };
 
   return (
-    <div className='grid-row'>
-      <div className='grid-col-6'>
-        <p className='margin-left-4 margin-top-3'>{t('home-page.intro')}</p>
+    <div className='grid-row quick-search-bar'>
+      <div className='grid-col-6 tablet:grid-col-8'>
+        <p className='margin-left-3 margin-top-3'>{t('home-page.intro')}</p>
       </div>
-      <div className='grid-col-4 grid-offset-1 tablet:grid-col-4 tablet:grid-offset-2'>
+      <div className='grid-col-4 grid-offset-1 tablet:grid-col-2 tablet:grid-offset-2'>
         <CustomButton
           additionalClassName='margin-top-2 margin-right-4'
           onClick={handleCustomSearch}

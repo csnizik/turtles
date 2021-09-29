@@ -21,3 +21,16 @@
     }
   }
 }
+
+@media only screen and (max-width: $large-screen) {
+  .home-page {
+    main {
+      .quick-search-bar {
+        align-items: baseline;
+      }
+      .location-search-container {
+        margin-top: 6rem;
+      }
+    }
+  }
+}
