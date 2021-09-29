@@ -10,7 +10,7 @@ module.exports = {
     '\\.(css|scss)$': '<rootDir>/src/__tests__/App.js',
     '\\.svg': '<rootDir>/src/__mocks__/svgrMock.js',
   },
-  setupFilesAfterEnv: ['./src/setupTestSuite.js'],
+  setupFilesAfterEnv: ['<rootDir>/src/setupTestSuite.js'],
   testMatch: ['**/?(*.)+(spec|test).[jt]s?(x)'],
   //coverageDirectory: '<rootDir>/src/__tests__/coverage',
   coverageReporters: ['json', 'lcov', 'text', 'clover', 'cobertura'],
