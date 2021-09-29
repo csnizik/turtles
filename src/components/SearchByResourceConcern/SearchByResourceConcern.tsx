@@ -170,7 +170,7 @@ const SearchByResourceConcern = ({
             name='selectedResourceCategory'
             disabled={status}
             onChange={handleChange}
-            value={selectedResourceCategory?.id}
+            value={selectedResourceCategory}
           >
             <option value=''>All resource concerns (default)</option>
             {resourceConcerns.resources.length
