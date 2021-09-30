@@ -53,8 +53,8 @@ const Accordion = () => {
   };
 
   const handleSpecificPracticeSelection = (
-    categoryId: number,
-    practiceId: number
+    categoryId: any,
+    practiceId: any
   ) => {
     dispatch(setPracticeCategory(categoryId));
     dispatch(setSpecificPractice(practiceId));
@@ -67,14 +67,55 @@ const Accordion = () => {
     return (
       category.practices?.length === 1 &&
       (index === array.length - 1 ||
-        array[index].practices === array[index + 1].practices)
+        array[index].practices?.[0].practiceId ===
+          array[index + 1].practices?.[0].practiceId)
     );
   };
   return (
     <>
       {isLoading && <Spinner />}
       {isError && error}
-      {isSuccess && data && (
+      {isSuccess && data && data.every(isSamePractice) && (
+        <>
+          <div className='top-title'>
+            <h4>{t('search-results-page.conservation-practices')}</h4>
+          </div>
+          <div className='accordion-section'>
+            <div className='child-accordion-container'>
+              <li
+                key={data?.[0].practices?.[0].practiceId}
+                onClick={() => toggleChild(data?.[0].practices?.[0].practiceId)}
+                role='presentation'
+              >
+                <div className='single-child-data'>
+                  <h4>{data?.[0].practices?.[0].practiceName}</h4>
+                  <div>
+                    <p>
+                      {data?.[0].practices?.[0].practiceDescription ||
+                        'No description Available'}
+                    </p>
+                    <p>
+                      <Link
+                        to='/ConservationPractices'
+                        onClick={() =>
+                          handleSpecificPracticeSelection(
+                            data?.[0].practice_category_id,
+                            data?.[0].practices?.[0].practiceId
+                          )
+                        }
+                      >
+                        {data?.[0].practices?.[0].practiceName} Details
+                      </Link>
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <hr />
+            </div>
+          </div>
+        </>
+      )}
+      {isSuccess && data && !data.every(isSamePractice) && (
         <>
           <div className='top-title'>
             <h4>{t('search-results-page.conservation-practices')}</h4>
@@ -90,45 +131,6 @@ const Accordion = () => {
                 'accordion-container': tab !== categoryId,
                 'accordion-container-blue': tab === categoryId,
               });
-              if (data.every(isSamePractice)) {
-                return (
-                  <div className='child-accordion-container'>
-                    {practiceCategory.practices.map((ele: Practice) => {
-                      return (
-                        <li
-                          key={ele.practiceId}
-                          onClick={() => toggleChild(ele.practiceId)}
-                          role='presentation'
-                        >
-                          <div className='single-child-data'>
-                            <h4>{ele.practiceName}</h4>
-                            <div>
-                              <p>
-                                {ele.practiceDescription ||
-                                  'No description Available'}
-                              </p>
-                              <p>
-                                <Link
-                                  to='/ConservationPractices'
-                                  onClick={() =>
-                                    handleSpecificPracticeSelection(
-                                      categoryId,
-                                      ele.practiceId
-                                    )
-                                  }
-                                >
-                                  {ele.practiceName} Details
-                                </Link>
-                              </p>
-                            </div>
-                          </div>
-                        </li>
-                      );
-                    })}
-                    <hr />
-                  </div>
-                );
-              }
               return (
                 <>
                   <div key={categoryId} className={accordionClass}>
