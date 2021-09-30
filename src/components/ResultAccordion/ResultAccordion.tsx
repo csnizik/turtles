@@ -10,7 +10,7 @@ import {
 import { usePostSearchDataQuery } from '../../Redux/services/api';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 
-import { Practice } from '../../common/types';
+import { ISearchData, Practice } from '../../common/types';
 import './result-accordion.scss';
 
 const Accordion = () => {
@@ -59,7 +59,17 @@ const Accordion = () => {
     dispatch(setPracticeCategory(categoryId));
     dispatch(setSpecificPractice(practiceId));
   };
-
+  const isSamePractice = (
+    category: ISearchData,
+    index: number,
+    array: ISearchData[]
+  ) => {
+    return (
+      category.practices?.length === 1 &&
+      (index === array.length - 1 ||
+        array[index].practices === array[index + 1].practices)
+    );
+  };
   return (
     <>
       {isLoading && <Spinner />}
@@ -80,7 +90,7 @@ const Accordion = () => {
                 'accordion-container': tab !== categoryId,
                 'accordion-container-blue': tab === categoryId,
               });
-              if (data.length === 1) {
+              if (data.every(isSamePractice)) {
                 return (
                   <div className='child-accordion-container'>
                     {practiceCategory.practices.map((ele: Practice) => {
