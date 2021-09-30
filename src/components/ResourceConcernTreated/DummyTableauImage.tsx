@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const DummyTableauImage = () => {
   // state was manually chosen as "Colorado" and the top five
@@ -8,10 +8,12 @@ const DummyTableauImage = () => {
   async function parseURI(d) {
     const reader = new FileReader();
     reader.readAsDataURL(d);
-    // eslint-disable-next-line no-unused-vars
     return new Promise((res, rej) => {
       reader.onload = (e: any) => {
         res(e.target.result);
+      };
+      reader.onerror = (error) => {
+        rej(error);
       };
     });
   }
@@ -23,7 +25,13 @@ const DummyTableauImage = () => {
     setBase64Url(uri);
   }
 
-  getDataBlob(tableauUrl);
+  useEffect(() => {
+    getDataBlob(tableauUrl);
+  }, []);
+
+  if(base64Url===''){
+    return <h2>Loading...</h2>
+  }
 
   return (
     <>
