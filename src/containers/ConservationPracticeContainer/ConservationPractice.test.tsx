@@ -3,10 +3,6 @@ import ConservationPracticeVideo from '../../components/ConservationPracticeVide
 import ResourceConcernTreated from '../../components/ResourceConcernTreated';
 import ConservationPracticeOverview from '../../components/ConservationPracticeOverview';
 
-test('adds 1 + 2 to equal 3', () => {
-  expect(1 + 2).toBe(3);
-});
-
 afterEach(() => {
   cleanup();
 });
