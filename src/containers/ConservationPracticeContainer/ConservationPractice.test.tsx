@@ -46,18 +46,3 @@ describe('Resource Concerns Treated section is rendered correctly', () => {
   //   expect(container.firstChild).toHaveClass();
   // });
 });
-
-// Is this test still needed?
-
-// Reason for commenting out: Image cannot be loaded.
-// Will switch to fetching Image from endpoint instead of local in this Iteration
-
-// describe('Conservation practice overview section is rendered correctly', () => {
-//   beforeEach(() => {
-//     render(<ConservationPracticeOverview />);
-//   });
-
-//   test('Should display the description section of the conservation practice', () => {
-//     expect(screen.getByTestId('overview-container')).toBeDefined();
-//   });
-// });
