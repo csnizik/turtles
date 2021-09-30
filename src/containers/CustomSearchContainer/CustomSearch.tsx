@@ -159,6 +159,7 @@ const CustomSearch = () => {
         }}
       >
         <CustomButton
+          role='button'
           ariaLabel='search'
           additionalClassName={searchButtonStyles()}
           onClick={handleSearch}

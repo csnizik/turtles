@@ -21,6 +21,6 @@ afterEach(() => {
 
 //   test('Custom search page should contain a search button', () => {
 //     expect(screen.getByTestId('custom-search-button')).toBeDefined();
-//     // expect(screen.getByRole('button', { name: 'search' }));
+//     // expect(screen.getByRole('button', { name: 'search', hidden: true }));
 //   });
 // });

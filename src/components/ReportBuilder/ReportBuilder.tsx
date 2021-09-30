@@ -10,10 +10,21 @@ const ReportBuilder = ({
   reportPreviewData,
   handleGeneratePdf,
 }: any) => {
+  // console.log('swapaData: ', swapaData);
+  // console.log('choiceInputs: ', choiceInputs);
+  // console.log('setChoiceInputs: ', setChoiceInputs);
+  // console.log('rcTreatedInputs: ', rcTreatedInputs);
+  // console.log('setRcTreatedInput: ', setRcTreatedInput);
+  // console.log('getRCTreatedComponent: ', getRCTreatedComponent);
+  // console.log('reportPreviewData: ', reportPreviewData);
+  // console.log('handleGeneratePdf: ', handleGeneratePdf);
 
   const handleInput = (e) => {
     const { value, checked } = e.target;
-    const newChoiceInput = { ...choiceInputs, [`input${Number(value) + 1}`]: checked };
+    const newChoiceInput = {
+      ...choiceInputs,
+      [`input${Number(value) + 1}`]: checked,
+    };
     setChoiceInputs(newChoiceInput);
   };
 
@@ -32,7 +43,7 @@ const ReportBuilder = ({
 
     setRcTreatedInput(new Set());
     getRCTreatedComponent(new Set());
-  }
+  };
 
   const toggleSingle = (categoryId: any) => {
     const tempSet = new Set();
@@ -45,11 +56,11 @@ const ReportBuilder = ({
     else tempSet.add(categoryId);
     setRcTreatedInput(tempSet);
     getRCTreatedComponent(tempSet);
-  }
+  };
 
-  const getIdName = (index : any) => {
+  const getIdName = (index: any) => {
     return `swapaInput${index}`;
-  }
+  };
 
   const buildCheckboxList = (swapaCategory) => {
     const allInput = (
@@ -113,7 +124,9 @@ const ReportBuilder = ({
         </div>
         <div>Resource Concerns Treated</div>
 
-        <div className='swapa-checkbox-list'>{buildCheckboxList(swapaData)}</div>
+        <div className='swapa-checkbox-list'>
+          {buildCheckboxList(swapaData)}
+        </div>
 
         <div className='usa-checkbox'>
           <input
@@ -171,7 +184,13 @@ const ReportBuilder = ({
           </label>
         </div>
       </div>
-      <button className='pdf-button' onClick={()=>handleGeneratePdf()} type='button'>Save</button>
+      <button
+        className='pdf-button'
+        onClick={() => handleGeneratePdf()}
+        type='button'
+      >
+        Save
+      </button>
     </div>
   );
 };
