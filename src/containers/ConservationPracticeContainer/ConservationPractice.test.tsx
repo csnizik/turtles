@@ -37,6 +37,8 @@ describe('Resource Concerns Treated section is rendered correctly', () => {
     expect(screen.queryByTestId('rc-accordion')).toBeDefined();
   });
 
+  // not sure what the idea for the test is here. toHaveClass must bee  provided at least one class  https://github.com/testing-library/jest-dom#tohaveclass
+
   // test('Should display an accordion that face to the right', () => {
   //   let { container } = render(
   //     <ResourceConcernTreated selectedStateCode='01' selectedPracticeId={1} />
