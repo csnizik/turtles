@@ -159,6 +159,7 @@ const CustomSearch = () => {
         }}
       >
         <CustomButton
+          data-testid='custom-search-button'
           role='button'
           ariaLabel='search'
           additionalClassName={searchButtonStyles()}
