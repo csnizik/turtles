@@ -15,7 +15,7 @@ const ConservationPracticeVideo = ({ selectedPracticeId }: any) => {
       {isLoading && <Spinner />}
       {isError && error}
       {isSuccess && data && (
-        <div className='content'>
+        <div className={fromPdfReport ? 'pdf-content' : 'content'}>
           <h2>{data[0].videoName}</h2>
           <div className='full-component'>
             <div className='video-media' data-testid='video-media'>
@@ -39,7 +39,7 @@ const ConservationPracticeVideo = ({ selectedPracticeId }: any) => {
                     }
                   />
                   <a href={data[0].videoLink} className='video-outer-link'>
-                    Video
+                    {data[0].videoName} Video
                   </a>
                 </>
               )}

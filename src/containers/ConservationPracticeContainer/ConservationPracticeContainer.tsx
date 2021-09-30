@@ -115,7 +115,6 @@ const ConservationPracticeContainer = ({
 
       <div className='overlay'>
         <ReportPreviewCreator
-          selectedStateCode={selectedStateCode}
           openModal={openModal}
           handleCreateReport={handleCreateReport}
           cleanModal={cleanModal}

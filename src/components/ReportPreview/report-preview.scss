@@ -19,9 +19,16 @@
     border-radius: 0.1rem;
     box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
     height: 40rem;
-    overflow-y: auto;
+    width: 100%;
   }
 
+}
 
+#preview-content-header {
+  padding: 60px 35.008px 0;
+  font-weight: $semi-heavy-weight;
+  font-size: $h2-font-size;
+  line-height: 33.5px;
+  margin: 0;
 }
 

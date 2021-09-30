@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import './report-builder.scss';
 
 const ReportBuilder = ({
@@ -10,14 +11,21 @@ const ReportBuilder = ({
   reportPreviewData,
   handleGeneratePdf,
 }: any) => {
-  // console.log('swapaData: ', swapaData);
-  // console.log('choiceInputs: ', choiceInputs);
-  // console.log('setChoiceInputs: ', setChoiceInputs);
-  // console.log('rcTreatedInputs: ', rcTreatedInputs);
-  // console.log('setRcTreatedInput: ', setRcTreatedInput);
-  // console.log('getRCTreatedComponent: ', getRCTreatedComponent);
-  // console.log('reportPreviewData: ', reportPreviewData);
-  // console.log('handleGeneratePdf: ', handleGeneratePdf);
+  const swapaCategoryCnt = swapaData?.result.length;
+  const [swapaCategoryIds, setSwapaCategoryIds] = useState(new Set());
+
+  const collectSwapaCategoryIds = () => {
+    const tempSet = new Set();
+    swapaData?.result.forEach((childData) => {
+      tempSet.add(childData.rcCategoryId)
+    })
+    
+    setSwapaCategoryIds(tempSet);
+  }
+
+  useEffect(() => {
+    collectSwapaCategoryIds();
+  }, []);
 
   const handleInput = (e) => {
     const { value, checked } = e.target;
@@ -31,11 +39,10 @@ const ReportBuilder = ({
   const toggleAll = () => {
     const tempSet = new Set();
 
-    if (rcTreatedInputs.size < 5) {
-      let i = 1;
-      for (; i < 6; i++) {
-        tempSet.add(i);
-      }
+    if (rcTreatedInputs.size < swapaCategoryCnt) {
+      swapaCategoryIds.forEach((id) => {
+        tempSet.add(id);
+      })
       setRcTreatedInput(tempSet);
       getRCTreatedComponent(tempSet);
       return;
@@ -47,10 +54,9 @@ const ReportBuilder = ({
 
   const toggleSingle = (categoryId: any) => {
     const tempSet = new Set();
-    let i = 1;
-    for (; i < 6; i++) {
-      if (rcTreatedInputs.has(i)) tempSet.add(i);
-    }
+    swapaCategoryIds.forEach((id) => {
+      if (rcTreatedInputs.has(id)) tempSet.add(id);
+    })
 
     if (rcTreatedInputs.has(categoryId)) tempSet.delete(categoryId);
     else tempSet.add(categoryId);
@@ -71,7 +77,7 @@ const ReportBuilder = ({
           type='checkbox'
           name='swapaInputAll'
           value='All'
-          checked={rcTreatedInputs.size === 5}
+          checked={rcTreatedInputs.size >= swapaCategoryCnt}
           onChange={() => toggleAll()}
         />
         <label className='usa-checkbox__label' htmlFor='swapaInputAll'>
@@ -189,7 +195,7 @@ const ReportBuilder = ({
         onClick={() => handleGeneratePdf()}
         type='button'
       >
-        Save
+        Download Report
       </button>
     </div>
   );

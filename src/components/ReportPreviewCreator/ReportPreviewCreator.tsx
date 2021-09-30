@@ -23,7 +23,6 @@ interface DomParent {
 const subTitle: string = `Select the information you'd like to include in your report:`;
 
 const ReportPreviewCreator = ({
-  selectedStateCode,
   openModal,
   handleCreateReport,
   cleanModal,
@@ -50,15 +49,19 @@ const ReportPreviewCreator = ({
   }, [cleanModal]);
 
   const rcRef = useRef();
-  const stateCode = {
-    stateCode: selectedStateCode as string,
-  };
   const state = useAppSelector((s) => s);
   const practiceId: any = state?.practiceSlice?.selectedSpecficPractice;
+  let stateCode = state?.practiceSlice?.searchInput?.state_county_code;
+  if(!stateCode) stateCode = state?.stateSlice?.stateCode;
+  if(!stateCode) stateCode = '00';
+
+  let stateName = state?.practiceSlice?.searchInfo.state;
+  if(!stateName) stateName = state?.stateSlice?.stateNameDisplay;
+  if(!stateName) stateName = 'U.S.';
 
   const initialFilter = {
-    stateCode: stateCode.stateCode,
-    practiceId: 10,
+    stateCode,
+    practiceId,
   };
 
   const { data } = useGetRelatedResourceConcernCategoryQuery(initialFilter);
@@ -70,14 +73,14 @@ const ReportPreviewCreator = ({
 
     childArr.children.forEach((child) => {
       const categoryId: number = +child.textContent.charAt(0);
-      child.className = selectedIds.has(categoryId)
+      child.className = selectedIds.has(categoryId)// eslint-disable-line no-param-reassign
         ? 'accordion-container'
-        : 'hidden-content'; // eslint-disable-line no-param-reassign
+        : 'hidden-content'; 
     });
   };
 
   const handleGeneratePdf = () => {
-    const element = document.getElementById('pdf-report-content');
+    const element = document.getElementById('preview-content');
     const opt = {
       margin: 0.2,
       filename: `Practice Report.pdf`,
@@ -121,7 +124,8 @@ const ReportPreviewCreator = ({
             />
             <div className='preview-container'>
               <ReportPreview
-                selectedStateCode={stateCode.stateCode}
+                selectedStateName={stateName}
+                selectedStateCode={stateCode}
                 choiceInputs={choiceInputs}
                 rcTreatedInputs={rcTreatedInputs}
                 reportPreviewData={reportPreviewData}
