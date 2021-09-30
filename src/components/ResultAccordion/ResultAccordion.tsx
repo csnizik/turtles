@@ -118,96 +118,92 @@ const Accordion = () => {
                     <hr />
                   </div>
                 );
-              } else {
-                return (
-                  <>
-                    <div key={categoryId} className={accordionClass}>
-                      <li>
-                        <i
-                          className={chevronClassName}
-                          onClick={() => toggleExpandCategory(categoryId)}
-                          role='presentation'
-                        />
-                        <div className='accordion-data'>
-                          <h4>{practiceCategory.practiceCategoryName}</h4>
-                          <div>
-                            {tab === categoryId && (
-                              <p>
-                                {practiceCategory.practiceCategoryDescription ||
-                                  'No description Available'}
-                              </p>
-                            )}
-                            {tab === categoryId && (
-                              <p>
-                                <Link
-                                  to={{
-                                    pathname: '/ConservationPractices',
-                                    state: { detail: categoryId },
-                                  }}
-                                  onClick={() =>
-                                    handlePracticeCategorySelection(categoryId)
-                                  }
-                                >
-                                  {practiceCategory.practiceCategoryName}{' '}
-                                  Details
-                                </Link>
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      </li>
-                    </div>
-                    {tab === categoryId && (
-                      <div className='child-accordion-container'>
-                        {practiceCategory.practices.map((ele: Practice) => {
-                          const childChevronClassName = classNames('fas', {
-                            'fa-chevron-right':
-                              toggleChildTab !== ele.practiceId,
-                            'fa-chevron-down':
-                              toggleChildTab === ele.practiceId,
-                          });
-                          return (
-                            <li
-                              key={ele.practiceId}
-                              onClick={() => toggleChild(ele.practiceId)}
-                              role='presentation'
-                            >
-                              <i className={childChevronClassName} />
-                              <div className='child-data'>
-                                <h4>{ele.practiceName}</h4>
-                                <div>
-                                  {toggleChildTab === ele.practiceId && (
-                                    <p>
-                                      {ele.practiceDescription ||
-                                        'No description Available'}
-                                    </p>
-                                  )}
-                                  {toggleChildTab === ele.practiceId && (
-                                    <p>
-                                      <Link
-                                        to='/ConservationPractices'
-                                        onClick={() =>
-                                          handleSpecificPracticeSelection(
-                                            categoryId,
-                                            ele.practiceId
-                                          )
-                                        }
-                                      >
-                                        {ele.practiceName} Details
-                                      </Link>
-                                    </p>
-                                  )}
-                                </div>
-                              </div>
-                            </li>
-                          );
-                        })}
-                        <hr />
-                      </div>
-                    )}
-                  </>
-                );
               }
+              return (
+                <>
+                  <div key={categoryId} className={accordionClass}>
+                    <li>
+                      <i
+                        className={chevronClassName}
+                        onClick={() => toggleExpandCategory(categoryId)}
+                        role='presentation'
+                      />
+                      <div className='accordion-data'>
+                        <h4>{practiceCategory.practiceCategoryName}</h4>
+                        <div>
+                          {tab === categoryId && (
+                            <p>
+                              {practiceCategory.practiceCategoryDescription ||
+                                'No description Available'}
+                            </p>
+                          )}
+                          {tab === categoryId && (
+                            <p>
+                              <Link
+                                to={{
+                                  pathname: '/ConservationPractices',
+                                  state: { detail: categoryId },
+                                }}
+                                onClick={() =>
+                                  handlePracticeCategorySelection(categoryId)
+                                }
+                              >
+                                {practiceCategory.practiceCategoryName} Details
+                              </Link>
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </li>
+                  </div>
+                  {tab === categoryId && (
+                    <div className='child-accordion-container'>
+                      {practiceCategory.practices.map((ele: Practice) => {
+                        const childChevronClassName = classNames('fas', {
+                          'fa-chevron-right': toggleChildTab !== ele.practiceId,
+                          'fa-chevron-down': toggleChildTab === ele.practiceId,
+                        });
+                        return (
+                          <li
+                            key={ele.practiceId}
+                            onClick={() => toggleChild(ele.practiceId)}
+                            role='presentation'
+                          >
+                            <i className={childChevronClassName} />
+                            <div className='child-data'>
+                              <h4>{ele.practiceName}</h4>
+                              <div>
+                                {toggleChildTab === ele.practiceId && (
+                                  <p>
+                                    {ele.practiceDescription ||
+                                      'No description Available'}
+                                  </p>
+                                )}
+                                {toggleChildTab === ele.practiceId && (
+                                  <p>
+                                    <Link
+                                      to='/ConservationPractices'
+                                      onClick={() =>
+                                        handleSpecificPracticeSelection(
+                                          categoryId,
+                                          ele.practiceId
+                                        )
+                                      }
+                                    >
+                                      {ele.practiceName} Details
+                                    </Link>
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                          </li>
+                        );
+                      })}
+                      <hr />
+                    </div>
+                  )}
+                </>
+              );
             })}
           </div>
         </>

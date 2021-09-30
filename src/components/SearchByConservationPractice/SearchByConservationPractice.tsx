@@ -30,7 +30,7 @@ const SearchByConservationPractice = ({
   const [practiceState, setPracticeState] = useState<any>(intialPracticeState);
   const [selectedSubPractice, setSelectedSubPractice] = useState({ id: -1 });
   const wrapperClassNames = classNames('practice-box-wrapper', {
-    'resource-selected': selectedResourceCategory >= 0,
+    'resource-selected': +selectedResourceCategory?.id >= 0,
   });
 
   const practiceCategory = useGetPracticeCategoryQuery();
