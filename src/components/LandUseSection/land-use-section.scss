@@ -14,6 +14,10 @@
   }
   .usa-checkbox {
     display: flex;
+    margin: 0rem 0rem 0rem -2.1rem;
+    .usa-checkbox__label {
+      text-indent: 0rem;
+    }
     i {
       margin: 0.5rem 0rem 0rem 0.5rem;
       align-self: center;
