@@ -25,6 +25,7 @@ const ReportBuilder = ({
 
   useEffect(() => {
     collectSwapaCategoryIds();
+    getRCTreatedComponent(new Set());
   }, []);
 
   const handleInput = (e) => {

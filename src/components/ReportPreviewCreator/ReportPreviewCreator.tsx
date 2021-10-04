@@ -27,6 +27,7 @@ const ReportPreviewCreator = ({
   handleCreateReport,
   cleanModal,
 }: any) => {
+  const rcRef = useRef();
   const [rcTreatedInputs, setRcTreatedInputs] = useState(new Set());
   const [childArr, setChildArr] = useState<DomParent>();
   const [choiceInputs, setChoiceInputs] = useState({
@@ -39,6 +40,7 @@ const ReportPreviewCreator = ({
 
   useEffect(() => {
     setRcTreatedInputs(new Set());
+    setChildArr(rcRef.current);
     setChoiceInputs({
       input1: false,
       input2: false,
@@ -48,7 +50,6 @@ const ReportPreviewCreator = ({
     });
   }, [cleanModal]);
 
-  const rcRef = useRef();
   const state = useAppSelector((s) => s);
   const practiceId: any = state?.practiceSlice?.selectedSpecficPractice;
   let stateCode = state?.practiceSlice?.searchInput?.state_county_code;

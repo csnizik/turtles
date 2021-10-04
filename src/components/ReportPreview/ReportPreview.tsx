@@ -1,6 +1,6 @@
 import html2pdf from "html2pdf.js";
 import './report-preview.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ConservationPracticeOverview from '../ConservationPracticeOverview';
 import ImplementationExtent from '../ImplementationExtent';
 import SpecificationsAndTools from '../SpecificationsAndTools';
@@ -20,6 +20,7 @@ const ReportPreview = ({
 }: any) => {
   const { data, error, isLoading, isSuccess, isError } = reportPreviewData;
   const [ pdfUrl, setPdfUrl] = useState(null);
+  const mountedRef = useRef(true)
 
   const contentToRender = () => {
     return (
@@ -72,12 +73,18 @@ const ReportPreview = ({
     };
 
     html2pdf().from(element).to('pdf').set(opt).output('datauristring').then((result)=> {
+      if (!mountedRef.current) return null;
       setPdfUrl(result);
+      return null;
     })
   }
 
   useEffect(() => {
+    mountedRef.current = true;
     makePDF();
+    return () => { 
+      mountedRef.current = false
+    }
   }, [choiceInputs,rcTreatedInputs])
 
   return (
