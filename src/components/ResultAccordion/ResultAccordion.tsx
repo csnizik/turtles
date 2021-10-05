@@ -127,7 +127,7 @@ const Accordion = () => {
                     <hr />
                   </div>
                 );
-              } else {
+              } else if (data.length > 1) {
                 return (
                   <>
                     <div key={categoryId} className={accordionClass}>
@@ -216,6 +216,8 @@ const Accordion = () => {
                     )}
                   </>
                 );
+              } else {
+                return <></>;
               }
             })}
           </div>
