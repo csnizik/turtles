@@ -71,6 +71,10 @@ const Accordion = () => {
           array[index + 1].practices?.[0].practiceId)
     );
   };
+  let singleDat;
+  if (data && data.length >= 1) {
+    singleDat = data.slice(0, 1);
+  }
   return (
     <>
       {isLoading && <Spinner />}
@@ -81,41 +85,48 @@ const Accordion = () => {
             <h4>{t('search-results-page.conservation-practices')}</h4>
           </div>
           <div className='accordion-section'>
-            <div className='child-accordion-container'>
-              <li
-                key={data?.[0].practices?.[0].practiceId}
-                onClick={() => toggleChild(data?.[0].practices?.[0].practiceId)}
-                role='presentation'
-              >
-                <div className='single-child-data'>
-                  <h4>{data?.[0].practices?.[0].practiceName}</h4>
-                  <div>
-                    <p>
-                      {data?.[0].practices?.[0].practiceDescription ||
-                        'No description Available'}
-                    </p>
-                    <p>
-                      <Link
-                        to='/ConservationPractices'
-                        onClick={() =>
-                          handleSpecificPracticeSelection(
-                            data?.[0].practice_category_id,
-                            data?.[0].practices?.[0].practiceId
-                          )
-                        }
-                      >
-                        {data?.[0].practices?.[0].practiceName} Details
-                      </Link>
-                    </p>
-                  </div>
+            {singleDat.map((practiceCategory: any) => {
+              return (
+                <div className='child-accordion-container'>
+                  <li
+                    key={practiceCategory.practices[0].practiceId}
+                    onClick={() =>
+                      toggleChild(practiceCategory.practices[0].practiceId)
+                    }
+                    role='presentation'
+                  >
+                    <div className='single-child-data'>
+                      <h4>{practiceCategory.practices[0].practiceName}</h4>
+                      <div>
+                        <p>
+                          {practiceCategory.practices[0].practiceDescription ||
+                            'No description Available'}
+                        </p>
+                        <p>
+                          <Link
+                            to='/ConservationPractices'
+                            onClick={() =>
+                              handleSpecificPracticeSelection(
+                                practiceCategory.practiceCategoryId,
+                                practiceCategory.practices[0].practiceId
+                              )
+                            }
+                          >
+                            {practiceCategory.practices[0].practiceName} Details
+                          </Link>
+                          );
+                        </p>
+                      </div>
+                    </div>
+                  </li>
+                  <hr />
                 </div>
-              </li>
-              <hr />
-            </div>
+              );
+            })}
           </div>
         </>
       )}
-      {isSuccess && data && data.length > 1 && !data.every(isSamePractice) && (
+      {isSuccess && data && data.length >= 1 && !data.every(isSamePractice) && (
         <>
           <div className='top-title'>
             <h4>{t('search-results-page.conservation-practices')}</h4>
