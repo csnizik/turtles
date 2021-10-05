@@ -75,7 +75,7 @@ const Accordion = () => {
     <>
       {isLoading && <Spinner />}
       {isError && error}
-      {isSuccess && data && data.every(isSamePractice) && (
+      {isSuccess && data && data.length >= 1 && data.every(isSamePractice) && (
         <>
           <div className='top-title'>
             <h4>{t('search-results-page.conservation-practices')}</h4>
@@ -115,7 +115,7 @@ const Accordion = () => {
           </div>
         </>
       )}
-      {isSuccess && data && !data.every(isSamePractice) && (
+      {isSuccess && data && data.length > 1 && !data.every(isSamePractice) && (
         <>
           <div className='top-title'>
             <h4>{t('search-results-page.conservation-practices')}</h4>
@@ -217,6 +217,13 @@ const Accordion = () => {
                 </>
               );
             })}
+          </div>
+        </>
+      )}
+      {isSuccess && data && data.length < 1 && (
+        <>
+          <div className='top-title'>
+            <h4>{t('search-results-page.conservation-practices')}</h4>
           </div>
         </>
       )}
