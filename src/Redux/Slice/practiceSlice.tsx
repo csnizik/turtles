@@ -5,7 +5,16 @@ interface IPracticeSlice {
   selectedSpecficPractice: number;
   searchInput: any;
   searchInfo?: any;
+  landUseSet?: any;
 }
+const initialLandUse = {
+  'Other Farm and Rural Land': false,
+  Cropland: false,
+  'Developed land/Urban Ag': false,
+  Forestland: false,
+  Pasture: false,
+  Rangeland: false,
+};
 
 const defaultSearchInput: any = {
   resource_concern_category_id: null,
@@ -29,6 +38,7 @@ const initialState = {
   selectedSpecficPractice: -1,
   searchInput: defaultSearchInput,
   searchInfo: defaultSearchInfo,
+  landUseSet: initialLandUse,
 } as IPracticeSlice;
 
 /* eslint-disable no-param-reassign */
@@ -48,6 +58,9 @@ const practiceSlice = createSlice({
     setSearchInfo(state, action) {
       state.searchInfo = action.payload;
     },
+    setLandUse(state, action) {
+      state.landUseSet = action.payload;
+    },
   },
 });
 
@@ -57,5 +70,6 @@ export const {
   setSpecificPractice,
   setSearch,
   setSearchInfo,
+  setLandUse,
 } = practiceSlice.actions;
 export default practiceSlice.reducer;

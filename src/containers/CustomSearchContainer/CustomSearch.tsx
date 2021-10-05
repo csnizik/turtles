@@ -11,15 +11,20 @@ import { BREAKPOINTS } from '../../common/constants';
 import {
   intialPracticeState,
   initialResourceState,
+  initialLandUse,
 } from '../../common/typedconstants.common';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
-import SearchByResourceConcern from '../../components/SearchByResourceConcern';
 import LandUseSection from '../../components/LandUseSection';
 import SearchByConservationPractice from '../../components/SearchByConservationPractice';
 import { ISearchData, ISearchInfo } from '../../common/types';
-import { useAppDispatch } from '../../Redux/hooks/hooks';
-import { setSearch, setSearchInfo } from '../../Redux/Slice/practiceSlice';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
+import {
+  setLandUse,
+  setSearch,
+  setSearchInfo,
+} from '../../Redux/Slice/practiceSlice';
+import SearchByResourceConcern from '../../components/SearchByResourceConcern/SearchByResourceConcern';
 import './custom-search.scss';
 
 const defaultSearchInput: ISearchData = {
@@ -55,6 +60,12 @@ const CustomSearch = () => {
   const [resourceConcernsSubgroups, setResourceConcernsSubgroups] =
     useState<any>(initialResourceState);
   const [secondState, setSecondState] = useState<any>(intialPracticeState);
+  const [checkedState, setCheckedState] = useState<any>(initialLandUse);
+
+  const landUseState = useAppSelector(
+    (state) => state?.practiceSlice?.landUseSet
+  );
+
   const clearBtnClassNames = classNames(
     'btn',
     'btn-link',
@@ -65,10 +76,32 @@ const CustomSearch = () => {
     }
   );
 
+  useEffect(() => {
+    setCheckedState(landUseState);
+  }, []);
+
   const handleClearPracticeAndConcerns = () => {
     if (selectedPractice?.id || selectedResourceCategory) {
       setSelectedPractice({ id: -1 });
       setSelectedResourceCategory({ id: -1 });
+      setSearchInput((prevState) => ({
+        ...prevState,
+        resource_concern_category_id: null,
+        resource_concern_id: null,
+        practice_category_id: null,
+        practice_id: null,
+      }));
+      setSearchedInfo((prevState) => ({
+        ...prevState,
+        resource_concern_category: null,
+        resource_concern: null,
+        practice_category: null,
+        practice: null,
+      }));
+      window.localStorage.removeItem('PracticeCategoryId');
+      window.localStorage.removeItem('PracticeId');
+      window.localStorage.removeItem('ResourceConcernCategoryId');
+      window.localStorage.removeItem('ResourceConcernId');
     }
     dispatch(enableResourceDropdown());
     dispatch(enablePracticeDropdown());
@@ -91,8 +124,7 @@ const CustomSearch = () => {
   const handleSearch = () => {
     dispatch(setSearch(searchInput));
     dispatch(setSearchInfo(searchedInfo));
-    dispatch(enableResourceDropdown());
-    dispatch(enablePracticeDropdown());
+    dispatch(setLandUse(checkedState));
   };
 
   const searchButtonStyles = () => {
@@ -119,6 +151,8 @@ const CustomSearch = () => {
       <LandUseSection
         setSearchInput={setSearchInput}
         setSearchInfo={setSearchedInfo}
+        checkedState={checkedState}
+        setCheckedState={setCheckedState}
       />
       <div className='practice-labels'>
         <p className='practice-description'>

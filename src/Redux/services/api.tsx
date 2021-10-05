@@ -44,6 +44,11 @@ export const api = createApi({
     getPractice: builder.query<IPractice[], number>({
       query: (id) => `/practice/catagories/practices?id=${id}`,
     }),
+    //! Resource Concern depending on SWAPA category
+    getResourceConcern: builder.query<IResourceConcernList[], string>({
+      query: (swapaCategory) =>
+        `/resourceConcern/concern/category/${swapaCategory}`,
+    }),
     //!Post request for Search
     postSearchData: builder.query<ISearchData[], ISearchData>({
       query: (data) => ({
@@ -67,6 +72,7 @@ export const api = createApi({
 
 export const {
   useGetResourcesQuery,
+  useGetResourceConcernQuery,
   useGetPracticeCategoryQuery,
   useGetPracticeQuery,
   usePostSearchDataQuery,

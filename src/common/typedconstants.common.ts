@@ -43,7 +43,16 @@ export const intialPracticeState: any = {
   disabled: true,
 };
 
-export const initialResourceState = {
+export const initialResourceState: any = {
   resources: [],
   disabled: true,
+};
+
+export const initialLandUse = {
+  'Other Farm and Rural Land': false,
+  Cropland: false,
+  'Developed land/Urban Ag': false,
+  Forestland: false,
+  Pasture: false,
+  Rangeland: false,
 };

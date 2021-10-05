@@ -48,15 +48,22 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
     }
   }, [isDisabled, stateId]);
 
+  useEffect(() => {
+    if (window.localStorage.getItem('StateId'))
+      setStateId({ id: window.localStorage.getItem('StateId') });
+  }, []);
+
   const handleSelectState = (event: any) => {
     const { value } = event.target;
     setStateId({ id: value });
     setIsDisabled(false);
+    window.localStorage.setItem('StateId', value);
   };
 
   const handleClearLocation = () => {
     if (stateId) {
       setStateId({ id: DEFAULT_NATIONAL_LOCATION });
+      window.localStorage.removeItem('StateId');
     }
   };
 

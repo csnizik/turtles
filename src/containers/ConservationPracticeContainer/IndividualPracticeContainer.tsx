@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import { useGetNationalOverviewByPracticeQuery } from '../../Redux/services/api';
 import ApplicationImpacts from '../../components/ApplicationImpacts';
@@ -13,12 +14,16 @@ const IndividualPracticeContainer = () => {
   const state = useAppSelector((s) => s);
   const practiceId: any = state.practiceSlice.selectedSpecficPractice;
   let stateCode = state?.practiceSlice.searchInput.state_county_code;
-  if(stateCode) stateCode=stateCode.substring(0,2);
-  else stateCode= state?.stateSlice.stateCode;
-  if(!stateCode) stateCode='00';
-  
+  if (stateCode) stateCode = stateCode.substring(0, 2);
+  else stateCode = state?.stateSlice.stateCode;
+  if (!stateCode) stateCode = '00';
+
   const { data, error, isLoading, isSuccess, isError } =
     useGetNationalOverviewByPracticeQuery(practiceId);
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
 
   return (
     <>

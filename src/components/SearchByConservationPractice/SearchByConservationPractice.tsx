@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-// import { IPractice, IPracticeCategory } from '../../common/types';
 import classNames from 'classnames';
 import { IPractice, IPracticeCategory } from '../../common/types';
 import { intialPracticeState } from '../../common/typedconstants.common';
@@ -27,8 +26,9 @@ const SearchByConservationPractice = ({
   const dispatch = useAppDispatch();
   const result = useAppSelector((State) => State.disableSlice.disableResource);
   const { t } = useTranslation();
-  const [practiceState, setPracticeState] = useState<any>(intialPracticeState);
-  const [selectedSubPractice, setSelectedSubPractice] = useState({ id: -1 });
+  const [selectedSubPractice, setSelectedSubPractice] = useState<any>({
+    id: -1,
+  });
   const wrapperClassNames = classNames('practice-box-wrapper', {
     'resource-selected': +selectedResourceCategory?.id >= 0,
   });
@@ -37,8 +37,10 @@ const SearchByConservationPractice = ({
   const practice = useGetPracticeQuery(selectedPractice);
 
   useEffect(() => {
-    setPracticeState({ ...practiceState, practice: practiceCategory.data });
-    setSecondState({ ...secondState, practice: practice.data });
+    const findPracticeName = practiceCategory?.data?.find((singlePractice) => {
+      const name = +selectedPractice === singlePractice.practiceCategoryId;
+      return name;
+    })?.practiceCategoryName;
 
     if (selectedPractice === -1) {
       setSearchInput((prevState) => ({
@@ -46,6 +48,10 @@ const SearchByConservationPractice = ({
         practice_category_id: null,
       }));
     } else {
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        practice_category: findPracticeName,
+      }));
       setSearchInput((prevState) => ({
         ...prevState,
         practice_category_id: +selectedPractice,
@@ -54,6 +60,25 @@ const SearchByConservationPractice = ({
   }, [selectedPractice]);
 
   useEffect(() => {
+    if (window.localStorage.getItem('PracticeCategoryId')) {
+      setSelectedPractice({
+        id: window.localStorage.getItem('PracticeCategoryId'),
+      });
+      setSecondState({ practice: practice.data, disabled: false });
+    }
+    if (window.localStorage.getItem('PracticeId')) {
+      setSelectedSubPractice({
+        id: window.localStorage.getItem('PracticeId'),
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    const findSubPracticeName = practice?.data?.find((subPractice) => {
+      const name = +selectedSubPractice.id === subPractice.practiceId;
+      return name;
+    })?.practiceName;
+
     if (selectedSubPractice.id === -1) {
       setSearchInput((prevState) => ({
         ...prevState,
@@ -62,24 +87,26 @@ const SearchByConservationPractice = ({
     } else {
       setSearchInput((prevState) => ({
         ...prevState,
-        practice_id: +selectedSubPractice,
+        practice_id: +selectedSubPractice.id,
+      }));
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        practice: findSubPracticeName,
       }));
     }
   }, [selectedSubPractice]);
 
   const handlePracticeCategoryChange = (e) => {
     const { value } = e.target;
+    window.localStorage.setItem('PracticeCategoryId', value);
     if (value !== '') {
+      window.localStorage.removeItem('PracticeId');
       dispatch(disablePracticeDropdown());
       setSelectedPractice({ id: value });
-      const foundPractice =
-        practiceCategory.data &&
-        practiceCategory.data.find((category: any) => {
-          return category.practiceCategoryId === +value;
-        });
+      setSelectedSubPractice({ id: -1 });
       setSearchInfo((prevState) => ({
         ...prevState,
-        practice_category: foundPractice?.practiceCategoryName || null,
+        practice: null,
       }));
       if (selectedPractice >= 0 && value !== selectedPractice) {
         setSecondState({ ...intialPracticeState, disabled: false });
@@ -87,6 +114,8 @@ const SearchByConservationPractice = ({
         setSecondState({ practice: practice.data, disabled: false });
       }
     } else {
+      window.localStorage.removeItem('PracticeId');
+      window.localStorage.removeItem('PracticeCategoryId');
       setSecondState({ ...intialPracticeState });
       setSelectedSubPractice({ id: -1 });
       setSelectedPractice({ id: -1 });
@@ -100,16 +129,8 @@ const SearchByConservationPractice = ({
 
   const handlePracticeChange = (e) => {
     const { value } = e.target;
-    const foundPractice =
-      practice.data &&
-      practice.data.find((specificPractice: any) => {
-        return specificPractice.practiceId === +value;
-      });
-    setSelectedSubPractice(value);
-    setSearchInfo((prevState) => ({
-      ...prevState,
-      practice: foundPractice?.practiceName || null,
-    }));
+    window.localStorage.setItem('PracticeId', value);
+    setSelectedSubPractice({ id: value });
     if (value === '') {
       setSelectedSubPractice({ id: -1 });
       setSearchInfo((prevState) => ({
@@ -117,6 +138,10 @@ const SearchByConservationPractice = ({
         practice: null,
       }));
     }
+    setSearchInput((prevState) => ({
+      ...prevState,
+      practice_id: value,
+    }));
   };
 
   return (
@@ -144,7 +169,7 @@ const SearchByConservationPractice = ({
             name='practiceCategorySelect'
             disabled={result}
             onChange={handlePracticeCategoryChange}
-            value={+selectedPractice}
+            value={selectedPractice}
           >
             <option value=''>All practices (default)</option>
             {practiceCategory.isSuccess &&

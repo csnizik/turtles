@@ -1,18 +1,28 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
+  setLandUse,
   setPracticeCategory,
+  setSearch,
+  setSearchInfo,
   setSpecificPractice,
 } from '../../Redux/Slice/practiceSlice';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
 import { currentState } from '../../Redux/Slice/stateSlice';
-
 import './gov-banner.scss';
+import { initialLandUse } from '../../common/typedconstants.common';
 
 const initialState = {
   stateNameDisplay: 'U.S.',
   stateCode: '00',
   stateAbbreviation: 'U.S.',
+};
+
+const defaultSearchInput: any = {
+  land_use_list: null,
+};
+const defaultSearchInfo: any = {
+  land_use_list: null,
 };
 
 const GovernmentBanner = () => {
@@ -25,6 +35,10 @@ const GovernmentBanner = () => {
     dispatch(currentState(initialState));
     dispatch(setPracticeCategory(-1));
     dispatch(setSpecificPractice(-1));
+    dispatch(setLandUse(initialLandUse));
+    dispatch(setSearchInfo(defaultSearchInfo));
+    dispatch(setSearch(defaultSearchInput));
+    window.localStorage.clear();
   };
   const renderNRCSHeaderSection: Function = () => (
     <header
