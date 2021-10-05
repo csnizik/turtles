@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import './report-builder.scss';
 
 const ReportBuilder = ({
@@ -10,21 +11,39 @@ const ReportBuilder = ({
   reportPreviewData,
   handleGeneratePdf,
 }: any) => {
+  const swapaCategoryCnt = swapaData?.result.length;
+  const [swapaCategoryIds, setSwapaCategoryIds] = useState(new Set());
+
+  const collectSwapaCategoryIds = () => {
+    const tempSet = new Set();
+    swapaData?.result.forEach((childData) => {
+      tempSet.add(childData.rcCategoryId)
+    })
+    
+    setSwapaCategoryIds(tempSet);
+  }
+
+  useEffect(() => {
+    collectSwapaCategoryIds();
+    getRCTreatedComponent(new Set());
+  }, []);
 
   const handleInput = (e) => {
     const { value, checked } = e.target;
-    const newChoiceInput = { ...choiceInputs, [`input${Number(value) + 1}`]: checked };
+    const newChoiceInput = {
+      ...choiceInputs,
+      [`input${Number(value) + 1}`]: checked,
+    };
     setChoiceInputs(newChoiceInput);
   };
 
   const toggleAll = () => {
     const tempSet = new Set();
 
-    if (rcTreatedInputs.size < 5) {
-      let i = 1;
-      for (; i < 6; i++) {
-        tempSet.add(i);
-      }
+    if (rcTreatedInputs.size < swapaCategoryCnt) {
+      swapaCategoryIds.forEach((id) => {
+        tempSet.add(id);
+      })
       setRcTreatedInput(tempSet);
       getRCTreatedComponent(tempSet);
       return;
@@ -32,24 +51,23 @@ const ReportBuilder = ({
 
     setRcTreatedInput(new Set());
     getRCTreatedComponent(new Set());
-  }
+  };
 
   const toggleSingle = (categoryId: any) => {
     const tempSet = new Set();
-    let i = 1;
-    for (; i < 6; i++) {
-      if (rcTreatedInputs.has(i)) tempSet.add(i);
-    }
+    swapaCategoryIds.forEach((id) => {
+      if (rcTreatedInputs.has(id)) tempSet.add(id);
+    })
 
     if (rcTreatedInputs.has(categoryId)) tempSet.delete(categoryId);
     else tempSet.add(categoryId);
     setRcTreatedInput(tempSet);
     getRCTreatedComponent(tempSet);
-  }
+  };
 
-  const getIdName = (index : any) => {
+  const getIdName = (index: any) => {
     return `swapaInput${index}`;
-  }
+  };
 
   const buildCheckboxList = (swapaCategory) => {
     const allInput = (
@@ -60,7 +78,7 @@ const ReportBuilder = ({
           type='checkbox'
           name='swapaInputAll'
           value='All'
-          checked={rcTreatedInputs.size === 5}
+          checked={rcTreatedInputs.size >= swapaCategoryCnt}
           onChange={() => toggleAll()}
         />
         <label className='usa-checkbox__label' htmlFor='swapaInputAll'>
@@ -113,7 +131,9 @@ const ReportBuilder = ({
         </div>
         <div>Resource Concerns Treated</div>
 
-        <div className='swapa-checkbox-list'>{buildCheckboxList(swapaData)}</div>
+        <div className='swapa-checkbox-list'>
+          {buildCheckboxList(swapaData)}
+        </div>
 
         <div className='usa-checkbox'>
           <input
@@ -171,7 +191,13 @@ const ReportBuilder = ({
           </label>
         </div>
       </div>
-      <button className='pdf-button' onClick={()=>handleGeneratePdf()} type='button'>Save</button>
+      <button
+        className='pdf-button'
+        onClick={() => handleGeneratePdf()}
+        type='button'
+      >
+        Download Report
+      </button>
     </div>
   );
 };

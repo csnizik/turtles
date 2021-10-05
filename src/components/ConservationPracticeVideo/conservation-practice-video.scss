@@ -3,12 +3,15 @@
 .media-box {
     margin: 0 2.188rem 1rem;
     background-color: $lighter-grey;
-    
+
     .content {
+      box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
+    }
+    
+    .content, .pdf-content {
       padding: 1.875rem 1.56rem;
       border: 0.06rem solid $light-grey-5;
       border-radius: 0.3rem;
-      box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
   
       h2 {
         font-size: 22px;

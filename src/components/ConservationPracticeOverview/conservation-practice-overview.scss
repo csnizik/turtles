@@ -9,18 +9,24 @@
     margin: 0;
 
     .full-component {
-      display: flex;
 
       .overview {
-        width: 70%;
-        margin-right: 1.875em;
+        width: auto;
+        min-width: 40%;
         min-height: 20vw;
       }
 
+      p {
+        text-align: justify;
+      }
+
       img {
+        float: right;
+        padding: 0 0 1.875rem 1.875rem;
         height: auto;
-        max-height: 18vw;
-        width: 30%;
+        width: auto;
+        max-height: 15.625rem;
+        max-width: 25rem;
       }
     }
 

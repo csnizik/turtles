@@ -10,7 +10,7 @@ import {
 import { usePostSearchDataQuery } from '../../Redux/services/api';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 
-import { Practice } from '../../common/types';
+import { ISearchData, Practice } from '../../common/types';
 import './result-accordion.scss';
 
 const Accordion = () => {
@@ -53,18 +53,69 @@ const Accordion = () => {
   };
 
   const handleSpecificPracticeSelection = (
-    categoryId: number,
-    practiceId: number
+    categoryId: any,
+    practiceId: any
   ) => {
     dispatch(setPracticeCategory(categoryId));
     dispatch(setSpecificPractice(practiceId));
   };
-
+  const isSamePractice = (
+    category: ISearchData,
+    index: number,
+    array: ISearchData[]
+  ) => {
+    return (
+      category.practices?.length === 1 &&
+      (index === array.length - 1 ||
+        array[index].practices?.[0].practiceId ===
+          array[index + 1].practices?.[0].practiceId)
+    );
+  };
   return (
     <>
       {isLoading && <Spinner />}
       {isError && error}
-      {isSuccess && data && (
+      {isSuccess && data && data.every(isSamePractice) && (
+        <>
+          <div className='top-title'>
+            <h4>{t('search-results-page.conservation-practices')}</h4>
+          </div>
+          <div className='accordion-section'>
+            <div className='child-accordion-container'>
+              <li
+                key={data?.[0].practices?.[0].practiceId}
+                onClick={() => toggleChild(data?.[0].practices?.[0].practiceId)}
+                role='presentation'
+              >
+                <div className='single-child-data'>
+                  <h4>{data?.[0].practices?.[0].practiceName}</h4>
+                  <div>
+                    <p>
+                      {data?.[0].practices?.[0].practiceDescription ||
+                        'No description Available'}
+                    </p>
+                    <p>
+                      <Link
+                        to='/ConservationPractices'
+                        onClick={() =>
+                          handleSpecificPracticeSelection(
+                            data?.[0].practice_category_id,
+                            data?.[0].practices?.[0].practiceId
+                          )
+                        }
+                      >
+                        {data?.[0].practices?.[0].practiceName} Details
+                      </Link>
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <hr />
+            </div>
+          </div>
+        </>
+      )}
+      {isSuccess && data && !data.every(isSamePractice) && (
         <>
           <div className='top-title'>
             <h4>{t('search-results-page.conservation-practices')}</h4>

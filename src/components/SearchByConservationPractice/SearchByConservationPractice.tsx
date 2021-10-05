@@ -30,7 +30,7 @@ const SearchByConservationPractice = ({
   const [practiceState, setPracticeState] = useState<any>(intialPracticeState);
   const [selectedSubPractice, setSelectedSubPractice] = useState({ id: -1 });
   const wrapperClassNames = classNames('practice-box-wrapper', {
-    'resource-selected': selectedResourceCategory >= 0,
+    'resource-selected': +selectedResourceCategory?.id >= 0,
   });
 
   const practiceCategory = useGetPracticeCategoryQuery();
@@ -69,15 +69,19 @@ const SearchByConservationPractice = ({
 
   const handlePracticeCategoryChange = (e) => {
     const { value } = e.target;
-    const practiceVal = value.split(',');
-    if (practiceVal[0] !== '') {
+    if (value !== '') {
       dispatch(disablePracticeDropdown());
-      setSelectedPractice({ id: practiceVal[0] });
+      setSelectedPractice({ id: value });
+      const foundPractice =
+        practiceCategory.data &&
+        practiceCategory.data.find((category: any) => {
+          return category.practiceCategoryId === +value;
+        });
       setSearchInfo((prevState) => ({
         ...prevState,
-        practice_category: practiceVal[1],
+        practice_category: foundPractice?.practiceCategoryName || null,
       }));
-      if (selectedPractice >= 0 && practiceVal[0] !== selectedPractice) {
+      if (selectedPractice >= 0 && value !== selectedPractice) {
         setSecondState({ ...intialPracticeState, disabled: false });
       } else {
         setSecondState({ practice: practice.data, disabled: false });
@@ -96,13 +100,17 @@ const SearchByConservationPractice = ({
 
   const handlePracticeChange = (e) => {
     const { value } = e.target;
-    const subPracticeVal = value.split(',');
-    setSelectedSubPractice(subPracticeVal[0]);
+    const foundPractice =
+      practice.data &&
+      practice.data.find((specificPractice: any) => {
+        return specificPractice.practiceId === +value;
+      });
+    setSelectedSubPractice(value);
     setSearchInfo((prevState) => ({
       ...prevState,
-      practice: subPracticeVal[1],
+      practice: foundPractice?.practiceName || null,
     }));
-    if (subPracticeVal[0] === '') {
+    if (value === '') {
       setSelectedSubPractice({ id: -1 });
       setSearchInfo((prevState) => ({
         ...prevState,
@@ -136,7 +144,7 @@ const SearchByConservationPractice = ({
             name='practiceCategorySelect'
             disabled={result}
             onChange={handlePracticeCategoryChange}
-            value={selectedPractice.id}
+            value={+selectedPractice}
           >
             <option value=''>All practices (default)</option>
             {practiceCategory.isSuccess &&
@@ -145,7 +153,7 @@ const SearchByConservationPractice = ({
                 return (
                   <option
                     key={item.practiceCategoryId}
-                    value={`${item.practiceCategoryId},${item.practiceCategoryName}`}
+                    value={item.practiceCategoryId}
                   >
                     {item.practiceCategoryName}
                   </option>
@@ -176,10 +184,7 @@ const SearchByConservationPractice = ({
               practice.data &&
               practice.data.map((item: IPractice) => {
                 return (
-                  <option
-                    key={item.practiceCode}
-                    value={`${item.practiceId},${item.practiceName}`}
-                  >
+                  <option key={item.practiceCode} value={item.practiceId}>
                     {item.practiceName}
                   </option>
                 );
