@@ -25,7 +25,8 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
   );
 
   useEffect(() => {
-    const id = `${stateId.id}000`;
+    const stateCountyCode =
+      stateId.id.length === 2 ? `${stateId.id}000` : stateId.id;
     const findStateName = stateStatus?.data?.find((state) => {
       const name = stateId.id === state.stateCode;
       return name;
@@ -34,7 +35,7 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
     if (stateId) {
       setSearchInput((prevState) => ({
         ...prevState,
-        state_county_code: id,
+        state_county_code: stateCountyCode,
       }));
       setSearchInfo((prevState) => ({
         ...prevState,
