@@ -52,14 +52,12 @@ const ResourceConcernTreated = ({
               className='accordion-container'
               key={categoryId}
               data-testid='rc-accordion'
+              onClick={() => toggleExpandCategory(categoryId)}
+              role='presentation'
             >
               <p className='hidden-content'>{categoryId}</p>
               <li key={categoryId}>
-                <i
-                  className={chevronClassName}
-                  onClick={() => toggleExpandCategory(categoryId)}
-                  role='presentation'
-                />
+                <i className={chevronClassName} />
                 <div className='accordion-data'>
                   <h4>
                     {rcCategory.rcCategoryName}

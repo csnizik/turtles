@@ -27,14 +27,11 @@ const ConservationPracticeContainer = ({
 }: any) => {
   const [practiceViewType, setPracticeViewType] =
     useState(defaultPracticeViews);
+  const [openModal, setOpenModal] = useState(false);
+  const [cleanModal, setCleanModal] = useState(false);
 
   const dispatch = useAppDispatch();
-
   const location: any = useLocation();
-
-  const [openModal, setOpenModal] = useState(false);
-
-  const [cleanModal, setCleanModal] = useState(false);
 
   const sharedState = location?.state?.detail;
 
