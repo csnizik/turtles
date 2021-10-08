@@ -5,6 +5,45 @@
     margin: 0;
   }
 
+  .left-button {
+    color: $dark-grey;
+    margin: 0.65rem 0 0.4rem 0;
+    border: none;
+    position: absolute;
+    background-color: $sfi-white;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .left-button-default {
+    display: none;
+  }
+
+  .right-button {
+    color: $dark-grey;
+    margin: -3.1rem 0 0 0;
+    display: none;
+    border: none;
+    float: right;
+    background-color: $sfi-white;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  @media only screen and (max-width: 1295px) {
+    .right-button {
+      display: grid;
+    }
+  }
+
+  @media only screen and (min-width: 1295px) {
+    .left-button {
+      display: none;
+    }
+  }
+
   .scroll_container {
     display: flex;
     overflow-x: scroll;
