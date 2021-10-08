@@ -10,7 +10,7 @@ const HorizontalScroll = () => {
 
   const [classState, setClassState]: any = useState('left-button-default');
 
-  // Need to do some research to find some alternative (better) solution
+  // Need to do some research to find an alternative (better) solution
   const ref = useRef(document.createElement('div'));
 
   const handleNav = (direction) => {
