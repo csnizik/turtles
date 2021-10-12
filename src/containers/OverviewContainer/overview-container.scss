@@ -1,0 +1,80 @@
+@import '../../stylesheets/variables';
+
+.overview-page {
+  background: $light-grey-205;
+  padding: 3.75rem $large-space-size;
+  .overview-box {
+    height: 36.5rem;
+    background: $white;
+    border: 1px solid $philippine-silver;
+    border-radius: 6px;
+  }
+
+  p.lead:first-of-type {
+    font-size: 22.4px;
+  }
+
+  h2,
+  h4 {
+    margin: 0;
+    padding: 0;
+  }
+
+  h2 {
+    font-weight: $semi-heavy-weight;
+    font-size: $h2-font-size;
+    line-height: 37.5px;
+  }
+
+  h4 {
+    padding-top: 0.625rem;
+    font-weight: $medium-light-weight;
+    font-size: $h4-font-size;
+    line-height: 22.4px;
+  }
+}
+
+.top-five-container:first-of-type {
+  padding: 1rem 3rem;
+  background: $white;
+
+  h2:first-of-type {
+    margin: 5rem 0rem 1.75rem 0rem;
+    font-weight: $heavier-weight;
+  }
+  .top-five-box {
+    height: 36.5rem;
+    background: $light-grey-205;
+    border: 1px solid $philippine-silver;
+    border-radius: 6px;
+  }
+}
+
+.top-five-container:nth-child(3) {
+  padding: 1rem 3rem;
+  background: $light-grey-205;
+
+  h2:first-of-type {
+    margin: 5rem 0rem 1.75rem 0rem;
+    font-weight: $heavier-weight;
+  }
+  .top-five-box {
+    height: 36.5rem;
+    background: $white;
+    border: 1px solid $philippine-silver;
+    border-radius: 6px;
+  }
+}
+
+.top-five-container:nth-child(4) {
+  padding: 1rem 3rem;
+  background: $white;
+
+  h2:first-of-type {
+    margin: 5rem 0rem 1.75rem 0rem;
+    font-weight: $heavier-weight;
+  }
+  p:last-child {
+    padding-bottom: 3.75rem;
+  }
+}

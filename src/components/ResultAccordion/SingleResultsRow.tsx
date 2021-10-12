@@ -34,7 +34,6 @@ const SingleResultsRow = ({
                   >
                     {practiceData.practiceName} Details
                   </Link>
-                  );
                 </p>
               </div>
             </div>

@@ -56,5 +56,10 @@
     "heading": "Resource Concerns Treated",
     "first-label-name": "Select a resource category",
     "second-label-name": "Select a resource concern (optional)"
+  },
+  "overview": {
+    "introductory-paragraph": "NRCS planners assess the existing condition of natural resources on a site to determine whether additional treatment is needed to address a potential resource concern. The natural resource concerns most frequently identified, and the conservation practices applied, vary across states and regions based on predominant land uses, topography, soil conditions, ...",
+    "description": "Description of this section...",
+    "outcomes": "NRCS uses a variety of methodologies to evaluate the impacts of conservation practices and to assess the potential of USDA conservation programs to meet the Nation’s conservation goals, including modeling, monitoring and data collection, and geospatial analysis. Impact estimation tools developed through these efforts support conservation program delivery and resource allocation and enable NRCS to report out on the estimated impacts of its conservation investment. "
   }
 }
