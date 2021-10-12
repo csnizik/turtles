@@ -57,6 +57,9 @@
     "first-label-name": "Select a resource category",
     "second-label-name": "Select a resource concern (optional)"
   },
+  "projects-page": {
+    "page-header": "All US projects & initiatives lorum ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula diam et diam tempor fringilla."
+  },
   "overview": {
     "introductory-paragraph": "NRCS planners assess the existing condition of natural resources on a site to determine whether additional treatment is needed to address a potential resource concern. The natural resource concerns most frequently identified, and the conservation practices applied, vary across states and regions based on predominant land uses, topography, soil conditions, ...",
     "description": "Description of this section...",

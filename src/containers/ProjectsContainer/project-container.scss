@@ -1,0 +1,13 @@
+@import '../../stylesheets/variables';
+
+.projects-tab {
+  ul.list-group {
+    width: 15%;
+
+    .list-group-item {
+      &.selected {
+        color: $dark-blue;
+      }
+    }
+  }
+}

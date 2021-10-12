@@ -6,6 +6,7 @@ import CustomTabs from '../../components/CustomTabs';
 import { searchOptionMap } from '../../common/typedconstants.common';
 import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
 import ConservationPracticeContainer from '../ConservationPracticeContainer';
+import ProjectsContainer from '../ProjectsContainer';
 import OverviewContainer from '../OverviewContainer';
 import './location-search.scss';
 import { currentState } from '../../Redux/Slice/stateSlice';
@@ -75,7 +76,11 @@ const LocationContainer = () => {
           />
         </TabPane>
       )}
-      {currentTabOption === 2 && <TabPane tabId={2} />}
+      {currentTabOption === 2 && (
+        <TabPane tabId={2}>
+          <ProjectsContainer />
+        </TabPane>
+      )}
     </TabContent>
   );
   return (
