@@ -10,6 +10,10 @@
     border-radius: 6px;
   }
 
+  p.lead:first-of-type {
+    font-size: 16px;
+  }
+
   h2,
   h4 {
     margin: 0;
@@ -31,7 +35,7 @@
 }
 
 .top-five-container:first-of-type {
-  padding: 1rem 3rem;
+  padding: 1rem 3rem 3rem 3rem;
   background: $white;
 
   h2:first-of-type {
@@ -47,7 +51,7 @@
 }
 
 .top-five-container:nth-child(3) {
-  padding: 1rem 3rem;
+  padding: 1rem 3rem 3rem 3rem;
   background: $light-grey-205;
 
   h2:first-of-type {
@@ -71,6 +75,7 @@
     font-weight: $heavier-weight;
   }
   p:last-child {
+    font-size: 16px;
     padding-bottom: 3.75rem;
   }
 }

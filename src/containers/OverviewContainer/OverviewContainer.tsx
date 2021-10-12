@@ -28,7 +28,7 @@ const OverviewContainer = () => {
       <section className='overview-page'>
         <div className='overview-box' />
 
-        <p className='lead margin-top-3 margin-bottom-7'>
+        <p className='lead margin-top-3 margin-bottom-6'>
           {t('overview.introductory-paragraph')}
         </p>
       </section>
