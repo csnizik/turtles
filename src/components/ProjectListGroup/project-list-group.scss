@@ -1,0 +1,40 @@
+@import '../../stylesheets/variables';
+
+.projects-data {
+  margin: 1rem 2rem;
+  li.list-group-item {
+    border: 1px solid #b8b8b8;
+    margin: 1rem 0rem 1rem 0rem;
+
+    .project-details {
+      margin: 0rem 0rem 1rem -1.5rem;
+      span {
+        padding-left: 1.75rem;
+        margin: 0rem 1.5rem 0rem 1.5rem;
+        border-left: 1px solid $light-grey-6;
+      }
+      span:first-of-type {
+        padding-left: 0rem;
+        margin: 0rem 1.5rem 0rem 1.5rem;
+        border: none;
+      }
+    }
+    p:first-of-type {
+      font-size: 18px;
+      font-weight: $heavier-weight;
+      color: $usda-blue;
+    }
+
+    p:nth-of-type(2) {
+      font-size: 18px;
+    }
+
+    p.project-type {
+      margin: 1rem 1rem 0rem 0rem;
+      font-size: 18px;
+      font-weight: $heavier-weight;
+      text-transform: uppercase;
+      color: $dark-grey-1;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import Accordion from '../../components/ResultAccordion';
+import ProjectListGroup from '../../components/ProjectListGroup';
 import Filters from '../../components/Filter';
 import './results.scss';
 
@@ -14,6 +15,7 @@ const ResultsContainer = () => {
       </div>
       <Filters />
       <Accordion />
+      <ProjectListGroup />
     </div>
   );
 };
