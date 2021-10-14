@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import Accordion from '../../components/ResultAccordion';
 import Filters from '../../components/Filter';
 import './results.scss';
+import Pagination from '../../components/Pagination';
 
 const ResultsContainer = () => {
   const { t } = useTranslation();
@@ -14,6 +15,7 @@ const ResultsContainer = () => {
       </div>
       <Filters />
       <Accordion />
+      <Pagination />
     </div>
   );
 };
