@@ -6,12 +6,14 @@
   background: $light-grey-205;
   border: 1px solid $philippine-silver;
   border-radius: 6px;
+  break-inside: avoid;
 }
 
 .app-impact-parent {
   padding: 5rem $large-space-size;
 
-  h2, h4 {
+  h2,
+  h4 {
     margin: 0;
     padding: 0;
   }

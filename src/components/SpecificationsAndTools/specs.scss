@@ -3,7 +3,7 @@
 .st-parent {
   background: $light-grey-205;
   padding: 5rem $large-space-size;
-
+  break-inside: avoid;
   h2,
   h4 {
     margin: 0;
