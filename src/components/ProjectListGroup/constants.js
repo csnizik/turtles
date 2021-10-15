@@ -1,4 +1,9 @@
-export const projectsList = [
+export const projectTabs = [
+  { id: 1, tabTitle: 'Conservation Innovation Grants' },
+  { id: 2, tabTitle: 'Landscape Conservation Initiatives' },
+];
+
+export const grantsList = [
   {
     projectId: 0,
     projectTitle:
@@ -8,7 +13,6 @@ export const projectsList = [
     projectOwner: 'University of Idaho (Global Rangelands)',
     statesInvolved: 'Idaho',
     projectYear: '2020',
-    projectType: 'Conservation Innovation Grant',
   },
   {
     projectId: 1,
@@ -18,7 +22,6 @@ export const projectsList = [
     projectOwner: 'University of Wisconsin - Madison',
     statesInvolved: 'Wisconsin',
     projectYear: '2018',
-    projectType: 'Conservation Innovation Grant',
   },
   {
     projectId: 2,
@@ -27,8 +30,26 @@ export const projectsList = [
     projectOwner: '',
     statesInvolved: '',
     projectYear: '20',
-    projectType: 'Conservation Innovation Grant',
   },
 ];
 
-export default projectsList;
+export const initiativesList = [
+  {
+    initiativeId: 0,
+    initiativeTitle: 'A National Initiative',
+    initiativeDescription:
+      'This project aims to leverage the considerable expertise and resources of the Rangelands Partnership (RP), developers of the suite of GlobalRangeland.org websites, to develop a grazinglands thesaurus that will improve the effectiveness of finding and delivering key grazingland management to conservation planners and other land managers.',
+    initiativeOwner: 'University of Idaho (Global Rangelands)',
+    statesInvolved: 'Idaho',
+    initiativeYear: '2020',
+  },
+  {
+    initiativeId: 1,
+    initiativeTitle: 'Rangelands Initiative Efforts',
+    projectDescription:
+      'This project aims to conserve native tree species within Wisconsin rangle lands.',
+    initiativeOwner: 'University of Wisconsin - Madison',
+    statesInvolved: 'Wisconsin',
+    initiativeYear: '2018',
+  },
+];

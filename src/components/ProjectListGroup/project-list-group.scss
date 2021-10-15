@@ -1,7 +1,16 @@
 @import '../../stylesheets/variables';
 
-.projects-data {
+.projects-list-group {
   margin: 1rem 2rem;
+  ul.nav-fpac {
+    width: 34%;
+    .nav-item {
+      width: 20rem;
+    }
+  }
+}
+
+.projects-data {
   li.list-group-item {
     border: 1px solid #b8b8b8;
     margin: 1rem 0rem 1rem 0rem;
@@ -27,14 +36,6 @@
 
     p:nth-of-type(2) {
       font-size: 18px;
-    }
-
-    p.project-type {
-      margin: 1rem 1rem 0rem 0rem;
-      font-size: 18px;
-      font-weight: $heavier-weight;
-      text-transform: uppercase;
-      color: $dark-grey-1;
     }
   }
 }
