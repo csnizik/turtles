@@ -82,7 +82,7 @@ const Accordion = () => {
       return data.every(isSamePractice) ? (
         <SingleResultsRow
           practiceData={singleDat[0].practices[0]}
-          rowId={singleDat.practiceCategoryId}
+          rowId={singleDat[0].practiceCategoryId}
           handleSpecificPracticeSelection={handleSpecificPracticeSelection}
         />
       ) : (
