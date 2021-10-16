@@ -10,6 +10,7 @@ import {
   NavItem,
   NavLink,
 } from 'reactstrap';
+import ProjectListItem from './ProjectListItem';
 import { projectTabs, grantsList, initiativesList } from './constants';
 import './project-list-group.scss';
 
@@ -21,23 +22,19 @@ const ProjectListGroup = () => {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
-  const renderProjectDetails = (
-    projectOwner: string,
-    states: any,
-    projectYear: string
-  ) => {
-    return (
-      <div className='project-details'>
-        <span>{projectOwner}</span>
-        <span>{states}</span>
-        <span>{projectYear}</span>
-      </div>
-    );
-  };
-
   const renderProjectTypeTabs = () => {
+    const getTitle = (tab: any) => {
+      if (tab.id === 1) {
+        return `${tab.tabTitle} (${grantsList.length})`;
+      }
+      if (tab.id === 2) {
+        return `${tab.tabTitle} (${initiativesList.length})`;
+      }
+      return tab.tabTitle;
+    };
+
     return (
-      <Nav className='nav-fpac'>
+      <Nav className='nav-fpac' data-testid='project-and-initiative-tabs'>
         {projectTabs.map((tab: any) => {
           return (
             <NavItem>
@@ -47,7 +44,7 @@ const ProjectListGroup = () => {
                   toggleProjectsTab(tab.id);
                 }}
               >
-                {tab.tabTitle}
+                {getTitle(tab)}
               </NavLink>
             </NavItem>
           );
@@ -69,16 +66,14 @@ const ProjectListGroup = () => {
               <ul className='list-group projects-data'>
                 {grantsList.map((project: any) => {
                   return (
-                    <li key={project.projectId} className='list-group-item'>
-                      <p>{project.projectTitle}</p>
-                      {project.projectOwner &&
-                        renderProjectDetails(
-                          project.projectOwner,
-                          project.statesInvolved,
-                          project.projectYear
-                        )}
-                      <p>{project.projectDescription}</p>
-                    </li>
+                    <ProjectListItem
+                      id={project.projectId}
+                      description={project.projectDescription}
+                      title={project.projectTitle}
+                      owner={project.projectOwner}
+                      statesInvolved={project.statesInvolved}
+                      year={project.projectYear}
+                    />
                   );
                 })}
               </ul>
@@ -91,19 +86,14 @@ const ProjectListGroup = () => {
               <ul className='list-group projects-data'>
                 {initiativesList.map((initiative: any) => {
                   return (
-                    <li
-                      key={initiative.initiativeId}
-                      className='list-group-item'
-                    >
-                      <p>{initiative.initiativeTitle}</p>
-                      {initiative.initiativeOwner &&
-                        renderProjectDetails(
-                          initiative.initiativeOwner,
-                          initiative.statesInvolved,
-                          initiative.projectYear
-                        )}
-                      <p>{initiative.initiativeDescription}</p>
-                    </li>
+                    <ProjectListItem
+                      id={initiative.initiativeId}
+                      description={initiative.initiativeDescription}
+                      title={initiative.initiativeTitle}
+                      owner={initiative.initiativeOwner}
+                      statesInvolved={initiative.statesInvolved}
+                      year={initiative.initiativeYear}
+                    />
                   );
                 })}
               </ul>
