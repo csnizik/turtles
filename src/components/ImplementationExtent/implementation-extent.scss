@@ -3,7 +3,8 @@
 .ie-parent {
   padding: 5rem $large-space-size;
 
-  h2, h4 {
+  h2,
+  h4 {
     margin: 0;
     padding: 0;
   }
@@ -25,7 +26,7 @@
 .obligations,
 .arces-implemented {
   background: $light-grey-205;
-
+  break-inside: avoid;
   .obligation-graph,
   .acres-graph {
     height: 24rem;
