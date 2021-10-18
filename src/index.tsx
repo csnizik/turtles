@@ -9,6 +9,8 @@ import './stylesheets/app.scss';
 import './i18n';
 import 'nrcs-design-system/scss/nrcs-design-system.scss';
 
+import MapContainer from './containers/MapContainer';
+
 const Home = lazy(() => import('./containers/Home'));
 const GovernmentBanner = lazy(
   () => import('./components/GovernmentBanner/GovernmentBanner')
@@ -17,6 +19,7 @@ const CustomSearch = lazy(
   () => import('./containers/CustomSearchContainer/CustomSearch')
 );
 const LocationContainer = lazy(() => import('./containers/LocationContainer'));
+
 const ResultsContainer = lazy(() => import('./containers/ResultsContainer'));
 
 const App = () => (
@@ -33,8 +36,8 @@ const App = () => (
         <Route path='/search-results'>
           <ResultsContainer />
         </Route>
-        <Route path='/:name'>
-          <LocationContainer />
+        <Route path='/map'>
+          <MapContainer />
         </Route>
       </Switch>
     </Suspense>
