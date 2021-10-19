@@ -58,8 +58,6 @@
 /** Media Queries **/
 @media only screen and (max-width: $large-screen) {
   .find-practice-container {
-    display: flex;
-    flex-wrap: wrap-reverse;
     .usa-button {
       width: 60%;
     }

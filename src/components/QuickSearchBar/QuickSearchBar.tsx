@@ -19,7 +19,7 @@ const QuickSearchBar = () => {
       </div>
       <div className='grid-col-4 grid-offset-1 tablet:grid-col-2 tablet:grid-offset-2'>
         <CustomButton
-          additionalClassName='margin-top-2 margin-right-4'
+          additionalClassName='margin-top-4 margin-right-4'
           onClick={handleCustomSearch}
         >
           {t('search-page.quick-search')}
