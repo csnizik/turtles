@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ListGroup, ListGroupItem } from 'reactstrap';
+import MapContainer from '../MapContainer';
 import './project-container.scss';
 
 import { projectCards, projectListGroups } from './constants';
@@ -23,29 +24,45 @@ const ProjectsContainer = () => {
     }
   };
 
+  const renderProjectSection = () => {
+    const selectedProjectType = projectCards.find(
+      (project: any) => selectedProjectCard === project.id
+    );
+    if (!selectedProjectType) return null;
+    return (
+      <h3 className='margin-top-3 grid-offset-2'>
+        {selectedProjectType.title}
+      </h3>
+    );
+  };
+
   if (toggleProjectView) {
     return (
       <div className='projects-tab'>
-        <ListGroup className='margin-2'>
-          {projectListGroups.map((listItem: any) => {
-            const listGroupItemClassNames = classNames(
-              'justify-content-between',
-              {
-                selected: listItem.id === selectedProjectCard,
-              }
-            );
-            return (
-              <ListGroupItem
-                key={listItem.id}
-                className={listGroupItemClassNames}
-                role='presentation'
-                onClick={() => handleSelectProjectItem(listItem.id)}
-              >
-                {listItem.title}
-              </ListGroupItem>
-            );
-          })}
-        </ListGroup>
+        <div className='projects-grid'>
+          <ListGroup className='margin-2'>
+            {projectListGroups.map((listItem: any) => {
+              const listGroupItemClassNames = classNames(
+                'justify-content-between',
+                {
+                  selected: listItem.id === selectedProjectCard,
+                }
+              );
+              return (
+                <ListGroupItem
+                  key={listItem.id}
+                  className={listGroupItemClassNames}
+                  role='presentation'
+                  onClick={() => handleSelectProjectItem(listItem.id)}
+                >
+                  {listItem.title}
+                </ListGroupItem>
+              );
+            })}
+          </ListGroup>
+          <MapContainer />
+        </div>
+        {renderProjectSection()}
       </div>
     );
   }

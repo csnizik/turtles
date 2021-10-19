@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import MapView from '@arcgis/core/views/MapView';
 import Home from '@arcgis/core/widgets/Home';
 import Map from '@arcgis/core/WebMap';
-import esriConfig from '@arcgis/core/config';
 import {
   MAP_ZOOM,
   MIN_ZOOM,
@@ -27,14 +26,14 @@ const MapComponent = () => {
       });
 
       const view = new MapView({
-        map: map,
+        map,
         container: VIEW_DIV,
         center: CENTER_COORDINATES,
         zoom: MAP_ZOOM,
       });
 
       const homeBtn = new Home({
-        view: view,
+        view,
       });
 
       // Set view constraints

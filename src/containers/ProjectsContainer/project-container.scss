@@ -1,9 +1,12 @@
 @import '../../stylesheets/variables';
 
-.projects-tab {
-  ul.list-group {
-    width: 15%;
+.projects-grid {
+  display: grid;
 
+  grid-gap: 1rem;
+
+  grid-template-columns: 20rem 1fr;
+  ul.list-group {
     .list-group-item {
       &.selected {
         color: $dark-blue;
