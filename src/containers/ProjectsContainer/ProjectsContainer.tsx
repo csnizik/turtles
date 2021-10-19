@@ -22,6 +22,7 @@ const ProjectsContainer = () => {
       setToggleProjectView(false);
       setSelectedProjectCard(-1);
     }
+    setSelectedProjectCard(id);
   };
 
   const renderProjectSection = () => {
@@ -30,9 +31,10 @@ const ProjectsContainer = () => {
     );
     if (!selectedProjectType) return null;
     return (
-      <h3 className='margin-top-3 grid-offset-2'>
-        {selectedProjectType.title}
-      </h3>
+      <div className='project-type-section margin-top-3 grid-offset-2 padding-left-2 padding-right-2'>
+        <h3>{selectedProjectType.title}</h3>
+        <p className='margin-top-2'>{selectedProjectType.paragraphText}</p>
+      </div>
     );
   };
 

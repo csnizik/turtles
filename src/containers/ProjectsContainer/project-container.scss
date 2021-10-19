@@ -8,9 +8,17 @@
   grid-template-columns: 20rem 1fr;
   ul.list-group {
     .list-group-item {
+      &:hover {
+        cursor: pointer;
+      }
       &.selected {
         color: $dark-blue;
+        border-left: 3px solid $usda-blue;
       }
     }
   }
+}
+
+.project-type-section {
+  width: 80%;
 }
