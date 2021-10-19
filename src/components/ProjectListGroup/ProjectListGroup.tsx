@@ -13,10 +13,13 @@ import {
 import ProjectListItem from './ProjectListItem';
 import { projectTabs, grantsList, initiativesList } from './constants';
 import './project-list-group.scss';
+import Pagination from '../Pagination';
 
 const ProjectListGroup = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState(1);
+
+  const grantsLength = grantsList.length;
 
   const toggleProjectsTab = (tab: number) => {
     if (activeTab !== tab) setActiveTab(tab);
@@ -52,13 +55,14 @@ const ProjectListGroup = () => {
       </Nav>
     );
   };
-
   return (
     <div className='projects-list-group'>
       <div className='top-title'>
         <h4>{t('search-results-page.project-initiatives')}</h4>
       </div>
-      {renderProjectTypeTabs()}
+
+      <Pagination cards={grantsLength} />
+      {/*renderProjectTypeTabs()*/}
       <TabContent activeTab={activeTab}>
         <TabPane tabId={1}>
           <Row>
