@@ -13,6 +13,10 @@ import {
   enablePdfGenState,
 } from '../../Redux/Slice/pdfGenSlice';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
+import {
+  setPracticeCategory,
+  setSpecificPractice,
+} from '../../Redux/Slice/practiceSlice';
 
 const defaultPracticeViews = {
   allPractices: false,
@@ -62,8 +66,23 @@ const ConservationPracticeContainer = ({
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
       setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
     } else if (currentPracticeCategoryId >= 0 && currentSpecificPractice < 0) {
+      //Temporary Fix for associated practies
+      window.localStorage.setItem(
+        'PracticeCategory',
+        currentPracticeCategoryId
+      );
       setPracticeViewType({ ...practiceViewType, practiceCategories: true });
     } else if (currentSpecificPractice >= 0) {
+      setPracticeViewType({ ...practiceViewType, individualPractice: true });
+    }
+    //Temporary Fix for associated practies
+    if (window.localStorage.getItem('Practice')) {
+      const practiceNum = Number(window.localStorage.getItem('Practice'));
+      const practiceCategoryNum = Number(
+        window.localStorage.getItem('PracticeCategory')
+      );
+      dispatch(setSpecificPractice(practiceNum));
+      dispatch(setPracticeCategory(practiceCategoryNum));
       setPracticeViewType({ ...practiceViewType, individualPractice: true });
     }
   }, [currentPracticeCategoryId, currentSpecificPractice]);
