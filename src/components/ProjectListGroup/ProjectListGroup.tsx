@@ -19,7 +19,7 @@ const ProjectListGroup = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage] = useState(1);
+  const [cardsPerPage] = useState(10);
 
   const grantsLength = grantsList.length;
 
