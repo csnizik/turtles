@@ -23,6 +23,60 @@ export const grantsList = [
     statesInvolved: ['WI'],
     awardeeYear: '2018',
   },
+  {
+    projectId: 2,
+    projectTitle: 'Local Forestland Conservation Efforts',
+    projectDescription:
+      'This project aims to conserve native plant and tree species within Wisconsin forest lands.',
+    projectOwner: 'University of Wisconsin - Madison',
+    statesInvolved: ['WI'],
+    awardeeYear: '2018',
+  },
+  {
+    projectId: 3,
+    projectTitle: 'Local Forestland Conservation Efforts',
+    projectDescription:
+      'This project aims to conserve native plant and tree species within Wisconsin forest lands.',
+    projectOwner: 'University of Wisconsin - Madison',
+    statesInvolved: ['WI'],
+    awardeeYear: '2018',
+  },
+  {
+    projectId: 4,
+    projectTitle: 'Local Forestland Conservation Efforts',
+    projectDescription:
+      'This project aims to conserve native plant and tree species within Wisconsin forest lands.',
+    projectOwner: 'University of Wisconsin - Madison',
+    statesInvolved: ['WI'],
+    awardeeYear: '2018',
+  },
+  {
+    projectId: 5,
+    projectTitle: 'Local Forestland Conservation Efforts',
+    projectDescription:
+      'This project aims to conserve native plant and tree species within Wisconsin forest lands.',
+    projectOwner: 'University of Wisconsin - Madison',
+    statesInvolved: ['WI'],
+    awardeeYear: '2018',
+  },
+  {
+    projectId: 6,
+    projectTitle: 'Local Forestland Conservation Efforts',
+    projectDescription:
+      'This project aims to conserve native plant and tree species within Wisconsin forest lands.',
+    projectOwner: 'University of Wisconsin - Madison',
+    statesInvolved: ['WI'],
+    awardeeYear: '2018',
+  },
+  {
+    projectId: 7,
+    projectTitle: 'Local Forestland Conservation Efforts',
+    projectDescription:
+      'This project aims to conserve native plant and tree species within Wisconsin forest lands.',
+    projectOwner: 'University of Wisconsin - Madison',
+    statesInvolved: ['WI'],
+    awardeeYear: '2018',
+  },
 ];
 
 export const initiativesList = [

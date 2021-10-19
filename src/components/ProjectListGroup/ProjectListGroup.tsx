@@ -18,13 +18,22 @@ import Pagination from '../Pagination';
 const ProjectListGroup = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [cardsPerPage] = useState(1);
 
   const grantsLength = grantsList.length;
 
   const toggleProjectsTab = (tab: number) => {
     if (activeTab !== tab) setActiveTab(tab);
   };
-
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentCards = grantsList.slice(indexOfFirstCard, indexOfLastCard);
+  const indexOfLastPage = Math.ceil(grantsList.length / cardsPerPage);
+  const paginate = (pageNumber) => {
+    if (pageNumber > 0 && pageNumber <= indexOfLastPage)
+      setCurrentPage(pageNumber);
+  };
   const renderProjectTypeTabs = () => {
     const getTitle = (tab: any) => {
       if (tab.id === 1) {
@@ -61,14 +70,20 @@ const ProjectListGroup = () => {
         <h4>{t('search-results-page.project-initiatives')}</h4>
       </div>
 
-      <Pagination cards={grantsLength} />
+      <Pagination
+        cards={grantsLength}
+        cardsPerPage={cardsPerPage}
+        paginate={paginate}
+        currentPage={currentPage}
+        indexOfLastPage={indexOfLastPage}
+      />
       {/*renderProjectTypeTabs()*/}
       <TabContent activeTab={activeTab}>
         <TabPane tabId={1}>
           <Row>
             <Col sm='12' className='p-3'>
               <ul className='list-group projects-data'>
-                {grantsList.map((project: any) => {
+                {currentCards.map((project: any) => {
                   return (
                     <ProjectListItem
                       id={project.projectId}
