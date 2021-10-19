@@ -72,7 +72,7 @@ const ProjectListGroup = () => {
                       title={project.projectTitle}
                       owner={project.projectOwner}
                       statesInvolved={project.statesInvolved}
-                      year={project.projectYear}
+                      year={project.awardeeYear}
                     />
                   );
                 })}
