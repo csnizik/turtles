@@ -11,3 +11,19 @@
     }
   }
 }
+
+/** Media Queries **/
+@media only screen and (max-width: $large-screen) {
+  .projects-tab {
+    ul.list-group {
+      width: 75%;
+    }
+
+    .usa-card-group {
+      justify-content: center;
+      .usa-card {
+        width: 75%;
+      }
+    }
+  }
+}
