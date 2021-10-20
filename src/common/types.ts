@@ -136,3 +136,16 @@ export interface IConservationPracticeSections {
   sectionName: string;
   anchorLink: string;
 }
+
+// export interface IProjectsStates{
+//   states: string;
+// }
+
+// export interface IProjectsAndInitiatives {
+//   projectId: number | null;
+//   projectTitle: string | null;
+//   projectDescription: string | null;
+//   projectOwner: string | null;
+//   statesInvolved: Array<IProjectsStates> | null;
+//   awardeeYear: string | null;
+// }

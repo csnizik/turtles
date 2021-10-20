@@ -14,10 +14,12 @@ const ProjectListItem = ({
     const getStates = states.length > 1 ? states.join(', ') : states[0];
 
     return (
-      <div className='project-details'>
-        <span>{projectOwner}</span>
-        <span>{getStates}</span>
-        <span>{projectYear}</span>
+      <div className='outer-box'>
+        <div className='project-details'>
+          <span>{projectOwner}</span>
+          <span>{getStates}</span>
+          <span>{projectYear}</span>
+        </div>
       </div>
     );
   };
