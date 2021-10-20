@@ -13,7 +13,7 @@ export const MAX_LEFT_POSITION = 220;
 export const MAX_RIGHT_POSITION = 1220;
 
 // Longitude / Latitude for center of map
-export const CENTER_COORDINATES = [-96, 34];
+export const CENTER_COORDINATES = [-96, 10];
 
 // Id for the ArcGis Map Element
 export const VIEW_DIV = 'viewDiv';

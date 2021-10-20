@@ -3,7 +3,7 @@ export const projectCards = [
     id: 1,
     title: 'Conservation Innovation Grants',
     paragraphText:
-      "Conservation Innovation Grants (CIG) is a competitive program that supports the development of new tools, approaches, practices, and technologies to further natural resource conservation on private lands. Through creative problem solving and innovation, CIG partners work to address our nation's water quality, air quality, soil health and wildlife habitat challenges, all while improving agricultural operations. Public and private grantees develop the tools, technologies, and strategies to support next-generation conservation efforts on working lands and develop market-based solutions to resource challenges. Visit the CIG website for more information.  Use advanced filters to see all projects.",
+      "Conservation Innovation Grants (CIG) is a competitive program that supports the development of new tools, approaches, practices, and technologies to further natural resource conservation on private lands. Through creative problem solving and innovation, CIG partners work to address our nation's water quality, air quality, soil health and wildlife habitat challenges, all while improving agricultural operations. Public and private grantees develop the tools, technologies, and strategies to support next-generation conservation efforts on working lands and develop market-based solutions to resource challenges.",
     imgSrc: 'https://m.media-amazon.com/images/I/71RymRbBm8L._AC_SX466_.jpg',
     imgAlt: 'Map of the United States of America',
   },

@@ -21,4 +21,14 @@
 
 .project-type-section {
   width: 80%;
+  a {
+    text-decoration: none;
+  }
+}
+
+/** Media Queries **/
+@media only screen and (max-width: $macbook-pro-screen) {
+  .project-type-section {
+    width: 75%;
+  }
 }
