@@ -14,6 +14,7 @@ const Pagination = ({
   const handleNextClick = () => {
     paginate(currentPage + 1);
   };
+
   const pageNumbers: number[] = [];
 
   for (let i = 1; i <= Math.ceil(cards / cardsPerPage); i++) {
@@ -28,52 +29,58 @@ const Pagination = ({
       <nav aria-label='Pagination' className='usa-pagination'>
         <ul className='usa-pagination__list'>
           <li className='usa-pagination__item usa-pagination__arrow'>
-            <a
+            <button
+              type='button'
               className='usa-pagination__link usa-pagination__previous-page'
               aria-label='Previous page'
-              href='#'
             >
               <svg className='usa-icon' aria-hidden='true' role='img'>
                 <use href='/assets/img/sprite.svg#navigate_before' />
               </svg>
 
               <span
+                role='button'
+                tabIndex={0}
                 className='usa-pagination__link-text'
                 onClick={() => handlePrevClick()}
+                onKeyUp={() => handlePrevClick()}
               >
                 Previous
               </span>
-            </a>
+            </button>
           </li>
 
           {pageNumbers.map((number) => {
             if (number === currentPage) {
               return (
                 <li className='usa-pagination__item usa-pagination__page-no'>
-                  <a
+                  <button
+                    type='button'
                     className='usa-pagination__button usa-current'
                     aria-label='Page'
                     aria-current='page'
                     onClick={() => paginate(number)}
                   >
                     {number}
-                  </a>
+                  </button>
                 </li>
               );
-            } else if (
+            }
+            if (
               number === currentPage + 1 ||
-              number === currentPage - 1
+              (number < currentPage && number >= indexOfLastPage - 3)
             ) {
               return (
                 <li className='usa-pagination__item usa-pagination__page-no'>
-                  <a
+                  <button
+                    type='button'
                     className='usa-pagination__button'
                     aria-label='Page'
                     aria-current='page'
                     onClick={() => paginate(number)}
                   >
                     {number}
-                  </a>
+                  </button>
                 </li>
               );
             }
@@ -81,7 +88,7 @@ const Pagination = ({
             return null;
           })}
 
-          {currentPage < indexOfLastPage - 4 ? (
+          {currentPage < indexOfLastPage - 3 ? (
             <li
               className='usa-pagination__item usa-pagination__overflow'
               role='presentation'
@@ -91,17 +98,18 @@ const Pagination = ({
           ) : null}
 
           {pageNumbers.map((number) => {
-            if (number >= indexOfLastPage - 2 && currentPage < number - 1) {
+            if (number >= indexOfLastPage - 1 && currentPage < number - 1) {
               return (
                 <li className='usa-pagination__item usa-pagination__page-no'>
-                  <a
+                  <button
+                    type='button'
                     className='usa-pagination__button'
                     aria-label='Page'
                     aria-current='page'
                     onClick={() => paginate(number)}
                   >
                     {number}
-                  </a>
+                  </button>
                 </li>
               );
             }
@@ -109,14 +117,17 @@ const Pagination = ({
           })}
 
           <li className='usa-pagination__item usa-pagination__arrow'>
-            <a
+            <button
+              type='button'
               className='usa-pagination__link usa-pagination__next-page'
               aria-label='Next page'
-              href='#'
             >
               <span
+                role='button'
+                tabIndex={0}
                 className='usa-pagination__link-text'
                 onClick={() => handleNextClick()}
+                onKeyUp={() => handleNextClick()}
               >
                 Next
               </span>
@@ -124,7 +135,7 @@ const Pagination = ({
               <svg className='usa-icon' aria-hidden='true' role='img'>
                 <use href='/assets/img/sprite.svg#navigate_next' />
               </svg>
-            </a>
+            </button>
           </li>
         </ul>
       </nav>

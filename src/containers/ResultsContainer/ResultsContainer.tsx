@@ -3,7 +3,6 @@ import Accordion from '../../components/ResultAccordion';
 import ProjectListGroup from '../../components/ProjectListGroup';
 import Filters from '../../components/Filter';
 import './results.scss';
-import Pagination from '../../components/Pagination';
 
 const ResultsContainer = () => {
   const { t } = useTranslation();
