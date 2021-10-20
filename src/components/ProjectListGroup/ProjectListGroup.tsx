@@ -67,7 +67,9 @@ const ProjectListGroup = () => {
   return (
     <div className='projects-list-group'>
       <div className='top-title'>
-        <h4>{t('search-results-page.project-initiatives')}</h4>
+        <h4 className='title'>
+          {t('search-results-page.project-initiatives')}
+        </h4>
       </div>
 
       <Pagination

@@ -23,10 +23,8 @@ const Pagination = ({
 
   return (
     <>
-      <h3 className='site-preview-heading'>
-        Showing 1 - 10 of {cards} projects
-      </h3>
       <nav aria-label='Pagination' className='usa-pagination'>
+        <h3>Showing 1 - 10 of {cards} projects</h3>
         <ul className='usa-pagination__list'>
           <li className='usa-pagination__item usa-pagination__arrow'>
             <button
@@ -57,7 +55,7 @@ const Pagination = ({
                   <button
                     type='button'
                     className='usa-pagination__button usa-current'
-                    aria-label='Page'
+                    aria-label={`Page ${number}`}
                     aria-current='page'
                     onClick={() => paginate(number)}
                   >
@@ -75,7 +73,7 @@ const Pagination = ({
                   <button
                     type='button'
                     className='usa-pagination__button'
-                    aria-label='Page'
+                    aria-label={`Page ${number}`}
                     aria-current='page'
                     onClick={() => paginate(number)}
                   >
@@ -104,7 +102,7 @@ const Pagination = ({
                   <button
                     type='button'
                     className='usa-pagination__button'
-                    aria-label='Page'
+                    aria-label={`Page ${number}`}
                     aria-current='page'
                     onClick={() => paginate(number)}
                   >
