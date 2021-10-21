@@ -7,7 +7,6 @@ const MapContainer = () => {
     <>
       <MapComponent />
       <div className='webmap' id={VIEW_DIV} />
-      <div id='akViewDiv' className='esri-widget' />
     </>
   );
 };

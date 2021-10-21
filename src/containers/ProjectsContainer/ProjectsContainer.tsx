@@ -31,12 +31,12 @@ const ProjectsContainer = () => {
     );
     if (!selectedProjectType) return null;
     return (
-      <div className='project-type-section margin-top-4 grid-offset-2 padding-left-2 padding-right-2'>
+      <div className='project-type-section margin-top-2'>
         <h3>{selectedProjectType.title}</h3>
         <p className='margin-top-3'>{selectedProjectType.paragraphText}</p>
         <p>
           Visit the <a href='https://usda.gov'>CIG website</a> for more
-          information. Use advanced filters to see all projects.
+          information.
         </p>
       </div>
     );
@@ -66,9 +66,9 @@ const ProjectsContainer = () => {
               );
             })}
           </ListGroup>
-          <MapContainer />
+          {renderProjectSection()}
         </div>
-        {renderProjectSection()}
+        <MapContainer />
       </div>
     );
   }
