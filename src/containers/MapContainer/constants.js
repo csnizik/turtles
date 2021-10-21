@@ -1,5 +1,5 @@
 // Basemap type
-export const grayBaseMap = 'gray-vector';
+export const topoBaseMap = 'topo-vector';
 
 // View constraints on map
 export const MIN_ZOOM = 6;

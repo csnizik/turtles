@@ -5,7 +5,7 @@ import Map from '@arcgis/core/Map';
 import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
 import {
   CENTER_COORDINATES,
-  grayBaseMap,
+  topoBaseMap,
   MIN_ZOOM,
   MAX_ZOOM,
   VIEW_DIV,
@@ -71,7 +71,7 @@ const MapComponent = () => {
   useEffect(() => {
     if (mapRef && mapRef.current) {
       const map = new Map({
-        basemap: grayBaseMap,
+        basemap: topoBaseMap,
       });
 
       const view = new MapView({
