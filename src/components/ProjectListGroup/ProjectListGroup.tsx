@@ -20,8 +20,10 @@ const ProjectListGroup = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(1);
+  const [currentIPage, setCurrentIPage] = useState(1);
 
   const grantsLength = grantsList.length;
+  const initiativesLength = initiativesList.length;
 
   const toggleProjectsTab = (tab: number) => {
     if (activeTab !== tab) setActiveTab(tab);
@@ -30,9 +32,21 @@ const ProjectListGroup = () => {
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   const currentCards = grantsList.slice(indexOfFirstCard, indexOfLastCard);
   const indexOfLastPage = Math.ceil(grantsList.length / cardsPerPage);
+
+  const indexOfLastICard = currentIPage * cardsPerPage;
+  const indexOfFirstICard = indexOfLastICard - cardsPerPage;
+  const currentICards = initiativesList.slice(
+    indexOfFirstICard,
+    indexOfLastICard
+  );
+  const indexOfLastIPage = Math.ceil(initiativesList.length / cardsPerPage);
   const paginate = (pageNumber) => {
     if (pageNumber > 0 && pageNumber <= indexOfLastPage)
       setCurrentPage(pageNumber);
+  };
+  const iPaginate = (pageNumber) => {
+    if (pageNumber > 0 && pageNumber <= indexOfLastPage)
+      setCurrentIPage(pageNumber);
   };
   const renderProjectTypeTabs = () => {
     const getTitle = (tab: any) => {
@@ -101,10 +115,17 @@ const ProjectListGroup = () => {
           </Row>
         </TabPane>
         <TabPane tabId={2}>
+          <Pagination
+            cards={initiativesLength}
+            cardsPerPage={cardsPerPage}
+            paginate={iPaginate}
+            currentPage={currentIPage}
+            indexOfLastPage={indexOfLastIPage}
+          />
           <Row>
             <Col sm='12' className='p-3'>
               <ul className='list-group projects-data'>
-                {initiativesList.map((initiative: any) => {
+                {currentICards.map((initiative: any) => {
                   return (
                     <ProjectListItem
                       id={initiative.initiativeId}
