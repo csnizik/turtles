@@ -12,6 +12,7 @@ import {
   IConservationPractice,
   IRCCategory,
   IRCRequestBody,
+  IAssociatedPracticeList,
 } from '../../common/types';
 
 export const api = createApi({
@@ -67,6 +68,14 @@ export const api = createApi({
       query: (data) =>
         `/relatedResourceConcernCategory?stateCode=${data.stateCode}&practiceId=${data.practiceId}`,
     }),
+    // ! Associated Practices depending on State Code and Practice Id
+    getAssociatedPractice: builder.query<
+      IAssociatedPracticeList[],
+      IRCRequestBody
+    >({
+      query: (data) =>
+        `/practice/associatedPractice?state_code=${data.stateCode}&practice_id=${data.practiceId}`,
+    }),
   }),
 });
 
@@ -82,4 +91,5 @@ export const {
   useGetLandUseOptionsQuery,
   useGetPracticeVideoLinkQuery,
   useGetRelatedResourceConcernCategoryQuery,
+  useGetAssociatedPracticeQuery,
 } = api;
