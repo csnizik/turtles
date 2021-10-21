@@ -10,9 +10,7 @@ describe('Verify ProductListGroup is rendered correctly', () => {
     render(<ProjectListGroup />);
   });
 
-  test('Verify project tabs are rendered', () => {
-    expect(
-      screen.getByTestId('project-and-initiative-tabs')
-    ).toBeInTheDocument();
+  test('Verify project component', () => {
+    expect(screen.getByTestId('projects-list-group')).toBeInTheDocument();
   });
 });

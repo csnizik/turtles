@@ -23,7 +23,11 @@ const Pagination = ({
 
   return (
     <>
-      <nav aria-label='Pagination' className='usa-pagination'>
+      <nav
+        aria-label='Pagination'
+        data-testid='Pagination'
+        className='usa-pagination'
+      >
         <h3>Showing 1 - 10 of {cards} projects</h3>
         <ul className='usa-pagination__list'>
           <li className='usa-pagination__item usa-pagination__arrow'>
@@ -51,7 +55,10 @@ const Pagination = ({
           {pageNumbers.map((number) => {
             if (number === currentPage) {
               return (
-                <li className='usa-pagination__item usa-pagination__page-no'>
+                <li
+                  key={number}
+                  className='usa-pagination__item usa-pagination__page-no'
+                >
                   <button
                     type='button'
                     className='usa-pagination__button usa-current'
@@ -66,10 +73,14 @@ const Pagination = ({
             }
             if (
               number === currentPage + 1 ||
+              number === currentPage - 1 ||
               (number < currentPage && number >= indexOfLastPage - 3)
             ) {
               return (
-                <li className='usa-pagination__item usa-pagination__page-no'>
+                <li
+                  key={number}
+                  className='usa-pagination__item usa-pagination__page-no'
+                >
                   <button
                     type='button'
                     className='usa-pagination__button'
@@ -98,7 +109,10 @@ const Pagination = ({
           {pageNumbers.map((number) => {
             if (number >= indexOfLastPage - 1 && currentPage < number - 1) {
               return (
-                <li className='usa-pagination__item usa-pagination__page-no'>
+                <li
+                  key={number}
+                  className='usa-pagination__item usa-pagination__page-no'
+                >
                   <button
                     type='button'
                     className='usa-pagination__button'

@@ -65,23 +65,22 @@ const ProjectListGroup = () => {
     );
   };
   return (
-    <div className='projects-list-group'>
+    <div className='projects-list-group' data-testid='projects-list-group'>
       <div className='top-title'>
         <h4 className='title'>
           {t('search-results-page.project-initiatives')}
         </h4>
       </div>
-
-      <Pagination
-        cards={grantsLength}
-        cardsPerPage={cardsPerPage}
-        paginate={paginate}
-        currentPage={currentPage}
-        indexOfLastPage={indexOfLastPage}
-      />
-      {/*renderProjectTypeTabs()*/}
+      {renderProjectTypeTabs()}
       <TabContent activeTab={activeTab}>
         <TabPane tabId={1}>
+          <Pagination
+            cards={grantsLength}
+            cardsPerPage={cardsPerPage}
+            paginate={paginate}
+            currentPage={currentPage}
+            indexOfLastPage={indexOfLastPage}
+          />
           <Row>
             <Col sm='12' className='p-3'>
               <ul className='list-group projects-data'>
