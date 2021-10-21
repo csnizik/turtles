@@ -32,6 +32,7 @@ const Pagination = ({
         <ul className='usa-pagination__list'>
           <li className='usa-pagination__item usa-pagination__arrow'>
             <button
+              data-testid='prev-button'
               type='button'
               className='usa-pagination__link usa-pagination__previous-page'
               aria-label='Previous page'
@@ -60,6 +61,7 @@ const Pagination = ({
                   className='usa-pagination__item usa-pagination__page-no'
                 >
                   <button
+                    data-testid='first-pagination'
                     type='button'
                     className='usa-pagination__button usa-current'
                     aria-label={`Page ${number}`}
@@ -130,6 +132,7 @@ const Pagination = ({
 
           <li className='usa-pagination__item usa-pagination__arrow'>
             <button
+              data-testid='next-button'
               type='button'
               className='usa-pagination__link usa-pagination__next-page'
               aria-label='Next page'

@@ -24,7 +24,16 @@ describe('Pagination is rendered correctly', () => {
     );
   });
 
-  test('Should display the Pagination', () => {
+  test('Should display the Pagination Component', () => {
     expect(screen.getByTestId('Pagination')).toBeDefined();
+  });
+  test('Should display the Previous Pagination Button', () => {
+    expect(screen.getByTestId('prev-button')).toBeDefined();
+  });
+  test('Should display the First Pagination Number', () => {
+    expect(screen.getByTestId('first-pagination')).toBeDefined();
+  });
+  test('Should display the Next Pagination Button', () => {
+    expect(screen.getByTestId('next-button')).toBeDefined();
   });
 });
