@@ -7,6 +7,19 @@ import './project-container.scss';
 
 import { projectCards, projectListGroups } from './constants';
 
+interface IProjectTypeCard {
+  id: number;
+  title: string;
+  paragraphText: string;
+  imgSrc: string;
+  imgAlt: string;
+}
+
+interface IProjectListGroup {
+  id: number;
+  title: string;
+}
+
 const ProjectsContainer = () => {
   const { t } = useTranslation();
   const [toggleProjectView, setToggleProjectView] = useState(false);
@@ -35,8 +48,16 @@ const ProjectsContainer = () => {
         <h3>{selectedProjectType.title}</h3>
         <p className='margin-top-3'>{selectedProjectType.paragraphText}</p>
         <p>
-          Visit the <a href='https://usda.gov'>CIG website</a> for more
-          information.
+          Visit the{' '}
+          <a
+            aria-label='Conservation Innovation Grants link opens a new tab'
+            href='https://usda.gov'
+            target='_blank'
+            rel='noreferrer'
+          >
+            CIG website
+          </a>{' '}
+          for more information.
         </p>
       </div>
     );
@@ -47,7 +68,7 @@ const ProjectsContainer = () => {
       <div className='projects-tab'>
         <div className='projects-grid'>
           <ListGroup className='margin-2'>
-            {projectListGroups.map((listItem: any) => {
+            {projectListGroups.map((listItem: IProjectListGroup) => {
               const listGroupItemClassNames = classNames(
                 'justify-content-between',
                 {
@@ -77,7 +98,7 @@ const ProjectsContainer = () => {
     <div className='projects-tab' data-testid='projects-container'>
       <p className='lead margin-3'>{t('projects-page.page-header')}</p>
       <ul className='usa-card-group margin-2'>
-        {projectCards.map((project: any) => {
+        {projectCards.map((project: IProjectTypeCard) => {
           return (
             <li
               className='tablet:grid-col-4 usa-card usa-card--header-first'
