@@ -76,36 +76,34 @@ const ProjectsContainer = () => {
   return (
     <div className='projects-tab' data-testid='projects-container'>
       <p className='lead margin-3'>{t('projects-page.page-header')}</p>
-      <div className='project-cards margin-2'>
-        <ul className='usa-card-group'>
-          {projectCards.map((project: any) => {
-            return (
-              <li
-                className='tablet:grid-col-4 usa-card usa-card--header-first'
-                key={project.id}
-                role='presentation'
-                onClick={() => handleSelectProjectCard(project.id)}
-              >
-                <div className='usa-card__container'>
-                  <header className='usa-card__header'>
-                    <h2 className='usa-card__heading'>{project.title}</h2>
-                  </header>
-                  <div className='usa-card__body'>
-                    <p className='lead'>{project.paragraphText}</p>
-                  </div>
-                  <div className='usa-card__footer margin-top-2'>
-                    <div className='usa-card__media'>
-                      <div className='usa-card__img'>
-                        <img src={project.imgSrc} alt={project.imgAlt} />
-                      </div>
+      <ul className='usa-card-group margin-2'>
+        {projectCards.map((project: any) => {
+          return (
+            <li
+              className='tablet:grid-col-4 usa-card usa-card--header-first'
+              key={project.id}
+              role='presentation'
+              onClick={() => handleSelectProjectCard(project.id)}
+            >
+              <div className='usa-card__container'>
+                <header className='usa-card__header'>
+                  <h2 className='usa-card__heading'>{project.title}</h2>
+                </header>
+                <div className='usa-card__body'>
+                  <p className='lead'>{project.paragraphText}</p>
+                </div>
+                <div className='usa-card__footer margin-top-2'>
+                  <div className='usa-card__media'>
+                    <div className='usa-card__img'>
+                      <img src={project.imgSrc} alt={project.imgAlt} />
                     </div>
                   </div>
                 </div>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };

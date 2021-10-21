@@ -53,12 +53,12 @@ const ReportPreviewCreator = ({
   const state = useAppSelector((s) => s);
   const practiceId: any = state?.practiceSlice?.selectedSpecficPractice;
   let stateCode = state?.practiceSlice?.searchInput?.state_county_code;
-  if(!stateCode) stateCode = state?.stateSlice?.stateCode;
-  if(!stateCode) stateCode = '00';
+  if (!stateCode) stateCode = state?.stateSlice?.stateCode;
+  if (!stateCode) stateCode = '00';
 
   let stateName = state?.practiceSlice?.searchInfo.state;
-  if(!stateName) stateName = state?.stateSlice?.stateNameDisplay;
-  if(!stateName) stateName = 'U.S.';
+  if (!stateName) stateName = state?.stateSlice?.stateNameDisplay;
+  if (!stateName) stateName = 'U.S.';
 
   const initialFilter = {
     stateCode,
@@ -74,9 +74,9 @@ const ReportPreviewCreator = ({
 
     childArr.children.forEach((child) => {
       const categoryId: number = +child.textContent.charAt(0);
-      child.className = selectedIds.has(categoryId)// eslint-disable-line no-param-reassign
+      child.className = selectedIds.has(categoryId) // eslint-disable-line no-param-reassign
         ? 'accordion-container'
-        : 'hidden-content'; 
+        : 'hidden-content';
     });
   };
 
