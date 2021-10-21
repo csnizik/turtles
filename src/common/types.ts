@@ -137,7 +137,13 @@ export interface IConservationPracticeSections {
   anchorLink: string;
 }
 
-<<<<<<< HEAD
+export interface IAssociatedPracticeList {
+  practiceId: number;
+  practiceCode: string;
+  practiceName: string;
+  practiceDescription: string;
+}
+
 // export interface IProjectsStates{
 //   states: string;
 // }
@@ -150,11 +156,3 @@ export interface IConservationPracticeSections {
 //   statesInvolved: Array<IProjectsStates> | null;
 //   awardeeYear: string | null;
 // }
-=======
-export interface IAssociatedPracticeList {
-  practiceId: number;
-  practiceCode: string;
-  practiceName: string;
-  practiceDescription: string;
-}
->>>>>>> devRedo
