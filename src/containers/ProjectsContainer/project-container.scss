@@ -23,18 +23,20 @@
   .project-tab-header {
     p,
     li {
-      font-weight: $semi-heavy-weight;
+      font-weight: $medium-light-weight;
     }
   }
 
   .usa-card-group {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 1rem;
     .usa-card {
       width: 95%;
       p {
-        font-weight: $semi-heavy-weight;
+        font-weight: $medium-light-weight;
+      }
+      &:hover {
+        cursor: pointer;
       }
     }
     .usa-card__header {
