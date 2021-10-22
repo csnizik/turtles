@@ -31,7 +31,6 @@ const SpecificationsAndTools = ({
   const clickHandler = (value) => {
     window.localStorage.setItem('Practice', value);
   };
-
   const content = useGetAssociatedPracticeQuery(userSelectedFilter);
 
   const getHeaderText = () => {
@@ -68,45 +67,28 @@ const SpecificationsAndTools = ({
         <div className='associated-prac'>
           <h4>{t('associated-practices.title')}</h4>
           <p>{t('associated-practices.description')}</p>
-          <div className='row'>
-            {content.data?.map((practice: any) => {
-              return (
-                <>
-                  <div className='grid-col-6'>
-                    <ul>
+          <div>
+            <ul className='practices-row'>
+              {content.data?.map((practice: IAssociatedPracticeList) => {
+                return (
+                  <>
+                    <div className='grid-col-6'>
                       <li key={practice.practiceId}>
                         <a
                           href='/ConservationPractices'
                           onClick={() => clickHandler(practice.practiceId)}
                           target='_blank'
+                          aria-label={`${practice.practiceName} link opens a new tab`}
                         >
                           {practice.practiceName}
                         </a>
                         &ensp;({practice.practiceCode})
                       </li>
-                    </ul>
-                  </div>
-                  {practice.data?.map((item: IAssociatedPracticeList) => {
-                    return (
-                      <div className='grid-col-6'>
-                        <ul>
-                          <li key={item.practiceId}>
-                            <a
-                              href='/ConservationPractices'
-                              onClick={() => clickHandler(item.practiceId)}
-                              target='_blank'
-                            >
-                              {item.practiceName}
-                            </a>
-                            &ensp;({item.practiceCode})
-                          </li>
-                        </ul>
-                      </div>
-                    );
-                  })}
-                </>
-              );
-            })}
+                    </div>
+                  </>
+                );
+              })}
+            </ul>
           </div>
         </div>
       </>
@@ -116,11 +98,15 @@ const SpecificationsAndTools = ({
   if (!isSuccess) return null;
 
   return (
-    <div className='st-parent' id='PracticeSpecifications'>
+    <section
+      className='st-parent'
+      data-testid='practice-spec'
+      id='PracticeSpecifications'
+    >
       <h2>{getHeaderText()}</h2>
       <h4>{intro}</h4>
       {renderNationalSpecs()}
-    </div>
+    </section>
   );
 };
 
