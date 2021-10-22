@@ -28,6 +28,15 @@ export interface ICountyList {
   countyDisplay: string;
 }
 
+export interface ILandUse {
+  'Other Farm and Rural Land': boolean;
+  Cropland: boolean;
+  'Developed land/Urban Ag': boolean;
+  Forestland: boolean;
+  Pasture: boolean;
+  Rangeland: boolean;
+}
+
 export type Practice = {
   practiceId: number;
   practiceName: string;
@@ -126,4 +135,11 @@ export interface IConservationPracticeSections {
   sectionId: number;
   sectionName: string;
   anchorLink: string;
+}
+
+export interface IAssociatedPracticeList {
+  practiceId: number;
+  practiceCode: string;
+  practiceName: string;
+  practiceDescription: string;
 }

@@ -12,6 +12,7 @@ import {
   IConservationPractice,
   IRCCategory,
   IRCRequestBody,
+  IAssociatedPracticeList,
 } from '../../common/types';
 
 export const api = createApi({
@@ -44,6 +45,11 @@ export const api = createApi({
     getPractice: builder.query<IPractice[], number>({
       query: (id) => `/practice/catagories/practices?id=${id}`,
     }),
+    //! Resource Concern depending on SWAPA category
+    getResourceConcern: builder.query<IResourceConcernList[], string>({
+      query: (swapaCategory) =>
+        `/resourceConcern/concern/category/${swapaCategory}`,
+    }),
     //!Post request for Search
     postSearchData: builder.query<ISearchData[], ISearchData>({
       query: (data) => ({
@@ -62,11 +68,20 @@ export const api = createApi({
       query: (data) =>
         `/relatedResourceConcernCategory?stateCode=${data.stateCode}&practiceId=${data.practiceId}`,
     }),
+    // ! Associated Practices depending on State Code and Practice Id
+    getAssociatedPractice: builder.query<
+      IAssociatedPracticeList[],
+      IRCRequestBody
+    >({
+      query: (data) =>
+        `/practice/associatedPractice?state_code=${data.stateCode}&practice_id=${data.practiceId}`,
+    }),
   }),
 });
 
 export const {
   useGetResourcesQuery,
+  useGetResourceConcernQuery,
   useGetPracticeCategoryQuery,
   useGetPracticeQuery,
   usePostSearchDataQuery,
@@ -76,4 +91,5 @@ export const {
   useGetLandUseOptionsQuery,
   useGetPracticeVideoLinkQuery,
   useGetRelatedResourceConcernCategoryQuery,
+  useGetAssociatedPracticeQuery,
 } = api;

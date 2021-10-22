@@ -13,6 +13,10 @@ import {
   enablePdfGenState,
 } from '../../Redux/Slice/pdfGenSlice';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
+import {
+  setPracticeCategory,
+  setSpecificPractice,
+} from '../../Redux/Slice/practiceSlice';
 
 const defaultPracticeViews = {
   allPractices: false,
@@ -27,14 +31,11 @@ const ConservationPracticeContainer = ({
 }: any) => {
   const [practiceViewType, setPracticeViewType] =
     useState(defaultPracticeViews);
+  const [openModal, setOpenModal] = useState(false);
+  const [cleanModal, setCleanModal] = useState(false);
 
   const dispatch = useAppDispatch();
-
   const location: any = useLocation();
-
-  const [openModal, setOpenModal] = useState(false);
-
-  const [cleanModal, setCleanModal] = useState(false);
 
   const sharedState = location?.state?.detail;
 
@@ -65,8 +66,23 @@ const ConservationPracticeContainer = ({
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
       setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
     } else if (currentPracticeCategoryId >= 0 && currentSpecificPractice < 0) {
+      //Temporary Fix for associated practies
+      window.localStorage.setItem(
+        'PracticeCategoryId',
+        currentPracticeCategoryId
+      );
       setPracticeViewType({ ...practiceViewType, practiceCategories: true });
     } else if (currentSpecificPractice >= 0) {
+      setPracticeViewType({ ...practiceViewType, individualPractice: true });
+    }
+    //Temporary Fix for associated practies
+    if (window.localStorage.getItem('PracticeId')) {
+      const practiceNum = Number(window.localStorage.getItem('PracticeId'));
+      const practiceCategoryNum = Number(
+        window.localStorage.getItem('PracticeCategoryId')
+      );
+      dispatch(setSpecificPractice(practiceNum));
+      dispatch(setPracticeCategory(practiceCategoryNum));
       setPracticeViewType({ ...practiceViewType, individualPractice: true });
     }
   }, [currentPracticeCategoryId, currentSpecificPractice]);
@@ -115,7 +131,6 @@ const ConservationPracticeContainer = ({
 
       <div className='overlay'>
         <ReportPreviewCreator
-          selectedStateCode={selectedStateCode}
           openModal={openModal}
           handleCreateReport={handleCreateReport}
           cleanModal={cleanModal}

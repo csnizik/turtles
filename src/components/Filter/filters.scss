@@ -12,13 +12,14 @@
   justify-content: space-between;
   .filter-box {
     margin-top: 1rem;
-    margin-bottom: 1rem;
-    margin-left: 2rem;
+    margin-bottom: 1.438rem;
+    margin-left: 1.25rem;
     height: 4rem;
     border-left: 1px solid $light-grey-5;
     .p-label {
-      margin-left: 2rem;
+      margin-left: 1.25rem;
       margin-right: 2rem;
+      margin-bottom: 0.6rem;
     }
     .filter-pill {
       p.filter-label {
@@ -27,7 +28,7 @@
         text-align: center;
         width: auto;
       }
-      margin-left: 2rem;
+      margin-left: 1.25rem;
       margin-top: 0.5rem;
       background-color: $usda-light-blue;
       border: 1px solid $usda-light-blue;
@@ -51,11 +52,9 @@
       color: $white;
     }
   }
+
   p.filter-style {
-    margin-left: 2rem;
-  }
-  p.filter-style {
-    margin: 1rem 0rem 1rem 2rem;
+    margin: 0.938rem 0rem 1.838rem 1.25rem;
     font-weight: bold;
   }
 }

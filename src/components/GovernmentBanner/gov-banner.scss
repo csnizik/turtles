@@ -9,11 +9,6 @@ header {
       vertical-align: baseline;
     }
   }
-
-  h1 {
-    color: $nrcs-dark;
-    font-size: 1.6em;
-  }
 }
 
 .government-banner {
@@ -39,10 +34,11 @@ header {
   background-color: $usda-blue;
   &:first-child {
     border-right: 1px solid $sfi-white;
-    color: red;
   }
   .usa-link {
     color: $sfi-white;
+    text-decoration: none;
+    margin-top: 0.2em;
   }
 
   .nrcsLogo {
@@ -66,16 +62,13 @@ header {
 /** USA flag logo **/
 .header-container {
   width: 100%;
-  margin: 0rem 2rem 0rem 0rem;
+
+  margin-right: 2rem;
   background-color: $sfi-dark-white;
-  height: auto;
 
   img {
     height: 1rem;
     width: 2rem;
     margin-right: 1em;
-  }
-  a {
-    color: $link-color;
   }
 }

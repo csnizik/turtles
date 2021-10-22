@@ -1,0 +1,72 @@
+@import '../../stylesheets/variables';
+
+.projects-grid {
+  display: grid;
+
+  grid-gap: 1rem;
+
+  grid-template-columns: 20rem 1fr;
+  ul.list-group {
+    .list-group-item {
+      &:hover {
+        cursor: pointer;
+      }
+      &.selected {
+        color: $dark-blue;
+        border-left: 3px solid $usda-blue;
+      }
+    }
+  }
+}
+
+.projects-tab {
+  .project-tab-header {
+    p,
+    li {
+      font-weight: $medium-light-weight;
+    }
+  }
+
+  .usa-card-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    .usa-card {
+      width: 95%;
+      p {
+        font-weight: $medium-light-weight;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .usa-card__header {
+      color: $usda-blue;
+    }
+
+    .usa-card__img {
+      background-color: $white;
+    }
+  }
+
+  .usa-card:nth-of-type(2) {
+    .usa-card__footer {
+      img {
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}
+
+.project-type-section {
+  width: 85%;
+  a {
+    text-decoration: none;
+  }
+}
+
+/** Media Queries **/
+@media only screen and (max-width: $macbook-pro-screen) {
+  .project-type-section {
+    width: 75%;
+  }
+}

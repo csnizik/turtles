@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Modal, ModalBody } from 'reactstrap';
-import html2pdf from "html2pdf.js";
+import html2pdf from 'html2pdf.js';
 import './report-preview-creator.scss';
 import {
   useGetRelatedResourceConcernCategoryQuery,
@@ -9,6 +9,7 @@ import {
 import ReportBuilder from '../ReportBuilder';
 import ReportPreview from '../ReportPreview';
 import { useAppSelector } from '../../Redux/hooks/hooks';
+import closebtn from './image/close-button.png';
 
 interface DomChild {
   className: string;
@@ -19,9 +20,14 @@ interface DomParent {
   children: Array<DomChild>;
 }
 
-const subTitle: string = `Select the information you'd like to include in your report:`
+const subTitle: string = `Select the information you'd like to include in your report:`;
 
-const ReportPreviewCreator = ({ selectedStateCode, openModal,  handleCreateReport, cleanModal }: any) => {
+const ReportPreviewCreator = ({
+  openModal,
+  handleCreateReport,
+  cleanModal,
+}: any) => {
+  const rcRef = useRef();
   const [rcTreatedInputs, setRcTreatedInputs] = useState(new Set());
   const [childArr, setChildArr] = useState<DomParent>();
   const [choiceInputs, setChoiceInputs] = useState({
@@ -34,25 +40,29 @@ const ReportPreviewCreator = ({ selectedStateCode, openModal,  handleCreateRepor
 
   useEffect(() => {
     setRcTreatedInputs(new Set());
+    setChildArr(rcRef.current);
     setChoiceInputs({
       input1: false,
       input2: false,
       input3: false,
       input4: false,
       input5: false,
-    })
-  }, [cleanModal])
+    });
+  }, [cleanModal]);
 
-  const rcRef = useRef();
-  const stateCode = {
-    stateCode: selectedStateCode as string,
-  };
   const state = useAppSelector((s) => s);
   const practiceId: any = state?.practiceSlice?.selectedSpecficPractice;
+  let stateCode = state?.practiceSlice?.searchInput?.state_county_code;
+  if (!stateCode) stateCode = state?.stateSlice?.stateCode;
+  if (!stateCode) stateCode = '00';
+
+  let stateName = state?.practiceSlice?.searchInfo.state;
+  if (!stateName) stateName = state?.stateSlice?.stateNameDisplay;
+  if (!stateName) stateName = 'U.S.';
 
   const initialFilter = {
-    stateCode: stateCode.stateCode,
-    practiceId: 10,
+    stateCode,
+    practiceId,
   };
 
   const { data } = useGetRelatedResourceConcernCategoryQuery(initialFilter);
@@ -63,24 +73,26 @@ const ReportPreviewCreator = ({ selectedStateCode, openModal,  handleCreateRepor
     if (!childArr) return;
 
     childArr.children.forEach((child) => {
-      const categoryId: number = +(child.textContent.charAt(0));
-      child.className = selectedIds.has(categoryId) ? 'accordion-container' : 'hidden-content';// eslint-disable-line no-param-reassign
-    })
-  }
+      const categoryId: number = +child.textContent.charAt(0);
+      child.className = selectedIds.has(categoryId) // eslint-disable-line no-param-reassign
+        ? 'accordion-container'
+        : 'hidden-content';
+    });
+  };
 
   const handleGeneratePdf = () => {
-    const element = document.getElementById('pdf-report-content');
+    const element = document.getElementById('preview-content');
     const opt = {
       margin: 0.2,
       filename: `Practice Report.pdf`,
-      image: { type: "png", quality: 0.98 },
+      image: { type: 'png', quality: 0.98 },
       html2canvas: { scale: 1 },
-      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
       pagebreak: { mode: ['avoid-all'] },
     };
 
     html2pdf().set(opt).from(element).save();
-  }
+  };
 
   return (
     <Modal isOpen={openModal}>
@@ -88,15 +100,15 @@ const ReportPreviewCreator = ({ selectedStateCode, openModal,  handleCreateRepor
         <div className='creator-container'>
           <div className='report-header'>
             <div className='create-report-title'>Create a Custom Report</div>
-            <button className='close-btn' onClick={() => handleCreateReport()} type='button'>
-              <img
-                //eslint-disable-next-line global-require
-                src={require('./image/close-button.png').default} alt='close button' />
+            <button
+              className='close-btn'
+              onClick={() => handleCreateReport()}
+              type='button'
+            >
+              <img src={closebtn} alt='close button' />
             </button>
           </div>
-          <div className='create-report-subtitle'>
-            {subTitle}
-          </div>
+          <div className='create-report-subtitle'>{subTitle}</div>
           <div className='horz-line'>
             <hr />
           </div>
@@ -113,7 +125,8 @@ const ReportPreviewCreator = ({ selectedStateCode, openModal,  handleCreateRepor
             />
             <div className='preview-container'>
               <ReportPreview
-                selectedStateCode={stateCode.stateCode}
+                selectedStateName={stateName}
+                selectedStateCode={stateCode}
                 choiceInputs={choiceInputs}
                 rcTreatedInputs={rcTreatedInputs}
                 reportPreviewData={reportPreviewData}

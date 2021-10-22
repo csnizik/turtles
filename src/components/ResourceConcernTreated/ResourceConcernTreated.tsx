@@ -17,12 +17,11 @@ const ResourceConcernTreated = ({
   };
 
   const [tab, setTab] = useState(null);
-  console.log(initialFilter)
   const { data, error, isLoading, isSuccess, isError } =
     useGetRelatedResourceConcernCategoryQuery(initialFilter);
 
   const fromPdfReport = useAppSelector(
-    (state) => state.pdfGenSlice.enablePdfGen
+    (state) => state?.pdfGenSlice?.enablePdfGen
   );
 
   const toggleExpandCategory = (categoryId: any) => {
@@ -53,14 +52,12 @@ const ResourceConcernTreated = ({
               className='accordion-container'
               key={categoryId}
               data-testid='rc-accordion'
+              onClick={() => toggleExpandCategory(categoryId)}
+              role='presentation'
             >
               <p className='hidden-content'>{categoryId}</p>
               <li key={categoryId}>
-                <i
-                  className={chevronClassName}
-                  onClick={() => toggleExpandCategory(categoryId)}
-                  role='presentation'
-                />
+                <i className={chevronClassName} />
                 <div className='accordion-data'>
                   <h4>
                     {rcCategory.rcCategoryName}

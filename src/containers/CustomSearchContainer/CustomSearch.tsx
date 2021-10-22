@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useBreakpoint from 'use-breakpoint';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
@@ -7,20 +7,25 @@ import {
   enableResourceDropdown,
   enablePracticeDropdown,
 } from '../../Redux/Slice/disableSlice';
-import { useGetPracticeCategoryQuery } from '../../Redux/services/api';
 import { BREAKPOINTS } from '../../common/constants';
 import {
   intialPracticeState,
   initialResourceState,
+  initialLandUse,
 } from '../../common/typedconstants.common';
 import CustomButton from '../../components/CustomButton';
 import SearchByLocation from '../../components/SearchByLocation';
-import SearchByResourceConcern from '../../components/SearchByResourceConcern';
 import LandUseSection from '../../components/LandUseSection';
 import SearchByConservationPractice from '../../components/SearchByConservationPractice';
 import { ISearchData, ISearchInfo } from '../../common/types';
-import { useAppDispatch } from '../../Redux/hooks/hooks';
-import { setSearch, setSearchInfo } from '../../Redux/Slice/practiceSlice';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
+import {
+  setLandUse,
+  setSearch,
+  setSearchInfo,
+} from '../../Redux/Slice/practiceSlice';
+import SearchByResourceConcern from '../../components/SearchByResourceConcern/SearchByResourceConcern';
+import './custom-search.scss';
 
 const defaultSearchInput: ISearchData = {
   resource_concern_category_id: null,
@@ -55,7 +60,12 @@ const CustomSearch = () => {
   const [resourceConcernsSubgroups, setResourceConcernsSubgroups] =
     useState<any>(initialResourceState);
   const [secondState, setSecondState] = useState<any>(intialPracticeState);
-  const practiceCategory = useGetPracticeCategoryQuery();
+  const [checkedState, setCheckedState] = useState<any>(initialLandUse);
+
+  const landUseState = useAppSelector(
+    (state) => state?.practiceSlice?.landUseSet
+  );
+
   const clearBtnClassNames = classNames(
     'btn',
     'btn-link',
@@ -66,10 +76,32 @@ const CustomSearch = () => {
     }
   );
 
+  useEffect(() => {
+    setCheckedState(landUseState);
+  }, []);
+
   const handleClearPracticeAndConcerns = () => {
-    if (practiceCategory || selectedResourceCategory) {
+    if (selectedPractice?.id || selectedResourceCategory) {
       setSelectedPractice({ id: -1 });
       setSelectedResourceCategory({ id: -1 });
+      setSearchInput((prevState) => ({
+        ...prevState,
+        resource_concern_category_id: null,
+        resource_concern_id: null,
+        practice_category_id: null,
+        practice_id: null,
+      }));
+      setSearchedInfo((prevState) => ({
+        ...prevState,
+        resource_concern_category: null,
+        resource_concern: null,
+        practice_category: null,
+        practice: null,
+      }));
+      window.localStorage.removeItem('PracticeCategoryId');
+      window.localStorage.removeItem('PracticeId');
+      window.localStorage.removeItem('ResourceConcernCategoryId');
+      window.localStorage.removeItem('ResourceConcernId');
     }
     dispatch(enableResourceDropdown());
     dispatch(enablePracticeDropdown());
@@ -77,9 +109,22 @@ const CustomSearch = () => {
     setSecondState({ ...intialPracticeState, disabled: true });
   };
 
+  const handleEvent = () => {
+    handleClearPracticeAndConcerns();
+  };
+
+  useEffect(() => {
+    window.addEventListener('navigateHome', handleEvent);
+
+    return () => {
+      window.removeEventListener('navigateHome', handleEvent);
+    };
+  });
+
   const handleSearch = () => {
     dispatch(setSearch(searchInput));
     dispatch(setSearchInfo(searchedInfo));
+    dispatch(setLandUse(checkedState));
   };
 
   const searchButtonStyles = () => {
@@ -106,6 +151,8 @@ const CustomSearch = () => {
       <LandUseSection
         setSearchInput={setSearchInput}
         setSearchInfo={setSearchedInfo}
+        checkedState={checkedState}
+        setCheckedState={setCheckedState}
       />
       <div className='practice-labels'>
         <p className='practice-description'>
@@ -146,6 +193,8 @@ const CustomSearch = () => {
         }}
       >
         <CustomButton
+          data-testid='custom-search-button'
+          role='button'
           ariaLabel='search'
           additionalClassName={searchButtonStyles()}
           onClick={handleSearch}

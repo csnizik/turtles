@@ -29,10 +29,11 @@
   "search-results-page": {
     "header": "Quick Search Results",
     "conservation-practices": "Conservation Practices",
-    "project-initiatives": "Projects & Initiatives"
+    "project-initiatives": "Projects & Initiatives",
+    "no-practices-found": "No Conservation Practices Found"
   },
   "location-search": {
-    "explore-by-location": "Explore NRCS Activities by Location",
+    "explore-by-location": "Explore NRCS Practices and Activities by Location",
     "explore-location": "Explore Location",
     "national": "National (default)",
     "introductory-paragraph": "Find conservation practices and NRCS sponsored projects & initiatives in your location.",
@@ -55,5 +56,18 @@
     "heading": "Resource Concerns Treated",
     "first-label-name": "Select a resource category",
     "second-label-name": "Select a resource concern (optional)"
+  },
+  "projects-page": {
+    "page-header-01": "NRCS's natural resources conservation programs help people reduce soil erosion, enhance water supplies, improve water quality, increase wildlife habitat, and reduce damages caused by floods and other natural disasters.",
+    "page-header-02": "In addition to the Farm Bill Programs, which offer Conservation Technical Assistance and Financial Assistance to producers interested in engaging in voluntary conservation on their land, NRCS manages a number of Projects and Initiatives that operate at the landscape scale and above. These Projects and Initiatives serve a variety of purposes, including:"
+  },
+  "overview": {
+    "introductory-paragraph": "NRCS planners assess the existing condition of natural resources on a site to determine whether additional treatment is needed to address a potential resource concern. The natural resource concerns most frequently identified, and the conservation practices applied, vary across states and regions based on predominant land uses, topography, soil conditions, ...",
+    "description": "Description of this section...",
+    "outcomes": "NRCS uses a variety of methodologies to evaluate the impacts of conservation practices and to assess the potential of USDA conservation programs to meet the Nation’s conservation goals, including modeling, monitoring and data collection, and geospatial analysis. Impact estimation tools developed through these efforts support conservation program delivery and resource allocation and enable NRCS to report out on the estimated impacts of its conservation investment. "
+  },
+  "associated-practices": {
+    "title": "Associated Practices",
+    "description": "These are conservation practices that are commonly applied in association with this practice."
   }
 }

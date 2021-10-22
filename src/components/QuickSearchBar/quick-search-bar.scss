@@ -1,22 +1,38 @@
 @import '../../stylesheets/variables';
 
-.home-page {
-  main {
-    .grid-col-4 {
-      .usa-button {
-        color: $usda-blue;
-        background: $white;
-        border: 0.2rem solid $usda-blue;
-        border-radius: 0.25rem;
+.quick-search-bar {
+  .grid-col-6 {
+    padding: 1rem 0rem;
+    p:first-of-type {
+      font-size: 22px;
+    }
+  }
+  .usa-button {
+    width: 95%;
+    color: $usda-blue;
+    background: $white;
+    border: 0.2rem solid $usda-blue;
+    border-radius: 0.25rem;
+  }
+  .grid-row:first-of-type {
+    background: $light-grey-205;
+    .grid-col-6 {
+      p:first-of-type {
+        font-size: 22px;
+        font-weight: 900;
       }
     }
-    .grid-row:first-of-type {
-      background: $light-grey-205;
-      .grid-col-6 {
-        p:first-of-type {
-          font-size: 22px;
-          font-weight: 900;
-        }
+  }
+}
+
+@media only screen and (max-width: $large-screen) {
+  .home-page {
+    main {
+      .quick-search-bar {
+        align-items: baseline;
+      }
+      .location-search-container {
+        margin-top: 6rem;
       }
     }
   }

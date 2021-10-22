@@ -4,7 +4,7 @@ import CustomSearchResults from '../ResultsContainer';
 import './custom-search.scss';
 
 const CustomSearchContainer = () => {
-  const [searchToggle, setSearchToggle] = useState(false);
+  const [searchToggle] = useState(false);
   if (searchToggle) {
     return <CustomSearchResults />;
   }

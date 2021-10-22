@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
-import { getRequest } from '../../common/util/AxiosUtil';
 import { initialResourceState } from '../../common/typedconstants.common';
-
 import {
   disableResourceDropdown,
   enableResourceDropdown,
 } from '../../Redux/Slice/disableSlice';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
+import {
+  useGetResourcesQuery,
+  useGetResourceConcernQuery,
+} from '../../Redux/services/api'; //Api call from redux
 import './search-by-resource-concern.scss';
 
 const SearchByResourceConcern = ({
@@ -20,12 +22,13 @@ const SearchByResourceConcern = ({
   setSelectedResourceCategory,
   selectedPractice,
 }: any) => {
+  const resourceCategory = useGetResourcesQuery(); //!Resource Category api
+  const resourceConcern = useGetResourceConcernQuery(selectedResourceCategory); //! Resource Concern
+
   const dispatchRequest = useAppDispatch();
   const status = useAppSelector((state) => state.disableSlice.disablePractice);
   const { t } = useTranslation();
-  const [resourceConcerns, setResourceConcerns] =
-    useState<any>(initialResourceState);
-  const [selectedResourceConcern, setSelectedResourceConcern] = useState({
+  const [selectedResourceConcern, setSelectedResourceConcern] = useState<any>({
     id: -1,
   });
 
@@ -33,39 +36,12 @@ const SearchByResourceConcern = ({
     'practice-selected': selectedPractice >= 0,
   });
 
-  const getResourceConcerns = async () => {
-    try {
-      const response: any = await getRequest('/resourceConcern/concern');
-      setResourceConcerns({
-        ...resourceConcerns,
-        resources: response.data.length > 0 ? response.data : [],
-        disabled: false,
-      });
-    } catch (error) {
-      // throw new Error('Resource Concern Request Error');
-    }
-  };
-
-  const getResourceConcernsSubgroups = async (swapaCategory) => {
-    try {
-      const response: any = await getRequest(
-        `/resourceConcern/concern/category/${swapaCategory}`
-      );
-      setResourceConcernsSubgroups({
-        ...resourceConcernsSubgroups,
-        resources: response.data.length > 0 ? response.data : [],
-        disabled: false,
-      });
-    } catch (error) {
-      throw new Error('Resource Concern Subgroup Request Error');
-    }
-  };
-
   useEffect(() => {
-    getResourceConcerns();
-  }, []);
+    const findResourceCategoryName = resourceCategory?.data?.find((concern) => {
+      const name = +selectedResourceCategory === concern.resourceConcernId;
+      return name;
+    })?.resourceConcernName;
 
-  useEffect(() => {
     if (selectedResourceCategory === -1) {
       setSearchInput((prevState) => ({
         ...prevState,
@@ -76,11 +52,36 @@ const SearchByResourceConcern = ({
         ...prevState,
         resource_concern_category_id: +selectedResourceCategory,
       }));
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        resource_concern_category: findResourceCategoryName,
+      }));
     }
   }, [selectedResourceCategory]);
 
   useEffect(() => {
-    if (selectedResourceConcern.id === -1) {
+    if (window.localStorage.getItem('ResourceConcernCategoryId')) {
+      setSelectedResourceCategory({
+        id: window.localStorage.getItem('ResourceConcernCategoryId'),
+      });
+      setResourceConcernsSubgroups({
+        resources: resourceConcern.data,
+        disabled: false,
+      });
+    }
+    if (window.localStorage.getItem('ResourceConcernId')) {
+      setSelectedResourceConcern({
+        id: window.localStorage.getItem('ResourceConcernId'),
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    const findResourceName = resourceConcern?.data?.find((subConcern) => {
+      const name = +selectedResourceConcern.id === subConcern.resourceConcernId;
+      return name;
+    })?.resourceConcernName;
+    if (+selectedResourceConcern.id === -1) {
       setSearchInput((prevState) => ({
         ...prevState,
         resource_concern_id: null,
@@ -90,25 +91,39 @@ const SearchByResourceConcern = ({
         ...prevState,
         resource_concern_id: +selectedResourceConcern.id,
       }));
+      setSearchInfo((prevState) => ({
+        ...prevState,
+        resource_concern: findResourceName,
+      }));
     }
   }, [selectedResourceConcern]);
 
   const handleChange = (e) => {
     const { value }: any = e.target;
-    const concernCategory = value.split(',');
-
-    if (concernCategory[0] !== '') {
+    window.localStorage.setItem('ResourceConcernCategoryId', value);
+    if (value !== '') {
+      window.localStorage.removeItem('ResourceConcernId');
+      dispatchRequest(disableResourceDropdown());
       setSelectedResourceCategory({
         ...selectedResourceCategory,
-        id: +concernCategory[0],
+        id: value,
       });
-      getResourceConcernsSubgroups(concernCategory[0]);
-      dispatchRequest(disableResourceDropdown());
+      setResourceConcernsSubgroups({
+        ...resourceConcernsSubgroups,
+        disabled: false,
+      });
       setSearchInfo((prevState) => ({
         ...prevState,
-        resource_concern_category: concernCategory[1],
+        resource_concern: null,
       }));
+      setSearchInput((prevState) => ({
+        ...prevState,
+        resource_concern_id: null,
+      }));
+      setSelectedResourceConcern({ id: -1 });
     } else {
+      window.localStorage.removeItem('ResourceConcernId');
+      window.localStorage.removeItem('ResourceConcernCategoryId');
       setResourceConcernsSubgroups(initialResourceState);
       setSelectedResourceCategory(-1);
       dispatchRequest(enableResourceDropdown());
@@ -119,46 +134,22 @@ const SearchByResourceConcern = ({
     }
   };
 
-  // const handleSubgroupChange = (e) => {
-  //   const { value } = e.target;
-  //   const concern = value.split(',');
-  //   console.log('Concern', concern);
-
-  //   if (concern[0] !== '') {
-  //     console.log("Conern{0} !==''");
-  //     setSelectedResourceConcern({
-  //       id: +concern[0],
-  //     });
-  //     setSearchInfo((prevState) => ({
-  //       ...prevState,
-  //       resource_concern: concern[1],
-  //     }));
-  //   } else {
-  //     console.log("Conern{0} ===''");
-  //     setSelectedResourceConcern({ id: -1 });
-  //     setSearchInfo((prevState) => ({
-  //       ...prevState,
-  //       resource_concern: null,
-  //     }));
-  //   }
-  // };
-
   const handleSubgroupChange = (e) => {
     const { value } = e.target;
-    const concern = value.split(',');
+    window.localStorage.setItem('ResourceConcernId', value);
+    setSelectedResourceConcern({ id: +value });
 
-    setSelectedResourceConcern({ id: +concern[0] });
-    if (concern[0] === '') {
+    if (value === '') {
       setSelectedResourceConcern({ id: -1 });
       setSearchInfo((prevState) => ({
         ...prevState,
         resource_concern: null,
       }));
+      setSearchInput((prevState) => ({
+        ...prevState,
+        resource_concern_id: null,
+      }));
     }
-    setSearchInfo((prevState) => ({
-      ...prevState,
-      resource_concern: concern[1],
-    }));
   };
 
   return (
@@ -166,63 +157,74 @@ const SearchByResourceConcern = ({
       <div className='search-by-resource-section'>
         <label
           className='usa-label resource-search-header'
-          htmlFor='locationValue'
+          aria-labelledby='resourceConcernCategoryValue resourceConcernValue'
         >
           {t('search-by-resource-concern.heading')}
         </label>
+
         <div className='desktop:grid-col-8'>
-          <p className='margin-top-2'>
-            {t('search-by-resource-concern.first-label-name')}
-          </p>
+          <label
+            className='usa-label resource-search-header'
+            htmlFor='resourceConcernCategoryValue'
+          >
+            <p className='margin-top-2'>
+              {t('search-by-resource-concern.first-label-name')}
+            </p>
+          </label>
           <select
             className='usa-select'
             id='resourceConcernCategoryValue'
             name='selectedResourceCategory'
             disabled={status}
             onChange={handleChange}
-            value={selectedResourceCategory?.id}
+            value={selectedResourceCategory}
           >
             <option value=''>All resource concerns (default)</option>
-            {resourceConcerns.resources.length
-              ? resourceConcerns.resources.map((item: any) => {
-                  return (
-                    <option
-                      key={item.resourceConcernId}
-                      value={`${item.resourceConcernId},${item.resourceConcernName}`}
-                    >
-                      {item.resourceConcernName}
-                    </option>
-                  );
-                })
-              : null}
+            {resourceCategory.isSuccess &&
+              resourceCategory.data &&
+              resourceCategory.data.map((item: any) => {
+                return (
+                  <option
+                    key={item.resourceConcernId}
+                    value={item.resourceConcernId}
+                  >
+                    {item.resourceConcernName}
+                  </option>
+                );
+              })}
           </select>
         </div>
 
         <div className='desktop:grid-col-8'>
-          <p className='margin-top-4'>
-            {t('search-by-resource-concern.second-label-name')}
-          </p>
+          <label
+            className='usa-label resource-search-header'
+            htmlFor='resourceConcernValue'
+          >
+            <p className='margin-top-4'>
+              {t('search-by-resource-concern.second-label-name')}
+            </p>
+          </label>
           <select
             className='usa-select'
             id='resourceConcernValue'
             name='selectedResourceSubgroup'
             disabled={resourceConcernsSubgroups.disabled}
             onChange={handleSubgroupChange}
-            // value={+selectedResourceConcern.id}
+            value={selectedResourceConcern.id}
           >
             <option value=''>- Select resource concern -</option>
-            {resourceConcernsSubgroups.resources.length
-              ? resourceConcernsSubgroups.resources.map((item: any) => {
-                  return (
-                    <option
-                      key={item.resourceConcernId}
-                      value={`${item.resourceConcernId},${item.resourceConcernName}`}
-                    >
-                      {item.resourceConcernName}
-                    </option>
-                  );
-                })
-              : null}
+            {resourceConcern.isSuccess &&
+              resourceConcern.data &&
+              resourceConcern.data.map((item: any) => {
+                return (
+                  <option
+                    key={item.resourceConcernId}
+                    value={item.resourceConcernId}
+                  >
+                    {item.resourceConcernName}
+                  </option>
+                );
+              })}
           </select>
         </div>
       </div>

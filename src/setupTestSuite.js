@@ -1,3 +1,5 @@
+import '@testing-library/jest-dom/extend-expect';
+
 jest.mock('../jest.config.js');
 
 // Mock external components and functions

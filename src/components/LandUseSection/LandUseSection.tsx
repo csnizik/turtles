@@ -1,19 +1,33 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Tooltip } from 'reactstrap';
-
 import { ILandUseOption } from '../../common/types';
 import './land-use-section.scss';
 import { useGetLandUseOptionsQuery } from '../../Redux/services/api';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 
-const LandUseSection = ({ setSearchInput, setSearchInfo }: any) => {
+const LandUseSection = ({
+  setSearchInput,
+  setSearchInfo,
+  checkedState,
+  setCheckedState,
+}: any) => {
   const landUseOptions: any = useGetLandUseOptionsQuery();
   const landUseData: ILandUseOption[] = landUseOptions.data || [];
   const [tooltipOpen, setTooltipOpen]: any = useState([]);
   const [landUse, setLandUse]: any = useState(null);
   const [landUseName, setLandUseName]: any = useState(null);
   const [check, setCheck] = useState(false);
+
   const { t } = useTranslation();
+
+  const landUseList = useAppSelector(
+    (state) => state?.practiceSlice?.searchInput?.land_use_list
+  );
+
+  const landUseInfoList = useAppSelector(
+    (state) => state?.practiceSlice?.searchInfo?.land_use_list
+  );
 
   useEffect(() => {
     if (landUseData.length) {
@@ -25,6 +39,26 @@ const LandUseSection = ({ setSearchInput, setSearchInfo }: any) => {
       setTooltipOpen(toolTipMap);
     }
   }, [landUseData]);
+
+  useEffect(() => {
+    if (!landUse) {
+      setLandUse(landUseList);
+      setLandUseName(landUseInfoList);
+      if (landUseList != null) {
+        window.localStorage.setItem('LandUseId', landUseList);
+        window.localStorage.setItem('LandUseName', landUseInfoList);
+      } else {
+        window.localStorage.removeItem('LandUseId');
+        window.localStorage.removeItem('LandUseName');
+      }
+    }
+    if (window.localStorage.getItem('LandUseId')) {
+      setLandUse(window.localStorage.getItem('LandUseId'));
+    }
+    if (window.localStorage.getItem('LandUseName')) {
+      setLandUseName(window.localStorage.getItem('LandUseName'));
+    }
+  }, []);
 
   useEffect(() => {
     setSearchInput((prevState) => ({
@@ -49,6 +83,10 @@ const LandUseSection = ({ setSearchInput, setSearchInfo }: any) => {
 
   const handleLandUse = (e) => {
     const { value, checked, name } = e.target;
+    setCheckedState((prevState) => ({
+      ...prevState,
+      [name]: !prevState[name],
+    }));
 
     if (checked) {
       if (landUse || (landUse && landUse.indexOf(value) === -1)) {
@@ -73,15 +111,15 @@ const LandUseSection = ({ setSearchInput, setSearchInfo }: any) => {
         land_use_list: landUse,
       }));
     } else if (!checked) {
-      const landUseArr = landUse.split(',');
-      const landUseNameArr = landUseName.split(',');
-      if (landUseArr.includes(value)) {
+      const landUseArr = landUse?.split(',');
+      const landUseNameArr = landUseName?.split(',');
+      if (landUseArr?.includes(value)) {
         const filteredLandUse = landUseArr?.filter((landId: any) => {
           return landId !== value;
         });
         setLandUse(filteredLandUse.join(','));
       }
-      if (landUseNameArr.includes(name)) {
+      if (landUseNameArr?.includes(name)) {
         const filteredLandUseName = landUseNameArr?.filter((landName: any) => {
           return landName !== name;
         });
@@ -131,8 +169,10 @@ const LandUseSection = ({ setSearchInput, setSearchInfo }: any) => {
                   id={`landUseOption${landId}`}
                   type='checkbox'
                   name={landType.landUseCategoryName}
-                  defaultChecked={check}
-                  onClick={handleLandUse}
+                  defaultChecked={
+                    check || checkedState[landType.landUseCategoryName]
+                  }
+                  onChange={handleLandUse}
                   value={landId}
                 />
                 <label
