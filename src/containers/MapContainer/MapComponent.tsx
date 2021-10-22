@@ -32,7 +32,6 @@ const MapComponent = () => {
     new FeatureLayer({
       url: conusFeatureLayerURL,
       layerId: 0,
-      opacity: 1,
     })
   );
   // State layout / boundaries
@@ -40,7 +39,6 @@ const MapComponent = () => {
     new FeatureLayer({
       url: conusFeatureLayerURL,
       layerId: 1,
-      opacity: 1,
     })
   );
   const alaskaFeatureToPointLayer = useRef(
@@ -78,7 +76,7 @@ const MapComponent = () => {
         center: CENTER_COORDINATES,
         container: VIEW_DIV,
         map,
-        zoom: MAX_ZOOM,
+        zoom: 4,
       });
 
       view.constraints = {
