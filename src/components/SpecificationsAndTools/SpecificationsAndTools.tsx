@@ -29,7 +29,8 @@ const SpecificationsAndTools = ({
   const { t } = useTranslation();
 
   const clickHandler = (value) => {
-    window.localStorage.setItem('Practice', value);
+    window.localStorage.setItem('PracticeId', value);
+    window.localStorage.setItem('StateId', selectedStateCode);
   };
   const content = useGetAssociatedPracticeQuery(userSelectedFilter);
 
