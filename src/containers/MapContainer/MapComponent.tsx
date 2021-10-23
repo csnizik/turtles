@@ -84,6 +84,27 @@ const MapComponent = () => {
         maxZoom: MAX_ZOOM,
       };
 
+      // Alaska composite view
+      const akView = new MapView({
+        container: 'akViewDiv',
+        map,
+        extent: {
+          xmin: -4847539.802087865,
+          ymin: 1848924.3741533272,
+          xmax: -1623658.5396487257,
+          ymax: 5200118.145045477,
+          spatialReference: {
+            wkid: 102009,
+          },
+        },
+        spatialReference: {
+          wkid: 102009,
+        },
+        ui: {
+          components: [],
+        },
+      });
+
       const homeBtn = new Home({
         view,
       });
@@ -91,6 +112,9 @@ const MapComponent = () => {
       mapRef.current.view = view;
       // Add the home button to the top left corner of the view
       mapRef.current.view.ui.add(homeBtn, 'top-left');
+
+      // Add the alaska view container as an inset view
+      mapRef.current.view.ui.add('akViewDiv', 'bottom-left');
 
       // Add Feature Layers
       map.layers.add(conusFeatureToPointLayer.current);

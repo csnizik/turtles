@@ -23,7 +23,7 @@
   .project-tab-header {
     p,
     li {
-      font-weight: $medium-light-weight;
+      font-weight: $semi-heavy-weight;
     }
   }
 
@@ -33,7 +33,7 @@
     .usa-card {
       width: 95%;
       p {
-        font-weight: $medium-light-weight;
+        font-weight: $semi-heavy-weight;
       }
       &:hover {
         cursor: pointer;
@@ -55,9 +55,23 @@
       }
     }
   }
+
+  .projets-map-section {
+    hr {
+      width: 86.5%;
+    }
+    h3 {
+      font-weight: $semi-heavy-weight;
+    }
+    margin-left: 20rem;
+  }
 }
 
 .project-type-section {
+  h3,
+  p {
+    font-weight: $semi-heavy-weight;
+  }
   width: 85%;
   a {
     text-decoration: none;

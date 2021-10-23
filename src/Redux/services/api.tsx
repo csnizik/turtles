@@ -58,6 +58,13 @@ export const api = createApi({
         body: data,
       }),
     }),
+    postProjectSearch: builder.query<ISearchData[], ISearchData>({
+      query: (data) => ({
+        url: '/project​/projectSearch',
+        method: 'POST',
+        body: data,
+      }),
+    }),
     getPracticeVideoLink: builder.query<IPracticeVideo[], void>({
       query: (practiceId) => `/video/${practiceId}`,
     }),

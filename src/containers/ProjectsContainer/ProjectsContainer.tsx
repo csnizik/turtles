@@ -89,7 +89,13 @@ const ProjectsContainer = () => {
           </ListGroup>
           {renderProjectSection()}
         </div>
-        <MapContainer />
+        <div className='projets-map-section'>
+          <hr />
+          <h3 className='margin-top-3 margin-bottom-3'>
+            Use map to filter Conservation Innovation Grants
+          </h3>
+          <MapContainer />
+        </div>
       </div>
     );
   }

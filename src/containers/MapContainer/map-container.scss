@@ -2,15 +2,23 @@
 
 #viewDiv {
   height: 68vh;
-  width: 81.5%;
-  margin: 1rem 0rem 0rem 20rem;
+  width: 94.5%;
+  margin: 1rem 0rem 0rem 0rem;
   padding-bottom: 3rem;
+}
+
+#akViewDiv {
+  padding: 0;
+  margin: 0rem 0rem 0rem 4rem;
+  height: 225px;
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 @media only screen and (max-width: $macbook-pro-screen) {
   #viewDiv {
     height: 68vh;
-    width: 72.5%;
-    margin: 1rem 0rem 0rem 20rem;
+    width: 82.5%;
+    margin: 1rem 0rem 0rem 0rem;
   }
 }
