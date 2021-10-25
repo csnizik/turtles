@@ -14,15 +14,25 @@ import ProjectListItem from './ProjectListItem';
 import { projectTabs, grantsList, initiativesList } from './constants';
 import './project-list-group.scss';
 import Pagination from '../Pagination';
+import { useAppSelector } from '../../Redux/hooks/hooks';
+import { usePostProjectSearchDataQuery } from '../../Redux/services/api';
+import Spinner from '../Spinner/Spinner';
 
 const ProjectListGroup = () => {
   const { t } = useTranslation();
+  const searchInputData = useAppSelector(
+    (state) => state.practiceSlice.searchInput
+  );
+
+  const { data, error, isLoading, isSuccess, isError } =
+    usePostProjectSearchDataQuery(searchInputData);
+
   const [activeTab, setActiveTab] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage] = useState(1);
+  const [cardsPerPage] = useState(10);
   const [currentIPage, setCurrentIPage] = useState(1);
 
-  const grantsLength = grantsList.length;
+  const grantsLength = data?.length;
   const initiativesLength = initiativesList.length;
 
   const toggleProjectsTab = (tab: number) => {
@@ -30,7 +40,7 @@ const ProjectListGroup = () => {
   };
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = grantsList.slice(indexOfFirstCard, indexOfLastCard);
+  const currentCards = data?.slice(indexOfFirstCard, indexOfLastCard);
   const indexOfLastPage = Math.ceil(grantsList.length / cardsPerPage);
 
   const indexOfLastICard = currentIPage * cardsPerPage;
@@ -51,7 +61,7 @@ const ProjectListGroup = () => {
   const renderProjectTypeTabs = () => {
     const getTitle = (tab: any) => {
       if (tab.id === 1) {
-        return `${tab.tabTitle} (${grantsList.length})`;
+        return `${tab.tabTitle} (${grantsLength})`;
       }
       if (tab.id === 2) {
         return `${tab.tabTitle} (${initiativesList.length})`;
@@ -97,20 +107,24 @@ const ProjectListGroup = () => {
           />
           <Row>
             <Col sm='12' className='p-3'>
-              <ul className='list-group projects-data'>
-                {currentCards.map((project: any) => {
-                  return (
-                    <ProjectListItem
-                      id={project.projectId}
-                      description={project.projectDescription}
-                      title={project.projectTitle}
-                      owner={project.projectOwner}
-                      statesInvolved={project.statesInvolved}
-                      year={project.awardeeYear}
-                    />
-                  );
-                })}
-              </ul>
+              {isLoading && <Spinner />}
+              {isError && error}
+              {isSuccess && data && (
+                <ul className='list-group projects-data'>
+                  {currentCards?.map((project: any) => {
+                    return (
+                      <ProjectListItem
+                        id={project.projectId}
+                        description={project.projectDescription}
+                        title={project.projectTitle}
+                        owner={project.projectOwner}
+                        statesInvolved={project.statesInvolved}
+                        year={project.awardeeYear}
+                      />
+                    );
+                  })}
+                </ul>
+              )}
             </Col>
           </Row>
         </TabPane>
