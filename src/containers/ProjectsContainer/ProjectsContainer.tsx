@@ -5,7 +5,7 @@ import { ListGroup, ListGroupItem } from 'reactstrap';
 import MapContainer from '../MapContainer';
 import './project-container.scss';
 
-import { projectCards, projectListGroups } from './constants';
+import { projectCards, projectListGroups, projectPurposes } from './constants';
 
 interface IProjectTypeCard {
   id: number;
@@ -96,7 +96,15 @@ const ProjectsContainer = () => {
 
   return (
     <div className='projects-tab' data-testid='projects-container'>
-      <p className='lead margin-3'>{t('projects-page.page-header')}</p>
+      <div className='project-tab-header margin-3'>
+        <p>{t('projects-page.page-header-01')}</p>
+        <p>{t('projects-page.page-header-02')}</p>
+        <ul className='margin-bottom-5'>
+          {projectPurposes.map((purpose: any) => {
+            return <li key={purpose.id}>{purpose.purpose}</li>;
+          })}
+        </ul>
+      </div>
       <ul className='usa-card-group margin-2'>
         {projectCards.map((project: IProjectTypeCard) => {
           return (
