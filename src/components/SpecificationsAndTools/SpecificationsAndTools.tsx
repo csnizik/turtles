@@ -29,11 +29,11 @@ const SpecificationsAndTools = ({
 
   const { t } = useTranslation();
 
-  const pacticeCategory = useAppSelector(
+  const practiceCategory = useAppSelector(
     (state) => state?.practiceSlice?.selectedPracticeCategory
   );
 
-  const updatePracticeCategory = pacticeCategory.toString();
+  const updatePracticeCategory = practiceCategory.toString();
 
   const clickHandler = (value) => {
     window.localStorage.setItem('PracticeId', value);
