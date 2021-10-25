@@ -11,6 +11,6 @@ describe('Verify ProductListGroup is rendered correctly', () => {
   });
 
   test('Verify project component', () => {
-    expect(screen.getByTestId('projects-list-group')).toBeInTheDocument();
+    expect(screen.getByTestId('projects-list-group')).toBeDefined();
   });
 });

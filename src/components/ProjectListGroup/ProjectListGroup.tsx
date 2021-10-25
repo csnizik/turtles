@@ -22,7 +22,7 @@ import Spinner from '../Spinner/Spinner';
 const ProjectListGroup = () => {
   const { t } = useTranslation();
   const searchInputData = useAppSelector(
-    (state) => state.practiceSlice.searchInput
+    (state) => state.practiceSlice?.searchInput
   );
 
   const { data, error, isLoading, isSuccess, isError } =
