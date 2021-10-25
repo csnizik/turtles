@@ -41,7 +41,12 @@ const IndividualPracticeContainer = () => {
         selectedPracticeId={practiceId}
       />
       <ImplementationExtent data={data} isSuccess={isSuccess} />
-      <SpecificationsAndTools data={data} isSuccess={isSuccess} />
+      <SpecificationsAndTools
+        selectedStateCode={stateCode}
+        selectedPracticeId={practiceId}
+        data={data}
+        isSuccess={isSuccess}
+      />
       <ApplicationImpacts data={data} isSuccess={isSuccess} />
       <ProjectsAndInitiatives data={data} isSuccess={isSuccess} />
     </>

@@ -1,0 +1,16 @@
+@import '../../stylesheets/variables';
+
+#viewDiv {
+  height: 68vh;
+  width: 81.5%;
+  margin: 1rem 0rem 0rem 20rem;
+  padding-bottom: 3rem;
+}
+
+@media only screen and (max-width: $macbook-pro-screen) {
+  #viewDiv {
+    height: 68vh;
+    width: 72.5%;
+    margin: 1rem 0rem 0rem 20rem;
+  }
+}

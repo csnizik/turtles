@@ -36,6 +36,8 @@ const FindByPractices = () => {
 
   const handleFindPractices = () => {
     history.push('/ConservationPractices');
+    const selectedPracticeCategory = selectedPractice.toString();
+    window.localStorage.setItem('PracticeCategoryId', selectedPracticeCategory);
   };
 
   const practiceCategory = useGetPracticeCategoryQuery();

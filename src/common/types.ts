@@ -136,3 +136,10 @@ export interface IConservationPracticeSections {
   sectionName: string;
   anchorLink: string;
 }
+
+export interface IAssociatedPracticeList {
+  practiceId: number;
+  practiceCode: string;
+  practiceName: string;
+  practiceDescription: string;
+}
