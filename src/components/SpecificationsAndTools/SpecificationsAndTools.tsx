@@ -33,7 +33,7 @@ const SpecificationsAndTools = ({
     (state) => state?.practiceSlice?.selectedPracticeCategory
   );
 
-  const updatePracticeCategory = practiceCategory.toString();
+  const updatePracticeCategory = practiceCategory?.toString();
 
   const clickHandler = (value) => {
     window.localStorage.setItem('PracticeId', value);
