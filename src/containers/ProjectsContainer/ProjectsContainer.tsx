@@ -2,9 +2,23 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ListGroup, ListGroupItem } from 'reactstrap';
+import MapContainer from '../MapContainer';
 import './project-container.scss';
 
-import { projectCards, projectListGroups } from './constants';
+import { projectCards, projectListGroups, projectPurposes } from './constants';
+
+interface IProjectTypeCard {
+  id: number;
+  title: string;
+  paragraphText: string;
+  imgSrc: string;
+  imgAlt: string;
+}
+
+interface IProjectListGroup {
+  id: number;
+  title: string;
+}
 
 const ProjectsContainer = () => {
   const { t } = useTranslation();
@@ -21,40 +35,78 @@ const ProjectsContainer = () => {
       setToggleProjectView(false);
       setSelectedProjectCard(-1);
     }
+    setSelectedProjectCard(id);
+  };
+
+  const renderProjectSection = () => {
+    const selectedProjectType = projectCards.find(
+      (project: any) => selectedProjectCard === project.id
+    );
+    if (!selectedProjectType) return null;
+    return (
+      <div className='project-type-section margin-top-2'>
+        <h3>{selectedProjectType.title}</h3>
+        <p className='margin-top-3'>{selectedProjectType.paragraphText}</p>
+        <p>
+          Visit the{' '}
+          <a
+            aria-label='Conservation Innovation Grants link opens a new tab'
+            href='https://usda.gov'
+            target='_blank'
+            rel='noreferrer'
+          >
+            CIG website
+          </a>{' '}
+          for more information.
+        </p>
+      </div>
+    );
   };
 
   if (toggleProjectView) {
     return (
       <div className='projects-tab'>
-        <ListGroup className='margin-2'>
-          {projectListGroups.map((listItem: any) => {
-            const listGroupItemClassNames = classNames(
-              'justify-content-between',
-              {
-                selected: listItem.id === selectedProjectCard,
-              }
-            );
-            return (
-              <ListGroupItem
-                key={listItem.id}
-                className={listGroupItemClassNames}
-                role='presentation'
-                onClick={() => handleSelectProjectItem(listItem.id)}
-              >
-                {listItem.title}
-              </ListGroupItem>
-            );
-          })}
-        </ListGroup>
+        <div className='projects-grid'>
+          <ListGroup className='margin-2'>
+            {projectListGroups.map((listItem: IProjectListGroup) => {
+              const listGroupItemClassNames = classNames(
+                'justify-content-between',
+                {
+                  selected: listItem.id === selectedProjectCard,
+                }
+              );
+              return (
+                <ListGroupItem
+                  key={listItem.id}
+                  className={listGroupItemClassNames}
+                  role='presentation'
+                  onClick={() => handleSelectProjectItem(listItem.id)}
+                >
+                  {listItem.title}
+                </ListGroupItem>
+              );
+            })}
+          </ListGroup>
+          {renderProjectSection()}
+        </div>
+        <MapContainer />
       </div>
     );
   }
 
   return (
     <div className='projects-tab' data-testid='projects-container'>
-      <p className='lead margin-3'>{t('projects-page.page-header')}</p>
+      <div className='project-tab-header margin-3'>
+        <p>{t('projects-page.page-header-01')}</p>
+        <p>{t('projects-page.page-header-02')}</p>
+        <ul className='margin-bottom-5'>
+          {projectPurposes.map((purpose: any) => {
+            return <li key={purpose.id}>{purpose.purpose}</li>;
+          })}
+        </ul>
+      </div>
       <ul className='usa-card-group margin-2'>
-        {projectCards.map((project: any) => {
+        {projectCards.map((project: IProjectTypeCard) => {
           return (
             <li
               className='tablet:grid-col-4 usa-card usa-card--header-first'

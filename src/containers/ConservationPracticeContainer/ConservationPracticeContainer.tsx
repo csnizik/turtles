@@ -68,7 +68,7 @@ const ConservationPracticeContainer = ({
     } else if (currentPracticeCategoryId >= 0 && currentSpecificPractice < 0) {
       //Temporary Fix for associated practies
       window.localStorage.setItem(
-        'PracticeCategory',
+        'PracticeCategoryId',
         currentPracticeCategoryId
       );
       setPracticeViewType({ ...practiceViewType, practiceCategories: true });
@@ -76,10 +76,10 @@ const ConservationPracticeContainer = ({
       setPracticeViewType({ ...practiceViewType, individualPractice: true });
     }
     //Temporary Fix for associated practies
-    if (window.localStorage.getItem('Practice')) {
-      const practiceNum = Number(window.localStorage.getItem('Practice'));
+    if (window.localStorage.getItem('PracticeId')) {
+      const practiceNum = Number(window.localStorage.getItem('PracticeId'));
       const practiceCategoryNum = Number(
-        window.localStorage.getItem('PracticeCategory')
+        window.localStorage.getItem('PracticeCategoryId')
       );
       dispatch(setSpecificPractice(practiceNum));
       dispatch(setPracticeCategory(practiceCategoryNum));

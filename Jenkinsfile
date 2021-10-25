@@ -86,7 +86,7 @@ pipeline {
 
         steps {
           script {
-              sleep(10)
+              sleep(90)
               httpStatus = sh(script: "curl --insecure -w '%{http_code}' $ppcUrl -o /dev/null --header 'Accept: application/json' ", returnStdout: true)
 
               if (httpStatus != "200" && httpStatus != "201" ) {
