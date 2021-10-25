@@ -2,7 +2,7 @@
 
 .usa-fieldset {
   padding: 1.75rem 0rem 1.75rem 2.25rem;
-  margin: 0 0 0 1rem;
+  margin: 0 0 0 -1rem;
   background: $white;
   .usa-legend {
     background: $white;
@@ -16,7 +16,7 @@
   }
   .usa-checkbox {
     display: flex;
-    margin: 0rem 0rem 0rem -2.1rem;
+    margin: 0rem 0rem 0rem 0rem;
     .usa-checkbox__label {
       text-indent: 0rem;
     }
