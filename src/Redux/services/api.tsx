@@ -60,7 +60,7 @@ export const api = createApi({
     }),
     postProjectSearch: builder.query<ISearchData[], ISearchData>({
       query: (data) => ({
-        url: '/project​/projectSearch',
+        url: '/project/projectSearch',
         method: 'POST',
         body: data,
       }),
@@ -92,6 +92,7 @@ export const {
   useGetPracticeCategoryQuery,
   useGetPracticeQuery,
   usePostSearchDataQuery,
+  usePostProjectSearchQuery,
   useGetNationalOverviewByPracticeQuery,
   useGetCountyListQuery,
   useGetStateListQuery,

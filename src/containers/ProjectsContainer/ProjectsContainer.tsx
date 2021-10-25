@@ -24,6 +24,7 @@ const ProjectsContainer = () => {
   const { t } = useTranslation();
   const [toggleProjectView, setToggleProjectView] = useState(false);
   const [selectedProjectCard, setSelectedProjectCard] = useState(-1);
+  const [selectedLocation, setSelectedLocation] = useState('');
 
   const handleSelectProjectCard = (id: number) => {
     setSelectedProjectCard(id);
@@ -94,7 +95,10 @@ const ProjectsContainer = () => {
           <h3 className='margin-top-3 margin-bottom-3'>
             Use map to filter Conservation Innovation Grants
           </h3>
-          <MapContainer />
+          <MapContainer
+            selectedLocation={selectedLocation}
+            setSelectedLocation={setSelectedLocation}
+          />
         </div>
       </div>
     );

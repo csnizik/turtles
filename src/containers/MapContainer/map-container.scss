@@ -9,9 +9,25 @@
 
 #akViewDiv {
   padding: 0;
-  margin: 0rem 0rem 0rem 4rem;
-  height: 225px;
-  width: 300px;
+  margin: 0rem 0rem 0rem 1.5rem;
+  height: 175px;
+  width: 225px;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+#hiViewDiv {
+  padding: 0;
+  margin: 0rem 0rem 0rem 2rem;
+  height: 150px;
+  width: 220px;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+#cariViewDiv {
+  padding: 0;
+  margin: 0rem 0rem 0rem 2.5rem;
+  height: 120px;
+  width: 175px;
   background-color: rgba(255, 255, 255, 0.9);
 }
 
