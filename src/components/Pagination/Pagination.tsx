@@ -133,7 +133,7 @@ const Pagination = ({
           })}
 
           <li className='usa-pagination__item usa-pagination__arrow'>
-            {currentPage !== indexOfLastPage ? (
+            {currentPage !== indexOfLastPage && indexOfLastPage > 0 ? (
               <button
                 data-testid='next-button'
                 type='button'

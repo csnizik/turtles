@@ -9,7 +9,7 @@ describe('Pagination is rendered correctly', () => {
   const paginate = () => {};
   const grantsLength = 10;
   const cardsPerPage = 1;
-  const currentPage = 1;
+  const currentPage = 2;
   const indexOfLastPage = 8;
 
   beforeEach(() => {
@@ -27,7 +27,7 @@ describe('Pagination is rendered correctly', () => {
   test('Should display the Pagination Component', () => {
     expect(screen.getByTestId('Pagination')).toBeDefined();
   });
-  test('Should display the Previous Pagination Button', () => {
+  test('Should NOT display the Previous Pagination Button', () => {
     expect(screen.getByTestId('prev-button')).toBeDefined();
   });
   test('Should display the First Pagination Number', () => {

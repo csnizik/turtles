@@ -11,13 +11,14 @@ import {
   NavLink,
 } from 'reactstrap';
 import ProjectListItem from './ProjectListItem';
-import { projectTabs, grantsList, initiativesList } from './constants';
+import { projectTabs, initiativesList } from './constants';
 import './project-list-group.scss';
 import Pagination from '../Pagination';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import { usePostProjectSearchDataQuery } from '../../Redux/services/api';
 import Spinner from '../Spinner/Spinner';
 
+//Initiatives constant to be replaced by backend data
 const ProjectListGroup = () => {
   const { t } = useTranslation();
   const searchInputData = useAppSelector(
@@ -41,7 +42,10 @@ const ProjectListGroup = () => {
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   const currentCards = data?.slice(indexOfFirstCard, indexOfLastCard);
-  const indexOfLastPage = Math.ceil(grantsList.length / cardsPerPage);
+  let indexOfLastPage = -1;
+  if (data) {
+    indexOfLastPage = Math.ceil(data.length / cardsPerPage);
+  }
 
   const indexOfLastICard = currentIPage * cardsPerPage;
   const indexOfFirstICard = indexOfLastICard - cardsPerPage;
