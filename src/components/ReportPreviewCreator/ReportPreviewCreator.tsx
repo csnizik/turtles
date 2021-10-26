@@ -55,6 +55,7 @@ const ReportPreviewCreator = ({
   let stateCode = state?.practiceSlice?.searchInput?.state_county_code;
   if (!stateCode) stateCode = state?.stateSlice?.stateCode;
   if (!stateCode) stateCode = '00';
+  if (stateCode.length > 2) stateCode = stateCode.slice(0, 2);
 
   let stateName = state?.practiceSlice?.searchInfo.state;
   if (!stateName) stateName = state?.stateSlice?.stateNameDisplay;
@@ -132,6 +133,7 @@ const ReportPreviewCreator = ({
                 reportPreviewData={reportPreviewData}
                 practiceId={practiceId}
                 rcRef={rcRef}
+                // content={content}
               />
             </div>
           </div>
