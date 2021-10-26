@@ -12,7 +12,7 @@
   margin: 0rem 0rem 0rem 1.5rem;
   height: 175px;
   width: 225px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: $white;
 }
 
 #hiViewDiv {
@@ -20,7 +20,7 @@
   margin: 0rem 0rem 0rem 2rem;
   height: 150px;
   width: 220px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: $white;
 }
 
 #cariViewDiv {
@@ -28,7 +28,7 @@
   margin: 0rem 0rem 0rem 2.5rem;
   height: 120px;
   width: 175px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: $white;
 }
 
 @media only screen and (max-width: $macbook-pro-screen) {
