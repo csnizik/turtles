@@ -6,6 +6,8 @@ const Pagination = ({
   paginate,
   currentPage,
   indexOfLastPage,
+  indexOfFirstCard,
+  indexOfLastCard,
 }: any) => {
   const handlePrevClick = () => {
     paginate(currentPage - 1);
@@ -28,7 +30,11 @@ const Pagination = ({
         data-testid='Pagination'
         className='usa-pagination'
       >
-        <h3>Showing 1 - 10 of {cards} projects</h3>
+        <h3>
+          Showing {indexOfFirstCard + 1} -{' '}
+          {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards}{' '}
+          projects
+        </h3>
         <ul className='usa-pagination__list'>
           <li className='usa-pagination__item usa-pagination__arrow'>
             {currentPage !== 1 ? (

@@ -14,17 +14,24 @@ import ProjectListItem from './ProjectListItem';
 import { projectTabs, initiativesList } from './constants';
 import './project-list-group.scss';
 import Pagination from '../Pagination';
-import { useAppSelector } from '../../Redux/hooks/hooks';
 import Spinner from '../Spinner/Spinner';
 
 interface IProjectListProps {
   isMapDisplayed: boolean;
   projectsList: any;
+  error: any;
+  isLoading: boolean;
+  isSuccess: boolean;
+  isError: boolean;
 }
 
 //Initiatives constant to be replaced by backend data
 const ProjectListGroup = ({
+  error,
+  isLoading,
+  isError,
   isMapDisplayed,
+  isSuccess,
   projectsList,
 }: IProjectListProps) => {
   const { t } = useTranslation();
@@ -77,17 +84,20 @@ const ProjectListGroup = ({
     return (
       <Nav className='nav-fpac' data-testid='project-and-initiative-tabs'>
         {projectTabs.map((tab: any) => {
+          const tabID = tab.id;
           return (
-            <NavItem>
-              <NavLink
-                className={classnames({ active: activeTab === tab.id })}
-                onClick={() => {
-                  toggleProjectsTab(tab.id);
-                }}
-              >
-                {getTitle(tab)}
-              </NavLink>
-            </NavItem>
+            <div key={tabID}>
+              <NavItem>
+                <NavLink
+                  className={classnames({ active: activeTab === tab.id })}
+                  onClick={() => {
+                    toggleProjectsTab(tab.id);
+                  }}
+                >
+                  {getTitle(tab)}
+                </NavLink>
+              </NavItem>
+            </div>
           );
         })}
       </Nav>
@@ -110,11 +120,15 @@ const ProjectListGroup = ({
             cardsPerPage={cardsPerPage}
             paginate={paginate}
             currentPage={currentPage}
-            indexOfLastPage={indexOfLastPage}
+            indexOfLastPage={indexOfLastIPage}
+            indexOfFirstCard={indexOfFirstICard}
+            indexOfLastCard={indexOfLastICard}
           />
           <Row>
             <Col sm='12' className='p-3'>
-              {projectsList.length ? (
+              {isLoading && <Spinner />}
+              {isError && error}
+              {isSuccess && projectsList.length ? (
                 <ul className='list-group projects-data'>
                   {currentCards?.map((project: any) => {
                     return (
@@ -140,6 +154,8 @@ const ProjectListGroup = ({
             paginate={iPaginate}
             currentPage={currentIPage}
             indexOfLastPage={indexOfLastIPage}
+            indexOfFirstCard={indexOfFirstICard}
+            indexOfLastCard={indexOfLastICard}
           />
           <Row>
             <Col sm='12' className='p-3'>

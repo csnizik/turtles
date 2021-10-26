@@ -2,13 +2,10 @@ import MapComponent from './MapComponent';
 import { VIEW_DIV } from './constants';
 import './map-container.scss';
 
-const MapContainer = ({ selectedLocation, setSelectedLocation }: any) => {
+const MapContainer = ({ setSelectedLocation }: any) => {
   return (
     <>
-      <MapComponent
-        selectedLocation={selectedLocation}
-        setSelectedLocation={setSelectedLocation}
-      />
+      <MapComponent setSelectedLocation={setSelectedLocation} />
       <div className='webmap' id={VIEW_DIV} />
       <div id='akViewDiv' className='esri-widget' />
       <div id='hiViewDiv' className='esri-widget' />

@@ -26,7 +26,7 @@ interface IMapProps {
   view: MapView;
 }
 
-const MapComponent = ({ selectedLocation, setSelectedLocation }: any) => {
+const MapComponent = ({ setSelectedLocation }: any) => {
   const mapRef = useRef({} as IMapProps);
   let hiView;
   // Project count layer
@@ -171,7 +171,6 @@ const MapComponent = ({ selectedLocation, setSelectedLocation }: any) => {
         mapRef.current.view.hitTest(event).then((response) => {
           mapRef.current.view.graphics.removeAll();
           if (response.results.length) {
-            console.log('response: ', response);
             const graphicList: any = response.results.filter((item: any) => {
               // check if the graphic belongs to the states layer
               if (conusStateLayer.current) {

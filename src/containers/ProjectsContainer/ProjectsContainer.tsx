@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import MapContainer from '../MapContainer';
 import ProjectListGroup from '../../components/ProjectListGroup';
-import { usePostProjectSearchQuery } from '../../Redux/services/api';
+import { usePostProjectSearchDataQuery } from '../../Redux/services/api';
 import './project-container.scss';
 
 import { projectCards, projectListGroups, projectPurposes } from './constants';
@@ -29,7 +29,7 @@ const ProjectsContainer = () => {
   const [selectedLocation, setSelectedLocation] = useState('');
 
   const { data, error, isLoading, isSuccess, isError } =
-    usePostProjectSearchQuery({
+    usePostProjectSearchDataQuery({
       state_county_code: selectedLocation,
     });
 
@@ -102,13 +102,17 @@ const ProjectsContainer = () => {
           <h3 className='margin-top-3 margin-bottom-3'>
             {t('projects-page.map-instructions')}
           </h3>
-          <MapContainer
-            selectedLocation={selectedLocation}
-            setSelectedLocation={setSelectedLocation}
-          />
+          <MapContainer setSelectedLocation={setSelectedLocation} />
         </div>
 
-        <ProjectListGroup projectsList={data} isMapDisplayed={true} />
+        <ProjectListGroup
+          error={error}
+          isError={isError}
+          isLoading={isLoading}
+          isSuccess={isSuccess}
+          isMapDisplayed={true}
+          projectsList={data}
+        />
       </div>
     );
   }

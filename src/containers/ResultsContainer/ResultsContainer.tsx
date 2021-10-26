@@ -1,10 +1,19 @@
 import { useTranslation } from 'react-i18next';
+import { usePostProjectSearchDataQuery } from '../../Redux/services/api';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 import Accordion from '../../components/ResultAccordion';
+import ProjectListGroup from '../../components/ProjectListGroup';
 import Filters from '../../components/Filter';
 import './results.scss';
 
 const ResultsContainer = () => {
   const { t } = useTranslation();
+  const searchInputData = useAppSelector(
+    (state) => state.practiceSlice?.searchInput
+  );
+
+  const { data, error, isLoading, isSuccess, isError } =
+    usePostProjectSearchDataQuery(searchInputData);
 
   return (
     <div className='results-page'>
@@ -14,6 +23,14 @@ const ResultsContainer = () => {
       </div>
       <Filters />
       <Accordion />
+      <ProjectListGroup
+        error={error}
+        isError={isError}
+        isLoading={isLoading}
+        isSuccess={isSuccess}
+        isMapDisplayed={false}
+        projectsList={data}
+      />
     </div>
   );
 };
