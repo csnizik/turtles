@@ -14,11 +14,10 @@ import {
   fillBorderColor,
   hawaiiFeatureLayerURL,
   hawaiiExtent,
-  MIN_ZOOM,
-  MAX_ZOOM,
   simpleFillColor,
   topoBaseMap,
   VIEW_DIV,
+  viewConstraints,
 } from './constants';
 import '@arcgis/core/assets/esri/themes/light/main.css';
 
@@ -28,7 +27,6 @@ interface IMapProps {
 
 const MapComponent = ({ setSelectedLocation }: any) => {
   const mapRef = useRef({} as IMapProps);
-  let hiView;
   // Project count layer
   const conusFeatureToPointLayer = useRef(
     new FeatureLayer({
@@ -94,10 +92,7 @@ const MapComponent = ({ setSelectedLocation }: any) => {
         zoom: 4,
       });
 
-      view.constraints = {
-        minZoom: MIN_ZOOM,
-        maxZoom: MAX_ZOOM,
-      };
+      view.constraints = viewConstraints;
 
       // Alaska composite view
       const akView = new MapView({
@@ -126,7 +121,7 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       });
 
       // Hawaii composite view
-      hiView = new MapView({
+      const hiView = new MapView({
         container: 'hiViewDiv',
         map,
         extent: hawaiiExtent,
@@ -209,14 +204,6 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       });
     });
   }, [mapRef]);
-
-  // useEffect(() => {
-  //   hiView.when(() => {
-  //     hiView.on('pointer-up', (event) => {
-  //       console.log('Event: ', event);
-  //     });
-  //   });
-  // }, [hiView]);
 
   return null;
 };

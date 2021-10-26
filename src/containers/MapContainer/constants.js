@@ -2,8 +2,12 @@
 export const topoBaseMap = 'topo-vector';
 
 // View constraints on map
-export const MIN_ZOOM = 6;
-export const MAX_ZOOM = 3;
+const MIN_ZOOM = 6;
+const MAX_ZOOM = 3;
+export const viewConstraints = {
+  maxZoom: MAX_ZOOM,
+  minZoom: MIN_ZOOM,
+};
 
 // Longitude / Latitude for center of map
 export const CENTER_COORDINATES = [-96, 36];
