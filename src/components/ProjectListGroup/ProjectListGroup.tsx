@@ -108,6 +108,8 @@ const ProjectListGroup = () => {
             paginate={paginate}
             currentPage={currentPage}
             indexOfLastPage={indexOfLastPage}
+            indexOfFirstCard={indexOfFirstCard}
+            indexOfLastCard={indexOfLastCard}
           />
           <Row>
             <Col sm='12' className='p-3'>
@@ -139,6 +141,8 @@ const ProjectListGroup = () => {
             paginate={iPaginate}
             currentPage={currentIPage}
             indexOfLastPage={indexOfLastIPage}
+            indexOfFirstCard={indexOfFirstICard}
+            indexOfLastCard={indexOfLastICard}
           />
           <Row>
             <Col sm='12' className='p-3'>
