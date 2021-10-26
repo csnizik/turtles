@@ -19,19 +19,6 @@ export const simpleFillColor = '#4689e0';
 
 export const fillBorderColor = '#04d9ff';
 
-// Feature layer urls
-export const alaskaFeatureLayerURL =
-  'https://gis1-eft.spatialfrontlab.com/arcgis/rest/services/cig-cpd/Project_Alaska/MapServer';
-
-export const caribbeanFeatureLayerURL =
-  'https://gis1-eft.spatialfrontlab.com/arcgis/rest/services/cig-cpd/Project_Caribbean/MapServer';
-
-export const conusFeatureLayerURL =
-  'https://gis1-eft.spatialfrontlab.com/arcgis/rest/services/cig-cpd/Project_CONUS/MapServer';
-
-export const hawaiiFeatureLayerURL =
-  'https://gis1-eft.spatialfrontlab.com/arcgis/rest/services/cig-cpd/Project_Hawaii/MapServer';
-
 // Extents for composite views
 export const alaskaExtent = {
   xmin: -4847539.802087865,
