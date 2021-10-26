@@ -24,6 +24,7 @@ import {
   hawaiiFeatureLayer0,
   hawaiiFeatureLayer1,
 } from './layers';
+import { createMapView } from './mapUtils';
 import '@arcgis/core/assets/esri/themes/light/main.css';
 
 interface IMapProps {
@@ -61,42 +62,23 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       view.constraints = viewConstraints;
 
       // Alaska composite view
-      alaskaView.current = new MapView({
-        container: 'akViewDiv',
-        map,
-        extent: alaskaExtent,
-        spatialReference: {
-          wkid: 102009,
-        },
-        ui: {
-          components: [],
-        },
+      alaskaView.current = createMapView('akViewDiv', map, alaskaExtent, {
+        wkid: 102009,
       });
 
       // Caribbean composite view
-      caribbeanView.current = new MapView({
-        container: 'cariViewDiv',
+      caribbeanView.current = createMapView(
+        'cariViewDiv',
         map,
-        extent: caribbeanExtent,
-        spatialReference: {
+        caribbeanExtent,
+        {
           wkid: 102965,
-        },
-        ui: {
-          components: [],
-        },
-      });
+        }
+      );
 
       // Hawaii composite view
-      hawaiiView.current = new MapView({
-        container: 'hiViewDiv',
-        map,
-        extent: hawaiiExtent,
-        spatialReference: {
-          wkid: 102965,
-        },
-        ui: {
-          components: [],
-        },
+      hawaiiView.current = createMapView('hiViewDiv', map, hawaiiExtent, {
+        wkid: 102965,
       });
 
       const homeBtn = new Home({
