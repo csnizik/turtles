@@ -76,17 +76,20 @@ const ProjectListGroup = () => {
     return (
       <Nav className='nav-fpac' data-testid='project-and-initiative-tabs'>
         {projectTabs.map((tab: any) => {
+          const tabID = tab.id;
           return (
-            <NavItem>
-              <NavLink
-                className={classnames({ active: activeTab === tab.id })}
-                onClick={() => {
-                  toggleProjectsTab(tab.id);
-                }}
-              >
-                {getTitle(tab)}
-              </NavLink>
-            </NavItem>
+            <div key={tabID}>
+              <NavItem>
+                <NavLink
+                  className={classnames({ active: activeTab === tab.id })}
+                  onClick={() => {
+                    toggleProjectsTab(tab.id);
+                  }}
+                >
+                  {getTitle(tab)}
+                </NavLink>
+              </NavItem>
+            </div>
           );
         })}
       </Nav>
@@ -118,15 +121,18 @@ const ProjectListGroup = () => {
               {isSuccess && data && (
                 <ul className='list-group projects-data'>
                   {currentCards?.map((project: any) => {
+                    const projectID = project.projectId;
                     return (
-                      <ProjectListItem
-                        id={project.projectId}
-                        description={project.projectDescription}
-                        title={project.projectTitle}
-                        owner={project.projectOwner}
-                        statesInvolved={project.statesInvolved}
-                        year={project.awardeeYear}
-                      />
+                      <div key={projectID}>
+                        <ProjectListItem
+                          id={project.projectId}
+                          description={project.projectDescription}
+                          title={project.projectTitle}
+                          owner={project.projectOwner}
+                          statesInvolved={project.statesInvolved}
+                          year={project.awardeeYear}
+                        />
+                      </div>
                     );
                   })}
                 </ul>
@@ -148,15 +154,18 @@ const ProjectListGroup = () => {
             <Col sm='12' className='p-3'>
               <ul className='list-group projects-data'>
                 {currentICards.map((initiative: any) => {
+                  const initiativeID = initiative.initiativeId;
                   return (
-                    <ProjectListItem
-                      id={initiative.initiativeId}
-                      description={initiative.initiativeDescription}
-                      title={initiative.initiativeTitle}
-                      owner={initiative.initiativeOwner}
-                      statesInvolved={initiative.statesInvolved}
-                      year={initiative.initiativeYear}
-                    />
+                    <div key={initiativeID}>
+                      <ProjectListItem
+                        id={initiative.initiativeId}
+                        description={initiative.initiativeDescription}
+                        title={initiative.initiativeTitle}
+                        owner={initiative.initiativeOwner}
+                        statesInvolved={initiative.statesInvolved}
+                        year={initiative.initiativeYear}
+                      />
+                    </div>
                   );
                 })}
               </ul>
