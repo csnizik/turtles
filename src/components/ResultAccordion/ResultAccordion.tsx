@@ -112,10 +112,6 @@ const Accordion = () => {
           {t('search-results-page.no-practices-found')}
         </p>
       )}
-      {/*  For demo Purpose  */}
-      <div className='top-title'>
-        <h4>{t('search-results-page.project-initiatives')}</h4>
-      </div>
     </>
   );
 };
