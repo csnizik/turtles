@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import MapContainer from '../MapContainer';
+import ProjectListGroup from '../../components/ProjectListGroup';
+import { usePostProjectSearchQuery } from '../../Redux/services/api';
 import './project-container.scss';
 
 import { projectCards, projectListGroups, projectPurposes } from './constants';
@@ -25,6 +27,11 @@ const ProjectsContainer = () => {
   const [toggleProjectView, setToggleProjectView] = useState(false);
   const [selectedProjectCard, setSelectedProjectCard] = useState(-1);
   const [selectedLocation, setSelectedLocation] = useState('');
+
+  const { data, error, isLoading, isSuccess, isError } =
+    usePostProjectSearchQuery({
+      state_county_code: selectedLocation,
+    });
 
   const handleSelectProjectCard = (id: number) => {
     setSelectedProjectCard(id);
@@ -93,13 +100,15 @@ const ProjectsContainer = () => {
         <div className='projets-map-section'>
           <hr />
           <h3 className='margin-top-3 margin-bottom-3'>
-            Use map to filter Conservation Innovation Grants
+            {t('projects-page.map-instructions')}
           </h3>
           <MapContainer
             selectedLocation={selectedLocation}
             setSelectedLocation={setSelectedLocation}
           />
         </div>
+
+        <ProjectListGroup projectsList={data} isMapDisplayed={true} />
       </div>
     );
   }

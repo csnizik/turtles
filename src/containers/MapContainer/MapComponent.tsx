@@ -4,7 +4,6 @@ import Graphic from '@arcgis/core/Graphic';
 import Home from '@arcgis/core/widgets/Home';
 import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
-import { usePostProjectSearchQuery } from '../../Redux/services/api';
 import {
   alaskaFeatureLayerURL,
   alaskaExtent,
@@ -81,10 +80,6 @@ const MapComponent = ({ selectedLocation, setSelectedLocation }: any) => {
       layerId: 1,
     })
   );
-  // Use post practice search to retrieve list of practiecs per selected state
-  const { data, isSuccess } = usePostProjectSearchQuery({
-    state_county_code: selectedLocation,
-  });
 
   useEffect(() => {
     if (mapRef && mapRef.current) {
@@ -152,10 +147,10 @@ const MapComponent = ({ selectedLocation, setSelectedLocation }: any) => {
       // Add the home button to the top left corner of the view
       mapRef.current.view.ui.add(homeBtn, 'top-left');
 
-      // Add the alaska view container as an inset view
+      // Add composite views for Alaska, Hawaii, and Caribbean
       mapRef.current.view.ui.add('akViewDiv', 'bottom-left');
-      // Add the hawaii view container as an inset view
       mapRef.current.view.ui.add('hiViewDiv', 'bottom-left');
+      mapRef.current.view.ui.add('cariViewDiv', 'bottom-left');
 
       // Add Feature Layers
       map.layers.add(alaskaFeatureToPointLayer.current);

@@ -21,6 +21,7 @@
     }
   },
   "rules": {
+    "react/jsx-boolean-value": "off",
     "spaced-comment": "off",
     "arrow-body-style": "off",
     "import/extensions": "off",

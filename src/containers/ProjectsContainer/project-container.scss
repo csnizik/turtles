@@ -78,9 +78,38 @@
   }
 }
 
+.usa-pagination {
+  h3 {
+    font-weight: $semi-heavy-weight;
+  }
+}
+
+.projects-list-group {
+  .top-title {
+    margin-left: 2rem;
+  }
+}
+
 /** Media Queries **/
 @media only screen and (max-width: $macbook-pro-screen) {
   .project-type-section {
     width: 75%;
+  }
+  .outer-box {
+    margin: 0 0 0 0 !important;
+    .project-details {
+      margin: 0rem 0rem 1rem 0rem !important;
+      font-size: 13px !important;
+      span {
+        padding-left: 0.6rem;
+        margin: 0rem 0.6rem 0rem 0.6rem;
+        border-left: 1px solid $light-grey-6;
+      }
+      span:first-of-type {
+        padding-left: 0rem;
+        margin: 0rem 0.6rem 0rem 0rem;
+        border: none;
+      }
+    }
   }
 }

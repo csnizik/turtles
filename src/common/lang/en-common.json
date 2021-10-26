@@ -59,7 +59,8 @@
   },
   "projects-page": {
     "page-header-01": "NRCS's natural resources conservation programs help people reduce soil erosion, enhance water supplies, improve water quality, increase wildlife habitat, and reduce damages caused by floods and other natural disasters.",
-    "page-header-02": "In addition to the Farm Bill Programs, which offer Conservation Technical Assistance and Financial Assistance to producers interested in engaging in voluntary conservation on their land, NRCS manages a number of Projects and Initiatives that operate at the landscape scale and above. These Projects and Initiatives serve a variety of purposes, including:"
+    "page-header-02": "In addition to the Farm Bill Programs, which offer Conservation Technical Assistance and Financial Assistance to producers interested in engaging in voluntary conservation on their land, NRCS manages a number of Projects and Initiatives that operate at the landscape scale and above. These Projects and Initiatives serve a variety of purposes, including:",
+    "map-instructions": "Use map to filter Conservation Innovation Grants:"
   },
   "overview": {
     "introductory-paragraph": "NRCS planners assess the existing condition of natural resources on a site to determine whether additional treatment is needed to address a potential resource concern. The natural resource concerns most frequently identified, and the conservation practices applied, vary across states and regions based on predominant land uses, topography, soil conditions, ...",
