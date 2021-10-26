@@ -51,6 +51,7 @@ const Accordion = () => {
     }
 
     dispatch(setPracticeCategory(categoryId));
+    window.localStorage.setItem('PracticeCategoryId', categoryId.toString());
   };
 
   const handleSpecificPracticeSelection = (
@@ -59,6 +60,7 @@ const Accordion = () => {
   ) => {
     dispatch(setPracticeCategory(categoryId));
     dispatch(setSpecificPractice(practiceId));
+    window.localStorage.setItem('PracticeCategoryId', categoryId.toString());
   };
   const isSamePractice = (
     category: ISearchData,
