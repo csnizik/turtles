@@ -133,7 +133,6 @@ const ReportPreviewCreator = ({
                 reportPreviewData={reportPreviewData}
                 practiceId={practiceId}
                 rcRef={rcRef}
-                // content={content}
               />
             </div>
           </div>
