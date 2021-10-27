@@ -40,7 +40,7 @@ const LocationSearch = () => {
 
   const handleClick = () => {
     history.push({
-      pathname: '/ConservationPractices',
+      pathname: '/Overview',
       state: { selectedStateId: selectedState },
     });
   };

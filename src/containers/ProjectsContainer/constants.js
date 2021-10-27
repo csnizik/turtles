@@ -13,7 +13,7 @@ export const projectCards = [
     paragraphText:
       'NRCS uses Landscape Conservation Initiatives to accelerate the benefits of voluntary conservation programs, such as cleaner water and air, healthier soil and enhanced wildlife habitat.',
     imgSrc: 'images/landscapeMap.png',
-    imgAlt: 'Map of the United States of America - Terrain View',
+    imgAlt: 'Map of Landscape Conservation Initiatives in the United States',
   },
 ];
 

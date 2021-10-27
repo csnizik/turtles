@@ -96,7 +96,7 @@ const ProjectsContainer = () => {
 
   return (
     <div className='projects-tab' data-testid='projects-container'>
-      <div className='project-tab-header margin-3'>
+      <div className='project-tab-header'>
         <p>{t('projects-page.page-header-01')}</p>
         <p>{t('projects-page.page-header-02')}</p>
         <ul className='margin-bottom-5'>
@@ -105,7 +105,7 @@ const ProjectsContainer = () => {
           })}
         </ul>
       </div>
-      <ul className='usa-card-group margin-2'>
+      <ul className='usa-card-group'>
         {projectCards.map((project: IProjectTypeCard) => {
           return (
             <li
@@ -121,7 +121,7 @@ const ProjectsContainer = () => {
                 <div className='usa-card__body'>
                   <p className='lead'>{project.paragraphText}</p>
                 </div>
-                <div className='usa-card__footer margin-top-2'>
+                <div className='usa-card__footer'>
                   <div className='usa-card__media'>
                     <div className='usa-card__img'>
                       <img src={project.imgSrc} alt={project.imgAlt} />
