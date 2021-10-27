@@ -161,15 +161,18 @@ const ProjectListGroup = ({
             <Col sm='12' className='p-3'>
               <ul className='list-group projects-data'>
                 {currentICards.map((initiative: any) => {
+                  const initiativeID = initiative.initiativeId;
                   return (
-                    <ProjectListItem
-                      id={initiative.initiativeId}
-                      description={initiative.initiativeDescription}
-                      title={initiative.initiativeTitle}
-                      owner={initiative.initiativeOwner}
-                      statesInvolved={initiative.statesInvolved}
-                      year={initiative.initiativeYear}
-                    />
+                    <div key={initiativeID}>
+                      <ProjectListItem
+                        id={initiative.initiativeId}
+                        description={initiative.initiativeDescription}
+                        title={initiative.initiativeTitle}
+                        owner={initiative.initiativeOwner}
+                        statesInvolved={initiative.statesInvolved}
+                        year={initiative.initiativeYear}
+                      />
+                    </div>
                   );
                 })}
               </ul>
