@@ -7,7 +7,7 @@ afterEach(() => {
 
 describe('Verify ProductListGroup is rendered correctly', () => {
   beforeEach(() => {
-    render(<ProjectListGroup />);
+    render(<ProjectListGroup practiceId={1} stateCode='00' />);
   });
 
   test('Verify project component', () => {

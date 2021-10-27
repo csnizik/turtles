@@ -9,6 +9,7 @@ import SpecificationsAndTools from '../../components/SpecificationsAndTools';
 import ResourceConcernTreated from '../../components/ResourceConcernTreated';
 import ProjectsAndInitiatives from '../../components/ProjectsAndInitiatives';
 import HorizontalScroll from '../../components/HorizontalScroll';
+import ProjectListGroup from '../../components/ProjectListGroup';
 
 const IndividualPracticeContainer = () => {
   const state = useAppSelector((s) => s);
@@ -24,7 +25,6 @@ const IndividualPracticeContainer = () => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
-
   return (
     <>
       <HorizontalScroll />
@@ -49,6 +49,7 @@ const IndividualPracticeContainer = () => {
       />
       <ApplicationImpacts data={data} isSuccess={isSuccess} />
       <ProjectsAndInitiatives data={data} isSuccess={isSuccess} />
+      <ProjectListGroup stateCode={stateCode} practiceId={practiceId} />
     </>
   );
 };

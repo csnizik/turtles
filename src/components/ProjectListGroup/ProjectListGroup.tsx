@@ -19,12 +19,25 @@ import { usePostProjectSearchDataQuery } from '../../Redux/services/api';
 import Spinner from '../Spinner/Spinner';
 
 //Initiatives constant to be replaced by backend data
-const ProjectListGroup = () => {
+const ProjectListGroup = ({ practiceId, stateCode }: any) => {
   const { t } = useTranslation();
-  const searchInputData = useAppSelector(
-    (state) => state.practiceSlice?.searchInput
-  );
-
+  let searchInputData;
+  if (practiceId && stateCode)
+    searchInputData = {
+      practice_id: practiceId,
+      state_county_code: stateCode,
+    };
+  else
+    searchInputData = useAppSelector(
+      (state) => state.practiceSlice?.searchInput
+    );
+  if (
+    searchInputData.state_county_code === '00' ||
+    searchInputData.state_county_code === '00000'
+  ) {
+    searchInputData = { ...searchInputData };
+    delete searchInputData.state_county_code;
+  }
   const { data, error, isLoading, isSuccess, isError } =
     usePostProjectSearchDataQuery(searchInputData);
 
