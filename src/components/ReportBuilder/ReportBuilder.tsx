@@ -10,6 +10,8 @@ const ReportBuilder = ({
   getRCTreatedComponent,
   reportPreviewData,
   handleGeneratePdf,
+  projectsInitiativesData,
+  stateName,
 }: any) => {
   const swapaCategoryCnt = swapaData?.result.length;
   const [swapaCategoryIds, setSwapaCategoryIds] = useState(new Set());
@@ -17,11 +19,11 @@ const ReportBuilder = ({
   const collectSwapaCategoryIds = () => {
     const tempSet = new Set();
     swapaData?.result.forEach((childData) => {
-      tempSet.add(childData.rcCategoryId)
-    })
-    
+      tempSet.add(childData.rcCategoryId);
+    });
+
     setSwapaCategoryIds(tempSet);
-  }
+  };
 
   useEffect(() => {
     collectSwapaCategoryIds();
@@ -43,7 +45,7 @@ const ReportBuilder = ({
     if (rcTreatedInputs.size < swapaCategoryCnt) {
       swapaCategoryIds.forEach((id) => {
         tempSet.add(id);
-      })
+      });
       setRcTreatedInput(tempSet);
       getRCTreatedComponent(tempSet);
       return;
@@ -57,7 +59,7 @@ const ReportBuilder = ({
     const tempSet = new Set();
     swapaCategoryIds.forEach((id) => {
       if (rcTreatedInputs.has(id)) tempSet.add(id);
-    })
+    });
 
     if (rcTreatedInputs.has(categoryId)) tempSet.delete(categoryId);
     else tempSet.add(categoryId);
@@ -113,6 +115,50 @@ const ReportBuilder = ({
     );
   };
 
+  const buildProjectsInitiativesCheckboxList = (projectsInitiativesData) => {
+    const allInput = (
+      <div className='usa-checkbox'>
+        <input
+          className='usa-checkbox__input'
+          id='projInitInputAll'
+          type='checkbox'
+          name='projInitInputAll'
+          value='All'
+          // checked={rcTreatedInputs.size >= swapaCategoryCnt}
+          onChange={() => toggleAll()}
+        />
+        <label className='usa-checkbox__label' htmlFor='projInitInputAll'>
+          All
+        </label>
+      </div>
+    );
+    const part2 = projectsInitiativesData?.map((item, index) => {
+      return (
+        <div key={item.rcCategoryId} className='usa-checkbox'>
+          <input
+            className='usa-checkbox__input'
+            id={getIdName(index)}
+            type='checkbox'
+            name={getIdName(index)}
+            value={item.rcCategoryId}
+            // checked={rcTreatedInputs.has(item.rcCategoryId)}
+            onChange={() => toggleSingle(item.rcCategoryId)}
+          />
+          <label className='usa-checkbox__label' htmlFor={`swapaInput${index}`}>
+            {item.title}
+          </label>
+        </div>
+      );
+    });
+    return (
+      <>
+        {' '}
+        {allInput}
+        {part2}
+      </>
+    );
+  };
+
   return (
     <div className='builder-container'>
       <div className='checkbox-container'>
@@ -129,7 +175,7 @@ const ReportBuilder = ({
             Practice Overview
           </label>
         </div>
-        <div>Resource Concerns Treated</div>
+        <div className='builder-title'>Resource Concerns Treated</div>
 
         <div className='swapa-checkbox-list'>
           {buildCheckboxList(swapaData)}
@@ -145,7 +191,7 @@ const ReportBuilder = ({
             onChange={handleInput}
           />
           <label className='usa-checkbox__label' htmlFor='input2'>
-            {`Support for ${reportPreviewData?.practiceName} in Colorado`}
+            {`Support for ${reportPreviewData?.practiceName} in ${stateName}`}
           </label>
         </div>
 
@@ -173,22 +219,14 @@ const ReportBuilder = ({
             onChange={handleInput}
           />
           <label className='usa-checkbox__label' htmlFor='input4'>
-            {`Impacts of Applying ${reportPreviewData?.practiceName} in Colorado`}
+            {`Impacts of Applying ${reportPreviewData?.practiceName} in ${stateName}`}
           </label>
         </div>
-
-        <div className='usa-checkbox'>
-          <input
-            className='usa-checkbox__input'
-            id='input5'
-            type='checkbox'
-            name='input5'
-            value={4}
-            onChange={handleInput}
-          />
-          <label className='usa-checkbox__label' htmlFor='input5'>
-            {`${reportPreviewData?.practiceName} Projects & Initiatives in Colorado`}
-          </label>
+        <div className='builder-title'>
+          {`${stateName} Cover Crop Projects and Initiatives`}
+        </div>
+        <div className='projects-initiatives-list'>
+          {buildProjectsInitiativesCheckboxList(projectsInitiativesData)}
         </div>
       </div>
       <button

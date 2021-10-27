@@ -62,9 +62,13 @@ const ReportPreview = ({
         {choiceInputs.input4 && (
           <ApplicationImpacts data={data} isSuccess={isSuccess} />
         )}
-        {choiceInputs.input5 && (
-          <ProjectsAndInitiatives data={data} isSuccess={isSuccess} />
-        )}
+        {/* {choiceInputs.input5 && (
+          <ProjectsAndInitiatives
+            data={data}
+            isSuccess={isSuccess}
+            setProjectsInitiativesData={() => {}}
+          />
+        )} */}
       </div>
     );
   };

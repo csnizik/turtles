@@ -10,7 +10,7 @@ import ResourceConcernTreated from '../../components/ResourceConcernTreated';
 import ProjectsAndInitiatives from '../../components/ProjectsAndInitiatives';
 import HorizontalScroll from '../../components/HorizontalScroll';
 
-const IndividualPracticeContainer = () => {
+const IndividualPracticeContainer = ({ setProjectsInitiativesData }: any) => {
   const state = useAppSelector((s) => s);
   const practiceId: any = state.practiceSlice.selectedSpecficPractice;
   let stateCode = state?.practiceSlice.searchInput.state_county_code;
@@ -48,7 +48,11 @@ const IndividualPracticeContainer = () => {
         isSuccess={isSuccess}
       />
       <ApplicationImpacts data={data} isSuccess={isSuccess} />
-      <ProjectsAndInitiatives data={data} isSuccess={isSuccess} />
+      <ProjectsAndInitiatives
+        data={data}
+        isSuccess={isSuccess}
+        setProjectsInitiativesData={setProjectsInitiativesData}
+      />
     </>
   );
 };

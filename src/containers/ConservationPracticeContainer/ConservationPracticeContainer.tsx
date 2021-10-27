@@ -33,6 +33,7 @@ const ConservationPracticeContainer = ({
     useState(defaultPracticeViews);
   const [openModal, setOpenModal] = useState(false);
   const [cleanModal, setCleanModal] = useState(false);
+  const [projectsInitiativesData, setProjectsInitiativesData] = useState([]);
 
   const dispatch = useAppDispatch();
   const location: any = useLocation();
@@ -108,7 +109,11 @@ const ConservationPracticeContainer = ({
       );
     }
     if (viewType === 'individualPractice') {
-      return <IndividualPracticeContainer />;
+      return (
+        <IndividualPracticeContainer
+          setProjectsInitiativesData={setProjectsInitiativesData}
+        />
+      );
     }
     return null;
   };
@@ -134,6 +139,7 @@ const ConservationPracticeContainer = ({
           openModal={openModal}
           handleCreateReport={handleCreateReport}
           cleanModal={cleanModal}
+          projectsInitiativesData={projectsInitiativesData}
         />
       </div>
       {renderPracticeContainerContent(currentViewType)}

@@ -26,6 +26,7 @@ const ReportPreviewCreator = ({
   openModal,
   handleCreateReport,
   cleanModal,
+  projectsInitiativesData,
 }: any) => {
   const rcRef = useRef();
   const [rcTreatedInputs, setRcTreatedInputs] = useState(new Set());
@@ -35,7 +36,6 @@ const ReportPreviewCreator = ({
     input2: false,
     input3: false,
     input4: false,
-    input5: false,
   });
 
   useEffect(() => {
@@ -46,9 +46,12 @@ const ReportPreviewCreator = ({
       input2: false,
       input3: false,
       input4: false,
-      input5: false,
     });
   }, [cleanModal]);
+
+  useEffect(() => {
+    console.log('projectsInitiativesData: ', projectsInitiativesData);
+  }, [projectsInitiativesData]);
 
   const state = useAppSelector((s) => s);
   const practiceId: any = state?.practiceSlice?.selectedSpecficPractice;
@@ -114,6 +117,7 @@ const ReportPreviewCreator = ({
           </div>
           <div className='report-container'>
             <ReportBuilder
+              stateName={stateName}
               swapaData={data}
               choiceInputs={choiceInputs}
               setChoiceInputs={setChoiceInputs}
@@ -122,6 +126,7 @@ const ReportPreviewCreator = ({
               getRCTreatedComponent={getRCTreatedComponent}
               reportPreviewData={reportPreviewData.data}
               handleGeneratePdf={handleGeneratePdf}
+              projectsInitiativesData={projectsInitiativesData}
             />
             <div className='preview-container'>
               <ReportPreview
