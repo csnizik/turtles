@@ -20,7 +20,9 @@
 }
 
 .projects-tab {
+  margin: 0rem 2.188rem;
   .project-tab-header {
+    margin: 2.5rem 0rem 3.75rem 0rem;
     p,
     li {
       font-weight: $semi-heavy-weight;
@@ -31,7 +33,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     .usa-card {
-      width: 95%;
+      width: 100%;
       p {
         font-weight: $semi-heavy-weight;
       }
@@ -41,18 +43,25 @@
     }
     .usa-card__header {
       color: $usda-blue;
+      padding: 1.875rem 1.563rem 0.688rem 1.563rem;
     }
 
+    .usa-card__body {
+      padding: 0rem 1.563rem 1.875rem 1.563rem;
+    }
     .usa-card__img {
       background-color: $white;
     }
   }
 
+  .usa-card:nth-of-type(1) {
+    .usa-card__footer {
+      padding: 0rem 1.563rem 1.875rem 1.563rem;
+    }
+  }
   .usa-card:nth-of-type(2) {
     .usa-card__footer {
-      img {
-        margin-bottom: 2rem;
-      }
+      padding: 0rem 1.563rem 1.875rem 1.563rem;
     }
   }
 
@@ -110,6 +119,14 @@
         margin: 0rem 0.6rem 0rem 0rem;
         border: none;
       }
+    }
+  }
+}
+
+@media only screen and (max-width: $iphonex-screen) {
+  .projects-tab {
+    .usa-card-group {
+      display: block;
     }
   }
 }

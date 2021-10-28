@@ -58,6 +58,12 @@ const LocationContainer = () => {
     ) {
       setTabOption(1);
     }
+    if (
+      (!currentTabOption && selectedPracticeCategory < 0) ||
+      !selectedPractice
+    ) {
+      setTabOption(0);
+    }
   }, [selectedPracticeCategory, selectedPractice]);
 
   const renderTabContent = () => (
