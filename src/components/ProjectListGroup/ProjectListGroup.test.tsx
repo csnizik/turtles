@@ -7,7 +7,16 @@ afterEach(() => {
 
 describe('Verify ProductListGroup is rendered correctly', () => {
   beforeEach(() => {
-    render(<ProjectListGroup practiceId={1} stateCode='00' />);
+    render(
+      <ProjectListGroup
+        error={null}
+        isError={false}
+        isLoading={false}
+        isSuccess={true}
+        isMapDisplayed={false}
+        projectsList={[]}
+      />
+    );
   });
 
   test('Verify project component', () => {

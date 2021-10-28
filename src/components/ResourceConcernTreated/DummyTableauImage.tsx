@@ -41,10 +41,10 @@ const DummyTableauImage = () => {
 
   return (
     <>
-      {/* <img 
+      {/* <img
         alt='Tableau Icon'
         // eslint-disable-next-line global-require
-        src={require('./image/Tableau-IconPlaceholder.png').default}      
+        src={require('./image/Tableau-IconPlaceholder.png').default}
       /> */}
       <img alt='Tableau Icon' src={updateUrl} />
     </>
