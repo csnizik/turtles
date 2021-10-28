@@ -23,7 +23,7 @@
   .project-tab-header {
     p,
     li {
-      font-weight: $medium-light-weight;
+      font-weight: $semi-heavy-weight;
     }
   }
 
@@ -33,7 +33,7 @@
     .usa-card {
       width: 95%;
       p {
-        font-weight: $medium-light-weight;
+        font-weight: $semi-heavy-weight;
       }
       &:hover {
         cursor: pointer;
@@ -55,12 +55,38 @@
       }
     }
   }
+
+  .projets-map-section {
+    hr {
+      width: 86.5%;
+    }
+    h3 {
+      font-weight: $semi-heavy-weight;
+    }
+    margin-left: 20rem;
+  }
 }
 
 .project-type-section {
+  h3,
+  p {
+    font-weight: $semi-heavy-weight;
+  }
   width: 85%;
   a {
     text-decoration: none;
+  }
+}
+
+.usa-pagination {
+  h3 {
+    font-weight: $semi-heavy-weight;
+  }
+}
+
+.projects-list-group {
+  .top-title {
+    margin-left: 2rem;
   }
 }
 
@@ -68,5 +94,22 @@
 @media only screen and (max-width: $macbook-pro-screen) {
   .project-type-section {
     width: 75%;
+  }
+  .outer-box {
+    margin: 0 0 0 0 !important;
+    .project-details {
+      margin: 0rem 0rem 1rem 0rem !important;
+      font-size: 13px !important;
+      span {
+        padding-left: 0.6rem;
+        margin: 0rem 0.6rem 0rem 0.6rem;
+        border-left: 1px solid $light-grey-6;
+      }
+      span:first-of-type {
+        padding-left: 0rem;
+        margin: 0rem 0.6rem 0rem 0rem;
+        border: none;
+      }
+    }
   }
 }
