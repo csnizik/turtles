@@ -31,6 +31,7 @@ const ReportPreviewCreator = ({
   const rcRef = useRef();
   const [rcTreatedInputs, setRcTreatedInputs] = useState(new Set());
   const [childArr, setChildArr] = useState<DomParent>();
+  const [selectedProjInitData, setSelectedProjInitData] = useState([]);
   const [choiceInputs, setChoiceInputs] = useState({
     input1: false,
     input2: false,
@@ -51,6 +52,7 @@ const ReportPreviewCreator = ({
 
   useEffect(() => {
     console.log('projectsInitiativesData: ', projectsInitiativesData);
+    setSelectedProjInitData(projectsInitiativesData);
   }, [projectsInitiativesData]);
 
   const state = useAppSelector((s) => s);
@@ -138,6 +140,7 @@ const ReportPreviewCreator = ({
                 reportPreviewData={reportPreviewData}
                 practiceId={practiceId}
                 rcRef={rcRef}
+                selectedProjInitData={selectedProjInitData}
               />
             </div>
           </div>

@@ -1,11 +1,13 @@
 import html2pdf from 'html2pdf.js';
 import './report-preview.scss';
 import { useEffect, useRef, useState } from 'react';
+import { map } from 'esri/widgets/TableList/TableListViewModel';
 import ConservationPracticeOverview from '../ConservationPracticeOverview';
 import ImplementationExtent from '../ImplementationExtent';
 import SpecificationsAndTools from '../SpecificationsAndTools';
 import ResourceConcernTreated from '../ResourceConcernTreated';
 import ProjectsAndInitiatives from '../ProjectsAndInitiatives';
+import ProjectListItem from '../ProjectListGroup/ProjectListItem';
 import ApplicationImpacts from '../ApplicationImpacts';
 import ConservationPracticeVideo from '../ConservationPracticeVideo';
 
@@ -17,11 +19,41 @@ const ReportPreview = ({
   practiceId,
   rcRef,
   rcTreatedInputs,
+  selectedProjInitData,
 }: any) => {
   const { data, error, isLoading, isSuccess, isError } = reportPreviewData;
   const [pdfUrl, setPdfUrl] = useState(null);
   const mountedRef = useRef(true);
 
+  const renderProjInit = (projInit) => {
+    const projInitList = projInit.data.map((item) => {
+      let identifyer = projInit.title.includes('Landscape')
+        ? 'initiative'
+        : 'project';
+      return (
+        <ProjectListItem
+          id={item?.[`${identifyer}Id`]}
+          description={item?.[`${identifyer}Description`]}
+          title={item?.[`${identifyer}Title`]}
+          owner={item?.[`${identifyer}Owner`]}
+          statesInvolved={item?.statesInvolved}
+          year={item?.awardeeYear}
+        />
+      );
+    });
+    return (
+      <>
+        <div>{projInit.title}</div>
+        {projInitList}
+      </>
+    );
+  };
+  const renderProjInits = (projInit) => {
+    let total = projInit.map((pItem) => {
+      return renderProjInit(pItem);
+    });
+    return total;
+  };
   const contentToRender = () => {
     return (
       <div id='preview-content'>
@@ -62,13 +94,7 @@ const ReportPreview = ({
         {choiceInputs.input4 && (
           <ApplicationImpacts data={data} isSuccess={isSuccess} />
         )}
-        {/* {choiceInputs.input5 && (
-          <ProjectsAndInitiatives
-            data={data}
-            isSuccess={isSuccess}
-            setProjectsInitiativesData={() => {}}
-          />
-        )} */}
+        {selectedProjInitData && renderProjInits(selectedProjInitData)}
       </div>
     );
   };
