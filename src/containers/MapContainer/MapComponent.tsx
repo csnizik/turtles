@@ -48,11 +48,11 @@ const MapComponent = ({ setSelectedLocation }: any) => {
 
   useEffect(() => {
     if (mapRef && mapRef.current) {
-      const map = new Map({
+      const map: Map = new Map({
         basemap: topoBaseMap,
       });
 
-      const view = new MapView({
+      const view: MapView = new MapView({
         center: CENTER_COORDINATES,
         container: VIEW_DIV,
         map,
@@ -81,7 +81,7 @@ const MapComponent = ({ setSelectedLocation }: any) => {
         wkid: 102965,
       });
 
-      const homeBtn = new Home({
+      const homeBtn: Home = new Home({
         view,
       });
 
