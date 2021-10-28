@@ -7,9 +7,8 @@ import {
   alaskaExtent,
   caribbeanExtent,
   CENTER_COORDINATES,
-  fillBorderColor,
+  highlightSymbol,
   hawaiiExtent,
-  simpleFillColor,
   topoBaseMap,
   VIEW_DIV,
   viewConstraints,
@@ -31,7 +30,7 @@ interface IMapProps {
   view: MapView;
 }
 
-const MapComponent = ({ setSelectedLocation }: any) => {
+const MapComponent = ({ selectedLocation, setSelectedLocation }: any) => {
   const alaskaView = useRef({} as MapView);
   const caribbeanView = useRef({} as MapView);
   const hawaiiView = useRef({} as MapView);
@@ -126,16 +125,6 @@ const MapComponent = ({ setSelectedLocation }: any) => {
               // Highlight selected state
               mapRef.current.view.graphics.removeAll();
 
-              const highlightSymbol = {
-                type: 'simple-fill',
-                color: simpleFillColor,
-                style: 'solid',
-                outline: {
-                  color: fillBorderColor,
-                  width: 1,
-                },
-              };
-
               const selectedGraphic = new Graphic({
                 geometry: selectedState.geometry,
                 symbol: highlightSymbol,
@@ -153,6 +142,37 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       });
     });
   }, [mapRef]);
+
+  // If selected location has a value, navigate and hightlight the selected state
+  useEffect(() => {
+    // Returns all the graphics from the continental U.S layer view
+    mapRef.current.view
+      .whenLayerView(conusStateLayer.current)
+      .then((layerView) => {
+        layerView.watch('updating', (val) => {
+          if (!val) {
+            layerView.queryFeatures().then((results) => {
+              const { features } = results;
+
+              const selectedGraphic = features.find((feature: any) => {
+                return feature.attributes.STATEFP === selectedLocation;
+              });
+
+              // Highlight selected state
+              mapRef.current.view.graphics.removeAll();
+              const selectedStateGraphic = new Graphic({
+                geometry: selectedGraphic?.geometry,
+                symbol: highlightSymbol,
+              });
+
+              mapRef.current.view.graphics.add(selectedStateGraphic);
+
+              mapRef.current.view.goTo(selectedGraphic);
+            });
+          }
+        });
+      });
+  }, [mapRef, selectedLocation]);
 
   return null;
 };

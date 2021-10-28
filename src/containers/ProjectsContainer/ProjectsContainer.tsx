@@ -1,9 +1,10 @@
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import MapContainer from '../MapContainer';
 import ProjectListGroup from '../../components/ProjectListGroup';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 import { usePostProjectSearchDataQuery } from '../../Redux/services/api';
 import './project-container.scss';
 
@@ -28,10 +29,19 @@ const ProjectsContainer = () => {
   const [selectedProjectCard, setSelectedProjectCard] = useState(-1);
   const [selectedLocation, setSelectedLocation] = useState('');
 
+  const stateSlice = useAppSelector((state) => state.stateSlice);
+  const selectedStateCode = stateSlice?.stateCode || '';
+
   const { data, error, isLoading, isSuccess, isError } =
     usePostProjectSearchDataQuery({
       state_county_code: selectedLocation,
     });
+
+  useEffect(() => {
+    if (selectedStateCode.length) {
+      setSelectedLocation(selectedStateCode);
+    }
+  }, [stateSlice]);
 
   const handleSelectProjectCard = (id: number) => {
     setSelectedProjectCard(id);
@@ -102,7 +112,10 @@ const ProjectsContainer = () => {
           <h3 className='margin-top-3 margin-bottom-3'>
             {t('projects-page.map-instructions')}
           </h3>
-          <MapContainer setSelectedLocation={setSelectedLocation} />
+          <MapContainer
+            selectedLocation={selectedLocation}
+            setSelectedLocation={setSelectedLocation}
+          />
         </div>
 
         <ProjectListGroup
