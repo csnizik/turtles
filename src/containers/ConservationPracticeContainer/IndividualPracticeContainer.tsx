@@ -49,7 +49,6 @@ const IndividualPracticeContainer = () => {
       />
       <ApplicationImpacts data={data} isSuccess={isSuccess} />
       <ProjectsAndInitiatives data={data} isSuccess={isSuccess} />
-      <ProjectListGroup stateCode={stateCode} practiceId={practiceId} />
     </>
   );
 };
