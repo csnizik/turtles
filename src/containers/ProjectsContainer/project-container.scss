@@ -3,17 +3,23 @@
 .projects-grid {
   display: grid;
 
-  grid-gap: 1rem;
-
   grid-template-columns: 20rem 1fr;
   ul.list-group {
+    margin: 0 0 0 0;
+    padding-right: 2rem;
     .list-group-item {
+      border-top: none;
+      border-right: none;
+      border-left: none;
       &:hover {
         cursor: pointer;
       }
       &.selected {
         color: $dark-blue;
         border-left: 3px solid $usda-blue;
+      }
+      &:last-of-type {
+        border: none;
       }
     }
   }
@@ -23,9 +29,11 @@
   margin: 0rem 2.188rem;
   .project-tab-header {
     margin: 2.5rem 0rem 3.75rem 0rem;
-    p,
+    p {
+      font-weight: $medium-light-weight;
+    }
     li {
-      font-weight: $semi-heavy-weight;
+      font-weight: $medium-light-weight;
     }
   }
 
@@ -48,6 +56,9 @@
 
     .usa-card__body {
       padding: 0rem 1.563rem 1.875rem 1.563rem;
+      .lead {
+        font-weight: $medium-light-weight;
+      }
     }
     .usa-card__img {
       background-color: $white;
@@ -67,35 +78,45 @@
 
   .projets-map-section {
     hr {
-      width: 86.5%;
+      width: 100%;
+      border-top: none;
+      margin: 0;
     }
+    h3 {
+      margin: 1.875rem 0 1.25rem 0;
+      font-weight: $semi-heavy-weight;
+    }
+    margin: 0 0 3.75rem 20rem;
+  }
+
+  .projects-list-group {
+    margin: 0 0 0 20rem;
+  }
+
+  .usa-pagination {
+    margin: 0;
     h3 {
       font-weight: $semi-heavy-weight;
     }
-    margin-left: 20rem;
   }
 }
 
 .project-type-section {
-  h3,
-  p {
+  margin-top: 2.5rem;
+  h3 {
+    margin: none;
     font-weight: $semi-heavy-weight;
   }
-  width: 85%;
+  p {
+    font-weight: $medium-light-weight;
+    margin: 0.625rem 0 1.875rem 0;
+    &:last-of-type {
+      margin: 0 0 1.875rem 0;
+    }
+  }
+  width: 100%;
   a {
     text-decoration: none;
-  }
-}
-
-.usa-pagination {
-  h3 {
-    font-weight: $semi-heavy-weight;
-  }
-}
-
-.projects-list-group {
-  .top-title {
-    margin-left: 2rem;
   }
 }
 
