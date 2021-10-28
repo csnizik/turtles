@@ -5,7 +5,7 @@ export const projectCards = [
     paragraphText:
       'Conservation Innovation Grants (CIG) is a competitive program that supports the development of new tools, approaches, practices, and technologies to further natural resource conservation on private lands. ',
     imgSrc: 'images/grantMap.png',
-    imgAlt: 'Map of the United States of America',
+    imgAlt: 'Map of the United States',
   },
   {
     id: 2,
