@@ -7,7 +7,6 @@ import {
   alaskaExtent,
   caribbeanExtent,
   CENTER_COORDINATES,
-  highlightSymbol,
   hawaiiExtent,
   topoBaseMap,
   VIEW_DIV,
@@ -122,17 +121,7 @@ const MapComponent = ({ selectedLocation, setSelectedLocation }: any) => {
 
             if (graphicList.length) {
               const selectedState: Graphic = graphicList[0].graphic;
-              // Highlight selected state
-              mapRef.current.view.graphics.removeAll();
-
-              const selectedGraphic = new Graphic({
-                geometry: selectedState.geometry,
-                symbol: highlightSymbol,
-              });
-
               setSelectedLocation(selectedState.attributes.STATEFP);
-
-              mapRef.current.view.graphics.add(selectedGraphic);
 
               // Zoom to selected state
               mapRef.current.view.goTo({ target: selectedState, zoom: 5 });
@@ -158,16 +147,8 @@ const MapComponent = ({ selectedLocation, setSelectedLocation }: any) => {
                 return feature.attributes.STATEFP === selectedLocation;
               });
 
-              // Highlight selected state
-              mapRef.current.view.graphics.removeAll();
-              const selectedStateGraphic = new Graphic({
-                geometry: selectedGraphic?.geometry,
-                symbol: highlightSymbol,
-              });
-
-              mapRef.current.view.graphics.add(selectedStateGraphic);
-
-              mapRef.current.view.goTo(selectedGraphic);
+              // Zoom to selected state
+              mapRef.current.view.goTo({ target: selectedGraphic, zoom: 4 });
             });
           }
         });
