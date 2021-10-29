@@ -14,26 +14,34 @@ import ProjectListItem from './ProjectListItem';
 import { projectTabs, initiativesList } from './constants';
 import './project-list-group.scss';
 import Pagination from '../Pagination';
-import { useAppSelector } from '../../Redux/hooks/hooks';
-import { usePostProjectSearchDataQuery } from '../../Redux/services/api';
 import Spinner from '../Spinner/Spinner';
 
-//Initiatives constant to be replaced by backend data
-const ProjectListGroup = () => {
-  const { t } = useTranslation();
-  const searchInputData = useAppSelector(
-    (state) => state.practiceSlice?.searchInput
-  );
+interface IProjectListProps {
+  isMapDisplayed: boolean;
+  projectsList: any;
+  error: any;
+  isLoading: boolean;
+  isSuccess: boolean;
+  isError: boolean;
+}
 
-  const { data, error, isLoading, isSuccess, isError } =
-    usePostProjectSearchDataQuery(searchInputData);
+//Initiatives constant to be replaced by backend data
+const ProjectListGroup = ({
+  error,
+  isLoading,
+  isError,
+  isMapDisplayed,
+  isSuccess,
+  projectsList,
+}: IProjectListProps) => {
+  const { t } = useTranslation();
 
   const [activeTab, setActiveTab] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(10);
   const [currentIPage, setCurrentIPage] = useState(1);
 
-  const grantsLength = data?.length;
+  const grantsLength = projectsList?.length;
   const initiativesLength = initiativesList.length;
 
   const toggleProjectsTab = (tab: number) => {
@@ -41,10 +49,10 @@ const ProjectListGroup = () => {
   };
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = data?.slice(indexOfFirstCard, indexOfLastCard);
+  const currentCards = projectsList?.slice(indexOfFirstCard, indexOfLastCard);
   let indexOfLastPage = -1;
-  if (data) {
-    indexOfLastPage = Math.ceil(data.length / cardsPerPage);
+  if (projectsList) {
+    indexOfLastPage = Math.ceil(projectsList.length / cardsPerPage);
   }
 
   const indexOfLastICard = currentIPage * cardsPerPage;
@@ -97,12 +105,14 @@ const ProjectListGroup = () => {
   };
   return (
     <div className='projects-list-group' data-testid='projects-list-group'>
-      <div className='top-title'>
-        <h4 className='title'>
-          {t('search-results-page.project-initiatives')}
-        </h4>
-      </div>
-      {renderProjectTypeTabs()}
+      {!isMapDisplayed && (
+        <div className='top-title'>
+          <h4 className='title'>
+            {t('search-results-page.project-initiatives')}
+          </h4>
+        </div>
+      )}
+      {!isMapDisplayed && renderProjectTypeTabs()}
       <TabContent activeTab={activeTab}>
         <TabPane tabId={1}>
           <Pagination
@@ -110,33 +120,30 @@ const ProjectListGroup = () => {
             cardsPerPage={cardsPerPage}
             paginate={paginate}
             currentPage={currentPage}
-            indexOfLastPage={indexOfLastPage}
-            indexOfFirstCard={indexOfFirstCard}
-            indexOfLastCard={indexOfLastCard}
+            indexOfLastPage={indexOfLastIPage}
+            indexOfFirstCard={indexOfFirstICard}
+            indexOfLastCard={indexOfLastICard}
           />
           <Row>
             <Col sm='12' className='p-3'>
               {isLoading && <Spinner />}
               {isError && error}
-              {isSuccess && data && (
+              {isSuccess && projectsList.length ? (
                 <ul className='list-group projects-data'>
                   {currentCards?.map((project: any) => {
-                    const projectID = project.projectId;
                     return (
-                      <div key={projectID}>
-                        <ProjectListItem
-                          id={project.projectId}
-                          description={project.projectDescription}
-                          title={project.projectTitle}
-                          owner={project.projectOwner}
-                          statesInvolved={project.statesInvolved}
-                          year={project.awardeeYear}
-                        />
-                      </div>
+                      <ProjectListItem
+                        id={project.projectId}
+                        description={project.projectDescription}
+                        title={project.projectTitle}
+                        owner={project.projectOwner}
+                        statesInvolved={project.statesInvolved}
+                        year={project.awardeeYear}
+                      />
                     );
                   })}
                 </ul>
-              )}
+              ) : null}
             </Col>
           </Row>
         </TabPane>

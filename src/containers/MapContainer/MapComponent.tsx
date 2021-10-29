@@ -1,70 +1,50 @@
 import { useEffect, useRef } from 'react';
-import MapView from '@arcgis/core/views/MapView';
+import Graphic from '@arcgis/core/Graphic';
 import Home from '@arcgis/core/widgets/Home';
+import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
-import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
 import {
+  alaskaExtent,
+  caribbeanExtent,
   CENTER_COORDINATES,
+  fillBorderColor,
+  hawaiiExtent,
+  simpleFillColor,
   topoBaseMap,
-  MIN_ZOOM,
-  MAX_ZOOM,
   VIEW_DIV,
+  viewConstraints,
 } from './constants';
+import {
+  alaskaFeatureLayer0,
+  alaskaFeatureLayer1,
+  caribbeanFeatureLayer0,
+  caribbeanFeatureLayer1,
+  conusFeatureLayer0,
+  conusFeatureLayer1,
+  hawaiiFeatureLayer0,
+  hawaiiFeatureLayer1,
+} from './layers';
+import { createMapView } from './mapUtils';
 import '@arcgis/core/assets/esri/themes/light/main.css';
 
 interface IMapProps {
   view: MapView;
 }
 
-const conusFeatureLayerURL: string =
-  'https://gis1-eft.spatialfrontlab.com/arcgis/rest/services/cig-cpd/Project_CONUS/MapServer';
-
-const alaskaFeatureLayerURL: string =
-  'https://gis1-eft.spatialfrontlab.com/arcgis/rest/services/cig-cpd/Project_Alaska/MapServer';
-
-const hawaiiFeatureLayerURL: string =
-  'https://gis1-eft.spatialfrontlab.com/arcgis/rest/services/cig-cpd/Project_Hawaii/MapServer';
-
-const MapComponent = () => {
+const MapComponent = ({ setSelectedLocation }: any) => {
+  const alaskaView = useRef({} as MapView);
+  const caribbeanView = useRef({} as MapView);
+  const hawaiiView = useRef({} as MapView);
   const mapRef = useRef({} as IMapProps);
-  // Project count layer
-  const conusFeatureToPointLayer = useRef(
-    new FeatureLayer({
-      url: conusFeatureLayerURL,
-      layerId: 0,
-    })
-  );
-  // State layout / boundaries
-  const conusStateLayer = useRef(
-    new FeatureLayer({
-      url: conusFeatureLayerURL,
-      layerId: 1,
-    })
-  );
-  const alaskaFeatureToPointLayer = useRef(
-    new FeatureLayer({
-      url: alaskaFeatureLayerURL,
-      layerId: 0,
-    })
-  );
-  const alaskaLayer = useRef(
-    new FeatureLayer({
-      url: alaskaFeatureLayerURL,
-      layerId: 1,
-    })
-  );
-  const hawaiiFeatureToPointLayer = useRef(
-    new FeatureLayer({
-      url: hawaiiFeatureLayerURL,
-      layerId: 0,
-    })
-  );
-  const hawaiiLayer = useRef(
-    new FeatureLayer({
-      url: hawaiiFeatureLayerURL,
-      layerId: 1,
-    })
-  );
+
+  const alaskaFeatureToPointLayer = useRef(alaskaFeatureLayer0);
+  const alaskaLayer = useRef(alaskaFeatureLayer1);
+  const conusFeatureToPointLayer = useRef(conusFeatureLayer0);
+  const conusStateLayer = useRef(conusFeatureLayer1);
+  const caribbeanFeatureToPointLayer = useRef(caribbeanFeatureLayer0);
+  const caribbeanLayer = useRef(caribbeanFeatureLayer1);
+  const hawaiiFeatureToPointLayer = useRef(hawaiiFeatureLayer0);
+  const hawaiiLayer = useRef(hawaiiFeatureLayer1);
 
   useEffect(() => {
     if (mapRef && mapRef.current) {
@@ -79,10 +59,27 @@ const MapComponent = () => {
         zoom: 4,
       });
 
-      view.constraints = {
-        minZoom: MIN_ZOOM,
-        maxZoom: MAX_ZOOM,
-      };
+      view.constraints = viewConstraints;
+
+      // Alaska composite view
+      alaskaView.current = createMapView('akViewDiv', map, alaskaExtent, {
+        wkid: 102009,
+      });
+
+      // Caribbean composite view
+      caribbeanView.current = createMapView(
+        'cariViewDiv',
+        map,
+        caribbeanExtent,
+        {
+          wkid: 102965,
+        }
+      );
+
+      // Hawaii composite view
+      hawaiiView.current = createMapView('hiViewDiv', map, hawaiiExtent, {
+        wkid: 102965,
+      });
 
       const homeBtn = new Home({
         view,
@@ -92,14 +89,69 @@ const MapComponent = () => {
       // Add the home button to the top left corner of the view
       mapRef.current.view.ui.add(homeBtn, 'top-left');
 
+      // Add composite views for Alaska, Hawaii, and Caribbean
+      mapRef.current.view.ui.add('akViewDiv', 'bottom-left');
+      mapRef.current.view.ui.add('hiViewDiv', 'bottom-left');
+      mapRef.current.view.ui.add('cariViewDiv', 'bottom-left');
+
       // Add Feature Layers
-      map.layers.add(conusFeatureToPointLayer.current);
-      map.layers.add(conusStateLayer.current);
       map.layers.add(alaskaFeatureToPointLayer.current);
       map.layers.add(alaskaLayer.current);
+      map.layers.add(conusFeatureToPointLayer.current);
+      map.layers.add(conusStateLayer.current);
+      map.layers.add(caribbeanFeatureToPointLayer.current);
+      map.layers.add(caribbeanLayer.current);
       map.layers.add(hawaiiFeatureToPointLayer.current);
       map.layers.add(hawaiiLayer.current);
     }
+  }, [mapRef]);
+
+  // Handle map interactions
+  useEffect(() => {
+    mapRef.current.view.when(() => {
+      mapRef.current.view.on('pointer-up', (event) => {
+        mapRef.current.view.hitTest(event).then((response) => {
+          mapRef.current.view.graphics.removeAll();
+          if (response.results.length) {
+            const graphicList: any = response.results.filter((item: any) => {
+              // check if the graphic belongs to the states layer
+              if (conusStateLayer.current) {
+                return item.graphic.layer === conusStateLayer.current;
+              }
+              return response.results;
+            });
+
+            if (graphicList.length) {
+              const selectedState: Graphic = graphicList[0].graphic;
+              // Highlight selected state
+              mapRef.current.view.graphics.removeAll();
+
+              const highlightSymbol = {
+                type: 'simple-fill',
+                color: simpleFillColor,
+                style: 'solid',
+                outline: {
+                  color: fillBorderColor,
+                  width: 1,
+                },
+              };
+
+              const selectedGraphic = new Graphic({
+                geometry: selectedState.geometry,
+                symbol: highlightSymbol,
+              });
+
+              setSelectedLocation(selectedState.attributes.STATEFP);
+
+              mapRef.current.view.graphics.add(selectedGraphic);
+
+              // Zoom to selected state
+              mapRef.current.view.goTo({ target: selectedState, zoom: 5 });
+            }
+          }
+        });
+      });
+    });
   }, [mapRef]);
 
   return null;
