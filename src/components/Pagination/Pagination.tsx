@@ -8,6 +8,7 @@ const Pagination = ({
   indexOfLastPage,
   indexOfFirstCard,
   indexOfLastCard,
+  selectedStateName,
 }: any) => {
   const handlePrevClick = () => {
     paginate(currentPage - 1);
@@ -23,6 +24,24 @@ const Pagination = ({
     pageNumbers.push(i);
   }
 
+  const renderTitle = () => {
+    if (selectedStateName) {
+      return (
+        <h3>
+          {indexOfFirstCard + 1} -{' '}
+          {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards}{' '}
+          projects for {selectedStateName}
+        </h3>
+      );
+    }
+    return (
+      <h3>
+        Showing {indexOfFirstCard + 1} -{' '}
+        {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards} projects
+      </h3>
+    );
+  };
+
   return (
     <>
       <nav
@@ -30,11 +49,7 @@ const Pagination = ({
         data-testid='Pagination'
         className='usa-pagination'
       >
-        <h3>
-          Showing {indexOfFirstCard + 1} -{' '}
-          {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards}{' '}
-          projects
-        </h3>
+        {renderTitle()}
         <ul className='usa-pagination__list'>
           <li className='usa-pagination__item usa-pagination__arrow'>
             {currentPage !== 1 ? (

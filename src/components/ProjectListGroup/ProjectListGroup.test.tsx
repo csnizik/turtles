@@ -15,6 +15,7 @@ describe('Verify ProductListGroup is rendered correctly', () => {
         isSuccess={true}
         isMapDisplayed={false}
         projectsList={[]}
+        selectedStateName={''}
       />
     );
   });
