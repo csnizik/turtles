@@ -8,10 +8,16 @@ import './results.scss';
 
 const ResultsContainer = () => {
   const { t } = useTranslation();
-  const searchInputData = useAppSelector(
+  let searchInputData = useAppSelector(
     (state) => state.practiceSlice?.searchInput
   );
-
+  if (
+    searchInputData.state_county_code === '00' ||
+    searchInputData.state_county_code === '00000'
+  ) {
+    searchInputData = { ...searchInputData };
+    delete searchInputData.state_county_code;
+  }
   const { data, error, isLoading, isSuccess, isError } =
     usePostProjectSearchDataQuery(searchInputData);
 
