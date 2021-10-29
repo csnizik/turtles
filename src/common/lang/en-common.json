@@ -70,5 +70,9 @@
   "associated-practices": {
     "title": "Associated Practices",
     "description": "These are conservation practices that are commonly applied in association with this practice."
+  },
+  "projects-initiatives": {
+    "innovation-tab": "Conservation Innovation Grants lorum ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula diam et diam tempor fringilla. Additional contextual information lorum ipsum dolor sit amet, consectetur adipiscing elit.",
+    "landscape-tab": "Landscape Conservation Initiatives lorum ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula diam et diam tempor fringilla. Additional contextual information lorum ipsum dolor sit amet, consectetur adipiscing elit."
   }
 }

@@ -115,6 +115,11 @@ const ProjectListGroup = ({
       {!isMapDisplayed && renderProjectTypeTabs()}
       <TabContent activeTab={activeTab}>
         <TabPane tabId={1}>
+          {!isMapDisplayed && (
+            <p className='intro-desc'>
+              {t('projects-initiatives.innovation-tab')}
+            </p>
+          )}
           <Pagination
             cards={grantsLength}
             cardsPerPage={cardsPerPage}
@@ -148,6 +153,11 @@ const ProjectListGroup = ({
           </Row>
         </TabPane>
         <TabPane tabId={2}>
+          {!isMapDisplayed && (
+            <p className='intro-desc'>
+              {t('projects-initiatives.landscape-tab')}
+            </p>
+          )}
           <Pagination
             cards={initiativesLength}
             cardsPerPage={cardsPerPage}

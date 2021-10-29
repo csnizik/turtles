@@ -11,12 +11,17 @@
   .title {
     margin-left: -2.188rem;
   }
+  .intro-desc {
+    margin: 1.25rem 0 2.5rem 0;
+  }
 }
 
 .projects-data {
   li.list-group-item {
     border: 1px solid $light-grey-5;
-    margin: 1rem 0rem 1rem 0rem;
+    border-radius: 6px;
+    margin: 0rem 0rem 1rem 0rem;
+    padding: 0 1.563rem 0 1.563rem;
 
     .outer-box {
       margin: 0 0 0 1.5rem;
@@ -36,6 +41,7 @@
       }
     }
     p:first-of-type {
+      margin: 1.563rem 0 0.625rem 0;
       font-size: 18px;
       font-weight: $heavier-weight;
       color: $usda-blue;
@@ -43,6 +49,7 @@
 
     p:nth-of-type(2) {
       font-size: 16px;
+      margin: 1.875rem 0 1.563rem 0;
     }
   }
 }
@@ -51,8 +58,7 @@
   .projects-list-group {
     margin: 1rem 2rem;
     ul.nav-fpac {
-      width: 42.5%;
-      display: block;
+      display: contents;
     }
   }
   .outer-box {
