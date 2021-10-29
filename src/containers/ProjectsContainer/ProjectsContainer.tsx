@@ -13,6 +13,7 @@ interface IProjectTypeCard {
   id: number;
   title: string;
   paragraphText: string;
+  paragraphDescription: string;
   imgSrc: string;
   imgAlt: string;
 }
@@ -52,9 +53,11 @@ const ProjectsContainer = () => {
     );
     if (!selectedProjectType) return null;
     return (
-      <div className='project-type-section margin-top-2'>
+      <div className='project-type-section'>
         <h3>{selectedProjectType.title}</h3>
-        <p className='margin-top-3'>{selectedProjectType.paragraphText}</p>
+        <p className='margin-top-3'>
+          {selectedProjectType.paragraphDescription}
+        </p>
         <p>
           Visit the{' '}
           <a
@@ -65,7 +68,15 @@ const ProjectsContainer = () => {
           >
             CIG website
           </a>{' '}
-          for more information.
+          for more information. Use
+          <a
+            aria-label='Conservation Innovation Grants link opens a new tab'
+            href='/search'
+            target='_blank'
+            rel='noreferrer'
+          >
+            &nbsp;advanced filters to search projects.
+          </a>
         </p>
       </div>
     );
@@ -75,7 +86,7 @@ const ProjectsContainer = () => {
     return (
       <div className='projects-tab'>
         <div className='projects-grid'>
-          <ListGroup className='margin-2'>
+          <ListGroup>
             {projectListGroups.map((listItem: IProjectListGroup) => {
               const listGroupItemClassNames = classNames(
                 'justify-content-between',
@@ -99,9 +110,7 @@ const ProjectsContainer = () => {
         </div>
         <div className='projets-map-section'>
           <hr />
-          <h3 className='margin-top-3 margin-bottom-3'>
-            {t('projects-page.map-instructions')}
-          </h3>
+          <h3>{t('projects-page.map-instructions')}</h3>
           <MapContainer setSelectedLocation={setSelectedLocation} />
         </div>
 
