@@ -45,9 +45,9 @@ const ConservationPracticeContainer = ({
 
   const sharedState = location?.state?.detail;
 
-  if (window.localStorage.getItem('StateId')) {
-    const selectedStateValue = window.localStorage.getItem('StateId');
+  const selectedStateValue = window.localStorage.getItem('StateId');
 
+  if (window.localStorage.getItem('StateId')) {
     const selectedState =
       selectedStateValue &&
       stateStatus.isSuccess &&
@@ -60,7 +60,7 @@ const ConservationPracticeContainer = ({
 
   let searchInputData = {
     practice_id: currentSpecificPractice,
-    state_county_code: selectedStateCode,
+    state_county_code: selectedStateValue?.toString(),
     practice_category_id: currentPracticeCategoryId,
   };
 
