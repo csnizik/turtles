@@ -21,6 +21,7 @@ import {
   setSpecificPractice,
 } from '../../Redux/Slice/practiceSlice';
 import ProjectListGroup from '../../components/ProjectListGroup';
+import { initiativesList } from '../../components/ProjectListGroup/constants';
 
 const defaultPracticeViews = {
   allPractices: false,
@@ -37,7 +38,9 @@ const ConservationPracticeContainer = ({
     useState(defaultPracticeViews);
   const [openModal, setOpenModal] = useState(false);
   const [cleanModal, setCleanModal] = useState(false);
-  const [projectsInitiativesData, setProjectsInitiativesData] = useState([]);
+  const [projectsInitiativesData, setProjectsInitiativesData]: any = useState(
+    []
+  );
 
   const dispatch = useAppDispatch();
   const location: any = useLocation();
@@ -87,6 +90,14 @@ const ConservationPracticeContainer = ({
       dispatch(enablePdfGenState());
     }
   };
+
+  useEffect(() => {
+    const tempData = [
+      { title: 'Conservation Innovation Grants', data: pdata },
+      { title: 'Landscape Conservation Initiatives', data: initiativesList },
+    ];
+    setProjectsInitiativesData(tempData);
+  }, [pdata]);
 
   useEffect(() => {
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {

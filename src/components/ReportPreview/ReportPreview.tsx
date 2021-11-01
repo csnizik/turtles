@@ -25,13 +25,19 @@ const ReportPreview = ({
   const [pdfUrl, setPdfUrl] = useState(null);
   const mountedRef = useRef(true);
 
+  useEffect(() => {
+    console.log('selectedProjInitData: ', selectedProjInitData);
+  }, [selectedProjInitData]);
+
   const renderProjInit = (projInit) => {
     const projInitList = projInit.data.map((item) => {
       let identifyer = projInit.title.includes('Landscape')
         ? 'initiative'
         : 'project';
+      console.log('identifyer: ', identifyer);
       return (
         <ProjectListItem
+          key={item?.[`${identifyer}Id`]}
           id={item?.[`${identifyer}Id`]}
           description={item?.[`${identifyer}Description`]}
           title={item?.[`${identifyer}Title`]}
@@ -49,6 +55,7 @@ const ReportPreview = ({
     );
   };
   const renderProjInits = (projInit) => {
+    console.log('renderProjInits: ', projInit);
     let total = projInit.map((pItem) => {
       return renderProjInit(pItem);
     });
@@ -94,7 +101,9 @@ const ReportPreview = ({
         {choiceInputs.input4 && (
           <ApplicationImpacts data={data} isSuccess={isSuccess} />
         )}
-        {selectedProjInitData && renderProjInits(selectedProjInitData)}
+        {selectedProjInitData.length > 0
+          ? renderProjInits(selectedProjInitData)
+          : null}
       </div>
     );
   };
@@ -128,7 +137,7 @@ const ReportPreview = ({
     return () => {
       mountedRef.current = false;
     };
-  }, [choiceInputs, rcTreatedInputs]);
+  }, [choiceInputs, rcTreatedInputs, selectedProjInitData]);
 
   return (
     <div className='pdf-preview'>

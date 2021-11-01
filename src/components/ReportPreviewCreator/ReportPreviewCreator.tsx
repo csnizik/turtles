@@ -50,10 +50,10 @@ const ReportPreviewCreator = ({
     });
   }, [cleanModal]);
 
-  useEffect(() => {
-    console.log('projectsInitiativesData: ', projectsInitiativesData);
-    setSelectedProjInitData(projectsInitiativesData);
-  }, [projectsInitiativesData]);
+  // useEffect(() => {
+  //   console.log('projectsInitiativesData: ', projectsInitiativesData);
+  //   setSelectedProjInitData(projectsInitiativesData);
+  // }, [projectsInitiativesData]);
 
   const state = useAppSelector((s) => s);
   const practiceId: any = state?.practiceSlice?.selectedSpecficPractice;
@@ -130,6 +130,7 @@ const ReportPreviewCreator = ({
               reportPreviewData={reportPreviewData.data}
               handleGeneratePdf={handleGeneratePdf}
               projectsInitiativesData={projectsInitiativesData}
+              setSelectedProjInitData={setSelectedProjInitData}
             />
             <div className='preview-container'>
               <ReportPreview

@@ -12,9 +12,12 @@ const ReportBuilder = ({
   handleGeneratePdf,
   projectsInitiativesData,
   stateName,
+  setSelectedProjInitData,
 }: any) => {
   const swapaCategoryCnt = swapaData?.result.length;
   const [swapaCategoryIds, setSwapaCategoryIds] = useState(new Set());
+  const [projectsInitiativesAll, setProjectsInitiativesAll] = useState(false);
+  const [projectsInitiatives, setProjectsInitiatives]: any = useState([]);
 
   const collectSwapaCategoryIds = () => {
     const tempSet = new Set();
@@ -28,6 +31,9 @@ const ReportBuilder = ({
   useEffect(() => {
     collectSwapaCategoryIds();
     getRCTreatedComponent(new Set());
+    const projectsInitiativesSize = projectsInitiativesData.length;
+    const initProjectsInitiatives = Array(projectsInitiativesSize).fill(false);
+    setProjectsInitiatives(initProjectsInitiatives);
   }, []);
 
   const handleInput = (e) => {
@@ -57,10 +63,13 @@ const ReportBuilder = ({
 
   const toggleSingle = (categoryId: any) => {
     const tempSet = new Set();
+    console.log('swapaCategoryIds: ', swapaCategoryIds);
+    console.log('rcTreatedInputs: ', rcTreatedInputs);
     swapaCategoryIds.forEach((id) => {
       if (rcTreatedInputs.has(id)) tempSet.add(id);
     });
-
+    console.log('tempSet: ', tempSet);
+    console.log('categoryId: ', categoryId);
     if (rcTreatedInputs.has(categoryId)) tempSet.delete(categoryId);
     else tempSet.add(categoryId);
     setRcTreatedInput(tempSet);
@@ -115,6 +124,31 @@ const ReportBuilder = ({
     );
   };
 
+  const toggleAllProjectsInitiatives = () => {
+    let checkedValue = !projectsInitiativesAll;
+    setProjectsInitiativesAll(checkedValue);
+    setProjectsInitiatives([...projectsInitiatives].fill(checkedValue));
+  };
+
+  const toggleSingleProjectsInitiative = (initiative) => {
+    setProjectsInitiatives(
+      Object.assign([...projectsInitiatives], {
+        [initiative]: !projectsInitiatives[initiative],
+      })
+    );
+  };
+
+  useEffect(() => {
+    setProjectsInitiativesAll(!projectsInitiatives.includes(false));
+    let selectedItems: any = [];
+    console.log('projectsInitiatives:', projectsInitiatives);
+    projectsInitiatives.forEach((element, index) => {
+      if (element) selectedItems.push(projectsInitiativesData[index]);
+      console.log('selectedItems: ', selectedItems);
+      setSelectedProjInitData(selectedItems);
+    });
+  }, [projectsInitiatives]);
+
   const buildProjectsInitiativesCheckboxList = (projectsInitiativesData) => {
     const allInput = (
       <div className='usa-checkbox'>
@@ -124,8 +158,8 @@ const ReportBuilder = ({
           type='checkbox'
           name='projInitInputAll'
           value='All'
-          // checked={rcTreatedInputs.size >= swapaCategoryCnt}
-          onChange={() => toggleAll()}
+          checked={projectsInitiativesAll}
+          onChange={() => toggleAllProjectsInitiatives()}
         />
         <label className='usa-checkbox__label' htmlFor='projInitInputAll'>
           All
@@ -134,17 +168,20 @@ const ReportBuilder = ({
     );
     const part2 = projectsInitiativesData?.map((item, index) => {
       return (
-        <div key={item.rcCategoryId} className='usa-checkbox'>
+        <div key={index} className='usa-checkbox'>
           <input
             className='usa-checkbox__input'
-            id={getIdName(index)}
+            id={`projInitInput${index}`}
             type='checkbox'
-            name={getIdName(index)}
-            value={item.rcCategoryId}
-            // checked={rcTreatedInputs.has(item.rcCategoryId)}
-            onChange={() => toggleSingle(item.rcCategoryId)}
+            name={`projInitInput${index}`}
+            value={index}
+            checked={projectsInitiatives[index]}
+            onChange={() => toggleSingleProjectsInitiative(index)}
           />
-          <label className='usa-checkbox__label' htmlFor={`swapaInput${index}`}>
+          <label
+            className='usa-checkbox__label'
+            htmlFor={`projInitInput${index}`}
+          >
             {item.title}
           </label>
         </div>

@@ -48,11 +48,11 @@ const IndividualPracticeContainer = ({ setProjectsInitiativesData }: any) => {
         isSuccess={isSuccess}
       />
       <ApplicationImpacts data={data} isSuccess={isSuccess} />
-      <ProjectsAndInitiatives
+      {/* <ProjectsAndInitiatives
         data={data}
         isSuccess={isSuccess}
         setProjectsInitiativesData={setProjectsInitiativesData}
-      />
+      /> */}
     </>
   );
 };
