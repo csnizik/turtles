@@ -32,11 +32,15 @@ const ProjectsContainer = () => {
   const [selectedProjectCard, setSelectedProjectCard] = useState(-1);
   const [selectedLocation, setSelectedLocation] = useState('');
   const stateStatus: any = useGetStateListQuery();
+  let searchInput = { state_county_code: selectedLocation };
+
+  if (!selectedLocation || '00' || '00000') {
+    searchInput = { ...searchInput };
+    searchInput.state_county_code = null;
+  }
 
   const { data, error, isLoading, isSuccess, isError } =
-    usePostProjectSearchDataQuery({
-      state_county_code: selectedLocation,
-    });
+    usePostProjectSearchDataQuery(searchInput);
 
   const selectedState =
     selectedLocation &&
