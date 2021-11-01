@@ -4,7 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import MapContainer from '../MapContainer';
 import ProjectListGroup from '../../components/ProjectListGroup';
-import { usePostProjectSearchDataQuery } from '../../Redux/services/api';
+import {
+  useGetStateListQuery,
+  usePostProjectSearchDataQuery,
+} from '../../Redux/services/api';
 import './project-container.scss';
 
 import { projectCards, projectListGroups, projectPurposes } from './constants';
@@ -28,11 +31,22 @@ const ProjectsContainer = () => {
   const [toggleProjectView, setToggleProjectView] = useState(false);
   const [selectedProjectCard, setSelectedProjectCard] = useState(-1);
   const [selectedLocation, setSelectedLocation] = useState('');
+  const stateStatus: any = useGetStateListQuery();
 
   const { data, error, isLoading, isSuccess, isError } =
     usePostProjectSearchDataQuery({
       state_county_code: selectedLocation,
     });
+
+  const selectedState =
+    selectedLocation &&
+    stateStatus.isSuccess &&
+    stateStatus.data &&
+    stateStatus.data.find((state: any) => {
+      return state.stateNameDisplay;
+    });
+
+  const selectedStateName = selectedState.stateNameDisplay;
 
   const handleSelectProjectCard = (id: number) => {
     setSelectedProjectCard(id);
@@ -121,6 +135,7 @@ const ProjectsContainer = () => {
           isSuccess={isSuccess}
           isMapDisplayed={true}
           projectsList={data}
+          selectedStateName={selectedStateName}
         />
       </div>
     );

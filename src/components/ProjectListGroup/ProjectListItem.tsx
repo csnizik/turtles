@@ -5,6 +5,7 @@ const ProjectListItem = ({
   statesInvolved,
   year,
   description,
+  link,
 }: any) => {
   const renderProjectDetails = (
     projectOwner: string,
@@ -26,7 +27,9 @@ const ProjectListItem = ({
 
   return (
     <li key={id} className='list-group-item'>
-      <p>{title}</p>
+      <p>
+        <a href={link}>{title}</a>
+      </p>
       {owner && renderProjectDetails(owner, statesInvolved, year)}
       <p>{description}</p>
     </li>
