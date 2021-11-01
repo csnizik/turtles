@@ -23,6 +23,7 @@ interface IProjectListProps {
   isLoading: boolean;
   isSuccess: boolean;
   isError: boolean;
+  selectedStateName?: any;
 }
 
 //Initiatives constant to be replaced by backend data
@@ -33,6 +34,7 @@ const ProjectListGroup = ({
   isMapDisplayed,
   isSuccess,
   projectsList,
+  selectedStateName,
 }: IProjectListProps) => {
   const { t } = useTranslation();
 
@@ -125,9 +127,9 @@ const ProjectListGroup = ({
             cardsPerPage={cardsPerPage}
             paginate={paginate}
             currentPage={currentPage}
-            indexOfLastPage={indexOfLastIPage}
-            indexOfFirstCard={indexOfFirstICard}
-            indexOfLastCard={indexOfLastICard}
+            indexOfLastPage={indexOfLastPage}
+            indexOfFirstCard={indexOfFirstCard}
+            indexOfLastCard={indexOfLastCard}
           />
           <Row>
             <Col sm='12' className='p-3'>
@@ -144,6 +146,7 @@ const ProjectListGroup = ({
                         owner={project.projectOwner}
                         statesInvolved={project.statesInvolved}
                         year={project.awardeeYear}
+                        link={project.projectLink}
                       />
                     );
                   })}
@@ -166,6 +169,7 @@ const ProjectListGroup = ({
             indexOfLastPage={indexOfLastIPage}
             indexOfFirstCard={indexOfFirstICard}
             indexOfLastCard={indexOfLastICard}
+            selectedStateName={selectedStateName}
           />
           <Row>
             <Col sm='12' className='p-3'>
@@ -195,3 +199,7 @@ const ProjectListGroup = ({
 };
 
 export default ProjectListGroup;
+
+ProjectListGroup.defaultProps = {
+  selectedStateName: '',
+};

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
+  useGetStateListQuery,
   usePostProjectSearchDataQuery,
   usePostSearchDataQuery,
 } from '../../Redux/services/api';
@@ -20,6 +21,7 @@ import {
   setPracticeCategory,
   setSpecificPractice,
 } from '../../Redux/Slice/practiceSlice';
+import { currentState } from '../../Redux/Slice/stateSlice';
 import ProjectListGroup from '../../components/ProjectListGroup';
 import { initiativesList } from '../../components/ProjectListGroup/constants';
 
@@ -42,14 +44,28 @@ const ConservationPracticeContainer = ({
     []
   );
 
+  const stateStatus: any = useGetStateListQuery();
   const dispatch = useAppDispatch();
   const location: any = useLocation();
 
   const sharedState = location?.state?.detail;
 
+  const selectedStateValue = window.localStorage.getItem('StateId');
+
+  if (window.localStorage.getItem('StateId')) {
+    const selectedState =
+      selectedStateValue &&
+      stateStatus.isSuccess &&
+      stateStatus.data &&
+      stateStatus.data.find((state: any) => {
+        return state.stateCode === selectedStateValue;
+      });
+    dispatch(currentState(selectedState));
+  }
+
   let searchInputData = {
     practice_id: currentSpecificPractice,
-    state_county_code: selectedStateCode,
+    state_county_code: selectedStateValue?.toString(),
     practice_category_id: currentPracticeCategoryId,
   };
 
@@ -60,6 +76,7 @@ const ConservationPracticeContainer = ({
     searchInputData = { ...searchInputData };
     delete searchInputData.state_county_code;
   }
+
   const {
     data: pdata,
     error: perror,

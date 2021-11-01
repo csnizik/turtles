@@ -8,6 +8,7 @@ const Pagination = ({
   indexOfLastPage,
   indexOfFirstCard,
   indexOfLastCard,
+  selectedStateName,
 }: any) => {
   const handlePrevClick = () => {
     paginate(currentPage - 1);
@@ -23,6 +24,24 @@ const Pagination = ({
     pageNumbers.push(i);
   }
 
+  const renderTitle = () => {
+    if (selectedStateName) {
+      return (
+        <h3>
+          {indexOfFirstCard + 1} -{' '}
+          {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards}{' '}
+          projects for {selectedStateName}
+        </h3>
+      );
+    }
+    return (
+      <h3>
+        Showing {indexOfFirstCard + 1} -{' '}
+        {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards} projects
+      </h3>
+    );
+  };
+
   return (
     <>
       <nav
@@ -30,11 +49,7 @@ const Pagination = ({
         data-testid='Pagination'
         className='usa-pagination'
       >
-        <h3>
-          Showing {indexOfFirstCard + 1} -{' '}
-          {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards}{' '}
-          projects
-        </h3>
+        {renderTitle()}
         <ul className='usa-pagination__list'>
           <li className='usa-pagination__item usa-pagination__arrow'>
             {currentPage !== 1 ? (
@@ -58,7 +73,29 @@ const Pagination = ({
                   Previous
                 </span>
               </button>
-            ) : null}
+            ) : (
+              <button
+                data-testid='prev-button'
+                type='button'
+                disabled
+                className='usa-pagination__link usa-pagination__previous-page'
+                aria-label='Previous page'
+              >
+                <svg className='usa-icon' aria-hidden='true' role='img'>
+                  <use href='/assets/img/sprite.svg#navigate_before' />
+                </svg>
+
+                <span
+                  role='button'
+                  tabIndex={0}
+                  className='usa-pagination__link-text'
+                  onClick={() => handlePrevClick()}
+                  onKeyUp={() => handlePrevClick()}
+                >
+                  Previous
+                </span>
+              </button>
+            )}
           </li>
 
           {pageNumbers.map((number) => {
@@ -137,7 +174,6 @@ const Pagination = ({
             }
             return null;
           })}
-
           <li className='usa-pagination__item usa-pagination__arrow'>
             {currentPage !== indexOfLastPage && indexOfLastPage > 0 ? (
               <button
@@ -160,7 +196,29 @@ const Pagination = ({
                   <use href='/assets/img/sprite.svg#navigate_next' />
                 </svg>
               </button>
-            ) : null}
+            ) : (
+              <button
+                data-testid='next-button'
+                disabled
+                type='button'
+                className='usa-pagination__link usa-pagination__next-page'
+                aria-label='Next page'
+              >
+                <span
+                  role='button'
+                  tabIndex={0}
+                  className='usa-pagination__link-text'
+                  onClick={() => handleNextClick()}
+                  onKeyUp={() => handleNextClick()}
+                >
+                  Next
+                </span>
+
+                <svg className='usa-icon' aria-hidden='true' role='img'>
+                  <use href='/assets/img/sprite.svg#navigate_next' />
+                </svg>
+              </button>
+            )}
           </li>
         </ul>
       </nav>
