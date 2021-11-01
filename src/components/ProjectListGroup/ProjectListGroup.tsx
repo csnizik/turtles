@@ -57,8 +57,6 @@ const ProjectListGroup = ({
     indexOfLastPage = Math.ceil(projectsList.length / cardsPerPage);
   }
 
-  console.log('math', indexOfLastPage);
-
   const indexOfLastICard = currentIPage * cardsPerPage;
   const indexOfFirstICard = indexOfLastICard - cardsPerPage;
   const currentICards = initiativesList.slice(
