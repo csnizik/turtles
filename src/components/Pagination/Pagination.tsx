@@ -73,7 +73,29 @@ const Pagination = ({
                   Previous
                 </span>
               </button>
-            ) : null}
+            ) : (
+              <button
+                data-testid='prev-button'
+                type='button'
+                disabled
+                className='usa-pagination__link usa-pagination__previous-page'
+                aria-label='Previous page'
+              >
+                <svg className='usa-icon' aria-hidden='true' role='img'>
+                  <use href='/assets/img/sprite.svg#navigate_before' />
+                </svg>
+
+                <span
+                  role='button'
+                  tabIndex={0}
+                  className='usa-pagination__link-text'
+                  onClick={() => handlePrevClick()}
+                  onKeyUp={() => handlePrevClick()}
+                >
+                  Previous
+                </span>
+              </button>
+            )}
           </li>
 
           {pageNumbers.map((number) => {
@@ -152,7 +174,6 @@ const Pagination = ({
             }
             return null;
           })}
-
           <li className='usa-pagination__item usa-pagination__arrow'>
             {currentPage !== indexOfLastPage && indexOfLastPage > 0 ? (
               <button
@@ -175,7 +196,29 @@ const Pagination = ({
                   <use href='/assets/img/sprite.svg#navigate_next' />
                 </svg>
               </button>
-            ) : null}
+            ) : (
+              <button
+                data-testid='next-button'
+                disabled
+                type='button'
+                className='usa-pagination__link usa-pagination__next-page'
+                aria-label='Next page'
+              >
+                <span
+                  role='button'
+                  tabIndex={0}
+                  className='usa-pagination__link-text'
+                  onClick={() => handleNextClick()}
+                  onKeyUp={() => handleNextClick()}
+                >
+                  Next
+                </span>
+
+                <svg className='usa-icon' aria-hidden='true' role='img'>
+                  <use href='/assets/img/sprite.svg#navigate_next' />
+                </svg>
+              </button>
+            )}
           </li>
         </ul>
       </nav>

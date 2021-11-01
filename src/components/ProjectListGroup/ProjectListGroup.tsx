@@ -127,9 +127,9 @@ const ProjectListGroup = ({
             cardsPerPage={cardsPerPage}
             paginate={paginate}
             currentPage={currentPage}
-            indexOfLastPage={indexOfLastIPage}
-            indexOfFirstCard={indexOfFirstICard}
-            indexOfLastCard={indexOfLastICard}
+            indexOfLastPage={indexOfLastPage}
+            indexOfFirstCard={indexOfFirstCard}
+            indexOfLastCard={indexOfLastCard}
           />
           <Row>
             <Col sm='12' className='p-3'>
