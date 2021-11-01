@@ -57,6 +57,8 @@ const ProjectListGroup = ({
     indexOfLastPage = Math.ceil(projectsList.length / cardsPerPage);
   }
 
+  console.log('math', indexOfLastPage);
+
   const indexOfLastICard = currentIPage * cardsPerPage;
   const indexOfFirstICard = indexOfLastICard - cardsPerPage;
   const currentICards = initiativesList.slice(
@@ -127,9 +129,9 @@ const ProjectListGroup = ({
             cardsPerPage={cardsPerPage}
             paginate={paginate}
             currentPage={currentPage}
-            indexOfLastPage={indexOfLastIPage}
-            indexOfFirstCard={indexOfFirstICard}
-            indexOfLastCard={indexOfLastICard}
+            indexOfLastPage={indexOfLastPage}
+            indexOfFirstCard={indexOfFirstCard}
+            indexOfLastCard={indexOfLastCard}
           />
           <Row>
             <Col sm='12' className='p-3'>
