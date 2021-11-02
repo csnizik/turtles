@@ -60,24 +60,31 @@ const MapComponent = ({ selectedLocation, setSelectedLocation }: any) => {
       view.constraints = viewConstraints;
 
       // Alaska composite view
-      alaskaView.current = createMapView('akViewDiv', map, alaskaExtent, {
-        wkid: 102009,
-      });
+      alaskaView.current = createMapView(
+        'akViewDiv',
+        map,
+        alaskaExtent,
+        2,
+        [-160, 65]
+      );
 
       // Caribbean composite view
       caribbeanView.current = createMapView(
         'cariViewDiv',
         map,
         caribbeanExtent,
-        {
-          wkid: 102965,
-        }
+        6,
+        [-66, 18]
       );
 
       // Hawaii composite view
-      hawaiiView.current = createMapView('hiViewDiv', map, hawaiiExtent, {
-        wkid: 102965,
-      });
+      hawaiiView.current = createMapView(
+        'hiViewDiv',
+        map,
+        hawaiiExtent,
+        5,
+        [-157, 20]
+      );
 
       const homeBtn: Home = new Home({
         view,
