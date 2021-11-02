@@ -28,7 +28,7 @@ const Pagination = ({
     if (selectedStateName) {
       return (
         <h3>
-          {indexOfFirstCard > 0 ? indexOfFirstCard + 1 : indexOfFirstCard} -{' '}
+          {indexOfFirstCard + 1} -{' '}
           {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards}{' '}
           projects for {selectedStateName}
         </h3>
@@ -36,9 +36,8 @@ const Pagination = ({
     }
     return (
       <h3>
-        Showing {indexOfFirstCard > 0 ? indexOfFirstCard + 1 : indexOfFirstCard}{' '}
-        - {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards}{' '}
-        projects
+        Showing {indexOfFirstCard + 1} -{' '}
+        {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards} projects
       </h3>
     );
   };

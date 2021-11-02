@@ -43,9 +43,8 @@ const ProjectListGroup = ({
   const [cardsPerPage] = useState(10);
   const [currentIPage, setCurrentIPage] = useState(1);
 
-  const grantsLength = projectsList?.length > 0 ? projectsList.length - 1 : 0;
-  const initiativesLength =
-    initiativesList?.length > 0 ? initiativesList.length - 1 : 0;
+  const grantsLength = projectsList?.length;
+  const initiativesLength = initiativesList.length;
 
   const toggleProjectsTab = (tab: number) => {
     if (activeTab !== tab) setActiveTab(tab);
