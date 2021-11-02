@@ -1,10 +1,9 @@
 import classNames from 'classnames';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import MapContainer from '../MapContainer';
 import ProjectListGroup from '../../components/ProjectListGroup';
-import { useAppSelector } from '../../Redux/hooks/hooks';
 import {
   useGetStateListQuery,
   usePostProjectSearchDataQuery,
@@ -43,9 +42,6 @@ const ProjectsContainer = () => {
     searchInput = { ...searchInput, state_county_code: null };
   }
 
-  const stateSlice = useAppSelector((state) => state.stateSlice);
-  const selectedStateCode = stateSlice?.stateCode || '';
-
   const { data, error, isLoading, isSuccess, isError } =
     usePostProjectSearchDataQuery(searchInput);
 
@@ -56,12 +52,6 @@ const ProjectsContainer = () => {
     stateStatus.data.find((state: any) => {
       return state.stateNameDisplay;
     });
-
-  useEffect(() => {
-    if (selectedStateCode.length) {
-      setSelectedLocation(selectedStateCode);
-    }
-  }, [stateSlice]);
 
   const selectedStateName = selectedState.stateNameDisplay;
 
@@ -141,9 +131,7 @@ const ProjectsContainer = () => {
         </div>
         <div className='projets-map-section'>
           <hr />
-          <h3 className='margin-top-3 margin-bottom-3'>
-            {t('projects-page.map-instructions')}
-          </h3>
+          <h3>{t('projects-page.map-instructions')}</h3>
           <MapContainer setSelectedLocation={setSelectedLocation} />
         </div>
 

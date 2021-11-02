@@ -22,6 +22,7 @@ export const alaskaFeatureLayer0 = new FeatureLayer({
 // State boundary layer
 export const alaskaFeatureLayer1 = new FeatureLayer({
   url: alaskaFeatureLayerURL,
+  outFields: ['STATEFP', 'NAME', 'STUSPS'],
   layerId: 1,
 });
 
@@ -47,6 +48,7 @@ export const caribbeanFeatureLayer0 = new FeatureLayer({
 // State boundary layer
 export const caribbeanFeatureLayer1 = new FeatureLayer({
   url: caribbeanFeatureLayerURL,
+  outFields: ['STATEFP', 'NAME', 'STUSPS'],
   layerId: 1,
 });
 
@@ -59,5 +61,6 @@ export const hawaiiFeatureLayer0 = new FeatureLayer({
 // State boundary layer
 export const hawaiiFeatureLayer1 = new FeatureLayer({
   url: hawaiiFeatureLayerURL,
+  outFields: ['STATEFP', 'NAME', 'STUSPS'],
   layerId: 1,
 });

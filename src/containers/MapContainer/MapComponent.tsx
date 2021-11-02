@@ -139,6 +139,51 @@ const MapComponent = ({ setSelectedLocation }: any) => {
     });
   }, [mapRef]);
 
+  // Handle alaska composite view interactions
+  useEffect(() => {
+    alaskaView.current.when(() => {
+      alaskaView.current.on('pointer-up', (event) => {
+        alaskaView.current.hitTest(event).then((response) => {
+          alaskaView.current.graphics.removeAll();
+          if (response.results.length) {
+            const selectedState: Graphic = response.results[0]?.graphic;
+            setSelectedLocation(selectedState.attributes.STATEFP);
+          }
+        });
+      });
+    });
+  }, [alaskaView]);
+
+  // Handle alaska composite view interactions
+  useEffect(() => {
+    caribbeanView.current.when(() => {
+      caribbeanView.current.on('pointer-up', (event) => {
+        caribbeanView.current.hitTest(event).then((response) => {
+          caribbeanView.current.graphics.removeAll();
+          if (response.results.length) {
+            const selectedState: Graphic = response.results[0].graphic;
+            setSelectedLocation(selectedState.attributes.STATEFP);
+          }
+        });
+      });
+    });
+  }, [caribbeanView]);
+
+  // Handle alaska composite view interactions
+  useEffect(() => {
+    hawaiiView.current.when(() => {
+      hawaiiView.current.on('pointer-up', (event) => {
+        hawaiiView.current.hitTest(event).then((response) => {
+          hawaiiView.current.graphics.removeAll();
+          if (response.results.length) {
+            const selectedState: Graphic = response.results[0].graphic;
+            setSelectedLocation(selectedState.attributes.STATEFP);
+          }
+        });
+      });
+    });
+  }, [hawaiiView]);
+
   return null;
 };
 
