@@ -50,11 +50,6 @@ const ReportPreviewCreator = ({
     });
   }, [cleanModal]);
 
-  // useEffect(() => {
-  //   console.log('projectsInitiativesData: ', projectsInitiativesData);
-  //   setSelectedProjInitData(projectsInitiativesData);
-  // }, [projectsInitiativesData]);
-
   const state = useAppSelector((s) => s);
   const practiceId: any = state?.practiceSlice?.selectedSpecficPractice;
   let stateCode = state?.practiceSlice?.searchInput?.state_county_code;

@@ -25,26 +25,23 @@ const ReportPreview = ({
   const [pdfUrl, setPdfUrl] = useState(null);
   const mountedRef = useRef(true);
 
-  useEffect(() => {
-    console.log('selectedProjInitData: ', selectedProjInitData);
-  }, [selectedProjInitData]);
-
   const renderProjInit = (projInit) => {
-    const projInitList = projInit.data.map((item) => {
+    console.log('renderProjInit: ', projInit);
+    const projInitList = projInit.data.map((item, index) => {
       let identifyer = projInit.title.includes('Landscape')
         ? 'initiative'
         : 'project';
-      console.log('identifyer: ', identifyer);
       return (
-        <ProjectListItem
-          key={item?.[`${identifyer}Id`]}
-          id={item?.[`${identifyer}Id`]}
-          description={item?.[`${identifyer}Description`]}
-          title={item?.[`${identifyer}Title`]}
-          owner={item?.[`${identifyer}Owner`]}
-          statesInvolved={item?.statesInvolved}
-          year={item?.awardeeYear}
-        />
+        <div key={`${identifyer}${index}`}>
+          <ProjectListItem
+            id={item?.[`${identifyer}Id`]}
+            description={item?.[`${identifyer}Description`]}
+            title={item?.[`${identifyer}Title`]}
+            owner={item?.[`${identifyer}Owner`]}
+            statesInvolved={item?.statesInvolved}
+            year={item?.awardeeYear}
+          />
+        </div>
       );
     });
     return (
@@ -68,6 +65,7 @@ const ReportPreview = ({
           {data?.practiceName} in{' '}
           {selectedStateName === 'U.S.' ? 'the U.S.' : selectedStateName}
         </h3>
+
         {choiceInputs.input1 && (
           <div>
             <ConservationPracticeOverview

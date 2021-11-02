@@ -109,6 +109,7 @@ const ConservationPracticeContainer = ({
   };
 
   useEffect(() => {
+    console.log('pData: ', pdata);
     const tempData = [
       { title: 'Conservation Innovation Grants', data: pdata },
       { title: 'Landscape Conservation Initiatives', data: initiativesList },
@@ -195,14 +196,16 @@ const ConservationPracticeContainer = ({
         handleCreateReport={handleCreateReport}
       />
 
-      <div className='overlay'>
-        <ReportPreviewCreator
-          openModal={openModal}
-          handleCreateReport={handleCreateReport}
-          cleanModal={cleanModal}
-          projectsInitiativesData={projectsInitiativesData}
-        />
-      </div>
+      {openModal ? (
+        <div className='overlay'>
+          <ReportPreviewCreator
+            openModal={openModal}
+            handleCreateReport={handleCreateReport}
+            cleanModal={cleanModal}
+            projectsInitiativesData={projectsInitiativesData}
+          />
+        </div>
+      ) : null}
       {renderPracticeContainerContent(currentViewType)}
     </>
   );
