@@ -29,7 +29,7 @@ interface IMapProps {
   view: MapView;
 }
 
-const MapComponent = ({ selectedLocation, setSelectedLocation }: any) => {
+const MapComponent = ({ setSelectedLocation }: any) => {
   const alaskaView = useRef({} as MapView);
   const caribbeanView = useRef({} as MapView);
   const hawaiiView = useRef({} as MapView);
@@ -138,29 +138,6 @@ const MapComponent = ({ selectedLocation, setSelectedLocation }: any) => {
       });
     });
   }, [mapRef]);
-
-  // If selected location has a value, navigate and hightlight the selected state
-  useEffect(() => {
-    // Returns all the graphics from the continental U.S layer view
-    mapRef.current.view
-      .whenLayerView(conusStateLayer.current)
-      .then((layerView) => {
-        layerView.watch('updating', (val) => {
-          if (!val) {
-            layerView.queryFeatures().then((results) => {
-              const { features } = results;
-
-              const selectedGraphic = features.find((feature: any) => {
-                return feature.attributes.STATEFP === selectedLocation;
-              });
-
-              // Zoom to selected state
-              mapRef.current.view.goTo({ target: selectedGraphic, zoom: 4 });
-            });
-          }
-        });
-      });
-  }, [mapRef, selectedLocation]);
 
   return null;
 };

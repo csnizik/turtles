@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { usePostSearchDataQuery } from '../../Redux/services/api';
+import {
+  useGetStateListQuery,
+  usePostProjectSearchDataQuery,
+  usePostSearchDataQuery,
+} from '../../Redux/services/api';
 import ConservationPracticeLandingScreen from '../../components/ConservationPracticeLandingScreen';
 import IndividualPracticeContainer from './IndividualPracticeContainer';
 import PracticeBreadcrumbs from '../../components/PracticeBreadcrumbs';
@@ -17,6 +21,8 @@ import {
   setPracticeCategory,
   setSpecificPractice,
 } from '../../Redux/Slice/practiceSlice';
+import { currentState } from '../../Redux/Slice/stateSlice';
+import ProjectListGroup from '../../components/ProjectListGroup';
 
 const defaultPracticeViews = {
   allPractices: false,
@@ -33,11 +39,46 @@ const ConservationPracticeContainer = ({
     useState(defaultPracticeViews);
   const [openModal, setOpenModal] = useState(false);
   const [cleanModal, setCleanModal] = useState(false);
-
+  const stateStatus: any = useGetStateListQuery();
   const dispatch = useAppDispatch();
   const location: any = useLocation();
 
   const sharedState = location?.state?.detail;
+
+  const selectedStateValue = window.localStorage.getItem('StateId');
+
+  if (window.localStorage.getItem('StateId')) {
+    const selectedState =
+      selectedStateValue &&
+      stateStatus.isSuccess &&
+      stateStatus.data &&
+      stateStatus.data.find((state: any) => {
+        return state.stateCode === selectedStateValue;
+      });
+    dispatch(currentState(selectedState));
+  }
+
+  let searchInputData = {
+    practice_id: currentSpecificPractice,
+    state_county_code: selectedStateValue?.toString(),
+    practice_category_id: currentPracticeCategoryId,
+  };
+
+  if (
+    searchInputData.state_county_code === '00' ||
+    searchInputData.state_county_code === '00000'
+  ) {
+    searchInputData = { ...searchInputData };
+    delete searchInputData.state_county_code;
+  }
+
+  const {
+    data: pdata,
+    error: perror,
+    isLoading: pisLoading,
+    isSuccess: pisSuccess,
+    isError: pisError,
+  } = usePostProjectSearchDataQuery(searchInputData);
 
   const { data, isSuccess } = usePostSearchDataQuery({
     practice_id: sharedState,
@@ -108,7 +149,19 @@ const ConservationPracticeContainer = ({
       );
     }
     if (viewType === 'individualPractice') {
-      return <IndividualPracticeContainer />;
+      return (
+        <>
+          <IndividualPracticeContainer />
+          <ProjectListGroup
+            error={perror}
+            isError={pisError}
+            isLoading={pisLoading}
+            isSuccess={pisSuccess}
+            isMapDisplayed={false}
+            projectsList={pdata}
+          />
+        </>
+      );
     }
     return null;
   };

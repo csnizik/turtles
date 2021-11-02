@@ -5,7 +5,10 @@ import { ListGroup, ListGroupItem } from 'reactstrap';
 import MapContainer from '../MapContainer';
 import ProjectListGroup from '../../components/ProjectListGroup';
 import { useAppSelector } from '../../Redux/hooks/hooks';
-import { usePostProjectSearchDataQuery } from '../../Redux/services/api';
+import {
+  useGetStateListQuery,
+  usePostProjectSearchDataQuery,
+} from '../../Redux/services/api';
 import './project-container.scss';
 
 import { projectCards, projectListGroups, projectPurposes } from './constants';
@@ -14,6 +17,7 @@ interface IProjectTypeCard {
   id: number;
   title: string;
   paragraphText: string;
+  paragraphDescription: string;
   imgSrc: string;
   imgAlt: string;
 }
@@ -28,13 +32,29 @@ const ProjectsContainer = () => {
   const [toggleProjectView, setToggleProjectView] = useState(false);
   const [selectedProjectCard, setSelectedProjectCard] = useState(-1);
   const [selectedLocation, setSelectedLocation] = useState('');
+  const stateStatus: any = useGetStateListQuery();
+  let searchInput = { state_county_code: selectedLocation || null };
+
+  if (
+    !selectedLocation ||
+    selectedLocation === '00' ||
+    selectedLocation === '00000'
+  ) {
+    searchInput = { ...searchInput, state_county_code: null };
+  }
 
   const stateSlice = useAppSelector((state) => state.stateSlice);
   const selectedStateCode = stateSlice?.stateCode || '';
 
   const { data, error, isLoading, isSuccess, isError } =
-    usePostProjectSearchDataQuery({
-      state_county_code: selectedLocation,
+    usePostProjectSearchDataQuery(searchInput);
+
+  const selectedState =
+    selectedLocation &&
+    stateStatus.isSuccess &&
+    stateStatus.data &&
+    stateStatus.data.find((state: any) => {
+      return state.stateNameDisplay;
     });
 
   useEffect(() => {
@@ -42,6 +62,8 @@ const ProjectsContainer = () => {
       setSelectedLocation(selectedStateCode);
     }
   }, [stateSlice]);
+
+  const selectedStateName = selectedState.stateNameDisplay;
 
   const handleSelectProjectCard = (id: number) => {
     setSelectedProjectCard(id);
@@ -62,9 +84,11 @@ const ProjectsContainer = () => {
     );
     if (!selectedProjectType) return null;
     return (
-      <div className='project-type-section margin-top-2'>
+      <div className='project-type-section'>
         <h3>{selectedProjectType.title}</h3>
-        <p className='margin-top-3'>{selectedProjectType.paragraphText}</p>
+        <p className='margin-top-3'>
+          {selectedProjectType.paragraphDescription}
+        </p>
         <p>
           Visit the{' '}
           <a
@@ -75,7 +99,15 @@ const ProjectsContainer = () => {
           >
             CIG website
           </a>{' '}
-          for more information.
+          for more information. Use
+          <a
+            aria-label='Conservation Innovation Grants link opens a new tab'
+            href='/search'
+            target='_blank'
+            rel='noreferrer'
+          >
+            &nbsp;advanced filters to search projects.
+          </a>
         </p>
       </div>
     );
@@ -85,7 +117,7 @@ const ProjectsContainer = () => {
     return (
       <div className='projects-tab'>
         <div className='projects-grid'>
-          <ListGroup className='margin-2'>
+          <ListGroup>
             {projectListGroups.map((listItem: IProjectListGroup) => {
               const listGroupItemClassNames = classNames(
                 'justify-content-between',
@@ -112,10 +144,7 @@ const ProjectsContainer = () => {
           <h3 className='margin-top-3 margin-bottom-3'>
             {t('projects-page.map-instructions')}
           </h3>
-          <MapContainer
-            selectedLocation={selectedLocation}
-            setSelectedLocation={setSelectedLocation}
-          />
+          <MapContainer setSelectedLocation={setSelectedLocation} />
         </div>
 
         <ProjectListGroup
@@ -125,6 +154,7 @@ const ProjectsContainer = () => {
           isSuccess={isSuccess}
           isMapDisplayed={true}
           projectsList={data}
+          selectedStateName={selectedStateName}
         />
       </div>
     );

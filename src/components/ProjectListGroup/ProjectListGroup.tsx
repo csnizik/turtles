@@ -23,6 +23,7 @@ interface IProjectListProps {
   isLoading: boolean;
   isSuccess: boolean;
   isError: boolean;
+  selectedStateName?: any;
 }
 
 //Initiatives constant to be replaced by backend data
@@ -33,6 +34,7 @@ const ProjectListGroup = ({
   isMapDisplayed,
   isSuccess,
   projectsList,
+  selectedStateName,
 }: IProjectListProps) => {
   const { t } = useTranslation();
 
@@ -41,8 +43,9 @@ const ProjectListGroup = ({
   const [cardsPerPage] = useState(10);
   const [currentIPage, setCurrentIPage] = useState(1);
 
-  const grantsLength = projectsList?.length;
-  const initiativesLength = initiativesList.length;
+  const grantsLength = projectsList?.length > 0 ? projectsList.length - 1 : 0;
+  const initiativesLength =
+    initiativesList?.length > 0 ? initiativesList.length - 1 : 0;
 
   const toggleProjectsTab = (tab: number) => {
     if (activeTab !== tab) setActiveTab(tab);
@@ -115,14 +118,19 @@ const ProjectListGroup = ({
       {!isMapDisplayed && renderProjectTypeTabs()}
       <TabContent activeTab={activeTab}>
         <TabPane tabId={1}>
+          {!isMapDisplayed && (
+            <p className='intro-desc'>
+              {t('projects-initiatives.innovation-tab')}
+            </p>
+          )}
           <Pagination
             cards={grantsLength}
             cardsPerPage={cardsPerPage}
             paginate={paginate}
             currentPage={currentPage}
-            indexOfLastPage={indexOfLastIPage}
-            indexOfFirstCard={indexOfFirstICard}
-            indexOfLastCard={indexOfLastICard}
+            indexOfLastPage={indexOfLastPage}
+            indexOfFirstCard={indexOfFirstCard}
+            indexOfLastCard={indexOfLastCard}
           />
           <Row>
             <Col sm='12' className='p-3'>
@@ -139,6 +147,7 @@ const ProjectListGroup = ({
                         owner={project.projectOwner}
                         statesInvolved={project.statesInvolved}
                         year={project.awardeeYear}
+                        link={project.projectLink}
                       />
                     );
                   })}
@@ -148,6 +157,11 @@ const ProjectListGroup = ({
           </Row>
         </TabPane>
         <TabPane tabId={2}>
+          {!isMapDisplayed && (
+            <p className='intro-desc'>
+              {t('projects-initiatives.landscape-tab')}
+            </p>
+          )}
           <Pagination
             cards={initiativesLength}
             cardsPerPage={cardsPerPage}
@@ -156,6 +170,7 @@ const ProjectListGroup = ({
             indexOfLastPage={indexOfLastIPage}
             indexOfFirstCard={indexOfFirstICard}
             indexOfLastCard={indexOfLastICard}
+            selectedStateName={selectedStateName}
           />
           <Row>
             <Col sm='12' className='p-3'>
@@ -185,3 +200,7 @@ const ProjectListGroup = ({
 };
 
 export default ProjectListGroup;
+
+ProjectListGroup.defaultProps = {
+  selectedStateName: '',
+};

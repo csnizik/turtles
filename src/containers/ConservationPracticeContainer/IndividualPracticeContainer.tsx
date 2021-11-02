@@ -24,7 +24,6 @@ const IndividualPracticeContainer = () => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
-
   return (
     <>
       <HorizontalScroll />
