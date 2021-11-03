@@ -27,6 +27,7 @@ import '@arcgis/core/assets/esri/themes/light/main.css';
 
 interface IMapProps {
   view: MapView;
+  map: Map;
 }
 
 const MapComponent = ({ setSelectedLocation }: any) => {
@@ -46,14 +47,14 @@ const MapComponent = ({ setSelectedLocation }: any) => {
 
   useEffect(() => {
     if (mapRef && mapRef.current) {
-      const map: Map = new Map({
+      mapRef.current.map = new Map({
         basemap: topoBaseMap,
       });
 
       const view: MapView = new MapView({
         center: CENTER_COORDINATES,
         container: VIEW_DIV,
-        map,
+        map: mapRef.current.map,
         zoom: 4,
       });
 
@@ -62,7 +63,7 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       // Alaska composite view
       alaskaView.current = createMapView(
         'akViewDiv',
-        map,
+        mapRef.current.map,
         alaskaExtent,
         2,
         [-160, 65]
@@ -71,7 +72,7 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       // Caribbean composite view
       caribbeanView.current = createMapView(
         'cariViewDiv',
-        map,
+        mapRef.current.map,
         caribbeanExtent,
         6,
         [-66, 18]
@@ -80,7 +81,7 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       // Hawaii composite view
       hawaiiView.current = createMapView(
         'hiViewDiv',
-        map,
+        mapRef.current.map,
         hawaiiExtent,
         5,
         [-157, 20]
@@ -100,15 +101,24 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       mapRef.current.view.ui.add('cariViewDiv', 'bottom-left');
 
       // Add Feature Layers
-      map.layers.add(alaskaFeatureToPointLayer.current);
-      map.layers.add(alaskaLayer.current);
-      map.layers.add(conusFeatureToPointLayer.current);
-      map.layers.add(conusStateLayer.current);
-      map.layers.add(caribbeanFeatureToPointLayer.current);
-      map.layers.add(caribbeanLayer.current);
-      map.layers.add(hawaiiFeatureToPointLayer.current);
-      map.layers.add(hawaiiLayer.current);
+      mapRef.current.map.layers.add(alaskaFeatureToPointLayer.current);
+      mapRef.current.map.layers.add(alaskaLayer.current);
+      mapRef.current.map.layers.add(conusFeatureToPointLayer.current);
+      mapRef.current.map.layers.add(conusStateLayer.current);
+      mapRef.current.map.layers.add(caribbeanFeatureToPointLayer.current);
+      mapRef.current.map.layers.add(caribbeanLayer.current);
+      mapRef.current.map.layers.add(hawaiiFeatureToPointLayer.current);
+      mapRef.current.map.layers.add(hawaiiLayer.current);
     }
+
+    return () => {
+      // Destroying the map will delete any associated resources including
+      // its layers, basemap, tables, and portalItem.
+      mapRef.current.map.destroy();
+      alaskaView.current.destroy();
+      caribbeanView.current.destroy();
+      hawaiiView.current.destroy();
+    };
   }, [mapRef]);
 
   // Handle map interactions
@@ -131,7 +141,7 @@ const MapComponent = ({ setSelectedLocation }: any) => {
               setSelectedLocation(selectedState.attributes.STATEFP);
 
               // Zoom to selected state
-              mapRef.current.view.goTo({ target: selectedState, zoom: 5 });
+              mapRef.current.view.goTo({ target: selectedState, zoom: 6 });
             }
           }
         });

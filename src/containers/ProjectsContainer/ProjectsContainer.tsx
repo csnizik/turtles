@@ -53,7 +53,7 @@ const ProjectsContainer = () => {
       return state.stateNameDisplay;
     });
 
-  const selectedStateName = selectedState.stateNameDisplay;
+  const selectedStateName = selectedState?.stateNameDisplay;
 
   const handleSelectProjectCard = (id: number) => {
     setSelectedProjectCard(id);
