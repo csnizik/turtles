@@ -7,9 +7,7 @@ import {
   alaskaExtent,
   caribbeanExtent,
   CENTER_COORDINATES,
-  fillBorderColor,
   hawaiiExtent,
-  simpleFillColor,
   topoBaseMap,
   VIEW_DIV,
   viewConstraints,
@@ -29,6 +27,7 @@ import '@arcgis/core/assets/esri/themes/light/main.css';
 
 interface IMapProps {
   view: MapView;
+  map: Map;
 }
 
 const MapComponent = ({ setSelectedLocation }: any) => {
@@ -48,40 +47,47 @@ const MapComponent = ({ setSelectedLocation }: any) => {
 
   useEffect(() => {
     if (mapRef && mapRef.current) {
-      const map = new Map({
+      mapRef.current.map = new Map({
         basemap: topoBaseMap,
       });
 
-      const view = new MapView({
+      const view: MapView = new MapView({
         center: CENTER_COORDINATES,
         container: VIEW_DIV,
-        map,
+        map: mapRef.current.map,
         zoom: 4,
       });
 
       view.constraints = viewConstraints;
 
       // Alaska composite view
-      alaskaView.current = createMapView('akViewDiv', map, alaskaExtent, {
-        wkid: 102009,
-      });
+      alaskaView.current = createMapView(
+        'akViewDiv',
+        mapRef.current.map,
+        alaskaExtent,
+        2,
+        [-160, 65]
+      );
 
       // Caribbean composite view
       caribbeanView.current = createMapView(
         'cariViewDiv',
-        map,
+        mapRef.current.map,
         caribbeanExtent,
-        {
-          wkid: 102965,
-        }
+        6,
+        [-66, 18]
       );
 
       // Hawaii composite view
-      hawaiiView.current = createMapView('hiViewDiv', map, hawaiiExtent, {
-        wkid: 102965,
-      });
+      hawaiiView.current = createMapView(
+        'hiViewDiv',
+        mapRef.current.map,
+        hawaiiExtent,
+        5,
+        [-157, 20]
+      );
 
-      const homeBtn = new Home({
+      const homeBtn: Home = new Home({
         view,
       });
 
@@ -95,15 +101,24 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       mapRef.current.view.ui.add('cariViewDiv', 'bottom-left');
 
       // Add Feature Layers
-      map.layers.add(alaskaFeatureToPointLayer.current);
-      map.layers.add(alaskaLayer.current);
-      map.layers.add(conusFeatureToPointLayer.current);
-      map.layers.add(conusStateLayer.current);
-      map.layers.add(caribbeanFeatureToPointLayer.current);
-      map.layers.add(caribbeanLayer.current);
-      map.layers.add(hawaiiFeatureToPointLayer.current);
-      map.layers.add(hawaiiLayer.current);
+      mapRef.current.map.layers.add(alaskaFeatureToPointLayer.current);
+      mapRef.current.map.layers.add(alaskaLayer.current);
+      mapRef.current.map.layers.add(conusFeatureToPointLayer.current);
+      mapRef.current.map.layers.add(conusStateLayer.current);
+      mapRef.current.map.layers.add(caribbeanFeatureToPointLayer.current);
+      mapRef.current.map.layers.add(caribbeanLayer.current);
+      mapRef.current.map.layers.add(hawaiiFeatureToPointLayer.current);
+      mapRef.current.map.layers.add(hawaiiLayer.current);
     }
+
+    return () => {
+      // Destroying the map will delete any associated resources including
+      // its layers, basemap, tables, and portalItem.
+      mapRef.current.map.destroy();
+      alaskaView.current.destroy();
+      caribbeanView.current.destroy();
+      hawaiiView.current.destroy();
+    };
   }, [mapRef]);
 
   // Handle map interactions
@@ -123,36 +138,61 @@ const MapComponent = ({ setSelectedLocation }: any) => {
 
             if (graphicList.length) {
               const selectedState: Graphic = graphicList[0].graphic;
-              // Highlight selected state
-              mapRef.current.view.graphics.removeAll();
-
-              const highlightSymbol = {
-                type: 'simple-fill',
-                color: simpleFillColor,
-                style: 'solid',
-                outline: {
-                  color: fillBorderColor,
-                  width: 1,
-                },
-              };
-
-              const selectedGraphic = new Graphic({
-                geometry: selectedState.geometry,
-                symbol: highlightSymbol,
-              });
-
               setSelectedLocation(selectedState.attributes.STATEFP);
 
-              mapRef.current.view.graphics.add(selectedGraphic);
-
               // Zoom to selected state
-              mapRef.current.view.goTo({ target: selectedState, zoom: 5 });
+              mapRef.current.view.goTo({ target: selectedState, zoom: 6 });
             }
           }
         });
       });
     });
   }, [mapRef]);
+
+  // Handle alaska composite view interactions
+  useEffect(() => {
+    alaskaView.current.when(() => {
+      alaskaView.current.on('pointer-up', (event) => {
+        alaskaView.current.hitTest(event).then((response) => {
+          alaskaView.current.graphics.removeAll();
+          if (response.results.length) {
+            const selectedState: Graphic = response.results[0]?.graphic;
+            setSelectedLocation(selectedState.attributes.STATEFP);
+          }
+        });
+      });
+    });
+  }, [alaskaView]);
+
+  // Handle alaska composite view interactions
+  useEffect(() => {
+    caribbeanView.current.when(() => {
+      caribbeanView.current.on('pointer-up', (event) => {
+        caribbeanView.current.hitTest(event).then((response) => {
+          caribbeanView.current.graphics.removeAll();
+          if (response.results.length) {
+            const selectedState: Graphic = response.results[0].graphic;
+            setSelectedLocation(selectedState.attributes.STATEFP);
+          }
+        });
+      });
+    });
+  }, [caribbeanView]);
+
+  // Handle alaska composite view interactions
+  useEffect(() => {
+    hawaiiView.current.when(() => {
+      hawaiiView.current.on('pointer-up', (event) => {
+        hawaiiView.current.hitTest(event).then((response) => {
+          hawaiiView.current.graphics.removeAll();
+          if (response.results.length) {
+            const selectedState: Graphic = response.results[0].graphic;
+            setSelectedLocation(selectedState.attributes.STATEFP);
+          }
+        });
+      });
+    });
+  }, [hawaiiView]);
 
   return null;
 };
