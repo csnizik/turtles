@@ -235,9 +235,12 @@ const MapComponent = ({ setSelectedLocation }: any) => {
         // Refresh project list to U.S
         setSelectedLocation(null);
         // Reset composite views to default position
-        alaskaView.current.goTo({ center: ALASKA_CENTER });
-        caribbeanView.current.goTo({ center: CARIBBEAN_CENTER });
-        hawaiiView.current.goTo({ center: HAWAII_CENTER });
+        alaskaView.current.goTo({ center: ALASKA_CENTER, zoom: ALASKA_ZOOM });
+        caribbeanView.current.goTo({
+          center: CARIBBEAN_CENTER,
+          zoom: CARIBBEAN_ZOOM,
+        });
+        hawaiiView.current.goTo({ center: HAWAII_CENTER, zoom: HAWAII_ZOOM });
       });
     });
   }, [homeBtn]);
