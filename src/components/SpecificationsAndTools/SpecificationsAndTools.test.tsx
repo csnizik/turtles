@@ -1,5 +1,10 @@
 import SpecificationsAndTools from './SpecificationsAndTools';
-import { cleanup, render, screen } from '../../common/test-utils/test_utils';
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+} from '../../common/test-utils/test_utils';
 
 afterEach(() => {
   cleanup();
@@ -20,6 +25,10 @@ describe('SpecificationsAndTools is rendered correctly', () => {
   const selectedStateCode = '06';
   const selectedPracticeId = 23;
 
+  const practiceCategory = 2;
+  const practiceId = 101;
+  const practiceName = 'Cover Crop';
+
   beforeEach(() => {
     render(
       <SpecificationsAndTools
@@ -33,5 +42,31 @@ describe('SpecificationsAndTools is rendered correctly', () => {
 
   test('Should display the contents of SpecificationsAndTools', () => {
     expect(screen.getByTestId('practice-spec')).toBeDefined();
+  });
+  test('Should display the contents of National Specifications', () => {
+    expect(screen.getByTestId('national-specifications')).toBeDefined();
+  });
+  test('Should display the contents of Associated Practices', () => {
+    expect(screen.getByTestId('associated-practice')).toBeDefined();
+  });
+  test('Should display associated practice Link', () => {
+    const { getByText } = render(
+      <a
+        href={`http://localhost:3000/ConservationPractices?PracticeCategory=${practiceCategory}?Practice=${practiceId}`}
+        // to={{
+        //   pathname: `/ConservationPractices`,
+        //   search: `http://localhost:3000/ConservationPractices?PracticeCategory=${practiceCategory}?Practice=${practiceId}`,
+        // }}
+      >
+        {practiceName}
+      </a>
+    );
+    const link = getByText('Cover Crop');
+    fireEvent.click(link);
+    fireEvent.mouseOver(link);
+    expect(screen.getByText('Cover Crop').closest('a')).toHaveAttribute(
+      'href',
+      'http://localhost:3000/ConservationPractices?PracticeCategory=2?Practice=101'
+    );
   });
 });

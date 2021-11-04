@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { useGetAssociatedPracticeQuery } from '../../Redux/services/api';
 import './specs.scss';
 import { IAssociatedPracticeList } from '../../common/types';
@@ -52,55 +53,59 @@ const SpecificationsAndTools = ({
 
   const renderNationalSpecs = () => {
     return (
-      <>
-        <div className='national-specs'>
-          <h4>National Specifications</h4>
-          <h5>{promptText}</h5>
-          <div className='link'>
-            <a
-              href='https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/cp/ncps/?cid=nrcs143_026849'
-              target='_blank'
-              rel='noopener noreferrer'
-              aria-label='Current NRCS National Conservation Practices link'
-            >
-              NRCS National Conservation Practices
-              <img
-                alt='All Conservation at Work videos'
-                // eslint-disable-next-line global-require
-                src={require('./image/newLinkIcon.svg').default}
-              />
-            </a>
-          </div>
+      <div className='national-specs' data-testid='national-specifications'>
+        <h4>National Specifications</h4>
+        <h5>{promptText}</h5>
+        <div className='link'>
+          <a
+            href='https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/cp/ncps/?cid=nrcs143_026849'
+            target='_blank'
+            rel='noopener noreferrer'
+            aria-label='Current NRCS National Conservation Practices link'
+          >
+            NRCS National Conservation Practices
+            <img
+              alt='All Conservation at Work videos'
+              // eslint-disable-next-line global-require
+              src={require('./image/newLinkIcon.svg').default}
+            />
+          </a>
         </div>
+      </div>
+    );
+  };
 
-        <div className='associated-prac'>
-          <h4>{t('associated-practices.title')}</h4>
-          <p>{t('associated-practices.description')}</p>
-          <div>
-            <ul className='practices-row'>
-              {content.data?.map((practice: IAssociatedPracticeList) => {
-                return (
-                  <>
-                    <div className='grid-col-6'>
-                      <li key={practice.practiceId}>
-                        <a
-                          href='/ConservationPractices'
-                          onClick={() => clickHandler(practice.practiceId)}
-                          target='_blank'
-                          aria-label={`${practice.practiceName} link opens a new tab`}
-                        >
-                          {practice.practiceName}
-                        </a>
-                        &ensp;({practice.practiceCode})
-                      </li>
-                    </div>
-                  </>
-                );
-              })}
-            </ul>
-          </div>
-        </div>
-      </>
+  const renderAssociatedPractice = () => {
+    return (
+      <div className='associated-prac' data-testid='associated-practice'>
+        <h4>{t('associated-practices.title')}</h4>
+        <p>{t('associated-practices.description')}</p>
+        <ul className='practices-row'>
+          {content.data?.map((practice: IAssociatedPracticeList) => {
+            return (
+              <>
+                <div className='grid-col-6'>
+                  <li key={practice.practiceId}>
+                    <Link
+                      to={{
+                        pathname: `/ConservationPractices`,
+                        state: { detail: practice.practiceId },
+                        search: `PracticeCategory=${practiceCategory}?Practice=${practice.practiceId}`,
+                      }}
+                      onClick={() => clickHandler(practice.practiceId)}
+                      target='_blank'
+                      aria-label={`${practice.practiceName} link opens a new tab`}
+                    >
+                      {practice.practiceName}
+                    </Link>
+                    &ensp;({practice.practiceCode})
+                  </li>
+                </div>
+              </>
+            );
+          })}
+        </ul>
+      </div>
     );
   };
 
@@ -115,6 +120,7 @@ const SpecificationsAndTools = ({
       <h2>{getHeaderText()}</h2>
       <h4>{intro}</h4>
       {renderNationalSpecs()}
+      {renderAssociatedPractice()}
     </section>
   );
 };

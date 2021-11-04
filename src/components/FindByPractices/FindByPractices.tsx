@@ -37,7 +37,13 @@ const FindByPractices = () => {
   const handleFindPractices = () => {
     history.push('/ConservationPractices');
     const selectedPracticeCategory = selectedPractice.toString();
+    const selectedSubPracticeCategory = selectedSubPractice.toString();
     window.localStorage.setItem('PracticeCategoryId', selectedPracticeCategory);
+    if (selectedSubPracticeCategory !== '-1') {
+      window.localStorage.setItem('PracticeId', selectedSubPracticeCategory);
+    } else {
+      window.localStorage.removeItem('PracticeId');
+    }
   };
 
   const practiceCategory = useGetPracticeCategoryQuery();

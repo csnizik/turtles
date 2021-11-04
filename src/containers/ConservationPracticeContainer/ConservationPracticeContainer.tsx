@@ -103,9 +103,21 @@ const ConservationPracticeContainer = ({
     }
   };
 
+  const practiceId = location.search.split('=').pop();
+
+  const practiceCategoryId = location.search.substring(
+    location.search.indexOf('=') + 1,
+    location.search.lastIndexOf('?')
+  );
+
   useEffect(() => {
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
       setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
+      if (practiceCategoryId && practiceId) {
+        dispatch(setPracticeCategory(Number(practiceCategoryId)));
+        dispatch(setSpecificPractice(Number(practiceId)));
+        setPracticeViewType({ ...practiceViewType, individualPractice: true });
+      }
     } else if (currentPracticeCategoryId >= 0 && currentSpecificPractice < 0) {
       //Temporary Fix for associated practies
       window.localStorage.setItem(
