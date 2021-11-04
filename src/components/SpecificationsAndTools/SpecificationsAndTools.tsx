@@ -4,6 +4,7 @@ import { useGetAssociatedPracticeQuery } from '../../Redux/services/api';
 import './specs.scss';
 import { IAssociatedPracticeList } from '../../common/types';
 import { useAppSelector } from '../../Redux/hooks/hooks';
+import image from './image/newLinkIcon.svg';
 
 interface ISpecAndToolsProps {
   data: any;
@@ -64,11 +65,7 @@ const SpecificationsAndTools = ({
             aria-label='Current NRCS National Conservation Practices link'
           >
             NRCS National Conservation Practices
-            <img
-              alt='All Conservation at Work videos'
-              // eslint-disable-next-line global-require
-              src={require('./image/newLinkIcon.svg').default}
-            />
+            <img alt='All Conservation at Work videos' src={image} />
           </a>
         </div>
       </div>
