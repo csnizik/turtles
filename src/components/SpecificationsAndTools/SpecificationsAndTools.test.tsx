@@ -53,10 +53,6 @@ describe('SpecificationsAndTools is rendered correctly', () => {
     const { getByText } = render(
       <a
         href={`http://localhost:3000/ConservationPractices?PracticeCategory=${practiceCategory}?Practice=${practiceId}`}
-        // to={{
-        //   pathname: `/ConservationPractices`,
-        //   search: `http://localhost:3000/ConservationPractices?PracticeCategory=${practiceCategory}?Practice=${practiceId}`,
-        // }}
       >
         {practiceName}
       </a>
