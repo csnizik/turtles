@@ -18,15 +18,9 @@ export const CENTER_COORDINATES = [-96, 36];
 export const VIEW_DIV = 'viewDiv';
 
 const simpleFillColor = '#4689e0';
-<<<<<<< HEAD
 
 const fillBorderColor = '#04d9ff';
 
-=======
-
-const fillBorderColor = '#04d9ff';
-
->>>>>>> devRedo
 export const highlightSymbol = {
   type: 'simple-fill',
   color: simpleFillColor,
