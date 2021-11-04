@@ -162,21 +162,23 @@ const MapComponent = ({ setSelectedLocation }: any) => {
   useEffect(() => {
     conusStateLayer.current.when(() => {
       conusStateLayer.current.on('layerview-create', () => {
-        conusStateLayer.current.queryFeatures().then((response) => {
-          const { features } = response;
-          const foundGraphic = features.find(
-            (graphic) => graphic.attributes?.STATEFP === stateCode
-          );
-          mapRef.current.view.goTo({
-            center: [
-              parseInt(foundGraphic?.attributes?.INTPTLON, 10),
-              parseInt(foundGraphic?.attributes?.INTPTLAT, 10),
-            ],
-            zoom: 6,
-          });
+        if (stateCode) {
+          conusStateLayer.current.queryFeatures().then((response) => {
+            const { features } = response;
+            const foundGraphic = features.find(
+              (graphic) => graphic.attributes?.STATEFP === stateCode
+            );
+            mapRef.current.view.goTo({
+              center: [
+                parseInt(foundGraphic?.attributes?.INTPTLON, 10),
+                parseInt(foundGraphic?.attributes?.INTPTLAT, 10),
+              ],
+              zoom: 6,
+            });
 
-          setSelectedLocation(foundGraphic?.attributes.STATEFP);
-        });
+            setSelectedLocation(foundGraphic?.attributes.STATEFP);
+          });
+        }
       });
     });
   }, []);
