@@ -29,6 +29,7 @@ import {
   hawaiiFeatureLayer1,
 } from './layers';
 import { createMapView } from './mapUtils';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 import '@arcgis/core/assets/esri/themes/light/main.css';
 
 interface IMapProps {
@@ -37,6 +38,7 @@ interface IMapProps {
 }
 
 const MapComponent = ({ setSelectedLocation }: any) => {
+  const stateCode = useAppSelector((state) => state.stateSlice?.stateCode);
   const alaskaView = useRef({} as MapView);
   const caribbeanView = useRef({} as MapView);
   const hawaiiView = useRef({} as MapView);
@@ -155,6 +157,29 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       });
     });
   }, [mapRef]);
+
+  // Pre-select the state given the stateCode
+  useEffect(() => {
+    conusStateLayer.current.when(() => {
+      conusStateLayer.current.on('layerview-create', () => {
+        conusStateLayer.current.queryFeatures().then((response) => {
+          const { features } = response;
+          const foundGraphic = features.find(
+            (graphic) => graphic.attributes?.STATEFP === stateCode
+          );
+          mapRef.current.view.goTo({
+            center: [
+              parseInt(foundGraphic?.attributes?.INTPTLON, 10),
+              parseInt(foundGraphic?.attributes?.INTPTLAT, 10),
+            ],
+            zoom: 6,
+          });
+
+          setSelectedLocation(foundGraphic?.attributes.STATEFP);
+        });
+      });
+    });
+  }, []);
 
   // Handle alaska composite view interactions
   useEffect(() => {
