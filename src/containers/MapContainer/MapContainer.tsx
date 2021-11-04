@@ -9,7 +9,7 @@ interface IMapProps {
 }
 
 const defaultProps: any = {
-  selectedLocation: '',
+  selectedLocation: null,
 };
 
 const MapContainer = ({ setSelectedLocation }: IMapProps) => {

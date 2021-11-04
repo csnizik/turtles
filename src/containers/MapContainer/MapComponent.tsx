@@ -5,9 +5,15 @@ import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
 import {
   alaskaExtent,
+  ALASKA_CENTER,
+  ALASKA_ZOOM,
   caribbeanExtent,
+  CARIBBEAN_CENTER,
+  CARIBBEAN_ZOOM,
   CENTER_COORDINATES,
   hawaiiExtent,
+  HAWAII_CENTER,
+  HAWAII_ZOOM,
   topoBaseMap,
   VIEW_DIV,
   viewConstraints,
@@ -35,6 +41,7 @@ const MapComponent = ({ setSelectedLocation }: any) => {
   const caribbeanView = useRef({} as MapView);
   const hawaiiView = useRef({} as MapView);
   const mapRef = useRef({} as IMapProps);
+  const homeBtn = useRef({} as Home);
 
   const alaskaFeatureToPointLayer = useRef(alaskaFeatureLayer0);
   const alaskaLayer = useRef(alaskaFeatureLayer1);
@@ -65,8 +72,8 @@ const MapComponent = ({ setSelectedLocation }: any) => {
         'akViewDiv',
         mapRef.current.map,
         alaskaExtent,
-        2,
-        [-160, 65]
+        ALASKA_ZOOM,
+        ALASKA_CENTER
       );
 
       // Caribbean composite view
@@ -74,8 +81,8 @@ const MapComponent = ({ setSelectedLocation }: any) => {
         'cariViewDiv',
         mapRef.current.map,
         caribbeanExtent,
-        6,
-        [-66, 18]
+        CARIBBEAN_ZOOM,
+        CARIBBEAN_CENTER
       );
 
       // Hawaii composite view
@@ -83,17 +90,17 @@ const MapComponent = ({ setSelectedLocation }: any) => {
         'hiViewDiv',
         mapRef.current.map,
         hawaiiExtent,
-        5,
-        [-157, 20]
+        HAWAII_ZOOM,
+        HAWAII_CENTER
       );
 
-      const homeBtn: Home = new Home({
+      homeBtn.current = new Home({
         view,
       });
 
       mapRef.current.view = view;
       // Add the home button to the top left corner of the view
-      mapRef.current.view.ui.add(homeBtn, 'top-left');
+      mapRef.current.view.ui.add(homeBtn.current, 'top-left');
 
       // Add composite views for Alaska, Hawaii, and Caribbean
       mapRef.current.view.ui.add('akViewDiv', 'bottom-left');
@@ -164,7 +171,7 @@ const MapComponent = ({ setSelectedLocation }: any) => {
     });
   }, [alaskaView]);
 
-  // Handle alaska composite view interactions
+  // Handle caribbean composite view interactions
   useEffect(() => {
     caribbeanView.current.when(() => {
       caribbeanView.current.on('pointer-up', (event) => {
@@ -179,7 +186,7 @@ const MapComponent = ({ setSelectedLocation }: any) => {
     });
   }, [caribbeanView]);
 
-  // Handle alaska composite view interactions
+  // Handle hawaii composite view interactions
   useEffect(() => {
     hawaiiView.current.when(() => {
       hawaiiView.current.on('pointer-up', (event) => {
@@ -193,6 +200,20 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       });
     });
   }, [hawaiiView]);
+
+  // Handle interaction with 'Home' button
+  useEffect(() => {
+    homeBtn.current.when(() => {
+      homeBtn.current.on('go', () => {
+        // Refresh project list to U.S
+        setSelectedLocation(null);
+        // Reset composite views to default position
+        alaskaView.current.goTo({ center: ALASKA_CENTER });
+        caribbeanView.current.goTo({ center: CARIBBEAN_CENTER });
+        hawaiiView.current.goTo({ center: HAWAII_CENTER });
+      });
+    });
+  }, [homeBtn]);
 
   return null;
 };

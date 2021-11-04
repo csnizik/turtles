@@ -61,3 +61,11 @@ export const hawaiiExtent = {
     wkid: 102965,
   },
 };
+
+// Constans for composite views
+export const ALASKA_CENTER = [-160, 65];
+export const ALASKA_ZOOM = 2;
+export const CARIBBEAN_CENTER = [-66, 18];
+export const CARIBBEAN_ZOOM = 6;
+export const HAWAII_CENTER = [-157, 20];
+export const HAWAII_ZOOM = 5;
