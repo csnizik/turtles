@@ -13,6 +13,7 @@ import {
   IRCCategory,
   IRCRequestBody,
   IAssociatedPracticeList,
+  IProjectType,
 } from '../../common/types';
 
 export const api = createApi({
@@ -84,6 +85,10 @@ export const api = createApi({
       query: (data) =>
         `/practice/associatedPractice?state_code=${data.stateCode}&practice_id=${data.practiceId}`,
     }),
+    // Retrieve project types
+    getProjectTypes: builder.query<IProjectType[], void>({
+      query: () => `project/projectTypes`,
+    }),
   }),
 });
 
@@ -101,4 +106,5 @@ export const {
   useGetPracticeVideoLinkQuery,
   useGetRelatedResourceConcernCategoryQuery,
   useGetAssociatedPracticeQuery,
+  useGetProjectTypesQuery,
 } = api;

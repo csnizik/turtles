@@ -1,14 +1,21 @@
 import MapView from '@arcgis/core/views/MapView';
 
-export function createMapView(container, map, stateExtent, spatialReference) {
+export function createMapView(
+  container,
+  map,
+  stateExtent,
+  zoom = 5,
+  center = []
+) {
   return new MapView({
     container,
     map,
     extent: stateExtent,
-    spatialReference,
     ui: {
       components: [],
     },
+    zoom,
+    center,
   });
 }
 
