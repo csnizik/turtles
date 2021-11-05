@@ -1,5 +1,17 @@
-
 @import '../../stylesheets/variables';
 .overlay {
   z-index: 1000;
+}
+
+.title-section {
+  .top-title {
+    margin: 3.75rem 2.188rem 1.25rem;
+    .project-title {
+      font-weight: $heavier-weight;
+      font-size: $h2-font-size;
+    }
+  }
+  .intro-desc {
+    margin-left: 2rem;
+  }
 }
