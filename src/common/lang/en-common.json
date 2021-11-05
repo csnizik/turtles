@@ -71,6 +71,10 @@
     "title": "Associated Practices",
     "description": "These are conservation practices that are commonly applied in association with this practice."
   },
+  "associated-projects-initiatives": {
+    "title": "Projects & Initiatives Using",
+    "description": "NRCS projects and initiatives on the ground assess the impacts of conservation practices, build scientific understanding of those impacts and the processes underlying them, explore the potential of innovative conservation activities, and coordinate planning efforts at larger scales to address resource concerns from a watershed or landscape perspective."
+  },
   "projects-initiatives": {
     "innovation-tab": "Conservation Innovation Grants lorum ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula diam et diam tempor fringilla. Additional contextual information lorum ipsum dolor sit amet, consectetur adipiscing elit.",
     "landscape-tab": "Landscape Conservation Initiatives lorum ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula diam et diam tempor fringilla. Additional contextual information lorum ipsum dolor sit amet, consectetur adipiscing elit."
