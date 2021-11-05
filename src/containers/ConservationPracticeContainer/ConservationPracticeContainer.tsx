@@ -158,16 +158,18 @@ const ConservationPracticeContainer = ({
       return (
         <>
           <IndividualPracticeContainer />
-          <div className='top-title'>
-            <h4 className='title'>
-              {stateInfo?.stateNameDisplay || 'U.S.'}{' '}
-              {t('associated-projects-initiatives.title')}{' '}
-              {currentPractice.practiceName}
-            </h4>
+          <div className='title-section'>
+            <div className='top-title'>
+              <h4 className='project-title'>
+                {stateInfo?.stateNameDisplay || 'U.S.'}{' '}
+                {t('associated-projects-initiatives.title')}{' '}
+                {currentPractice.practiceName}
+              </h4>
+            </div>
+            <p className='intro-desc'>
+              {t('associated-projects-initiatives.description')}
+            </p>
           </div>
-          <p className='intro-desc'>
-            {t('associated-projects-initiatives.description')}
-          </p>
           <ProjectListGroup
             error={perror}
             isError={pisError}
