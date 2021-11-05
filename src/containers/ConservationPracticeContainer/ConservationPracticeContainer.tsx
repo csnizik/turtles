@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   useGetStateListQuery,
   usePostProjectSearchDataQuery,
@@ -16,7 +17,7 @@ import {
   disablePdfGenState,
   enablePdfGenState,
 } from '../../Redux/Slice/pdfGenSlice';
-import { useAppDispatch } from '../../Redux/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import {
   setPracticeCategory,
   setSpecificPractice,
@@ -35,6 +36,8 @@ const ConservationPracticeContainer = ({
   currentPracticeCategoryId,
   selectedStateCode,
 }: any) => {
+  const { t } = useTranslation();
+  const stateInfo = useAppSelector((state: any) => state?.stateSlice);
   const [practiceViewType, setPracticeViewType] =
     useState(defaultPracticeViews);
   const [openModal, setOpenModal] = useState(false);
@@ -46,7 +49,6 @@ const ConservationPracticeContainer = ({
   const sharedState = location?.state?.detail;
 
   const selectedStateValue = window.localStorage.getItem('StateId');
-
   if (window.localStorage.getItem('StateId')) {
     const selectedState =
       selectedStateValue &&
@@ -92,6 +94,11 @@ const ConservationPracticeContainer = ({
         practice.practiceCategoryId === currentPracticeCategoryId
     );
 
+  const currentPractice =
+    currentPracticeCategory &&
+    currentPracticeCategory.practices.find(
+      (practice: any) => practice.practiceId === currentSpecificPractice
+    );
   const handleCreateReport = () => {
     if (openModal) {
       setOpenModal(false);
@@ -102,7 +109,6 @@ const ConservationPracticeContainer = ({
       dispatch(enablePdfGenState());
     }
   };
-
   useEffect(() => {
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
       setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
@@ -152,6 +158,16 @@ const ConservationPracticeContainer = ({
       return (
         <>
           <IndividualPracticeContainer />
+          <div className='top-title'>
+            <h4 className='title'>
+              {stateInfo?.stateNameDisplay || 'U.S.'}{' '}
+              {t('associated-projects-initiatives.title')}{' '}
+              {currentPractice.practiceName}
+            </h4>
+          </div>
+          <p className='intro-desc'>
+            {t('associated-projects-initiatives.description')}
+          </p>
           <ProjectListGroup
             error={perror}
             isError={pisError}

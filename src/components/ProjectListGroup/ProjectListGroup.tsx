@@ -107,13 +107,6 @@ const ProjectListGroup = ({
   };
   return (
     <div className='projects-list-group' data-testid='projects-list-group'>
-      {!isMapDisplayed && (
-        <div className='top-title'>
-          <h4 className='title'>
-            {t('search-results-page.project-initiatives')}
-          </h4>
-        </div>
-      )}
       {!isMapDisplayed && renderProjectTypeTabs()}
       <TabContent activeTab={activeTab}>
         <TabPane tabId={1}>
