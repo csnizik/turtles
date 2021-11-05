@@ -109,7 +109,6 @@ const ConservationPracticeContainer = ({
       dispatch(enablePdfGenState());
     }
   };
-<<<<<<< HEAD
 
   const practiceId = location.search.split('=').pop();
 
@@ -118,8 +117,6 @@ const ConservationPracticeContainer = ({
     location.search.lastIndexOf('?')
   );
 
-=======
->>>>>>> devRedo
   useEffect(() => {
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
       setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
