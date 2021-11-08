@@ -6,11 +6,18 @@
   font-family: Roboto;
   box-sizing: border-box;
 }
+
+#root {
+  margin: auto;
+  max-width: 1200px;
+  min-width: 1040px;
+}
+
 body {
   background: $white;
 }
 .container {
-  width: 90%;
+  
   border: 1px solid $dark-grey-1;
   box-shadow: 5px 5px 5px 1px $medium-darkgrey;
   border-radius: 5px;
