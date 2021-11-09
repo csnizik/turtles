@@ -2,15 +2,38 @@
 
 #viewDiv {
   height: 68vh;
-  width: 81.5%;
-  margin: 1rem 0rem 0rem 20rem;
-  padding-bottom: 3rem;
+  width: 100%;
+  margin: 1rem 0rem 0rem 0rem;
+}
+
+#akViewDiv {
+  padding: 0;
+  margin: 0rem 0rem 0rem 1.5rem;
+  height: 175px;
+  width: 225px;
+  background-color: $white;
+}
+
+#hiViewDiv {
+  padding: 0;
+  margin: 0rem 0rem 0rem 2rem;
+  height: 150px;
+  width: 220px;
+  background-color: $white;
+}
+
+#cariViewDiv {
+  padding: 0;
+  margin: 0rem 0rem 0rem 2.5rem;
+  height: 120px;
+  width: 175px;
+  background-color: $white;
 }
 
 @media only screen and (max-width: $macbook-pro-screen) {
   #viewDiv {
     height: 68vh;
-    width: 72.5%;
-    margin: 1rem 0rem 0rem 20rem;
+    width: 82.5%;
+    margin: 1rem 0rem 0rem 0rem;
   }
 }

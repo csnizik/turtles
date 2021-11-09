@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useGetAssociatedPracticeQuery } from '../../Redux/services/api';
 import './specs.scss';
 import { IAssociatedPracticeList } from '../../common/types';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 
 interface ISpecAndToolsProps {
   data: any;
@@ -28,9 +29,16 @@ const SpecificationsAndTools = ({
 
   const { t } = useTranslation();
 
+  const practiceCategory = useAppSelector(
+    (state) => state?.practiceSlice?.selectedPracticeCategory
+  );
+
+  const updatePracticeCategory = practiceCategory?.toString();
+
   const clickHandler = (value) => {
     window.localStorage.setItem('PracticeId', value);
     window.localStorage.setItem('StateId', selectedStateCode);
+    window.localStorage.setItem('PracticeCategoryId', updatePracticeCategory);
   };
   const content = useGetAssociatedPracticeQuery(userSelectedFilter);
 

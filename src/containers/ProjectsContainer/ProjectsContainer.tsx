@@ -3,6 +3,11 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import MapContainer from '../MapContainer';
+import ProjectListGroup from '../../components/ProjectListGroup';
+import {
+  useGetStateListQuery,
+  usePostProjectSearchDataQuery,
+} from '../../Redux/services/api';
 import './project-container.scss';
 
 import { projectCards, projectListGroups, projectPurposes } from './constants';
@@ -11,6 +16,7 @@ interface IProjectTypeCard {
   id: number;
   title: string;
   paragraphText: string;
+  paragraphDescription: string;
   imgSrc: string;
   imgAlt: string;
 }
@@ -24,6 +30,30 @@ const ProjectsContainer = () => {
   const { t } = useTranslation();
   const [toggleProjectView, setToggleProjectView] = useState(false);
   const [selectedProjectCard, setSelectedProjectCard] = useState(-1);
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const stateStatus: any = useGetStateListQuery();
+  let searchInput = { state_county_code: selectedLocation || null };
+
+  if (
+    !selectedLocation ||
+    selectedLocation === '00' ||
+    selectedLocation === '00000'
+  ) {
+    searchInput = { ...searchInput, state_county_code: null };
+  }
+
+  const { data, error, isLoading, isSuccess, isError } =
+    usePostProjectSearchDataQuery(searchInput);
+
+  const selectedState =
+    selectedLocation &&
+    stateStatus.isSuccess &&
+    stateStatus.data &&
+    stateStatus.data.find((state: any) => {
+      return state.stateNameDisplay;
+    });
+
+  const selectedStateName = selectedState?.stateNameDisplay;
 
   const handleSelectProjectCard = (id: number) => {
     setSelectedProjectCard(id);
@@ -44,9 +74,11 @@ const ProjectsContainer = () => {
     );
     if (!selectedProjectType) return null;
     return (
-      <div className='project-type-section margin-top-2'>
+      <div className='project-type-section'>
         <h3>{selectedProjectType.title}</h3>
-        <p className='margin-top-3'>{selectedProjectType.paragraphText}</p>
+        <p className='margin-top-3'>
+          {selectedProjectType.paragraphDescription}
+        </p>
         <p>
           Visit the{' '}
           <a
@@ -57,7 +89,15 @@ const ProjectsContainer = () => {
           >
             CIG website
           </a>{' '}
-          for more information.
+          for more information. Use
+          <a
+            aria-label='Conservation Innovation Grants link opens a new tab'
+            href='/search'
+            target='_blank'
+            rel='noreferrer'
+          >
+            &nbsp;advanced filters to search projects.
+          </a>
         </p>
       </div>
     );
@@ -67,7 +107,7 @@ const ProjectsContainer = () => {
     return (
       <div className='projects-tab'>
         <div className='projects-grid'>
-          <ListGroup className='margin-2'>
+          <ListGroup>
             {projectListGroups.map((listItem: IProjectListGroup) => {
               const listGroupItemClassNames = classNames(
                 'justify-content-between',
@@ -89,14 +129,28 @@ const ProjectsContainer = () => {
           </ListGroup>
           {renderProjectSection()}
         </div>
-        <MapContainer />
+        <div className='projets-map-section'>
+          <hr />
+          <h3>{t('projects-page.map-instructions')}</h3>
+          <MapContainer setSelectedLocation={setSelectedLocation} />
+        </div>
+
+        <ProjectListGroup
+          error={error}
+          isError={isError}
+          isLoading={isLoading}
+          isSuccess={isSuccess}
+          isMapDisplayed={true}
+          projectsList={data}
+          selectedStateName={selectedStateName}
+        />
       </div>
     );
   }
 
   return (
     <div className='projects-tab' data-testid='projects-container'>
-      <div className='project-tab-header margin-3'>
+      <div className='project-tab-header'>
         <p>{t('projects-page.page-header-01')}</p>
         <p>{t('projects-page.page-header-02')}</p>
         <ul className='margin-bottom-5'>
@@ -105,7 +159,7 @@ const ProjectsContainer = () => {
           })}
         </ul>
       </div>
-      <ul className='usa-card-group margin-2'>
+      <ul className='usa-card-group'>
         {projectCards.map((project: IProjectTypeCard) => {
           return (
             <li
@@ -121,7 +175,7 @@ const ProjectsContainer = () => {
                 <div className='usa-card__body'>
                   <p className='lead'>{project.paragraphText}</p>
                 </div>
-                <div className='usa-card__footer margin-top-2'>
+                <div className='usa-card__footer'>
                   <div className='usa-card__media'>
                     <div className='usa-card__img'>
                       <img src={project.imgSrc} alt={project.imgAlt} />

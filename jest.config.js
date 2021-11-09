@@ -3,9 +3,8 @@ module.exports = {
   transform: {
     '^.+\\.(ts|tsx)?$': 'ts-jest',
     '^.+\\.(js|jsx)$': 'babel-jest',
-    '^.+\\.jsx?$': 'babel-jest',
   },
-  transformIgnorePatterns: ['node_modules/(?!@arcgis/.*)'],
+  transformIgnorePatterns: ['node_modules/(?!@arcgis|@esri|@stencil/.*)'],
   moduleNameMapper: {
     '\\.(css|scss)$': '<rootDir>/src/__tests__/App.js',
     '\\.svg': '<rootDir>/src/__mocks__/svgrMock.js',
