@@ -23,16 +23,14 @@ const IndividualPracticeContainer = () => {
   const { data, error, isLoading, isSuccess, isError } =
     useGetNationalOverviewByPracticeQuery(practiceId);
 
-  const subPracticeId = location.search.split('=').pop();
-
-  const practiceCategoryId = location.search.substring(
-    location.search.indexOf('=') + 1,
-    location.search.lastIndexOf('?')
-  );
-
-  if (practiceCategoryId && subPracticeId) {
+  if (location.search) {
+    const linkage = location.search.split('?');
+    const practiceCategoryId = linkage[1].split('=').pop();
+    const subPracticeId = linkage[2].split('=').pop();
+    const stateId = linkage[3].split('=').pop();
     window.localStorage.setItem('PracticeCategoryId', practiceCategoryId);
     window.localStorage.setItem('PracticeId', subPracticeId);
+    window.localStorage.setItem('StateId', stateId);
   }
 
   useEffect(() => {

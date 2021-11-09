@@ -49,7 +49,8 @@ const ConservationPracticeContainer = ({
   const sharedState = location?.state?.detail;
 
   const selectedStateValue = window.localStorage.getItem('StateId');
-  if (window.localStorage.getItem('StateId')) {
+
+  if (selectedStateValue) {
     const selectedState =
       selectedStateValue &&
       stateStatus.isSuccess &&
@@ -110,19 +111,17 @@ const ConservationPracticeContainer = ({
     }
   };
 
-  const practiceId = location.search.split('=').pop();
-
-  const practiceCategoryId = location.search.substring(
-    location.search.indexOf('=') + 1,
-    location.search.lastIndexOf('?')
-  );
-
   useEffect(() => {
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
       setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
-      if (practiceCategoryId && practiceId) {
+      if (location.search) {
+        const linkage = location.search.split('?');
+        const practiceCategoryId = linkage[1].split('=').pop();
+        const practiceId = linkage[2].split('=').pop();
+        const stateCode = linkage[3].split('=').pop();
         dispatch(setPracticeCategory(Number(practiceCategoryId)));
         dispatch(setSpecificPractice(Number(practiceId)));
+        dispatch(currentState(stateCode));
         setPracticeViewType({ ...practiceViewType, individualPractice: true });
       }
     } else if (currentPracticeCategoryId >= 0 && currentSpecificPractice < 0) {

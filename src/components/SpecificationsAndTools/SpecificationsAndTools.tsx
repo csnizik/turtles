@@ -87,7 +87,7 @@ const SpecificationsAndTools = ({
                       to={{
                         pathname: `/ConservationPractices`,
                         state: { detail: practice.practiceId },
-                        search: `PracticeCategory=${practiceCategory}?Practice=${practice.practiceId}`,
+                        search: `PracticeCategory=${practiceCategory}?Practice=${practice.practiceId}?State=${selectedStateCode}`,
                       }}
                       onClick={() => clickHandler(practice.practiceId)}
                       target='_blank'
