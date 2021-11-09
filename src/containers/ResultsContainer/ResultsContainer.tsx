@@ -29,6 +29,11 @@ const ResultsContainer = () => {
       </div>
       <Filters />
       <Accordion />
+      <div className='top-title'>
+        <h4 className='title'>
+          {t('search-results-page.project-initiatives')}
+        </h4>
+      </div>
       <ProjectListGroup
         error={error}
         isError={isError}

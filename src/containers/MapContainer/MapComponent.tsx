@@ -5,11 +5,15 @@ import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
 import {
   alaskaExtent,
+  ALASKA_CENTER,
+  ALASKA_ZOOM,
   caribbeanExtent,
+  CARIBBEAN_CENTER,
+  CARIBBEAN_ZOOM,
   CENTER_COORDINATES,
-  fillBorderColor,
   hawaiiExtent,
-  simpleFillColor,
+  HAWAII_CENTER,
+  HAWAII_ZOOM,
   topoBaseMap,
   VIEW_DIV,
   viewConstraints,
@@ -25,17 +29,21 @@ import {
   hawaiiFeatureLayer1,
 } from './layers';
 import { createMapView } from './mapUtils';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 import '@arcgis/core/assets/esri/themes/light/main.css';
 
 interface IMapProps {
   view: MapView;
+  map: Map;
 }
 
 const MapComponent = ({ setSelectedLocation }: any) => {
+  const stateCode = useAppSelector((state) => state.stateSlice?.stateCode);
   const alaskaView = useRef({} as MapView);
   const caribbeanView = useRef({} as MapView);
   const hawaiiView = useRef({} as MapView);
   const mapRef = useRef({} as IMapProps);
+  const homeBtn = useRef({} as Home);
 
   const alaskaFeatureToPointLayer = useRef(alaskaFeatureLayer0);
   const alaskaLayer = useRef(alaskaFeatureLayer1);
@@ -48,46 +56,53 @@ const MapComponent = ({ setSelectedLocation }: any) => {
 
   useEffect(() => {
     if (mapRef && mapRef.current) {
-      const map = new Map({
+      mapRef.current.map = new Map({
         basemap: topoBaseMap,
       });
 
-      const view = new MapView({
+      const view: MapView = new MapView({
         center: CENTER_COORDINATES,
         container: VIEW_DIV,
-        map,
+        map: mapRef.current.map,
         zoom: 4,
       });
 
       view.constraints = viewConstraints;
 
       // Alaska composite view
-      alaskaView.current = createMapView('akViewDiv', map, alaskaExtent, {
-        wkid: 102009,
-      });
+      alaskaView.current = createMapView(
+        'akViewDiv',
+        mapRef.current.map,
+        alaskaExtent,
+        ALASKA_ZOOM,
+        ALASKA_CENTER
+      );
 
       // Caribbean composite view
       caribbeanView.current = createMapView(
         'cariViewDiv',
-        map,
+        mapRef.current.map,
         caribbeanExtent,
-        {
-          wkid: 102965,
-        }
+        CARIBBEAN_ZOOM,
+        CARIBBEAN_CENTER
       );
 
       // Hawaii composite view
-      hawaiiView.current = createMapView('hiViewDiv', map, hawaiiExtent, {
-        wkid: 102965,
-      });
+      hawaiiView.current = createMapView(
+        'hiViewDiv',
+        mapRef.current.map,
+        hawaiiExtent,
+        HAWAII_ZOOM,
+        HAWAII_CENTER
+      );
 
-      const homeBtn = new Home({
+      homeBtn.current = new Home({
         view,
       });
 
       mapRef.current.view = view;
       // Add the home button to the top left corner of the view
-      mapRef.current.view.ui.add(homeBtn, 'top-left');
+      mapRef.current.view.ui.add(homeBtn.current, 'top-left');
 
       // Add composite views for Alaska, Hawaii, and Caribbean
       mapRef.current.view.ui.add('akViewDiv', 'bottom-left');
@@ -95,15 +110,24 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       mapRef.current.view.ui.add('cariViewDiv', 'bottom-left');
 
       // Add Feature Layers
-      map.layers.add(alaskaFeatureToPointLayer.current);
-      map.layers.add(alaskaLayer.current);
-      map.layers.add(conusFeatureToPointLayer.current);
-      map.layers.add(conusStateLayer.current);
-      map.layers.add(caribbeanFeatureToPointLayer.current);
-      map.layers.add(caribbeanLayer.current);
-      map.layers.add(hawaiiFeatureToPointLayer.current);
-      map.layers.add(hawaiiLayer.current);
+      mapRef.current.map.layers.add(alaskaFeatureToPointLayer.current);
+      mapRef.current.map.layers.add(alaskaLayer.current);
+      mapRef.current.map.layers.add(conusFeatureToPointLayer.current);
+      mapRef.current.map.layers.add(conusStateLayer.current);
+      mapRef.current.map.layers.add(caribbeanFeatureToPointLayer.current);
+      mapRef.current.map.layers.add(caribbeanLayer.current);
+      mapRef.current.map.layers.add(hawaiiFeatureToPointLayer.current);
+      mapRef.current.map.layers.add(hawaiiLayer.current);
     }
+
+    return () => {
+      // Destroying the map will delete any associated resources including
+      // its layers, basemap, tables, and portalItem.
+      mapRef.current.map.destroy();
+      alaskaView.current.destroy();
+      caribbeanView.current.destroy();
+      hawaiiView.current.destroy();
+    };
   }, [mapRef]);
 
   // Handle map interactions
@@ -123,36 +147,97 @@ const MapComponent = ({ setSelectedLocation }: any) => {
 
             if (graphicList.length) {
               const selectedState: Graphic = graphicList[0].graphic;
-              // Highlight selected state
-              mapRef.current.view.graphics.removeAll();
-
-              const highlightSymbol = {
-                type: 'simple-fill',
-                color: simpleFillColor,
-                style: 'solid',
-                outline: {
-                  color: fillBorderColor,
-                  width: 1,
-                },
-              };
-
-              const selectedGraphic = new Graphic({
-                geometry: selectedState.geometry,
-                symbol: highlightSymbol,
-              });
 
               setSelectedLocation(selectedState.attributes.STATEFP);
 
-              mapRef.current.view.graphics.add(selectedGraphic);
-
               // Zoom to selected state
-              mapRef.current.view.goTo({ target: selectedState, zoom: 5 });
+              mapRef.current.view.goTo({ target: selectedState, zoom: 7 });
             }
           }
         });
       });
     });
   }, [mapRef]);
+
+  // Pre-select the state given the stateCode
+  useEffect(() => {
+    conusStateLayer.current.when(() => {
+      conusStateLayer.current.on('layerview-create', () => {
+        if (stateCode) {
+          conusStateLayer.current.queryFeatures().then((response) => {
+            const { features } = response;
+            const foundGraphic = features.find(
+              (graphic) => graphic.attributes?.STATEFP === stateCode
+            );
+            setSelectedLocation(foundGraphic?.attributes.STATEFP);
+            mapRef.current.view.goTo({ target: foundGraphic, zoom: 9 });
+          });
+        }
+      });
+    });
+  }, []);
+
+  // Handle alaska composite view interactions
+  useEffect(() => {
+    alaskaView.current.when(() => {
+      alaskaView.current.on('pointer-up', (event) => {
+        alaskaView.current.hitTest(event).then((response) => {
+          alaskaView.current.graphics.removeAll();
+          if (response.results.length) {
+            const selectedState: Graphic = response.results[0]?.graphic;
+            setSelectedLocation(selectedState.attributes.STATEFP);
+          }
+        });
+      });
+    });
+  }, [alaskaView]);
+
+  // Handle caribbean composite view interactions
+  useEffect(() => {
+    caribbeanView.current.when(() => {
+      caribbeanView.current.on('pointer-up', (event) => {
+        caribbeanView.current.hitTest(event).then((response) => {
+          caribbeanView.current.graphics.removeAll();
+          if (response.results.length) {
+            const selectedState: Graphic = response.results[0].graphic;
+            setSelectedLocation(selectedState.attributes.STATEFP);
+          }
+        });
+      });
+    });
+  }, [caribbeanView]);
+
+  // Handle hawaii composite view interactions
+  useEffect(() => {
+    hawaiiView.current.when(() => {
+      hawaiiView.current.on('pointer-up', (event) => {
+        hawaiiView.current.hitTest(event).then((response) => {
+          hawaiiView.current.graphics.removeAll();
+          if (response.results.length) {
+            const selectedState: Graphic = response.results[0].graphic;
+            setSelectedLocation(selectedState.attributes.STATEFP);
+          }
+        });
+      });
+    });
+  }, [hawaiiView]);
+
+  // Handle interaction with 'Home' button
+  useEffect(() => {
+    homeBtn.current.when(() => {
+      homeBtn.current.on('go', () => {
+        // Refresh project list to U.S
+        setSelectedLocation(null);
+        // Reset composite views to default position
+        alaskaView.current.goTo({ center: ALASKA_CENTER, zoom: ALASKA_ZOOM });
+        caribbeanView.current.goTo({
+          center: CARIBBEAN_CENTER,
+          zoom: CARIBBEAN_ZOOM,
+        });
+        hawaiiView.current.goTo({ center: HAWAII_CENTER, zoom: HAWAII_ZOOM });
+      });
+    });
+  }, [homeBtn]);
 
   return null;
 };

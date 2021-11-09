@@ -1,3 +1,5 @@
+import Extent from '@arcgis/core/geometry/Extent';
+
 // Basemap type
 export const topoBaseMap = 'topo-vector';
 
@@ -15,12 +17,17 @@ export const CENTER_COORDINATES = [-96, 36];
 // Id for the ArcGis Map Element
 export const VIEW_DIV = 'viewDiv';
 
-export const simpleFillColor = '#4689e0';
+const fillBorderColor = '#13A8F7';
 
-export const fillBorderColor = '#04d9ff';
+export const highlightSymbol = {
+  type: 'simple-line',
+  color: fillBorderColor,
+  style: 'solid',
+  width: '3px',
+};
 
 // Extents for composite views
-export const alaskaExtent = {
+export const alaskaExtent = new Extent({
   xmin: -4847539.802087865,
   ymin: 1848924.3741533272,
   xmax: -1623658.5396487257,
@@ -28,7 +35,7 @@ export const alaskaExtent = {
   spatialReference: {
     wkid: 102009,
   },
-};
+});
 
 export const caribbeanExtent = {
   xmin: 3071284.104725703,
@@ -49,3 +56,11 @@ export const hawaiiExtent = {
     wkid: 102965,
   },
 };
+
+// Constans for composite views
+export const ALASKA_CENTER = [-160, 65];
+export const ALASKA_ZOOM = 2;
+export const CARIBBEAN_CENTER = [-66, 18];
+export const CARIBBEAN_ZOOM = 6;
+export const HAWAII_CENTER = [-157, 20];
+export const HAWAII_ZOOM = 5;

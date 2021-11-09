@@ -143,3 +143,9 @@ export interface IAssociatedPracticeList {
   practiceName: string;
   practiceDescription: string;
 }
+
+export interface IProjectType {
+  title: string;
+  description: string;
+  map: string;
+}
