@@ -82,7 +82,7 @@ const ReportPreviewCreator = ({
   };
 
   const handleGeneratePdf = () => {
-    const element = document.getElementById('preview-content');
+    const element = document.getElementById('preview-content-pdf');
     const opt = {
       margin: 0.2,
       filename: `Practice Report.pdf`,
