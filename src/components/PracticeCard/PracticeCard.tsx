@@ -34,6 +34,8 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
       practiceCategories: false,
       individualPractice: true,
     });
+    const selectedPractice = practiceId.toString();
+    window.localStorage.setItem('PracticeId', selectedPractice);
   };
 
   useEffect(() => {
