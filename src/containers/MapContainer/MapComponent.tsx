@@ -119,15 +119,6 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       mapRef.current.map.layers.add(hawaiiFeatureToPointLayer.current);
       mapRef.current.map.layers.add(hawaiiLayer.current);
     }
-
-    return () => {
-      // Destroying the map will delete any associated resources including
-      // its layers, basemap, tables, and portalItem.
-      mapRef.current.map.destroy();
-      alaskaView.current.destroy();
-      caribbeanView.current.destroy();
-      hawaiiView.current.destroy();
-    };
   }, [mapRef]);
 
   // Handle map interactions
@@ -147,10 +138,11 @@ const MapComponent = ({ setSelectedLocation }: any) => {
 
             if (graphicList.length) {
               const selectedState: Graphic = graphicList[0].graphic;
+
               setSelectedLocation(selectedState.attributes.STATEFP);
 
               // Zoom to selected state
-              mapRef.current.view.goTo({ target: selectedState, zoom: 6 });
+              mapRef.current.view.goTo({ target: selectedState, zoom: 7 });
             }
           }
         });
@@ -168,15 +160,8 @@ const MapComponent = ({ setSelectedLocation }: any) => {
             const foundGraphic = features.find(
               (graphic) => graphic.attributes?.STATEFP === stateCode
             );
-            mapRef.current.view.goTo({
-              center: [
-                parseInt(foundGraphic?.attributes?.INTPTLON, 10),
-                parseInt(foundGraphic?.attributes?.INTPTLAT, 10),
-              ],
-              zoom: 6,
-            });
-
             setSelectedLocation(foundGraphic?.attributes.STATEFP);
+            mapRef.current.view.goTo({ target: foundGraphic, zoom: 9 });
           });
         }
       });
