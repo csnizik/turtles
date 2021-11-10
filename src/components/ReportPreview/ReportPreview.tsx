@@ -30,7 +30,7 @@ const ReportPreview = ({
         ? 'initiative'
         : 'project';
       return (
-        <div key={`${identifyer}${index}`}>
+        <li className='proj-list-item' key={`${identifyer}${index}`}>
           <ProjectListItem
             id={item?.[`${identifyer}Id`]}
             description={item?.[`${identifyer}Description`]}
@@ -39,30 +39,39 @@ const ReportPreview = ({
             statesInvolved={item?.statesInvolved}
             year={item?.awardeeYear}
           />
-        </div>
+        </li>
       );
     });
     return (
-      <>
-        <div>{projInit.title}</div>
-        {projInitList}
-      </>
+      <div className='projects-data'>
+        <div className='subheader-title'>{projInit.title}</div>
+        <ul className='bullets'>{projInitList}</ul>
+      </div>
     );
   };
   const renderProjInits = (projInit) => {
     let total = projInit.map((pItem) => {
       return renderProjInit(pItem);
     });
-    return total;
+
+    return (
+      <div className='proj-inits'>
+        <h2 className='bold-header'>
+          {`${data?.practiceName} Projects and Initiatives`}
+        </h2>
+        {total}
+      </div>
+    );
   };
   const contentToRender = () => {
     return (
-      <div id='preview-content'>
-        <h3 id='preview-content-header'>
-          {data?.practiceName} in{' '}
-          {selectedStateName === 'U.S.' ? 'the U.S.' : selectedStateName}
-        </h3>
-        <div className='preview-scroll'>
+      <div className='preview-scroll'>
+        <div id='preview-content'>
+          <h3 id='preview-content-header'>
+            {data?.practiceName} in{' '}
+            {selectedStateName === 'U.S.' ? 'the U.S.' : selectedStateName}
+          </h3>
+
           {choiceInputs.input1 && (
             <div>
               <ConservationPracticeOverview
