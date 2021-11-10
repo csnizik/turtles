@@ -48,7 +48,9 @@ const LocationContainer = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(currentState(selectedState));
+    if (selectedState) {
+      dispatch(currentState(selectedState));
+    }
   }, []);
 
   useEffect(() => {

@@ -1,19 +1,32 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage/session' // defaults to localStorage for web
 import { api } from './services/api';
 import disableSlice from './Slice/disableSlice';
 import pdfGenSlice from './Slice/pdfGenSlice';
 import practiceSlice from './Slice/practiceSlice';
 import stateSlice from './Slice/stateSlice';
 
-const store = configureStore({
-  reducer: {
+const rootReducer = combineReducers({
     [api.reducerPath]: api.reducer,
     disableSlice,
     pdfGenSlice,
     practiceSlice,
     stateSlice,
-  },
+});
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  blacklist: [''], // navigation will not be persisted
+  whitelist: ['stateSlice', 'practiceSlice', 'disableSlice'] // only navigation will be persisted
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+export const store = configureStore({
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware),
 });
@@ -25,4 +38,4 @@ setupListeners(store.dispatch);
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 
-export default store;
+export const presistedStore = persistStore(store)
