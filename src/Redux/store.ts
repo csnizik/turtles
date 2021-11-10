@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage/session' // defaults to localStorage for web
+import storage from 'redux-persist/lib/storage/session' // SessionStorage for web
 import { api } from './services/api';
 import disableSlice from './Slice/disableSlice';
 import pdfGenSlice from './Slice/pdfGenSlice';
