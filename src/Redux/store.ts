@@ -19,8 +19,8 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: [''], // navigation will not be persisted
-  whitelist: ['stateSlice', 'practiceSlice', 'disableSlice'] // only navigation will be persisted
+  blacklist: [''], // State will not be persisted
+  whitelist: ['stateSlice', 'practiceSlice', 'disableSlice'] // only State will be persisted
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
