@@ -27,18 +27,23 @@ const Pagination = ({
   const renderTitle = () => {
     if (selectedStateName) {
       return (
-        <h3>
+        <h4>
           {indexOfFirstCard + 1} -{' '}
           {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards}{' '}
           projects for {selectedStateName}
-        </h3>
+        </h4>
       );
     }
     return (
+<<<<<<< HEAD
       <h3>
         Showing {cards ? 1 : 0} -{' '}
+=======
+      <h4>
+        Showing {indexOfFirstCard + 1} -{' '}
+>>>>>>> devRedo
         {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards} projects
-      </h3>
+      </h4>
     );
   };
 
