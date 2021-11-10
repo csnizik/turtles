@@ -35,13 +35,8 @@ const Pagination = ({
       );
     }
     return (
-<<<<<<< HEAD
-      <h3>
-        Showing {cards ? 1 : 0} -{' '}
-=======
       <h4>
-        Showing {indexOfFirstCard + 1} -{' '}
->>>>>>> devRedo
+        Showing {cards ? 1 : 0} -{' '}
         {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards} projects
       </h4>
     );
