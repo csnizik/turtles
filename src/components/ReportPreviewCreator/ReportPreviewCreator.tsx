@@ -29,8 +29,10 @@ const ReportPreviewCreator = ({
   projectsInitiativesData,
 }: any) => {
   const rcRef = useRef();
+  const rcRef2 = useRef();
   const [rcTreatedInputs, setRcTreatedInputs] = useState(new Set());
   const [childArr, setChildArr] = useState<DomParent>();
+  const [childArr2, setChildArr2] = useState<DomParent>();
   const [selectedProjInitData, setSelectedProjInitData] = useState([]);
   const [choiceInputs, setChoiceInputs] = useState({
     input1: false,
@@ -42,6 +44,7 @@ const ReportPreviewCreator = ({
   useEffect(() => {
     setRcTreatedInputs(new Set());
     setChildArr(rcRef.current);
+    setChildArr2(rcRef2.current);
     setChoiceInputs({
       input1: false,
       input2: false,
@@ -74,6 +77,16 @@ const ReportPreviewCreator = ({
     if (!childArr) return;
 
     childArr.children.forEach((child) => {
+      const categoryId: number = +child.textContent.charAt(0);
+      child.className = selectedIds.has(categoryId) // eslint-disable-line no-param-reassign
+        ? 'accordion-container'
+        : 'hidden-content';
+    });
+
+    setChildArr2(rcRef2.current);
+    if (!childArr2) return;
+
+    childArr2.children.forEach((child) => {
       const categoryId: number = +child.textContent.charAt(0);
       child.className = selectedIds.has(categoryId) // eslint-disable-line no-param-reassign
         ? 'accordion-container'
@@ -136,6 +149,7 @@ const ReportPreviewCreator = ({
                 reportPreviewData={reportPreviewData}
                 practiceId={practiceId}
                 rcRef={rcRef}
+                rcRef2={rcRef2}
                 selectedProjInitData={selectedProjInitData}
               />
             </div>

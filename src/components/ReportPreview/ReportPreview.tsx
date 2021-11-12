@@ -17,6 +17,7 @@ const ReportPreview = ({
   reportPreviewData,
   practiceId,
   rcRef,
+  rcRef2,
   rcTreatedInputs,
   selectedProjInitData,
 }: any) => {
@@ -89,6 +90,7 @@ const ReportPreview = ({
               selectedStateCode={selectedStateCode}
               selectedPracticeId={practiceId}
               rcRef={rcRef}
+              cName='accordion-section'
             />
           </div>
           {choiceInputs.input2 && (
@@ -137,7 +139,8 @@ const ReportPreview = ({
             <ResourceConcernTreated
               selectedStateCode={selectedStateCode}
               selectedPracticeId={practiceId}
-              rcRef={rcRef}
+              rcRef={rcRef2}
+              cName='accordion-section'
             />
           </div>
           {choiceInputs.input2 && (
