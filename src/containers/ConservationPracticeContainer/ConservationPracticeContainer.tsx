@@ -110,7 +110,6 @@ const ConservationPracticeContainer = ({
       dispatch(enablePdfGenState());
     }
   };
-
   useEffect(() => {
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
       setPracticeViewType({ ...defaultPracticeViews, allPractices: true });

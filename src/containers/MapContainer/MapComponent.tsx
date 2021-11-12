@@ -119,6 +119,44 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       mapRef.current.map.layers.add(hawaiiFeatureToPointLayer.current);
       mapRef.current.map.layers.add(hawaiiLayer.current);
     }
+
+    return () => {
+      // Destroying the map will delete any associated resources including
+      // its layers, basemap, tables, and portalItem.
+      mapRef.current.map.destroy();
+      alaskaView.current.destroy();
+      caribbeanView.current.destroy();
+      hawaiiView.current.destroy();
+    };
+  }, [mapRef]);
+
+  // Handle map interactions
+  useEffect(() => {
+    mapRef.current.view.when(() => {
+      mapRef.current.view.on('pointer-up', (event) => {
+        mapRef.current.view.hitTest(event).then((response) => {
+          mapRef.current.view.graphics.removeAll();
+          if (response.results.length) {
+            const graphicList: any = response.results.filter((item: any) => {
+              // check if the graphic belongs to the states layer
+              if (conusStateLayer.current) {
+                return item.graphic.layer === conusStateLayer.current;
+              }
+              return response.results;
+            });
+
+            if (graphicList.length) {
+              const selectedState: Graphic = graphicList[0].graphic;
+
+              setSelectedLocation(selectedState.attributes.STATEFP);
+
+              // Zoom to selected state
+              mapRef.current.view.goTo({ target: selectedState, zoom: 7 });
+            }
+          }
+        });
+      });
+    });
   }, [mapRef]);
 
   // Handle map interactions
