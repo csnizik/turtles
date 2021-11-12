@@ -58,7 +58,7 @@ const ReportPreview = ({
     return (
       <div className='proj-inits'>
         <h2 className='bold-header'>
-          {`${data?.practiceName} Projects and Initiatives`}
+          {`${selectedStateName} ${data?.practiceName} Projects and Initiatives`}
         </h2>
         {total}
       </div>
