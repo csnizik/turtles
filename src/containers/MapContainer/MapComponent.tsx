@@ -159,6 +159,35 @@ const MapComponent = ({ setSelectedLocation }: any) => {
     });
   }, [mapRef]);
 
+  // Handle map interactions
+  useEffect(() => {
+    mapRef.current.view.when(() => {
+      mapRef.current.view.on('pointer-up', (event) => {
+        mapRef.current.view.hitTest(event).then((response) => {
+          mapRef.current.view.graphics.removeAll();
+          if (response.results.length) {
+            const graphicList: any = response.results.filter((item: any) => {
+              // check if the graphic belongs to the states layer
+              if (conusStateLayer.current) {
+                return item.graphic.layer === conusStateLayer.current;
+              }
+              return response.results;
+            });
+
+            if (graphicList.length) {
+              const selectedState: Graphic = graphicList[0].graphic;
+
+              setSelectedLocation(selectedState.attributes.STATEFP);
+
+              // Zoom to selected state
+              mapRef.current.view.goTo({ target: selectedState, zoom: 7 });
+            }
+          }
+        });
+      });
+    });
+  }, [mapRef]);
+
   // Pre-select the state given the stateCode
   useEffect(() => {
     conusStateLayer.current.when(() => {
