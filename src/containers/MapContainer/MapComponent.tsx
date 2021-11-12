@@ -119,15 +119,6 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       mapRef.current.map.layers.add(hawaiiFeatureToPointLayer.current);
       mapRef.current.map.layers.add(hawaiiLayer.current);
     }
-
-    return () => {
-      // Destroying the map will delete any associated resources including
-      // its layers, basemap, tables, and portalItem.
-      mapRef.current.map.destroy();
-      alaskaView.current.destroy();
-      caribbeanView.current.destroy();
-      hawaiiView.current.destroy();
-    };
   }, [mapRef]);
 
   // Handle map interactions
