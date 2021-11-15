@@ -32,14 +32,26 @@
   .usa-checkbox {
     padding-bottom: $short-space-size;
   }
+  .usa-checkbox__label {
+    color: $nrcs-dark;
+    font-family: Roboto;
+    font-size: 1rem;
+  }
 }
 
 .projects-initiatives-list {
   margin-left: 2.1875rem;
+
+  .usa-checkbox__label {
+    color: $nrcs-dark;
+    font-family: Roboto;
+    font-size: 1rem;
+  }
 }
 
 .builder-title {
-  font-weight: $medium-weight;
+  font-weight: $medium-light-weight;
   font-size: 1rem;
-  color: $dark-grey-2;
+  color: $black;
+  font-family: Source Sans Pro Web;
 }
