@@ -35,7 +35,6 @@ const defaultPracticeViews = {
 const ConservationPracticeContainer = ({
   currentSpecificPractice,
   currentPracticeCategoryId,
-  selectedStateCode,
 }: any) => {
   const { t } = useTranslation();
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
@@ -52,9 +51,8 @@ const ConservationPracticeContainer = ({
   const location: any = useLocation();
 
   const sharedState = location?.state?.detail;
-
+  const selectedStateCode = stateInfo.stateCode;
   const selectedStateValue = window.localStorage.getItem('StateId');
-
   if (selectedStateValue) {
     const selectedState =
       selectedStateValue &&
@@ -68,7 +66,7 @@ const ConservationPracticeContainer = ({
 
   let searchInputData = {
     practice_id: currentSpecificPractice,
-    state_county_code: selectedStateValue?.toString(),
+    state_county_code: selectedStateCode,
     practice_category_id: currentPracticeCategoryId,
   };
 
@@ -115,7 +113,6 @@ const ConservationPracticeContainer = ({
       dispatch(enablePdfGenState());
     }
   };
-
   useEffect(() => {
     console.log('pData: ', pdata);
     const tempData = [

@@ -48,7 +48,9 @@ const LocationContainer = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(currentState(selectedState));
+    if (selectedState) {
+      dispatch(currentState(selectedState));
+    }
   }, []);
 
   useEffect(() => {
@@ -76,7 +78,6 @@ const LocationContainer = () => {
       {currentTabOption === 1 && (
         <TabPane tabId={1}>
           <ConservationPracticeContainer
-            selectedStateCode={selectedStateCode}
             currentPracticeCategoryId={selectedPracticeCategory}
             currentSpecificPractice={selectedPractice}
           />
