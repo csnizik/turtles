@@ -63,13 +63,9 @@ const ReportBuilder = ({
 
   const toggleSingle = (categoryId: any) => {
     const tempSet = new Set();
-    console.log('swapaCategoryIds: ', swapaCategoryIds);
-    console.log('rcTreatedInputs: ', rcTreatedInputs);
     swapaCategoryIds.forEach((id) => {
       if (rcTreatedInputs.has(id)) tempSet.add(id);
     });
-    console.log('tempSet: ', tempSet);
-    console.log('categoryId: ', categoryId);
     if (rcTreatedInputs.has(categoryId)) tempSet.delete(categoryId);
     else tempSet.add(categoryId);
     setRcTreatedInput(tempSet);
@@ -109,18 +105,17 @@ const ReportBuilder = ({
             checked={rcTreatedInputs.has(item.rcCategoryId)}
             onChange={() => toggleSingle(item.rcCategoryId)}
           />
-          <label className='usa-checkbox__label' htmlFor={`swapaInput${index}`}>
+          <label className='usa-checkbox__label' htmlFor={getIdName(index)}>
             {item.rcCategoryName}
           </label>
         </div>
       );
     });
     return (
-      <>
-        {' '}
+      <div>
         {allInput}
         {part2}
-      </>
+      </div>
     );
   };
 
@@ -141,10 +136,8 @@ const ReportBuilder = ({
   useEffect(() => {
     setProjectsInitiativesAll(!projectsInitiatives.includes(false));
     let selectedItems: any = [];
-    console.log('projectsInitiatives:', projectsInitiatives);
     projectsInitiatives.forEach((element, index) => {
       if (element) selectedItems.push(projectsInitiativesData[index]);
-      console.log('selectedItems: ', selectedItems);
       setSelectedProjInitData(selectedItems);
     });
   }, [projectsInitiatives]);

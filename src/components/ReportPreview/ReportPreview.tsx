@@ -1,11 +1,9 @@
 import './report-preview.scss';
 import { useEffect, useRef, useState } from 'react';
-import { map } from 'esri/widgets/TableList/TableListViewModel';
 import ConservationPracticeOverview from '../ConservationPracticeOverview';
 import ImplementationExtent from '../ImplementationExtent';
 import SpecificationsAndTools from '../SpecificationsAndTools';
 import ResourceConcernTreated from '../ResourceConcernTreated';
-import ProjectsAndInitiatives from '../ProjectsAndInitiatives';
 import ProjectListItem from '../ProjectListGroup/ProjectListItem';
 import ApplicationImpacts from '../ApplicationImpacts';
 import ConservationPracticeVideo from '../ConservationPracticeVideo';
@@ -22,16 +20,14 @@ const ReportPreview = ({
   selectedProjInitData,
 }: any) => {
   const { data, error, isLoading, isSuccess, isError } = reportPreviewData;
-  const [pdfUrl, setPdfUrl] = useState(null);
   const mountedRef = useRef(true);
-
   const renderProjInit = (projInit) => {
     const projInitList = projInit.data.map((item, index) => {
       let identifyer = projInit.title.includes('Landscape')
         ? 'initiative'
         : 'project';
       return (
-        <li className='proj-list-item' key={`${identifyer}${index}`}>
+        <div className='proj-list-item' key={`${identifyer}${index}`}>
           <ProjectListItem
             id={item?.[`${identifyer}Id`]}
             description={item?.[`${identifyer}Description`]}
@@ -40,12 +36,12 @@ const ReportPreview = ({
             statesInvolved={item?.statesInvolved}
             year={item?.awardeeYear}
           />
-        </li>
+        </div>
       );
     });
     return (
-      <div className='projects-data'>
-        <div className='subheader-title'>{projInit.title}</div>
+      <div key={projInit.title} className='projects-data'>
+        <div className='subheader-titlee'>{projInit.title}</div>
         <ul className='bullets'>{projInitList}</ul>
       </div>
     );
@@ -72,49 +68,66 @@ const ReportPreview = ({
             {data?.practiceName} in{' '}
             {selectedStateName === 'U.S.' ? 'the U.S.' : selectedStateName}
           </h3>
-
-          {choiceInputs.input1 && (
-            <div>
-              <ConservationPracticeOverview
-                data={data}
-                error={error}
-                isSuccess={isSuccess}
-                isError={isError}
-                isLoading={isLoading}
-              />
-              <ConservationPracticeVideo selectedPracticeId={practiceId} />
-            </div>
-          )}
-          <div className={rcTreatedInputs.size < 1 ? 'hidden-content' : ''}>
-            <ResourceConcernTreated
-              selectedStateCode={selectedStateCode}
-              selectedPracticeId={practiceId}
-              rcRef={rcRef}
-              cName='accordion-section'
-            />
+          <div data-testid='conservation-overview'>
+            {choiceInputs.input1 && (
+              <div>
+                <ConservationPracticeOverview
+                  data={data}
+                  error={error}
+                  isSuccess={isSuccess}
+                  isError={isError}
+                  isLoading={isLoading}
+                />
+                <ConservationPracticeVideo selectedPracticeId={practiceId} />
+              </div>
+            )}
           </div>
-          {choiceInputs.input2 && (
-            <ImplementationExtent data={data} isSuccess={isSuccess} />
-          )}
-          {choiceInputs.input3 && (
-            <SpecificationsAndTools
-              selectedStateCode={selectedStateCode}
-              selectedPracticeId={practiceId}
-              data={data}
-              isSuccess={isSuccess}
-            />
-          )}
-          {choiceInputs.input4 && (
-            <ApplicationImpacts data={data} isSuccess={isSuccess} />
-          )}
-          {selectedProjInitData.length > 0
-            ? renderProjInits(selectedProjInitData)
-            : null}
+          <div className={rcTreatedInputs.size < 1 ? 'hidden-content' : ''}>
+            <div data-testid='resource-concern-treated'>
+              <ResourceConcernTreated
+                selectedStateCode={selectedStateCode}
+                selectedPracticeId={practiceId}
+                rcRef={rcRef}
+                cName='accordion-section'
+              />
+            </div>
+          </div>
+          <div data-testid='implementation-extent'>
+            {choiceInputs.input2 && (
+              <div>
+                <ImplementationExtent data={data} isSuccess={isSuccess} />
+              </div>
+            )}
+          </div>
+          <div data-testid='spec-tools'>
+            {choiceInputs.input3 && (
+              <div>
+                <SpecificationsAndTools
+                  selectedStateCode={selectedStateCode}
+                  selectedPracticeId={practiceId}
+                  data={data}
+                  isSuccess={isSuccess}
+                />
+              </div>
+            )}
+          </div>
+          <div data-testid='app-impacts'>
+            {choiceInputs.input4 && (
+              <div>
+                <ApplicationImpacts data={data} isSuccess={isSuccess} />
+              </div>
+            )}
+          </div>
+          <div data-testid='proj-init'>
+            {selectedProjInitData.length > 0 ? (
+              <div>{renderProjInits(selectedProjInitData)}</div>
+            ) : null}
+          </div>
         </div>
       </div>
     );
   };
-
+  // We  need this to render a version for the pdf which can't have scroll bar
   const contentToRenderPdf = () => {
     return (
       <div id='preview-content-pdf'>
@@ -173,7 +186,7 @@ const ReportPreview = ({
   }, [choiceInputs, rcTreatedInputs, selectedProjInitData]);
 
   return (
-    <div className='pdf-preview'>
+    <div data-testid='preview' className='pdf-preview'>
       <h3>Preview</h3>
       <div>{contentToRender()}</div>
       <div className='hidden-content'>{contentToRenderPdf()}</div>
