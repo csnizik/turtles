@@ -114,7 +114,6 @@ const ConservationPracticeContainer = ({
     }
   };
   useEffect(() => {
-    console.log('pData: ', pdata);
     const tempData = [
       { title: 'Conservation Innovation Grants', data: pdata },
       { title: 'Landscape Conservation Initiatives', data: initiativesList },
