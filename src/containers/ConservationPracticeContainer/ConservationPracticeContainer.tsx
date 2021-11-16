@@ -24,6 +24,7 @@ import {
 } from '../../Redux/Slice/practiceSlice';
 import { currentState } from '../../Redux/Slice/stateSlice';
 import ProjectListGroup from '../../components/ProjectListGroup';
+import { initiativesList } from '../../components/ProjectListGroup/constants';
 
 const defaultPracticeViews = {
   allPractices: false,
@@ -34,7 +35,6 @@ const defaultPracticeViews = {
 const ConservationPracticeContainer = ({
   currentSpecificPractice,
   currentPracticeCategoryId,
-  selectedStateCode,
 }: any) => {
   const { t } = useTranslation();
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
@@ -42,14 +42,18 @@ const ConservationPracticeContainer = ({
     useState(defaultPracticeViews);
   const [openModal, setOpenModal] = useState(false);
   const [cleanModal, setCleanModal] = useState(false);
+  const [projectsInitiativesData, setProjectsInitiativesData]: any = useState(
+    []
+  );
+
   const stateStatus: any = useGetStateListQuery();
   const dispatch = useAppDispatch();
   const location: any = useLocation();
 
   const sharedState = location?.state?.detail;
-
+  const selectedStateCode = stateInfo.stateCode;
   const selectedStateValue = window.localStorage.getItem('StateId');
-  if (window.localStorage.getItem('StateId')) {
+  if (selectedStateValue) {
     const selectedState =
       selectedStateValue &&
       stateStatus.isSuccess &&
@@ -62,7 +66,7 @@ const ConservationPracticeContainer = ({
 
   let searchInputData = {
     practice_id: currentSpecificPractice,
-    state_county_code: selectedStateValue?.toString(),
+    state_county_code: selectedStateCode,
     practice_category_id: currentPracticeCategoryId,
   };
 
@@ -110,8 +114,27 @@ const ConservationPracticeContainer = ({
     }
   };
   useEffect(() => {
+    console.log('pData: ', pdata);
+    const tempData = [
+      { title: 'Conservation Innovation Grants', data: pdata },
+      { title: 'Landscape Conservation Initiatives', data: initiativesList },
+    ];
+    setProjectsInitiativesData(tempData);
+  }, [pdata]);
+
+  useEffect(() => {
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
       setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
+      if (location.search) {
+        const linkage = location.search.split('?');
+        const practiceCategoryId = linkage[1].split('=').pop();
+        const practiceId = linkage[2].split('=').pop();
+        const stateCode = linkage[3].split('=').pop();
+        dispatch(setPracticeCategory(Number(practiceCategoryId)));
+        dispatch(setSpecificPractice(Number(practiceId)));
+        dispatch(currentState(stateCode));
+        setPracticeViewType({ ...practiceViewType, individualPractice: true });
+      }
     } else if (currentPracticeCategoryId >= 0 && currentSpecificPractice < 0) {
       //Temporary Fix for associated practies
       window.localStorage.setItem(
@@ -200,13 +223,16 @@ const ConservationPracticeContainer = ({
         handleCreateReport={handleCreateReport}
       />
 
-      <div className='overlay'>
-        <ReportPreviewCreator
-          openModal={openModal}
-          handleCreateReport={handleCreateReport}
-          cleanModal={cleanModal}
-        />
-      </div>
+      {openModal ? (
+        <div className='overlay'>
+          <ReportPreviewCreator
+            openModal={openModal}
+            handleCreateReport={handleCreateReport}
+            cleanModal={cleanModal}
+            projectsInitiativesData={projectsInitiativesData}
+          />
+        </div>
+      ) : null}
       {renderPracticeContainerContent(currentViewType)}
     </>
   );

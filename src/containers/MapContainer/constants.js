@@ -17,18 +17,13 @@ export const CENTER_COORDINATES = [-96, 36];
 // Id for the ArcGis Map Element
 export const VIEW_DIV = 'viewDiv';
 
-const simpleFillColor = '#4689e0';
-
-const fillBorderColor = '#04d9ff';
+const fillBorderColor = '#13A8F7';
 
 export const highlightSymbol = {
-  type: 'simple-fill',
-  color: simpleFillColor,
+  type: 'simple-line',
+  color: fillBorderColor,
   style: 'solid',
-  outline: {
-    color: fillBorderColor,
-    width: 1,
-  },
+  width: '3px',
 };
 
 // Extents for composite views

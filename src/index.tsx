@@ -2,7 +2,8 @@ import { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './Redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, presistedStore } from './Redux/store';
 import Spinner from './components/Spinner/Spinner';
 
 import './stylesheets/app.scss';
@@ -44,7 +45,9 @@ const App = () => (
 const rootNode = document.getElementById('root');
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={presistedStore}>
+      <App />
+    </PersistGate>
   </Provider>,
   rootNode
 );
