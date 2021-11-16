@@ -110,20 +110,35 @@ const ProjectListGroup = ({
       {!isMapDisplayed && renderProjectTypeTabs()}
       <TabContent activeTab={activeTab}>
         <TabPane tabId={1}>
-          {!isMapDisplayed && (
-            <p className='intro-desc'>
-              {t('projects-initiatives.innovation-tab')}
-            </p>
+          {isMapDisplayed ? (
+            <>
+              <p className='intro-desc'>
+                {t('projects-initiatives.innovation-tab')}
+              </p>
+              <Pagination
+                cards={grantsLength}
+                cardsPerPage={cardsPerPage}
+                paginate={paginate}
+                currentPage={currentPage}
+                indexOfLastPage={indexOfLastPage}
+                indexOfFirstCard={indexOfFirstCard}
+                indexOfLastCard={indexOfLastCard}
+                selectedStateName={selectedStateName}
+                mapComponent={true}
+              />
+            </>
+          ) : (
+            <Pagination
+              cards={grantsLength}
+              cardsPerPage={cardsPerPage}
+              paginate={paginate}
+              currentPage={currentPage}
+              indexOfLastPage={indexOfLastPage}
+              indexOfFirstCard={indexOfFirstCard}
+              indexOfLastCard={indexOfLastCard}
+            />
           )}
-          <Pagination
-            cards={grantsLength}
-            cardsPerPage={cardsPerPage}
-            paginate={paginate}
-            currentPage={currentPage}
-            indexOfLastPage={indexOfLastPage}
-            indexOfFirstCard={indexOfFirstCard}
-            indexOfLastCard={indexOfLastCard}
-          />
+
           <Row>
             <Col sm='12' className='p-3'>
               {isLoading && <Spinner />}
@@ -133,6 +148,7 @@ const ProjectListGroup = ({
                   {currentCards?.map((project: any) => {
                     return (
                       <ProjectListItem
+                        key={project.projectId}
                         id={project.projectId}
                         description={project.projectDescription}
                         title={project.projectTitle}

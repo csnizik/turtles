@@ -14,6 +14,7 @@ import {
   hawaiiExtent,
   HAWAII_CENTER,
   HAWAII_ZOOM,
+  highlightSymbol,
   topoBaseMap,
   VIEW_DIV,
   viewConstraints,
@@ -28,6 +29,7 @@ import {
   hawaiiFeatureLayer0,
   hawaiiFeatureLayer1,
 } from './layers';
+import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 import { createMapView } from './mapUtils';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import '@arcgis/core/assets/esri/themes/light/main.css';
@@ -119,15 +121,6 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       mapRef.current.map.layers.add(hawaiiFeatureToPointLayer.current);
       mapRef.current.map.layers.add(hawaiiLayer.current);
     }
-
-    return () => {
-      // Destroying the map will delete any associated resources including
-      // its layers, basemap, tables, and portalItem.
-      mapRef.current.map.destroy();
-      alaskaView.current.destroy();
-      caribbeanView.current.destroy();
-      hawaiiView.current.destroy();
-    };
   }, [mapRef]);
 
   // Handle map interactions
@@ -135,7 +128,15 @@ const MapComponent = ({ setSelectedLocation }: any) => {
     mapRef.current.view.when(() => {
       mapRef.current.view.on('pointer-up', (event) => {
         mapRef.current.view.hitTest(event).then((response) => {
-          mapRef.current.view.graphics.removeAll();
+          if (alaskaView.current.graphics.length) {
+            alaskaView.current.graphics.removeAll();
+          } else if (caribbeanView.current.graphics.length) {
+            caribbeanView.current.graphics.removeAll();
+          } else if (hawaiiView.current.graphics.length) {
+            hawaiiView.current.graphics.removeAll();
+          } else if (mapRef.current.view.graphics.length) {
+            mapRef.current.view.graphics.removeAll();
+          }
           if (response.results.length) {
             const graphicList: any = response.results.filter((item: any) => {
               // check if the graphic belongs to the states layer
@@ -147,10 +148,15 @@ const MapComponent = ({ setSelectedLocation }: any) => {
 
             if (graphicList.length) {
               const selectedState: Graphic = graphicList[0].graphic;
+              const highlightedGraphic = new Graphic({
+                geometry: selectedState?.geometry,
+                symbol: highlightSymbol,
+              });
+              mapRef.current.view.graphics.add(highlightedGraphic);
+              // Refresh project lists
               setSelectedLocation(selectedState.attributes.STATEFP);
-
               // Zoom to selected state
-              mapRef.current.view.goTo({ target: selectedState, zoom: 6 });
+              mapRef.current.view.goTo({ target: selectedState, zoom: 9 });
             }
           }
         });
@@ -162,21 +168,19 @@ const MapComponent = ({ setSelectedLocation }: any) => {
   useEffect(() => {
     conusStateLayer.current.when(() => {
       conusStateLayer.current.on('layerview-create', () => {
-        if (stateCode) {
+        if (stateCode && stateCode !== DEFAULT_NATIONAL_LOCATION) {
           conusStateLayer.current.queryFeatures().then((response) => {
             const { features } = response;
             const foundGraphic = features.find(
               (graphic) => graphic.attributes?.STATEFP === stateCode
             );
-            mapRef.current.view.goTo({
-              center: [
-                parseInt(foundGraphic?.attributes?.INTPTLON, 10),
-                parseInt(foundGraphic?.attributes?.INTPTLAT, 10),
-              ],
-              zoom: 6,
+            const highlightedGraphic = new Graphic({
+              geometry: foundGraphic?.geometry,
+              symbol: highlightSymbol,
             });
-
+            mapRef.current.view.graphics.add(highlightedGraphic);
             setSelectedLocation(foundGraphic?.attributes.STATEFP);
+            mapRef.current.view.goTo({ target: foundGraphic, zoom: 9 });
           });
         }
       });
@@ -188,9 +192,20 @@ const MapComponent = ({ setSelectedLocation }: any) => {
     alaskaView.current.when(() => {
       alaskaView.current.on('pointer-up', (event) => {
         alaskaView.current.hitTest(event).then((response) => {
-          alaskaView.current.graphics.removeAll();
+          if (caribbeanView.current.graphics.length) {
+            caribbeanView.current.graphics.removeAll();
+          } else if (hawaiiView.current.graphics.length) {
+            hawaiiView.current.graphics.removeAll();
+          } else if (mapRef.current.view.graphics.length) {
+            mapRef.current.view.graphics.removeAll();
+          }
           if (response.results.length) {
             const selectedState: Graphic = response.results[0]?.graphic;
+            const highlightedGraphic = new Graphic({
+              geometry: selectedState?.geometry,
+              symbol: highlightSymbol,
+            });
+            alaskaView.current.graphics.add(highlightedGraphic);
             setSelectedLocation(selectedState.attributes.STATEFP);
           }
         });
@@ -203,9 +218,20 @@ const MapComponent = ({ setSelectedLocation }: any) => {
     caribbeanView.current.when(() => {
       caribbeanView.current.on('pointer-up', (event) => {
         caribbeanView.current.hitTest(event).then((response) => {
-          caribbeanView.current.graphics.removeAll();
+          if (alaskaView.current.graphics.length) {
+            alaskaView.current.graphics.removeAll();
+          } else if (hawaiiView.current.graphics.length) {
+            hawaiiView.current.graphics.removeAll();
+          } else if (mapRef.current.view.graphics.length) {
+            mapRef.current.view.graphics.removeAll();
+          }
           if (response.results.length) {
             const selectedState: Graphic = response.results[0].graphic;
+            const highlightedGraphic = new Graphic({
+              geometry: selectedState?.geometry,
+              symbol: highlightSymbol,
+            });
+            caribbeanView.current.graphics.add(highlightedGraphic);
             setSelectedLocation(selectedState.attributes.STATEFP);
           }
         });
@@ -218,9 +244,20 @@ const MapComponent = ({ setSelectedLocation }: any) => {
     hawaiiView.current.when(() => {
       hawaiiView.current.on('pointer-up', (event) => {
         hawaiiView.current.hitTest(event).then((response) => {
-          hawaiiView.current.graphics.removeAll();
+          if (alaskaView.current.graphics.length) {
+            alaskaView.current.graphics.removeAll();
+          } else if (caribbeanView.current.graphics.length) {
+            caribbeanView.current.graphics.removeAll();
+          } else if (mapRef.current.view.graphics.length) {
+            mapRef.current.view.graphics.removeAll();
+          }
           if (response.results.length) {
             const selectedState: Graphic = response.results[0].graphic;
+            const highlightedGraphic = new Graphic({
+              geometry: selectedState?.geometry,
+              symbol: highlightSymbol,
+            });
+            hawaiiView.current.graphics.add(highlightedGraphic);
             setSelectedLocation(selectedState.attributes.STATEFP);
           }
         });

@@ -10,22 +10,30 @@ const ReportBuilder = ({
   getRCTreatedComponent,
   reportPreviewData,
   handleGeneratePdf,
+  projectsInitiativesData,
+  stateName,
+  setSelectedProjInitData,
 }: any) => {
   const swapaCategoryCnt = swapaData?.result.length;
   const [swapaCategoryIds, setSwapaCategoryIds] = useState(new Set());
+  const [projectsInitiativesAll, setProjectsInitiativesAll] = useState(false);
+  const [projectsInitiatives, setProjectsInitiatives]: any = useState([]);
 
   const collectSwapaCategoryIds = () => {
     const tempSet = new Set();
     swapaData?.result.forEach((childData) => {
-      tempSet.add(childData.rcCategoryId)
-    })
-    
+      tempSet.add(childData.rcCategoryId);
+    });
+
     setSwapaCategoryIds(tempSet);
-  }
+  };
 
   useEffect(() => {
     collectSwapaCategoryIds();
     getRCTreatedComponent(new Set());
+    const projectsInitiativesSize = projectsInitiativesData.length;
+    const initProjectsInitiatives = Array(projectsInitiativesSize).fill(false);
+    setProjectsInitiatives(initProjectsInitiatives);
   }, []);
 
   const handleInput = (e) => {
@@ -43,7 +51,7 @@ const ReportBuilder = ({
     if (rcTreatedInputs.size < swapaCategoryCnt) {
       swapaCategoryIds.forEach((id) => {
         tempSet.add(id);
-      })
+      });
       setRcTreatedInput(tempSet);
       getRCTreatedComponent(tempSet);
       return;
@@ -57,8 +65,7 @@ const ReportBuilder = ({
     const tempSet = new Set();
     swapaCategoryIds.forEach((id) => {
       if (rcTreatedInputs.has(id)) tempSet.add(id);
-    })
-
+    });
     if (rcTreatedInputs.has(categoryId)) tempSet.delete(categoryId);
     else tempSet.add(categoryId);
     setRcTreatedInput(tempSet);
@@ -98,8 +105,77 @@ const ReportBuilder = ({
             checked={rcTreatedInputs.has(item.rcCategoryId)}
             onChange={() => toggleSingle(item.rcCategoryId)}
           />
-          <label className='usa-checkbox__label' htmlFor={`swapaInput${index}`}>
+          <label className='usa-checkbox__label' htmlFor={getIdName(index)}>
             {item.rcCategoryName}
+          </label>
+        </div>
+      );
+    });
+    return (
+      <div>
+        {allInput}
+        {part2}
+      </div>
+    );
+  };
+
+  const toggleAllProjectsInitiatives = () => {
+    let checkedValue = !projectsInitiativesAll;
+    setProjectsInitiativesAll(checkedValue);
+    setProjectsInitiatives([...projectsInitiatives].fill(checkedValue));
+  };
+
+  const toggleSingleProjectsInitiative = (initiative) => {
+    setProjectsInitiatives(
+      Object.assign([...projectsInitiatives], {
+        [initiative]: !projectsInitiatives[initiative],
+      })
+    );
+  };
+
+  useEffect(() => {
+    setProjectsInitiativesAll(!projectsInitiatives.includes(false));
+    let selectedItems: any = [];
+    projectsInitiatives.forEach((element, index) => {
+      if (element) selectedItems.push(projectsInitiativesData[index]);
+      setSelectedProjInitData(selectedItems);
+    });
+  }, [projectsInitiatives]);
+
+  const buildProjectsInitiativesCheckboxList = (projectsInitiativesData) => {
+    const allInput = (
+      <div className='usa-checkbox'>
+        <input
+          className='usa-checkbox__input'
+          id='projInitInputAll'
+          type='checkbox'
+          name='projInitInputAll'
+          value='All'
+          checked={projectsInitiativesAll}
+          onChange={() => toggleAllProjectsInitiatives()}
+        />
+        <label className='usa-checkbox__label' htmlFor='projInitInputAll'>
+          All
+        </label>
+      </div>
+    );
+    const part2 = projectsInitiativesData?.map((item, index) => {
+      return (
+        <div key={index} className='usa-checkbox'>
+          <input
+            className='usa-checkbox__input'
+            id={`projInitInput${index}`}
+            type='checkbox'
+            name={`projInitInput${index}`}
+            value={index}
+            checked={projectsInitiatives[index]}
+            onChange={() => toggleSingleProjectsInitiative(index)}
+          />
+          <label
+            className='usa-checkbox__label'
+            htmlFor={`projInitInput${index}`}
+          >
+            {item.title}
           </label>
         </div>
       );
@@ -129,7 +205,7 @@ const ReportBuilder = ({
             Practice Overview
           </label>
         </div>
-        <div>Resource Concerns Treated</div>
+        <div className='builder-title'>Resource Concerns Treated</div>
 
         <div className='swapa-checkbox-list'>
           {buildCheckboxList(swapaData)}
@@ -145,7 +221,7 @@ const ReportBuilder = ({
             onChange={handleInput}
           />
           <label className='usa-checkbox__label' htmlFor='input2'>
-            {`Support for ${reportPreviewData?.practiceName} in Colorado`}
+            {`Support for ${reportPreviewData?.practiceName} in ${stateName}`}
           </label>
         </div>
 
@@ -173,22 +249,14 @@ const ReportBuilder = ({
             onChange={handleInput}
           />
           <label className='usa-checkbox__label' htmlFor='input4'>
-            {`Impacts of Applying ${reportPreviewData?.practiceName} in Colorado`}
+            {`Impacts of Applying ${reportPreviewData?.practiceName} in ${stateName}`}
           </label>
         </div>
-
-        <div className='usa-checkbox'>
-          <input
-            className='usa-checkbox__input'
-            id='input5'
-            type='checkbox'
-            name='input5'
-            value={4}
-            onChange={handleInput}
-          />
-          <label className='usa-checkbox__label' htmlFor='input5'>
-            {`${reportPreviewData?.practiceName} Projects & Initiatives in Colorado`}
-          </label>
+        <div className='builder-title'>
+          {`${stateName} Cover Crop Projects and Initiatives`}
+        </div>
+        <div className='projects-initiatives-list'>
+          {buildProjectsInitiativesCheckboxList(projectsInitiativesData)}
         </div>
       </div>
       <button

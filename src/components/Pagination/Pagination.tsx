@@ -9,6 +9,7 @@ const Pagination = ({
   indexOfFirstCard,
   indexOfLastCard,
   selectedStateName,
+  mapComponent,
 }: any) => {
   const handlePrevClick = () => {
     paginate(currentPage - 1);
@@ -23,22 +24,21 @@ const Pagination = ({
   for (let i = 1; i <= Math.ceil(cards / cardsPerPage); i++) {
     pageNumbers.push(i);
   }
-
   const renderTitle = () => {
-    if (selectedStateName) {
+    if (mapComponent) {
       return (
-        <h3>
+        <h4>
           {indexOfFirstCard + 1} -{' '}
           {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards}{' '}
-          projects for {selectedStateName}
-        </h3>
+          projects for {selectedStateName || 'the U.S.'}
+        </h4>
       );
     }
     return (
-      <h3>
-        Showing {indexOfFirstCard + 1} -{' '}
+      <h4>
+        Showing {cards ? 1 : 0} -{' '}
         {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards} projects
-      </h3>
+      </h4>
     );
   };
 
