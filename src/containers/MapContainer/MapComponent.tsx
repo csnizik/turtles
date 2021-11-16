@@ -19,16 +19,7 @@ import {
   VIEW_DIV,
   viewConstraints,
 } from './constants';
-import {
-  alaskaFeatureLayer0,
-  alaskaFeatureLayer1,
-  caribbeanFeatureLayer0,
-  caribbeanFeatureLayer1,
-  conusFeatureLayer0,
-  conusFeatureLayer1,
-  hawaiiFeatureLayer0,
-  hawaiiFeatureLayer1,
-} from './layers';
+import { usaFeatureLayer0, usaFeatureLayer1 } from './layers';
 import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 import { createMapView } from './mapUtils';
 import { useAppSelector } from '../../Redux/hooks/hooks';
@@ -47,14 +38,8 @@ const MapComponent = ({ setSelectedLocation }: any) => {
   const mapRef = useRef({} as IMapProps);
   const homeBtn = useRef({} as Home);
 
-  const alaskaFeatureToPointLayer = useRef(alaskaFeatureLayer0);
-  const alaskaLayer = useRef(alaskaFeatureLayer1);
-  const conusFeatureToPointLayer = useRef(conusFeatureLayer0);
-  const conusStateLayer = useRef(conusFeatureLayer1);
-  const caribbeanFeatureToPointLayer = useRef(caribbeanFeatureLayer0);
-  const caribbeanLayer = useRef(caribbeanFeatureLayer1);
-  const hawaiiFeatureToPointLayer = useRef(hawaiiFeatureLayer0);
-  const hawaiiLayer = useRef(hawaiiFeatureLayer1);
+  const usaFeatureToPointLayer = useRef(usaFeatureLayer0);
+  const usaStateLayer = useRef(usaFeatureLayer1);
 
   useEffect(() => {
     if (mapRef && mapRef.current) {
@@ -112,14 +97,8 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       mapRef.current.view.ui.add('cariViewDiv', 'bottom-left');
 
       // Add Feature Layers
-      mapRef.current.map.layers.add(alaskaFeatureToPointLayer.current);
-      mapRef.current.map.layers.add(alaskaLayer.current);
-      mapRef.current.map.layers.add(conusFeatureToPointLayer.current);
-      mapRef.current.map.layers.add(conusStateLayer.current);
-      mapRef.current.map.layers.add(caribbeanFeatureToPointLayer.current);
-      mapRef.current.map.layers.add(caribbeanLayer.current);
-      mapRef.current.map.layers.add(hawaiiFeatureToPointLayer.current);
-      mapRef.current.map.layers.add(hawaiiLayer.current);
+      mapRef.current.map.layers.add(usaFeatureToPointLayer.current);
+      mapRef.current.map.layers.add(usaStateLayer.current);
     }
   }, [mapRef]);
 
@@ -140,8 +119,8 @@ const MapComponent = ({ setSelectedLocation }: any) => {
           if (response.results.length) {
             const graphicList: any = response.results.filter((item: any) => {
               // check if the graphic belongs to the states layer
-              if (conusStateLayer.current) {
-                return item.graphic.layer === conusStateLayer.current;
+              if (usaStateLayer.current) {
+                return item.graphic.layer === usaStateLayer.current;
               }
               return response.results;
             });
@@ -166,10 +145,10 @@ const MapComponent = ({ setSelectedLocation }: any) => {
 
   // Pre-select the state given the stateCode
   useEffect(() => {
-    conusStateLayer.current.when(() => {
-      conusStateLayer.current.on('layerview-create', () => {
+    usaStateLayer.current.when(() => {
+      usaStateLayer.current.on('layerview-create', () => {
         if (stateCode && stateCode !== DEFAULT_NATIONAL_LOCATION) {
-          conusStateLayer.current.queryFeatures().then((response) => {
+          usaStateLayer.current.queryFeatures().then((response) => {
             const { features } = response;
             const foundGraphic = features.find(
               (graphic) => graphic.attributes?.STATEFP === stateCode
