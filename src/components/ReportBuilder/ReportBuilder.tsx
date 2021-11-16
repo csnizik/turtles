@@ -120,7 +120,7 @@ const ReportBuilder = ({
   };
 
   const toggleAllProjectsInitiatives = () => {
-    let checkedValue = !projectsInitiativesAll;
+    const checkedValue = !projectsInitiativesAll;
     setProjectsInitiativesAll(checkedValue);
     setProjectsInitiatives([...projectsInitiatives].fill(checkedValue));
   };
@@ -135,14 +135,14 @@ const ReportBuilder = ({
 
   useEffect(() => {
     setProjectsInitiativesAll(!projectsInitiatives.includes(false));
-    let selectedItems: any = [];
+    const selectedItems: any = [];
     projectsInitiatives.forEach((element, index) => {
       if (element) selectedItems.push(projectsInitiativesData[index]);
       setSelectedProjInitData(selectedItems);
     });
   }, [projectsInitiatives]);
 
-  const buildProjectsInitiativesCheckboxList = (projectsInitiativesData) => {
+  const buildProjectsInitiativesCheckboxList = (projInitiativesData) => {
     const allInput = (
       <div className='usa-checkbox'>
         <input
@@ -159,9 +159,9 @@ const ReportBuilder = ({
         </label>
       </div>
     );
-    const part2 = projectsInitiativesData?.map((item, index) => {
+    const part2 = projInitiativesData?.map((item, index) => {
       return (
-        <div key={index} className='usa-checkbox'>
+        <div key={item.title} className='usa-checkbox'>
           <input
             className='usa-checkbox__input'
             id={`projInitInput${index}`}
