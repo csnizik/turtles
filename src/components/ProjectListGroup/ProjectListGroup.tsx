@@ -148,6 +148,7 @@ const ProjectListGroup = ({
                   {currentCards?.map((project: any) => {
                     return (
                       <ProjectListItem
+                        key={project.projectId}
                         id={project.projectId}
                         description={project.projectDescription}
                         title={project.projectTitle}

@@ -140,7 +140,7 @@ const ProjectsContainer = () => {
           isError={isError}
           isLoading={isLoading}
           isSuccess={isSuccess}
-          isMapDisplayed={true}
+          isMapDisplayed
           projectsList={data}
           selectedStateName={selectedStateName}
         />

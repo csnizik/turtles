@@ -81,8 +81,8 @@ const SpecificationsAndTools = ({
           {content.data?.map((practice: IAssociatedPracticeList) => {
             return (
               <>
-                <div className='grid-col-6'>
-                  <li key={practice.practiceId}>
+                <div key={practice.practiceId} className='grid-col-6'>
+                  <li>
                     <Link
                       to={{
                         pathname: `/ConservationPractices`,

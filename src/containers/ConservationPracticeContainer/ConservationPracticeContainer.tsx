@@ -24,6 +24,7 @@ import {
 } from '../../Redux/Slice/practiceSlice';
 import { currentState } from '../../Redux/Slice/stateSlice';
 import ProjectListGroup from '../../components/ProjectListGroup';
+import { initiativesList } from '../../components/ProjectListGroup/constants';
 
 const defaultPracticeViews = {
   allPractices: false,
@@ -41,6 +42,10 @@ const ConservationPracticeContainer = ({
     useState(defaultPracticeViews);
   const [openModal, setOpenModal] = useState(false);
   const [cleanModal, setCleanModal] = useState(false);
+  const [projectsInitiativesData, setProjectsInitiativesData]: any = useState(
+    []
+  );
+
   const stateStatus: any = useGetStateListQuery();
   const dispatch = useAppDispatch();
   const location: any = useLocation();
@@ -108,6 +113,15 @@ const ConservationPracticeContainer = ({
       dispatch(enablePdfGenState());
     }
   };
+  useEffect(() => {
+    console.log('pData: ', pdata);
+    const tempData = [
+      { title: 'Conservation Innovation Grants', data: pdata },
+      { title: 'Landscape Conservation Initiatives', data: initiativesList },
+    ];
+    setProjectsInitiativesData(tempData);
+  }, [pdata]);
+
   useEffect(() => {
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
       setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
@@ -209,13 +223,16 @@ const ConservationPracticeContainer = ({
         handleCreateReport={handleCreateReport}
       />
 
-      <div className='overlay'>
-        <ReportPreviewCreator
-          openModal={openModal}
-          handleCreateReport={handleCreateReport}
-          cleanModal={cleanModal}
-        />
-      </div>
+      {openModal ? (
+        <div className='overlay'>
+          <ReportPreviewCreator
+            openModal={openModal}
+            handleCreateReport={handleCreateReport}
+            cleanModal={cleanModal}
+            projectsInitiativesData={projectsInitiativesData}
+          />
+        </div>
+      ) : null}
       {renderPracticeContainerContent(currentViewType)}
     </>
   );
