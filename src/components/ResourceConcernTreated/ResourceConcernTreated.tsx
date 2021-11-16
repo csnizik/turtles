@@ -10,7 +10,6 @@ const ResourceConcernTreated = ({
   selectedStateCode,
   selectedPracticeId,
   rcRef,
-  cName,
 }: any) => {
   const initialFilter = {
     stateCode: selectedStateCode,
@@ -39,7 +38,7 @@ const ResourceConcernTreated = ({
 
     if (!rc || !rc.result || rc.result.length < 1) return null;
     return (
-      <div className={cName} ref={rcRef}>
+      <div className='accordion-section' ref={rcRef}>
         {rc.result.map((rcCategory: any) => {
           const categoryId = rcCategory.rcCategoryId;
           const chevronClassName = fromPdfReport

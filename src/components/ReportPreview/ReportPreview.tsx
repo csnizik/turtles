@@ -88,7 +88,6 @@ const ReportPreview = ({
                 selectedStateCode={selectedStateCode}
                 selectedPracticeId={practiceId}
                 rcRef={rcRef}
-                cName='accordion-section'
               />
             </div>
           </div>
@@ -153,7 +152,6 @@ const ReportPreview = ({
               selectedStateCode={selectedStateCode}
               selectedPracticeId={practiceId}
               rcRef={rcRef2}
-              cName='accordion-section'
             />
           </div>
           {choiceInputs.input2 && (

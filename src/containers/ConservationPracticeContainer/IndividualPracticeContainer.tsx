@@ -8,10 +8,9 @@ import ConservationPracticeVideo from '../../components/ConservationPracticeVide
 import ImplementationExtent from '../../components/ImplementationExtent';
 import SpecificationsAndTools from '../../components/SpecificationsAndTools';
 import ResourceConcernTreated from '../../components/ResourceConcernTreated';
-import ProjectsAndInitiatives from '../../components/ProjectsAndInitiatives';
 import HorizontalScroll from '../../components/HorizontalScroll';
 
-const IndividualPracticeContainer = ({ setProjectsInitiativesData }: any) => {
+const IndividualPracticeContainer = () => {
   const state = useAppSelector((s) => s);
   const location: any = useLocation();
   const practiceId: any = state.practiceSlice.selectedSpecficPractice;
@@ -59,11 +58,6 @@ const IndividualPracticeContainer = ({ setProjectsInitiativesData }: any) => {
         isSuccess={isSuccess}
       />
       <ApplicationImpacts data={data} isSuccess={isSuccess} />
-      {/* <ProjectsAndInitiatives
-        data={data}
-        isSuccess={isSuccess}
-        setProjectsInitiativesData={setProjectsInitiativesData}
-      /> */}
     </>
   );
 };

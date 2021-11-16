@@ -11,7 +11,6 @@ describe('ReportPreviewCreator is rendered correctly', () => {
     stateCode: '00',
   };
   const openModal = true;
-  // const handleCreateReport = () => {};
   const cleanModal = false;
   const projectsInitiativesData = [
     {
@@ -70,7 +69,6 @@ describe('ReportPreviewCreator is rendered correctly', () => {
       <ReportPreviewCreator
         selectedStateCode={selectedStateCode}
         openModal={openModal}
-        // handleCreateReport={handleCreateReport}
         cleanModal={cleanModal}
         projectsInitiativesData={projectsInitiativesData}
       />
