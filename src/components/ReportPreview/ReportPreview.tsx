@@ -1,5 +1,5 @@
 import './report-preview.scss';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import ConservationPracticeOverview from '../ConservationPracticeOverview';
 import ImplementationExtent from '../ImplementationExtent';
 import SpecificationsAndTools from '../SpecificationsAndTools';
@@ -23,11 +23,11 @@ const ReportPreview = ({
   const mountedRef = useRef(true);
   const renderProjInit = (projInit) => {
     const projInitList = projInit.data.map((item, index) => {
-      let identifyer = projInit.title.includes('Landscape')
+      const identifyer = projInit.title.includes('Landscape')
         ? 'initiative'
         : 'project';
       return (
-        <div className='proj-list-item' key={`${identifyer}${index}`}>
+        <div className='proj-list-item' key={item?.[`${identifyer}Title`]}>
           <ProjectListItem
             id={item?.[`${identifyer}Id`]}
             description={item?.[`${identifyer}Description`]}
@@ -47,7 +47,7 @@ const ReportPreview = ({
     );
   };
   const renderProjInits = (projInit) => {
-    let total = projInit.map((pItem) => {
+    const total = projInit.map((pItem) => {
       return renderProjInit(pItem);
     });
 

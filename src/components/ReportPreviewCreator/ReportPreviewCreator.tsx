@@ -74,9 +74,7 @@ const ReportPreviewCreator = ({
 
   const getRCTreatedComponent = (selectedIds) => {
     setChildArr(rcRef.current);
-    if (!childArr) return;
-
-    childArr.children.forEach((child) => {
+    childArr?.children.forEach((child) => {
       const categoryId: number = +child.textContent.charAt(0);
       child.className = selectedIds.has(categoryId) // eslint-disable-line no-param-reassign
         ? 'accordion-container'
@@ -84,9 +82,7 @@ const ReportPreviewCreator = ({
     });
 
     setChildArr2(rcRef2.current);
-    if (!childArr2) return;
-
-    childArr2.children.forEach((child) => {
+    childArr2?.children.forEach((child) => {
       const categoryId: number = +child.textContent.charAt(0);
       child.className = selectedIds.has(categoryId) // eslint-disable-line no-param-reassign
         ? 'accordion-container'
