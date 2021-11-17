@@ -4,13 +4,19 @@ import { useTranslation } from 'react-i18next';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import MapContainer from '../MapContainer';
 import ProjectListGroup from '../../components/ProjectListGroup';
+import ProjectTypeSection from '../../components/ProjectTypeSection';
 import {
   useGetStateListQuery,
   usePostProjectSearchDataQuery,
 } from '../../Redux/services/api';
 import './project-container.scss';
 
-import { projectCards, projectListGroups, projectPurposes } from './constants';
+import {
+  landscapeInitiativeTypes,
+  projectCards,
+  projectListGroups,
+  projectPurposes,
+} from './constants';
 
 interface IProjectTypeCard {
   id: number;
@@ -73,34 +79,7 @@ const ProjectsContainer = () => {
       (project: any) => selectedProjectCard === project.id
     );
     if (!selectedProjectType) return null;
-    return (
-      <div className='project-type-section'>
-        <h3>{selectedProjectType.title}</h3>
-        <p className='margin-top-3'>
-          {selectedProjectType.paragraphDescription}
-        </p>
-        <p>
-          Visit the{' '}
-          <a
-            aria-label='Conservation Innovation Grants link opens a new tab'
-            href='https://usda.gov'
-            target='_blank'
-            rel='noreferrer'
-          >
-            CIG website
-          </a>{' '}
-          for more information. Use
-          <a
-            aria-label='Conservation Innovation Grants link opens a new tab'
-            href='/search'
-            target='_blank'
-            rel='noreferrer'
-          >
-            &nbsp;advanced filters to search projects.
-          </a>
-        </p>
-      </div>
-    );
+    return <ProjectTypeSection projectType={selectedProjectType} />;
   };
 
   if (toggleProjectView) {
@@ -129,21 +108,25 @@ const ProjectsContainer = () => {
           </ListGroup>
           {renderProjectSection()}
         </div>
-        <div className='projets-map-section'>
-          <hr />
-          <h3>{t('projects-page.map-instructions')}</h3>
-          <MapContainer setSelectedLocation={setSelectedLocation} />
-        </div>
+        {selectedProjectCard === 1 ? (
+          <>
+            <div className='projets-map-section'>
+              <hr />
+              <h3>{t('projects-page.map-instructions')}</h3>
+              <MapContainer setSelectedLocation={setSelectedLocation} />
+            </div>
 
-        <ProjectListGroup
-          error={error}
-          isError={isError}
-          isLoading={isLoading}
-          isSuccess={isSuccess}
-          isMapDisplayed
-          projectsList={data}
-          selectedStateName={selectedStateName}
-        />
+            <ProjectListGroup
+              error={error}
+              isError={isError}
+              isLoading={isLoading}
+              isSuccess={isSuccess}
+              isMapDisplayed
+              projectsList={data}
+              selectedStateName={selectedStateName}
+            />
+          </>
+        ) : null}
       </div>
     );
   }
