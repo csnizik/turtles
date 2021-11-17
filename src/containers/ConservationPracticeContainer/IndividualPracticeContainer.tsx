@@ -56,6 +56,7 @@ const IndividualPracticeContainer = () => {
         data={data}
         isSuccess={isSuccess}
       />
+      {/* Impacts: TO DO Put back in the next PI */}
       {/* <ApplicationImpacts data={data} isSuccess={isSuccess} /> */}
     </>
   );
