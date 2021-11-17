@@ -21,7 +21,6 @@ const IndividualPracticeContainer = () => {
 
   const { data, error, isLoading, isSuccess, isError } =
     useGetNationalOverviewByPracticeQuery(practiceId);
-
   if (location.search) {
     const linkage = location.search.split('?');
     const practiceCategoryId = linkage[1].split('=').pop();

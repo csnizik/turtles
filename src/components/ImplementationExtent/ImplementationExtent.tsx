@@ -1,5 +1,8 @@
 import DummyTableauImage from '../ResourceConcernTreated/DummyTableauImage';
+import { useAppSelector } from '../../Redux/hooks/hooks';
+import { useGetPaymentScheduleLinksQuery } from '../../Redux/services/api';
 import './implementation-extent.scss';
+import image from './image/newLinkIcon.svg';
 
 interface IImplementationExtentProps {
   data: any;
@@ -12,8 +15,7 @@ const intro: string =
 const ImplementationExtent = ({
   data,
   isSuccess,
-}: IImplementationExtentProps
-) => {
+}: IImplementationExtentProps) => {
   const getHeaderText = () => {
     const practiceName = (data && data.practiceName) || '';
     if (practiceName) {
@@ -21,6 +23,12 @@ const ImplementationExtent = ({
     }
     return practiceName;
   };
+
+  const stateInfo = useAppSelector((state: any) => state?.stateSlice);
+  const scheduleLink: any = useGetPaymentScheduleLinksQuery(
+    stateInfo.stateCode
+  );
+  console.log('scheduleLink: ', scheduleLink);
 
   const renderObligations = () => {
     return (
@@ -50,6 +58,35 @@ const ImplementationExtent = ({
     );
   };
 
+  const renderPaymentScheduleLink = () => {
+    const selectedLocation =
+      stateInfo.stateCode === '00'
+        ? '2021 State Payment Schedules | NRCS'
+        : `${stateInfo.stateNameDisplay} Payment Schedules | NRCS`;
+    return (
+      <div className='payment-schedule'>
+        <h3 id='payment-title'>Payment Schedules</h3>
+        <p>
+          NRCS provides financial assistance for selected conservation
+          practices. The availability and amount of financial assistance can
+          vary between states.
+        </p>
+        <div className='link'>
+          <a
+            // href={scheduleLink?.data?.paymentLink}
+            href={scheduleLink}
+            target='_blank'
+            rel='noopener noreferrer'
+            aria-label={`${stateInfo.stateNameDisplay} Payment Schedules link opens a new browser tab`}
+          >
+            {selectedLocation}
+            <img alt='' src={image} />
+          </a>
+        </div>
+      </div>
+    );
+  };
+
   if (!isSuccess) return null;
 
   return (
@@ -59,6 +96,7 @@ const ImplementationExtent = ({
       <div className='extent-content'>
         {renderObligations()}
         {renderAcresImplemented()}
+        {renderPaymentScheduleLink()}
       </div>
     </div>
   );
