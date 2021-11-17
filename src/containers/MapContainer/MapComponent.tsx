@@ -41,6 +41,18 @@ const MapComponent = ({ setSelectedLocation }: any) => {
   const usaFeatureToPointLayer = useRef(usaFeatureLayer0);
   const usaStateLayer = useRef(usaFeatureLayer1);
 
+  const checkAndClearHighlightedGraphics = () => {
+    if (alaskaView.current.graphics.length) {
+      alaskaView.current.graphics.removeAll();
+    } else if (caribbeanView.current.graphics.length) {
+      caribbeanView.current.graphics.removeAll();
+    } else if (hawaiiView.current.graphics.length) {
+      hawaiiView.current.graphics.removeAll();
+    } else if (mapRef.current.view.graphics.length) {
+      mapRef.current.view.graphics.removeAll();
+    }
+  };
+
   useEffect(() => {
     if (mapRef && mapRef.current) {
       mapRef.current.map = new Map({
@@ -107,15 +119,7 @@ const MapComponent = ({ setSelectedLocation }: any) => {
     mapRef.current.view.when(() => {
       mapRef.current.view.on('pointer-up', (event) => {
         mapRef.current.view.hitTest(event).then((response) => {
-          if (alaskaView.current.graphics.length) {
-            alaskaView.current.graphics.removeAll();
-          } else if (caribbeanView.current.graphics.length) {
-            caribbeanView.current.graphics.removeAll();
-          } else if (hawaiiView.current.graphics.length) {
-            hawaiiView.current.graphics.removeAll();
-          } else if (mapRef.current.view.graphics.length) {
-            mapRef.current.view.graphics.removeAll();
-          }
+          checkAndClearHighlightedGraphics();
           if (response.results.length) {
             const graphicList: any = response.results.filter((item: any) => {
               // check if the graphic belongs to the states layer
@@ -171,13 +175,7 @@ const MapComponent = ({ setSelectedLocation }: any) => {
     alaskaView.current.when(() => {
       alaskaView.current.on('pointer-up', (event) => {
         alaskaView.current.hitTest(event).then((response) => {
-          if (caribbeanView.current.graphics.length) {
-            caribbeanView.current.graphics.removeAll();
-          } else if (hawaiiView.current.graphics.length) {
-            hawaiiView.current.graphics.removeAll();
-          } else if (mapRef.current.view.graphics.length) {
-            mapRef.current.view.graphics.removeAll();
-          }
+          checkAndClearHighlightedGraphics();
           if (response.results.length) {
             const selectedState: Graphic = response.results[0]?.graphic;
             const highlightedGraphic = new Graphic({
@@ -197,13 +195,7 @@ const MapComponent = ({ setSelectedLocation }: any) => {
     caribbeanView.current.when(() => {
       caribbeanView.current.on('pointer-up', (event) => {
         caribbeanView.current.hitTest(event).then((response) => {
-          if (alaskaView.current.graphics.length) {
-            alaskaView.current.graphics.removeAll();
-          } else if (hawaiiView.current.graphics.length) {
-            hawaiiView.current.graphics.removeAll();
-          } else if (mapRef.current.view.graphics.length) {
-            mapRef.current.view.graphics.removeAll();
-          }
+          checkAndClearHighlightedGraphics();
           if (response.results.length) {
             const selectedState: Graphic = response.results[0].graphic;
             const highlightedGraphic = new Graphic({
@@ -223,13 +215,7 @@ const MapComponent = ({ setSelectedLocation }: any) => {
     hawaiiView.current.when(() => {
       hawaiiView.current.on('pointer-up', (event) => {
         hawaiiView.current.hitTest(event).then((response) => {
-          if (alaskaView.current.graphics.length) {
-            alaskaView.current.graphics.removeAll();
-          } else if (caribbeanView.current.graphics.length) {
-            caribbeanView.current.graphics.removeAll();
-          } else if (mapRef.current.view.graphics.length) {
-            mapRef.current.view.graphics.removeAll();
-          }
+          checkAndClearHighlightedGraphics();
           if (response.results.length) {
             const selectedState: Graphic = response.results[0].graphic;
             const highlightedGraphic = new Graphic({
@@ -248,6 +234,7 @@ const MapComponent = ({ setSelectedLocation }: any) => {
   useEffect(() => {
     homeBtn.current.when(() => {
       homeBtn.current.on('go', () => {
+        checkAndClearHighlightedGraphics();
         // Refresh project list to U.S
         setSelectedLocation(null);
         // Reset composite views to default position
