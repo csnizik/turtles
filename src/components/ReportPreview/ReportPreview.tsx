@@ -134,7 +134,7 @@ const ReportPreview = ({
           {data?.practiceName} in{' '}
           {selectedStateName === 'U.S.' ? 'the U.S.' : selectedStateName}
         </h3>
-        <div className='pdf-header-space'>
+        <div>
           {choiceInputs.input1 && (
             <div>
               <ConservationPracticeOverview
@@ -144,6 +144,10 @@ const ReportPreview = ({
                 isError={isError}
                 isLoading={isLoading}
               />
+            </div>
+          )}
+          {choiceInputs.input1 && (
+            <div className='pdf-header-space'>
               <ConservationPracticeVideo selectedPracticeId={practiceId} />
             </div>
           )}
