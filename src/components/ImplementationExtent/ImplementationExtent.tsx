@@ -28,7 +28,6 @@ const ImplementationExtent = ({
   const scheduleLink: any = useGetPaymentScheduleLinksQuery(
     stateInfo.stateCode
   );
-  console.log('scheduleLink: ', scheduleLink);
 
   const renderObligations = () => {
     return (
@@ -73,8 +72,7 @@ const ImplementationExtent = ({
         </p>
         <div className='link'>
           <a
-            // href={scheduleLink?.data?.paymentLink}
-            href={scheduleLink}
+            href={scheduleLink?.data[0]?.paymentLink}
             target='_blank'
             rel='noopener noreferrer'
             aria-label={`${stateInfo.stateNameDisplay} Payment Schedules link opens a new browser tab`}
