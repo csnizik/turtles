@@ -48,8 +48,5 @@ export const projectListGroups = [
 export const landscapeInitiativeTypes = [
   { id: 10, title: 'National Water Quality Initiative' },
   { id: 11, title: 'WaterSMART' },
-  { id: 22, title: 'Working Lands for Wildlife' },
+  { id: 12, title: 'Working Lands for Wildlife' },
 ];
-
-export const NRCS_CONSERVATION_INITIATIVES_URL =
-  'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/programs/initiatives/';

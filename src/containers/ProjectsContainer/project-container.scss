@@ -4,7 +4,8 @@
   display: grid;
 
   grid-template-columns: 20rem 1fr;
-  .project-types-list {
+  .project-types-list,
+  .landscape-initiative-list {
     margin: 0 0 0 0;
     padding-right: 2rem;
     .list-group-item {

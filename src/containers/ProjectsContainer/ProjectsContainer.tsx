@@ -36,6 +36,8 @@ const ProjectsContainer = () => {
   const { t } = useTranslation();
   const [toggleProjectView, setToggleProjectView] = useState(false);
   const [selectedProjectCard, setSelectedProjectCard] = useState(-1);
+  const [selectedLandscapeInitiative, setSelectedLandscapeInitiative] =
+    useState(-1);
   const [selectedLocation, setSelectedLocation] = useState('');
   const stateStatus: any = useGetStateListQuery();
   let searchInput = { state_county_code: selectedLocation || null };
@@ -61,6 +63,10 @@ const ProjectsContainer = () => {
 
   const selectedStateName = selectedState?.stateNameDisplay;
 
+  const handleSelectLandscapeInitiative = (id: number) => {
+    setSelectedLandscapeInitiative(id);
+  };
+
   const handleSelectProjectCard = (id: number) => {
     setSelectedProjectCard(id);
     setToggleProjectView(!toggleProjectView);
@@ -71,6 +77,9 @@ const ProjectsContainer = () => {
       setToggleProjectView(false);
       setSelectedProjectCard(-1);
     }
+    if (selectedLandscapeInitiative > 0) {
+      setSelectedLandscapeInitiative(-1);
+    }
     setSelectedProjectCard(id);
   };
 
@@ -79,7 +88,12 @@ const ProjectsContainer = () => {
       (project: any) => selectedProjectCard === project.id
     );
     if (!selectedProjectType) return null;
-    return <ProjectTypeSection projectType={selectedProjectType} />;
+    return (
+      <ProjectTypeSection
+        selectedLandscapeInitiative={selectedLandscapeInitiative}
+        projectType={selectedProjectType}
+      />
+    );
   };
 
   if (toggleProjectView) {
@@ -113,7 +127,7 @@ const ProjectsContainer = () => {
                   const listGroupItemClassNames = classNames(
                     'justify-content-between',
                     {
-                      selected: initiative.id === 10,
+                      selected: initiative.id === selectedLandscapeInitiative,
                     }
                   );
                   return (
@@ -121,6 +135,9 @@ const ProjectsContainer = () => {
                       key={initiative.id}
                       className={listGroupItemClassNames}
                       role='presentation'
+                      onClick={() =>
+                        handleSelectLandscapeInitiative(initiative.id)
+                      }
                     >
                       {initiative.title}
                     </ListGroupItem>
