@@ -86,26 +86,49 @@ const ProjectsContainer = () => {
     return (
       <div className='projects-tab'>
         <div className='projects-grid'>
-          <ListGroup>
-            {projectListGroups.map((listItem: IProjectListGroup) => {
-              const listGroupItemClassNames = classNames(
-                'justify-content-between',
-                {
-                  selected: listItem.id === selectedProjectCard,
-                }
-              );
-              return (
-                <ListGroupItem
-                  key={listItem.id}
-                  className={listGroupItemClassNames}
-                  role='presentation'
-                  onClick={() => handleSelectProjectItem(listItem.id)}
-                >
-                  {listItem.title}
-                </ListGroupItem>
-              );
-            })}
-          </ListGroup>
+          <div>
+            <ListGroup className='project-types-list'>
+              {projectListGroups.map((listItem: IProjectListGroup) => {
+                const listGroupItemClassNames = classNames(
+                  'justify-content-between',
+                  {
+                    selected: listItem.id === selectedProjectCard,
+                  }
+                );
+                return (
+                  <ListGroupItem
+                    key={listItem.id}
+                    className={listGroupItemClassNames}
+                    role='presentation'
+                    onClick={() => handleSelectProjectItem(listItem.id)}
+                  >
+                    {listItem.title}
+                  </ListGroupItem>
+                );
+              })}
+            </ListGroup>
+            {selectedProjectCard === 2 ? (
+              <ListGroup className='landscape-initiative-list'>
+                {landscapeInitiativeTypes.map((initiative: any) => {
+                  const listGroupItemClassNames = classNames(
+                    'justify-content-between',
+                    {
+                      selected: initiative.id === 10,
+                    }
+                  );
+                  return (
+                    <ListGroupItem
+                      key={initiative.id}
+                      className={listGroupItemClassNames}
+                      role='presentation'
+                    >
+                      {initiative.title}
+                    </ListGroupItem>
+                  );
+                })}
+              </ListGroup>
+            ) : null}
+          </div>
           {renderProjectSection()}
         </div>
         {selectedProjectCard === 1 ? (
