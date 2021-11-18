@@ -26,7 +26,7 @@ const ImplementationExtent = ({
 
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
   const scheduleLink: any = useGetPaymentScheduleLinksQuery(
-    stateInfo.stateCode
+    stateInfo?.stateCode
   );
 
   const renderObligations = () => {
@@ -61,7 +61,7 @@ const ImplementationExtent = ({
     const selectedLocation =
       stateInfo.stateCode === '00'
         ? '2021 State Payment Schedules | NRCS'
-        : `${stateInfo.stateNameDisplay} Payment Schedules | NRCS`;
+        : `${stateInfo?.stateNameDisplay} Payment Schedules | NRCS`;
     return (
       <div className='payment-schedule'>
         <h3 id='payment-title'>Payment Schedules</h3>
@@ -75,7 +75,7 @@ const ImplementationExtent = ({
             href={scheduleLink?.data[0]?.paymentLink}
             target='_blank'
             rel='noopener noreferrer'
-            aria-label={`${stateInfo.stateNameDisplay} Payment Schedules link opens a new browser tab`}
+            aria-label={`${stateInfo?.stateNameDisplay} Payment Schedules link opens a new browser tab`}
           >
             {selectedLocation}
             <img alt='' src={image} />
