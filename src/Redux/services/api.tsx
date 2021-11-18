@@ -85,6 +85,10 @@ export const api = createApi({
       query: (data) =>
         `/practice/associatedPractice?state_code=${data.stateCode}&practice_id=${data.practiceId}`,
     }),
+    // Payment Schedule Links depending on state
+    getPaymentScheduleLinks: builder.query<string, string>({
+      query: (stateCode) => `/payment/link?stateCode=${stateCode}`,
+    }),
     // Retrieve project types
     getProjectTypes: builder.query<IProjectType[], void>({
       query: () => `project/projectTypes`,
@@ -107,4 +111,5 @@ export const {
   useGetRelatedResourceConcernCategoryQuery,
   useGetAssociatedPracticeQuery,
   useGetProjectTypesQuery,
+  useGetPaymentScheduleLinksQuery,
 } = api;
