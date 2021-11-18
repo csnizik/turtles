@@ -101,7 +101,7 @@ const ReportBuilder = ({
             id={getIdName(index)}
             type='checkbox'
             name={getIdName(index)}
-            value={item.rcCategoryId}
+            value={item.rcCategoryId || 0}
             checked={rcTreatedInputs.has(item.rcCategoryId)}
             onChange={() => toggleSingle(item.rcCategoryId)}
           />
