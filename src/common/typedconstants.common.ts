@@ -56,4 +56,5 @@ export const initialLandUse = {
   Forestland: false,
   Pasture: false,
   Rangeland: false,
+  Protected: false,
 };
