@@ -15,6 +15,7 @@ import {
   HAWAII_CENTER,
   HAWAII_ZOOM,
   highlightSymbol,
+  SMALL_STATES,
   topoBaseMap,
   VIEW_DIV,
   viewConstraints,
@@ -139,7 +140,11 @@ const MapComponent = ({ setSelectedLocation }: any) => {
               // Refresh project lists
               setSelectedLocation(selectedState.attributes.STATEFP);
               // Zoom to selected state
-              mapRef.current.view.goTo({ target: selectedState, zoom: 9 });
+              if (SMALL_STATES.includes(selectedState.attributes.STUSPS)) {
+                mapRef.current.view.goTo({ target: selectedState, zoom: 7 });
+              } else {
+                mapRef.current.view.goTo({ target: selectedState, zoom: 6 });
+              }
             }
           }
         });
@@ -163,7 +168,11 @@ const MapComponent = ({ setSelectedLocation }: any) => {
             });
             mapRef.current.view.graphics.add(highlightedGraphic);
             setSelectedLocation(foundGraphic?.attributes.STATEFP);
-            mapRef.current.view.goTo({ target: foundGraphic, zoom: 9 });
+            if (SMALL_STATES.includes(foundGraphic?.attributes.STUSPS)) {
+              mapRef.current.view.goTo({ target: foundGraphic, zoom: 7 });
+            } else {
+              mapRef.current.view.goTo({ target: foundGraphic, zoom: 6 });
+            }
           });
         }
       });

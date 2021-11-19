@@ -4,7 +4,7 @@ import Extent from '@arcgis/core/geometry/Extent';
 export const topoBaseMap = 'topo-vector';
 
 // View constraints on map
-const MIN_ZOOM = 6;
+const MIN_ZOOM = 8;
 const MAX_ZOOM = 3;
 export const viewConstraints = {
   maxZoom: MAX_ZOOM,
@@ -23,7 +23,7 @@ export const highlightSymbol = {
   type: 'simple-line',
   color: fillBorderColor,
   style: 'solid',
-  width: '3px',
+  width: '5px',
 };
 
 // Extents for composite views
@@ -64,3 +64,6 @@ export const CARIBBEAN_CENTER = [-66, 18];
 export const CARIBBEAN_ZOOM = 6;
 export const HAWAII_CENTER = [-157, 20];
 export const HAWAII_ZOOM = 5;
+
+// List of states that should zoom in further
+export const SMALL_STATES = ['CT', 'DE', 'NH', 'NJ', 'MD', 'RI', 'VT'];

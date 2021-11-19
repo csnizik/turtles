@@ -22,7 +22,7 @@ const ReportPreview = ({
   const { data, error, isLoading, isSuccess, isError } = reportPreviewData;
   const mountedRef = useRef(true);
   const renderProjInit = (projInit) => {
-    const projInitList = projInit.data.map((item, index) => {
+    const projInitList = projInit.data.map((item) => {
       const identifyer = projInit.title.includes('Landscape')
         ? 'initiative'
         : 'project';
@@ -56,6 +56,14 @@ const ReportPreview = ({
         <h2 className='bold-header'>
           {`${selectedStateName} ${data?.practiceName} Projects and Initiatives`}
         </h2>
+        <p>
+          NRCS projects and initiatives on the ground assess the impacts of
+          conservation practices, build scientific understanding of those
+          impacts and the processes underlying them, explore the potential of
+          innovative conservation activities, and coordinate planning efforts at
+          larger scales to address resource concerns from a watershed or
+          landscape perspective.
+        </p>
         {total}
       </div>
     );
@@ -134,7 +142,7 @@ const ReportPreview = ({
           {data?.practiceName} in{' '}
           {selectedStateName === 'U.S.' ? 'the U.S.' : selectedStateName}
         </h3>
-        <div className='pdf-header-space'>
+        <div>
           {choiceInputs.input1 && (
             <div>
               <ConservationPracticeOverview
@@ -144,6 +152,10 @@ const ReportPreview = ({
                 isError={isError}
                 isLoading={isLoading}
               />
+            </div>
+          )}
+          {choiceInputs.input1 && (
+            <div className='pdf-header-space'>
               <ConservationPracticeVideo selectedPracticeId={practiceId} />
             </div>
           )}
