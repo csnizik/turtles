@@ -43,7 +43,7 @@ const LocationSearch = () => {
   }, []);
 
   const handleClick = () => {
-    if (selectedState) {
+    if (selectedState && selectedState !== '00') {
       const selectedStateCode =
         selectedState &&
         stateStatus.isSuccess &&
