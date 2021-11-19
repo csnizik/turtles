@@ -84,6 +84,13 @@ Jenkins - https://jenkins.spatialfrontlab.com/job/CIG-Epi/job/develop/
 - [Node sass](https://github.com/sass/node-sass)
 - [Scss](https://sass-lang.com/)
 
+##### 508 Accessibility
+
+- [Webaim](https://webaim.org/techniques/aria/)
+- [MDN Aria attributes](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/List_role)
+- [Aria explanation and more](http://inclusive-design.umn.edu/aria/index.html)
+- [Accessibility fundamentals](https://developers.google.com/web/fundamentals/accessibility/semantics-aria/)
+
 ##### Unit Tests
 
 - [Jest for unit tests](https://jestjs.io/docs/using-matchers)
