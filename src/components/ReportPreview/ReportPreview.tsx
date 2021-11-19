@@ -56,6 +56,14 @@ const ReportPreview = ({
         <h2 className='bold-header'>
           {`${selectedStateName} ${data?.practiceName} Projects and Initiatives`}
         </h2>
+        <p>
+          NRCS projects and initiatives on the ground assess the impacts of
+          conservation practices, build scientific understanding of those
+          impacts and the processes underlying them, explore the potential of
+          innovative conservation activities, and coordinate planning efforts at
+          larger scales to address resource concerns from a watershed or
+          landscape perspective.
+        </p>
         {total}
       </div>
     );
