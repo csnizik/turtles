@@ -1,6 +1,7 @@
 import DummyTableauImage from '../ResourceConcernTreated/DummyTableauImage';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import { useGetPaymentScheduleLinksQuery } from '../../Redux/services/api';
+import Spinner from '../Spinner/Spinner';
 import './implementation-extent.scss';
 import image from './image/newLinkIcon.svg';
 
@@ -25,9 +26,14 @@ const ImplementationExtent = ({
   };
 
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
-  const scheduleLink: any = useGetPaymentScheduleLinksQuery(
-    stateInfo?.stateCode
-  );
+
+  const results = useGetPaymentScheduleLinksQuery(stateInfo?.stateCode);
+  const data2 = results.data || [];
+  const error2 = results.error;
+  const isLoading2 = results.isLoading;
+  const isSuccess2 = results.isSuccess;
+  const isError2 = results.isError;
+  const scheduleLink: any = data2[0]?.paymentLink || '';
 
   const renderObligations = () => {
     return (
@@ -72,7 +78,7 @@ const ImplementationExtent = ({
         </p>
         <div className='link'>
           <a
-            href={scheduleLink?.data[0]?.paymentLink}
+            href={scheduleLink}
             target='_blank'
             rel='noopener noreferrer'
             aria-label={`${stateInfo?.stateNameDisplay} Payment Schedules link opens a new browser tab`}
@@ -94,7 +100,11 @@ const ImplementationExtent = ({
       <div className='extent-content'>
         {renderObligations()}
         {renderAcresImplemented()}
-        {renderPaymentScheduleLink()}
+        <>
+          {isLoading2 && <Spinner />}
+          {isError2 && error2}
+          {isSuccess2 && data2 && renderPaymentScheduleLink()}
+        </>
       </div>
     </div>
   );
