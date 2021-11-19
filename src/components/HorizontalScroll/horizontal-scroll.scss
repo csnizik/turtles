@@ -32,21 +32,15 @@
     cursor: pointer;
   }
 
-  @media only screen and (max-width: 1295px) {
+  @media only screen and (max-width: 768px) {
     .right-button {
       display: grid;
     }
   }
 
-  @media only screen and (min-width: 1295px) {
-    .left-button {
-      display: none;
-    }
-  }
-
   .scroll_container {
     display: flex;
-    overflow-x: scroll;
+    overflow-x: auto;
     margin: 0 2.188rem 0 2.188rem;
 
     .title {

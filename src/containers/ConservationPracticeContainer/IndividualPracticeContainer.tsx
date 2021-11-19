@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import { useGetNationalOverviewByPracticeQuery } from '../../Redux/services/api';
-import ApplicationImpacts from '../../components/ApplicationImpacts';
 import ConservationPracticeOverview from '../../components/ConservationPracticeOverview';
 import ConservationPracticeVideo from '../../components/ConservationPracticeVideo';
 import ImplementationExtent from '../../components/ImplementationExtent';
@@ -56,7 +55,8 @@ const IndividualPracticeContainer = () => {
         data={data}
         isSuccess={isSuccess}
       />
-      <ApplicationImpacts data={data} isSuccess={isSuccess} />
+      {/* Impacts: TO DO Put back in the next PI */}
+      {/* <ApplicationImpacts data={data} isSuccess={isSuccess} /> */}
     </>
   );
 };

@@ -30,6 +30,8 @@ hr {
   h4 {
     margin: 0 0 0 1rem;
     display: flex;
+    font-size: 17px;
+    line-height: 20px;
   }
 
   .accordion-container {
@@ -43,7 +45,8 @@ hr {
 
       .fa,
       .fas {
-        padding: 5px 0 0 0;
+        padding: 0;
+        line-height: 20px;
       }
 
       .accordion-data {
@@ -107,7 +110,8 @@ hr {
 
       .fa,
       .fas {
-        padding: 5px 0 0 0;
+        padding: 0;
+        line-height: 20px;
       }
 
       &:last-of-type {

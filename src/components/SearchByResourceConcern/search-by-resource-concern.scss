@@ -1,18 +1,16 @@
 @import '../../stylesheets/variables';
 
 .resource-box-wrapper {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 2em;
   text-align: left;
-  width: 100%;
+  flex: 50%;
   border: 2px solid $philippine-silver;
   border-radius: 0.5em;
   background-color: $sfi-white;
-  padding: 0 2em 0 2em;
-  margin: 2em 1em 1em 0;
+  padding: 1.25rem 2rem 1.875rem 2rem;
+  margin-left: 1.875rem;
 
   .usa-label {
+    margin: 0;
     font-weight: 500;
     color: black;
   }

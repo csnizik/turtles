@@ -106,7 +106,7 @@ const ProjectListGroup = ({
     );
   };
   return (
-    <div className='projects-list-group' data-testid='projects-list-group'>
+    <div className='projects-list-group' data-testid='projects-list-group' id='ProjectsInitiatives'>
       {!isMapDisplayed && renderProjectTypeTabs()}
       <TabContent activeTab={activeTab}>
         <TabPane tabId={1}>

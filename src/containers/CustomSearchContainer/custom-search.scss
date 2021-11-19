@@ -1,20 +1,21 @@
 @import '../../stylesheets/variables';
 
 .custom-search {
-  margin: 0rem 0rem 0rem 1rem;
   .custom-search-header {
+    background-color: $white;
     h1 {
-      margin: 2.5rem 0rem 2.5rem 1.25rem;
       font-size: 42px;
       font-weight: $heavy-weight;
+      padding: 2.5rem 2.188rem;
+      margin: 0;
     }
     p {
       font-size: 17px;
       font-weight: $medium-weight;
-      margin: 2rem 0rem 0rem -1rem;
-      // background-color: #fff;
-      padding: 2rem 0rem 2rem 2.25rem;
+      background-color: $light-grey-205;
       border-top: solid $dark-grey 1px;
+      padding: 2.5rem 2.188rem;
+      margin: 0;
     }
   }
 
@@ -22,17 +23,14 @@
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial,
       sans-serif;
     color: $nrcs-dark;
-    font-weight: $medium-weight;
-    background-color: $light-grey-2;
+    font-weight: $semi-heavy-weight;
     font-size: 17px;
     line-height: 1.3;
-    margin: 0rem 0rem -1rem -1rem;
-    padding: 1rem 0rem 0rem 2.25rem;
+    margin: 0;
   }
   .practice-labels {
     display: flex;
     align-items: baseline;
-    background-color: $light-grey-2;
     .clear-button {
       color: $usda-blue;
       &.selected {
@@ -41,16 +39,21 @@
     }
   }
   .bottom-container {
-    margin: 0rem 0rem 1.75rem -1rem;
-    padding: 0rem 0rem 1rem 2.25rem;
-    background-color: $light-grey-2;
+    margin: 0;
+    padding: 1.375rem 2.25rem;
+    background-color: $white;
+  }
+
+  .search-criteria {
     display: flex;
     justify-content: space-between;
+    margin-top: 1.25rem;
+    flex-basis: 100%;
   }
 
   @media only screen and (max-width: $small-screen) {
-    .bottom-container {
-      margin: 0rem 2rem 1.75rem -1rem;
+    .search-criteria div{
+      margin: 0rem 0rem 0rem -1rem;
       padding: 0rem 0rem 0rem 2.25rem;
       display: block;
     }

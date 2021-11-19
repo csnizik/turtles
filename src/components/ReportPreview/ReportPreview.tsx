@@ -22,7 +22,7 @@ const ReportPreview = ({
   const { data, error, isLoading, isSuccess, isError } = reportPreviewData;
   const mountedRef = useRef(true);
   const renderProjInit = (projInit) => {
-    const projInitList = projInit.data.map((item, index) => {
+    const projInitList = projInit.data.map((item) => {
       const identifyer = projInit.title.includes('Landscape')
         ? 'initiative'
         : 'project';
