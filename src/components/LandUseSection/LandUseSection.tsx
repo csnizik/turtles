@@ -44,19 +44,10 @@ const LandUseSection = ({
     if (!landUse) {
       setLandUse(landUseList);
       setLandUseName(landUseInfoList);
-      if (landUseList != null) {
-        window.localStorage.setItem('LandUseId', landUseList);
-        window.localStorage.setItem('LandUseName', landUseInfoList);
-      } else {
-        window.localStorage.removeItem('LandUseId');
-        window.localStorage.removeItem('LandUseName');
-      }
     }
-    if (window.localStorage.getItem('LandUseId')) {
-      setLandUse(window.localStorage.getItem('LandUseId'));
-    }
-    if (window.localStorage.getItem('LandUseName')) {
-      setLandUseName(window.localStorage.getItem('LandUseName'));
+    if (landUseList && landUseInfoList) {
+      setLandUse(landUseList);
+      setLandUseName(landUseInfoList);
     }
   }, []);
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import CustomButton from '../CustomButton';
@@ -35,15 +35,9 @@ const FindByPractices = () => {
   const [selectedSubPractice, setSelectedSubPractice] = useState(-1);
 
   const handleFindPractices = () => {
+    dispatch(setPracticeCategory(+selectedPractice));
+    dispatch(setSpecificPractice(+selectedSubPractice));
     history.push('/ConservationPractices');
-    const selectedPracticeCategory = selectedPractice.toString();
-    const selectedSubPracticeCategory = selectedSubPractice.toString();
-    window.localStorage.setItem('PracticeCategoryId', selectedPracticeCategory);
-    if (selectedSubPracticeCategory !== '-1') {
-      window.localStorage.setItem('PracticeId', selectedSubPracticeCategory);
-    } else {
-      window.localStorage.removeItem('PracticeId');
-    }
   };
 
   const practiceCategory = useGetPracticeCategoryQuery();
@@ -55,20 +49,25 @@ const FindByPractices = () => {
       setSelectedPractice(practiceVal);
       if (selectedPractice >= 0 && practiceVal !== selectedPractice) {
         setSecondState({ ...intialState, disabled: false });
-        dispatch(setSpecificPractice(-1));
+        setSelectedSubPractice(-1);
       } else {
         setSecondState({ disabled: false });
       }
     } else {
       setSecondState({ ...intialState });
     }
-    dispatch(setPracticeCategory(+practiceVal));
   };
+
+  useEffect(() => {
+    setSelectedPractice(-1);
+    setSelectedSubPractice(-1);
+    dispatch(setPracticeCategory(-1));
+    dispatch(setSpecificPractice(-1));
+  }, []);
 
   const handlePracticeChange = (e) => {
     const practiceSubVal = e.target.value;
     setSelectedSubPractice(practiceSubVal);
-    dispatch(setSpecificPractice(+practiceSubVal));
   };
 
   return (

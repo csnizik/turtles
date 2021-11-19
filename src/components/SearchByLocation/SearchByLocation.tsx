@@ -4,15 +4,28 @@ import classNames from 'classnames';
 import { IStateDropdownOption } from '../../common/types';
 import { useGetStateListQuery } from '../../Redux/services/api';
 import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import './search-by-location.scss';
+import { currentState } from '../../Redux/Slice/stateSlice';
+
+const initialState = {
+  stateNameDisplay: 'U.S.',
+  stateCode: '00',
+  stateAbbreviation: 'U.S.',
+};
 
 const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const [isDisabled, setIsDisabled]: any = useState(true);
   const [stateId, setStateId]: any = useState<any>({
     id: DEFAULT_NATIONAL_LOCATION,
   });
   const stateStatus: any = useGetStateListQuery();
+
+  const persistLocationState = useAppSelector(
+    (state) => state?.practiceSlice?.searchInput.state_county_code
+  );
 
   const clearBtnClassNames = classNames(
     'btn',
@@ -50,21 +63,33 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
   }, [isDisabled, stateId]);
 
   useEffect(() => {
-    if (window.localStorage.getItem('StateId'))
-      setStateId({ id: window.localStorage.getItem('StateId') });
+    if (persistLocationState)
+      setStateId({ id: persistLocationState.slice(0, 2) });
   }, []);
 
   const handleSelectState = (event: any) => {
     const { value } = event.target;
     setStateId({ id: value });
     setIsDisabled(false);
-    window.localStorage.setItem('StateId', value);
+    if (value) {
+      const selectedState =
+        value &&
+        stateStatus.isSuccess &&
+        stateStatus.data &&
+        stateStatus.data.find((state: any) => {
+          return state.stateCode === value;
+        });
+      dispatch(currentState(selectedState));
+    } else {
+      setStateId({ id: DEFAULT_NATIONAL_LOCATION });
+      dispatch(currentState(initialState));
+    }
   };
 
   const handleClearLocation = () => {
     if (stateId) {
       setStateId({ id: DEFAULT_NATIONAL_LOCATION });
-      window.localStorage.removeItem('StateId');
+      dispatch(currentState(initialState));
     }
   };
 

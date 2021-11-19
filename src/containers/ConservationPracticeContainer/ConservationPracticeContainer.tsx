@@ -18,10 +18,7 @@ import {
   enablePdfGenState,
 } from '../../Redux/Slice/pdfGenSlice';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
-import {
-  setPracticeCategory,
-  setSpecificPractice,
-} from '../../Redux/Slice/practiceSlice';
+import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
 import { currentState } from '../../Redux/Slice/stateSlice';
 import ProjectListGroup from '../../components/ProjectListGroup';
 
@@ -42,15 +39,14 @@ const ConservationPracticeContainer = ({
     useState(defaultPracticeViews);
   const [openModal, setOpenModal] = useState(false);
   const [cleanModal, setCleanModal] = useState(false);
+  const [selectedStateValue] = useState(stateInfo.stateCode);
   const stateStatus: any = useGetStateListQuery();
   const dispatch = useAppDispatch();
   const location: any = useLocation();
 
   const sharedState = location?.state?.detail;
 
-  const selectedStateValue = window.localStorage.getItem('StateId');
-
-  if (selectedStateValue) {
+  useEffect(() => {
     const selectedState =
       selectedStateValue &&
       stateStatus.isSuccess &&
@@ -58,8 +54,10 @@ const ConservationPracticeContainer = ({
       stateStatus.data.find((state: any) => {
         return state.stateCode === selectedStateValue;
       });
-    dispatch(currentState(selectedState));
-  }
+    if (selectedState) {
+      dispatch(currentState(selectedState));
+    }
+  }, [selectedStateValue]);
 
   let searchInputData = {
     practice_id: currentSpecificPractice,
@@ -114,33 +112,12 @@ const ConservationPracticeContainer = ({
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
       setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
       if (location.search) {
-        const linkage = location.search.split('?');
-        const practiceCategoryId = linkage[1].split('=').pop();
-        const practiceId = linkage[2].split('=').pop();
-        const stateCode = linkage[3].split('=').pop();
-        dispatch(setPracticeCategory(Number(practiceCategoryId)));
-        dispatch(setSpecificPractice(Number(practiceId)));
-        dispatch(currentState(stateCode));
         setPracticeViewType({ ...practiceViewType, individualPractice: true });
       }
     } else if (currentPracticeCategoryId >= 0 && currentSpecificPractice < 0) {
-      //Temporary Fix for associated practies
-      window.localStorage.setItem(
-        'PracticeCategoryId',
-        currentPracticeCategoryId
-      );
+      dispatch(setPracticeCategory(currentPracticeCategoryId));
       setPracticeViewType({ ...practiceViewType, practiceCategories: true });
     } else if (currentSpecificPractice >= 0) {
-      setPracticeViewType({ ...practiceViewType, individualPractice: true });
-    }
-    //Temporary Fix for associated practies
-    if (window.localStorage.getItem('PracticeId')) {
-      const practiceNum = Number(window.localStorage.getItem('PracticeId'));
-      const practiceCategoryNum = Number(
-        window.localStorage.getItem('PracticeCategoryId')
-      );
-      dispatch(setSpecificPractice(practiceNum));
-      dispatch(setPracticeCategory(practiceCategoryNum));
       setPracticeViewType({ ...practiceViewType, individualPractice: true });
     }
   }, [currentPracticeCategoryId, currentSpecificPractice]);
@@ -174,7 +151,7 @@ const ConservationPracticeContainer = ({
               <h4 className='project-title'>
                 {stateInfo?.stateNameDisplay || 'U.S.'}{' '}
                 {t('associated-projects-initiatives.title')}{' '}
-                {currentPractice.practiceName}
+                {currentPractice?.practiceName}
               </h4>
             </div>
             <p className='intro-desc'>

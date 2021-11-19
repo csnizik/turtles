@@ -35,13 +35,6 @@ const SpecificationsAndTools = ({
     (state) => state?.practiceSlice?.selectedPracticeCategory
   );
 
-  const updatePracticeCategory = practiceCategory?.toString();
-
-  const clickHandler = (value) => {
-    window.localStorage.setItem('PracticeId', value);
-    window.localStorage.setItem('StateId', selectedStateCode);
-    window.localStorage.setItem('PracticeCategoryId', updatePracticeCategory);
-  };
   const content = useGetAssociatedPracticeQuery(userSelectedFilter);
 
   const getHeaderText = () => {
@@ -89,7 +82,6 @@ const SpecificationsAndTools = ({
                         state: { detail: practice.practiceId },
                         search: `PracticeCategory=${practiceCategory}?Practice=${practice.practiceId}?State=${selectedStateCode}`,
                       }}
-                      onClick={() => clickHandler(practice.practiceId)}
                       target='_blank'
                       aria-label={`${practice.practiceName} link opens a new tab`}
                     >
