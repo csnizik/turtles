@@ -1,20 +1,22 @@
 @import '../../stylesheets/variables';
 
-.usa-fieldset {
-  padding: 1.75rem 0rem 1.75rem 2.25rem;
-  margin: 0 0 0 -1rem;
-  background: $white;
+.land-use-fieldset {
+  padding: 1.75rem 2.25rem;
+  margin: 0;
+  background-color: $light-grey-205;
   .usa-legend {
-    background: $white;
+    background-color: $light-grey-205;
     margin-top: 0rem;
     font-size: 17px;
+    font-weight: $semi-heavy-weight;
   }
   .land-use-grid {
     display: grid;
     grid-template-columns: 20rem 20rem 20rem;
-    gap: 2rem;
+    column-gap: 1rem;
   }
   .usa-checkbox {
+    background-color: $light-grey-205;
     display: flex;
     margin: 0rem 0rem 0rem 0rem;
     .usa-checkbox__label {
