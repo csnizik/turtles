@@ -86,7 +86,7 @@ export const api = createApi({
         `/practice/associatedPractice?state_code=${data.stateCode}&practice_id=${data.practiceId}`,
     }),
     // Payment Schedule Links depending on state
-    getPaymentScheduleLinks: builder.query<string, string>({
+    getPaymentScheduleLinks: builder.query<any, any>({
       query: (stateCode) => `/payment/link?stateCode=${stateCode}`,
     }),
     // Retrieve project types
