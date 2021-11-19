@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useGetAssociatedPracticeQuery } from '../../Redux/services/api';
@@ -73,9 +74,9 @@ const SpecificationsAndTools = ({
         <ul className='practices-row'>
           {content.data?.map((practice: IAssociatedPracticeList) => {
             return (
-              <>
+              <Fragment key={practice.practiceId}>
                 <div className='grid-col-6'>
-                  <li key={practice.practiceId}>
+                  <li>
                     <Link
                       to={{
                         pathname: `/ConservationPractices`,
@@ -90,7 +91,7 @@ const SpecificationsAndTools = ({
                     &ensp;({practice.practiceCode})
                   </li>
                 </div>
-              </>
+              </Fragment>
             );
           })}
         </ul>

@@ -20,6 +20,7 @@
   }
   .content-row {
     margin-top: 4rem;
+    margin-bottom: 5rem;
     .practice-label-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -47,10 +48,10 @@
   }
   .practice-image {
     img:first-of-type {
-      margin-top: 2rem;
+      margin-top: 4rem;
       float: right;
-      height: 24rem;
-      width: 32rem;
+      height: auto;
+      width: 100%;
     }
   }
 }

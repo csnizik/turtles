@@ -50,7 +50,7 @@ const ProjectsContainer = () => {
     stateStatus.isSuccess &&
     stateStatus.data &&
     stateStatus.data.find((state: any) => {
-      return state.stateNameDisplay;
+      return state.stateCode === selectedLocation;
     });
 
   const selectedStateName = selectedState?.stateNameDisplay;
@@ -140,7 +140,7 @@ const ProjectsContainer = () => {
           isError={isError}
           isLoading={isLoading}
           isSuccess={isSuccess}
-          isMapDisplayed={true}
+          isMapDisplayed
           projectsList={data}
           selectedStateName={selectedStateName}
         />

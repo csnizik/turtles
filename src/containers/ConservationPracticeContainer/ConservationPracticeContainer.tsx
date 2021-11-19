@@ -21,6 +21,7 @@ import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
 import { currentState } from '../../Redux/Slice/stateSlice';
 import ProjectListGroup from '../../components/ProjectListGroup';
+import { initiativesList } from '../../components/ProjectListGroup/constants';
 
 const defaultPracticeViews = {
   allPractices: false,
@@ -31,7 +32,6 @@ const defaultPracticeViews = {
 const ConservationPracticeContainer = ({
   currentSpecificPractice,
   currentPracticeCategoryId,
-  selectedStateCode,
 }: any) => {
   const { t } = useTranslation();
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
@@ -40,11 +40,16 @@ const ConservationPracticeContainer = ({
   const [openModal, setOpenModal] = useState(false);
   const [cleanModal, setCleanModal] = useState(false);
   const [selectedStateValue] = useState(stateInfo.stateCode);
+  const [projectsInitiativesData, setProjectsInitiativesData]: any = useState(
+    []
+  );
+
   const stateStatus: any = useGetStateListQuery();
   const dispatch = useAppDispatch();
   const location: any = useLocation();
 
   const sharedState = location?.state?.detail;
+  const selectedStateCode = stateInfo?.stateCode;
 
   useEffect(() => {
     const selectedState =
@@ -61,7 +66,7 @@ const ConservationPracticeContainer = ({
 
   let searchInputData = {
     practice_id: currentSpecificPractice,
-    state_county_code: selectedStateValue?.toString(),
+    state_county_code: selectedStateCode,
     practice_category_id: currentPracticeCategoryId,
   };
 
@@ -108,6 +113,14 @@ const ConservationPracticeContainer = ({
       dispatch(enablePdfGenState());
     }
   };
+  useEffect(() => {
+    const tempData = [
+      { title: 'Conservation Innovation Grants', data: pdata },
+      { title: 'Landscape Conservation Initiatives', data: initiativesList },
+    ];
+    setProjectsInitiativesData(tempData);
+  }, [pdata]);
+
   useEffect(() => {
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
       setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
@@ -188,13 +201,16 @@ const ConservationPracticeContainer = ({
         handleCreateReport={handleCreateReport}
       />
 
-      <div className='overlay'>
-        <ReportPreviewCreator
-          openModal={openModal}
-          handleCreateReport={handleCreateReport}
-          cleanModal={cleanModal}
-        />
-      </div>
+      {openModal ? (
+        <div className='overlay'>
+          <ReportPreviewCreator
+            openModal={openModal}
+            handleCreateReport={handleCreateReport}
+            cleanModal={cleanModal}
+            projectsInitiativesData={projectsInitiativesData}
+          />
+        </div>
+      ) : null}
       {renderPracticeContainerContent(currentViewType)}
     </>
   );

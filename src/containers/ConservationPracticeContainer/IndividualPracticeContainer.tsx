@@ -5,13 +5,11 @@ import {
   useGetNationalOverviewByPracticeQuery,
   useGetStateListQuery,
 } from '../../Redux/services/api';
-import ApplicationImpacts from '../../components/ApplicationImpacts';
 import ConservationPracticeOverview from '../../components/ConservationPracticeOverview';
 import ConservationPracticeVideo from '../../components/ConservationPracticeVideo';
 import ImplementationExtent from '../../components/ImplementationExtent';
 import SpecificationsAndTools from '../../components/SpecificationsAndTools';
 import ResourceConcernTreated from '../../components/ResourceConcernTreated';
-import ProjectsAndInitiatives from '../../components/ProjectsAndInitiatives';
 import HorizontalScroll from '../../components/HorizontalScroll';
 import {
   setPracticeCategory,
@@ -32,7 +30,6 @@ const IndividualPracticeContainer = () => {
 
   const { data, error, isLoading, isSuccess, isError } =
     useGetNationalOverviewByPracticeQuery(practiceId);
-
   if (location.search) {
     const linkage = location.search.split('?');
     const practiceCategoryId = linkage[1].split('=').pop();
@@ -75,8 +72,8 @@ const IndividualPracticeContainer = () => {
         data={data}
         isSuccess={isSuccess}
       />
-      <ApplicationImpacts data={data} isSuccess={isSuccess} />
-      <ProjectsAndInitiatives data={data} isSuccess={isSuccess} />
+      {/* Impacts: TO DO Put back in the next PI */}
+      {/* <ApplicationImpacts data={data} isSuccess={isSuccess} /> */}
     </>
   );
 };

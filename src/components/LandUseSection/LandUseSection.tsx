@@ -138,7 +138,7 @@ const LandUseSection = ({
   };
 
   return (
-    <fieldset className='usa-fieldset'>
+    <fieldset className='land-use-fieldset'>
       <legend className='usa-legend'>
         {t('search-page.filter-by-land-use')}
       </legend>

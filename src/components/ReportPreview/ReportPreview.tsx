@@ -1,11 +1,10 @@
-import html2pdf from 'html2pdf.js';
 import './report-preview.scss';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import ConservationPracticeOverview from '../ConservationPracticeOverview';
 import ImplementationExtent from '../ImplementationExtent';
 import SpecificationsAndTools from '../SpecificationsAndTools';
 import ResourceConcernTreated from '../ResourceConcernTreated';
-import ProjectsAndInitiatives from '../ProjectsAndInitiatives';
+import ProjectListItem from '../ProjectListGroup/ProjectListItem';
 import ApplicationImpacts from '../ApplicationImpacts';
 import ConservationPracticeVideo from '../ConservationPracticeVideo';
 
@@ -16,101 +15,191 @@ const ReportPreview = ({
   reportPreviewData,
   practiceId,
   rcRef,
+  rcRef2,
   rcTreatedInputs,
+  selectedProjInitData,
 }: any) => {
   const { data, error, isLoading, isSuccess, isError } = reportPreviewData;
-  const [pdfUrl, setPdfUrl] = useState(null);
   const mountedRef = useRef(true);
+  const renderProjInit = (projInit) => {
+    const projInitList = projInit.data.map((item) => {
+      const identifyer = projInit.title.includes('Landscape')
+        ? 'initiative'
+        : 'project';
+      return (
+        <div className='proj-list-item' key={item?.[`${identifyer}Title`]}>
+          <ProjectListItem
+            id={item?.[`${identifyer}Id`]}
+            description={item?.[`${identifyer}Description`]}
+            title={item?.[`${identifyer}Title`]}
+            owner={item?.[`${identifyer}Owner`]}
+            statesInvolved={item?.statesInvolved}
+            year={item?.awardeeYear}
+          />
+        </div>
+      );
+    });
+    return (
+      <div key={projInit.title} className='projects-data'>
+        <div className='subheader-titlee'>{projInit.title}</div>
+        <ul className='bullets'>{projInitList}</ul>
+      </div>
+    );
+  };
+  const renderProjInits = (projInit) => {
+    const total = projInit.map((pItem) => {
+      return renderProjInit(pItem);
+    });
 
+    return (
+      <div className='proj-inits'>
+        <h2 className='bold-header'>
+          {`${selectedStateName} ${data?.practiceName} Projects and Initiatives`}
+        </h2>
+        <p>
+          NRCS projects and initiatives on the ground assess the impacts of
+          conservation practices, build scientific understanding of those
+          impacts and the processes underlying them, explore the potential of
+          innovative conservation activities, and coordinate planning efforts at
+          larger scales to address resource concerns from a watershed or
+          landscape perspective.
+        </p>
+        {total}
+      </div>
+    );
+  };
   const contentToRender = () => {
     return (
-      <div id='preview-content'>
-        <h3 id='preview-content-header'>
+      <div className='preview-scroll'>
+        <div id='preview-content'>
+          <h3 id='preview-content-header'>
+            {data?.practiceName} in{' '}
+            {selectedStateName === 'U.S.' ? 'the U.S.' : selectedStateName}
+          </h3>
+          <div data-testid='conservation-overview'>
+            {choiceInputs.input1 && (
+              <div>
+                <ConservationPracticeOverview
+                  data={data}
+                  error={error}
+                  isSuccess={isSuccess}
+                  isError={isError}
+                  isLoading={isLoading}
+                />
+                <ConservationPracticeVideo selectedPracticeId={practiceId} />
+              </div>
+            )}
+          </div>
+          <div className={rcTreatedInputs.size < 1 ? 'hidden-content' : ''}>
+            <div data-testid='resource-concern-treated'>
+              <ResourceConcernTreated
+                selectedStateCode={selectedStateCode}
+                selectedPracticeId={practiceId}
+                rcRef={rcRef}
+              />
+            </div>
+          </div>
+          <div data-testid='implementation-extent'>
+            {choiceInputs.input2 && (
+              <div>
+                <ImplementationExtent data={data} isSuccess={isSuccess} />
+              </div>
+            )}
+          </div>
+          <div data-testid='spec-tools'>
+            {choiceInputs.input3 && (
+              <div>
+                <SpecificationsAndTools
+                  selectedStateCode={selectedStateCode}
+                  selectedPracticeId={practiceId}
+                  data={data}
+                  isSuccess={isSuccess}
+                />
+              </div>
+            )}
+          </div>
+          <div data-testid='app-impacts'>
+            {choiceInputs.input4 && (
+              <div>
+                <ApplicationImpacts data={data} isSuccess={isSuccess} />
+              </div>
+            )}
+          </div>
+          <div data-testid='proj-init'>
+            {selectedProjInitData.length > 0 ? (
+              <div>{renderProjInits(selectedProjInitData)}</div>
+            ) : null}
+          </div>
+        </div>
+      </div>
+    );
+  };
+  // We  need this to render a version for the pdf which can't have scroll bar
+  const contentToRenderPdf = () => {
+    return (
+      <div id='preview-content-pdf'>
+        <h3 id='preview-content-header-pdf'>
           {data?.practiceName} in{' '}
           {selectedStateName === 'U.S.' ? 'the U.S.' : selectedStateName}
         </h3>
-        {choiceInputs.input1 && (
-          <div>
-            <ConservationPracticeOverview
-              data={data}
-              error={error}
-              isSuccess={isSuccess}
-              isError={isError}
-              isLoading={isLoading}
+        <div>
+          {choiceInputs.input1 && (
+            <div>
+              <ConservationPracticeOverview
+                data={data}
+                error={error}
+                isSuccess={isSuccess}
+                isError={isError}
+                isLoading={isLoading}
+              />
+            </div>
+          )}
+          {choiceInputs.input1 && (
+            <div className='pdf-header-space'>
+              <ConservationPracticeVideo selectedPracticeId={practiceId} />
+            </div>
+          )}
+          <div className={rcTreatedInputs.size < 1 ? 'hidden-content' : ''}>
+            <ResourceConcernTreated
+              selectedStateCode={selectedStateCode}
+              selectedPracticeId={practiceId}
+              rcRef={rcRef2}
             />
-            <ConservationPracticeVideo selectedPracticeId={practiceId} />
           </div>
-        )}
-        <div className={rcTreatedInputs.size < 1 ? 'hidden-content' : ''}>
-          <ResourceConcernTreated
-            selectedStateCode={selectedStateCode}
-            selectedPracticeId={practiceId}
-            rcRef={rcRef}
-          />
+          {choiceInputs.input2 && (
+            <ImplementationExtent data={data} isSuccess={isSuccess} />
+          )}
+          {choiceInputs.input3 && (
+            <SpecificationsAndTools
+              selectedStateCode={selectedStateCode}
+              selectedPracticeId={practiceId}
+              data={data}
+              isSuccess={isSuccess}
+            />
+          )}
+          {choiceInputs.input4 && (
+            <ApplicationImpacts data={data} isSuccess={isSuccess} />
+          )}
+          {selectedProjInitData.length > 0
+            ? renderProjInits(selectedProjInitData)
+            : null}
         </div>
-        {choiceInputs.input2 && (
-          <ImplementationExtent data={data} isSuccess={isSuccess} />
-        )}
-        {choiceInputs.input3 && (
-          <SpecificationsAndTools
-            selectedStateCode={selectedStateCode}
-            selectedPracticeId={practiceId}
-            data={data}
-            isSuccess={isSuccess}
-          />
-        )}
-        {choiceInputs.input4 && (
-          <ApplicationImpacts data={data} isSuccess={isSuccess} />
-        )}
-        {choiceInputs.input5 && (
-          <ProjectsAndInitiatives data={data} isSuccess={isSuccess} />
-        )}
       </div>
     );
   };
 
-  const makePDF = () => {
-    const element = document.getElementById('preview-content');
-    const opt = {
-      margin: 0.2,
-      filename: `Practice Report.pdf`,
-      image: { type: 'png', quality: 0.98 },
-      html2canvas: { scale: 1 },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-      pagebreak: { mode: ['avoid-all'] },
-    };
-
-    html2pdf()
-      .from(element)
-      .to('pdf')
-      .set(opt)
-      .output('datauristring')
-      .then((result) => {
-        if (!mountedRef.current) return null;
-        setPdfUrl(result);
-        return null;
-      });
-  };
-
   useEffect(() => {
     mountedRef.current = true;
-    makePDF();
     return () => {
       mountedRef.current = false;
     };
-  }, [choiceInputs, rcTreatedInputs]);
+  }, [choiceInputs, rcTreatedInputs, selectedProjInitData]);
 
   return (
-    <div className='pdf-preview'>
+    <div data-testid='preview' className='pdf-preview'>
       <h3>Preview</h3>
-      {pdfUrl && (
-        <iframe
-          src={pdfUrl}
-          className='content-container'
-          title='Embedded PDF'
-        />
-      )}
-      <div className='hidden-content'>{contentToRender()}</div>
+      <div>{contentToRender()}</div>
+      <div className='hidden-content'>{contentToRenderPdf()}</div>
     </div>
   );
 };
