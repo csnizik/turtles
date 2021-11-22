@@ -81,24 +81,21 @@
   p {
     padding: 0rem 1.875rem;
     margin: 0;
-    line-height: 22.4px;
-    font-size: 16px;
-    font-weight: $medium-light-weight;
+    line-height: 1.25rem;
+    font-size: $h5-font-size;
+    font-weight: $medium-weight;
     color: $nrcs-dark;
     font-family: Roboto;
   }
   a {
     text-decoration: none;
-    font-size: $h3-font-size;
-    line-height: 31px;
+    font-size: $h4-font-size;
+    line-height: 22.4px;
     color: $dark-blue;
-    margin-top: $short-space-size;
   }
   .link {
     width: fit-content;
-    margin-left: auto;
-    margin-right: 1.875rem;
-    margin-bottom: 1.875rem;
+    margin: 0.6875rem 1.875rem 1.875rem auto;
 
     a:first-of-type {
       img {
