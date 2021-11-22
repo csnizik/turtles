@@ -103,7 +103,7 @@ const ImplementationExtent = ({
         <>
           {isLoading2 && <Spinner />}
           {isError2 && error2}
-          {isSuccess2 && data2 && renderPaymentScheduleLink()}
+          {isSuccess2 && data2.length > 0 && renderPaymentScheduleLink()}
         </>
       </div>
     </div>

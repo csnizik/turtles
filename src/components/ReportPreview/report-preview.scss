@@ -70,6 +70,9 @@ div#preview-content {
 
 .proj-inits {
   padding: 5rem $large-space-size;
+  p {
+    line-height: 1.375rem;
+  }
 }
 .proj-list-item {
   margin-bottom: 0.625rem;
