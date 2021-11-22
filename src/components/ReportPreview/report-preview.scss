@@ -23,10 +23,10 @@
 }
 
 #preview-content-header {
-  padding: 60px 35.008px 0;
+  padding: 25px 35.008px 0;
   font-weight: $semi-heavy-weight;
-  font-size: $h2-font-size;
-  line-height: 33.5px;
+  font-size: $h5-font-size;
+  line-height: $h4-font-size;
   margin: 0;
 }
 
@@ -39,9 +39,16 @@
 }
 
 .preview-scroll {
-  overflow-y: scroll;
   max-height: 40rem;
   margin-top: 20px;
+  background-color: $white;
+  border: 1px solid $light-grey-5;
+  box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
+}
+
+div#preview-content {
+  height: 40rem;
+  overflow-y: auto;
 }
 
 .pdf-header-space {
