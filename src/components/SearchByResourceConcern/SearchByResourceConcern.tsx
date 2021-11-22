@@ -36,12 +36,20 @@ const SearchByResourceConcern = ({
     'practice-selected': selectedPractice >= 0,
   });
 
+  const presistSearchInputResource = useAppSelector(
+    (State) => State.practiceSlice.searchInput
+  );
+
+  //Temporary Solution
+  const presistSearchInfo = useAppSelector(
+    (State) => State?.practiceSlice.searchInfo
+  );
+
   useEffect(() => {
     const findResourceCategoryName = resourceCategory?.data?.find((concern) => {
       const name = +selectedResourceCategory === concern.resourceConcernId;
       return name;
     })?.resourceConcernName;
-
     if (selectedResourceCategory === -1) {
       setSearchInput((prevState) => ({
         ...prevState,
@@ -60,18 +68,18 @@ const SearchByResourceConcern = ({
   }, [selectedResourceCategory]);
 
   useEffect(() => {
-    if (window.localStorage.getItem('ResourceConcernCategoryId')) {
+    if (presistSearchInputResource.resource_concern_category_id != null) {
       setSelectedResourceCategory({
-        id: window.localStorage.getItem('ResourceConcernCategoryId'),
+        id: presistSearchInputResource.resource_concern_category_id,
       });
       setResourceConcernsSubgroups({
         resources: resourceConcern.data,
         disabled: false,
       });
     }
-    if (window.localStorage.getItem('ResourceConcernId')) {
+    if (presistSearchInputResource.resource_concern_id != null) {
       setSelectedResourceConcern({
-        id: window.localStorage.getItem('ResourceConcernId'),
+        id: presistSearchInputResource.resource_concern_id,
       });
     }
   }, []);
@@ -93,23 +101,22 @@ const SearchByResourceConcern = ({
       }));
       setSearchInfo((prevState) => ({
         ...prevState,
-        resource_concern: findResourceName,
+        resource_concern:
+          findResourceName || presistSearchInfo.resource_concern,
       }));
     }
   }, [selectedResourceConcern]);
 
   const handleChange = (e) => {
     const { value }: any = e.target;
-    window.localStorage.setItem('ResourceConcernCategoryId', value);
     if (value !== '') {
-      window.localStorage.removeItem('ResourceConcernId');
       dispatchRequest(disableResourceDropdown());
       setSelectedResourceCategory({
         ...selectedResourceCategory,
         id: value,
       });
       setResourceConcernsSubgroups({
-        ...resourceConcernsSubgroups,
+        ...initialResourceState,
         disabled: false,
       });
       setSearchInfo((prevState) => ({
@@ -122,23 +129,24 @@ const SearchByResourceConcern = ({
       }));
       setSelectedResourceConcern({ id: -1 });
     } else {
-      window.localStorage.removeItem('ResourceConcernId');
-      window.localStorage.removeItem('ResourceConcernCategoryId');
       setResourceConcernsSubgroups(initialResourceState);
-      setSelectedResourceCategory(-1);
+      setSelectedResourceCategory({ id: -1 });
       dispatchRequest(enableResourceDropdown());
       setSearchInfo((prevState) => ({
         ...prevState,
         resource_concern_category: null,
+        resource_concern: null,
+      }));
+      setSearchInput((prevState) => ({
+        ...prevState,
+        resource_concern_id: null,
       }));
     }
   };
 
   const handleSubgroupChange = (e) => {
     const { value } = e.target;
-    window.localStorage.setItem('ResourceConcernId', value);
     setSelectedResourceConcern({ id: +value });
-
     if (value === '') {
       setSelectedResourceConcern({ id: -1 });
       setSearchInfo((prevState) => ({

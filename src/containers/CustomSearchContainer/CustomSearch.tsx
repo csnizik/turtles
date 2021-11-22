@@ -98,10 +98,6 @@ const CustomSearch = () => {
         practice_category: null,
         practice: null,
       }));
-      window.localStorage.removeItem('PracticeCategoryId');
-      window.localStorage.removeItem('PracticeId');
-      window.localStorage.removeItem('ResourceConcernCategoryId');
-      window.localStorage.removeItem('ResourceConcernId');
     }
     dispatch(enableResourceDropdown());
     dispatch(enablePracticeDropdown());

@@ -1,15 +1,13 @@
 import { TabContent, TabPane } from 'reactstrap';
 import { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import { useGetStateListQuery } from '../../Redux/services/api';
+import { useParams } from 'react-router-dom';
 import CustomTabs from '../../components/CustomTabs';
 import { searchOptionMap } from '../../common/typedconstants.common';
-import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 import ConservationPracticeContainer from '../ConservationPracticeContainer';
 import ProjectsContainer from '../ProjectsContainer';
 import OverviewContainer from '../OverviewContainer';
 import './location-search.scss';
-import { currentState } from '../../Redux/Slice/stateSlice';
 import TabTitle from '../../components/TabTitle';
 
 // Tab styles come from the NRCS design system
@@ -23,9 +21,7 @@ const tabStyleOptions: any = {
 
 const LocationContainer = () => {
   const { name }: any = useParams();
-  const location: any = useLocation();
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
-  const stateStatus = useGetStateListQuery();
   const selectedPracticeCategory: number = useAppSelector(
     (state) => state.practiceSlice.selectedPracticeCategory
   );
@@ -34,24 +30,6 @@ const LocationContainer = () => {
   );
   const option = searchOptionMap[name];
   const [currentTabOption, setTabOption] = useState(option?.id);
-
-  const selectedStateCode = location?.state?.selectedStateId || '00';
-
-  const selectedState =
-    selectedStateCode &&
-    stateStatus.isSuccess &&
-    stateStatus.data &&
-    stateStatus.data.find((state: any) => {
-      return state.stateCode === selectedStateCode;
-    });
-
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (selectedState) {
-      dispatch(currentState(selectedState));
-    }
-  }, []);
 
   useEffect(() => {
     if (
