@@ -37,12 +37,12 @@ const SearchByConservationPractice = ({
   const practice = useGetPracticeQuery(selectedPractice);
 
   const presistSearchInput = useAppSelector(
-    (State) => State?.practiceSlice.searchInput
+    (State) => State?.practiceSlice?.searchInput
   );
 
   //Temporary Solution
   const presistSearchInfo = useAppSelector(
-    (State) => State?.practiceSlice.searchInfo
+    (State) => State?.practiceSlice?.searchInfo
   );
 
   useEffect(() => {
@@ -69,13 +69,13 @@ const SearchByConservationPractice = ({
   }, [selectedPractice]);
 
   useEffect(() => {
-    if (presistSearchInput.practice_category_id != null) {
+    if (presistSearchInput?.practice_category_id != null) {
       setSelectedPractice({
         id: presistSearchInput.practice_category_id,
       });
       setSecondState({ practice: practice.data, disabled: false });
     }
-    if (presistSearchInput.practice_id != null) {
+    if (presistSearchInput?.practice_id != null) {
       setSelectedSubPractice({
         id: presistSearchInput.practice_id,
       });
