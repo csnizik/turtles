@@ -37,12 +37,12 @@ const SearchByResourceConcern = ({
   });
 
   const presistSearchInputResource = useAppSelector(
-    (State) => State.practiceSlice.searchInput
+    (State) => State?.practiceSlice?.searchInput
   );
 
   //Temporary Solution
   const presistSearchInfo = useAppSelector(
-    (State) => State?.practiceSlice.searchInfo
+    (State) => State?.practiceSlice?.searchInfo
   );
 
   useEffect(() => {
@@ -68,7 +68,7 @@ const SearchByResourceConcern = ({
   }, [selectedResourceCategory]);
 
   useEffect(() => {
-    if (presistSearchInputResource.resource_concern_category_id != null) {
+    if (presistSearchInputResource?.resource_concern_category_id != null) {
       setSelectedResourceCategory({
         id: presistSearchInputResource.resource_concern_category_id,
       });
@@ -77,7 +77,7 @@ const SearchByResourceConcern = ({
         disabled: false,
       });
     }
-    if (presistSearchInputResource.resource_concern_id != null) {
+    if (presistSearchInputResource?.resource_concern_id != null) {
       setSelectedResourceConcern({
         id: presistSearchInputResource.resource_concern_id,
       });
