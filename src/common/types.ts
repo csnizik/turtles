@@ -35,6 +35,7 @@ export interface ILandUse {
   Forestland: boolean;
   Pasture: boolean;
   Rangeland: boolean;
+  Protected: boolean;
 }
 
 export type Practice = {

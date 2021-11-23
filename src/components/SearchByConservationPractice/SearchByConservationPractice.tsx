@@ -36,6 +36,15 @@ const SearchByConservationPractice = ({
   const practiceCategory = useGetPracticeCategoryQuery();
   const practice = useGetPracticeQuery(selectedPractice);
 
+  const presistSearchInput = useAppSelector(
+    (State) => State?.practiceSlice?.searchInput
+  );
+
+  //Temporary Solution
+  const presistSearchInfo = useAppSelector(
+    (State) => State?.practiceSlice?.searchInfo
+  );
+
   useEffect(() => {
     const findPracticeName = practiceCategory?.data?.find((singlePractice) => {
       const name = +selectedPractice === singlePractice.practiceCategoryId;
@@ -60,15 +69,15 @@ const SearchByConservationPractice = ({
   }, [selectedPractice]);
 
   useEffect(() => {
-    if (window.localStorage.getItem('PracticeCategoryId')) {
+    if (presistSearchInput?.practice_category_id != null) {
       setSelectedPractice({
-        id: window.localStorage.getItem('PracticeCategoryId'),
+        id: presistSearchInput.practice_category_id,
       });
       setSecondState({ practice: practice.data, disabled: false });
     }
-    if (window.localStorage.getItem('PracticeId')) {
+    if (presistSearchInput?.practice_id != null) {
       setSelectedSubPractice({
-        id: window.localStorage.getItem('PracticeId'),
+        id: presistSearchInput.practice_id,
       });
     }
   }, []);
@@ -78,7 +87,6 @@ const SearchByConservationPractice = ({
       const name = +selectedSubPractice.id === subPractice.practiceId;
       return name;
     })?.practiceName;
-
     if (selectedSubPractice.id === -1) {
       setSearchInput((prevState) => ({
         ...prevState,
@@ -91,16 +99,14 @@ const SearchByConservationPractice = ({
       }));
       setSearchInfo((prevState) => ({
         ...prevState,
-        practice: findSubPracticeName,
+        practice: findSubPracticeName || presistSearchInfo.practice,
       }));
     }
   }, [selectedSubPractice]);
 
   const handlePracticeCategoryChange = (e) => {
     const { value } = e.target;
-    window.localStorage.setItem('PracticeCategoryId', value);
     if (value !== '') {
-      window.localStorage.removeItem('PracticeId');
       dispatch(disablePracticeDropdown());
       setSelectedPractice({ id: value });
       setSelectedSubPractice({ id: -1 });
@@ -114,8 +120,6 @@ const SearchByConservationPractice = ({
         setSecondState({ practice: practice.data, disabled: false });
       }
     } else {
-      window.localStorage.removeItem('PracticeId');
-      window.localStorage.removeItem('PracticeCategoryId');
       setSecondState({ ...intialPracticeState });
       setSelectedSubPractice({ id: -1 });
       setSelectedPractice({ id: -1 });
@@ -123,13 +127,13 @@ const SearchByConservationPractice = ({
       setSearchInfo((prevState) => ({
         ...prevState,
         practice_category: null,
+        practice: null,
       }));
     }
   };
 
   const handlePracticeChange = (e) => {
     const { value } = e.target;
-    window.localStorage.setItem('PracticeId', value);
     setSelectedSubPractice({ id: value });
     if (value === '') {
       setSelectedSubPractice({ id: -1 });

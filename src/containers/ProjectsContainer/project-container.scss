@@ -4,7 +4,8 @@
   display: grid;
 
   grid-template-columns: 20rem 1fr;
-  ul.list-group {
+  .project-types-list,
+  .landscape-initiative-list {
     margin: 0 0 0 0;
     padding-right: 2rem;
     .list-group-item {
@@ -19,7 +20,7 @@
         border-left: 3px solid $usda-blue;
       }
       &:last-of-type {
-        border: none;
+        border-bottom: none;
       }
     }
   }

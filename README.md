@@ -84,6 +84,33 @@ Jenkins - https://jenkins.spatialfrontlab.com/job/CIG-Epi/job/develop/
 - [Node sass](https://github.com/sass/node-sass)
 - [Scss](https://sass-lang.com/)
 
+##### 508 Accessibility
+
+###### Install accessibility tools
+
+- [Wave](https://chrome.google.com/webstore/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh?hl=en-US)
+- [Accessibility Insights](https://accessibilityinsights.io/)
+
+###### Resources and helpful links
+
+- [Accessibility Checklist](https://drive.google.com/drive/u/1/folders/156gj1v5NnHTW1ofKA-xH0wWuT1EKAs-D)
+- [Webaim](https://webaim.org/techniques/aria/)
+- [MDN Aria attributes](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/List_role)
+- [Aria explanation and more](http://inclusive-design.umn.edu/aria/index.html)
+- [Accessibility fundamentals](https://developers.google.com/web/fundamentals/accessibility/semantics-aria/)
+
+- Accessible list with checkboxes:
+  https://www.w3.org/TR/wai-aria-practices-1.1/examples/checkbox/checkbox-1/checkbox-1.html
+  https://www.w3.org/TR/2016/WD-wai-aria-practices-1.1-20160317/examples/checkbox/checkbox-2.html
+
+- Modals:
+  https://www.w3.org/TR/wai-aria-practices-1.1/examples/dialog-modal/dialog.html
+  https://w3c.github.io/aria-practices/examples/dialog-modal/dialog.html
+  https://www.tpgi.com/the-current-state-of-modal-dialog-accessibility/
+
+- Accessible PDFs:
+  https://sfgov.org/developing-accessible-pdfs
+
 ##### Unit Tests
 
 - [Jest for unit tests](https://jestjs.io/docs/using-matchers)

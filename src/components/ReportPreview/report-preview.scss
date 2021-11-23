@@ -6,7 +6,6 @@
 }
 
 .pdf-preview {
-
   h3 {
     margin-bottom: $medium-space-size;
     font-weight: 600;
@@ -21,10 +20,17 @@
     height: 40rem;
     width: 100%;
   }
-
 }
 
 #preview-content-header {
+  padding: 25px 35.008px 0;
+  font-weight: $semi-heavy-weight;
+  font-size: $h5-font-size;
+  line-height: $h4-font-size;
+  margin: 0;
+}
+
+#preview-content-header-pdf {
   padding: 60px 35.008px 0;
   font-weight: $semi-heavy-weight;
   font-size: $h2-font-size;
@@ -32,3 +38,87 @@
   margin: 0;
 }
 
+.preview-scroll {
+  max-height: 40rem;
+  margin-top: 20px;
+  background-color: $white;
+  border: 1px solid $light-grey-5;
+  box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
+}
+
+div#preview-content {
+  height: 40rem;
+  overflow-y: auto;
+}
+
+.pdf-header-space {
+  margin-top: 200px;
+}
+
+.bold-header {
+  font-weight: 650;
+}
+
+.subheader-titlee {
+  font-size: 1.375rem;
+  font-weight: 650;
+  line-height: 1.25rem;
+  color: $nrcs-dark;
+  margin-bottom: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.proj-inits {
+  padding: 5rem $large-space-size;
+  p {
+    line-height: 1.375rem;
+  }
+}
+.proj-list-item {
+  margin-bottom: 0.625rem;
+}
+
+.projects-data {
+  li.list-group-item {
+    border: 1px solid $light-grey-5;
+    border-radius: 6px;
+    margin: 0rem 0rem 1rem 0rem;
+    padding: 0 1.563rem 0 1.563rem;
+
+    a {
+      text-decoration: none;
+    }
+    .outer-box {
+      margin: 0 0 0 1.5rem;
+      .project-details {
+        margin: 0rem 0rem 1rem -1.5rem;
+        font-size: 15px;
+        span {
+          padding-left: 3rem;
+          margin: 0rem 1.5rem;
+          border-left: 1px solid $light-grey-6;
+        }
+        span:first-of-type {
+          padding-left: 0rem;
+          margin: 0rem 1.5rem 0rem 0rem;
+          border: none;
+        }
+      }
+    }
+    p:first-of-type {
+      margin: 1.563rem 0 0.625rem 0;
+      font-size: 18px;
+      font-weight: $heavier-weight;
+      color: $usda-blue;
+    }
+
+    p:nth-of-type(2) {
+      font-size: 16px;
+      margin: 1.25rem 0 1.563rem 0;
+    }
+  }
+}
+.bullets {
+  list-style-type: none;
+  padding-left: 0;
+}

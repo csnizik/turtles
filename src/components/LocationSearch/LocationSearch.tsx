@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IStateDropdownOption } from '../../common/types';
 import { useGetStateListQuery } from '../../Redux/services/api';
@@ -38,10 +38,23 @@ const LocationSearch = () => {
     }
   };
 
+  useEffect(() => {
+    dispatch(currentState(initialState));
+  }, []);
+
   const handleClick = () => {
+    if (selectedState && selectedState !== '00') {
+      const selectedStateCode =
+        selectedState &&
+        stateStatus.isSuccess &&
+        stateStatus.data &&
+        stateStatus.data.find((state: any) => {
+          return state.stateCode === selectedState;
+        });
+      dispatch(currentState(selectedStateCode));
+    }
     history.push({
       pathname: '/Overview',
-      state: { selectedStateId: selectedState },
     });
   };
 
@@ -50,7 +63,7 @@ const LocationSearch = () => {
       <div className='desktop:grid-col-4 img-row margin-right-3'>
         <img src='images/homePageUSMap.png' alt='Map of the United States' />
       </div>
-      <div className='desktop:grid-col-6 content-row margin-top-4'>
+      <div className='desktop:grid-col-7 content-row margin-top-4'>
         <h2>{t('location-search.explore-by-location')}</h2>
         <p className='p-style'>{t('location-search.introductory-paragraph')}</p>
         <div className='location-label-grid'>

@@ -28,7 +28,9 @@ const ProjectListItem = ({
   return (
     <li key={id} className='list-group-item'>
       <p>
-        <a href={link}>{title}</a>
+        <a href={link} target='_blank' rel='noreferrer'>
+          {title}
+        </a>
       </p>
       {owner && renderProjectDetails(owner, statesInvolved, year)}
       <p>{description}</p>

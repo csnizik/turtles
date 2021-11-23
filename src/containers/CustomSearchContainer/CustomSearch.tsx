@@ -98,10 +98,6 @@ const CustomSearch = () => {
         practice_category: null,
         practice: null,
       }));
-      window.localStorage.removeItem('PracticeCategoryId');
-      window.localStorage.removeItem('PracticeId');
-      window.localStorage.removeItem('ResourceConcernCategoryId');
-      window.localStorage.removeItem('ResourceConcernId');
     }
     dispatch(enableResourceDropdown());
     dispatch(enablePracticeDropdown());
@@ -154,37 +150,39 @@ const CustomSearch = () => {
         checkedState={checkedState}
         setCheckedState={setCheckedState}
       />
-      <div className='practice-labels'>
-        <p className='practice-description'>
-          {t('search-by-conservation-practice.description')}
-        </p>
-        <button
-          className={clearBtnClassNames}
-          type='button'
-          onClick={handleClearPracticeAndConcerns}
-        >
-          {t('actions.clear')}
-        </button>
-      </div>
       <div className='bottom-container'>
-        <SearchByConservationPractice
-          selectedResourceCategory={selectedResourceCategory}
-          secondState={secondState}
-          setSecondState={setSecondState}
-          selectedPractice={selectedPractice.id}
-          setSelectedPractice={setSelectedPractice}
-          setSearchInput={setSearchInput}
-          setSearchInfo={setSearchedInfo}
-        />
-        <SearchByResourceConcern
-          resourceConcernsSubgroups={resourceConcernsSubgroups}
-          setResourceConcernsSubgroups={setResourceConcernsSubgroups}
-          setSelectedResourceCategory={setSelectedResourceCategory}
-          selectedResourceCategory={selectedResourceCategory.id}
-          selectedPractice={selectedPractice.id}
-          setSearchInput={setSearchInput}
-          setSearchInfo={setSearchedInfo}
-        />
+        <div className='practice-labels'>
+          <p className='practice-description'>
+            {t('search-by-conservation-practice.description')}
+          </p>
+          <button
+            className={clearBtnClassNames}
+            type='button'
+            onClick={handleClearPracticeAndConcerns}
+          >
+            {t('actions.clear')}
+          </button>
+        </div>
+        <div className='search-criteria'>
+          <SearchByConservationPractice
+            selectedResourceCategory={selectedResourceCategory}
+            secondState={secondState}
+            setSecondState={setSecondState}
+            selectedPractice={selectedPractice.id}
+            setSelectedPractice={setSelectedPractice}
+            setSearchInput={setSearchInput}
+            setSearchInfo={setSearchedInfo}
+          />
+          <SearchByResourceConcern
+            resourceConcernsSubgroups={resourceConcernsSubgroups}
+            setResourceConcernsSubgroups={setResourceConcernsSubgroups}
+            setSelectedResourceCategory={setSelectedResourceCategory}
+            selectedResourceCategory={selectedResourceCategory.id}
+            selectedPractice={selectedPractice.id}
+            setSearchInput={setSearchInput}
+            setSearchInfo={setSearchedInfo}
+          />
+        </div>
       </div>
       <Link
         to={{

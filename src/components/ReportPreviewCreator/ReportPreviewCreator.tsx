@@ -26,27 +26,30 @@ const ReportPreviewCreator = ({
   openModal,
   handleCreateReport,
   cleanModal,
+  projectsInitiativesData,
 }: any) => {
   const rcRef = useRef();
+  const rcRef2 = useRef();
   const [rcTreatedInputs, setRcTreatedInputs] = useState(new Set());
   const [childArr, setChildArr] = useState<DomParent>();
+  const [childArr2, setChildArr2] = useState<DomParent>();
+  const [selectedProjInitData, setSelectedProjInitData] = useState([]);
   const [choiceInputs, setChoiceInputs] = useState({
     input1: false,
     input2: false,
     input3: false,
     input4: false,
-    input5: false,
   });
 
   useEffect(() => {
     setRcTreatedInputs(new Set());
     setChildArr(rcRef.current);
+    setChildArr2(rcRef2.current);
     setChoiceInputs({
       input1: false,
       input2: false,
       input3: false,
       input4: false,
-      input5: false,
     });
   }, [cleanModal]);
 
@@ -71,9 +74,15 @@ const ReportPreviewCreator = ({
 
   const getRCTreatedComponent = (selectedIds) => {
     setChildArr(rcRef.current);
-    if (!childArr) return;
+    childArr?.children.forEach((child) => {
+      const categoryId: number = +child.textContent.charAt(0);
+      child.className = selectedIds.has(categoryId) // eslint-disable-line no-param-reassign
+        ? 'accordion-container'
+        : 'hidden-content';
+    });
 
-    childArr.children.forEach((child) => {
+    setChildArr2(rcRef2.current);
+    childArr2?.children.forEach((child) => {
       const categoryId: number = +child.textContent.charAt(0);
       child.className = selectedIds.has(categoryId) // eslint-disable-line no-param-reassign
         ? 'accordion-container'
@@ -82,7 +91,7 @@ const ReportPreviewCreator = ({
   };
 
   const handleGeneratePdf = () => {
-    const element = document.getElementById('preview-content');
+    const element = document.getElementById('preview-content-pdf');
     const opt = {
       margin: 0.2,
       filename: `Practice Report.pdf`,
@@ -115,6 +124,7 @@ const ReportPreviewCreator = ({
           </div>
           <div className='report-container'>
             <ReportBuilder
+              stateName={stateName}
               swapaData={data}
               choiceInputs={choiceInputs}
               setChoiceInputs={setChoiceInputs}
@@ -123,6 +133,8 @@ const ReportPreviewCreator = ({
               getRCTreatedComponent={getRCTreatedComponent}
               reportPreviewData={reportPreviewData.data}
               handleGeneratePdf={handleGeneratePdf}
+              projectsInitiativesData={projectsInitiativesData}
+              setSelectedProjInitData={setSelectedProjInitData}
             />
             <div className='preview-container'>
               <ReportPreview
@@ -133,6 +145,8 @@ const ReportPreviewCreator = ({
                 reportPreviewData={reportPreviewData}
                 practiceId={practiceId}
                 rcRef={rcRef}
+                rcRef2={rcRef2}
+                selectedProjInitData={selectedProjInitData}
               />
             </div>
           </div>

@@ -18,12 +18,10 @@ import {
   enablePdfGenState,
 } from '../../Redux/Slice/pdfGenSlice';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
-import {
-  setPracticeCategory,
-  setSpecificPractice,
-} from '../../Redux/Slice/practiceSlice';
+import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
 import { currentState } from '../../Redux/Slice/stateSlice';
 import ProjectListGroup from '../../components/ProjectListGroup';
+import { initiativesList } from '../../components/ProjectListGroup/constants';
 
 const defaultPracticeViews = {
   allPractices: false,
@@ -34,7 +32,6 @@ const defaultPracticeViews = {
 const ConservationPracticeContainer = ({
   currentSpecificPractice,
   currentPracticeCategoryId,
-  selectedStateCode,
 }: any) => {
   const { t } = useTranslation();
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
@@ -42,15 +39,19 @@ const ConservationPracticeContainer = ({
     useState(defaultPracticeViews);
   const [openModal, setOpenModal] = useState(false);
   const [cleanModal, setCleanModal] = useState(false);
+  const [selectedStateValue] = useState(stateInfo.stateCode);
+  const [projectsInitiativesData, setProjectsInitiativesData]: any = useState(
+    []
+  );
+
   const stateStatus: any = useGetStateListQuery();
   const dispatch = useAppDispatch();
   const location: any = useLocation();
 
   const sharedState = location?.state?.detail;
+  const selectedStateCode = stateInfo?.stateCode;
 
-  const selectedStateValue = window.localStorage.getItem('StateId');
-
-  if (selectedStateValue) {
+  useEffect(() => {
     const selectedState =
       selectedStateValue &&
       stateStatus.isSuccess &&
@@ -58,12 +59,14 @@ const ConservationPracticeContainer = ({
       stateStatus.data.find((state: any) => {
         return state.stateCode === selectedStateValue;
       });
-    dispatch(currentState(selectedState));
-  }
+    if (selectedState) {
+      dispatch(currentState(selectedState));
+    }
+  }, [selectedStateValue]);
 
   let searchInputData = {
     practice_id: currentSpecificPractice,
-    state_county_code: selectedStateValue?.toString(),
+    state_county_code: selectedStateCode,
     practice_category_id: currentPracticeCategoryId,
   };
 
@@ -111,36 +114,23 @@ const ConservationPracticeContainer = ({
     }
   };
   useEffect(() => {
+    const tempData = [
+      { title: 'Conservation Innovation Grants', data: pdata },
+      { title: 'Landscape Conservation Initiatives', data: initiativesList },
+    ];
+    setProjectsInitiativesData(tempData);
+  }, [pdata]);
+
+  useEffect(() => {
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
       setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
       if (location.search) {
-        const linkage = location.search.split('?');
-        const practiceCategoryId = linkage[1].split('=').pop();
-        const practiceId = linkage[2].split('=').pop();
-        const stateCode = linkage[3].split('=').pop();
-        dispatch(setPracticeCategory(Number(practiceCategoryId)));
-        dispatch(setSpecificPractice(Number(practiceId)));
-        dispatch(currentState(stateCode));
         setPracticeViewType({ ...practiceViewType, individualPractice: true });
       }
     } else if (currentPracticeCategoryId >= 0 && currentSpecificPractice < 0) {
-      //Temporary Fix for associated practies
-      window.localStorage.setItem(
-        'PracticeCategoryId',
-        currentPracticeCategoryId
-      );
+      dispatch(setPracticeCategory(currentPracticeCategoryId));
       setPracticeViewType({ ...practiceViewType, practiceCategories: true });
     } else if (currentSpecificPractice >= 0) {
-      setPracticeViewType({ ...practiceViewType, individualPractice: true });
-    }
-    //Temporary Fix for associated practies
-    if (window.localStorage.getItem('PracticeId')) {
-      const practiceNum = Number(window.localStorage.getItem('PracticeId'));
-      const practiceCategoryNum = Number(
-        window.localStorage.getItem('PracticeCategoryId')
-      );
-      dispatch(setSpecificPractice(practiceNum));
-      dispatch(setPracticeCategory(practiceCategoryNum));
       setPracticeViewType({ ...practiceViewType, individualPractice: true });
     }
   }, [currentPracticeCategoryId, currentSpecificPractice]);
@@ -174,7 +164,7 @@ const ConservationPracticeContainer = ({
               <h4 className='project-title'>
                 {stateInfo?.stateNameDisplay || 'U.S.'}{' '}
                 {t('associated-projects-initiatives.title')}{' '}
-                {currentPractice.practiceName}
+                {currentPractice?.practiceName}
               </h4>
             </div>
             <p className='intro-desc'>
@@ -211,13 +201,16 @@ const ConservationPracticeContainer = ({
         handleCreateReport={handleCreateReport}
       />
 
-      <div className='overlay'>
-        <ReportPreviewCreator
-          openModal={openModal}
-          handleCreateReport={handleCreateReport}
-          cleanModal={cleanModal}
-        />
-      </div>
+      {openModal ? (
+        <div className='overlay'>
+          <ReportPreviewCreator
+            openModal={openModal}
+            handleCreateReport={handleCreateReport}
+            cleanModal={cleanModal}
+            projectsInitiativesData={projectsInitiativesData}
+          />
+        </div>
+      ) : null}
       {renderPracticeContainerContent(currentViewType)}
     </>
   );

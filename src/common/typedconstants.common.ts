@@ -26,15 +26,16 @@ export const ConservationPracticeSections: any = [
     sectionName: 'Practice Specifications and Tools',
     anchorLink: '#PracticeSpecifications',
   },
+  // TO DO Impacts: Put back in the next PI
+  // {
+  //   sectionId: 3,
+  //   sectionName: 'Impacts of Applying this Practice',
+  //   anchorLink: '#ImpactsPractice',
+  // },
   {
     sectionId: 3,
-    sectionName: 'Impacts of Applying this Practice',
-    anchorLink: '#ImpactsPractice',
-  },
-  {
-    sectionId: 4,
     sectionName: 'Practice Projects & Initiatives',
-    anchorLink: '#Projects&Initiatives',
+    anchorLink: '#ProjectsInitiatives',
   },
 ];
 
@@ -55,4 +56,5 @@ export const initialLandUse = {
   Forestland: false,
   Pasture: false,
   Rangeland: false,
+  Protected: false,
 };

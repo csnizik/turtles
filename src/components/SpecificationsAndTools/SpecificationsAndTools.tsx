@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useGetAssociatedPracticeQuery } from '../../Redux/services/api';
@@ -35,13 +36,6 @@ const SpecificationsAndTools = ({
     (state) => state?.practiceSlice?.selectedPracticeCategory
   );
 
-  const updatePracticeCategory = practiceCategory?.toString();
-
-  const clickHandler = (value) => {
-    window.localStorage.setItem('PracticeId', value);
-    window.localStorage.setItem('StateId', selectedStateCode);
-    window.localStorage.setItem('PracticeCategoryId', updatePracticeCategory);
-  };
   const content = useGetAssociatedPracticeQuery(userSelectedFilter);
 
   const getHeaderText = () => {
@@ -80,16 +74,15 @@ const SpecificationsAndTools = ({
         <ul className='practices-row'>
           {content.data?.map((practice: IAssociatedPracticeList) => {
             return (
-              <>
+              <Fragment key={practice.practiceId}>
                 <div className='grid-col-6'>
-                  <li key={practice.practiceId}>
+                  <li>
                     <Link
                       to={{
                         pathname: `/ConservationPractices`,
                         state: { detail: practice.practiceId },
                         search: `PracticeCategory=${practiceCategory}?Practice=${practice.practiceId}?State=${selectedStateCode}`,
                       }}
-                      onClick={() => clickHandler(practice.practiceId)}
                       target='_blank'
                       aria-label={`${practice.practiceName} link opens a new tab`}
                     >
@@ -98,7 +91,7 @@ const SpecificationsAndTools = ({
                     &ensp;({practice.practiceCode})
                   </li>
                 </div>
-              </>
+              </Fragment>
             );
           })}
         </ul>
