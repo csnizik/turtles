@@ -62,7 +62,9 @@ const SearchByResourceConcern = ({
       }));
       setSearchInfo((prevState) => ({
         ...prevState,
-        resource_concern_category: findResourceCategoryName,
+        resource_concern_category:
+          findResourceCategoryName ||
+          presistSearchInfo.resource_concern_category,
       }));
     }
   }, [selectedResourceCategory]);

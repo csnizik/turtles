@@ -59,7 +59,8 @@ const SearchByConservationPractice = ({
     } else {
       setSearchInfo((prevState) => ({
         ...prevState,
-        practice_category: findPracticeName,
+        practice_category:
+          findPracticeName || presistSearchInfo.practice_category,
       }));
       setSearchInput((prevState) => ({
         ...prevState,
