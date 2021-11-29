@@ -62,8 +62,9 @@ const ProjectTypeSection = ({
             target='_blank'
             rel='noreferrer'
           >
-            {nrcsLinkText}
+            {nrcsLinkText}{' '}
           </a>
+          <i className='fas fa-external-link-alt' />
           <hr className='margin-bottom-2' />
           <div className='landscape-details'>
             {selectedLandscapeInitiative > 0
