@@ -5,10 +5,7 @@ import { ListGroup, ListGroupItem } from 'reactstrap';
 import MapContainer from '../MapContainer';
 import ProjectListGroup from '../../components/ProjectListGroup';
 import ProjectTypeSection from '../../components/ProjectTypeSection';
-import {
-  useGetStateListQuery,
-  usePostProjectSearchDataQuery,
-} from '../../Redux/services/api';
+import { useGetStateListQuery } from '../../Redux/services/api';
 import './project-container.scss';
 
 import {

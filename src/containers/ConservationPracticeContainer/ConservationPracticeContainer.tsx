@@ -22,7 +22,6 @@ import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
 import { currentState } from '../../Redux/Slice/stateSlice';
 import ProjectListGroup from '../../components/ProjectListGroup';
-import { initiativesList } from '../../components/ProjectListGroup/constants';
 
 const defaultPracticeViews = {
   allPractices: false,
@@ -65,6 +64,35 @@ const ConservationPracticeContainer = ({
     }
   }, [selectedStateValue]);
 
+  let searchInputData = {
+    practice_id: currentSpecificPractice,
+    state_county_code: selectedStateCode,
+    practice_category_id: currentPracticeCategoryId,
+  };
+
+  if (
+    searchInputData.state_county_code === '00' ||
+    searchInputData.state_county_code === '00000'
+  ) {
+    searchInputData = { ...searchInputData };
+    delete searchInputData.state_county_code;
+  }
+
+  const {
+    data: pdata,
+    error: perror,
+    isLoading: pisLoading,
+    isSuccess: pisSuccess,
+    isError: pisError,
+  } = usePostProjectSearchDataQuery(searchInputData);
+  const {
+    data: ldata,
+    error: lerror,
+    isLoading: lisLoading,
+    isSuccess: lisSuccess,
+    isError: lisError,
+  } = usePostLandscapeInitiativesQuery(searchInputData);
+
   const { data, isSuccess } = usePostSearchDataQuery({
     practice_id: sharedState,
   });
@@ -92,6 +120,13 @@ const ConservationPracticeContainer = ({
       dispatch(enablePdfGenState());
     }
   };
+  useEffect(() => {
+    const tempData = [
+      { title: 'Conservation Innovation Grants', data: pdata },
+      { title: 'Landscape Conservation Initiatives', data: ldata },
+    ];
+    setProjectsInitiativesData(tempData);
+  }, [pdata, ldata]);
 
   useEffect(() => {
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
