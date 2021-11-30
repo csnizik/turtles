@@ -80,8 +80,8 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
                       <p>{practice.practiceDescription}</p>
                     </div>
                     <img
-                      src='images/practice_placeholder.png'
-                      alt='Practice Description'
+                      src='images/landscape-initiatives-images/practice_placeholder.png'
+                      alt=''
                     />
                   </div>
                 </div>
