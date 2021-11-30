@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   useGetStateListQuery,
+  usePostLandscapeInitiativesQuery,
   usePostProjectSearchDataQuery,
   usePostSearchDataQuery,
 } from '../../Redux/services/api';
@@ -64,28 +65,6 @@ const ConservationPracticeContainer = ({
     }
   }, [selectedStateValue]);
 
-  let searchInputData = {
-    practice_id: currentSpecificPractice,
-    state_county_code: selectedStateCode,
-    practice_category_id: currentPracticeCategoryId,
-  };
-
-  if (
-    searchInputData.state_county_code === '00' ||
-    searchInputData.state_county_code === '00000'
-  ) {
-    searchInputData = { ...searchInputData };
-    delete searchInputData.state_county_code;
-  }
-
-  const {
-    data: pdata,
-    error: perror,
-    isLoading: pisLoading,
-    isSuccess: pisSuccess,
-    isError: pisError,
-  } = usePostProjectSearchDataQuery(searchInputData);
-
   const { data, isSuccess } = usePostSearchDataQuery({
     practice_id: sharedState,
   });
@@ -113,13 +92,6 @@ const ConservationPracticeContainer = ({
       dispatch(enablePdfGenState());
     }
   };
-  useEffect(() => {
-    const tempData = [
-      { title: 'Conservation Innovation Grants', data: pdata },
-      { title: 'Landscape Conservation Initiatives', data: initiativesList },
-    ];
-    setProjectsInitiativesData(tempData);
-  }, [pdata]);
 
   useEffect(() => {
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
@@ -171,14 +143,7 @@ const ConservationPracticeContainer = ({
               {t('associated-projects-initiatives.description')}
             </p>
           </div>
-          <ProjectListGroup
-            error={perror}
-            isError={pisError}
-            isLoading={pisLoading}
-            isSuccess={pisSuccess}
-            isMapDisplayed={false}
-            projectsList={pdata}
-          />
+          <ProjectListGroup isMapDisplayed={false} />
         </>
       );
     }
