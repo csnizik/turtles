@@ -150,3 +150,12 @@ export interface IProjectType {
   description: string;
   map: string;
 }
+
+export interface ILandscapeInitiatives {
+  resource_concern_category_id?: number | null;
+  resource_concern_id?: number | null;
+  practice_category_id?: number | null;
+  practice_id?: number | null;
+  state_county_code?: string | null;
+  land_use_list?: string | null;
+}

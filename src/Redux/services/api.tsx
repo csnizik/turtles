@@ -14,6 +14,7 @@ import {
   IRCRequestBody,
   IAssociatedPracticeList,
   IProjectType,
+  ILandscapeInitiatives,
 } from '../../common/types';
 
 export const api = createApi({
@@ -67,6 +68,17 @@ export const api = createApi({
         body: data,
       }),
     }),
+    //!Post request for Landscape Initiatives
+    postLandscapeInitiatives: builder.query<
+      ILandscapeInitiatives[],
+      ILandscapeInitiatives
+    >({
+      query: (data) => ({
+        url: '/landscapeInitiatives',
+        method: 'POST',
+        body: data,
+      }),
+    }),
     getPracticeVideoLink: builder.query<IPracticeVideo[], void>({
       query: (practiceId) => `/video/${practiceId}`,
     }),
@@ -112,4 +124,5 @@ export const {
   useGetAssociatedPracticeQuery,
   useGetProjectTypesQuery,
   useGetPaymentScheduleLinksQuery,
+  usePostLandscapeInitiativesQuery,
 } = api;
