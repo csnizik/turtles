@@ -1,6 +1,4 @@
 import { cleanup, render, screen } from '../../common/test-utils/test_utils';
-import { useAppDispatch } from '../../Redux/hooks/hooks';
-import { setSearch } from '../../Redux/Slice/practiceSlice';
 import ProjectListGroup from './ProjectListGroup';
 
 afterEach(() => {
