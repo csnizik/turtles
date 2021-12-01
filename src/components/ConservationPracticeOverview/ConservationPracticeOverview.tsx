@@ -16,10 +16,7 @@ const ConservationPracticeOverview = ({
         <section className='practice-box'>
           <ul className='list-document'>
             <div key={data.practiceId} className='full-component'>
-              <img
-                alt='Practice'
-                src={`data:image/png;base64,${data.practiceImage}`}
-              />
+              <img alt='' src={`data:image/png;base64,${data.practiceImage}`} />
               <div className='overview' data-testid='overview-container'>
                 <h4>{`${data.practiceName} (${data.practiceCode})`}</h4>
                 <p>{data.practiceOverview}</p>
