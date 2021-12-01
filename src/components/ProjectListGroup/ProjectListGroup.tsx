@@ -24,25 +24,19 @@ import {
 interface IProjectListProps {
   isMapDisplayed: boolean;
   selectedStateName?: string;
-  testData?: any;
 }
 
 const ProjectListGroup = ({
   isMapDisplayed,
   selectedStateName,
-  testData,
 }: IProjectListProps) => {
-  let searchInputData;
-  if (testData) {
-    searchInputData = testData;
-  } else {
-    searchInputData = useAppSelector(
-      (state) => state.practiceSlice?.searchInput
-    );
-  }
+  let searchInputData = useAppSelector(
+    (state) => state?.practiceSlice?.searchInput
+  );
   if (
-    searchInputData.state_county_code === '00' ||
-    searchInputData.state_county_code === '00000'
+    searchInputData &&
+    (searchInputData.state_county_code === '00' ||
+      searchInputData.state_county_code === '00000')
   ) {
     searchInputData = { ...searchInputData };
     delete searchInputData.state_county_code;
@@ -54,7 +48,6 @@ const ProjectListGroup = ({
     isSuccess: pisSuccess,
     isError: pisError,
   } = usePostProjectSearchDataQuery(searchInputData);
-
   const {
     data: initiativesList,
     error: lerror,
@@ -227,6 +220,7 @@ const ProjectListGroup = ({
                         owner={initiative.initiativeOwner}
                         statesInvolved={initiative.statesInvolved}
                         year={initiative.initiativeYear}
+                        link={initiative.lci_page_link}
                       />
                     </div>
                   );
@@ -244,5 +238,4 @@ export default ProjectListGroup;
 
 ProjectListGroup.defaultProps = {
   selectedStateName: '',
-  testData: {},
 };

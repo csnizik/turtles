@@ -14,6 +14,8 @@ import {
   projectListGroups,
   projectPurposes,
 } from './constants';
+import { useAppDispatch } from '../../Redux/hooks/hooks';
+import { setSearch } from '../../Redux/Slice/practiceSlice';
 
 interface IProjectTypeCard {
   id: number;
@@ -30,6 +32,7 @@ interface IProjectListGroup {
 }
 
 const ProjectsContainer = () => {
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const [toggleProjectView, setToggleProjectView] = useState(false);
   const [selectedProjectCard, setSelectedProjectCard] = useState(-1);
@@ -47,7 +50,17 @@ const ProjectsContainer = () => {
     });
 
   const selectedStateName = selectedState?.stateNameDisplay;
-
+  let searchInputData;
+  if (selectedState) {
+    searchInputData = {
+      state_county_code: selectedState.stateCode,
+    };
+  } else {
+    searchInputData = {
+      state_county_code: '00',
+    };
+  }
+  dispatch(setSearch(searchInputData));
   const handleSelectLandscapeInitiative = (id: number) => {
     setSelectedLandscapeInitiative(id);
   };

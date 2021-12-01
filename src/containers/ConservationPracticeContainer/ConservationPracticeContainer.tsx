@@ -19,7 +19,10 @@ import {
   enablePdfGenState,
 } from '../../Redux/Slice/pdfGenSlice';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
-import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
+import {
+  setPracticeCategory,
+  setSearch,
+} from '../../Redux/Slice/practiceSlice';
 import { currentState } from '../../Redux/Slice/stateSlice';
 import ProjectListGroup from '../../components/ProjectListGroup';
 
@@ -77,7 +80,7 @@ const ConservationPracticeContainer = ({
     searchInputData = { ...searchInputData };
     delete searchInputData.state_county_code;
   }
-
+  dispatch(setSearch(searchInputData));
   const {
     data: pdata,
     error: perror,
