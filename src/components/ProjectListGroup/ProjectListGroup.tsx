@@ -24,16 +24,22 @@ import {
 interface IProjectListProps {
   isMapDisplayed: boolean;
   selectedStateName?: string;
+  testData?: any;
 }
 
-//Initiatives constant to be replaced by backend data
 const ProjectListGroup = ({
   isMapDisplayed,
   selectedStateName,
+  testData,
 }: IProjectListProps) => {
-  let searchInputData = useAppSelector(
-    (state) => state.practiceSlice?.searchInput
-  );
+  let searchInputData;
+  if (testData) {
+    searchInputData = testData;
+  } else {
+    searchInputData = useAppSelector(
+      (state) => state.practiceSlice?.searchInput
+    );
+  }
   if (
     searchInputData.state_county_code === '00' ||
     searchInputData.state_county_code === '00000'
@@ -238,4 +244,5 @@ export default ProjectListGroup;
 
 ProjectListGroup.defaultProps = {
   selectedStateName: '',
+  testData: {},
 };

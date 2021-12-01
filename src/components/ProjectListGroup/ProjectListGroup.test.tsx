@@ -1,4 +1,6 @@
 import { cleanup, render, screen } from '../../common/test-utils/test_utils';
+import { useAppDispatch } from '../../Redux/hooks/hooks';
+import { setSearch } from '../../Redux/Slice/practiceSlice';
 import ProjectListGroup from './ProjectListGroup';
 
 afterEach(() => {
@@ -6,16 +8,15 @@ afterEach(() => {
 });
 
 describe('Verify ProductListGroup is rendered correctly', () => {
+  const testData = {
+    state_county_code: '08',
+  };
   beforeEach(() => {
     render(
       <ProjectListGroup
-        error={null}
-        isError={false}
-        isLoading={false}
-        isSuccess={true}
         isMapDisplayed={false}
-        projectsList={[]}
-        selectedStateName={''}
+        selectedStateName=''
+        testData={testData}
       />
     );
   });
