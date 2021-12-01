@@ -5,10 +5,7 @@ import { ListGroup, ListGroupItem } from 'reactstrap';
 import MapContainer from '../MapContainer';
 import ProjectListGroup from '../../components/ProjectListGroup';
 import ProjectTypeSection from '../../components/ProjectTypeSection';
-import {
-  useGetStateListQuery,
-  usePostProjectSearchDataQuery,
-} from '../../Redux/services/api';
+import { useGetStateListQuery } from '../../Redux/services/api';
 import './project-container.scss';
 
 import {
@@ -40,18 +37,6 @@ const ProjectsContainer = () => {
     useState(-1);
   const [selectedLocation, setSelectedLocation] = useState('');
   const stateStatus: any = useGetStateListQuery();
-  let searchInput = { state_county_code: selectedLocation || null };
-
-  if (
-    !selectedLocation ||
-    selectedLocation === '00' ||
-    selectedLocation === '00000'
-  ) {
-    searchInput = { ...searchInput, state_county_code: null };
-  }
-
-  const { data, error, isLoading, isSuccess, isError } =
-    usePostProjectSearchDataQuery(searchInput);
 
   const selectedState =
     selectedLocation &&
@@ -157,12 +142,7 @@ const ProjectsContainer = () => {
             </div>
 
             <ProjectListGroup
-              error={error}
-              isError={isError}
-              isLoading={isLoading}
-              isSuccess={isSuccess}
               isMapDisplayed
-              projectsList={data}
               selectedStateName={selectedStateName}
             />
           </>

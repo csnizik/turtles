@@ -11,31 +11,51 @@ import {
   NavLink,
 } from 'reactstrap';
 import ProjectListItem from './ProjectListItem';
-import { projectTabs, initiativesList } from './constants';
+import { projectTabs } from './constants';
 import './project-list-group.scss';
 import Pagination from '../Pagination';
 import Spinner from '../Spinner/Spinner';
+import { useAppSelector } from '../../Redux/hooks/hooks';
+import {
+  usePostLandscapeInitiativesQuery,
+  usePostProjectSearchDataQuery,
+} from '../../Redux/services/api';
 
 interface IProjectListProps {
   isMapDisplayed: boolean;
-  projectsList: any;
-  error: any;
-  isLoading: boolean;
-  isSuccess: boolean;
-  isError: boolean;
-  selectedStateName?: any;
+  selectedStateName?: string;
 }
 
 //Initiatives constant to be replaced by backend data
 const ProjectListGroup = ({
-  error,
-  isLoading,
-  isError,
   isMapDisplayed,
-  isSuccess,
-  projectsList,
   selectedStateName,
 }: IProjectListProps) => {
+  let searchInputData = useAppSelector(
+    (state) => state.practiceSlice?.searchInput
+  );
+  if (
+    searchInputData.state_county_code === '00' ||
+    searchInputData.state_county_code === '00000'
+  ) {
+    searchInputData = { ...searchInputData };
+    delete searchInputData.state_county_code;
+  }
+  const {
+    data: projectsList,
+    error: perror,
+    isLoading: pisLoading,
+    isSuccess: pisSuccess,
+    isError: pisError,
+  } = usePostProjectSearchDataQuery(searchInputData);
+
+  const {
+    data: initiativesList,
+    error: lerror,
+    isLoading: lisLoading,
+    isSuccess: lisSuccess,
+    isError: lisError,
+  } = usePostLandscapeInitiativesQuery(searchInputData);
   const { t } = useTranslation();
 
   const [activeTab, setActiveTab] = useState(1);
@@ -44,7 +64,7 @@ const ProjectListGroup = ({
   const [currentIPage, setCurrentIPage] = useState(1);
 
   const grantsLength = projectsList?.length;
-  const initiativesLength = initiativesList.length;
+  const initiativesLength = initiativesList?.length;
 
   const toggleProjectsTab = (tab: number) => {
     if (activeTab !== tab) setActiveTab(tab);
@@ -59,11 +79,14 @@ const ProjectListGroup = ({
 
   const indexOfLastICard = currentIPage * cardsPerPage;
   const indexOfFirstICard = indexOfLastICard - cardsPerPage;
-  const currentICards = initiativesList.slice(
+  const currentICards = initiativesList?.slice(
     indexOfFirstICard,
     indexOfLastICard
   );
-  const indexOfLastIPage = Math.ceil(initiativesList.length / cardsPerPage);
+  let indexOfLastIPage = -1;
+  if (initiativesList) {
+    indexOfLastIPage = Math.ceil(initiativesList.length / cardsPerPage);
+  }
   const paginate = (pageNumber) => {
     if (pageNumber > 0 && pageNumber <= indexOfLastPage)
       setCurrentPage(pageNumber);
@@ -78,7 +101,7 @@ const ProjectListGroup = ({
         return `${tab.tabTitle} (${grantsLength})`;
       }
       if (tab.id === 2) {
-        return `${tab.tabTitle} (${initiativesList.length})`;
+        return `${tab.tabTitle} (${initiativesLength})`;
       }
       return tab.tabTitle;
     };
@@ -106,7 +129,11 @@ const ProjectListGroup = ({
     );
   };
   return (
-    <div className='projects-list-group' data-testid='projects-list-group' id='ProjectsInitiatives'>
+    <div
+      className='projects-list-group'
+      data-testid='projects-list-group'
+      id='ProjectsInitiatives'
+    >
       {!isMapDisplayed && renderProjectTypeTabs()}
       <TabContent activeTab={activeTab}>
         <TabPane tabId={1}>
@@ -141,9 +168,9 @@ const ProjectListGroup = ({
 
           <Row>
             <Col sm='12' className='p-3'>
-              {isLoading && <Spinner />}
-              {isError && error}
-              {isSuccess && projectsList.length ? (
+              {pisLoading && <Spinner />}
+              {pisError && perror}
+              {pisSuccess && grantsLength ? (
                 <ul className='list-group projects-data'>
                   {currentCards?.map((project: any) => {
                     return (
@@ -183,14 +210,14 @@ const ProjectListGroup = ({
           <Row>
             <Col sm='12' className='p-3'>
               <ul className='list-group projects-data'>
-                {currentICards.map((initiative: any) => {
+                {currentICards?.map((initiative: any) => {
                   const initiativeID = initiative.initiativeId;
                   return (
                     <div key={initiativeID}>
                       <ProjectListItem
-                        id={initiative.initiativeId}
-                        description={initiative.initiativeDescription}
-                        title={initiative.initiativeTitle}
+                        id={initiative.lci_id}
+                        description={initiative.lci_description}
+                        title={initiative.lci_name}
                         owner={initiative.initiativeOwner}
                         statesInvolved={initiative.statesInvolved}
                         year={initiative.initiativeYear}
