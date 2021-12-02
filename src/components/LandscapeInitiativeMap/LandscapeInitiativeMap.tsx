@@ -1,8 +1,6 @@
 import { useEffect, useRef } from 'react';
 import MapView from '@arcgis/core/views/MapView';
 import WebMap from '@arcgis/core/WebMap';
-import Graphic from '@arcgis/core/Graphic';
-import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
 import Legend from '@arcgis/core/widgets/Legend';
 import Layer from '@arcgis/core/layers/Layer';
 import '@arcgis/core/assets/esri/themes/light/main.css';
@@ -56,12 +54,12 @@ const LandscapeInitiativeMap = () => {
           const workingLandsForWildlifeLayerInfos: Array<any> = [];
           allFeatureLayers.forEach((layer: Layer) => {
             workingLandsForWildlifeLayerInfos.push({
-              layer: layer,
+              layer,
               title: layer.title,
             });
           });
 
-          let legend: Legend = new Legend({
+          const legend: Legend = new Legend({
             style: 'classic',
             view: mapRef.current.view,
             layerInfos: workingLandsForWildlifeLayerInfos,
