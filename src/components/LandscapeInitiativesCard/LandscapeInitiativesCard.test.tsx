@@ -7,9 +7,7 @@ afterEach(() => {
 
 describe('Landscape Initiatives Card is rendered correctly', () => {
   const lci_name = 'Golden-Winged Warbler';
-  const lci_description = [
-    'The golden-winged warbler is a nationally identified target species of the Working Lands for Wildlife (WLFW) partnership, a collaborative approach to conserve habitat on working lands. ',
-  ];
+  const lci_description = ['Identified target species'];
 
   beforeEach(() => {
     render(
@@ -25,8 +23,10 @@ describe('Landscape Initiatives Card is rendered correctly', () => {
   });
   test('Should display the Card Title', () => {
     expect(screen.getByTestId('subInitiativesTitle')).toBeDefined();
+    expect(screen.getByText('Golden-Winged Warbler')).toBeInTheDocument();
   });
   test('Should display the Card Description', () => {
     expect(screen.getByTestId('subInitiativesDescription')).toBeDefined();
+    expect(screen.getByText('Identified target species')).toBeInTheDocument();
   });
 });
