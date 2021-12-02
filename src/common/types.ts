@@ -113,6 +113,7 @@ export interface IRCRequestBody {
 export interface IRCLandUse {
   landUseId: number;
   landUseName: string;
+  landUseIcon: string;
 }
 
 export interface IRCConcern {
