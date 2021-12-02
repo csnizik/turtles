@@ -5,6 +5,7 @@ import {
 } from './constants';
 import { landscapeInitiativeTypes } from '../../containers/ProjectsContainer/constants';
 import './project-type.scss';
+import LandscapeMapContainer from '../LandscapeInitiativeMap/LandscapeMapContainer';
 
 interface IProjectTypeProps {
   selectedLandscapeInitiative: number;
@@ -53,9 +54,7 @@ const ProjectTypeSection = ({
       ).find((initiative) => initiative.id === selectedLandscapeInitiative);
       return (
         <div className='landscape-intiatives margin-top-2'>
-          <div className='landscape-img-placeholder margin-bottom-3'>
-            <h3 className='padding-3'>Placeholder for webmap or image</h3>
-          </div>
+          <LandscapeMapContainer />
           <a
             aria-label='Link to NRCS website for landscape initiatives'
             href={NRCS_CONSERVATION_INITIATIVES_URL}
