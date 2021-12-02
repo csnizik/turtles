@@ -45,29 +45,31 @@ const LandscapeInitiativeMap = () => {
 
   useEffect(() => {
     mapRef.current.view.when(() => {
-      console.log('Layers: ', mapRef.current.map.layers);
-      if (mapRef.current.map.allLayers.length) {
-        const allFeatureLayers: any = (
-          mapRef.current.map.allLayers as any
-        ).items.filter((layer: Layer) => {
-          return layer.type === 'feature';
-        });
-
-        const workingLandsForWildlifeLayerInfos: Array<any> = [];
-        allFeatureLayers.forEach((layer: Layer) => {
-          workingLandsForWildlifeLayerInfos.push({
-            layer: layer,
-            title: layer.title,
+      mapRef.current.map.when(() => {
+        if (mapRef.current.map.allLayers.length) {
+          const allFeatureLayers: Array<any> = (
+            mapRef.current.map.allLayers as any
+          ).items.filter((layer: Layer) => {
+            return layer.type === 'feature';
           });
-        });
 
-        let legend: Legend = new Legend({
-          view: mapRef.current.view,
-          layerInfos: workingLandsForWildlifeLayerInfos,
-        });
+          const workingLandsForWildlifeLayerInfos: Array<any> = [];
+          allFeatureLayers.forEach((layer: Layer) => {
+            workingLandsForWildlifeLayerInfos.push({
+              layer: layer,
+              title: layer.title,
+            });
+          });
 
-        mapRef.current.view.ui.add(legend, 'bottom-right');
-      }
+          let legend: Legend = new Legend({
+            style: 'classic',
+            view: mapRef.current.view,
+            layerInfos: workingLandsForWildlifeLayerInfos,
+          });
+
+          mapRef.current.view.ui.add(legend, 'bottom-right');
+        }
+      });
     });
   }, []);
 
