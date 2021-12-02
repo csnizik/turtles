@@ -11,7 +11,7 @@ import {
   NavLink,
 } from 'reactstrap';
 import ProjectListItem from './ProjectListItem';
-import { projectTabs } from './constants';
+import projectTabs from './constants';
 import './project-list-group.scss';
 import Pagination from '../Pagination';
 import Spinner from '../Spinner/Spinner';
@@ -49,13 +49,8 @@ const ProjectListGroup = ({
     isError: pisError,
   } = usePostProjectSearchDataQuery(searchInputData);
 
-  const {
-    data: initiativesList,
-    error: lerror,
-    isLoading: lisLoading,
-    isSuccess: lisSuccess,
-    isError: lisError,
-  } = usePostLandscapeInitiativesQuery(searchInputData);
+  const { data: initiativesList } =
+    usePostLandscapeInitiativesQuery(searchInputData);
   const { t } = useTranslation();
 
   const [activeTab, setActiveTab] = useState(1);

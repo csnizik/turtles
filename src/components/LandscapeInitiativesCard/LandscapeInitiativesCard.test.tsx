@@ -21,12 +21,12 @@ describe('Landscape Initiatives Card is rendered correctly', () => {
   });
 
   test('Should display the Card Component', () => {
-    expect(screen.getByTestId('card')).toBeDefined();
+    expect(screen.getByTestId('subInitiativesCard')).toBeDefined();
   });
   test('Should display the Card Title', () => {
-    expect(screen.getByTestId('title')).toBeDefined();
+    expect(screen.getByTestId('subInitiativesTitle')).toBeDefined();
   });
   test('Should display the Card Description', () => {
-    expect(screen.getByTestId('description')).toBeDefined();
+    expect(screen.getByTestId('subInitiativesDescription')).toBeDefined();
   });
 });

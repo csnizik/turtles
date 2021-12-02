@@ -36,7 +36,7 @@ const ProjectsContainer = () => {
   const [selectedLocation, setSelectedLocation] = useState('');
   const stateStatus: any = useGetStateListQuery();
   const stateCode = useAppSelector((state) => state?.stateSlice?.stateCode);
-  let searchInput = { state_county_code: selectedLocation || null };
+  const searchInput = { state_county_code: selectedLocation || null };
   let searchLandscapeInitiatives = { state_county_code: stateCode || null };
 
   if (stateCode !== '00') {

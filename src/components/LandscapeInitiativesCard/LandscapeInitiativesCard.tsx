@@ -7,13 +7,19 @@ interface ILandscapeData {
 
 const LandscapeInitiativesCard = ({ title, description }: ILandscapeData) => {
   return (
-    <div className='landscape-card' data-testid='card'>
+    <div className='landscape-card' data-testid='subInitiativesCard'>
       <div className='top-title'>
-        <div className='related-initiatives-name' data-testid='title'>
+        <div
+          className='related-initiatives-name'
+          data-testid='subInitiativesTitle'
+        >
           <h4>{title}</h4>
         </div>
       </div>
-      <div className='related-initiatives-desc' data-testid='description'>
+      <div
+        className='related-initiatives-desc'
+        data-testid='subInitiativesDescription'
+      >
         {description.map((paragraph: any, id: number) => {
           return <p key={id}>{paragraph}</p>;
         })}
