@@ -35,8 +35,8 @@ const ProjectListGroup = ({
     (state) => state.practiceSlice?.searchInput
   );
   if (
-    searchInputData.state_county_code === '00' ||
-    searchInputData.state_county_code === '00000'
+    searchInputData?.state_county_code === '00' ||
+    searchInputData?.state_county_code === '00000'
   ) {
     searchInputData = { ...searchInputData };
     delete searchInputData.state_county_code;
@@ -49,13 +49,8 @@ const ProjectListGroup = ({
     isError: pisError,
   } = usePostProjectSearchDataQuery(searchInputData);
 
-  const {
-    data: initiativesList,
-    error: lerror,
-    isLoading: lisLoading,
-    isSuccess: lisSuccess,
-    isError: lisError,
-  } = usePostLandscapeInitiativesQuery(searchInputData);
+  const { data: initiativesList } =
+    usePostLandscapeInitiativesQuery(searchInputData);
   const { t } = useTranslation();
 
   const [activeTab, setActiveTab] = useState(1);
