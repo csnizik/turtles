@@ -33,10 +33,11 @@ const ProjectListGroup = ({
   let searchInputData = useAppSelector(
     (state) => state?.practiceSlice?.searchInput
   );
+
   if (
     searchInputData &&
-    (searchInputData.state_county_code === '00' ||
-      searchInputData.state_county_code === '00000')
+    (searchInputData?.state_county_code === '00' ||
+      searchInputData?.state_county_code === '00000')
   ) {
     searchInputData = { ...searchInputData };
     delete searchInputData.state_county_code;
@@ -55,6 +56,7 @@ const ProjectListGroup = ({
     isSuccess: lisSuccess,
     isError: lisError,
   } = usePostLandscapeInitiativesQuery(searchInputData);
+
   const { t } = useTranslation();
 
   const [activeTab, setActiveTab] = useState(1);
