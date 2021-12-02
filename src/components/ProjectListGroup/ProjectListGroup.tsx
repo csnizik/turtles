@@ -11,7 +11,7 @@ import {
   NavLink,
 } from 'reactstrap';
 import ProjectListItem from './ProjectListItem';
-import projectTabs from './constants';
+import { projectTabs } from './constants';
 import './project-list-group.scss';
 import Pagination from '../Pagination';
 import Spinner from '../Spinner/Spinner';
