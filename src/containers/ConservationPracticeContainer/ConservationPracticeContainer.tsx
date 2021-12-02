@@ -22,6 +22,7 @@ import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
 import { currentState } from '../../Redux/Slice/stateSlice';
 import ProjectListGroup from '../../components/ProjectListGroup';
+import ExceptionMessage from '../../components/ExceptionMessage/ExceptionMessage';
 
 const defaultPracticeViews = {
   allPractices: false,
@@ -110,6 +111,10 @@ const ConservationPracticeContainer = ({
     currentPracticeCategory.practices.find(
       (practice: any) => practice.practiceId === currentSpecificPractice
     );
+  
+  const exceptionTitle = `${stateInfo?.stateNameDisplay} has no ${currentPractice?.practiceName} projects or initiatives`;
+  const exceptionMessage = `The projects below represent ${currentPractice?.practiceName} projects across the United States.`;
+  
   const handleCreateReport = () => {
     if (openModal) {
       setOpenModal(false);
@@ -177,6 +182,12 @@ const ConservationPracticeContainer = ({
             <p className='intro-desc'>
               {t('associated-projects-initiatives.description')}
             </p>
+            <div className='margin-top-30'>
+              <ExceptionMessage
+                exceptionTitle={exceptionTitle}
+                exceptionMessage={exceptionMessage}
+              />
+            </div>
           </div>
           <ProjectListGroup isMapDisplayed={false} />
         </>

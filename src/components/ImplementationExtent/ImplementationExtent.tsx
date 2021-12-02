@@ -4,6 +4,7 @@ import { useGetPaymentScheduleLinksQuery } from '../../Redux/services/api';
 import Spinner from '../Spinner/Spinner';
 import './implementation-extent.scss';
 import image from './image/newLinkIcon.svg';
+import ExceptionMessage from '../ExceptionMessage';
 
 interface IImplementationExtentProps {
   data: any;
@@ -17,16 +18,12 @@ const ImplementationExtent = ({
   data,
   isSuccess,
 }: IImplementationExtentProps) => {
-  const getHeaderText = () => {
-    const practiceName = (data && data.practiceName) || '';
-    if (practiceName) {
-      return `Support for ${practiceName} in the U.S`;
-    }
-    return practiceName;
-  };
-
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
 
+  const practiceName = (data && data.practiceName) || '';
+  const exceptionTitle = `${stateInfo?.stateNameDisplay} has not adopted ${practiceName}`;
+  const exceptionMessage = 'The charts below reflect obligations and acres implemented in the entire United States.';
+  
   const results = useGetPaymentScheduleLinksQuery(stateInfo?.stateCode);
   const data2 = results.data || [];
   const error2 = results.error;
@@ -34,6 +31,13 @@ const ImplementationExtent = ({
   const isSuccess2 = results.isSuccess;
   const isError2 = results.isError;
   const scheduleLink: any = data2[0]?.paymentLink || '';
+
+  const getHeaderText = () => {
+    if (practiceName) {
+      return `Support for ${practiceName} in ${stateInfo?.stateNameDisplay}`;
+    }
+    return practiceName;
+  };
 
   const renderObligations = () => {
     return (
@@ -97,6 +101,12 @@ const ImplementationExtent = ({
     <div className='ie-parent' id='SupportPractice'>
       <h2>{getHeaderText()}</h2>
       <h4>{intro}</h4>
+      <div className='exception-message-section'>
+        <ExceptionMessage
+          exceptionTitle={exceptionTitle}
+          exceptionMessage={exceptionMessage}
+        />
+      </div>
       <div className='extent-content'>
         {renderObligations()}
         {renderAcresImplemented()}

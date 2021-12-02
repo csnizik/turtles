@@ -1,24 +1,21 @@
 import './exception-message.scss';
 
 interface IExceptionOptions {
-  message1: string;
-  message2: string;
+  exceptionTitle: string;
+  exceptionMessage: string;
 }
 
-const ExceptionMessage = ({ message1, message2 }: IExceptionOptions) => {
+const ExceptionMessage = ({ exceptionTitle, exceptionMessage }: IExceptionOptions) => {
   return (
-    <div className='exception-msg-container'>
-      <div className='exception-messages'>
-        <div className='circle-msg'>
-          <i
-            id='exception-circle'
-            className='fas fa-info-circle'
-            aria-hidden='true'
-          />
-          <div className='exception-msg1'>{message1}</div>
-        </div>
-
-        <div className='exception-msg2'>{message2}</div>
+    <div className='exception-content-container'>
+      <i
+        id='exception-circle'
+        className='fas fa-info-circle'
+        aria-hidden='true'
+      />
+      <div className='exception-msg-container'>
+        <p className='exception-msg1'>{exceptionTitle}</p>
+        <p className='exception-msg2'>{exceptionMessage}</p>
       </div>
     </div>
   );
