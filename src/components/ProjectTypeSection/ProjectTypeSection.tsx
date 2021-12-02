@@ -91,7 +91,7 @@ const ProjectTypeSection = ({
                     }
                   )}
               {foundInitiative?.lci_id === 10 && selectedLandscapeInitiative > 0
-                ? subInitiative?.map((item) => (
+                ? subInitiative?.map((item: any) => (
                     /* eslint-disable */
                     <LandscapeInitiativesCard
                       title={item.lci_name}

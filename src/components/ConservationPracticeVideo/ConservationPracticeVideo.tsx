@@ -6,15 +6,15 @@ import { useAppSelector } from '../../Redux/hooks/hooks';
 const ConservationPracticeVideo = ({ selectedPracticeId }: any) => {
   const { data, error, isLoading, isSuccess, isError } =
     useGetPracticeVideoLinkQuery(selectedPracticeId);
-
   const fromPdfReport = useAppSelector(
     (state) => state?.pdfGenSlice?.enablePdfGen
   );
+
   return (
     <section className='media-box' data-testid='video-box-container'>
       {isLoading && <Spinner />}
       {isError && error}
-      {isSuccess && data && (
+      {isSuccess && data && data[0]?.videoLink?.length > 0 && (
         <div className={fromPdfReport ? 'pdf-content' : 'content'}>
           <h2>{data[0].videoName}</h2>
           <div className='full-component'>

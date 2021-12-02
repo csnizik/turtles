@@ -1,12 +1,8 @@
 import './landscape-initiatives-card.scss';
 
-interface text {
-  description: string;
-}
-
 interface ILandscapeData {
   title: string;
-  description: Array<text>;
+  description: Array<string>;
 }
 
 const LandscapeInitiativesCard = ({ title, description }: ILandscapeData) => {
@@ -18,8 +14,8 @@ const LandscapeInitiativesCard = ({ title, description }: ILandscapeData) => {
         </div>
       </div>
       <div className='related-initiatives-desc' data-testid='description'>
-        {description.map((paragraph: text) => {
-          return <p>{paragraph}</p>;
+        {description.map((paragraph: any, id: number) => {
+          return <p key={id}>{paragraph}</p>;
         })}
       </div>
     </div>

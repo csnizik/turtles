@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   useGetStateListQuery,
+  usePostLandscapeInitiativesQuery,
   usePostProjectSearchDataQuery,
   usePostSearchDataQuery,
 } from '../../Redux/services/api';
@@ -21,7 +22,6 @@ import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
 import { currentState } from '../../Redux/Slice/stateSlice';
 import ProjectListGroup from '../../components/ProjectListGroup';
-import { initiativesList } from '../../components/ProjectListGroup/constants';
 
 const defaultPracticeViews = {
   allPractices: false,
@@ -85,6 +85,13 @@ const ConservationPracticeContainer = ({
     isSuccess: pisSuccess,
     isError: pisError,
   } = usePostProjectSearchDataQuery(searchInputData);
+  const {
+    data: ldata,
+    error: lerror,
+    isLoading: lisLoading,
+    isSuccess: lisSuccess,
+    isError: lisError,
+  } = usePostLandscapeInitiativesQuery(searchInputData);
 
   const { data, isSuccess } = usePostSearchDataQuery({
     practice_id: sharedState,
@@ -116,10 +123,10 @@ const ConservationPracticeContainer = ({
   useEffect(() => {
     const tempData = [
       { title: 'Conservation Innovation Grants', data: pdata },
-      { title: 'Landscape Conservation Initiatives', data: initiativesList },
+      { title: 'Landscape Conservation Initiatives', data: ldata },
     ];
     setProjectsInitiativesData(tempData);
-  }, [pdata]);
+  }, [pdata, ldata]);
 
   useEffect(() => {
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
@@ -171,14 +178,7 @@ const ConservationPracticeContainer = ({
               {t('associated-projects-initiatives.description')}
             </p>
           </div>
-          <ProjectListGroup
-            error={perror}
-            isError={pisError}
-            isLoading={pisLoading}
-            isSuccess={pisSuccess}
-            isMapDisplayed={false}
-            projectsList={pdata}
-          />
+          <ProjectListGroup isMapDisplayed={false} />
         </>
       );
     }

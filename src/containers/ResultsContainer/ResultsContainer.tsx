@@ -1,6 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { usePostProjectSearchDataQuery } from '../../Redux/services/api';
-import { useAppSelector } from '../../Redux/hooks/hooks';
 import Accordion from '../../components/ResultAccordion';
 import ProjectListGroup from '../../components/ProjectListGroup';
 import Filters from '../../components/Filter';
@@ -8,18 +6,6 @@ import './results.scss';
 
 const ResultsContainer = () => {
   const { t } = useTranslation();
-  let searchInputData = useAppSelector(
-    (state) => state.practiceSlice?.searchInput
-  );
-  if (
-    searchInputData.state_county_code === '00' ||
-    searchInputData.state_county_code === '00000'
-  ) {
-    searchInputData = { ...searchInputData };
-    delete searchInputData.state_county_code;
-  }
-  const { data, error, isLoading, isSuccess, isError } =
-    usePostProjectSearchDataQuery(searchInputData);
 
   return (
     <div className='results-page'>
@@ -34,14 +20,7 @@ const ResultsContainer = () => {
           {t('search-results-page.project-initiatives')}
         </h4>
       </div>
-      <ProjectListGroup
-        error={error}
-        isError={isError}
-        isLoading={isLoading}
-        isSuccess={isSuccess}
-        isMapDisplayed={false}
-        projectsList={data}
-      />
+      <ProjectListGroup isMapDisplayed={false} />
     </div>
   );
 };

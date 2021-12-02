@@ -89,7 +89,7 @@ const PracticeBreadcrumbs = ({
                 type='button'
                 className='usa-breadcrumb__link btn btn-link'
               >
-                <span>{currentPracticeCategory.practiceCategoryName}</span>
+                <span>{currentPracticeCategory?.practiceCategoryName}</span>
               </button>
             </li>
             <li className='usa-breadcrumb__list-item'>
@@ -113,7 +113,7 @@ const PracticeBreadcrumbs = ({
             onKeyUp={() => handleNavigateBreadcrumb(1)}
             role='presentation'
           >
-            <span>{currentPracticeCategory.practiceCategoryName}</span>
+            <span>{currentPracticeCategory?.practiceCategoryName}</span>
           </li>
         )}
       </ol>

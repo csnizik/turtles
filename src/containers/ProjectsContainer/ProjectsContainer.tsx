@@ -8,7 +8,6 @@ import ProjectListGroup from '../../components/ProjectListGroup';
 import ProjectTypeSection from '../../components/ProjectTypeSection';
 import {
   useGetStateListQuery,
-  usePostProjectSearchDataQuery,
   usePostLandscapeInitiativesQuery,
 } from '../../Redux/services/api';
 import './project-container.scss';
@@ -40,14 +39,6 @@ const ProjectsContainer = () => {
   let searchInput = { state_county_code: selectedLocation || null };
   let searchLandscapeInitiatives = { state_county_code: stateCode || null };
 
-  if (
-    !selectedLocation ||
-    selectedLocation === '00' ||
-    selectedLocation === '00000'
-  ) {
-    searchInput = { ...searchInput, state_county_code: null };
-  }
-
   if (stateCode !== '00') {
     searchLandscapeInitiatives = {
       ...searchInput,
@@ -63,9 +54,6 @@ const ProjectsContainer = () => {
   const landscapeInitiativesData = usePostLandscapeInitiativesQuery(
     searchLandscapeInitiatives
   );
-
-  const { data, error, isLoading, isSuccess, isError } =
-    usePostProjectSearchDataQuery(searchInput);
 
   const selectedState =
     selectedLocation &&
@@ -173,12 +161,7 @@ const ProjectsContainer = () => {
             </div>
 
             <ProjectListGroup
-              error={error}
-              isError={isError}
-              isLoading={isLoading}
-              isSuccess={isSuccess}
               isMapDisplayed
-              projectsList={data}
               selectedStateName={selectedStateName}
             />
           </>
