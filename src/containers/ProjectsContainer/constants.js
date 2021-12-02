@@ -45,8 +45,3 @@ export const projectListGroups = [
   { id: 2, title: 'Landscape Conservation Initiatives' },
 ];
 
-export const landscapeInitiativeTypes = [
-  { id: 10, title: 'National Water Quality Initiative' },
-  { id: 11, title: 'WaterSMART' },
-  { id: 12, title: 'Working Lands for Wildlife' },
-];

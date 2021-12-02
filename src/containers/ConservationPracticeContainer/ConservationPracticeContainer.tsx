@@ -79,20 +79,8 @@ const ConservationPracticeContainer = ({
     delete searchInputData.state_county_code;
   }
 
-  const {
-    data: pdata,
-    error: perror,
-    isLoading: pisLoading,
-    isSuccess: pisSuccess,
-    isError: pisError,
-  } = usePostProjectSearchDataQuery(searchInputData);
-  const {
-    data: ldata,
-    error: lerror,
-    isLoading: lisLoading,
-    isSuccess: lisSuccess,
-    isError: lisError,
-  } = usePostLandscapeInitiativesQuery(searchInputData);
+  const { data: pdata } = usePostProjectSearchDataQuery(searchInputData);
+  const { data: ldata } = usePostLandscapeInitiativesQuery(searchInputData);
 
   const { data, isSuccess } = usePostSearchDataQuery({
     practice_id: sharedState,

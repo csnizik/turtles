@@ -2,18 +2,16 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ListGroup, ListGroupItem } from 'reactstrap';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 import MapContainer from '../MapContainer';
 import ProjectListGroup from '../../components/ProjectListGroup';
 import ProjectTypeSection from '../../components/ProjectTypeSection';
-import { useGetStateListQuery } from '../../Redux/services/api';
-import './project-container.scss';
-
 import {
-  landscapeInitiativeTypes,
-  projectCards,
-  projectListGroups,
-  projectPurposes,
-} from './constants';
+  useGetStateListQuery,
+  usePostLandscapeInitiativesQuery,
+} from '../../Redux/services/api';
+import './project-container.scss';
+import { projectCards, projectListGroups, projectPurposes } from './constants';
 
 interface IProjectTypeCard {
   id: number;
@@ -37,6 +35,25 @@ const ProjectsContainer = () => {
     useState(-1);
   const [selectedLocation, setSelectedLocation] = useState('');
   const stateStatus: any = useGetStateListQuery();
+  const stateCode = useAppSelector((state) => state?.stateSlice?.stateCode);
+  const searchInput = { state_county_code: selectedLocation || null };
+  let searchLandscapeInitiatives = { state_county_code: stateCode || null };
+
+  if (stateCode !== '00') {
+    searchLandscapeInitiatives = {
+      ...searchInput,
+      state_county_code: stateCode,
+    };
+  } else {
+    searchLandscapeInitiatives = {
+      ...searchInput,
+      state_county_code: null,
+    };
+  }
+
+  const landscapeInitiativesData = usePostLandscapeInitiativesQuery(
+    searchLandscapeInitiatives
+  );
 
   const selectedState =
     selectedLocation &&
@@ -77,6 +94,7 @@ const ProjectsContainer = () => {
       <ProjectTypeSection
         selectedLandscapeInitiative={selectedLandscapeInitiative}
         projectType={selectedProjectType}
+        landscapeInitiativesData={landscapeInitiativesData}
       />
     );
   };
@@ -108,25 +126,26 @@ const ProjectsContainer = () => {
             </ListGroup>
             {selectedProjectCard === 2 ? (
               <ListGroup className='landscape-initiative-list'>
-                {landscapeInitiativeTypes.map((initiative: any) => {
+                {landscapeInitiativesData?.data?.map((initiative: any) => {
                   const listGroupItemClassNames = classNames(
                     'justify-content-between',
                     {
-                      selected: initiative.id === selectedLandscapeInitiative,
+                      selected:
+                        initiative.lci_id === selectedLandscapeInitiative,
                     }
                   );
-                  return (
+                  return initiative.lci_parent_id === null ? (
                     <ListGroupItem
-                      key={initiative.id}
+                      key={initiative.lci_id}
                       className={listGroupItemClassNames}
                       role='presentation'
                       onClick={() =>
-                        handleSelectLandscapeInitiative(initiative.id)
+                        handleSelectLandscapeInitiative(initiative.lci_id)
                       }
                     >
-                      {initiative.title}
+                      {initiative.lci_name}
                     </ListGroupItem>
-                  );
+                  ) : null;
                 })}
               </ListGroup>
             ) : null}
