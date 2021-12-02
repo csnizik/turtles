@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useGetAssociatedPracticeQuery } from '../../Redux/services/api';
 import './specs.scss';
+import ExceptionMessage from '../ExceptionMessage/ExceptionMessage';
 import { IAssociatedPracticeList } from '../../common/types';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import image from './image/newLinkIcon.svg';
@@ -109,6 +110,12 @@ const SpecificationsAndTools = ({
     >
       <h2>{getHeaderText()}</h2>
       <h4>{intro}</h4>
+      <div className='exception-spacing'>
+        <ExceptionMessage
+          message1='Massachusetts has not adopted Alley Cropping as a practice'
+          message2='The links below reflect specifications and tools for the entire United States'
+        />
+      </div>
       {renderNationalSpecs()}
       {renderAssociatedPractice()}
     </section>
