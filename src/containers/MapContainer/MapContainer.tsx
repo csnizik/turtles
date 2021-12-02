@@ -1,6 +1,8 @@
 import MapComponent from './MapComponent';
 import { VIEW_DIV } from './constants';
 import './map-container.scss';
+import { useAppDispatch } from '../../Redux/hooks/hooks';
+import { setSearch } from '../../Redux/Slice/practiceSlice';
 
 /* eslint-disable react/no-unused-prop-types */
 interface IMapProps {
