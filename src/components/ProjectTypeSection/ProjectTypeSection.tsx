@@ -74,6 +74,7 @@ const ProjectTypeSection = ({
                 NRCS_CONSERVATION_INITIATIVES_URL
               }
               target='_blank'
+              title={foundInitiative?.lci_page_link_text || nrcsLinkText}
               rel='noreferrer'
             >
               {foundInitiative?.lci_page_link_text || nrcsLinkText}{' '}

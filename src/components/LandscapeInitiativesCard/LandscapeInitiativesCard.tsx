@@ -21,6 +21,7 @@ const LandscapeInitiativesCard = ({ title, description }: ILandscapeData) => {
         data-testid='subInitiativesDescription'
       >
         {description.map((paragraph: any, id: number) => {
+          /* eslint-disable */
           return <p key={id}>{paragraph}</p>;
         })}
       </div>
