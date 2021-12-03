@@ -13,6 +13,12 @@
   @media (max-width: $medium-screen) {
     flex: 0 0 90%;
   }
+
+  .top-title {
+    display: flex;
+    align-items: center;
+    margin-top: 1.1875rem;
+  }
 }
 
 .related-initiatives-name {
@@ -30,10 +36,4 @@
   color: $nrcs-dark;
   line-height: 1.625rem;
   margin-top: 1.25rem;
-}
-
-.top-title {
-  display: flex;
-  align-items: center;
-  margin-top: 1.1875rem;
 }
