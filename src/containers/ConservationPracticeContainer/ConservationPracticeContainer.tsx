@@ -19,7 +19,10 @@ import {
   enablePdfGenState,
 } from '../../Redux/Slice/pdfGenSlice';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
-import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
+import {
+  setPracticeCategory,
+  setSearch,
+} from '../../Redux/Slice/practiceSlice';
 import { currentState } from '../../Redux/Slice/stateSlice';
 import ProjectListGroup from '../../components/ProjectListGroup';
 
@@ -77,21 +80,9 @@ const ConservationPracticeContainer = ({
     searchInputData = { ...searchInputData };
     delete searchInputData.state_county_code;
   }
-
-  const {
-    data: pdata,
-    error: perror,
-    isLoading: pisLoading,
-    isSuccess: pisSuccess,
-    isError: pisError,
-  } = usePostProjectSearchDataQuery(searchInputData);
-  const {
-    data: ldata,
-    error: lerror,
-    isLoading: lisLoading,
-    isSuccess: lisSuccess,
-    isError: lisError,
-  } = usePostLandscapeInitiativesQuery(searchInputData);
+  dispatch(setSearch(searchInputData));
+  const { data: pdata } = usePostProjectSearchDataQuery(searchInputData);
+  const { data: ldata } = usePostLandscapeInitiativesQuery(searchInputData);
 
   const { data, isSuccess } = usePostSearchDataQuery({
     practice_id: sharedState,
