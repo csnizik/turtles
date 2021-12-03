@@ -2,10 +2,11 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ListGroup, ListGroupItem } from 'reactstrap';
-import { useAppSelector } from '../../Redux/hooks/hooks';
+import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
 import MapContainer from '../MapContainer';
 import ProjectListGroup from '../../components/ProjectListGroup';
 import ProjectTypeSection from '../../components/ProjectTypeSection';
+import { setSearch } from '../../Redux/Slice/practiceSlice';
 import {
   useGetStateListQuery,
   usePostLandscapeInitiativesQuery,
@@ -28,6 +29,7 @@ interface IProjectListGroup {
 }
 
 const ProjectsContainer = () => {
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const [toggleProjectView, setToggleProjectView] = useState(false);
   const [selectedProjectCard, setSelectedProjectCard] = useState(-1);
@@ -64,7 +66,17 @@ const ProjectsContainer = () => {
     });
 
   const selectedStateName = selectedState?.stateNameDisplay;
-
+  let searchInputData;
+  if (selectedState) {
+    searchInputData = {
+      state_county_code: selectedState.stateCode,
+    };
+  } else {
+    searchInputData = {
+      state_county_code: '00',
+    };
+  }
+  dispatch(setSearch(searchInputData));
   const handleSelectLandscapeInitiative = (id: number) => {
     setSelectedLandscapeInitiative(id);
   };
