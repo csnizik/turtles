@@ -26,17 +26,18 @@ interface IProjectListProps {
   selectedStateName?: string;
 }
 
-//Initiatives constant to be replaced by backend data
 const ProjectListGroup = ({
   isMapDisplayed,
   selectedStateName,
 }: IProjectListProps) => {
   let searchInputData = useAppSelector(
-    (state) => state.practiceSlice?.searchInput
+    (state) => state?.practiceSlice?.searchInput
   );
+
   if (
-    searchInputData.state_county_code === '00' ||
-    searchInputData.state_county_code === '00000'
+    searchInputData &&
+    (searchInputData?.state_county_code === '00' ||
+      searchInputData?.state_county_code === '00000')
   ) {
     searchInputData = { ...searchInputData };
     delete searchInputData.state_county_code;
@@ -49,13 +50,8 @@ const ProjectListGroup = ({
     isError: pisError,
   } = usePostProjectSearchDataQuery(searchInputData);
 
-  const {
-    data: initiativesList,
-    error: lerror,
-    isLoading: lisLoading,
-    isSuccess: lisSuccess,
-    isError: lisError,
-  } = usePostLandscapeInitiativesQuery(searchInputData);
+  const { data: initiativesList } =
+    usePostLandscapeInitiativesQuery(searchInputData);
   const { t } = useTranslation();
 
   const [activeTab, setActiveTab] = useState(1);
@@ -221,6 +217,7 @@ const ProjectListGroup = ({
                         owner={initiative.initiativeOwner}
                         statesInvolved={initiative.statesInvolved}
                         year={initiative.initiativeYear}
+                        link={initiative.lci_page_link}
                       />
                     </div>
                   );

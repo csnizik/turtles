@@ -23,18 +23,19 @@ const ReportPreview = ({
   const mountedRef = useRef(true);
   const renderProjInit = (projInit) => {
     const projInitList = projInit.data.map((item) => {
-      const identifyer = projInit.title.includes('Landscape')
-        ? 'initiative'
-        : 'project';
       return (
-        <div className='proj-list-item' key={item?.[`${identifyer}Title`]}>
+        <div
+          className='proj-list-item'
+          key={item?.[`projectTitle` || `lci_name`]}
+        >
           <ProjectListItem
-            id={item?.[`${identifyer}Id`]}
-            description={item?.[`${identifyer}Description`]}
-            title={item?.[`${identifyer}Title`]}
-            owner={item?.[`${identifyer}Owner`]}
+            id={item?.projectId || item?.lci_id}
+            description={item?.projectDescription || item?.lci_description}
+            title={item?.projectTitle || item?.lci_name}
+            owner={item?.projectOwner}
             statesInvolved={item?.statesInvolved}
             year={item?.awardeeYear}
+            link={item?.projectLink || item?.lci_page_link}
           />
         </div>
       );
