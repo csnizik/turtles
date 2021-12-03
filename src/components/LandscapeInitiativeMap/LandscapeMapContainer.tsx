@@ -4,7 +4,7 @@ import './landscape-init-map.scss';
 const LandscapeMapContainer = () => {
   return (
     <>
-      <LandscapeInitiativeMap />
+      <LandscapeInitiativeMap selectedLocation='08' />
       <div className='webmap' id='landscapeViewDiv' />
     </>
   );
