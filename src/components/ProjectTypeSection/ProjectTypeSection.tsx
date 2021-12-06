@@ -71,6 +71,7 @@ const ProjectTypeSection = ({
             selectedLandscapeInitiative === 10 ? (
               <LandscapeMapContainer
                 landscapeInitiativesData={landscapeInitiativesData?.data}
+                selectedLandscapeInitiative={selectedLandscapeInitiative}
               />
             ) : (
               <div className='landscape-img-placeholder margin-bottom-3'>

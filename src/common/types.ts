@@ -151,11 +151,14 @@ export interface IProjectType {
   map: string;
 }
 
-export interface ILandscapeInitiatives {
-  resource_concern_category_id?: number | null;
-  resource_concern_id?: number | null;
-  practice_category_id?: number | null;
-  practice_id?: number | null;
-  state_county_code?: string | null;
-  land_use_list?: string | null;
+/*eslint camelcase: 0*/
+export interface ILandscapeInitiative {
+  lci_id: number;
+  lci_name: string;
+  lci_resource: string;
+  lci_image_link: string;
+  lci_page_link: string;
+  lci_page_link_text: string;
+  lci_description: Array<string>;
+  lci_parent_id: number;
 }

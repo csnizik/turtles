@@ -5,8 +5,8 @@ export const ALL_LANDSCAPE_INITIATIVES_PORTAL_URL =
 export const LANDSCAPE_VIEW_DIV = 'landscapeViewDiv';
 
 export const landscapeViewConstraints = {
-  maxZoom: 5,
-  minZoom: 8,
+  maxZoom: 4,
+  minZoom: 10,
 };
 
 export const landscapeInitiativeToLegendMap = {
@@ -26,6 +26,17 @@ export const landscapeInitiativeToLegendMap = {
   17: 'Bog Turtle',
   18: 'New England Cottontail',
 };
+
+export const workingLandsForWildlifeOptions = [
+  'Golden_Winged_Warbler',
+  'Gopher_Tortoise',
+  'Lesser_Prairie_Chicken_Initiative',
+  'Monarch_Butterfly_Project',
+  'Southwestern Willow Flycatcher',
+  'Sage_Grouse',
+  'Bog Turtle',
+  'New England Cottontail',
+];
 
 export const STATE_FEATURE_LAYER_URL =
   'https://gis1-eft.spatialfrontlab.com/arcgis/rest/services/cig-cpd/CIG_Project/MapServer';

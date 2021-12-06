@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import MapView from '@arcgis/core/views/MapView';
 import WebMap from '@arcgis/core/WebMap';
 import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
@@ -10,7 +10,9 @@ import {
   ALL_LANDSCAPE_INITIATIVES_PORTAL_URL,
   LANDSCAPE_VIEW_DIV,
   landscapeInitiativeToLegendMap,
+  landscapeViewConstraints,
   STATE_FEATURE_LAYER_URL,
+  workingLandsForWildlifeOptions,
 } from './constants';
 
 interface IMapProps {
@@ -21,15 +23,18 @@ interface IMapProps {
 interface ILandscapeProps {
   landscapeInitiativesData: any;
   selectedLocation: any;
+  selectedLandscapeInitiative: number;
 }
 
 const LandscapeInitiativeMap = ({
   landscapeInitiativesData,
   selectedLocation,
+  selectedLandscapeInitiative,
 }: ILandscapeProps) => {
   const mapRef = useRef({} as IMapProps);
   const stateFeatureLayer = useRef({} as FeatureLayer);
   const legendRef = useRef({} as Expand);
+  const [filteredOutLayers, setFilteredLayers]: any = useState([]);
 
   useEffect(() => {
     if (mapRef && mapRef.current) {
@@ -41,6 +46,7 @@ const LandscapeInitiativeMap = ({
       const view: MapView = new MapView({
         center: [-96, 36],
         container: LANDSCAPE_VIEW_DIV,
+        constraints: landscapeViewConstraints,
         map: mapRef.current.map,
         zoom: 4,
       });
@@ -68,7 +74,6 @@ const LandscapeInitiativeMap = ({
             return layer.type === 'feature';
           });
 
-          let filteredLayers: Array<any> = [];
           const featureLayerInfos: Array<any> = [];
           if (landscapeInitiativesData?.length && selectedLocation) {
             const relatedLandscpaeInitiativesPerSelectedLocation =
@@ -76,6 +81,7 @@ const LandscapeInitiativeMap = ({
                 return landscapeInitiativeToLegendMap[init.lci_id];
               });
 
+            let filteredLayers: Array<any> = [];
             filteredLayers = allFeatureLayers.filter((layer: Layer) => {
               return (
                 relatedLandscpaeInitiativesPerSelectedLocation.findIndex(
@@ -106,21 +112,63 @@ const LandscapeInitiativeMap = ({
             });
           }
 
-          legendRef.current = new Expand({
-            content: new Legend({
-              layerInfos: featureLayerInfos,
-              style: 'classic',
+          if (!legendRef.current.visible) {
+            legendRef.current = new Expand({
+              content: new Legend({
+                layerInfos: featureLayerInfos,
+                style: 'classic',
+                view: mapRef.current.view,
+              }),
+              expanded: true,
               view: mapRef.current.view,
-            }),
-            expanded: true,
-            view: mapRef.current.view,
-          });
+            });
 
-          mapRef.current.view.ui.add(legendRef.current, 'bottom-right');
+            mapRef.current.view.ui.add(legendRef.current, 'bottom-right');
+          }
         }
       });
     });
-  }, [mapRef]);
+  }, [mapRef, selectedLandscapeInitiative]);
+
+  useEffect(() => {
+    // TODO: Remove layers depending on if Landscape Intiative is selected
+    // or if Working Lands for Wildlife
+    // Filter out layers if selectedLandscapeInitiative is Working Lands for Wildlife
+    mapRef.current.view.when(() => {
+      mapRef.current.map.when(() => {
+        if (mapRef.current.map.allLayers.length) {
+          const allFeatureLayers: Array<any> = (
+            mapRef.current.map.allLayers as any
+          ).items.filter((layer: Layer) => {
+            return layer.type === 'feature';
+          });
+          if (selectedLandscapeInitiative === 10) {
+            let filteredLayers: Array<any> = [];
+            filteredLayers = allFeatureLayers.filter((layer: Layer) => {
+              return (
+                workingLandsForWildlifeOptions.findIndex(
+                  (intiative: string) => {
+                    if (intiative.includes('_')) {
+                      return intiative.includes(
+                        layer.title.slice(layer.title.indexOf('_') + 1)
+                      );
+                    }
+                    return intiative.includes(layer.title);
+                  }
+                ) === -1
+              );
+            });
+            setFilteredLayers(filteredLayers);
+            mapRef.current.map.removeMany(filteredLayers);
+          }
+          if (selectedLandscapeInitiative === -1) {
+            // Restore all layers
+            mapRef.current.map.addMany(filteredOutLayers);
+          }
+        }
+      });
+    });
+  }, [mapRef, selectedLandscapeInitiative]);
 
   useEffect(() => {
     if (
