@@ -4,7 +4,6 @@ import { useGetPaymentScheduleLinksQuery } from '../../Redux/services/api';
 import Spinner from '../Spinner/Spinner';
 import './implementation-extent.scss';
 import image from './image/newLinkIcon.svg';
-import ExceptionMessage from '../ExceptionMessage';
 
 interface IImplementationExtentProps {
   data: any;
@@ -21,8 +20,6 @@ const ImplementationExtent = ({
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
 
   const practiceName = (data && data.practiceName) || '';
-  const exceptionTitle = `${stateInfo?.stateNameDisplay} has not adopted ${practiceName}`;
-  const exceptionMessage = 'The charts below reflect obligations and acres implemented in the entire United States.';
   
   const results = useGetPaymentScheduleLinksQuery(stateInfo?.stateCode);
   const data2 = results.data || [];
@@ -101,12 +98,6 @@ const ImplementationExtent = ({
     <div className='ie-parent' id='SupportPractice'>
       <h2>{getHeaderText()}</h2>
       <h4>{intro}</h4>
-      <div className='exception-message-section'>
-        <ExceptionMessage
-          exceptionTitle={exceptionTitle}
-          exceptionMessage={exceptionMessage}
-        />
-      </div>
       <div className='extent-content'>
         {renderObligations()}
         {renderAcresImplemented()}

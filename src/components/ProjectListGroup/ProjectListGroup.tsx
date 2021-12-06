@@ -20,15 +20,18 @@ import {
   usePostLandscapeInitiativesQuery,
   usePostProjectSearchDataQuery,
 } from '../../Redux/services/api';
+import ExceptionMessage from '../ExceptionMessage/ExceptionMessage';
 
 interface IProjectListProps {
   isMapDisplayed: boolean;
   selectedStateName?: string;
+  selectedPracticeName?: string;
 }
 
 const ProjectListGroup = ({
   isMapDisplayed,
   selectedStateName,
+  selectedPracticeName
 }: IProjectListProps) => {
   let searchInputData = useAppSelector(
     (state) => state?.practiceSlice?.searchInput
@@ -61,6 +64,13 @@ const ProjectListGroup = ({
 
   const grantsLength = projectsList?.length;
   const initiativesLength = initiativesList?.length;
+  let exceptionStateName = (selectedStateName === null || selectedStateName?.length === 0) ?
+    useAppSelector(
+      (state) => state?.stateSlice?.stateNameDisplay
+    ) : selectedStateName;
+  if(exceptionStateName === null) exceptionStateName='The U.S.'; 
+  const exceptionTitle = `${exceptionStateName} has no ${selectedPracticeName} projects or initiatives`;
+  const exceptionMessage = `The projects below represent ${selectedPracticeName} projects across the United States.`;
 
   const toggleProjectsTab = (tab: number) => {
     if (activeTab !== tab) setActiveTab(tab);
@@ -130,6 +140,14 @@ const ProjectListGroup = ({
       data-testid='projects-list-group'
       id='ProjectsInitiatives'
     >
+      {(grantsLength === 0 || grantsLength===undefined) &&
+        <div className='margin-top-30'>
+          <ExceptionMessage
+            exceptionTitle={exceptionTitle}
+            exceptionMessage={exceptionMessage}
+          />
+        </div>
+      }
       {!isMapDisplayed && renderProjectTypeTabs()}
       <TabContent activeTab={activeTab}>
         <TabPane tabId={1}>
@@ -235,4 +253,5 @@ export default ProjectListGroup;
 
 ProjectListGroup.defaultProps = {
   selectedStateName: '',
+  selectedPracticeName: ''
 };
