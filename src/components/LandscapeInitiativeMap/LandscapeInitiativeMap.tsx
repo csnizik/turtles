@@ -15,6 +15,7 @@ import {
 } from './constants';
 import { STATE_FEATURE_LAYER_URL } from '../../common/constants';
 import { ILandscapeInitiative } from '../../common/types';
+import { filterLandscapeInitiativeLayers } from './utils';
 
 interface IMapProps {
   view: MapView;
@@ -83,20 +84,10 @@ const LandscapeInitiativeMap = ({
               });
 
             let filteredLayers: Array<any> = [];
-            filteredLayers = allFeatureLayers.filter((layer: Layer) => {
-              return (
-                relatedLandscpaeInitiativesPerSelectedLocation.findIndex(
-                  (intiativeName: string) => {
-                    if (intiativeName.includes('_')) {
-                      return intiativeName.includes(
-                        layer.title.slice(layer.title.indexOf('_') + 1)
-                      );
-                    }
-                    return intiativeName.includes(layer.title);
-                  }
-                ) > 0
-              );
-            });
+            filteredLayers = filterLandscapeInitiativeLayers(
+              allFeatureLayers,
+              relatedLandscpaeInitiativesPerSelectedLocation
+            );
 
             filteredLayers.forEach((layer: Layer) => {
               featureLayerInfos.push({
