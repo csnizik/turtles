@@ -10,6 +10,7 @@ import {
   NavItem,
   NavLink,
 } from 'reactstrap';
+import { convertToObject } from 'typescript';
 import ProjectListItem from './ProjectListItem';
 import { projectTabs } from './constants';
 import './project-list-group.scss';
@@ -104,7 +105,6 @@ const ProjectListGroup = ({
       }
       return tab.tabTitle;
     };
-
     return (
       <Nav className='nav-fpac' data-testid='project-and-initiative-tabs'>
         {projectTabs.map((tab: any) => {
@@ -127,6 +127,7 @@ const ProjectListGroup = ({
       </Nav>
     );
   };
+  console.log(grantsLength);
   return (
     <div
       className='projects-list-group'
@@ -141,28 +142,42 @@ const ProjectListGroup = ({
               <p className='intro-desc'>
                 {t('projects-initiatives.innovation-tab')}
               </p>
-              <Pagination
-                cards={grantsLength}
-                cardsPerPage={cardsPerPage}
-                paginate={paginate}
-                currentPage={currentPage}
-                indexOfLastPage={indexOfLastPage}
-                indexOfFirstCard={indexOfFirstCard}
-                indexOfLastCard={indexOfLastCard}
-                selectedStateName={selectedStateName}
-                mapComponent={true}
-              />
+              {grantsLength !== 0 ? (
+                <Pagination
+                  cards={grantsLength}
+                  cardsPerPage={cardsPerPage}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                  indexOfLastPage={indexOfLastPage}
+                  indexOfFirstCard={indexOfFirstCard}
+                  indexOfLastCard={indexOfLastCard}
+                  selectedStateName={selectedStateName}
+                  mapComponent={true}
+                />
+              ) : (
+                <p className='centered'>
+                  No Conservation Innovation Grants found for this search.
+                </p>
+              )}
             </>
           ) : (
-            <Pagination
-              cards={grantsLength}
-              cardsPerPage={cardsPerPage}
-              paginate={paginate}
-              currentPage={currentPage}
-              indexOfLastPage={indexOfLastPage}
-              indexOfFirstCard={indexOfFirstCard}
-              indexOfLastCard={indexOfLastCard}
-            />
+            <>
+              {grantsLength !== 0 ? (
+                <Pagination
+                  cards={grantsLength}
+                  cardsPerPage={cardsPerPage}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                  indexOfLastPage={indexOfLastPage}
+                  indexOfFirstCard={indexOfFirstCard}
+                  indexOfLastCard={indexOfLastCard}
+                />
+              ) : (
+                <p className='centered'>
+                  No Conservation Innovation Grants found for this search.
+                </p>
+              )}
+            </>
           )}
 
           <Row>
@@ -191,21 +206,23 @@ const ProjectListGroup = ({
           </Row>
         </TabPane>
         <TabPane tabId={2}>
-          {!isMapDisplayed && (
-            <p className='intro-desc'>
-              {t('projects-initiatives.landscape-tab')}
+          {initiativesLength !== 0 ? (
+            <Pagination
+              cards={initiativesLength}
+              cardsPerPage={cardsPerPage}
+              paginate={iPaginate}
+              currentPage={currentIPage}
+              indexOfLastPage={indexOfLastIPage}
+              indexOfFirstCard={indexOfFirstICard}
+              indexOfLastCard={indexOfLastICard}
+              selectedStateName={selectedStateName}
+            />
+          ) : (
+            <p className='centered'>
+              No Landscape Conservation Initiatives found for this search.
             </p>
           )}
-          <Pagination
-            cards={initiativesLength}
-            cardsPerPage={cardsPerPage}
-            paginate={iPaginate}
-            currentPage={currentIPage}
-            indexOfLastPage={indexOfLastIPage}
-            indexOfFirstCard={indexOfFirstICard}
-            indexOfLastCard={indexOfLastICard}
-            selectedStateName={selectedStateName}
-          />
+
           <Row>
             <Col sm='12' className='p-3'>
               <ul className='list-group projects-data'>
