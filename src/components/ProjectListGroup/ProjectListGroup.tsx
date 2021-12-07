@@ -177,15 +177,20 @@ const ProjectListGroup = ({
           ) : (
             <>
               {grantsLength !== 0 ? (
-                <Pagination
-                  cards={grantsLength}
-                  cardsPerPage={cardsPerPage}
-                  paginate={paginate}
-                  currentPage={currentPage}
-                  indexOfLastPage={indexOfLastPage}
-                  indexOfFirstCard={indexOfFirstCard}
-                  indexOfLastCard={indexOfLastCard}
-                />
+                <>
+                  <p className='intro-desc'>
+                    {t('projects-initiatives.innovation-tab')}
+                  </p>
+                  <Pagination
+                    cards={grantsLength}
+                    cardsPerPage={cardsPerPage}
+                    paginate={paginate}
+                    currentPage={currentPage}
+                    indexOfLastPage={indexOfLastPage}
+                    indexOfFirstCard={indexOfFirstCard}
+                    indexOfLastCard={indexOfLastCard}
+                  />
+                </>
               ) : (
                 <p className='centered'>
                   No Conservation Innovation Grants found for this search.
@@ -220,23 +225,30 @@ const ProjectListGroup = ({
           </Row>
         </TabPane>
         <TabPane tabId={2}>
-          {initiativesLength !== 0 ? (
-            <Pagination
-              cards={initiativesLength}
-              cardsPerPage={cardsPerPage}
-              paginate={iPaginate}
-              currentPage={currentIPage}
-              indexOfLastPage={indexOfLastIPage}
-              indexOfFirstCard={indexOfFirstICard}
-              indexOfLastCard={indexOfLastICard}
-              selectedStateName={selectedStateName}
-            />
-          ) : (
-            <p className='centered'>
-              No Landscape Conservation Initiatives found for this search.
-            </p>
-          )}
+          {!isMapDisplayed && (
+            <>
+              <p className='intro-desc'>
+                {t('projects-initiatives.landscape-tab')}
+              </p>
 
+              {initiativesLength !== 0 ? (
+                <Pagination
+                  cards={initiativesLength}
+                  cardsPerPage={cardsPerPage}
+                  paginate={iPaginate}
+                  currentPage={currentIPage}
+                  indexOfLastPage={indexOfLastIPage}
+                  indexOfFirstCard={indexOfFirstICard}
+                  indexOfLastCard={indexOfLastICard}
+                  selectedStateName={selectedStateName}
+                />
+              ) : (
+                <p className='centered'>
+                  No Landscape Conservation Initiatives found for this search.
+                </p>
+              )}
+            </>
+          )}
           <Row>
             <Col sm='12' className='p-3'>
               <ul className='list-group projects-data'>
