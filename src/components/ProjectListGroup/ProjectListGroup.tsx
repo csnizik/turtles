@@ -68,7 +68,7 @@ const ProjectListGroup = ({
     useAppSelector(
       (state) => state?.stateSlice?.stateNameDisplay
     ) : selectedStateName;
-  if(exceptionStateName === null) exceptionStateName='The U.S.'; 
+  if(exceptionStateName === null || exceptionStateName===undefined) exceptionStateName='The U.S.'; 
   const exceptionTitle = `${exceptionStateName} has no ${selectedPracticeName} projects or initiatives`;
   const exceptionMessage = `The projects below represent ${selectedPracticeName} projects across the United States.`;
 
