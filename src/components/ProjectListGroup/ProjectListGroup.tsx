@@ -153,9 +153,6 @@ const ProjectListGroup = ({
         <TabPane tabId={1}>
           {isMapDisplayed ? (
             <>
-              <p className='intro-desc'>
-                {t('projects-initiatives.innovation-tab')}
-              </p>
               {grantsLength !== 0 ? (
                 <Pagination
                   cards={grantsLength}
@@ -169,7 +166,7 @@ const ProjectListGroup = ({
                   mapComponent={true}
                 />
               ) : (
-                <p className='centered'>
+                <p className='centered-text'>
                   No Conservation Innovation Grants found for this search.
                 </p>
               )}
@@ -178,9 +175,6 @@ const ProjectListGroup = ({
             <>
               {grantsLength !== 0 ? (
                 <>
-                  <p className='intro-desc'>
-                    {t('projects-initiatives.innovation-tab')}
-                  </p>
                   <Pagination
                     cards={grantsLength}
                     cardsPerPage={cardsPerPage}
@@ -192,7 +186,7 @@ const ProjectListGroup = ({
                   />
                 </>
               ) : (
-                <p className='centered'>
+                <p className='centered-text'>
                   No Conservation Innovation Grants found for this search.
                 </p>
               )}
@@ -227,23 +221,21 @@ const ProjectListGroup = ({
         <TabPane tabId={2}>
           {!isMapDisplayed && (
             <>
-              <p className='intro-desc'>
-                {t('projects-initiatives.landscape-tab')}
-              </p>
-
               {initiativesLength !== 0 ? (
-                <Pagination
-                  cards={initiativesLength}
-                  cardsPerPage={cardsPerPage}
-                  paginate={iPaginate}
-                  currentPage={currentIPage}
-                  indexOfLastPage={indexOfLastIPage}
-                  indexOfFirstCard={indexOfFirstICard}
-                  indexOfLastCard={indexOfLastICard}
-                  selectedStateName={selectedStateName}
-                />
+                <>
+                  <Pagination
+                    cards={initiativesLength}
+                    cardsPerPage={cardsPerPage}
+                    paginate={iPaginate}
+                    currentPage={currentIPage}
+                    indexOfLastPage={indexOfLastIPage}
+                    indexOfFirstCard={indexOfFirstICard}
+                    indexOfLastCard={indexOfLastICard}
+                    selectedStateName={selectedStateName}
+                  />
+                </>
               ) : (
-                <p className='centered'>
+                <p className='centered-text'>
                   No Landscape Conservation Initiatives found for this search.
                 </p>
               )}
