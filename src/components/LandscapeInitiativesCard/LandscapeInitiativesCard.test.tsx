@@ -14,7 +14,6 @@ describe('Landscape Initiatives Card is rendered correctly', () => {
   const lci_name = 'Golden-Winged Warbler';
   const lci_description = ['Identified target species'];
   const lci_link = 'https://www.nrcs.usda.gov/';
-  const sub_name = 'Gopher Tortoise';
 
   beforeEach(() => {
     render(
