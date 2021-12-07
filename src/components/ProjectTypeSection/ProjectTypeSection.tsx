@@ -53,16 +53,16 @@ const ProjectTypeSection = ({
         landscapeInitiativeMap
       ).find((initiative) => initiative.id === 0);
       if (projectType.id === 2 || selectedLandscapeInitiative > 0) {
-        const foundInitiative = landscapeInitiativesData.data.find(
-          (initiative) => {
+        const foundInitiative =
+          landscapeInitiativesData?.data &&
+          landscapeInitiativesData.data.find((initiative) => {
             return initiative.lci_id === selectedLandscapeInitiative;
-          }
-        );
-        const subInitiative = landscapeInitiativesData?.data.filter(
-          (parentId: any) => {
+          });
+        const subInitiative =
+          landscapeInitiativesData?.data &&
+          landscapeInitiativesData.data.filter((parentId: any) => {
             return parentId.lci_parent_id !== null;
-          }
-        );
+          });
         return (
           <div className='landscape-intiatives margin-top-2'>
             {/* Webmap only available for 'Landscape Conservation Initiatives'
@@ -70,7 +70,7 @@ const ProjectTypeSection = ({
             {selectedLandscapeInitiative === -1 ||
             selectedLandscapeInitiative === 10 ? (
               <LandscapeMapContainer
-                landscapeInitiativesData={landscapeInitiativesData?.data}
+                landscapeInitiativesData={landscapeInitiativesData.data || []}
                 selectedLandscapeInitiative={selectedLandscapeInitiative}
               />
             ) : (

@@ -11,9 +11,10 @@ import {
   LANDSCAPE_VIEW_DIV,
   landscapeInitiativeToLegendMap,
   landscapeViewConstraints,
-  STATE_FEATURE_LAYER_URL,
   workingLandsForWildlifeOptions,
 } from './constants';
+import { STATE_FEATURE_LAYER_URL } from '../../common/constants';
+import { ILandscapeInitiative } from '../../common/types';
 
 interface IMapProps {
   view: MapView;
@@ -21,7 +22,7 @@ interface IMapProps {
 }
 
 interface ILandscapeProps {
-  landscapeInitiativesData: any;
+  landscapeInitiativesData: Array<ILandscapeInitiative>;
   selectedLocation: any;
   selectedLandscapeInitiative: number;
 }
@@ -131,8 +132,6 @@ const LandscapeInitiativeMap = ({
   }, [mapRef, selectedLandscapeInitiative]);
 
   useEffect(() => {
-    // TODO: Remove layers depending on if Landscape Intiative is selected
-    // or if Working Lands for Wildlife
     // Filter out layers if selectedLandscapeInitiative is Working Lands for Wildlife
     mapRef.current.view.when(() => {
       mapRef.current.map.when(() => {
