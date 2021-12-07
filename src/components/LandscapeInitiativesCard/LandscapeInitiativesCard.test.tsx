@@ -38,10 +38,7 @@ describe('Landscape Initiatives Card is rendered correctly', () => {
     expect(screen.getByText('Identified target species')).toBeInTheDocument();
   });
   test('Should test Landscape Initiatives Card Link', () => {
-    const { getByText } = render(
-      <a href={`https://www.nrcs.usda.gov/`}>{sub_name}</a>
-    );
-    const link = getByText('Gopher Tortoise');
+    const link = screen.getByRole('link');
     fireEvent.click(link);
     fireEvent.mouseOver(link);
     expect(
