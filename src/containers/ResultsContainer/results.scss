@@ -10,6 +10,17 @@
     margin: 0 2.188rem 2.188rem 2.188rem;
     display: flex;
     padding: 2.5rem 0 1.25rem 0;
-    font-weight: 900;
+    font-weight: $heavier-weight;
+  }
+
+  .top-title {
+    margin: 3.75rem 2.188rem 0;
+
+    .title {
+      font-size: $h2-font-size;
+      line-height: 37.5px;
+      font-weight: $heavier-weight;
+      margin: 0;
+    }
   }
 }
