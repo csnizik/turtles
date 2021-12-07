@@ -101,6 +101,7 @@ const ConservationPracticeContainer = ({
     currentPracticeCategory.practices.find(
       (practice: any) => practice.practiceId === currentSpecificPractice
     );
+  
   const handleCreateReport = () => {
     if (openModal) {
       setOpenModal(false);
@@ -169,7 +170,7 @@ const ConservationPracticeContainer = ({
               {t('associated-projects-initiatives.description')}
             </p>
           </div>
-          <ProjectListGroup isMapDisplayed={false} />
+          <ProjectListGroup isMapDisplayed={false} selectedPracticeName={currentPractice?.practiceName}/>
         </>
       );
     }
