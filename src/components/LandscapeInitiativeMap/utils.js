@@ -1,5 +1,5 @@
 export function filterLandscapeInitiativeLayers(initiativeList, filterList) {
-  initiativeList.filter((layer: Layer) => {
+  return initiativeList.filter((layer: Layer) => {
     return (
       filterList.findIndex((intiativeName: string) => {
         if (intiativeName.includes('_')) {

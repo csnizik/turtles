@@ -134,20 +134,10 @@ const LandscapeInitiativeMap = ({
           });
           if (selectedLandscapeInitiative === 10) {
             let filteredLayers: Array<any> = [];
-            filteredLayers = allFeatureLayers.filter((layer: Layer) => {
-              return (
-                workingLandsForWildlifeOptions.findIndex(
-                  (intiative: string) => {
-                    if (intiative.includes('_')) {
-                      return intiative.includes(
-                        layer.title.slice(layer.title.indexOf('_') + 1)
-                      );
-                    }
-                    return intiative.includes(layer.title);
-                  }
-                ) === -1
-              );
-            });
+            filteredLayers = filterLandscapeInitiativeLayers(
+              allFeatureLayers,
+              workingLandsForWildlifeOptions
+            );
             setFilteredLayers(filteredLayers);
             mapRef.current.map.removeMany(filteredLayers);
           }
