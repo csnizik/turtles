@@ -81,20 +81,8 @@ const ConservationPracticeContainer = ({
     delete searchInputData.state_county_code;
   }
   dispatch(setSearch(searchInputData));
-  const {
-    data: pdata,
-    error: perror,
-    isLoading: pisLoading,
-    isSuccess: pisSuccess,
-    isError: pisError,
-  } = usePostProjectSearchDataQuery(searchInputData);
-  const {
-    data: ldata,
-    error: lerror,
-    isLoading: lisLoading,
-    isSuccess: lisSuccess,
-    isError: lisError,
-  } = usePostLandscapeInitiativesQuery(searchInputData);
+  const { data: pdata } = usePostProjectSearchDataQuery(searchInputData);
+  const { data: ldata } = usePostLandscapeInitiativesQuery(searchInputData);
 
   const { data, isSuccess } = usePostSearchDataQuery({
     practice_id: sharedState,
@@ -113,6 +101,7 @@ const ConservationPracticeContainer = ({
     currentPracticeCategory.practices.find(
       (practice: any) => practice.practiceId === currentSpecificPractice
     );
+  
   const handleCreateReport = () => {
     if (openModal) {
       setOpenModal(false);
@@ -181,7 +170,7 @@ const ConservationPracticeContainer = ({
               {t('associated-projects-initiatives.description')}
             </p>
           </div>
-          <ProjectListGroup isMapDisplayed={false} />
+          <ProjectListGroup isMapDisplayed={false} selectedPracticeName={currentPractice?.practiceName}/>
         </>
       );
     }

@@ -21,23 +21,27 @@ import {
   usePostLandscapeInitiativesQuery,
   usePostProjectSearchDataQuery,
 } from '../../Redux/services/api';
+import ExceptionMessage from '../ExceptionMessage/ExceptionMessage';
 
 interface IProjectListProps {
   isMapDisplayed: boolean;
   selectedStateName?: string;
+  selectedPracticeName?: string;
 }
 
 const ProjectListGroup = ({
   isMapDisplayed,
   selectedStateName,
+  selectedPracticeName
 }: IProjectListProps) => {
   let searchInputData = useAppSelector(
     (state) => state?.practiceSlice?.searchInput
   );
+
   if (
     searchInputData &&
-    (searchInputData.state_county_code === '00' ||
-      searchInputData.state_county_code === '00000')
+    (searchInputData?.state_county_code === '00' ||
+      searchInputData?.state_county_code === '00000')
   ) {
     searchInputData = { ...searchInputData };
     delete searchInputData.state_county_code;
@@ -49,13 +53,9 @@ const ProjectListGroup = ({
     isSuccess: pisSuccess,
     isError: pisError,
   } = usePostProjectSearchDataQuery(searchInputData);
-  const {
-    data: initiativesList,
-    error: lerror,
-    isLoading: lisLoading,
-    isSuccess: lisSuccess,
-    isError: lisError,
-  } = usePostLandscapeInitiativesQuery(searchInputData);
+
+  const { data: initiativesList } =
+    usePostLandscapeInitiativesQuery(searchInputData);
   const { t } = useTranslation();
 
   const [activeTab, setActiveTab] = useState(1);
@@ -65,6 +65,13 @@ const ProjectListGroup = ({
 
   const grantsLength = projectsList?.length;
   const initiativesLength = initiativesList?.length;
+  let exceptionStateName = (selectedStateName === null || selectedStateName?.length === 0) ?
+    useAppSelector(
+      (state) => state?.stateSlice?.stateNameDisplay
+    ) : selectedStateName;
+  if(exceptionStateName === null || exceptionStateName===undefined) exceptionStateName='The U.S.'; 
+  const exceptionTitle = `${exceptionStateName} has no ${selectedPracticeName} projects or initiatives`;
+  const exceptionMessage = `The projects below represent ${selectedPracticeName} projects across the United States.`;
 
   const toggleProjectsTab = (tab: number) => {
     if (activeTab !== tab) setActiveTab(tab);
@@ -134,6 +141,14 @@ const ProjectListGroup = ({
       data-testid='projects-list-group'
       id='ProjectsInitiatives'
     >
+      {(grantsLength === 0 || grantsLength===undefined) &&
+        <div className='margin-top-30'>
+          <ExceptionMessage
+            exceptionTitle={exceptionTitle}
+            exceptionMessage={exceptionMessage}
+          />
+        </div>
+      }
       {!isMapDisplayed && renderProjectTypeTabs()}
       <TabContent activeTab={activeTab}>
         <TabPane tabId={1}>
@@ -255,4 +270,5 @@ export default ProjectListGroup;
 
 ProjectListGroup.defaultProps = {
   selectedStateName: '',
+  selectedPracticeName: ''
 };
