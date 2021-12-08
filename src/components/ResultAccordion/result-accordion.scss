@@ -5,12 +5,14 @@ html {
   background-color: $light-grey-205;
 }
 
-.top-title {
-  margin: 3.75rem 2.188rem 1.25rem;
-
-  h4 {
-    font-size: 32px;
-    font-weight: 900;
+.result-accordion-container{
+  .top-title {
+    margin: 3.75rem 2.188rem 1.25rem;
+  
+    h4 {
+      font-size: 32px;
+      font-weight: 900;
+    }
   }
 }
 

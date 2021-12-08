@@ -1,15 +1,19 @@
 @import '../../stylesheets/variables';
 
 .projects-list-group {
-  margin: 1rem 2rem;
+  padding: 1.25rem 2.188rem;
   ul.nav-fpac {
     width: 40rem;
     .nav-item {
       width: 20rem;
     }
   }
-  .usa-pagination h4{
-    margin:0;
+  .centered-text {
+    margin-top: 2.166rem;
+    text-align: center;
+  }
+  .usa-pagination h4 {
+    margin: 0;
   }
   .title {
     margin-left: -2.188rem;

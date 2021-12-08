@@ -20,15 +20,18 @@ import {
   usePostLandscapeInitiativesQuery,
   usePostProjectSearchDataQuery,
 } from '../../Redux/services/api';
+import ExceptionMessage from '../ExceptionMessage/ExceptionMessage';
 
 interface IProjectListProps {
   isMapDisplayed: boolean;
   selectedStateName?: string;
+  selectedPracticeName?: string;
 }
 
 const ProjectListGroup = ({
   isMapDisplayed,
   selectedStateName,
+  selectedPracticeName,
 }: IProjectListProps) => {
   let searchInputData = useAppSelector(
     (state) => state?.practiceSlice?.searchInput
@@ -61,6 +64,14 @@ const ProjectListGroup = ({
 
   const grantsLength = projectsList?.length;
   const initiativesLength = initiativesList?.length;
+  let exceptionStateName =
+    selectedStateName === null || selectedStateName?.length === 0
+      ? useAppSelector((state) => state?.stateSlice?.stateNameDisplay)
+      : selectedStateName;
+  if (exceptionStateName === null || exceptionStateName === undefined)
+    exceptionStateName = 'The U.S.';
+  const exceptionTitle = `${exceptionStateName} has no ${selectedPracticeName} projects or initiatives`;
+  const exceptionMessage = `The projects below represent ${selectedPracticeName} projects across the United States.`;
 
   const toggleProjectsTab = (tab: number) => {
     if (activeTab !== tab) setActiveTab(tab);
@@ -101,7 +112,6 @@ const ProjectListGroup = ({
       }
       return tab.tabTitle;
     };
-
     return (
       <Nav className='nav-fpac' data-testid='project-and-initiative-tabs'>
         {projectTabs.map((tab: any) => {
@@ -130,36 +140,57 @@ const ProjectListGroup = ({
       data-testid='projects-list-group'
       id='ProjectsInitiatives'
     >
+      {(grantsLength === 0 || grantsLength === undefined) && (
+        <div className='margin-top-30'>
+          <ExceptionMessage
+            exceptionTitle={exceptionTitle}
+            exceptionMessage={exceptionMessage}
+          />
+        </div>
+      )}
       {!isMapDisplayed && renderProjectTypeTabs()}
       <TabContent activeTab={activeTab}>
         <TabPane tabId={1}>
           {isMapDisplayed ? (
             <>
-              <p className='intro-desc'>
-                {t('projects-initiatives.innovation-tab')}
-              </p>
-              <Pagination
-                cards={grantsLength}
-                cardsPerPage={cardsPerPage}
-                paginate={paginate}
-                currentPage={currentPage}
-                indexOfLastPage={indexOfLastPage}
-                indexOfFirstCard={indexOfFirstCard}
-                indexOfLastCard={indexOfLastCard}
-                selectedStateName={selectedStateName}
-                mapComponent={true}
-              />
+              {grantsLength !== 0 ? (
+                <Pagination
+                  cards={grantsLength}
+                  cardsPerPage={cardsPerPage}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                  indexOfLastPage={indexOfLastPage}
+                  indexOfFirstCard={indexOfFirstCard}
+                  indexOfLastCard={indexOfLastCard}
+                  selectedStateName={selectedStateName}
+                  mapComponent={true}
+                />
+              ) : (
+                <p className='centered-text'>
+                  No Conservation Innovation Grants found for this search.
+                </p>
+              )}
             </>
           ) : (
-            <Pagination
-              cards={grantsLength}
-              cardsPerPage={cardsPerPage}
-              paginate={paginate}
-              currentPage={currentPage}
-              indexOfLastPage={indexOfLastPage}
-              indexOfFirstCard={indexOfFirstCard}
-              indexOfLastCard={indexOfLastCard}
-            />
+            <>
+              {grantsLength !== 0 ? (
+                <>
+                  <Pagination
+                    cards={grantsLength}
+                    cardsPerPage={cardsPerPage}
+                    paginate={paginate}
+                    currentPage={currentPage}
+                    indexOfLastPage={indexOfLastPage}
+                    indexOfFirstCard={indexOfFirstCard}
+                    indexOfLastCard={indexOfLastCard}
+                  />
+                </>
+              ) : (
+                <p className='centered-text'>
+                  No Conservation Innovation Grants found for this search.
+                </p>
+              )}
+            </>
           )}
 
           <Row>
@@ -189,20 +220,27 @@ const ProjectListGroup = ({
         </TabPane>
         <TabPane tabId={2}>
           {!isMapDisplayed && (
-            <p className='intro-desc'>
-              {t('projects-initiatives.landscape-tab')}
-            </p>
+            <>
+              {initiativesLength !== 0 ? (
+                <>
+                  <Pagination
+                    cards={initiativesLength}
+                    cardsPerPage={cardsPerPage}
+                    paginate={iPaginate}
+                    currentPage={currentIPage}
+                    indexOfLastPage={indexOfLastIPage}
+                    indexOfFirstCard={indexOfFirstICard}
+                    indexOfLastCard={indexOfLastICard}
+                    selectedStateName={selectedStateName}
+                  />
+                </>
+              ) : (
+                <p className='centered-text'>
+                  No Landscape Conservation Initiatives found for this search.
+                </p>
+              )}
+            </>
           )}
-          <Pagination
-            cards={initiativesLength}
-            cardsPerPage={cardsPerPage}
-            paginate={iPaginate}
-            currentPage={currentIPage}
-            indexOfLastPage={indexOfLastIPage}
-            indexOfFirstCard={indexOfFirstICard}
-            indexOfLastCard={indexOfLastICard}
-            selectedStateName={selectedStateName}
-          />
           <Row>
             <Col sm='12' className='p-3'>
               <ul className='list-group projects-data'>
@@ -235,4 +273,5 @@ export default ProjectListGroup;
 
 ProjectListGroup.defaultProps = {
   selectedStateName: '',
+  selectedPracticeName: '',
 };
