@@ -1,10 +1,5 @@
 import LandscapeInitiativesCard from './LandscapeInitiativesCard';
-import {
-  cleanup,
-  fireEvent,
-  render,
-  screen,
-} from '../../common/test-utils/test_utils';
+import { cleanup, render, screen } from '../../common/test-utils/test_utils';
 
 afterEach(() => {
   cleanup();
@@ -37,12 +32,11 @@ describe('Landscape Initiatives Card is rendered correctly', () => {
     expect(screen.getByText('Identified target species')).toBeInTheDocument();
   });
   test('Should test Landscape Initiatives Card Link', () => {
-    // const link = screen.getByRole('link');
-    // Doing future research for fireEvent
-    // fireEvent.click(link);
-    // fireEvent.mouseOver(link);
     expect(
       screen.getByText('Golden-Winged Warbler').closest('a')
     ).toHaveAttribute('href', 'https://www.nrcs.usda.gov/');
+    expect(
+      screen.getByText('Golden-Winged Warbler').closest('a')
+    ).toHaveAttribute('target', '_blank');
   });
 });
