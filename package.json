@@ -16,6 +16,7 @@
     "eslint-config-prettier": "^8.3.0",
     "html2pdf.js": "^0.10.1",
     "i18next": "^20.4.0",
+    "msw": "^0.36.2",
     "node-sass": "4.14.1",
     "nrcs-design-system": "^0.1.13",
     "react": "^17.0.1",
