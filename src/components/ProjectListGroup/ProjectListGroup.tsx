@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import classnames from 'classnames';
 import {
   Row,
@@ -55,7 +54,6 @@ const ProjectListGroup = ({
 
   const { data: initiativesList } =
     usePostLandscapeInitiativesQuery(searchInputData);
-  const { t } = useTranslation();
 
   const [activeTab, setActiveTab] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
