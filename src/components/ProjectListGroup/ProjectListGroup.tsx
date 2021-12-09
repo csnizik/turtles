@@ -53,8 +53,11 @@ const ProjectListGroup = ({
     isError: pisError,
   } = usePostProjectSearchDataQuery(searchInputData);
 
-  const { data: initiativesList } =
+  let { data: initiativesList } =
     usePostLandscapeInitiativesQuery(searchInputData);
+  initiativesList = initiativesList?.filter((initiative: any) => {
+    return !initiative.lci_parent_id;
+  });
   const { t } = useTranslation();
 
   const [activeTab, setActiveTab] = useState(1);
@@ -246,22 +249,19 @@ const ProjectListGroup = ({
               <ul className='list-group projects-data'>
                 {currentICards?.map((initiative: any) => {
                   const initiativeID = initiative.initiativeId;
-                  if (initiative.lci_parent_id === 0) {
-                    return (
-                      <div key={initiativeID}>
-                        <ProjectListItem
-                          id={initiative.lci_id}
-                          description={initiative.lci_description}
-                          title={initiative.lci_name}
-                          owner={initiative.initiativeOwner}
-                          statesInvolved={initiative.statesInvolved}
-                          year={initiative.initiativeYear}
-                          link={initiative.lci_page_link}
-                        />
-                      </div>
-                    );
-                  }
-                  return <> </>;
+                  return (
+                    <div key={initiativeID}>
+                      <ProjectListItem
+                        id={initiative.lci_id}
+                        description={initiative.lci_description}
+                        title={initiative.lci_name}
+                        owner={initiative.initiativeOwner}
+                        statesInvolved={initiative.statesInvolved}
+                        year={initiative.initiativeYear}
+                        link={initiative.lci_page_link}
+                      />
+                    </div>
+                  );
                 })}
               </ul>
             </Col>
