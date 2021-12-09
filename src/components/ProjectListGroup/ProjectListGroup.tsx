@@ -246,19 +246,22 @@ const ProjectListGroup = ({
               <ul className='list-group projects-data'>
                 {currentICards?.map((initiative: any) => {
                   const initiativeID = initiative.initiativeId;
-                  return (
-                    <div key={initiativeID}>
-                      <ProjectListItem
-                        id={initiative.lci_id}
-                        description={initiative.lci_description}
-                        title={initiative.lci_name}
-                        owner={initiative.initiativeOwner}
-                        statesInvolved={initiative.statesInvolved}
-                        year={initiative.initiativeYear}
-                        link={initiative.lci_page_link}
-                      />
-                    </div>
-                  );
+                  if (initiative.lci_parent_id === 0) {
+                    return (
+                      <div key={initiativeID}>
+                        <ProjectListItem
+                          id={initiative.lci_id}
+                          description={initiative.lci_description}
+                          title={initiative.lci_name}
+                          owner={initiative.initiativeOwner}
+                          statesInvolved={initiative.statesInvolved}
+                          year={initiative.initiativeYear}
+                          link={initiative.lci_page_link}
+                        />
+                      </div>
+                    );
+                  }
+                  return <> </>;
                 })}
               </ul>
             </Col>
