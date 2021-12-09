@@ -18,6 +18,12 @@ const ProjectTypeSection = ({
   projectType,
   landscapeInitiativesData,
 }: IProjectTypeProps) => {
+  const initiativesWithWebMaps =
+    (landscapeInitiativesData?.data.length &&
+      landscapeInitiativesData.data.filter((initiative: any) => {
+        return initiative.lci_resource.length;
+      })) ||
+    [];
   const renderProjectDetails = () => {
     // Conservation Grants
     if (projectType.id === 1) {
@@ -65,10 +71,12 @@ const ProjectTypeSection = ({
           });
         return (
           <div className='landscape-intiatives margin-top-2'>
-            {/* Webmap only available for 'Landscape Conservation Initiatives'
-            and 'Working Lands for Wildlife' */}
+            {/* Webmap only available for 'Landscape Conservation Initiatives',
+            'Watersmart' and 'Working Lands for Wildlife' */}
             {selectedLandscapeInitiative === -1 ||
-            selectedLandscapeInitiative === 10 ? (
+            initiativesWithWebMaps.findIndex((initiative: any) => {
+              return initiative.lci_id === selectedLandscapeInitiative;
+            }) > 0 ? (
               <LandscapeMapContainer
                 landscapeInitiativesData={landscapeInitiativesData.data || []}
                 selectedLandscapeInitiative={selectedLandscapeInitiative}

@@ -129,7 +129,7 @@ const LandscapeInitiativeMap = ({
   }, [mapRef, selectedLandscapeInitiative]);
 
   useEffect(() => {
-    // Filter out layers if selectedLandscapeInitiative is Working Lands for Wildlife
+    // Filter out layers depending on which landscape initiative is selected
     mapRef.current.view.when(() => {
       mapRef.current.map.when(() => {
         if (mapRef.current.map.allLayers.length) {
@@ -138,6 +138,8 @@ const LandscapeInitiativeMap = ({
           ).items.filter((layer: Layer) => {
             return layer.type === 'feature';
           });
+
+          // Working Lands for Wildlife
           if (selectedLandscapeInitiative === 10) {
             let filteredLayers: Array<any> = [];
             filteredLayers = filterLandscapeInitiativeLayers(
@@ -147,6 +149,16 @@ const LandscapeInitiativeMap = ({
             setFilteredLayers(filteredLayers);
             mapRef.current.map.removeMany(filteredLayers);
           }
+          // WaterSmart
+          if (selectedLandscapeInitiative === 9) {
+            let filteredLayers: Array<any> = [];
+            filteredLayers = allFeatureLayers.filter((layer: any) => {
+              return !layer.id.startsWith('NWQI');
+            });
+            setFilteredLayers(filteredLayers);
+            mapRef.current.map.removeMany(filteredLayers);
+          }
+          // Defaualt 'Landscape Conservation Initiatives'
           if (selectedLandscapeInitiative === -1) {
             // Restore all layers
             mapRef.current.map.addMany(filteredOutLayers);
