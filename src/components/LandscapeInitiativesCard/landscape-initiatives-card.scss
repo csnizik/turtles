@@ -13,27 +13,28 @@
   @media (max-width: $medium-screen) {
     flex: 0 0 90%;
   }
-}
 
-.related-initiatives-name {
-  h4 {
-    font-weight: 800;
-    color: $nrcs-dark;
-    line-height: 1.61125rem;
-    margin-top: 0.625rem;
-    margin-bottom: 0;
+  .landscape-title {
+    display: flex;
+    align-items: center;
+    margin-top: 1.1875rem;
+
+    .related-initiatives-name {
+      a {
+        font-size: $h3-font-size;
+        font-weight: 800;
+        color: $nrcs-dark;
+        line-height: 1.61125rem;
+        margin-top: 0.625rem;
+        margin-bottom: 0;
+      }
+    }
   }
-}
 
-.related-initiatives-desc {
-  font-weight: $medium-light-weight;
-  color: $nrcs-dark;
-  line-height: 1.625rem;
-  margin-top: 1.25rem;
-}
-
-.top-title {
-  display: flex;
-  align-items: center;
-  margin-top: 1.1875rem;
+  .related-initiatives-desc {
+    font-weight: $medium-light-weight;
+    color: $nrcs-dark;
+    line-height: 1.625rem;
+    margin-top: 1.25rem;
+  }
 }

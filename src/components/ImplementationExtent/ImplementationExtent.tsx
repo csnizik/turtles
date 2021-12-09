@@ -17,16 +17,10 @@ const ImplementationExtent = ({
   data,
   isSuccess,
 }: IImplementationExtentProps) => {
-  const getHeaderText = () => {
-    const practiceName = (data && data.practiceName) || '';
-    if (practiceName) {
-      return `Support for ${practiceName} in the U.S`;
-    }
-    return practiceName;
-  };
-
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
 
+  const practiceName = (data && data.practiceName) || '';
+  
   const results = useGetPaymentScheduleLinksQuery(stateInfo?.stateCode);
   const data2 = results.data || [];
   const error2 = results.error;
@@ -34,6 +28,13 @@ const ImplementationExtent = ({
   const isSuccess2 = results.isSuccess;
   const isError2 = results.isError;
   const scheduleLink: any = data2[0]?.paymentLink || '';
+
+  const getHeaderText = () => {
+    if (practiceName) {
+      return `Support for ${practiceName} in ${stateInfo?.stateNameDisplay}`;
+    }
+    return practiceName;
+  };
 
   const renderObligations = () => {
     return (

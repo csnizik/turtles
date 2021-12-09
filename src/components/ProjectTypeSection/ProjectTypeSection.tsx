@@ -74,6 +74,7 @@ const ProjectTypeSection = ({
                 NRCS_CONSERVATION_INITIATIVES_URL
               }
               target='_blank'
+              title={foundInitiative?.lci_page_link_text || nrcsLinkText}
               rel='noreferrer'
             >
               {foundInitiative?.lci_page_link_text || nrcsLinkText}{' '}
@@ -94,6 +95,7 @@ const ProjectTypeSection = ({
                 ? subInitiative?.map((item: any) => (
                     /* eslint-disable */
                     <LandscapeInitiativesCard
+                      link={item.lci_page_link}
                       title={item.lci_name}
                       description={item.lci_description}
                     />

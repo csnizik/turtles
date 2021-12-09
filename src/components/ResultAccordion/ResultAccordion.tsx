@@ -101,7 +101,7 @@ const Accordion = () => {
   };
 
   return (
-    <>
+    <section className='result-accordion-container'>
       {isLoading && <Spinner />}
       {isError && error}
       {renderAccordion()}
@@ -110,7 +110,7 @@ const Accordion = () => {
           {t('search-results-page.no-practices-found')}
         </p>
       )}
-    </>
+    </section>
   );
 };
 
