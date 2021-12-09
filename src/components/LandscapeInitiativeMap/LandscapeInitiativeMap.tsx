@@ -39,6 +39,8 @@ const LandscapeInitiativeMap = ({
   const [filteredOutLayers, setFilteredLayers]: any = useState([]);
 
   useEffect(() => {
+    /*eslint consistent-return: 0 */
+
     if (mapRef && mapRef.current) {
       mapRef.current.map = new WebMap({
         portalItem: {
@@ -63,6 +65,10 @@ const LandscapeInitiativeMap = ({
       });
 
       mapRef.current.map.layers.add(stateFeatureLayer.current);
+
+      return () => {
+        mapRef.current.view.destroy();
+      };
     }
   }, [mapRef]);
 
