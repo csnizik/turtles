@@ -106,6 +106,7 @@ const ProjectTypeSection = ({
                 ? subInitiative?.map((item: any) => (
                     /* eslint-disable */
                     <LandscapeInitiativesCard
+                      link={item.lci_page_link}
                       title={item.lci_name}
                       description={item.lci_description}
                     />
