@@ -5,6 +5,9 @@ import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
 import Legend from '@arcgis/core/widgets/Legend';
 import Expand from '@arcgis/core/widgets/Expand';
 import Layer from '@arcgis/core/layers/Layer';
+import Graphic from '@arcgis/core/Graphic';
+import { currentState } from '../../Redux/Slice/stateSlice';
+import { useAppDispatch } from '../../Redux/hooks/hooks';
 import '@arcgis/core/assets/esri/themes/light/main.css';
 import {
   ALL_LANDSCAPE_INITIATIVES_PORTAL_URL,
@@ -37,6 +40,7 @@ const LandscapeInitiativeMap = ({
   const stateFeatureLayer = useRef({} as FeatureLayer);
   const legendRef = useRef({} as Expand);
   const [filteredOutLayers, setFilteredLayers]: any = useState([]);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     /*eslint consistent-return: 0 */
@@ -55,13 +59,14 @@ const LandscapeInitiativeMap = ({
         zoom: 4,
       });
 
+      //mapRef.current.view.popup = null;
       mapRef.current.view = view;
 
       stateFeatureLayer.current = new FeatureLayer({
         layerId: 1,
         outFields: ['STATEFP', 'NAME', 'STUSPS'],
         url: STATE_FEATURE_LAYER_URL,
-        visible: false,
+        visible: true,
       });
 
       mapRef.current.map.layers.add(stateFeatureLayer.current);
@@ -181,6 +186,42 @@ const LandscapeInitiativeMap = ({
       });
     }
   }, []);
+
+  // Handle map interactions
+  useEffect(() => {
+    mapRef.current.view.when(() => {
+      mapRef.current.view.on('pointer-up', (event) => {
+        mapRef.current.view.hitTest(event).then((response) => {
+          if (response.results.length) {
+            const graphicList: any = response.results.filter((item: any) => {
+              // check if the graphic belongs to the states layer
+              if (stateFeatureLayer.current) {
+                return item.graphic.layer === stateFeatureLayer.current;
+              }
+              return response.results;
+            });
+
+            if (graphicList.length) {
+              const selectedState: Graphic = graphicList[0].graphic;
+              const { attributes } = selectedState;
+              console.log('Attrs: ', selectedState.attributes);
+              // Set stateCode to the one selected:
+              dispatch(
+                currentState({
+                  stateNameDisplay: attributes.NAME,
+                  stateCode: attributes.STATEFP,
+                  stateAbbreviation: attributes.STUSPS,
+                })
+              );
+              mapRef.current.view.extent = selectedState?.geometry?.extent
+                .clone()
+                .expand(1.625);
+            }
+          }
+        });
+      });
+    });
+  }, [mapRef]);
 
   return null;
 };
