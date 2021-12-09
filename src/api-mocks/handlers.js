@@ -1,12 +1,10 @@
 import { rest } from 'msw';
-import { baseURL } from '../common/util/AxiosUtil';
 
+const baseURL = 'http://localhost';
 const postLandscapeInitiatives = `${baseURL}/landscapeInitiatives`;
 const postProjectSearchData = `${baseURL}/project/projectSearch`;
-
 const projHandler = rest.post(postProjectSearchData, async (req, res, ctx) => {
-  console.log(req.body);
-  res(
+  return res(
     ctx.json([
       {
         projectId: 71,
@@ -135,171 +133,170 @@ const projHandler = rest.post(postProjectSearchData, async (req, res, ctx) => {
   );
 });
 
-const initHandler = rest.post(postLandscapeInitiatives, async (req, res, ctx) =>
-  res(
-    ctx.json([
-      {
-        lci_id: 2,
-        lci_name: 'Joint Chiefs Landscape Restoration Partnership',
-        lci_resource: '',
-        lci_image_link: 'jclrp.map',
-        lci_page_link:
-          'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/programs/initiatives/?cid=stelprdb1244394',
-        lci_page_link_text:
-          'Go to the Joint Chiefs Landscape Restoration Partnership page for detailed information',
-        lci_description: [
-          'Under the Joint Chiefs’ Landscape Restoration Partnership (JCLRP), NRCS and the U.S. Forest Service are working together to target conservation and restoration to measurably improve the health and resiliency of forest ecosystems where public and private lands meet to provide for long-term natural resources and production benefits. Priorities for the effort are:\r',
-          ' • Reducing and mitigating wildfire threats to communities and landowners. \r',
-          ' • Protecting water quality and supply for communities and industry. \r',
-          ' • Improving habitat conditions for at-risk species.\r',
-          '',
-        ],
-        lci_parent_id: null,
-      },
-      {
-        lci_id: 7,
-        lci_name: 'National Water Quality Initiative',
-        lci_resource: '',
-        lci_image_link: 'jclrp.map',
-        lci_page_link:
-          'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/programs/initiatives/?cid=stelprdb1047761',
-        lci_page_link_text:
-          'Go to the National Water Quality Initiative page for detailed information',
-        lci_description: [
-          'The purpose of NWQI is to work with producers and landowners to implement voluntary conservation practices as part of areawide efforts to improve water quality in high-priority areas. These areas are defined primarily by subwatersheds (HUC 12) and referred to in this guidance generally as NWQI watersheds.  NWQI is designed to help individual agricultural producers take actions to reduce the runoff of sediment, nutrients, and pathogens into surface waters where water quality is a critical concern. Practice implementation is focused to identified areas of the watershed most in need of treatment. NWQI also assists with practice implementation on priority source water protection areas (SWPAs), where the drinking water source is surface or ground water. In this case, NWQI addresses identified threats to drinking water, either to remediate impairments or protect clean sources.\r',
-          'NWQI is governed by a board of directors chaired by a regional conservationist (RC) and composed of select States from each Region. All NWQI guidance and instructions are reviewed by the board, assisted by the initiative coordinator.\r',
-          '',
-        ],
-        lci_parent_id: null,
-      },
-      {
-        lci_id: 9,
-        lci_name: 'WaterSMART',
-        lci_resource: '821a9b7fe7d44d92bb0ce60c0d5bcb8b',
-        lci_image_link: 'jclrp.map',
-        lci_page_link:
-          'https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/programs/financial/eqip/?cid=nrcseprd1685421',
-        lci_page_link_text:
-          'Go to the WaterSMART page for detailed information',
-        lci_description: [
-          'The purpose of WSI is to assist producers and landowners in implementing voluntary conservation that is complimentary to the water conservation assistance provided through the Department of Interior’s Bureau of Reclamation (Reclamation) Sustain and Manage America’s Resources for Tomorrow (WaterSMART) program. Where Reclamation supports water conservation planning and improvement projects by States, tribes, local governments, irrigation water companies, and other organizations, NRCS targets assistance to agricultural producers to improve water conservation and irrigation water use efficiency on their operation.\r',
-          'Priorities for the joint effort are—\r',
-          '    • Improving irrigation water use efficiency\r',
-          '    • Preventing groundwater depletion\r',
-          '    • Preventing surface water depletion\r',
-          '    • Optimal use of naturally available moisture and prevention of drought stress',
-        ],
-        lci_parent_id: null,
-      },
-      {
-        lci_id: 10,
-        lci_name: 'Working Lands for Wildlife',
-        lci_resource: '821a9b7fe7d44d92bb0ce60c0d5bcb8b',
-        lci_image_link: 'wlfw.map',
-        lci_page_link:
-          'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/fishwildlife/?cid=stelprdb1046975',
-        lci_page_link_text:
-          'Go to the Working Lands for Wildlife page for detailed information',
-        lci_description: [
-          'The WLFW initiative is a partnership with the U.S. Fish and Wildlife Service (FWS) that targets conservation efforts to improve agricultural and forest productivity and enhance wildlife habitat. Nine species are used as barometers of success because their habitat needs are representative of healthy, functioning ecosystems where conservation efforts benefit a much broader suite of species. NRCS provides technical and financial assistance to participants who voluntarily make improvements to working lands.\r',
-          'In the event any of the species are listed, the FWS is committed to validating the conference reports and opinions (linked below) as biological opinions for NRCS under section 7 of the Endangered Species Act (ESA), and exempting any incidental take as described in the biological opinions associated with implementing the specified conservation practices. As a result, the participants will know that the conservation practices will continue to benefit wildlife for as long as they are implemented, and that any ESA issues associated with their implementation have been already addressed in full. Thus, FWS provides regulatory predictability relative to the ESA such that no matter what the legal status of a species, participants may have the peace of mind to keep their working lands working with NRCS conservation systems in place.',
-        ],
-        lci_parent_id: null,
-      },
-      {
-        lci_id: 11,
-        lci_name: 'Golden-Winged Warbler',
-        lci_resource: '',
-        lci_image_link: 'goldenwingedwarbler.map',
-        lci_page_link:
-          'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/fishwildlife/?cid=stelprdb1046990',
-        lci_page_link_text:
-          'Go to the Golden-Winged Warbler page for detailed information',
-        lci_description: [
-          'The golden-winged warbler is a nationally identified target species of the Working Lands for Wildlife (WLFW) partnership, a collaborative approach to conserve habitat on working lands. From 2012 to 2016, WLFW enabled producers to conserve or create more than 13,000 acres of early successional habitat through the implementation of science-based habitat guidelines developed especially for the golden-winged warbler. By the end of 2021, the agency aims to help landowners manage for an additional 15,000 acres of habitat.\r',
-          'WLFW provides technical and financial assistance through the Environmental Quality Incentives Program, which is funded through the Farm Bill, the largest funding source for wildlife habitat conservation on private lands. Habitat restored for the golden-winged warbler benefits many other species, including songbirds like indigo bunting, gray catbird and prairie warbler as well as game species like American woodcock, cottontail, wild turkey, deer and grouse.',
-        ],
-        lci_parent_id: 10,
-      },
-      {
-        lci_id: 12,
-        lci_name: 'Gopher Tortoise',
-        lci_resource: '',
-        lci_image_link: 'gophertortoise.map',
-        lci_page_link:
-          'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/fishwildlife/?cid=stelprdb1047006',
-        lci_page_link_text:
-          'Go to the Gopher Tortoise page for detailed information',
-        lci_description: [
-          'The gopher tortoise is a nationally identified target species of the Working Lands for Wildlife (WLFW) partnership, a collaborative approach to conserve habitat on working lands. Since 2012, WLFW has enabled producers to conserve or create more than 278,000 acres of longleaf pine forests. WLFW provides technical and financial assistance through the Environmental Quality Incentives Program, which is funded through the Farm Bill, the largest funding source for wildlife habitat conservation on private lands. Additionally, NRCS is working to restore longleaf pine across its historic range -- from Texas to Virginia – through the Longleaf Pine Initiative. Since 2010, more than 278,000 acres of forests have been restored or enhanced.\r',
-          ' Habitat restored for the gopher tortoise benefits many other species, including red cockaded woodpecker, black pine snake, bobwhite quail, white-tailed deer, turkey and dusky gopher frog. In total, 28 threatened and endangered species are dependent on longleaf pine forests.',
-        ],
-        lci_parent_id: 10,
-      },
-      {
-        lci_id: 13,
-        lci_name: 'Lesser Prairie-Chicken',
-        lci_resource: '',
-        lci_image_link: 'lesserprairiechicken.map',
-        lci_page_link:
-          'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/fishwildlife/?cid=stelprdb1047028',
-        lci_page_link_text:
-          'Go to the Lesser Prairie-Chicken page for detailed information',
-        lci_description: [
-          'The lesser prairie-chicken is a nationally identified target species of the Working Lands for Wildlife (WLFW) partnership, a collaborative approach to conserve habitat while keeping working lands working. From 2010 to 2015, the Lesser Prairie-Chicken Initiative (part of the WLFW family) enabled producers to conserve more than 1 million acres of prime habitat. From 2016 to 2018, NRCS aims to conserve 500,000 additional acres.\r',
-          ' Through WLFW, NRCS targets conservation efforts where the returns are highest by targeting threats to the bird. For the lesser prairie-chicken, the loss and fragmentation of habitat is caused by invading mesquite and redcedars, poor grassland and prairie health and conversion to cropland. WLFW is able to provide technical and financial assistance through the Environmental Quality Incentives Program and Agricultural Conservation Easement Program, two programs funded through the Farm Bill.',
-        ],
-        lci_parent_id: 10,
-      },
-      {
-        lci_id: 14,
-        lci_name: 'Monarch Butterfly',
-        lci_resource: '',
-        lci_image_link: 'monarchbutterfly.map',
-        lci_page_link:
-          'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/pollinate/?cid=nrcseprd402207',
-        lci_page_link_text:
-          'Go to the Monarch Butterfly page for detailed information',
-        lci_description: [
-          'The monarch butterfly is one of the most iconic butterflies in North America and is known in part for its annual multi-generational migration from overwintering sites in central Mexico and coastal California to as far north as Canada. Multiple critical population stressors including the loss and degradation of habitat across the species range have led to a significant decrease in the number of monarchs in the U.S. over the past few decades.',
-        ],
-        lci_parent_id: 10,
-      },
-      {
-        lci_id: 15,
-        lci_name: 'Southwestern Willow Flycatcher',
-        lci_resource: '',
-        lci_image_link: 'swwillowflycatcher.map',
-        lci_page_link:
-          'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/fishwildlife/?cid=stelprdb1047041',
-        lci_page_link_text:
-          'Go to the Southwestern Willow Flycatcher page for detailed information',
-        lci_description: [
-          'The southwestern willow flycatcher is a nationally identified target species of the Working Lands for Wildlife (WLFW) partnership, a collaborative approach to conserve habitat on working lands. Since 2012, WLFW enabled producers to conserve or create more than 8,000 acres of riparian areas and adjacent upland habitat. WLFW provides technical and financial assistance through the Environmental Quality Incentives Program, which is funded through the Farm Bill, the largest funding source for wildlife habitat conservation on private lands.\r',
-          ' Through WLFW, NRCS targets conservation efforts where the returns are highest by targeting threats to the bird. The flycatcher nests in native trees and shrubs where available but also nests in thickets dominated by the non-native invasive species like tamarisk and Russian olive. Efforts to control non-native species can be detrimental to flycatchers, especially if those plants are removed in places lacking in suitable native riparian habitat.',
-        ],
-        lci_parent_id: 10,
-      },
-      {
-        lci_id: 16,
-        lci_name: 'Sage Grouse',
-        lci_resource: '',
-        lci_image_link: 'sagegrouse.map',
-        lci_page_link:
-          'https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/plantsanimals/fishwildlife/?cid=steldevb1027671',
-        lci_page_link_text:
-          'Go to the Sage Grouse page for detailed information',
-        lci_description: [
-          'NRCS launched the Sage Grouse Initiative (SGI) in 2010 as a highly targeted and science-based landscape approach to proactively conserve sage-grouse and sustain the working rangelands that support western ranching economies. This innovative partnership of ranchers, agencies, universities, non-profit groups and businesses all embrace a common vision – achieving wildlife conservation through sustainable ranching.',
-        ],
-        lci_parent_id: 10,
-      },
-    ])
-  )
+const initHandler = rest.post(
+  postLandscapeInitiatives,
+  async (req, res, ctx) => {
+    return res(
+      ctx.json([
+        {
+          lci_id: 2,
+          lci_name: 'Joint Chiefs Landscape Restoration Partnership',
+          lci_resource: '',
+          lci_image_link: 'jclrp.map',
+          lci_page_link:
+            'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/programs/initiatives/?cid=stelprdb1244394',
+          lci_page_link_text:
+            'Go to the Joint Chiefs Landscape Restoration Partnership page for detailed information',
+          lci_description: [
+            'Under the Joint Chiefs’ Landscape Restoration Partnership (JCLRP), NRCS and the U.S. Forest Service are working together to target conservation and restoration to measurably improve the health and resiliency of forest ecosystems where public and private lands meet to provide for long-term natural resources and production benefits. Priorities for the effort are:\r',
+            ' • Reducing and mitigating wildfire threats to communities and landowners. \r',
+            ' • Protecting water quality and supply for communities and industry. \r',
+            ' • Improving habitat conditions for at-risk species.\r',
+            '',
+          ],
+          lci_parent_id: null,
+        },
+        {
+          lci_id: 7,
+          lci_name: 'National Water Quality Initiative',
+          lci_resource: '',
+          lci_image_link: 'jclrp.map',
+          lci_page_link:
+            'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/programs/initiatives/?cid=stelprdb1047761',
+          lci_page_link_text:
+            'Go to the National Water Quality Initiative page for detailed information',
+          lci_description: [
+            'The purpose of NWQI is to work with producers and landowners to implement voluntary conservation practices as part of areawide efforts to improve water quality in high-priority areas. These areas are defined primarily by subwatersheds (HUC 12) and referred to in this guidance generally as NWQI watersheds.  NWQI is designed to help individual agricultural producers take actions to reduce the runoff of sediment, nutrients, and pathogens into surface waters where water quality is a critical concern. Practice implementation is focused to identified areas of the watershed most in need of treatment. NWQI also assists with practice implementation on priority source water protection areas (SWPAs), where the drinking water source is surface or ground water. In this case, NWQI addresses identified threats to drinking water, either to remediate impairments or protect clean sources.\r',
+            'NWQI is governed by a board of directors chaired by a regional conservationist (RC) and composed of select States from each Region. All NWQI guidance and instructions are reviewed by the board, assisted by the initiative coordinator.\r',
+            '',
+          ],
+          lci_parent_id: null,
+        },
+        {
+          lci_id: 9,
+          lci_name: 'WaterSMART',
+          lci_resource: '821a9b7fe7d44d92bb0ce60c0d5bcb8b',
+          lci_image_link: 'jclrp.map',
+          lci_page_link:
+            'https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/programs/financial/eqip/?cid=nrcseprd1685421',
+          lci_page_link_text:
+            'Go to the WaterSMART page for detailed information',
+          lci_description: [
+            'The purpose of WSI is to assist producers and landowners in implementing voluntary conservation that is complimentary to the water conservation assistance provided through the Department of Interior’s Bureau of Reclamation (Reclamation) Sustain and Manage America’s Resources for Tomorrow (WaterSMART) program. Where Reclamation supports water conservation planning and improvement projects by States, tribes, local governments, irrigation water companies, and other organizations, NRCS targets assistance to agricultural producers to improve water conservation and irrigation water use efficiency on their operation.\r',
+            'Priorities for the joint effort are—\r',
+            '    • Improving irrigation water use efficiency\r',
+            '    • Preventing groundwater depletion\r',
+            '    • Preventing surface water depletion\r',
+            '    • Optimal use of naturally available moisture and prevention of drought stress',
+          ],
+          lci_parent_id: null,
+        },
+        {
+          lci_id: 10,
+          lci_name: 'Working Lands for Wildlife',
+          lci_resource: '821a9b7fe7d44d92bb0ce60c0d5bcb8b',
+          lci_image_link: 'wlfw.map',
+          lci_page_link:
+            'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/fishwildlife/?cid=stelprdb1046975',
+          lci_page_link_text:
+            'Go to the Working Lands for Wildlife page for detailed information',
+          lci_description: [
+            'The WLFW initiative is a partnership with the U.S. Fish and Wildlife Service (FWS) that targets conservation efforts to improve agricultural and forest productivity and enhance wildlife habitat. Nine species are used as barometers of success because their habitat needs are representative of healthy, functioning ecosystems where conservation efforts benefit a much broader suite of species. NRCS provides technical and financial assistance to participants who voluntarily make improvements to working lands.\r',
+            'In the event any of the species are listed, the FWS is committed to validating the conference reports and opinions (linked below) as biological opinions for NRCS under section 7 of the Endangered Species Act (ESA), and exempting any incidental take as described in the biological opinions associated with implementing the specified conservation practices. As a result, the participants will know that the conservation practices will continue to benefit wildlife for as long as they are implemented, and that any ESA issues associated with their implementation have been already addressed in full. Thus, FWS provides regulatory predictability relative to the ESA such that no matter what the legal status of a species, participants may have the peace of mind to keep their working lands working with NRCS conservation systems in place.',
+          ],
+          lci_parent_id: null,
+        },
+        {
+          lci_id: 11,
+          lci_name: 'Golden-Winged Warbler',
+          lci_resource: '',
+          lci_image_link: 'goldenwingedwarbler.map',
+          lci_page_link:
+            'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/fishwildlife/?cid=stelprdb1046990',
+          lci_page_link_text:
+            'Go to the Golden-Winged Warbler page for detailed information',
+          lci_description: [
+            'The golden-winged warbler is a nationally identified target species of the Working Lands for Wildlife (WLFW) partnership, a collaborative approach to conserve habitat on working lands. From 2012 to 2016, WLFW enabled producers to conserve or create more than 13,000 acres of early successional habitat through the implementation of science-based habitat guidelines developed especially for the golden-winged warbler. By the end of 2021, the agency aims to help landowners manage for an additional 15,000 acres of habitat.\r',
+            'WLFW provides technical and financial assistance through the Environmental Quality Incentives Program, which is funded through the Farm Bill, the largest funding source for wildlife habitat conservation on private lands. Habitat restored for the golden-winged warbler benefits many other species, including songbirds like indigo bunting, gray catbird and prairie warbler as well as game species like American woodcock, cottontail, wild turkey, deer and grouse.',
+          ],
+          lci_parent_id: 10,
+        },
+        {
+          lci_id: 12,
+          lci_name: 'Gopher Tortoise',
+          lci_resource: '',
+          lci_image_link: 'gophertortoise.map',
+          lci_page_link:
+            'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/fishwildlife/?cid=stelprdb1047006',
+          lci_page_link_text:
+            'Go to the Gopher Tortoise page for detailed information',
+          lci_description: [
+            'The gopher tortoise is a nationally identified target species of the Working Lands for Wildlife (WLFW) partnership, a collaborative approach to conserve habitat on working lands. Since 2012, WLFW has enabled producers to conserve or create more than 278,000 acres of longleaf pine forests. WLFW provides technical and financial assistance through the Environmental Quality Incentives Program, which is funded through the Farm Bill, the largest funding source for wildlife habitat conservation on private lands. Additionally, NRCS is working to restore longleaf pine across its historic range -- from Texas to Virginia – through the Longleaf Pine Initiative. Since 2010, more than 278,000 acres of forests have been restored or enhanced.\r',
+            ' Habitat restored for the gopher tortoise benefits many other species, including red cockaded woodpecker, black pine snake, bobwhite quail, white-tailed deer, turkey and dusky gopher frog. In total, 28 threatened and endangered species are dependent on longleaf pine forests.',
+          ],
+          lci_parent_id: 10,
+        },
+        {
+          lci_id: 13,
+          lci_name: 'Lesser Prairie-Chicken',
+          lci_resource: '',
+          lci_image_link: 'lesserprairiechicken.map',
+          lci_page_link:
+            'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/fishwildlife/?cid=stelprdb1047028',
+          lci_page_link_text:
+            'Go to the Lesser Prairie-Chicken page for detailed information',
+          lci_description: [
+            'The lesser prairie-chicken is a nationally identified target species of the Working Lands for Wildlife (WLFW) partnership, a collaborative approach to conserve habitat while keeping working lands working. From 2010 to 2015, the Lesser Prairie-Chicken Initiative (part of the WLFW family) enabled producers to conserve more than 1 million acres of prime habitat. From 2016 to 2018, NRCS aims to conserve 500,000 additional acres.\r',
+            ' Through WLFW, NRCS targets conservation efforts where the returns are highest by targeting threats to the bird. For the lesser prairie-chicken, the loss and fragmentation of habitat is caused by invading mesquite and redcedars, poor grassland and prairie health and conversion to cropland. WLFW is able to provide technical and financial assistance through the Environmental Quality Incentives Program and Agricultural Conservation Easement Program, two programs funded through the Farm Bill.',
+          ],
+          lci_parent_id: 10,
+        },
+        {
+          lci_id: 14,
+          lci_name: 'Monarch Butterfly',
+          lci_resource: '',
+          lci_image_link: 'monarchbutterfly.map',
+          lci_page_link:
+            'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/pollinate/?cid=nrcseprd402207',
+          lci_page_link_text:
+            'Go to the Monarch Butterfly page for detailed information',
+          lci_description: [
+            'The monarch butterfly is one of the most iconic butterflies in North America and is known in part for its annual multi-generational migration from overwintering sites in central Mexico and coastal California to as far north as Canada. Multiple critical population stressors including the loss and degradation of habitat across the species range have led to a significant decrease in the number of monarchs in the U.S. over the past few decades.',
+          ],
+          lci_parent_id: 10,
+        },
+        {
+          lci_id: 15,
+          lci_name: 'Southwestern Willow Flycatcher',
+          lci_resource: '',
+          lci_image_link: 'swwillowflycatcher.map',
+          lci_page_link:
+            'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/fishwildlife/?cid=stelprdb1047041',
+          lci_page_link_text:
+            'Go to the Southwestern Willow Flycatcher page for detailed information',
+          lci_description: [
+            'The southwestern willow flycatcher is a nationally identified target species of the Working Lands for Wildlife (WLFW) partnership, a collaborative approach to conserve habitat on working lands. Since 2012, WLFW enabled producers to conserve or create more than 8,000 acres of riparian areas and adjacent upland habitat. WLFW provides technical and financial assistance through the Environmental Quality Incentives Program, which is funded through the Farm Bill, the largest funding source for wildlife habitat conservation on private lands.\r',
+            ' Through WLFW, NRCS targets conservation efforts where the returns are highest by targeting threats to the bird. The flycatcher nests in native trees and shrubs where available but also nests in thickets dominated by the non-native invasive species like tamarisk and Russian olive. Efforts to control non-native species can be detrimental to flycatchers, especially if those plants are removed in places lacking in suitable native riparian habitat.',
+          ],
+          lci_parent_id: 10,
+        },
+        {
+          lci_id: 16,
+          lci_name: 'Sage Grouse',
+          lci_resource: '',
+          lci_image_link: 'sagegrouse.map',
+          lci_page_link:
+            'https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/plantsanimals/fishwildlife/?cid=steldevb1027671',
+          lci_page_link_text:
+            'Go to the Sage Grouse page for detailed information',
+          lci_description: [
+            'NRCS launched the Sage Grouse Initiative (SGI) in 2010 as a highly targeted and science-based landscape approach to proactively conserve sage-grouse and sustain the working rangelands that support western ranching economies. This innovative partnership of ranchers, agencies, universities, non-profit groups and businesses all embrace a common vision – achieving wildlife conservation through sustainable ranching.',
+          ],
+          lci_parent_id: 10,
+        },
+      ])
+    );
+  }
 );
-
-initHandler.start({
-  onUnhandledRequest: 'warn',
-});
 
 export const handlers = [initHandler, projHandler];

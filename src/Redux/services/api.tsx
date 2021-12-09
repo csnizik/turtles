@@ -107,7 +107,6 @@ export const api = createApi({
     }),
   }),
 });
-
 export const {
   useGetResourcesQuery,
   useGetResourceConcernQuery,

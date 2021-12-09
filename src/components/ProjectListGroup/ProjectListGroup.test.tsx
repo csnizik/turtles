@@ -24,7 +24,9 @@ describe('Verify ProductListGroup is rendered correctly', () => {
         <ProjectListGroup isMapDisplayed={false} selectedStateName='' />
       </Provider>
     );
-    await findByText('Test success');
+    await findByText(
+      'A New Technology for Threatened and Endangered Species Monitoring in the San Luis Valley of Colorado: Remote, Passive, Acoustic Monitoring for Southwestern Willow Flycatcher, Yellow-billed Cuckoo, and Northern Leopard Frogs'
+    );
   });
 });
 

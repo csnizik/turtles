@@ -52,7 +52,6 @@ const ProjectListGroup = ({
     isSuccess: pisSuccess,
     isError: pisError,
   } = usePostProjectSearchDataQuery(searchInputData);
-
   const { data: initiativesList } =
     usePostLandscapeInitiativesQuery(searchInputData);
   const { t } = useTranslation();
