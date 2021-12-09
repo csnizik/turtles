@@ -14,7 +14,6 @@ import {
   IRCRequestBody,
   IAssociatedPracticeList,
   IProjectType,
-  ILandscapeInitiatives,
 } from '../../common/types';
 
 export const api = createApi({
@@ -69,10 +68,7 @@ export const api = createApi({
       }),
     }),
     //!Post request for Landscape Initiatives
-    postLandscapeInitiatives: builder.query<
-      ILandscapeInitiatives[],
-      ILandscapeInitiatives
-    >({
+    postLandscapeInitiatives: builder.query<ISearchData[], ISearchData>({
       query: (data) => ({
         url: '/landscapeInitiatives',
         method: 'POST',

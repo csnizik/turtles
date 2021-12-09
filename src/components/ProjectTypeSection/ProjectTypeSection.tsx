@@ -5,6 +5,7 @@ import {
   landscapeInitiativeMap,
 } from './constants';
 import './project-type.scss';
+import LandscapeMapContainer from '../LandscapeInitiativeMap/LandscapeMapContainer';
 
 interface IProjectTypeProps {
   selectedLandscapeInitiative: number;
@@ -52,21 +53,31 @@ const ProjectTypeSection = ({
         landscapeInitiativeMap
       ).find((initiative) => initiative.id === 0);
       if (projectType.id === 2 || selectedLandscapeInitiative > 0) {
-        const foundInitiative = landscapeInitiativesData.data.find(
-          (initiative) => {
+        const foundInitiative =
+          landscapeInitiativesData?.data &&
+          landscapeInitiativesData.data.find((initiative) => {
             return initiative.lci_id === selectedLandscapeInitiative;
-          }
-        );
-        const subInitiative = landscapeInitiativesData?.data.filter(
-          (parentId: any) => {
+          });
+        const subInitiative =
+          landscapeInitiativesData?.data &&
+          landscapeInitiativesData.data.filter((parentId: any) => {
             return parentId.lci_parent_id !== null;
-          }
-        );
+          });
         return (
           <div className='landscape-intiatives margin-top-2'>
-            <div className='landscape-img-placeholder margin-bottom-3'>
-              <h3 className='padding-3'>Placeholder for webmap or image</h3>
-            </div>
+            {/* Webmap only available for 'Landscape Conservation Initiatives'
+            and 'Working Lands for Wildlife' */}
+            {selectedLandscapeInitiative === -1 ||
+            selectedLandscapeInitiative === 10 ? (
+              <LandscapeMapContainer
+                landscapeInitiativesData={landscapeInitiativesData.data || []}
+                selectedLandscapeInitiative={selectedLandscapeInitiative}
+              />
+            ) : (
+              <div className='landscape-img-placeholder margin-bottom-3'>
+                <h3 className='padding-3'>Placeholder for webmap or image</h3>
+              </div>
+            )}
             <a
               aria-label='Link to NRCS website for landscape initiatives'
               href={
