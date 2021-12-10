@@ -102,6 +102,7 @@ const ProjectsContainer = () => {
       (project: any) => selectedProjectCard === project.id
     );
     if (!selectedProjectType) return null;
+    console.log(selectedProjectType);
     return (
       <ProjectTypeSection
         selectedLandscapeInitiative={selectedLandscapeInitiative}
