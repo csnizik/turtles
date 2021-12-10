@@ -60,7 +60,6 @@ const LandscapeInitiativeMap = ({
         zoom: 4,
       });
 
-      //mapRef.current.view.popup = null;
       mapRef.current.view = view;
 
       stateFeatureLayer.current = new FeatureLayer({
