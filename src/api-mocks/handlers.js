@@ -3,6 +3,44 @@ import { rest } from 'msw';
 const baseURL = 'http://localhost';
 const postLandscapeInitiatives = `${baseURL}/landscapeInitiatives`;
 const postProjectSearchData = `${baseURL}/project/projectSearch`;
+const postSearchData = `${baseURL}/practiceSearch`;
+
+const practiceHandler = rest.post(postSearchData, async (req, res, ctx) => {
+  return res(
+    ctx.json([
+      {
+        practiceCategoryId: 3,
+        stateAbbr: 'US',
+        landUseName: '',
+        conservationPracticeSelected: 'Cropland Soil Health & Sustainability',
+        resourceConcernSelected: null,
+        practiceCategoryName: 'Cropland Soil Health & Sustainability',
+        practiceCategoryDescription:
+          'Farmers put in place a Soil Health Management System (SHMS) to sustain or improve soil health. A SHMS is a collection of conservation practices that addresses four soil health management principles: minimize disturbance, maximize soil cover, maximize biodiversity and maximize presence of living roots. This category includes NRCS supported practices that can be combined to implement a SHMS on cropland.',
+        practiceCategoryLink: 'Cropland Soil Health & Sustainability',
+        practices: [
+          {
+            practiceId: 12,
+            practiceName: 'Conservation Crop Rotation',
+            practiceDescription:
+              'Crops included in conservation crop rotation include high-residue producing crops such as corn or wheat in rotation with low-residueproducing crops such as vegetables or soybeans. The rotation may also involve growing forage crops in rotation with other field crops. Crop rotations vary with soil type, crops produced, farming operations, and how the crop residue is managed. The most effective crops for soil improvement are fibrous-rooted high-residue producing crops such as grass and small grain. Perennial plants used for forage are very effective in crop rotations due to increases in organic matter and reduced soil erosion. In addition, crop rotations help break insect, disease, and weed cycles. Rotations add diversity to farm operations and often reduce economic and environmental risks.',
+            practiceLink:
+              'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/technical/cp/ncps/',
+          },
+          {
+            practiceId: 20,
+            practiceName: 'Cover Crop',
+            practiceDescription:
+              'Cover and green manure crops are grown on land where seasonal or long-term benefits of a cover crop are needed. This practice is used to control erosion, add fertility and organic material to the soil, improve soil tilth, increase infiltration and aeration of the soil, and improve overall soil health. The practice is also used to increase populations of bees for pollination purposes. Cover and green manure crops have beneficial effects on water quantity and quality. Cover crops have a filtering effect on movement of sediment, pathogens, and dissolved and sediment-attached pollutants. Operation and maintenance of cover crops include: controlling weeds by mowing or by using other pest management techniques, and managing for the efficient use of soil moisture by selecting water-efficient plant species and terminating the cover crop before excessive transpiration. Use of the cover crop as a green manure crop to cycle nutrients will impact when to terminate the cover to match release of nutrient with uptake by following cash crop.',
+            practiceLink:
+              'https://www.nrcs.usda.gov/Internet/FSE_DOCUMENTS/stelprdb1263481.pdf',
+          },
+        ],
+      },
+    ])
+  );
+});
+
 const projHandler = rest.post(postProjectSearchData, async (req, res, ctx) => {
   return res(
     ctx.json([
@@ -299,4 +337,4 @@ const initHandler = rest.post(
   }
 );
 
-export const handlers = [initHandler, projHandler];
+export const handlers = [initHandler, projHandler, practiceHandler];
