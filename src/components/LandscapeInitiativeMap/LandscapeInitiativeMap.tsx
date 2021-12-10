@@ -142,7 +142,6 @@ const LandscapeInitiativeMap = ({
           // Working Lands for Wildlife
           if (selectedLandscapeInitiative === 10) {
             let filteredLayers: Array<any> = [];
-            mapRef.current.map.addMany(allFeatureLayers);
             filteredLayers = filterLandscapeInitiativeLayers(
               allFeatureLayers,
               workingLandsForWildlifeOptions
@@ -153,7 +152,6 @@ const LandscapeInitiativeMap = ({
           // WaterSmart
           if (selectedLandscapeInitiative === 9) {
             let filteredLayers: Array<any> = [];
-            mapRef.current.map.addMany(allFeatureLayers);
             filteredLayers = allFeatureLayers.filter((layer: any) => {
               return layer.title !== 'National Water Quality Initiative';
             });
