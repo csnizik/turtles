@@ -11,7 +11,6 @@ import {
   LANDSCAPE_VIEW_DIV,
   landscapeInitiativeToLegendMap,
   landscapeViewConstraints,
-  workingLandsForWildlifeOptions,
 } from './constants';
 import { STATE_FEATURE_LAYER_URL } from '../../common/constants';
 import { ILandscapeInitiative } from '../../common/types';
@@ -140,10 +139,9 @@ const LandscapeInitiativeMap = ({
           });
           if (selectedLandscapeInitiative === 10) {
             let filteredLayers: Array<any> = [];
-            filteredLayers = filterLandscapeInitiativeLayers(
-              allFeatureLayers,
-              workingLandsForWildlifeOptions
-            );
+            filteredLayers = allFeatureLayers.filter((layer: any) => {
+              return !layer.title.endsWith('(WLFW)');
+            });
             setFilteredLayers(filteredLayers);
             mapRef.current.map.removeMany(filteredLayers);
           }
