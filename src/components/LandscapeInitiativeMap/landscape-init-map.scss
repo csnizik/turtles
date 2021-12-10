@@ -1,0 +1,13 @@
+#landscapeViewDiv {
+  height: 68vh;
+  width: 100%;
+  margin: 1rem 0rem 2rem 0rem;
+}
+
+.esri-legend.esri-widget.esri-widget--panel {
+  max-height: 12.5rem;
+  .esri-legend__service {
+    display: flex;
+    align-items: center;
+  }
+}
