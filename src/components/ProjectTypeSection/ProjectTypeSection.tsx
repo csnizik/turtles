@@ -18,17 +18,14 @@ const ProjectTypeSection = ({
   projectType,
   landscapeInitiativesData,
 }: IProjectTypeProps) => {
-  const initiativesWithWebMaps =
-    (landscapeInitiativesData?.data.length &&
-      landscapeInitiativesData.data.filter((initiative: any) => {
-        return initiative.lci_resource.length;
-      })) ||
-    [];
   const renderProjectDetails = () => {
     // Conservation Grants
     if (projectType.id === 1) {
       return (
-        <div className='project-type-details'>
+        <div
+          className='project-type-details'
+          data-testid='project-type-details'
+        >
           <p className='margin-top-3'>{projectType.paragraphDescription}</p>
           <p>
             Visit the{' '}
@@ -70,20 +67,25 @@ const ProjectTypeSection = ({
             return parentId.lci_parent_id !== null;
           });
         return (
-          <div className='landscape-intiatives margin-top-2'>
+          <div
+            className='landscape-intiatives margin-top-2'
+            data-testid='landscape-intiatives-details'
+          >
             {/* Webmap only available for 'Landscape Conservation Initiatives',
             'Watersmart' and 'Working Lands for Wildlife' */}
             {selectedLandscapeInitiative === -1 ||
-            initiativesWithWebMaps.findIndex((initiative: any) => {
-              return initiative.lci_id === selectedLandscapeInitiative;
-            }) > 0 ? (
+            selectedLandscapeInitiative === 9 ||
+            selectedLandscapeInitiative === 10 ? (
               <LandscapeMapContainer
                 landscapeInitiativesData={landscapeInitiativesData.data || []}
                 selectedLandscapeInitiative={selectedLandscapeInitiative}
               />
             ) : (
-              <div className='landscape-img-placeholder margin-bottom-3'>
-                <h3 className='padding-3'>Placeholder for webmap or image</h3>
+              <div className='landscape-img'>
+                <img
+                  src={foundInitiative.lci_image_link}
+                  alt={foundInitiative.lci_name}
+                />
               </div>
             )}
             <a
@@ -130,7 +132,7 @@ const ProjectTypeSection = ({
 
   const renderPageTitle = () => {
     if (selectedLandscapeInitiative > 0) {
-      const foundInitiative = landscapeInitiativesData.data.find(
+      const foundInitiative = landscapeInitiativesData?.data?.find(
         (initiative) => {
           return initiative.lci_id === selectedLandscapeInitiative;
         }
@@ -141,7 +143,7 @@ const ProjectTypeSection = ({
   };
 
   return (
-    <div className='project-type-section'>
+    <div className='project-type-section' data-testid='project-type-overview'>
       {renderPageTitle()}
       {renderProjectDetails()}
     </div>
