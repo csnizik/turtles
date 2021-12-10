@@ -26,14 +26,3 @@ export const landscapeInitiativeToLegendMap = {
   17: 'Bog Turtle',
   18: 'New England Cottontail',
 };
-
-export const workingLandsForWildlifeOptions = [
-  'Golden_Winged_Warbler',
-  'Gopher_Tortoise',
-  'Lesser_Prairie_Chicken_Initiative',
-  'Monarch_Butterfly_Project',
-  'Southwestern Willow Flycatcher',
-  'Sage_Grouse',
-  'Bog Turtle',
-  'New England Cottontail',
-];
