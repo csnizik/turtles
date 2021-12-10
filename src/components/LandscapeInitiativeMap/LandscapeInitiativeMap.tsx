@@ -19,6 +19,7 @@ import {
 import { STATE_FEATURE_LAYER_URL } from '../../common/constants';
 import { ILandscapeInitiative } from '../../common/types';
 import { filterLandscapeInitiativeLayers } from './utils';
+import { highlightSymbol } from '../../containers/MapContainer/constants.js';
 
 interface IMapProps {
   view: MapView;
@@ -84,7 +85,9 @@ const LandscapeInitiativeMap = ({
           const allFeatureLayers: Array<any> = (
             mapRef.current.map.allLayers as any
           ).items.filter((layer: Layer) => {
-            return layer.type === 'feature';
+            return (
+              layer.type === 'feature' && layer.title !== 'CIG Project - States'
+            );
           });
 
           const featureLayerInfos: Array<any> = [];
@@ -115,23 +118,26 @@ const LandscapeInitiativeMap = ({
             });
           }
 
-          if (!legendRef.current.visible) {
-            legendRef.current = new Expand({
-              content: new Legend({
-                layerInfos: featureLayerInfos,
-                style: 'classic',
-                view: mapRef.current.view,
-              }),
-              expanded: true,
+          legendRef.current = new Expand({
+            id: 'landscapeInitiativeLegend',
+            content: new Legend({
+              layerInfos: featureLayerInfos,
+              style: 'classic',
               view: mapRef.current.view,
-            });
-
+            }),
+            expanded: true,
+            view: mapRef.current.view,
+          });
+          if (!mapRef.current.view.ui.find('landscapeInitiativeLegend')) {
+            mapRef.current.view.ui.add(legendRef.current, 'bottom-right');
+          } else {
+            mapRef.current.view.ui.remove('landscapeInitiativeLegend');
             mapRef.current.view.ui.add(legendRef.current, 'bottom-right');
           }
         }
       });
     });
-  }, [mapRef, selectedLandscapeInitiative]);
+  }, [mapRef, selectedLandscapeInitiative, landscapeInitiativesData]);
 
   useEffect(() => {
     // Filter out layers if selectedLandscapeInitiative is Working Lands for Wildlife
@@ -171,11 +177,18 @@ const LandscapeInitiativeMap = ({
       mapRef.current.map.when(() => {
         stateFeatureLayer.current.when(() => {
           stateFeatureLayer.current.on('layerview-create', () => {
+            mapRef.current.view.graphics.removeAll();
             stateFeatureLayer.current.queryFeatures().then((response) => {
               const { features } = response;
               const result: any = features.find((feat: any) => {
                 return feat.attributes?.STATEFP === selectedLocation;
               });
+
+              const highlightedGraphic = new Graphic({
+                geometry: result?.geometry,
+                symbol: highlightSymbol,
+              });
+              mapRef.current.view.graphics.add(highlightedGraphic);
 
               mapRef.current.view.extent = result?.geometry?.extent
                 .clone()
@@ -192,6 +205,7 @@ const LandscapeInitiativeMap = ({
     mapRef.current.view.when(() => {
       mapRef.current.view.on('pointer-up', (event) => {
         mapRef.current.view.hitTest(event).then((response) => {
+          mapRef.current.view.graphics.removeAll();
           if (response.results.length) {
             const graphicList: any = response.results.filter((item: any) => {
               // check if the graphic belongs to the states layer
@@ -204,8 +218,13 @@ const LandscapeInitiativeMap = ({
             if (graphicList.length) {
               const selectedState: Graphic = graphicList[0].graphic;
               const { attributes } = selectedState;
-              console.log('Attrs: ', selectedState.attributes);
-              // Set stateCode to the one selected:
+              const highlightedGraphic = new Graphic({
+                geometry: selectedState?.geometry,
+                symbol: highlightSymbol,
+              });
+              mapRef.current.view.graphics.add(highlightedGraphic);
+
+              // Set stateCode to the one selected on map
               dispatch(
                 currentState({
                   stateNameDisplay: attributes.NAME,
@@ -215,7 +234,7 @@ const LandscapeInitiativeMap = ({
               );
               mapRef.current.view.extent = selectedState?.geometry?.extent
                 .clone()
-                .expand(1.625);
+                .expand(1.65);
             }
           }
         });

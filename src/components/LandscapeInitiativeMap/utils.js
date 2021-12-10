@@ -8,7 +8,7 @@ export function filterLandscapeInitiativeLayers(initiativeList, filterList) {
           );
         }
         return intiativeName.includes(layer.title);
-      }) > 0
+      }) >= 0
     );
   });
 }
