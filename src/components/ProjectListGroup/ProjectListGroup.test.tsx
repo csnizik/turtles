@@ -1,3 +1,4 @@
+import { Provider } from 'react-redux';
 import { cleanup, render, screen } from '../../common/test-utils/test_utils';
 import { setSearch } from '../../Redux/Slice/practiceSlice';
 import { createTestStore } from '../../Redux/store';
@@ -18,21 +19,19 @@ describe('Verify ProductListGroup is rendered correctly', () => {
   });
   test('Verify project component', async () => {
     // Create a redux store
-    expect(true);
-    /*const { findByText } = render(
+    const { findByText } = render(
       <Provider store={store}>
         <ProjectListGroup isMapDisplayed={false} selectedStateName='' />
       </Provider>
     );
-    await findByText('Test success');
-    */
+    await findByText(
+      'A New Technology for Threatened and Endangered Species Monitoring in the San Luis Valley of Colorado: Remote, Passive, Acoustic Monitoring for Southwestern Willow Flycatcher, Yellow-billed Cuckoo, and Northern Leopard Frogs'
+    );
   });
 });
 
 describe('Exception Message is rendered correctly', () => {
-
   beforeEach(() => {
-    
     render(
       <ProjectListGroup
         isMapDisplayed={false}
@@ -68,11 +67,12 @@ describe('Exception Message is rendered correctly', () => {
         if (element) {
           return (
             element.tagName.toLowerCase() === 'p' &&
-            content.startsWith('The projects below represent projects across the United States.')
+            content.startsWith(
+              'The projects below represent projects across the United States.'
+            )
           );
         }
       })
     );
   });
-  
 });

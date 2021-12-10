@@ -32,10 +32,12 @@ const LandscapeInitiativesCard = ({
         className='related-initiatives-desc'
         data-testid='subInitiativesDescription'
       >
-        {description.map((paragraph: any, id: number) => {
-          /* eslint-disable */
-          return <p key={id}>{paragraph}</p>;
-        })}
+        {
+          /*eslint react/no-array-index-key: 0 */
+          description.map((paragraph: any, id: number) => {
+            return <p key={id}>{paragraph}</p>;
+          })
+        }
       </div>
     </div>
   );
