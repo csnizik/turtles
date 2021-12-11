@@ -48,7 +48,6 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
     usePostSearchDataQuery(praticestate);
 
   const practiceCategory: any = data && data[0];
-  console.log('practice: ', practiceCategory);
 
   return (
     <div className='heading'>
