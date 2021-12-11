@@ -32,10 +32,7 @@ const LocationContainer = () => {
   const [currentTabOption, setTabOption] = useState(option?.id);
 
   useEffect(() => {
-    if (
-      (selectedPracticeCategory >= 0 && !currentTabOption) ||
-      selectedPractice
-    ) {
+    if (selectedPracticeCategory >= 0 && !currentTabOption) {
       setTabOption(1);
     }
     if (
