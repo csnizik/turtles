@@ -37,7 +37,7 @@ const Pagination = ({
     return (
       <h4>
         Showing {cards ? 1 : 0} -{' '}
-        {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards} projects
+        {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards} projects/initiatives
       </h4>
     );
   };
