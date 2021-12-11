@@ -7,6 +7,7 @@ interface ISubjectProps {
   tabStyleOption: number;
   searchOptionList: any;
   handleChangeSearchOption: Function;
+  hideOverviewTab: boolean;
 }
 
 interface INavigationOptions {
@@ -19,6 +20,7 @@ const CustomTabs = ({
   searchOptionList,
   handleChangeSearchOption,
   tabStyleOption,
+  hideOverviewTab
 }: ISubjectProps) => {
   const navOptions: INavigationOptions = {
     tabs: tabStyleOption === 0,
@@ -28,6 +30,7 @@ const CustomTabs = ({
     return (
       <Nav {...navOptions}>
         {Object.keys(searchOptionList).map((option: any) => {
+          if(hideOverviewTab && searchOptionList[option].id===0) return null;
           return (
             <Tab
               key={option}
