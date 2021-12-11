@@ -9,6 +9,7 @@ import {
   NavItem,
   NavLink,
 } from 'reactstrap';
+import { useTranslation } from 'react-i18next';
 import ProjectListItem from './ProjectListItem';
 import { projectTabs } from './constants';
 import './project-list-group.scss';
@@ -52,8 +53,12 @@ const ProjectListGroup = ({
     isError: pisError,
   } = usePostProjectSearchDataQuery(searchInputData);
 
-  const { data: initiativesList } =
+  let { data: initiativesList } =
     usePostLandscapeInitiativesQuery(searchInputData);
+  initiativesList = initiativesList?.filter((initiative: any) => {
+    return !initiative.lci_parent_id;
+  });
+  const { t } = useTranslation();
 
   const [activeTab, setActiveTab] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);

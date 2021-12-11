@@ -30,12 +30,10 @@ const LocationContainer = () => {
   );
   const option = searchOptionMap[name];
   const [currentTabOption, setTabOption] = useState(option?.id);
+  const shouldHideOverviewPage = (selectedPracticeCategory >= 0 && !currentTabOption) || selectedPractice!==-1;
 
   useEffect(() => {
-    if (
-      (selectedPracticeCategory >= 0 && !currentTabOption) ||
-      selectedPractice
-    ) {
+    if (selectedPracticeCategory >= 0 && !currentTabOption) {
       setTabOption(1);
     }
     if (
@@ -79,6 +77,7 @@ const LocationContainer = () => {
         searchOptionList={searchOptionMap}
         currOption={currentTabOption}
         handleChangeSearchOption={setTabOption}
+        hideOverviewTab={shouldHideOverviewPage}
       />
       {renderTabContent()}
     </>
