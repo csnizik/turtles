@@ -152,6 +152,7 @@ const ProjectsContainer = () => {
                       key={initiative.lci_id}
                       className={listGroupItemClassNames}
                       role='presentation'
+                      title={initiative.lci_page_link_text}
                       onClick={() =>
                         handleSelectLandscapeInitiative(initiative.lci_id)
                       }

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import classnames from 'classnames';
 import {
   Row,
@@ -10,6 +9,7 @@ import {
   NavItem,
   NavLink,
 } from 'reactstrap';
+import { useTranslation } from 'react-i18next';
 import ProjectListItem from './ProjectListItem';
 import { projectTabs } from './constants';
 import './project-list-group.scss';
