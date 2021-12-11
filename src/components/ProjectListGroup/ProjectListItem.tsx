@@ -1,3 +1,5 @@
+import { useHistory } from 'react-router-dom';
+
 const ProjectListItem = ({
   id,
   title,
@@ -7,6 +9,14 @@ const ProjectListItem = ({
   description,
   link,
 }: any) => {
+  const history: any = useHistory();
+  const handleClick = () => {
+    history.push({
+      pathname: '/ProjectsAndInitiatives',
+    });
+    window.location.reload();
+  };
+
   const renderProjectDetails = (
     projectOwner: string,
     states: any,
@@ -24,13 +34,25 @@ const ProjectListItem = ({
       </div>
     );
   };
-
+  if (statesInvolved) {
+    return (
+      <li key={id} className='list-group-item'>
+        <p>
+          <a href={link} target='_blank' rel='noreferrer'>
+            {title}
+          </a>
+        </p>
+        {owner && renderProjectDetails(owner, statesInvolved, year)}
+        <p>{description}</p>
+      </li>
+    );
+  }
   return (
     <li key={id} className='list-group-item'>
       <p>
-        <a href={link} target='_blank' rel='noreferrer'>
+        <button onClick={handleClick} type='button'>
           {title}
-        </a>
+        </button>
       </p>
       {owner && renderProjectDetails(owner, statesInvolved, year)}
       <p>{description}</p>

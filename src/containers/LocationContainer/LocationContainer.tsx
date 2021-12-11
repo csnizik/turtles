@@ -33,10 +33,7 @@ const LocationContainer = () => {
   const shouldHideOverviewPage = (selectedPracticeCategory >= 0 && !currentTabOption) || selectedPractice!==-1;
 
   useEffect(() => {
-    if (
-      (selectedPracticeCategory >= 0 && !currentTabOption) ||
-      selectedPractice
-    ) {
+    if (selectedPracticeCategory >= 0 && !currentTabOption) {
       setTabOption(1);
     }
     if (
