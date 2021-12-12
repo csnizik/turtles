@@ -29,7 +29,7 @@ const LocationContainer = () => {
     (state) => state.practiceSlice.selectedSpecficPractice
   );
   const option = searchOptionMap[name];
-  const [currentTabOption, setTabOption] = useState(1);
+  const [currentTabOption, setTabOption] = useState(option?.id);
 
   useEffect(() => {
     setTabOption(1);
