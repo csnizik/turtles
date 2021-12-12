@@ -29,19 +29,21 @@ const LocationContainer = () => {
     (state) => state.practiceSlice.selectedSpecficPractice
   );
   const option = searchOptionMap[name];
-  const [currentTabOption, setTabOption] = useState(option?.id);
-  const shouldHideOverviewPage = (selectedPracticeCategory >= 0 && !currentTabOption) || selectedPractice!==-1;
+  const [currentTabOption, setTabOption] = useState(1);
 
   useEffect(() => {
-    if (selectedPracticeCategory >= 0 && !currentTabOption) {
-      setTabOption(1);
-    }
-    if (
-      (!currentTabOption && selectedPracticeCategory < 0) ||
-      !selectedPractice
-    ) {
-      setTabOption(0);
-    }
+    setTabOption(1);
+    // Commented on 12/11. To be released in the future. 
+    // More details: CIG-1019
+    // if (selectedPracticeCategory >= 0 && !currentTabOption) {
+    //   setTabOption(1);
+    // }
+    // if (
+    //   (!currentTabOption && selectedPracticeCategory < 0) ||
+    //   !selectedPractice
+    // ) {
+    //   setTabOption(0);
+    // }
   }, [selectedPracticeCategory, selectedPractice]);
 
   const renderTabContent = () => (
@@ -77,7 +79,6 @@ const LocationContainer = () => {
         searchOptionList={searchOptionMap}
         currOption={currentTabOption}
         handleChangeSearchOption={setTabOption}
-        hideOverviewTab={shouldHideOverviewPage}
       />
       {renderTabContent()}
     </>
