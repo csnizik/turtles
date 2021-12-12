@@ -52,7 +52,7 @@
     "prettier": "2.3.2"
   },
   "scripts": {
-    "start": "npm run copy && react-scripts start",
+    "start": "react-scripts start",
     "build": "npm run copy && react-scripts build",
     "test": "jest --colors --coverage --coverageDirectory=/output/coverage/jest",
     "eject": "react-scripts eject",

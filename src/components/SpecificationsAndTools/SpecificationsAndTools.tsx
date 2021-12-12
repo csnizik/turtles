@@ -16,8 +16,10 @@ interface ISpecAndToolsProps {
 
 const intro: string =
   'NRCS technical standards guide proper implementation of recommended practices.  Each practice also has a payment schedule that determines how much financial assistance is available for beginning or installing it. The following links provide details about practice standards and payment schedules specific to your region.';
-const promptText: string =
+const nationalPromptText: string =
   'You can find national conservation practice standards, overviews, conservation practice effects and network effects diagrams on the NRCS website.';
+const statePromptText: string =
+  'You can access this state’s conservation practice standards on the NRCS Field Office Technical Guide.';
 
 const SpecificationsAndTools = ({
   data,
@@ -35,6 +37,9 @@ const SpecificationsAndTools = ({
   const practiceCategory = useAppSelector(
     (state) => state?.practiceSlice?.selectedPracticeCategory
   );
+  const selectedStateName = useAppSelector(
+    (state) => state?.stateSlice?.stateNameDisplay
+  );
 
   const content = useGetAssociatedPracticeQuery(userSelectedFilter);
 
@@ -46,11 +51,29 @@ const SpecificationsAndTools = ({
     return practiceName;
   };
 
+  const renderDetailedPracticeStandardGuide = () => {
+    return (
+      <div>
+        <h4>Accessing Colorado Practice Standards on the NRCS Website </h4>
+        <h4>1. Goto the NRCS Colorado Conservation Practices Website</h4>
+        <h4>2. Select “Colorado” from the state dropdown if it is not already selected</h4>
+        {/* image */}
+
+        <h4>3. On the toolbar below the state selector ensure that “Document Tree” is selected</h4>
+        <h4>4. Click “Section 4 - Practice Standards and Supporting Documents”</h4>
+        {/* image */}
+
+        <h4>5. Scroll down the list and select “Cover Crop” this will load the documents related to your practice standard</h4>
+        {/* image */}
+      </div>
+    );
+  }
+
   const renderNationalSpecs = () => {
     return (
-      <div className='national-specs' data-testid='national-specifications'>
+      <div className='state-specific-container' data-testid='state-specifications'>
         <h4>National Specifications</h4>
-        <h5>{promptText}</h5>
+        <h5>{nationalPromptText}</h5>
         <div className='link'>
           <a
             href='https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/cp/ncps/?cid=nrcs143_026849'
@@ -65,6 +88,30 @@ const SpecificationsAndTools = ({
       </div>
     );
   };
+
+  const renderStateSpecs = () => {
+    return (
+      <div className='state-specific-container' data-testid='state-specifications'>
+        <h4>{selectedStateName} Specifications</h4>
+        <h5>{statePromptText}</h5>
+        <div className='link'>
+          <button className='practice-standard-button'>
+            Instructions for Acessing this State’s Practice Standards
+          </button>
+          <a
+            href='https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/cp/ncps/?cid=nrcs143_026849'
+            target='_blank'
+            rel='noopener noreferrer'
+            aria-label='Current NRCS National Conservation Practices link'
+          >
+            Go Straight to this State’s Field Office Technical Guide
+            <img alt='All Conservation at Work videos' src={image} />
+          </a>
+        </div>
+        {renderDetailedPracticeStandardGuide()}
+      </div>
+    );
+  }
 
   const renderAssociatedPractice = () => {
     return (
@@ -109,7 +156,7 @@ const SpecificationsAndTools = ({
     >
       <h2>{getHeaderText()}</h2>
       <h4>{intro}</h4>
-      {renderNationalSpecs()}
+      {selectedStateName==='U.S.' ? renderNationalSpecs() : renderStateSpecs()}
       {renderAssociatedPractice()}
     </section>
   );

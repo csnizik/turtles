@@ -43,8 +43,8 @@ describe('SpecificationsAndTools is rendered correctly', () => {
   test('Should display the contents of SpecificationsAndTools', () => {
     expect(screen.getByTestId('practice-spec')).toBeDefined();
   });
-  test('Should display the contents of National Specifications', () => {
-    expect(screen.getByTestId('national-specifications')).toBeDefined();
+  test('Should display the contents of State Specifications', () => {
+    expect(screen.getByTestId('state-specifications')).toBeDefined();
   });
   test('Should display the contents of Associated Practices', () => {
     expect(screen.getByTestId('associated-practice')).toBeDefined();
