@@ -103,15 +103,20 @@ const ProjectTypeSection = ({
             <i className='fas fa-external-link-alt' />
             <hr className='margin-bottom-2' />
             <div className='landscape-details'>
-              {selectedLandscapeInitiative > 0
-                ? foundInitiative?.lci_description.map((paragraphText) => {
-                    return <p key={foundInitiative?.lci_id}>{paragraphText}</p>;
-                  })
-                : baseConservationInitiative?.descriptions.map(
-                    (paragraphText) => {
-                      return <p>{paragraphText}</p>;
-                    }
-                  )}
+              {
+                /*eslint react/no-array-index-key: 0 */
+                selectedLandscapeInitiative > 0
+                  ? foundInitiative?.lci_description.map(
+                      (paragraphText: any, id: number) => {
+                        return <p key={id}>{paragraphText}</p>;
+                      }
+                    )
+                  : baseConservationInitiative?.descriptions.map(
+                      (paragraphText) => {
+                        return <p>{paragraphText}</p>;
+                      }
+                    )
+              }
               {foundInitiative?.lci_id === 10 && selectedLandscapeInitiative > 0
                 ? subInitiative?.map((item: any) => (
                     /* eslint-disable */
