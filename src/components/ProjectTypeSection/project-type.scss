@@ -1,9 +1,5 @@
-.landscape-img-placeholder {
-  height: 20rem;
-  width: 26rem;
-  background: #73b2ff;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
+.landscape-img {
+  img {
+    padding-bottom: 1rem;
+  }
 }
