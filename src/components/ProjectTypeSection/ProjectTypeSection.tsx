@@ -39,7 +39,7 @@ const ProjectTypeSection = ({
             </a>{' '}
             for more information. Use
             <a
-              aria-label='Conservation Innovation Grants link opens a new tab'
+              aria-label='Conservation Innovation Grants link opens in a new tab'
               href='/search'
               target='_blank'
               rel='noreferrer'
@@ -105,7 +105,7 @@ const ProjectTypeSection = ({
             <div className='landscape-details'>
               {selectedLandscapeInitiative > 0
                 ? foundInitiative?.lci_description.map((paragraphText) => {
-                    return <p>{paragraphText}</p>;
+                    return <p key={foundInitiative?.lci_id}>{paragraphText}</p>;
                   })
                 : baseConservationInitiative?.descriptions.map(
                     (paragraphText) => {
@@ -129,7 +129,6 @@ const ProjectTypeSection = ({
     }
     return null;
   };
-
   const renderPageTitle = () => {
     if (selectedLandscapeInitiative > 0) {
       const foundInitiative = landscapeInitiativesData?.data?.find(
@@ -137,9 +136,11 @@ const ProjectTypeSection = ({
           return initiative.lci_id === selectedLandscapeInitiative;
         }
       );
-      return <h3>{foundInitiative?.lci_name}</h3>;
+      return (
+        <h3 data-testid='initiative-title'>{foundInitiative?.lci_name}</h3>
+      );
     }
-    return <h3>{projectType.title}</h3>;
+    return <h3 data-testid='project-type-title'>{projectType.title}</h3>;
   };
 
   return (
