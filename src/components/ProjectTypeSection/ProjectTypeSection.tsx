@@ -31,7 +31,7 @@ const ProjectTypeSection = ({
             Visit the{' '}
             <a
               aria-label='Conservation Innovation Grants link opens a new tab'
-              href='https://usda.gov'
+              href='https://cig.sc.egov.usda.gov/'
               target='_blank'
               rel='noreferrer'
             >

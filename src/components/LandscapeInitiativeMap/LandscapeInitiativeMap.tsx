@@ -11,11 +11,12 @@ import {
   LANDSCAPE_VIEW_DIV,
   landscapeInitiativeToLegendMap,
   landscapeViewConstraints,
-  workingLandsForWildlifeOptions,
+  WATER_SMART_LAYER_ID,
 } from './constants';
 import { STATE_FEATURE_LAYER_URL } from '../../common/constants';
 import { ILandscapeInitiative } from '../../common/types';
 import { filterLandscapeInitiativeLayers } from './utils';
+import { usePrevious } from '../../common/util/helperHooks';
 
 interface IMapProps {
   view: MapView;
@@ -37,6 +38,9 @@ const LandscapeInitiativeMap = ({
   const stateFeatureLayer = useRef({} as FeatureLayer);
   const legendRef = useRef({} as Expand);
   const [filteredOutLayers, setFilteredLayers]: any = useState([]);
+  const previousValues: any = usePrevious({
+    selectedLandscapeInitiative,
+  });
 
   useEffect(() => {
     /*eslint consistent-return: 0 */
@@ -79,7 +83,9 @@ const LandscapeInitiativeMap = ({
           const allFeatureLayers: Array<any> = (
             mapRef.current.map.allLayers as any
           ).items.filter((layer: Layer) => {
-            return layer.type === 'feature';
+            return (
+              layer.type === 'feature' || layer.id === WATER_SMART_LAYER_ID
+            );
           });
 
           const featureLayerInfos: Array<any> = [];
@@ -110,17 +116,25 @@ const LandscapeInitiativeMap = ({
             });
           }
 
-          if (!legendRef.current.visible) {
-            legendRef.current = new Expand({
-              content: new Legend({
-                layerInfos: featureLayerInfos,
-                style: 'classic',
-                view: mapRef.current.view,
-              }),
-              expanded: true,
-              view: mapRef.current.view,
-            });
+          const legendContent: any = new Legend({
+            layerInfos: featureLayerInfos,
+            style: 'classic',
+            view: mapRef.current.view,
+          });
 
+          legendContent.hideLayersNotInCurrentView = true;
+
+          legendRef.current = new Expand({
+            id: 'landscapeInitiativeLegend',
+            content: legendContent,
+            expanded: true,
+            view: mapRef.current.view,
+          });
+
+          if (!mapRef.current.view.ui.find('landscapeInitiativeLegend')) {
+            mapRef.current.view.ui.add(legendRef.current, 'bottom-right');
+          } else {
+            mapRef.current.view.ui.remove('landscapeInitiativeLegend');
             mapRef.current.view.ui.add(legendRef.current, 'bottom-right');
           }
         }
@@ -136,18 +150,31 @@ const LandscapeInitiativeMap = ({
           const allFeatureLayers: Array<any> = (
             mapRef.current.map.allLayers as any
           ).items.filter((layer: Layer) => {
-            return layer.type === 'feature';
+            return (
+              layer.type === 'feature' || layer.id === WATER_SMART_LAYER_ID
+            );
           });
+
+          if (
+            previousValues &&
+            previousValues.selectedLandscapeInitiative !==
+              selectedLandscapeInitiative
+          ) {
+            allFeatureLayers.forEach((layer: any) => {
+              layer.visible = true; // eslint-disable-line no-param-reassign
+            });
+          }
 
           // Working Lands for Wildlife
           if (selectedLandscapeInitiative === 10) {
             let filteredLayers: Array<any> = [];
-            filteredLayers = filterLandscapeInitiativeLayers(
-              allFeatureLayers,
-              workingLandsForWildlifeOptions
-            );
+            filteredLayers = allFeatureLayers.filter((layer: any) => {
+              return !layer.title.endsWith('(WLFW)');
+            });
             setFilteredLayers(filteredLayers);
-            mapRef.current.map.removeMany(filteredLayers);
+            filteredLayers.forEach((layer: any) => {
+              layer.visible = false; // eslint-disable-line no-param-reassign
+            });
           }
           // WaterSmart
           if (selectedLandscapeInitiative === 9) {
@@ -156,12 +183,16 @@ const LandscapeInitiativeMap = ({
               return layer.title !== 'National Water Quality Initiative';
             });
             setFilteredLayers(filteredLayers);
-            mapRef.current.map.removeMany(filteredLayers);
+            filteredLayers.forEach((layer: any) => {
+              layer.visible = false; // eslint-disable-line no-param-reassign
+            });
           }
           // Defaualt 'Landscape Conservation Initiatives'
-          if (selectedLandscapeInitiative === -1) {
+          if (selectedLandscapeInitiative === -1 && filteredOutLayers.length) {
             // Restore all layers
-            mapRef.current.map.addMany(filteredOutLayers);
+            allFeatureLayers.forEach((layer: any) => {
+              layer.visible = true; // eslint-disable-line no-param-reassign
+            });
           }
         }
       });

@@ -18,7 +18,7 @@ const CustomTabs = ({
   currOption,
   searchOptionList,
   handleChangeSearchOption,
-  tabStyleOption,
+  tabStyleOption
 }: ISubjectProps) => {
   const navOptions: INavigationOptions = {
     tabs: tabStyleOption === 0,
@@ -28,6 +28,7 @@ const CustomTabs = ({
     return (
       <Nav {...navOptions}>
         {Object.keys(searchOptionList).map((option: any) => {
+          if(searchOptionList[option].id===0) return null;
           return (
             <Tab
               key={option}

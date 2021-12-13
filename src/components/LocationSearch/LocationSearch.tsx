@@ -54,7 +54,7 @@ const LocationSearch = () => {
       dispatch(currentState(selectedStateCode));
     }
     history.push({
-      pathname: '/Overview',
+      pathname: '/ConservationPractices',
     });
   };
 

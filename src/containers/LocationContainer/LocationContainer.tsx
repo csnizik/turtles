@@ -32,18 +32,18 @@ const LocationContainer = () => {
   const [currentTabOption, setTabOption] = useState(option?.id);
 
   useEffect(() => {
-    if (
-      (selectedPracticeCategory >= 0 && !currentTabOption) ||
-      selectedPractice
-    ) {
-      setTabOption(1);
-    }
-    if (
-      (!currentTabOption && selectedPracticeCategory < 0) ||
-      !selectedPractice
-    ) {
-      setTabOption(0);
-    }
+    setTabOption(1);
+    // Commented on 12/11. To be released in the future. 
+    // More details: CIG-1019
+    // if (selectedPracticeCategory >= 0 && !currentTabOption) {
+    //   setTabOption(1);
+    // }
+    // if (
+    //   (!currentTabOption && selectedPracticeCategory < 0) ||
+    //   !selectedPractice
+    // ) {
+    //   setTabOption(0);
+    // }
   }, [selectedPracticeCategory, selectedPractice]);
 
   const renderTabContent = () => (
