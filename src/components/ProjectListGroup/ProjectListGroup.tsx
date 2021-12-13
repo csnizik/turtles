@@ -52,8 +52,11 @@ const ProjectListGroup = ({
     isError: pisError,
   } = usePostProjectSearchDataQuery(searchInputData);
 
-  const { data: initiativesList } =
+  let { data: initiativesList } =
     usePostLandscapeInitiativesQuery(searchInputData);
+  initiativesList = initiativesList?.filter((initiative: any) => {
+    return !initiative.lci_parent_id;
+  });
 
   const [activeTab, setActiveTab] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
