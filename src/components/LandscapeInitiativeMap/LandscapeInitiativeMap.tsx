@@ -14,6 +14,8 @@ import {
   LANDSCAPE_VIEW_DIV,
   landscapeInitiativeToLegendMap,
   landscapeViewConstraints,
+  NATIONAL_WATER_QUALITY_INIT,
+  WORKING_LANDS_FOR_WILDLIFE_ABBRV,
   WATER_SMART_LAYER_ID,
 } from './constants';
 import { STATE_FEATURE_LAYER_URL } from '../../common/constants';
@@ -84,67 +86,65 @@ const LandscapeInitiativeMap = ({
   useEffect(() => {
     mapRef.current.view.when(() => {
       mapRef.current.map.when(() => {
-        if (mapRef.current.map.allLayers.length) {
-          const allFeatureLayers: Array<any> = (
-            mapRef.current.map.allLayers as any
-          ).items.filter((layer: Layer) => {
-            return (
-              layer.type === 'feature' || layer.id === WATER_SMART_LAYER_ID
-            );
-          });
-
-          // && layer.title !== 'CIG Project - States'
-
-          const featureLayerInfos: Array<any> = [];
-          if (landscapeInitiativesData?.length && selectedLocation) {
-            const relatedLandscpaeInitiativesPerSelectedLocation =
-              landscapeInitiativesData.map((init: any) => {
-                return landscapeInitiativeToLegendMap[init.lci_id];
-              });
-
-            let filteredLayers: Array<any> = [];
-            filteredLayers = filterLandscapeInitiativeLayers(
-              allFeatureLayers,
-              relatedLandscpaeInitiativesPerSelectedLocation
-            );
-
-            filteredLayers.forEach((layer: Layer) => {
-              featureLayerInfos.push({
-                layer,
-                title: layer.title,
-              });
+        stateFeatureLayer.current.when(() => {
+          if (mapRef.current.map.allLayers.length) {
+            const allFeatureLayers: Array<any> = (
+              mapRef.current.map.allLayers as any
+            ).items.filter((layer: Layer) => {
+              return layer.title !== 'CIG Project - States';
             });
-          } else {
-            allFeatureLayers.forEach((layer: Layer) => {
-              featureLayerInfos.push({
-                layer,
-                title: layer.title,
+
+            const featureLayerInfos: Array<any> = [];
+            if (landscapeInitiativesData?.length && selectedLocation) {
+              const relatedLandscpaeInitiativesPerSelectedLocation =
+                landscapeInitiativesData.map((init: any) => {
+                  return landscapeInitiativeToLegendMap[init.lci_id];
+                });
+
+              let filteredLayers: Array<any> = [];
+              filteredLayers = filterLandscapeInitiativeLayers(
+                allFeatureLayers,
+                relatedLandscpaeInitiativesPerSelectedLocation
+              );
+
+              filteredLayers.forEach((layer: Layer) => {
+                featureLayerInfos.push({
+                  layer,
+                  title: layer.title,
+                });
               });
+            } else {
+              allFeatureLayers.forEach((layer: Layer) => {
+                featureLayerInfos.push({
+                  layer,
+                  title: layer.title,
+                });
+              });
+            }
+
+            const legendContent: any = new Legend({
+              layerInfos: featureLayerInfos,
+              style: 'classic',
+              view: mapRef.current.view,
             });
+
+            legendContent.hideLayersNotInCurrentView = true;
+
+            legendRef.current = new Expand({
+              id: 'landscapeInitiativeLegend',
+              content: legendContent,
+              expanded: true,
+              view: mapRef.current.view,
+            });
+
+            if (!mapRef.current.view.ui.find('landscapeInitiativeLegend')) {
+              mapRef.current.view.ui.add(legendRef.current, 'bottom-right');
+            } else {
+              mapRef.current.view.ui.remove('landscapeInitiativeLegend');
+              mapRef.current.view.ui.add(legendRef.current, 'bottom-right');
+            }
           }
-
-          const legendContent: any = new Legend({
-            layerInfos: featureLayerInfos,
-            style: 'classic',
-            view: mapRef.current.view,
-          });
-
-          legendContent.hideLayersNotInCurrentView = true;
-
-          legendRef.current = new Expand({
-            id: 'landscapeInitiativeLegend',
-            content: legendContent,
-            expanded: true,
-            view: mapRef.current.view,
-          });
-
-          if (!mapRef.current.view.ui.find('landscapeInitiativeLegend')) {
-            mapRef.current.view.ui.add(legendRef.current, 'bottom-right');
-          } else {
-            mapRef.current.view.ui.remove('landscapeInitiativeLegend');
-            mapRef.current.view.ui.add(legendRef.current, 'bottom-right');
-          }
-        }
+        });
       });
     });
   }, [mapRef, selectedLandscapeInitiative, landscapeInitiativesData]);
@@ -176,7 +176,7 @@ const LandscapeInitiativeMap = ({
           if (selectedLandscapeInitiative === 10) {
             let filteredLayers: Array<any> = [];
             filteredLayers = allFeatureLayers.filter((layer: any) => {
-              return !layer.title.endsWith('(WLFW)');
+              return !layer.title.endsWith(WORKING_LANDS_FOR_WILDLIFE_ABBRV);
             });
             setFilteredLayers(filteredLayers);
             filteredLayers.forEach((layer: any) => {
@@ -187,7 +187,7 @@ const LandscapeInitiativeMap = ({
           if (selectedLandscapeInitiative === 9) {
             let filteredLayers: Array<any> = [];
             filteredLayers = allFeatureLayers.filter((layer: any) => {
-              return layer.title !== 'National Water Quality Initiative';
+              return layer.title !== NATIONAL_WATER_QUALITY_INIT;
             });
             setFilteredLayers(filteredLayers);
             filteredLayers.forEach((layer: any) => {

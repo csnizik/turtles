@@ -10,21 +10,25 @@ export const landscapeViewConstraints = {
 };
 
 export const landscapeInitiativeToLegendMap = {
-  1: 'Great_Lakes_Restoration_Initiative',
+  1: 'Great Lakes Restoration Initiative',
   2: 'Joint Chiefs Landscape Restoration Partnership',
-  4: 'Longleaf_Pine',
-  5: 'Mississippi_River_Basin_Initiative',
-  7: 'National Water Quality Initiative',
+  4: 'Longleaf Pine',
+  5: 'Mississippi River Basin',
+  7: 'National Water Quality',
   9: 'WaterSMART',
   10: 'Working Lands for Wildlife',
-  11: 'Golden_Winged_Warbler',
-  12: 'Gopher_Tortoise',
-  13: 'Lesser_Prairie_Chicken_Initiative',
-  14: 'Monarch_Butterfly_Project',
+  11: 'Golden-Winged Warbler',
+  12: 'Gopher Tortoise',
+  13: 'Lesser Prairie-Chicken',
+  14: 'Monarch Butterfly',
   15: 'Southwestern Willow Flycatcher',
-  16: 'Sage_Grouse',
+  16: 'Sage Grouse',
   17: 'Bog Turtle',
   18: 'New England Cottontail',
 };
 
+export const NATIONAL_WATER_QUALITY_INIT = 'National Water Quality Initiative';
+
 export const WATER_SMART_LAYER_ID = 'FY2022_NWQI_7645';
+
+export const WORKING_LANDS_FOR_WILDLIFE_ABBRV = '(WLFW)';
