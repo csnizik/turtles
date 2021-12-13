@@ -312,3 +312,717 @@ export const coloradoInitiatives = [
     lci_parent_id: 10,
   },
 ];
+
+export const resources = [
+  {
+    resourceConcernId: 1,
+    resourceConcernName: 'Soil',
+    resourceConcernDescription: 'Soil',
+    highlighted: true,
+  },
+  {
+    resourceConcernId: 2,
+    resourceConcernName: 'Water',
+    resourceConcernDescription: 'Water',
+    highlighted: true,
+  },
+  {
+    resourceConcernId: 3,
+    resourceConcernName: 'Air',
+    resourceConcernDescription: 'Air',
+    highlighted: true,
+  },
+  {
+    resourceConcernId: 4,
+    resourceConcernName: 'Plant',
+    resourceConcernDescription: 'Plant',
+    highlighted: true,
+  },
+  {
+    resourceConcernId: 5,
+    resourceConcernName: 'Animal',
+    resourceConcernDescription: 'Animal',
+    highlighted: true,
+  },
+  {
+    resourceConcernId: 6,
+    resourceConcernName: 'Energy',
+    resourceConcernDescription: 'Energy',
+    highlighted: true,
+  },
+  {
+    resourceConcernId: 7,
+    resourceConcernName: 'Human',
+    resourceConcernDescription: 'Human',
+    highlighted: true,
+  },
+];
+
+export const relatedResources = {
+  result: [
+    {
+      rcCategoryId: 3,
+      rcCategoryName: 'Air',
+      resourceConcerns: [
+        {
+          rcId: 178,
+          rcName: 'Emissions of airborne reactive nitrogen',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 3,
+              landUseName: 'Developed land/Urban Ag',
+              landUseIcon: 'Urban Ag2.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+          ],
+        },
+        {
+          rcId: 179,
+          rcName: 'Emissions of greenhouse gases - GHGs',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 2,
+              landUseName: 'Cropland',
+              landUseIcon: 'Crops.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+            {
+              landUseId: 6,
+              landUseName: 'Rangeland',
+              landUseIcon: 'Range2.png',
+            },
+          ],
+        },
+        {
+          rcId: 181,
+          rcName: 'Emissions of particulate matter (PM) and PM precursors',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 2,
+              landUseName: 'Cropland',
+              landUseIcon: 'Crops.png',
+            },
+            {
+              landUseId: 3,
+              landUseName: 'Developed land/Urban Ag',
+              landUseIcon: 'Urban Ag2.png',
+            },
+            {
+              landUseId: 4,
+              landUseName: 'Forestland',
+              landUseIcon: 'Forest.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+            {
+              landUseId: 6,
+              landUseName: 'Rangeland',
+              landUseIcon: 'Range2.png',
+            },
+          ],
+        },
+        {
+          rcId: 182,
+          rcName: 'Objectionable odor',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 2,
+              landUseName: 'Cropland',
+              landUseIcon: 'Crops.png',
+            },
+            {
+              landUseId: 3,
+              landUseName: 'Developed land/Urban Ag',
+              landUseIcon: 'Urban Ag2.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      rcCategoryId: 5,
+      rcCategoryName: 'Animal',
+      resourceConcerns: [
+        {
+          rcId: 190,
+          rcName: 'Inadequate livestock shelter',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 2,
+              landUseName: 'Cropland',
+              landUseIcon: 'Crops.png',
+            },
+            {
+              landUseId: 3,
+              landUseName: 'Developed land/Urban Ag',
+              landUseIcon: 'Urban Ag2.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+            {
+              landUseId: 6,
+              landUseName: 'Rangeland',
+              landUseIcon: 'Range2.png',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      rcCategoryId: 6,
+      rcCategoryName: 'Energy',
+      resourceConcerns: [
+        {
+          rcId: 193,
+          rcName: 'Energy efficiency of equipment and facilities',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 2,
+              landUseName: 'Cropland',
+              landUseIcon: 'Crops.png',
+            },
+            {
+              landUseId: 3,
+              landUseName: 'Developed land/Urban Ag',
+              landUseIcon: 'Urban Ag2.png',
+            },
+            {
+              landUseId: 4,
+              landUseName: 'Forestland',
+              landUseIcon: 'Forest.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+            {
+              landUseId: 6,
+              landUseName: 'Rangeland',
+              landUseIcon: 'Range2.png',
+            },
+          ],
+        },
+        {
+          rcId: 194,
+          rcName:
+            'Energy efficiency of farming/ranching practices and field operations',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 2,
+              landUseName: 'Cropland',
+              landUseIcon: 'Crops.png',
+            },
+            {
+              landUseId: 3,
+              landUseName: 'Developed land/Urban Ag',
+              landUseIcon: 'Urban Ag2.png',
+            },
+            {
+              landUseId: 4,
+              landUseName: 'Forestland',
+              landUseIcon: 'Forest.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+            {
+              landUseId: 6,
+              landUseName: 'Rangeland',
+              landUseIcon: 'Range2.png',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      rcCategoryId: 4,
+      rcCategoryName: 'Plant',
+      resourceConcerns: [
+        {
+          rcId: 183,
+          rcName: 'Plant productivity and health',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 2,
+              landUseName: 'Cropland',
+              landUseIcon: 'Crops.png',
+            },
+            {
+              landUseId: 3,
+              landUseName: 'Developed land/Urban Ag',
+              landUseIcon: 'Urban Ag2.png',
+            },
+            {
+              landUseId: 4,
+              landUseName: 'Forestland',
+              landUseIcon: 'Forest.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+            {
+              landUseId: 6,
+              landUseName: 'Rangeland',
+              landUseIcon: 'Range2.png',
+            },
+          ],
+        },
+        {
+          rcId: 184,
+          rcName: 'Plant structure and composition',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 4,
+              landUseName: 'Forestland',
+              landUseIcon: 'Forest.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      rcCategoryId: 1,
+      rcCategoryName: 'Soil',
+      resourceConcerns: [
+        {
+          rcId: 154,
+          rcName: 'Sheet and rill erosion',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 2,
+              landUseName: 'Cropland',
+              landUseIcon: 'Crops.png',
+            },
+            {
+              landUseId: 3,
+              landUseName: 'Developed land/Urban Ag',
+              landUseIcon: 'Urban Ag2.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+          ],
+        },
+        {
+          rcId: 155,
+          rcName: 'Wind erosion',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 2,
+              landUseName: 'Cropland',
+              landUseIcon: 'Crops.png',
+            },
+            {
+              landUseId: 3,
+              landUseName: 'Developed land/Urban Ag',
+              landUseIcon: 'Urban Ag2.png',
+            },
+            {
+              landUseId: 4,
+              landUseName: 'Forestland',
+              landUseIcon: 'Forest.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      rcCategoryId: 2,
+      rcCategoryName: 'Water',
+      resourceConcerns: [
+        {
+          rcId: 173,
+          rcName: 'Drifted snow',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 2,
+              landUseName: 'Cropland',
+              landUseIcon: 'Crops.png',
+            },
+            {
+              landUseId: 3,
+              landUseName: 'Developed land/Urban Ag',
+              landUseIcon: 'Urban Ag2.png',
+            },
+            {
+              landUseId: 4,
+              landUseName: 'Forestland',
+              landUseIcon: 'Forest.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+            {
+              landUseId: 6,
+              landUseName: 'Rangeland',
+              landUseIcon: 'Range2.png',
+            },
+          ],
+        },
+        {
+          rcId: 165,
+          rcName: 'Groundwater depletion',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 2,
+              landUseName: 'Cropland',
+              landUseIcon: 'Crops.png',
+            },
+            {
+              landUseId: 3,
+              landUseName: 'Developed land/Urban Ag',
+              landUseIcon: 'Urban Ag2.png',
+            },
+            {
+              landUseId: 4,
+              landUseName: 'Forestland',
+              landUseIcon: 'Forest.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+            {
+              landUseId: 6,
+              landUseName: 'Rangeland',
+              landUseIcon: 'Range2.png',
+            },
+          ],
+        },
+        {
+          rcId: 166,
+          rcName: 'Inefficient irrigation water use',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 2,
+              landUseName: 'Cropland',
+              landUseIcon: 'Crops.png',
+            },
+            {
+              landUseId: 3,
+              landUseName: 'Developed land/Urban Ag',
+              landUseIcon: 'Urban Ag2.png',
+            },
+            {
+              landUseId: 4,
+              landUseName: 'Forestland',
+              landUseIcon: 'Forest.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+            {
+              landUseId: 6,
+              landUseName: 'Rangeland',
+              landUseIcon: 'Range2.png',
+            },
+          ],
+        },
+        {
+          rcId: 174,
+          rcName: 'Naturally available moisture use',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 2,
+              landUseName: 'Cropland',
+              landUseIcon: 'Crops.png',
+            },
+            {
+              landUseId: 3,
+              landUseName: 'Developed land/Urban Ag',
+              landUseIcon: 'Urban Ag2.png',
+            },
+            {
+              landUseId: 4,
+              landUseName: 'Forestland',
+              landUseIcon: 'Forest.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+            {
+              landUseId: 6,
+              landUseName: 'Rangeland',
+              landUseIcon: 'Range2.png',
+            },
+          ],
+        },
+        {
+          rcId: 157,
+          rcName: 'Nutrients transported to surface water',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 2,
+              landUseName: 'Cropland',
+              landUseIcon: 'Crops.png',
+            },
+            {
+              landUseId: 3,
+              landUseName: 'Developed land/Urban Ag',
+              landUseIcon: 'Urban Ag2.png',
+            },
+            {
+              landUseId: 4,
+              landUseName: 'Forestland',
+              landUseIcon: 'Forest.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+          ],
+        },
+        {
+          rcId: 162,
+          rcName: 'Pesticides transported to surface water',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 2,
+              landUseName: 'Cropland',
+              landUseIcon: 'Crops.png',
+            },
+            {
+              landUseId: 3,
+              landUseName: 'Developed land/Urban Ag',
+              landUseIcon: 'Urban Ag2.png',
+            },
+            {
+              landUseId: 4,
+              landUseName: 'Forestland',
+              landUseIcon: 'Forest.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+            {
+              landUseId: 6,
+              landUseName: 'Rangeland',
+              landUseIcon: 'Range2.png',
+            },
+          ],
+        },
+        {
+          rcId: 160,
+          rcName: 'Sediment transported to surface water',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 2,
+              landUseName: 'Cropland',
+              landUseIcon: 'Crops.png',
+            },
+            {
+              landUseId: 3,
+              landUseName: 'Developed land/Urban Ag',
+              landUseIcon: 'Urban Ag2.png',
+            },
+            {
+              landUseId: 4,
+              landUseName: 'Forestland',
+              landUseIcon: 'Forest.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+            {
+              landUseId: 6,
+              landUseName: 'Rangeland',
+              landUseIcon: 'Range2.png',
+            },
+          ],
+        },
+        {
+          rcId: 167,
+          rcName: 'Surface water depletion',
+          rcDescription: null,
+          relatedLandUses: [
+            {
+              landUseId: 2,
+              landUseName: 'Cropland',
+              landUseIcon: 'Crops.png',
+            },
+            {
+              landUseId: 3,
+              landUseName: 'Developed land/Urban Ag',
+              landUseIcon: 'Urban Ag2.png',
+            },
+            {
+              landUseId: 4,
+              landUseName: 'Forestland',
+              landUseIcon: 'Forest.png',
+            },
+            {
+              landUseId: 1,
+              landUseName: 'Other Farm and Rural Land',
+              landUseIcon: 'Farm+Rural land.png',
+            },
+            {
+              landUseId: 5,
+              landUseName: 'Pasture',
+              landUseIcon: 'Pasture.png',
+            },
+            {
+              landUseId: 6,
+              landUseName: 'Rangeland',
+              landUseIcon: 'Range2.png',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  id: 64,
+  exception: null,
+  status: 5,
+  isCanceled: false,
+  isCompleted: true,
+  isCompletedSuccessfully: true,
+  creationOptions: 0,
+  asyncState: null,
+  isFaulted: false,
+};
