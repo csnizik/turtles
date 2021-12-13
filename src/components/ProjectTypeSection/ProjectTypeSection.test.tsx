@@ -110,7 +110,7 @@ describe('Project Type Section is rendered correctly', () => {
           name: /Conservation Innovation Grants link opens a new tab/i,
         })
         .closest('a')
-    ).toHaveAttribute('href', 'https://usda.gov');
+    ).toHaveAttribute('href', 'https://cig.sc.egov.usda.gov/');
     expect(
       screen
         .getByRole('link', {
