@@ -1,11 +1,12 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useGetAssociatedPracticeQuery } from '../../Redux/services/api';
 import './specs.scss';
 import { IAssociatedPracticeList } from '../../common/types';
 import { useAppSelector } from '../../Redux/hooks/hooks';
-import image from './image/newLinkIcon.svg';
+import outerLinkImage from './image/newLinkIcon.svg';
+import PracticeStandardGuide from './PracticeStandardGuide';
 
 interface ISpecAndToolsProps {
   data: any;
@@ -33,6 +34,7 @@ const SpecificationsAndTools = ({
   };
 
   const { t } = useTranslation();
+  const [ expandTechGuide, setExpandTechGuide] = useState(false);
 
   const practiceCategory = useAppSelector(
     (state) => state?.practiceSlice?.selectedPracticeCategory
@@ -40,7 +42,6 @@ const SpecificationsAndTools = ({
   const selectedStateName = useAppSelector(
     (state) => state?.stateSlice?.stateNameDisplay
   );
-
   const content = useGetAssociatedPracticeQuery(userSelectedFilter);
 
   const getHeaderText = () => {
@@ -50,30 +51,15 @@ const SpecificationsAndTools = ({
     }
     return practiceName;
   };
-
-  const renderDetailedPracticeStandardGuide = () => {
-    return (
-      <div>
-        <h4>Accessing Colorado Practice Standards on the NRCS Website </h4>
-        <h4>1. Goto the NRCS Colorado Conservation Practices Website</h4>
-        <h4>2. Select “Colorado” from the state dropdown if it is not already selected</h4>
-        {/* image */}
-
-        <h4>3. On the toolbar below the state selector ensure that “Document Tree” is selected</h4>
-        <h4>4. Click “Section 4 - Practice Standards and Supporting Documents”</h4>
-        {/* image */}
-
-        <h4>5. Scroll down the list and select “Cover Crop” this will load the documents related to your practice standard</h4>
-        {/* image */}
-      </div>
-    );
+  const handleExpandTechGuide = () => {
+    setExpandTechGuide(!expandTechGuide);
   }
 
   const renderNationalSpecs = () => {
     return (
       <div className='state-specific-container' data-testid='state-specifications'>
         <h4>National Specifications</h4>
-        <h5>{nationalPromptText}</h5>
+        <h5 className='state-prompt-text'>{nationalPromptText}</h5>
         <div className='link'>
           <a
             href='https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/cp/ncps/?cid=nrcs143_026849'
@@ -82,7 +68,7 @@ const SpecificationsAndTools = ({
             aria-label='Current NRCS National Conservation Practices link'
           >
             NRCS National Conservation Practices
-            <img alt='All Conservation at Work videos' src={image} />
+            <img alt='All Conservation at Work videos' src={outerLinkImage} />
           </a>
         </div>
       </div>
@@ -93,22 +79,22 @@ const SpecificationsAndTools = ({
     return (
       <div className='state-specific-container' data-testid='state-specifications'>
         <h4>{selectedStateName} Specifications</h4>
-        <h5>{statePromptText}</h5>
+        <h5 className='state-prompt-text'>{statePromptText}</h5>
         <div className='link'>
-          <button className='practice-standard-button'>
+          <button className='practice-standard-button' type='button' onClick={() => handleExpandTechGuide()}>
             Instructions for Acessing this State’s Practice Standards
           </button>
           <a
             href='https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/cp/ncps/?cid=nrcs143_026849'
             target='_blank'
             rel='noopener noreferrer'
-            aria-label='Current NRCS National Conservation Practices link'
+            aria-label='Current NRCS State Conservation Practices link'
           >
             Go Straight to this State’s Field Office Technical Guide
-            <img alt='All Conservation at Work videos' src={image} />
+            <img alt='All Conservation at Work videos' src={outerLinkImage} />
           </a>
         </div>
-        {renderDetailedPracticeStandardGuide()}
+        {expandTechGuide && <PracticeStandardGuide/> }
       </div>
     );
   }

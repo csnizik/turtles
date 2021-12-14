@@ -58,3 +58,19 @@ export const initialLandUse = {
   Rangeland: false,
   Protected: false,
 };
+
+export const practiceStandardGuideText = {
+  title: 'Accessing Colorado Practice Standards on the NRCS Website',
+  firstStep: '1. Go to the',
+  secondStep: '2. Select “Colorado” from the state dropdown if it is not already selected',
+  thirdStep: '3. On the toolbar below the state selector ensure that “Document Tree” is selected',
+  fourthStep: '4. Click “Section 4 - Practice Standards and Supporting Documents”',
+  fifthStep: '5. Scroll down the list and select “Cover Crop” this will load the documents related to your practice standard',
+};
+
+export const practiceStandardGuideLink = {
+  stateConservationPracticeText: `${' '}NRCS Colorado Conservation Practices Website${' '}`,
+  stateConservationPracticeLink: `https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/cp/ncps/?cid=nrcs143_026849`,
+  viewStateConservationPracticeText: `${' '}View NRCS Colorado Conservation Practices${' '}`,
+  viewStateConservationPracticeLink: `https://efotg.sc.egov.usda.gov/#/state/`,
+}

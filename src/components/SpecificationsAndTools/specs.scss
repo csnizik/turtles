@@ -38,7 +38,7 @@
     line-height: 26px;
   }
 
-  h5 {
+  .state-prompt-text {
     padding-top: 0.625rem;
     font-size: $h5-font-size;
     font-weight: $medium-weight;
@@ -75,6 +75,22 @@
       img {
         margin: 0rem 0rem 0.2rem 0.5rem;
       }
+    }
+  }
+
+  .practice-standard-steps{
+    margin-top: 1.25rem;
+
+    h5 {
+      font-size: $h5-font-size;
+      font-weight: $medium-weight;
+      line-height: 20px;
+      margin-bottom: .25rem;
+    }
+
+    .guide-icons {
+      margin: 1.25rem 0;
+      display: block;
     }
   }
 }
