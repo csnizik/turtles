@@ -43,8 +43,9 @@ const LocationSearch = () => {
   }, []);
 
   const handleClick = () => {
+    let selectedStateCode;
     if (selectedState && selectedState !== '00') {
-      const selectedStateCode =
+      selectedStateCode =
         selectedState &&
         stateStatus.isSuccess &&
         stateStatus.data &&
@@ -54,7 +55,7 @@ const LocationSearch = () => {
       dispatch(currentState(selectedStateCode));
     }
     history.push({
-      pathname: '/ConservationPractices',
+      pathname: `${selectedStateCode?.stateCode || '00'}/ConservationPractices`,
     });
   };
 

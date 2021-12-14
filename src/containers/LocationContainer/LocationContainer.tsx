@@ -3,12 +3,14 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CustomTabs from '../../components/CustomTabs';
 import { searchOptionMap } from '../../common/typedconstants.common';
-import { useAppSelector } from '../../Redux/hooks/hooks';
+import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
 import ConservationPracticeContainer from '../ConservationPracticeContainer';
 import ProjectsContainer from '../ProjectsContainer';
 import OverviewContainer from '../OverviewContainer';
 import './location-search.scss';
 import TabTitle from '../../components/TabTitle';
+import { currentState } from '../../Redux/Slice/stateSlice';
+import { useGetStateListQuery } from '../../Redux/services/api';
 
 // Tab styles come from the NRCS design system
 // Documentation: (https://koala-bandits.github.io/nrcs-design-system-storybook/?path=/story/components-tabs-nav--tabs-story)
@@ -20,7 +22,17 @@ const tabStyleOptions: any = {
 };
 
 const LocationContainer = () => {
-  const { name }: any = useParams();
+  const dispatch = useAppDispatch();
+  const { stateCode, name }: any = useParams();
+  const stateStatus: any = useGetStateListQuery();
+  const selectedState =
+    stateCode &&
+    stateStatus.isSuccess &&
+    stateStatus.data &&
+    stateStatus.data.find((stateInfo: any) => {
+      return stateInfo.stateCode === stateCode;
+    });
+  dispatch(currentState(selectedState));
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
   const selectedPracticeCategory: number = useAppSelector(
     (state) => state.practiceSlice.selectedPracticeCategory
@@ -30,10 +42,9 @@ const LocationContainer = () => {
   );
   const option = searchOptionMap[name];
   const [currentTabOption, setTabOption] = useState(option?.id);
-
   useEffect(() => {
-    setTabOption(1);
-    // Commented on 12/11. To be released in the future. 
+    setTabOption(option?.id);
+    // Commented on 12/11. To be released in the future.
     // More details: CIG-1019
     // if (selectedPracticeCategory >= 0 && !currentTabOption) {
     //   setTabOption(1);
@@ -44,7 +55,7 @@ const LocationContainer = () => {
     // ) {
     //   setTabOption(0);
     // }
-  }, [selectedPracticeCategory, selectedPractice]);
+  }, [selectedPracticeCategory, selectedPractice, option]);
 
   const renderTabContent = () => (
     <TabContent activeTab={currentTabOption}>

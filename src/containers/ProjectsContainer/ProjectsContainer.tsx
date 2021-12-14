@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ListGroup, ListGroupItem } from 'reactstrap';
@@ -29,6 +30,7 @@ interface IProjectListGroup {
 }
 
 const ProjectsContainer = () => {
+  const history = useHistory();
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const [toggleProjectView, setToggleProjectView] = useState(false);
@@ -84,17 +86,21 @@ const ProjectsContainer = () => {
   const handleSelectProjectCard = (id: number) => {
     setSelectedProjectCard(id);
     setToggleProjectView(!toggleProjectView);
+    history.push(`/ProjectsAndInitiatives/${id}`);
   };
 
   const handleSelectProjectItem = (id: number) => {
     if (id === 0) {
       setToggleProjectView(false);
       setSelectedProjectCard(-1);
+      history.push(`/ProjectsAndInitiatives`);
+    } else {
+      setSelectedProjectCard(id);
+      history.push(`/ProjectsAndInitiatives/${id}`);
     }
     if (selectedLandscapeInitiative > 0) {
       setSelectedLandscapeInitiative(-1);
     }
-    setSelectedProjectCard(id);
   };
 
   const renderProjectSection = () => {

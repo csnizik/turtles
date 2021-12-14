@@ -46,7 +46,6 @@ const ConservationPracticeContainer = ({
   const [projectsInitiativesData, setProjectsInitiativesData]: any = useState(
     []
   );
-
   const stateStatus: any = useGetStateListQuery();
   const dispatch = useAppDispatch();
   const location: any = useLocation();
@@ -101,7 +100,7 @@ const ConservationPracticeContainer = ({
     currentPracticeCategory.practices.find(
       (practice: any) => practice.practiceId === currentSpecificPractice
     );
-  
+
   const handleCreateReport = () => {
     if (openModal) {
       setOpenModal(false);
@@ -170,7 +169,10 @@ const ConservationPracticeContainer = ({
               {t('associated-projects-initiatives.description')}
             </p>
           </div>
-          <ProjectListGroup isMapDisplayed={false} selectedPracticeName={currentPractice?.practiceName}/>
+          <ProjectListGroup
+            isMapDisplayed={false}
+            selectedPracticeName={currentPractice?.practiceName}
+          />
         </>
       );
     }
