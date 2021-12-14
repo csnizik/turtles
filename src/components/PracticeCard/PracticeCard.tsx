@@ -62,30 +62,38 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
         <>
           {practiceCategory?.practices
             ? // eslint-disable-next-line
-              practiceCategory.practices.map((practice: any) => (
-                <div className='full-document-box'>
-                  <div className='list-box'>
-                    <div className='info-box'>
-                      <Link
-                        to='/ConservationPractices'
-                        onClick={() =>
-                          handleChange(
-                            practice.practiceId,
-                            practiceCategory.practiceCategoryId
-                          )
+              practiceCategory.practices.map((practice: any) => {
+                const imageName = practice?.practiceImagePath || 'default.jpg';
+                return (
+                  <div className='full-document-box'>
+                    <div className='list-box'>
+                      <div className='info-box'>
+                        <Link
+                          to='/ConservationPractices'
+                          onClick={() =>
+                            handleChange(
+                              practice.practiceId,
+                              practiceCategory.practiceCategoryId
+                            )
+                          }
+                        >
+                          <h3>{practice.practiceName}</h3>
+                        </Link>
+                        <p>{practice.practiceDescription}</p>
+                      </div>
+                      <img
+                        className='practice-image'
+                        src={
+                          imageName
+                            ? `images/landscape-initiatives-images/${imageName}`
+                            : `images/landscape-initiatives-images/default.jpg`
                         }
-                      >
-                        <h3>{practice.practiceName}</h3>
-                      </Link>
-                      <p>{practice.practiceDescription}</p>
+                        alt=''
+                      />
                     </div>
-                    <img
-                      src='images/practice_placeholder.png'
-                      alt='Practice Description'
-                    />
                   </div>
-                </div>
-              ))
+                );
+              })
             : []}
         </>
       )}
