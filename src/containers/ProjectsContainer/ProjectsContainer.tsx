@@ -31,7 +31,7 @@ interface IProjectListGroup {
 
 const ProjectsContainer = () => {
   const history = useHistory();
-  const { category, individual }: any = useParams();
+  const { stateCode: stateC, category, individual }: any = useParams();
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const [toggleProjectView, setToggleProjectView] = useState(false);
@@ -45,6 +45,7 @@ const ProjectsContainer = () => {
   let searchLandscapeInitiatives = { state_county_code: stateCode || null };
 
   useEffect(() => {
+    setSelectedLocation(stateC);
     setSelectedProjectCard(Number(category));
     if (individual) {
       setSelectedLandscapeInitiative(Number(individual));
@@ -56,7 +57,7 @@ const ProjectsContainer = () => {
     } else {
       setToggleProjectView(false);
     }
-  }, [category, individual]);
+  }, [category, individual, stateC]);
 
   if (stateCode !== '00') {
     searchLandscapeInitiatives = {
@@ -69,7 +70,6 @@ const ProjectsContainer = () => {
       state_county_code: null,
     };
   }
-
   const landscapeInitiativesData = usePostLandscapeInitiativesQuery(
     searchLandscapeInitiatives
   );
@@ -80,12 +80,11 @@ const ProjectsContainer = () => {
     stateStatus.data.find((state: any) => {
       return state.stateCode === selectedLocation;
     });
-
   const selectedStateName = selectedState?.stateNameDisplay;
   let searchInputData;
   if (selectedState) {
     searchInputData = {
-      state_county_code: selectedState.stateCode,
+      state_county_code: selectedState?.stateCode,
     };
   } else {
     searchInputData = {
@@ -97,7 +96,7 @@ const ProjectsContainer = () => {
     setSelectedLandscapeInitiative(id);
     history.push(
       `/${
-        selectedState.stateCode || '00'
+        selectedState?.stateCode || '00'
       }/ProjectsAndInitiatives/${category}/${id}`
     );
   };
@@ -106,7 +105,7 @@ const ProjectsContainer = () => {
     setSelectedProjectCard(id);
     setToggleProjectView(!toggleProjectView);
     history.push(
-      `/${selectedState.stateCode || '00'}/ProjectsAndInitiatives/${id}`
+      `/${selectedState?.stateCode || '00'}/ProjectsAndInitiatives/${id}`
     );
   };
 
@@ -115,7 +114,7 @@ const ProjectsContainer = () => {
       setToggleProjectView(false);
       setSelectedProjectCard(-1);
       history.push(
-        `/${selectedState.stateCode || '00'}/ProjectsAndInitiatives`
+        `/${selectedState?.stateCode || '00'}/ProjectsAndInitiatives`
       );
     } else {
       setSelectedProjectCard(id);
