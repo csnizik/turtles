@@ -167,7 +167,13 @@ const MapComponent = ({ setSelectedLocation }: any) => {
               symbol: highlightSymbol,
             });
             mapRef.current.view.graphics.add(highlightedGraphic);
-            setSelectedLocation(foundGraphic?.attributes.STATEFP);
+            if (
+              foundGraphic?.attributes &&
+              foundGraphic.attributes.STATEFP.length
+            ) {
+              setSelectedLocation(foundGraphic.attributes.STATEFP);
+            }
+
             if (SMALL_STATES.includes(foundGraphic?.attributes.STUSPS)) {
               mapRef.current.view.goTo({ target: foundGraphic, zoom: 7 });
             } else {
@@ -177,7 +183,7 @@ const MapComponent = ({ setSelectedLocation }: any) => {
         }
       });
     });
-  }, []);
+  }, [mapRef]);
 
   // Handle alaska composite view interactions
   useEffect(() => {
