@@ -48,7 +48,7 @@ const GovernmentBanner = () => {
       <div className='header-container row-flex-start'>
         <img
           className='flex-align-self-center'
-          src='images/usa-flag-logo.png'
+          src='../../../../images/usa-flag-logo.png'
           alt='USA Flag Logo'
         />
         {`${t('header.disclaimer')} `}
@@ -57,7 +57,7 @@ const GovernmentBanner = () => {
         </a>
       </div>
       <div className='usda-header row-flex-start'>
-        <img src='images/usda_logo_color.png' alt='USDA LOGO' />
+        <img src='../../../../images/usda_logo_color.png' alt='USDA LOGO' />
         <div className='government-banner'>
           <h4 className='page-title' data-testid='page-title'>
             {t('header.nrcs')}
@@ -70,7 +70,11 @@ const GovernmentBanner = () => {
 
   const renderNavigationSection: Function = () => (
     <div className='navigation-bar'>
-      <img className='nrcsLogo' src='images/nrcs_logo.png' alt='NRCS Logo' />
+      <img
+        className='nrcsLogo'
+        src='../../../../images/nrcs_logo.png'
+        alt='NRCS Logo'
+      />
       <Link
         to='/'
         onClick={handleNavigateHome}

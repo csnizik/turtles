@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import {
   useGetNationalOverviewByPracticeQuery,
@@ -19,7 +19,6 @@ import { currentState } from '../../Redux/Slice/stateSlice';
 
 const IndividualPracticeContainer = () => {
   const state = useAppSelector((s) => s);
-  const location: any = useLocation();
   const dispatch = useAppDispatch();
   const stateStatus: any = useGetStateListQuery();
   const practiceId: any = state.practiceSlice.selectedSpecficPractice;
@@ -31,20 +30,18 @@ const IndividualPracticeContainer = () => {
   const { data, error, isLoading, isSuccess, isError } =
     useGetNationalOverviewByPracticeQuery(practiceId);
 
-  if (location.search) {
-    const linkage = location.search.split('?');
-    const practiceCategoryId = linkage[1].split('=').pop();
-    const subPracticeId = linkage[2].split('=').pop();
-    const stateId = linkage[3].split('=').pop();
+  const { stateCode: stateCodeSelect, category, individual }: any = useParams();
+
+  if (+individual !== practiceId) {
     const selectedState =
-      stateId &&
+      stateCodeSelect &&
       stateStatus.isSuccess &&
       stateStatus.data &&
       stateStatus.data.find((stateInfo: any) => {
-        return stateInfo.stateCode === stateId;
+        return stateInfo.stateCode === stateCodeSelect;
       });
-    dispatch(setPracticeCategory(Number(practiceCategoryId)));
-    dispatch(setSpecificPractice(Number(subPracticeId)));
+    dispatch(setPracticeCategory(Number(category)));
+    dispatch(setSpecificPractice(Number(individual)));
     dispatch(currentState(selectedState));
   }
 
