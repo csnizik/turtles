@@ -5,17 +5,12 @@ import './map-container.scss';
 /* eslint-disable react/no-unused-prop-types */
 interface IMapProps {
   setSelectedLocation: Function;
-  selectedLocation?: string;
 }
-
-const defaultProps: any = {
-  selectedLocation: null,
-};
-
+/* eslint-disable no-unused-vars */
 const MapContainer = ({ setSelectedLocation }: IMapProps) => {
   return (
     <>
-      <MapComponent setSelectedLocation={setSelectedLocation} />
+      <MapComponent />
       <div className='webmap' id={VIEW_DIV} />
       <div id='akViewDiv' className='esri-widget' />
       <div id='hiViewDiv' className='esri-widget' />
@@ -23,7 +18,5 @@ const MapContainer = ({ setSelectedLocation }: IMapProps) => {
     </>
   );
 };
-
-MapContainer.defaultProps = defaultProps;
 
 export default MapContainer;
