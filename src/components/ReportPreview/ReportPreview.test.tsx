@@ -5,7 +5,7 @@ afterEach(() => {
   cleanup();
 });
 
-describe('ReportPreview is rendered correctly', () => {
+xdescribe('ReportPreview is rendered correctly', () => {
   const selectedStateCode = { stateCode: '00' };
   const choiceInputs = {
     input1: true,
