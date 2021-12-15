@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import { useHistory } from 'react-router-dom';
-import { useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
@@ -31,6 +31,7 @@ interface IProjectListGroup {
 
 const ProjectsContainer = () => {
   const history = useHistory();
+  const { category, individual }: any = useParams();
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const [toggleProjectView, setToggleProjectView] = useState(false);
@@ -42,6 +43,20 @@ const ProjectsContainer = () => {
   const stateCode = useAppSelector((state) => state?.stateSlice?.stateCode);
   const searchInput = { state_county_code: selectedLocation || null };
   let searchLandscapeInitiatives = { state_county_code: stateCode || null };
+
+  useEffect(() => {
+    setSelectedProjectCard(Number(category));
+    if (individual) {
+      setSelectedLandscapeInitiative(Number(individual));
+    } else {
+      setSelectedLandscapeInitiative(-1);
+    }
+    if (Number(category) > 0) {
+      setToggleProjectView(true);
+    } else {
+      setToggleProjectView(false);
+    }
+  }, [category, individual]);
 
   if (stateCode !== '00') {
     searchLandscapeInitiatives = {
@@ -58,7 +73,6 @@ const ProjectsContainer = () => {
   const landscapeInitiativesData = usePostLandscapeInitiativesQuery(
     searchLandscapeInitiatives
   );
-
   const selectedState =
     selectedLocation &&
     stateStatus.isSuccess &&
@@ -81,22 +95,33 @@ const ProjectsContainer = () => {
   dispatch(setSearch(searchInputData));
   const handleSelectLandscapeInitiative = (id: number) => {
     setSelectedLandscapeInitiative(id);
+    history.push(
+      `/${
+        selectedState.stateCode || '00'
+      }/ProjectsAndInitiatives/${category}/${id}`
+    );
   };
 
   const handleSelectProjectCard = (id: number) => {
     setSelectedProjectCard(id);
     setToggleProjectView(!toggleProjectView);
-    history.push(`/ProjectsAndInitiatives/${id}`);
+    history.push(
+      `/${selectedState.stateCode || '00'}/ProjectsAndInitiatives/${id}`
+    );
   };
 
   const handleSelectProjectItem = (id: number) => {
     if (id === 0) {
       setToggleProjectView(false);
       setSelectedProjectCard(-1);
-      history.push(`/ProjectsAndInitiatives`);
+      history.push(
+        `/${selectedState.stateCode || '00'}/ProjectsAndInitiatives`
+      );
     } else {
       setSelectedProjectCard(id);
-      history.push(`/ProjectsAndInitiatives/${id}`);
+      history.push(
+        `/${selectedState.stateCode || '00'}/ProjectsAndInitiatives/${id}`
+      );
     }
     if (selectedLandscapeInitiative > 0) {
       setSelectedLandscapeInitiative(-1);
