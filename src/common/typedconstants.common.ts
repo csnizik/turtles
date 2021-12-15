@@ -58,3 +58,20 @@ export const initialLandUse = {
   Rangeland: false,
   Protected: false,
 };
+
+export const practiceStandardGuideText = {
+  title: "Accessing this state's Practice Standards on the NRCS Website",
+  firstStep: '1. Go to the',
+  secondStep: '2. On the toolbar below the state selector ensure that “Document Tree” is selected',
+  thirdStep: '3. Click “Section 4 - Practice Standards and Supporting Documents”',
+  fourthStep: '4. Select Conservation Practice Standards & Support Documents',
+  fifthStep: '5. Select your desired practice standard from the list, this will load the documents related to your practice standard',
+};
+
+export const practiceStandardGuideLink = {
+  stateConservationPracticeText: `${' '}NRCS Conservation Practices Website${' '}`,
+  viewStateConservationPracticeText: `${' '}View this State's Conservation Practices${' '}`,
+  viewStateConservationPracticeLink: `https://efotg.sc.egov.usda.gov/#/state/`,
+  webpagePromptText: `Go Straight to this State’s Field Office Technical Guide`,
+  pdfReportPromptText: `State Specific National Conservation Practices`,
+}
