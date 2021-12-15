@@ -75,12 +75,12 @@ const ProjectTypeSection = ({
             'Watersmart' and 'Working Lands for Wildlife' */}
             {selectedLandscapeInitiative === -1 ||
             selectedLandscapeInitiative === 9 ||
-            selectedLandscapeInitiative === 10 ? null : (
-              /*
+            selectedLandscapeInitiative === 10 ? (
               <LandscapeMapContainer
                 landscapeInitiativesData={landscapeInitiativesData.data || []}
                 selectedLandscapeInitiative={selectedLandscapeInitiative}
-              />*/
+              />
+            ) : (
               <div className='landscape-img'>
                 <img
                   src={foundInitiative?.lci_image_link}

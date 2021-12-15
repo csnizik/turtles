@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, NavItem, NavLink } from 'reactstrap';
+import { NavItem, NavLink } from 'reactstrap';
 import './tab.scss';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 
