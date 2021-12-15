@@ -40,9 +40,9 @@
 
   .state-prompt-text {
     padding-top: 0.625rem;
-    font-size: $h5-font-size;
+    font-size: $h4-font-size;
     font-weight: $medium-weight;
-    line-height: 20px;
+    line-height: 22px;
     margin: 0;
   }
 
@@ -70,6 +70,10 @@
       line-height: 19px;
     }
 
+    .hiddent-content {
+      display: none;
+    }
+
     a:first-of-type {
       margin-left: auto;
       img {
@@ -81,16 +85,30 @@
   .practice-standard-steps{
     margin-top: 1.25rem;
 
-    h5 {
-      font-size: $h5-font-size;
+    h4 {
+      font-size: $h4-font-size;
       font-weight: $medium-weight;
-      line-height: 20px;
+      line-height: 22px;
       margin-bottom: .25rem;
     }
 
     .guide-icons {
       margin: 1.25rem 0;
       display: block;
+    }
+
+    .close-instruction-button {
+      display: block;
+      width: 176px;
+      height: 43px;
+      margin-top: 20px;
+      border: 1px solid $usda-blue;
+      border-radius: 4px;
+      padding: 12px 20px;
+      font-weight: bold;
+      font-size: $h4-font-size;
+      line-height: 19px;
+      color: $usda-blue;
     }
   }
 }
@@ -111,7 +129,8 @@
   }
 
   p {
-    font-size: $h5-font-size;
+    font-size: $h4-font-size;
+    line-height: 22px;
     font-weight: $medium-light-weight;
   }
 

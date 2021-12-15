@@ -7,6 +7,7 @@ import { IAssociatedPracticeList } from '../../common/types';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import outerLinkImage from './image/newLinkIcon.svg';
 import PracticeStandardGuide from './PracticeStandardGuide';
+import { practiceStandardGuideLink } from '../../common/typedconstants.common';
 
 interface ISpecAndToolsProps {
   data: any;
@@ -34,7 +35,7 @@ const SpecificationsAndTools = ({
   };
 
   const { t } = useTranslation();
-  const [ expandTechGuide, setExpandTechGuide] = useState(false);
+  const [expandTechGuide, setExpandTechGuide] = useState(false);
 
   const practiceCategory = useAppSelector(
     (state) => state?.practiceSlice?.selectedPracticeCategory
@@ -42,7 +43,17 @@ const SpecificationsAndTools = ({
   const selectedStateName = useAppSelector(
     (state) => state?.stateSlice?.stateNameDisplay
   );
+  const selectedStateAbbr = useAppSelector(
+    (state) => state?.stateSlice?.stateAbbreviation
+  );
+  const fromPdfReport = useAppSelector(
+    (state) => state?.pdfGenSlice?.enablePdfGen
+  );
   const content = useGetAssociatedPracticeQuery(userSelectedFilter);
+  const practiceLink = (selectedStateAbbr === 'U.S.' || selectedStateAbbr===undefined) ? 
+  practiceStandardGuideLink.viewStateConservationPracticeLink : 
+    (practiceStandardGuideLink.viewStateConservationPracticeLink+selectedStateAbbr);
+    
 
   const getHeaderText = () => {
     const practiceName = (data && data?.practiceName) || '';
@@ -57,7 +68,7 @@ const SpecificationsAndTools = ({
 
   const renderNationalSpecs = () => {
     return (
-      <div className='state-specific-container' data-testid='state-specifications'>
+      <div className='state-specific-container' data-testid='national-specifications'>
         <h4>National Specifications</h4>
         <h5 className='state-prompt-text'>{nationalPromptText}</h5>
         <div className='link'>
@@ -81,20 +92,29 @@ const SpecificationsAndTools = ({
         <h4>{selectedStateName} Specifications</h4>
         <h5 className='state-prompt-text'>{statePromptText}</h5>
         <div className='link'>
-          <button className='practice-standard-button' type='button' onClick={() => handleExpandTechGuide()}>
+          <button
+            className={fromPdfReport ? 'hidden-content' : 'practice-standard-button'}
+            type='button'
+            onClick={() => handleExpandTechGuide()}
+          >
             Instructions for Acessing this State’s Practice Standards
           </button>
           <a
-            href='https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/cp/ncps/?cid=nrcs143_026849'
+            href={practiceStandardGuideLink.viewStateConservationPracticeLink + selectedStateAbbr}
             target='_blank'
             rel='noopener noreferrer'
             aria-label='Current NRCS State Conservation Practices link'
           >
-            Go Straight to this State’s Field Office Technical Guide
+            {fromPdfReport ? practiceStandardGuideLink.pdfReportPromptText : practiceStandardGuideLink.webpagePromptText}
             <img alt='All Conservation at Work videos' src={outerLinkImage} />
           </a>
         </div>
-        {expandTechGuide && <PracticeStandardGuide/> }
+        {expandTechGuide && 
+          <PracticeStandardGuide 
+            handleClick={handleExpandTechGuide} 
+            practiceLink={practiceLink}
+          />
+        }
       </div>
     );
   }
@@ -142,7 +162,8 @@ const SpecificationsAndTools = ({
     >
       <h2>{getHeaderText()}</h2>
       <h4>{intro}</h4>
-      {selectedStateName==='U.S.' ? renderNationalSpecs() : renderStateSpecs()}
+      {renderNationalSpecs()}
+      {selectedStateName === 'U.S.' ? null : renderStateSpecs()}
       {renderAssociatedPractice()}
     </section>
   );
