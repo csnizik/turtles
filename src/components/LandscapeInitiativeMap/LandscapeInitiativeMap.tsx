@@ -14,7 +14,6 @@ import {
   LANDSCAPE_VIEW_DIV,
   landscapeInitiativeToLegendMap,
   landscapeViewConstraints,
-  NATIONAL_WATER_QUALITY_INIT,
   WORKING_LANDS_FOR_WILDLIFE_ABBRV,
   WATER_SMART_LAYER_ID,
 } from './constants';
@@ -157,9 +156,7 @@ const LandscapeInitiativeMap = ({
           const allFeatureLayers: Array<any> = (
             mapRef.current.map.allLayers as any
           ).items.filter((layer: Layer) => {
-            return (
-              layer.type === 'feature' || layer.id === WATER_SMART_LAYER_ID
-            );
+            return layer.title !== 'CIG Project - States';
           });
 
           if (
@@ -176,7 +173,15 @@ const LandscapeInitiativeMap = ({
           if (selectedLandscapeInitiative === 10) {
             let filteredLayers: Array<any> = [];
             filteredLayers = allFeatureLayers.filter((layer: any) => {
-              return !layer.title.endsWith(WORKING_LANDS_FOR_WILDLIFE_ABBRV);
+              const nrcsBaseLayers: any = [
+                'VectorTile_8900',
+                'VectorTile_9702',
+                'VectorTile_7804',
+              ];
+              return (
+                !layer.title.endsWith(WORKING_LANDS_FOR_WILDLIFE_ABBRV) &&
+                !nrcsBaseLayers.includes(layer.id)
+              );
             });
             setFilteredLayers(filteredLayers);
             filteredLayers.forEach((layer: any) => {
@@ -187,7 +192,13 @@ const LandscapeInitiativeMap = ({
           if (selectedLandscapeInitiative === 9) {
             let filteredLayers: Array<any> = [];
             filteredLayers = allFeatureLayers.filter((layer: any) => {
-              return layer.title !== NATIONAL_WATER_QUALITY_INIT;
+              const waterSmartLayerIds: any = [
+                'VectorTile_8900',
+                'VectorTile_9702',
+                'VectorTile_7804',
+                WATER_SMART_LAYER_ID,
+              ];
+              return !waterSmartLayerIds.includes(layer.id);
             });
             setFilteredLayers(filteredLayers);
             filteredLayers.forEach((layer: any) => {

@@ -5,8 +5,8 @@ export const ALL_LANDSCAPE_INITIATIVES_PORTAL_URL =
 export const LANDSCAPE_VIEW_DIV = 'landscapeViewDiv';
 
 export const landscapeViewConstraints = {
-  maxZoom: 4,
-  minZoom: 10,
+  maxZoom: 2,
+  minZoom: 8,
 };
 
 export const landscapeInitiativeToLegendMap = {
@@ -29,6 +29,7 @@ export const landscapeInitiativeToLegendMap = {
 
 export const NATIONAL_WATER_QUALITY_INIT = 'National Water Quality Initiative';
 
-export const WATER_SMART_LAYER_ID = 'FY2022_NWQI_7645';
+export const WATER_SMART_LAYER_ID =
+  'FY22_WaterSMART_Initiative_Priority_Areas_285';
 
 export const WORKING_LANDS_FOR_WILDLIFE_ABBRV = '(WLFW)';
