@@ -4,6 +4,7 @@ import './conservation-practices-categories.scss';
 interface ICategoryData {
   practiceCategoryName: string;
   practiceCategoryDisplay: string;
+  practiceCategoryIconPath: string;
   practiceCategoryId: string;
 }
 
@@ -38,6 +39,7 @@ const ConservationPracticesCategories = ({
                 practiceCategoryName={category.practiceCategoryName}
                 practiceCategoryDisplay={category.practiceCategoryDisplay}
                 practiceCategoryId={category.practiceCategoryId}
+                practiceCategoryIconPath={category.practiceCategoryIconPath}
               />
             );
           })}
