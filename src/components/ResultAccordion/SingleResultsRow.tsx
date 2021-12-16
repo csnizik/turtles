@@ -28,7 +28,9 @@ const SingleResultsRow = ({
                 </p>
                 <p>
                   <Link
-                    to={`${stateCode || '00'}/ConservationPractices`}
+                    to={`${stateCode || '00'}/ConservationPractices/${rowId}/${
+                      practiceData.practiceId
+                    }`}
                     onClick={() =>
                       handleSpecificPracticeSelection(
                         rowId,

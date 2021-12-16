@@ -32,7 +32,7 @@ const IndividualPracticeContainer = () => {
 
   const { stateCode: stateCodeSelect, category, individual }: any = useParams();
 
-  if (+individual !== practiceId) {
+  if (individual && +individual !== practiceId) {
     const selectedState =
       stateCodeSelect &&
       stateStatus.isSuccess &&

@@ -57,7 +57,7 @@ const ResultsRow = ({
                             to={{
                               pathname: `${
                                 stateCode || '00'
-                              }/ConservationPractices`,
+                              }/ConservationPractices/${categoryId}`,
                               state: { detail: categoryId },
                             }}
                             onClick={() =>
@@ -100,7 +100,9 @@ const ResultsRow = ({
                                 <Link
                                   to={`${
                                     stateCode || '00'
-                                  }/ConservationPractices`}
+                                  }/ConservationPractices/${categoryId}/${
+                                    ele.practiceId
+                                  }`}
                                   onClick={() =>
                                     handleSpecificPracticeSelection(
                                       categoryId,

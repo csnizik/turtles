@@ -22,6 +22,7 @@ import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import {
   setPracticeCategory,
   setSearch,
+  setSpecificPractice,
 } from '../../Redux/Slice/practiceSlice';
 import { currentState } from '../../Redux/Slice/stateSlice';
 import ProjectListGroup from '../../components/ProjectListGroup';
@@ -54,6 +55,31 @@ const ConservationPracticeContainer = ({
   const selectedStateCode = stateInfo?.stateCode;
 
   const { category, individual }: any = useParams();
+  useEffect(() => {
+    if (individual) {
+      setPracticeViewType({
+        ...defaultPracticeViews,
+        individualPractice: true,
+      });
+      dispatch(setPracticeCategory(+category));
+      dispatch(setSpecificPractice(+individual));
+    } else if (category) {
+      setPracticeViewType({
+        ...defaultPracticeViews,
+        practiceCategories: true,
+      });
+
+      dispatch(setPracticeCategory(+category));
+      dispatch(setSpecificPractice(-1));
+    } else {
+      setPracticeViewType({
+        ...defaultPracticeViews,
+        allPractices: true,
+      });
+      dispatch(setPracticeCategory(-1));
+      dispatch(setSpecificPractice(-1));
+    }
+  }, [category, individual]);
 
   useEffect(() => {
     const selectedState =
@@ -88,6 +114,7 @@ const ConservationPracticeContainer = ({
   const { data, isSuccess } = usePostSearchDataQuery({
     practice_id: sharedState,
   });
+
   const currentPracticeCategory: any =
     isSuccess &&
     data &&
@@ -96,7 +123,6 @@ const ConservationPracticeContainer = ({
       (practice: any) =>
         practice.practiceCategoryId === currentPracticeCategoryId
     );
-
   const currentPractice =
     currentPracticeCategory &&
     currentPracticeCategory.practices.find(
@@ -122,31 +148,19 @@ const ConservationPracticeContainer = ({
   }, [pdata, ldata]);
 
   useEffect(() => {
-    if (
-      currentPracticeCategoryId < 0 &&
-      currentSpecificPractice < 0 &&
-      individual &&
-      +individual !== currentSpecificPractice
-    ) {
-      setPracticeViewType({ ...practiceViewType, individualPractice: true });
-    } else if (
-      currentPracticeCategoryId < 0 &&
-      currentSpecificPractice < 0 &&
-      category &&
-      +category !== currentPracticeCategory
-    ) {
+    if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
+      setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
+    } else if (currentPracticeCategoryId >= 0 && currentSpecificPractice < 0) {
+      dispatch(setPracticeCategory(currentPracticeCategoryId));
       setPracticeViewType({
         ...defaultPracticeViews,
         practiceCategories: true,
       });
-      dispatch(setPracticeCategory(+category));
-    } else if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
-      setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
-    } else if (currentPracticeCategoryId >= 0 && currentSpecificPractice < 0) {
-      dispatch(setPracticeCategory(currentPracticeCategoryId));
-      setPracticeViewType({ ...practiceViewType, practiceCategories: true });
     } else if (currentSpecificPractice >= 0) {
-      setPracticeViewType({ ...practiceViewType, individualPractice: true });
+      setPracticeViewType({
+        ...defaultPracticeViews,
+        individualPractice: true,
+      });
     }
   }, [currentPracticeCategoryId, currentSpecificPractice]);
 
