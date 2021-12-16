@@ -24,7 +24,7 @@
   }
 }
 
-.national-specs {
+.state-specific-container {
   background: $white;
   margin-top: 1.875rem;
   padding: 1.875rem;
@@ -38,11 +38,11 @@
     line-height: 26px;
   }
 
-  h5 {
+  .state-prompt-text {
     padding-top: 0.625rem;
-    font-size: $h5-font-size;
+    font-size: $h4-font-size;
     font-weight: $medium-weight;
-    line-height: 20px;
+    line-height: 22px;
     margin: 0;
   }
 
@@ -51,18 +51,64 @@
     font-size: $h4-font-size;
     line-height: 22.4px;
     color: $dark-blue;
+    font-weight: $medium-weight;
   }
 
   .link {
-    width: fit-content;
-    margin-left: auto;
-    margin-right: 0;
-    margin-top: 0.6875rem;
+    margin-top: 0.625rem;
+    display: flex;
+    align-items: center;
+
+    .practice-standard-button{
+      background-color: $usda-blue;
+      color: $white;
+      width: 27.8125rem;
+      height: 2.6875rem;
+      border-radius: 0.25rem;
+      font-weight: $heavy-weight;
+      font-size: $h4-font-size;
+      line-height: 19px;
+    }
+
+    .hiddent-content {
+      display: none;
+    }
 
     a:first-of-type {
+      margin-left: auto;
       img {
         margin: 0rem 0rem 0.2rem 0.5rem;
       }
+    }
+  }
+
+  .practice-standard-steps{
+    margin-top: 1.25rem;
+
+    h4 {
+      font-size: $h4-font-size;
+      font-weight: $medium-weight;
+      line-height: 22px;
+      margin-bottom: .25rem;
+    }
+
+    .guide-icons {
+      margin: 1.25rem 0;
+      display: block;
+    }
+
+    .close-instruction-button {
+      display: block;
+      width: 176px;
+      height: 43px;
+      margin-top: 20px;
+      border: 1px solid $usda-blue;
+      border-radius: 4px;
+      padding: 12px 20px;
+      font-weight: bold;
+      font-size: $h4-font-size;
+      line-height: 19px;
+      color: $usda-blue;
     }
   }
 }
@@ -83,7 +129,8 @@
   }
 
   p {
-    font-size: $h5-font-size;
+    font-size: $h4-font-size;
+    line-height: 22px;
     font-weight: $medium-light-weight;
   }
 

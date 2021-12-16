@@ -26,3 +26,5 @@ export const landscapeInitiativeToLegendMap = {
   17: 'Bog Turtle',
   18: 'New England Cottontail',
 };
+
+export const WATER_SMART_LAYER_ID = 'FY2022_NWQI_7645';

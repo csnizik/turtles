@@ -13,6 +13,7 @@ const LandscapeMapContainer = ({
   selectedLandscapeInitiative,
 }: ILandscapeContainerProps) => {
   const stateCode = useAppSelector((state) => state?.stateSlice?.stateCode);
+
   return (
     <>
       <LandscapeInitiativeMap

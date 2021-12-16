@@ -22,7 +22,10 @@ const ProjectTypeSection = ({
     // Conservation Grants
     if (projectType.id === 1) {
       return (
-        <div className='project-type-details'>
+        <div
+          className='project-type-details'
+          data-testid='project-type-details'
+        >
           <p className='margin-top-3'>{projectType.paragraphDescription}</p>
           <p>
             Visit the{' '}
@@ -36,7 +39,7 @@ const ProjectTypeSection = ({
             </a>{' '}
             for more information. Use
             <a
-              aria-label='Conservation Innovation Grants link opens a new tab'
+              aria-label='Conservation Innovation Grants link opens in a new tab'
               href='/search'
               target='_blank'
               rel='noreferrer'
@@ -64,18 +67,25 @@ const ProjectTypeSection = ({
             return parentId.lci_parent_id !== null;
           });
         return (
-          <div className='landscape-intiatives margin-top-2'>
-            {/* Webmap only available for 'Landscape Conservation Initiatives'
-            and 'Working Lands for Wildlife' */}
+          <div
+            className='landscape-intiatives margin-top-2'
+            data-testid='landscape-intiatives-details'
+          >
+            {/* Webmap only available for 'Landscape Conservation Initiatives',
+            'Watersmart' and 'Working Lands for Wildlife' */}
             {selectedLandscapeInitiative === -1 ||
+            selectedLandscapeInitiative === 9 ||
             selectedLandscapeInitiative === 10 ? (
               <LandscapeMapContainer
                 landscapeInitiativesData={landscapeInitiativesData.data || []}
                 selectedLandscapeInitiative={selectedLandscapeInitiative}
               />
             ) : (
-              <div className='landscape-img-placeholder margin-bottom-3'>
-                <h3 className='padding-3'>Placeholder for webmap or image</h3>
+              <div className='landscape-img'>
+                <img
+                  src={foundInitiative.lci_image_link}
+                  alt={foundInitiative.lci_name}
+                />
               </div>
             )}
             <a
@@ -93,15 +103,20 @@ const ProjectTypeSection = ({
             <i className='fas fa-external-link-alt' />
             <hr className='margin-bottom-2' />
             <div className='landscape-details'>
-              {selectedLandscapeInitiative > 0
-                ? foundInitiative?.lci_description.map((paragraphText) => {
-                    return <p>{paragraphText}</p>;
-                  })
-                : baseConservationInitiative?.descriptions.map(
-                    (paragraphText) => {
-                      return <p>{paragraphText}</p>;
-                    }
-                  )}
+              {
+                /*eslint react/no-array-index-key: 0 */
+                selectedLandscapeInitiative > 0
+                  ? foundInitiative?.lci_description.map(
+                      (paragraphText: any, id: number) => {
+                        return <p key={id}>{paragraphText}</p>;
+                      }
+                    )
+                  : baseConservationInitiative?.descriptions.map(
+                      (paragraphText) => {
+                        return <p>{paragraphText}</p>;
+                      }
+                    )
+              }
               {foundInitiative?.lci_id === 10 && selectedLandscapeInitiative > 0
                 ? subInitiative?.map((item: any) => (
                     /* eslint-disable */
@@ -119,21 +134,22 @@ const ProjectTypeSection = ({
     }
     return null;
   };
-
   const renderPageTitle = () => {
     if (selectedLandscapeInitiative > 0) {
-      const foundInitiative = landscapeInitiativesData.data.find(
+      const foundInitiative = landscapeInitiativesData?.data?.find(
         (initiative) => {
           return initiative.lci_id === selectedLandscapeInitiative;
         }
       );
-      return <h3>{foundInitiative?.lci_name}</h3>;
+      return (
+        <h3 data-testid='initiative-title'>{foundInitiative?.lci_name}</h3>
+      );
     }
-    return <h3>{projectType.title}</h3>;
+    return <h3 data-testid='project-type-title'>{projectType.title}</h3>;
   };
 
   return (
-    <div className='project-type-section'>
+    <div className='project-type-section' data-testid='project-type-overview'>
       {renderPageTitle()}
       {renderProjectDetails()}
     </div>
