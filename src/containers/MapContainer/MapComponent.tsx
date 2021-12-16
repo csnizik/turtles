@@ -143,13 +143,16 @@ const MapComponent = () => {
               const searchInput = {
                 state_county_code: selectedState.attributes.STATEFP || null,
               };
-              dispatch(setSearch(searchInput));
               // Zoom to selected state
               if (SMALL_STATES.includes(selectedState.attributes.STUSPS)) {
                 mapRef.current.view.goTo({ target: selectedState, zoom: 7 });
+              } else if (selectedState?.attributes.STUSPS === 'AK') {
+                mapRef.current.view.goTo({ target: selectedState, zoom: 4 });
               } else {
                 mapRef.current.view.goTo({ target: selectedState, zoom: 6 });
               }
+
+              dispatch(setSearch(searchInput));
             }
           }
         });
@@ -171,7 +174,6 @@ const MapComponent = () => {
               const searchInput = {
                 state_county_code: stateCode || null,
               };
-              dispatch(setSearch(searchInput));
               const highlightedGraphic = new Graphic({
                 geometry: foundGraphic?.geometry,
                 symbol: highlightSymbol,
@@ -179,9 +181,12 @@ const MapComponent = () => {
               mapRef.current.view.graphics.add(highlightedGraphic);
               if (SMALL_STATES.includes(foundGraphic?.attributes.STUSPS)) {
                 mapRef.current.view.goTo({ target: foundGraphic, zoom: 7 });
+              } else if (foundGraphic?.attributes.STUSPS === 'AK') {
+                mapRef.current.view.goTo({ target: foundGraphic, zoom: 4 });
               } else {
                 mapRef.current.view.goTo({ target: foundGraphic, zoom: 6 });
               }
+              dispatch(setSearch(searchInput));
             }
           });
         }
