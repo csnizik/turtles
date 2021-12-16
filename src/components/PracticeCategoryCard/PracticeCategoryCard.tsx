@@ -1,3 +1,4 @@
+import { useParams, useHistory } from 'react-router-dom';
 import './practice-category-card.scss';
 import image from './placeholder-icon-36.svg';
 
@@ -14,6 +15,8 @@ const PracticeCategoryCard = ({
   practiceCategoryId,
   selectPractice,
 }: ICategoryData) => {
+  const history = useHistory();
+  const { name }: any = useParams();
   return (
     <div className='card'>
       <button
@@ -21,6 +24,7 @@ const PracticeCategoryCard = ({
         className='btn-cover'
         onClick={() => {
           selectPractice(practiceCategoryId);
+          history.push(`${name}/${practiceCategoryId}`);
         }}
       >
         {practiceCategoryName}

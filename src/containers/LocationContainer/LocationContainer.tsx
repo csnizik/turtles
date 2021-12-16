@@ -9,7 +9,7 @@ import ProjectsContainer from '../ProjectsContainer';
 import OverviewContainer from '../OverviewContainer';
 import './location-search.scss';
 import TabTitle from '../../components/TabTitle';
-import { currentState } from '../../Redux/Slice/stateSlice';
+import { currentState, initialState } from '../../Redux/Slice/stateSlice';
 import { useGetStateListQuery } from '../../Redux/services/api';
 
 // Tab styles come from the NRCS design system
@@ -32,7 +32,11 @@ const LocationContainer = () => {
     stateStatus.data.find((stateInfo: any) => {
       return stateInfo.stateCode === stateCode;
     });
-  dispatch(currentState(selectedState));
+  if (selectedState) {
+    dispatch(currentState(selectedState));
+  } else {
+    dispatch(currentState(initialState));
+  }
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
   const selectedPracticeCategory: number = useAppSelector(
     (state) => state.practiceSlice.selectedPracticeCategory

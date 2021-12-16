@@ -6,7 +6,7 @@ interface IState {
   stateAbbreviation: string;
 }
 
-const initialState = {
+export const initialState = {
   stateNameDisplay: 'U.S.',
   stateCode: '00',
   stateAbbreviation: 'U.S.',

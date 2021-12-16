@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   useGetStateListQuery,
@@ -52,6 +52,8 @@ const ConservationPracticeContainer = ({
 
   const sharedState = location?.state?.detail;
   const selectedStateCode = stateInfo?.stateCode;
+
+  const { category, individual }: any = useParams();
 
   useEffect(() => {
     const selectedState =
@@ -120,11 +122,26 @@ const ConservationPracticeContainer = ({
   }, [pdata, ldata]);
 
   useEffect(() => {
-    if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
+    if (
+      currentPracticeCategoryId < 0 &&
+      currentSpecificPractice < 0 &&
+      individual &&
+      +individual !== currentSpecificPractice
+    ) {
+      setPracticeViewType({ ...practiceViewType, individualPractice: true });
+    } else if (
+      currentPracticeCategoryId < 0 &&
+      currentSpecificPractice < 0 &&
+      category &&
+      +category !== currentPracticeCategory
+    ) {
+      setPracticeViewType({
+        ...defaultPracticeViews,
+        practiceCategories: true,
+      });
+      dispatch(setPracticeCategory(+category));
+    } else if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
       setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
-      if (location.search) {
-        setPracticeViewType({ ...practiceViewType, individualPractice: true });
-      }
     } else if (currentPracticeCategoryId >= 0 && currentSpecificPractice < 0) {
       dispatch(setPracticeCategory(currentPracticeCategoryId));
       setPracticeViewType({ ...practiceViewType, practiceCategories: true });

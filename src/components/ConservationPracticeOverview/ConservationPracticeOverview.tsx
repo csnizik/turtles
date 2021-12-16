@@ -20,8 +20,8 @@ const ConservationPracticeOverview = ({
                 alt=''
                 src={
                   data.practiceImage
-                    ? `images/landscape-initiatives-images/${data.practiceImage}`
-                    : `images/landscape-initiatives-images/default.jpg`
+                    ? `../../../images/landscape-initiatives-images/${data.practiceImage}`
+                    : `../../../images/landscape-initiatives-images/default.jpg`
                 }
               />
               <div className='overview' data-testid='overview-container'>

@@ -37,7 +37,15 @@ const FindByPractices = () => {
   const handleFindPractices = () => {
     dispatch(setPracticeCategory(+selectedPractice));
     dispatch(setSpecificPractice(+selectedSubPractice));
-    history.push('00/ConservationPractices');
+    if (+selectedPractice !== -1 && +selectedSubPractice === -1) {
+      history.push(`00/ConservationPractices/${+selectedPractice}`);
+    } else if (+selectedPractice !== -1 && +selectedSubPractice !== -1) {
+      history.push(
+        `00/ConservationPractices/${+selectedPractice}/${+selectedSubPractice}`
+      );
+    } else {
+      history.push('00/ConservationPractices');
+    }
   };
 
   const practiceCategory = useGetPracticeCategoryQuery();
