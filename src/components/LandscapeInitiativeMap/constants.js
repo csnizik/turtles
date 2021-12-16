@@ -29,7 +29,10 @@ export const landscapeInitiativeToLegendMap = {
 
 export const NATIONAL_WATER_QUALITY_INIT = 'National Water Quality Initiative';
 
-export const WATER_SMART_LAYER_ID =
-  'FY22_WaterSMART_Initiative_Priority_Areas_285';
+export const WATER_SMART_LAYER_ID_01 =
+  'FY22_WaterSMART_Initiative_Priority_Areas_1949';
+
+export const WATER_SMART_LAYER_ID_02 =
+  'WaterSMART_Initiative_Eligible_States_7041';
 
 export const WORKING_LANDS_FOR_WILDLIFE_ABBRV = '(WLFW)';

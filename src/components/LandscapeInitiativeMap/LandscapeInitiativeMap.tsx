@@ -10,12 +10,10 @@ import { currentState } from '../../Redux/Slice/stateSlice';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
 import '@arcgis/core/assets/esri/themes/light/main.css';
 import {
-  ALL_LANDSCAPE_INITIATIVES_PORTAL_URL,
   LANDSCAPE_VIEW_DIV,
   landscapeInitiativeToLegendMap,
   landscapeViewConstraints,
   WORKING_LANDS_FOR_WILDLIFE_ABBRV,
-  WATER_SMART_LAYER_ID,
 } from './constants';
 import { STATE_FEATURE_LAYER_URL } from '../../common/constants';
 import { ILandscapeInitiative } from '../../common/types';
@@ -32,12 +30,14 @@ interface ILandscapeProps {
   landscapeInitiativesData: Array<ILandscapeInitiative>;
   selectedLocation: any;
   selectedLandscapeInitiative: number;
+  portalId: string;
 }
 
 const LandscapeInitiativeMap = ({
   landscapeInitiativesData,
   selectedLocation,
   selectedLandscapeInitiative,
+  portalId,
 }: ILandscapeProps) => {
   const mapRef = useRef({} as IMapProps);
   const stateFeatureLayer = useRef({} as FeatureLayer);
@@ -54,7 +54,7 @@ const LandscapeInitiativeMap = ({
     if (mapRef && mapRef.current) {
       mapRef.current.map = new WebMap({
         portalItem: {
-          id: ALL_LANDSCAPE_INITIATIVES_PORTAL_URL,
+          id: portalId,
         },
       });
       const view: MapView = new MapView({
@@ -62,7 +62,10 @@ const LandscapeInitiativeMap = ({
         container: LANDSCAPE_VIEW_DIV,
         constraints: landscapeViewConstraints,
         map: mapRef.current.map,
-        zoom: 3,
+        zoom:
+          selectedLandscapeInitiative === 9 || selectedLandscapeInitiative === 7
+            ? 4
+            : 3,
       });
 
       mapRef.current.view = view;
@@ -80,7 +83,7 @@ const LandscapeInitiativeMap = ({
         mapRef.current.view.destroy();
       };
     }
-  }, [mapRef]);
+  }, [mapRef, portalId]);
 
   useEffect(() => {
     mapRef.current.view.when(() => {
@@ -94,7 +97,11 @@ const LandscapeInitiativeMap = ({
             });
 
             const featureLayerInfos: Array<any> = [];
-            if (landscapeInitiativesData?.length && selectedLocation) {
+            if (
+              landscapeInitiativesData?.length &&
+              selectedLocation &&
+              selectedLandscapeInitiative !== 2
+            ) {
               const relatedLandscpaeInitiativesPerSelectedLocation =
                 landscapeInitiativesData.map((init: any) => {
                   return landscapeInitiativeToLegendMap[init.lci_id];
@@ -182,23 +189,6 @@ const LandscapeInitiativeMap = ({
                 !layer.title.endsWith(WORKING_LANDS_FOR_WILDLIFE_ABBRV) &&
                 !nrcsBaseLayers.includes(layer.id)
               );
-            });
-            setFilteredLayers(filteredLayers);
-            filteredLayers.forEach((layer: any) => {
-              layer.visible = false; // eslint-disable-line no-param-reassign
-            });
-          }
-          // WaterSmart
-          if (selectedLandscapeInitiative === 9) {
-            let filteredLayers: Array<any> = [];
-            filteredLayers = allFeatureLayers.filter((layer: any) => {
-              const waterSmartLayerIds: any = [
-                'VectorTile_8900',
-                'VectorTile_9702',
-                'VectorTile_7804',
-                WATER_SMART_LAYER_ID,
-              ];
-              return !waterSmartLayerIds.includes(layer.id);
             });
             setFilteredLayers(filteredLayers);
             filteredLayers.forEach((layer: any) => {
