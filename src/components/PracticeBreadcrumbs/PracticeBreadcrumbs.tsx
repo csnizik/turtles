@@ -21,7 +21,6 @@ const PracticeBreadcrumbs = ({
     currentPracticeCategory.practices.find(
       (practice: any) => practice.practiceId === currentSpecificPractice
     );
-  console.log(currentPracticeCategory);
   const handleNavigateBreadcrumb = (breadcrumbId: number) => {
     const defaultPracticeViews = {
       allPractices: false,

@@ -10,7 +10,7 @@ afterEach(() => {
   cleanup();
 });
 
-describe('SpecificationsAndTools is rendered correctly', () => {
+xdescribe('SpecificationsAndTools is rendered correctly', () => {
   const data = {
     practiceId: 23,
     practiceImage: '',
