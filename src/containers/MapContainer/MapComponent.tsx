@@ -20,10 +20,11 @@ import {
   VIEW_DIV,
   viewConstraints,
 } from './constants';
+import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
+import { setSearch } from '../../Redux/Slice/practiceSlice';
 import { usaFeatureLayer0, usaFeatureLayer1 } from './layers';
 import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 import { createMapView } from './mapUtils';
-import { useAppSelector } from '../../Redux/hooks/hooks';
 import '@arcgis/core/assets/esri/themes/light/main.css';
 
 interface IMapProps {
@@ -31,7 +32,8 @@ interface IMapProps {
   map: Map;
 }
 
-const MapComponent = ({ setSelectedLocation }: any) => {
+const MapComponent = () => {
+  const dispatch = useAppDispatch();
   const stateCode = useAppSelector((state) => state.stateSlice?.stateCode);
   const alaskaView = useRef({} as MapView);
   const caribbeanView = useRef({} as MapView);
@@ -138,7 +140,10 @@ const MapComponent = ({ setSelectedLocation }: any) => {
               });
               mapRef.current.view.graphics.add(highlightedGraphic);
               // Refresh project lists
-              setSelectedLocation(selectedState.attributes.STATEFP);
+              const searchInput = {
+                state_county_code: selectedState.attributes.STATEFP || null,
+              };
+              dispatch(setSearch(searchInput));
               // Zoom to selected state
               if (SMALL_STATES.includes(selectedState.attributes.STUSPS)) {
                 mapRef.current.view.goTo({ target: selectedState, zoom: 7 });
@@ -162,16 +167,21 @@ const MapComponent = ({ setSelectedLocation }: any) => {
             const foundGraphic = features.find(
               (graphic) => graphic.attributes?.STATEFP === stateCode
             );
-            const highlightedGraphic = new Graphic({
-              geometry: foundGraphic?.geometry,
-              symbol: highlightSymbol,
-            });
-            mapRef.current.view.graphics.add(highlightedGraphic);
-            setSelectedLocation(foundGraphic?.attributes.STATEFP);
-            if (SMALL_STATES.includes(foundGraphic?.attributes.STUSPS)) {
-              mapRef.current.view.goTo({ target: foundGraphic, zoom: 7 });
-            } else {
-              mapRef.current.view.goTo({ target: foundGraphic, zoom: 6 });
+            if (foundGraphic) {
+              const searchInput = {
+                state_county_code: stateCode || null,
+              };
+              dispatch(setSearch(searchInput));
+              const highlightedGraphic = new Graphic({
+                geometry: foundGraphic?.geometry,
+                symbol: highlightSymbol,
+              });
+              mapRef.current.view.graphics.add(highlightedGraphic);
+              if (SMALL_STATES.includes(foundGraphic?.attributes.STUSPS)) {
+                mapRef.current.view.goTo({ target: foundGraphic, zoom: 7 });
+              } else {
+                mapRef.current.view.goTo({ target: foundGraphic, zoom: 6 });
+              }
             }
           });
         }
@@ -192,7 +202,10 @@ const MapComponent = ({ setSelectedLocation }: any) => {
               symbol: highlightSymbol,
             });
             alaskaView.current.graphics.add(highlightedGraphic);
-            setSelectedLocation(selectedState.attributes.STATEFP);
+            const searchInput = {
+              state_county_code: selectedState.attributes.STATEFP,
+            };
+            dispatch(setSearch(searchInput));
           }
         });
       });
@@ -212,7 +225,10 @@ const MapComponent = ({ setSelectedLocation }: any) => {
               symbol: highlightSymbol,
             });
             caribbeanView.current.graphics.add(highlightedGraphic);
-            setSelectedLocation(selectedState.attributes.STATEFP);
+            const searchInput = {
+              state_county_code: selectedState.attributes.STATEFP,
+            };
+            dispatch(setSearch(searchInput));
           }
         });
       });
@@ -232,7 +248,10 @@ const MapComponent = ({ setSelectedLocation }: any) => {
               symbol: highlightSymbol,
             });
             hawaiiView.current.graphics.add(highlightedGraphic);
-            setSelectedLocation(selectedState.attributes.STATEFP);
+            const searchInput = {
+              state_county_code: selectedState.attributes.STATEFP,
+            };
+            dispatch(setSearch(searchInput));
           }
         });
       });
@@ -245,7 +264,11 @@ const MapComponent = ({ setSelectedLocation }: any) => {
       homeBtn.current.on('go', () => {
         checkAndClearHighlightedGraphics();
         // Refresh project list to U.S
-        setSelectedLocation(null);
+        dispatch(
+          setSearch({
+            state_county_code: null,
+          })
+        );
         // Reset composite views to default position
         alaskaView.current.goTo({ center: ALASKA_CENTER, zoom: ALASKA_ZOOM });
         caribbeanView.current.goTo({

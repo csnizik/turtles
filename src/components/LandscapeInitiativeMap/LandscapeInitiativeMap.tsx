@@ -56,7 +56,7 @@ const LandscapeInitiativeMap = ({
         container: LANDSCAPE_VIEW_DIV,
         constraints: landscapeViewConstraints,
         map: mapRef.current.map,
-        zoom: 4,
+        zoom: 3,
       });
 
       mapRef.current.view = view;

@@ -46,6 +46,9 @@ xdescribe('SpecificationsAndTools is rendered correctly', () => {
   test('Should display the contents of National Specifications', () => {
     expect(screen.getByTestId('national-specifications')).toBeDefined();
   });
+  test('Should display the contents of State Specifications', () => {
+    expect(screen.getByTestId('state-specifications')).toBeDefined();
+  });
   test('Should display the contents of Associated Practices', () => {
     expect(screen.getByTestId('associated-practice')).toBeDefined();
   });
@@ -63,6 +66,17 @@ xdescribe('SpecificationsAndTools is rendered correctly', () => {
     expect(screen.getByText('Cover Crop').closest('a')).toHaveAttribute(
       'href',
       'http://localhost:3000/ConservationPractices?PracticeCategory=2?Practice=101'
+    );
+  });
+  test('Should display practice standard container after clicking the practice standard button', () => {
+    fireEvent.click( screen.getByText('Instructions for Acessing this State’s Practice Standards'));
+    expect(screen.getByTestId('practice-standard-steps')).toBeDefined();
+  });
+  test('Should display practice standard link after clicking the practice standard button', () => {
+    fireEvent.click( screen.getByText('Instructions for Acessing this State’s Practice Standards'));
+    expect(screen.getByText('NRCS Conservation Practices Website').closest('a')).toHaveAttribute(
+      'href',
+      'https://efotg.sc.egov.usda.gov/#/state/'
     );
   });
 });
