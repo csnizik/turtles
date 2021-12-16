@@ -274,7 +274,7 @@ const LandscapeInitiativeMap = ({
               );
               mapRef.current.view.extent = selectedState?.geometry?.extent
                 .clone()
-                .expand(1.65);
+                .expand(1.25);
             }
           }
         });
