@@ -36,3 +36,6 @@ export const WATER_SMART_LAYER_ID_02 =
   'WaterSMART_Initiative_Eligible_States_7041';
 
 export const WORKING_LANDS_FOR_WILDLIFE_ABBRV = '(WLFW)';
+
+export const WATER_SMART_INITIATIVE_ID = 9;
+export const NATIONAL_WATER_QUALITY_INITIATIVE_ID = 7;

@@ -13,7 +13,9 @@ import {
   LANDSCAPE_VIEW_DIV,
   landscapeInitiativeToLegendMap,
   landscapeViewConstraints,
+  NATIONAL_WATER_QUALITY_INITIATIVE_ID,
   WORKING_LANDS_FOR_WILDLIFE_ABBRV,
+  WATER_SMART_INITIATIVE_ID,
 } from './constants';
 import { STATE_FEATURE_LAYER_URL } from '../../common/constants';
 import { ILandscapeInitiative } from '../../common/types';
@@ -62,10 +64,12 @@ const LandscapeInitiativeMap = ({
         container: LANDSCAPE_VIEW_DIV,
         constraints: landscapeViewConstraints,
         map: mapRef.current.map,
-        zoom:
-          selectedLandscapeInitiative === 9 || selectedLandscapeInitiative === 7
-            ? 4
-            : 3,
+        zoom: [
+          WATER_SMART_INITIATIVE_ID,
+          NATIONAL_WATER_QUALITY_INITIATIVE_ID,
+        ].includes(selectedLandscapeInitiative)
+          ? 4
+          : 3,
       });
 
       mapRef.current.view = view;
