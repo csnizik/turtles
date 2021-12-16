@@ -12,11 +12,13 @@ describe('ConservationPracticesCategories is rendered correctly', () => {
       practiceCategoryName: 'name1',
       practiceCategoryDisplay: 'test description',
       practiceCategoryId: '01',
+      practiceCategoryIconPath: 'Wetlands.png'
     },
     {
       practiceCategoryName: 'name2',
       practiceCategoryDisplay: 'test description',
       practiceCategoryId: '02',
+      practiceCategoryIconPath: 'Soil Quality.png'
     },
   ];
 
