@@ -1,10 +1,10 @@
 import './practice-category-card.scss';
-import image from './placeholder-icon-36.svg';
 
 interface ICategoryData {
   practiceCategoryName: string;
   practiceCategoryDisplay: string;
   practiceCategoryId: string;
+  practiceCategoryIconPath: string;
   selectPractice: any;
 }
 
@@ -12,6 +12,7 @@ const PracticeCategoryCard = ({
   practiceCategoryName,
   practiceCategoryDisplay,
   practiceCategoryId,
+  practiceCategoryIconPath,
   selectPractice,
 }: ICategoryData) => {
   return (
@@ -26,7 +27,7 @@ const PracticeCategoryCard = ({
         {practiceCategoryName}
       </button>
       <div className='top-container'>
-        <img className='icon' alt='conservation practice icon' src={image} />
+        <img className='icon' alt='conservation practice icon' src={`images/conservation-practice-images/${practiceCategoryIconPath}`} />
         <div className='practice-category-name'>{practiceCategoryName}</div>
       </div>
       <div className='practice-categoryisplay'>{practiceCategoryDisplay}</div>
