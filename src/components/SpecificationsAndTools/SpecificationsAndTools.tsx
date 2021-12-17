@@ -1,10 +1,7 @@
 import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router-dom';
-import {
-  useGetAssociatedPracticeQuery,
-  usePostSearchDataQuery,
-} from '../../Redux/services/api';
+import { useGetAssociatedPracticeQuery } from '../../Redux/services/api';
 import './specs.scss';
 import { IAssociatedPracticeList } from '../../common/types';
 import { useAppSelector } from '../../Redux/hooks/hooks';
@@ -36,15 +33,11 @@ const SpecificationsAndTools = ({
     stateCode: selectedStateCode,
     practiceId: selectedPracticeId,
   };
-
   const { t } = useTranslation();
   const [expandTechGuide, setExpandTechGuide] = useState(false);
 
   const { name }: any = useParams();
 
-  const practiceCategory = useAppSelector(
-    (state) => state?.practiceSlice?.selectedPracticeCategory
-  );
   const selectedStateName = useAppSelector(
     (state) => state?.stateSlice?.stateNameDisplay
   );
@@ -54,6 +47,7 @@ const SpecificationsAndTools = ({
   const fromPdfReport = useAppSelector(
     (state) => state?.pdfGenSlice?.enablePdfGen
   );
+
   const content = useGetAssociatedPracticeQuery(userSelectedFilter);
   const practiceLink =
     selectedStateAbbr === 'U.S.' || selectedStateAbbr === undefined
@@ -137,14 +131,7 @@ const SpecificationsAndTools = ({
       </div>
     );
   };
-  const newData = [];
-  const getCatIds = async () => {
-    for await (const element of content?.data) {
-      const postData = usePostSearchDataQuery({
-        practice_id: element.practiceId,
-      });
-    }
-  };
+
   const renderAssociatedPractice = () => {
     return (
       <div className='associated-prac' data-testid='associated-practice'>
@@ -157,7 +144,7 @@ const SpecificationsAndTools = ({
                 <div className='grid-col-6'>
                   <li>
                     <Link
-                      to={`/${selectedStateCode}/${name}/${practiceCategory}/${practice.practiceId}`}
+                      to={`/${selectedStateCode}/${name}/#/${practice.practiceId}`}
                       target='_blank'
                       aria-label={`${practice.practiceName} link opens a new tab`}
                     >
