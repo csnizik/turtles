@@ -14,6 +14,7 @@ import {
   landscapeInitiativeToLegendMap,
   landscapeViewConstraints,
   NATIONAL_WATER_QUALITY_INITIATIVE_ID,
+  nrcsBaseLayers,
   WORKING_LANDS_FOR_WILDLIFE_ABBRV,
   WATER_SMART_INITIATIVE_ID,
 } from './constants';
@@ -184,11 +185,6 @@ const LandscapeInitiativeMap = ({
           if (selectedLandscapeInitiative === 10) {
             let filteredLayers: Array<any> = [];
             filteredLayers = allFeatureLayers.filter((layer: any) => {
-              const nrcsBaseLayers: any = [
-                'VectorTile_8900',
-                'VectorTile_9702',
-                'VectorTile_7804',
-              ];
               return (
                 !layer.title.endsWith(WORKING_LANDS_FOR_WILDLIFE_ABBRV) &&
                 !nrcsBaseLayers.includes(layer.id)
@@ -205,12 +201,23 @@ const LandscapeInitiativeMap = ({
             allFeatureLayers.forEach((layer: any) => {
               layer.visible = true; // eslint-disable-line no-param-reassign
             });
+          } else if (
+            selectedLocation &&
+            landscapeInitiativesData.length === 0
+          ) {
+            // Remove all layers if no landscape initiatives are found
+            allFeatureLayers.forEach((layer: any) => {
+              if (!nrcsBaseLayers.includes(layer.id)) {
+                layer.visible = false; // eslint-disable-line no-param-reassign
+              }
+            });
           }
         }
       });
     });
   }, [mapRef, selectedLandscapeInitiative]);
 
+  // Pre-select state and highlight if stateCode is provided (selectedLocation)
   useEffect(() => {
     if (
       selectedLocation &&

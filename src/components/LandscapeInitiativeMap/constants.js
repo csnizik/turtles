@@ -29,6 +29,14 @@ export const landscapeInitiativeToLegendMap = {
 
 export const NATIONAL_WATER_QUALITY_INIT = 'National Water Quality Initiative';
 
+export const NATIONAL_WATER_QUALITY_INITIATIVE_ID = 7;
+
+export const nrcsBaseLayers = [
+  'VectorTile_8900',
+  'VectorTile_9702',
+  'VectorTile_7804',
+];
+
 export const WATER_SMART_LAYER_ID_01 =
   'FY22_WaterSMART_Initiative_Priority_Areas_1949';
 
@@ -38,4 +46,3 @@ export const WATER_SMART_LAYER_ID_02 =
 export const WORKING_LANDS_FOR_WILDLIFE_ABBRV = '(WLFW)';
 
 export const WATER_SMART_INITIATIVE_ID = 9;
-export const NATIONAL_WATER_QUALITY_INITIATIVE_ID = 7;
