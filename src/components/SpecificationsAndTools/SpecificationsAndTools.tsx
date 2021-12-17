@@ -1,7 +1,10 @@
 import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router-dom';
-import { useGetAssociatedPracticeQuery } from '../../Redux/services/api';
+import {
+  useGetAssociatedPracticeQuery,
+  usePostSearchDataQuery,
+} from '../../Redux/services/api';
 import './specs.scss';
 import { IAssociatedPracticeList } from '../../common/types';
 import { useAppSelector } from '../../Redux/hooks/hooks';
@@ -134,7 +137,14 @@ const SpecificationsAndTools = ({
       </div>
     );
   };
-
+  const newData = [];
+  const getCatIds = async () => {
+    for await (const element of content?.data) {
+      const postData = usePostSearchDataQuery({
+        practice_id: element.practiceId,
+      });
+    }
+  };
   const renderAssociatedPractice = () => {
     return (
       <div className='associated-prac' data-testid='associated-practice'>
