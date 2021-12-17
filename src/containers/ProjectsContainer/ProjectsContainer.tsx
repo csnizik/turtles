@@ -60,7 +60,7 @@ const ProjectsContainer = () => {
     }
   }, [category, individual, stateC]);
 
-  if (stateCode !== '00') {
+  if (stateCode !== DEFAULT_NATIONAL_LOCATION) {
     searchLandscapeInitiatives = {
       ...searchInput,
       state_county_code: stateCode,
@@ -89,7 +89,7 @@ const ProjectsContainer = () => {
     };
   } else {
     searchInputData = {
-      state_county_code: '00',
+      state_county_code: DEFAULT_NATIONAL_LOCATION,
     };
   }
   dispatch(setSearch(searchInputData));
