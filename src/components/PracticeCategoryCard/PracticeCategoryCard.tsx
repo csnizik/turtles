@@ -31,7 +31,11 @@ const PracticeCategoryCard = ({
         {practiceCategoryName}
       </button>
       <div className='top-container'>
-        <img className='icon' alt='conservation practice icon' src={`images/conservation-practice-images/${practiceCategoryIconPath}`} />
+        <img
+          className='icon'
+          alt='conservation practice icon'
+          src={`../images/conservation-practice-images/${practiceCategoryIconPath}`}
+        />
         <div className='practice-category-name'>{practiceCategoryName}</div>
       </div>
       <div className='practice-categoryisplay'>{practiceCategoryDisplay}</div>
