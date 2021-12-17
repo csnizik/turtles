@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 const ProjectListItem = ({
   id,
@@ -10,11 +10,10 @@ const ProjectListItem = ({
   link,
 }: any) => {
   const history: any = useHistory();
+  const { stateCode }: any = useParams();
+  //Pushes you to specific initiative pages under Initiative tab (2) in projects and initiatives
   const handleClick = () => {
-    history.push({
-      pathname: '/ProjectsAndInitiatives',
-    });
-    window.location.reload();
+    history.push(`/${stateCode}/ProjectsAndInitiatives/2/${id}`);
   };
 
   const renderProjectDetails = (

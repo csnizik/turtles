@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Practice } from '../../common/types';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 
 const ResultsRow = ({
   rowData,
@@ -13,6 +14,9 @@ const ResultsRow = ({
   handleSpecificPracticeSelection,
 }: any) => {
   const { t } = useTranslation();
+  const stateCode: string = useAppSelector(
+    (state) => state.stateSlice.stateCode
+  );
   return (
     <>
       <div className='top-title'>
@@ -51,7 +55,9 @@ const ResultsRow = ({
                         <p>
                           <Link
                             to={{
-                              pathname: '/ConservationPractices',
+                              pathname: `${
+                                stateCode || '00'
+                              }/ConservationPractices/${categoryId}`,
                               state: { detail: categoryId },
                             }}
                             onClick={() =>
@@ -92,7 +98,11 @@ const ResultsRow = ({
                             {toggleChildTab === ele.practiceId && (
                               <p>
                                 <Link
-                                  to='/ConservationPractices'
+                                  to={`${
+                                    stateCode || '00'
+                                  }/ConservationPractices/${categoryId}/${
+                                    ele.practiceId
+                                  }`}
                                   onClick={() =>
                                     handleSpecificPracticeSelection(
                                       categoryId,

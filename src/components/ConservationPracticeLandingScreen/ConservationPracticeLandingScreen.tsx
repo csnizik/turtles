@@ -14,7 +14,7 @@ const ConservationPracticeLandingScreen = ({
   stateCode,
 }: any) => {
   const [categories, setCategories] = useState([]);
-  const mountedRef = useRef(true)
+  const mountedRef = useRef(true);
 
   const dispatch = useAppDispatch();
 
@@ -34,7 +34,7 @@ const ConservationPracticeLandingScreen = ({
       const response: any = (await getRequest(
         `/practice/category/${code}`
       )) || { data: [] };
-      if(!mountedRef.current) return null;
+      if (!mountedRef.current) return null;
       setCategories(response.data);
     } catch (error) {
       // throw new Error('practice categories Request Error');
@@ -44,9 +44,9 @@ const ConservationPracticeLandingScreen = ({
 
   useEffect(() => {
     getPractices();
-    return () => { 
-      mountedRef.current = false
-    }
+    return () => {
+      mountedRef.current = false;
+    };
   }, []);
 
   return (

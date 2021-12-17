@@ -1,3 +1,4 @@
+import { useParams, useHistory } from 'react-router-dom';
 import './practice-category-card.scss';
 
 interface ICategoryData {
@@ -15,6 +16,8 @@ const PracticeCategoryCard = ({
   practiceCategoryIconPath,
   selectPractice,
 }: ICategoryData) => {
+  const history = useHistory();
+  const { name }: any = useParams();
   return (
     <div className='card'>
       <button
@@ -22,12 +25,17 @@ const PracticeCategoryCard = ({
         className='btn-cover'
         onClick={() => {
           selectPractice(practiceCategoryId);
+          history.push(`${name}/${practiceCategoryId}`);
         }}
       >
         {practiceCategoryName}
       </button>
       <div className='top-container'>
-        <img className='icon' alt='conservation practice icon' src={`images/conservation-practice-images/${practiceCategoryIconPath}`} />
+        <img
+          className='icon'
+          alt='conservation practice icon'
+          src={`../images/conservation-practice-images/${practiceCategoryIconPath}`}
+        />
         <div className='practice-category-name'>{practiceCategoryName}</div>
       </div>
       <div className='practice-categoryisplay'>{practiceCategoryDisplay}</div>

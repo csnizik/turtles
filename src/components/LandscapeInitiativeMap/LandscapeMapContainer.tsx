@@ -24,7 +24,7 @@ const LandscapeMapContainer = ({
       <LandscapeInitiativeMap
         landscapeInitiativesData={landscapeInitiativesData}
         selectedLocation={
-          stateCode !== '00' && stateCode.length ? stateCode : null
+          stateCode !== '00' && stateCode?.length ? stateCode : null
         }
         selectedLandscapeInitiative={selectedLandscapeInitiative}
         portalId={
