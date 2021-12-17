@@ -97,7 +97,7 @@ const ProjectsContainer = () => {
     setSelectedLandscapeInitiative(id);
     history.push(
       `/${
-        selectedState?.stateCode || DEFAULT_NATIONAL_LOCATION
+        stateC || DEFAULT_NATIONAL_LOCATION
       }/ProjectsAndInitiatives/${category}/${id}`
     );
   };
@@ -106,9 +106,7 @@ const ProjectsContainer = () => {
     setSelectedProjectCard(id);
     setToggleProjectView(!toggleProjectView);
     history.push(
-      `/${
-        selectedState?.stateCode || DEFAULT_NATIONAL_LOCATION
-      }/ProjectsAndInitiatives/${id}`
+      `/${stateC || DEFAULT_NATIONAL_LOCATION}/ProjectsAndInitiatives/${id}`
     );
   };
 
@@ -117,16 +115,12 @@ const ProjectsContainer = () => {
       setToggleProjectView(false);
       setSelectedProjectCard(-1);
       history.push(
-        `/${
-          selectedState?.stateCode || DEFAULT_NATIONAL_LOCATION
-        }/ProjectsAndInitiatives`
+        `/${stateC || DEFAULT_NATIONAL_LOCATION}/ProjectsAndInitiatives`
       );
     } else {
       setSelectedProjectCard(id);
       history.push(
-        `/${
-          selectedState.stateCode || DEFAULT_NATIONAL_LOCATION
-        }/ProjectsAndInitiatives/${id}`
+        `/${stateC || DEFAULT_NATIONAL_LOCATION}/ProjectsAndInitiatives/${id}`
       );
     }
     if (selectedLandscapeInitiative > 0) {
