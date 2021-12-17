@@ -14,6 +14,7 @@ import {
 } from '../../Redux/services/api';
 import './project-container.scss';
 import { projectCards, projectListGroups, projectPurposes } from './constants';
+import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 
 interface IProjectTypeCard {
   id: number;
@@ -96,7 +97,7 @@ const ProjectsContainer = () => {
     setSelectedLandscapeInitiative(id);
     history.push(
       `/${
-        selectedState?.stateCode || '00'
+        selectedState?.stateCode || DEFAULT_NATIONAL_LOCATION
       }/ProjectsAndInitiatives/${category}/${id}`
     );
   };
@@ -105,7 +106,9 @@ const ProjectsContainer = () => {
     setSelectedProjectCard(id);
     setToggleProjectView(!toggleProjectView);
     history.push(
-      `/${selectedState?.stateCode || '00'}/ProjectsAndInitiatives/${id}`
+      `/${
+        selectedState?.stateCode || DEFAULT_NATIONAL_LOCATION
+      }/ProjectsAndInitiatives/${id}`
     );
   };
 
@@ -114,12 +117,16 @@ const ProjectsContainer = () => {
       setToggleProjectView(false);
       setSelectedProjectCard(-1);
       history.push(
-        `/${selectedState?.stateCode || '00'}/ProjectsAndInitiatives`
+        `/${
+          selectedState?.stateCode || DEFAULT_NATIONAL_LOCATION
+        }/ProjectsAndInitiatives`
       );
     } else {
       setSelectedProjectCard(id);
       history.push(
-        `/${selectedState.stateCode || '00'}/ProjectsAndInitiatives/${id}`
+        `/${
+          selectedState.stateCode || DEFAULT_NATIONAL_LOCATION
+        }/ProjectsAndInitiatives/${id}`
       );
     }
     if (selectedLandscapeInitiative > 0) {

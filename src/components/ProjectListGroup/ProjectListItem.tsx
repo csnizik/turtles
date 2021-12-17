@@ -11,6 +11,7 @@ const ProjectListItem = ({
 }: any) => {
   const history: any = useHistory();
   const { stateCode }: any = useParams();
+  //Pushes you to specific initiative pages under Initiative tab (2) in projects and initiatives
   const handleClick = () => {
     history.push(`/${stateCode}/ProjectsAndInitiatives/2/${id}`);
   };

@@ -55,7 +55,9 @@ const LocationSearch = () => {
       dispatch(currentState(selectedStateCode));
     }
     history.push({
-      pathname: `${selectedStateCode?.stateCode || '00'}/ConservationPractices`,
+      pathname: `${
+        selectedStateCode?.stateCode || DEFAULT_NATIONAL_LOCATION
+      }/ConservationPractices`,
     });
   };
 
