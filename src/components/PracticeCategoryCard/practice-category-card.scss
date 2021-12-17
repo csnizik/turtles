@@ -4,8 +4,7 @@
   background: $sfi-white;
   box-sizing: border-box;
   @include colored-top-box;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding: 0rem 1.25rem 1.25rem 1.25rem;
   flex: 0 0 48%;
   margin-bottom: 1.875rem;
   margin-left: 1.25rem;
