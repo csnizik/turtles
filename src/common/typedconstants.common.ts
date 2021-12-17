@@ -75,3 +75,21 @@ export const practiceStandardGuideLink = {
   webpagePromptText: `Go Straight to this State’s Field Office Technical Guide`,
   pdfReportPromptText: `State Specific National Conservation Practices`,
 }
+
+export const tableauGraph = {
+  RegionalConservationPractice: { 
+    id: 0, 
+    displayName: 'RegionalConservationPractice',
+    link:'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticeListbyAcres/Dashboard1' 
+  },
+  ConservationPracticeCategory: { 
+    id: 1, 
+    displayName: 'ConservationPracticeCategory', 
+    link:'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticesbyYearforStateandMeasure/Dashboard1' 
+  },
+  PracticeDetail: {
+    id: 2,
+    displayName: 'PracticeDetail',
+    link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticebyProgramOverYears/Dashboard1'
+  },
+};
