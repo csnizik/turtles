@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import Home from '@arcgis/core/widgets/Home';
 import MapView from '@arcgis/core/views/MapView';
 import WebMap from '@arcgis/core/WebMap';
 import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
@@ -18,7 +19,11 @@ import {
   WORKING_LANDS_FOR_WILDLIFE_ABBRV,
   WATER_SMART_INITIATIVE_ID,
 } from './constants';
-import { STATE_FEATURE_LAYER_URL } from '../../common/constants';
+import {
+  DEFAULT_NATIONAL_LOCATION,
+  STATE_FEATURE_LAYER_URL,
+  UNITED_STATES_ABBR,
+} from '../../common/constants';
 import { ILandscapeInitiative } from '../../common/types';
 import { filterLandscapeInitiativeLayers } from './utils';
 import { highlightSymbol } from '../../containers/MapContainer/constants.js';
@@ -50,6 +55,7 @@ const LandscapeInitiativeMap = ({
   const previousValues: any = usePrevious({
     selectedLandscapeInitiative,
   });
+  const homeBtn = useRef({} as Home);
 
   useEffect(() => {
     /*eslint consistent-return: 0 */
@@ -73,7 +79,14 @@ const LandscapeInitiativeMap = ({
           : 3,
       });
 
+      homeBtn.current = new Home({
+        view,
+      });
+
       mapRef.current.view = view;
+
+      // Add the home button to the top left corner of the view
+      mapRef.current.view.ui.add(homeBtn.current, 'top-left');
 
       stateFeatureLayer.current = new FeatureLayer({
         layerId: 1,
@@ -89,6 +102,23 @@ const LandscapeInitiativeMap = ({
       };
     }
   }, [mapRef, portalId]);
+
+  // Handle interaction with 'Home' button
+  useEffect(() => {
+    homeBtn.current.when(() => {
+      homeBtn.current.on('go', () => {
+        mapRef.current.view.graphics.removeAll();
+        // Refresh project list to U.S
+        dispatch(
+          currentState({
+            stateNameDisplay: UNITED_STATES_ABBR,
+            stateCode: DEFAULT_NATIONAL_LOCATION,
+            stateAbbreviation: UNITED_STATES_ABBR,
+          })
+        );
+      });
+    });
+  }, [homeBtn]);
 
   useEffect(() => {
     mapRef.current.view.when(() => {
@@ -254,7 +284,7 @@ const LandscapeInitiativeMap = ({
   // Handle map interactions
   useEffect(() => {
     mapRef.current.view.when(() => {
-      mapRef.current.view.on('pointer-up', (event) => {
+      mapRef.current.view.on('click', (event) => {
         mapRef.current.view.hitTest(event).then((response) => {
           mapRef.current.view.graphics.removeAll();
           if (response.results.length) {
