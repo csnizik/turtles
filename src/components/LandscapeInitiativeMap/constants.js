@@ -6,7 +6,7 @@ export const LANDSCAPE_VIEW_DIV = 'landscapeViewDiv';
 
 export const landscapeViewConstraints = {
   maxZoom: 2,
-  minZoom: 8,
+  minZoom: 10,
 };
 
 export const landscapeInitiativeToLegendMap = {

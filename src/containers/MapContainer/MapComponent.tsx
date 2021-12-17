@@ -120,7 +120,7 @@ const MapComponent = () => {
   // Handle map interactions
   useEffect(() => {
     mapRef.current.view.when(() => {
-      mapRef.current.view.on('pointer-up', (event) => {
+      mapRef.current.view.on('click', (event) => {
         mapRef.current.view.hitTest(event).then((response) => {
           checkAndClearHighlightedGraphics();
           if (response.results.length) {
@@ -197,7 +197,7 @@ const MapComponent = () => {
   // Handle alaska composite view interactions
   useEffect(() => {
     alaskaView.current.when(() => {
-      alaskaView.current.on('pointer-up', (event) => {
+      alaskaView.current.on('click', (event) => {
         alaskaView.current.hitTest(event).then((response) => {
           checkAndClearHighlightedGraphics();
           if (response.results.length) {
@@ -220,7 +220,7 @@ const MapComponent = () => {
   // Handle caribbean composite view interactions
   useEffect(() => {
     caribbeanView.current.when(() => {
-      caribbeanView.current.on('pointer-up', (event) => {
+      caribbeanView.current.on('click', (event) => {
         caribbeanView.current.hitTest(event).then((response) => {
           checkAndClearHighlightedGraphics();
           if (response.results.length) {
@@ -243,7 +243,7 @@ const MapComponent = () => {
   // Handle hawaii composite view interactions
   useEffect(() => {
     hawaiiView.current.when(() => {
-      hawaiiView.current.on('pointer-up', (event) => {
+      hawaiiView.current.on('click', (event) => {
         hawaiiView.current.hitTest(event).then((response) => {
           checkAndClearHighlightedGraphics();
           if (response.results.length) {
