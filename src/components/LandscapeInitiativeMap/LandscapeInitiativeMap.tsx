@@ -19,7 +19,11 @@ import {
   WORKING_LANDS_FOR_WILDLIFE_ABBRV,
   WATER_SMART_INITIATIVE_ID,
 } from './constants';
-import { STATE_FEATURE_LAYER_URL } from '../../common/constants';
+import {
+  DEFAULT_NATIONAL_LOCATION,
+  STATE_FEATURE_LAYER_URL,
+  UNITED_STATES_ABBR,
+} from '../../common/constants';
 import { ILandscapeInitiative } from '../../common/types';
 import { filterLandscapeInitiativeLayers } from './utils';
 import { highlightSymbol } from '../../containers/MapContainer/constants.js';
@@ -107,9 +111,9 @@ const LandscapeInitiativeMap = ({
         // Refresh project list to U.S
         dispatch(
           currentState({
-            stateNameDisplay: 'U.S.',
-            stateCode: '00',
-            stateAbbreviation: 'U.S.',
+            stateNameDisplay: UNITED_STATES_ABBR,
+            stateCode: DEFAULT_NATIONAL_LOCATION,
+            stateAbbreviation: UNITED_STATES_ABBR,
           })
         );
       });
