@@ -92,8 +92,8 @@ const ProjectTypeSection = ({
             ) : (
               <div className='landscape-img'>
                 <img
-                  src={foundInitiative.lci_image_link}
-                  alt={foundInitiative.lci_name}
+                  src={foundInitiative?.lci_image_link}
+                  alt={foundInitiative?.lci_name}
                 />
               </div>
             )}

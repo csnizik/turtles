@@ -34,7 +34,7 @@ const App = () => (
         <Route path='/search-results'>
           <ResultsContainer />
         </Route>
-        <Route path='/:name'>
+        <Route path='/:stateCode/:name/:category?/:individual?'>
           <LocationContainer />
         </Route>
       </Switch>

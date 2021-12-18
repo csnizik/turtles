@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useGetAssociatedPracticeQuery } from '../../Redux/services/api';
 import './specs.scss';
 import { IAssociatedPracticeList } from '../../common/types';
@@ -33,13 +33,11 @@ const SpecificationsAndTools = ({
     stateCode: selectedStateCode,
     practiceId: selectedPracticeId,
   };
-
   const { t } = useTranslation();
   const [expandTechGuide, setExpandTechGuide] = useState(false);
 
-  const practiceCategory = useAppSelector(
-    (state) => state?.practiceSlice?.selectedPracticeCategory
-  );
+  const { name }: any = useParams();
+
   const selectedStateName = useAppSelector(
     (state) => state?.stateSlice?.stateNameDisplay
   );
@@ -49,11 +47,13 @@ const SpecificationsAndTools = ({
   const fromPdfReport = useAppSelector(
     (state) => state?.pdfGenSlice?.enablePdfGen
   );
+
   const content = useGetAssociatedPracticeQuery(userSelectedFilter);
-  const practiceLink = (selectedStateAbbr === 'U.S.' || selectedStateAbbr===undefined) ? 
-  practiceStandardGuideLink.viewStateConservationPracticeLink : 
-    (practiceStandardGuideLink.viewStateConservationPracticeLink+selectedStateAbbr);
-    
+  const practiceLink =
+    selectedStateAbbr === 'U.S.' || selectedStateAbbr === undefined
+      ? practiceStandardGuideLink.viewStateConservationPracticeLink
+      : practiceStandardGuideLink.viewStateConservationPracticeLink +
+        selectedStateAbbr;
 
   const getHeaderText = () => {
     const practiceName = (data && data?.practiceName) || '';
@@ -64,11 +64,14 @@ const SpecificationsAndTools = ({
   };
   const handleExpandTechGuide = () => {
     setExpandTechGuide(!expandTechGuide);
-  }
+  };
 
   const renderNationalSpecs = () => {
     return (
-      <div className='state-specific-container' data-testid='national-specifications'>
+      <div
+        className='state-specific-container'
+        data-testid='national-specifications'
+      >
         <h4>National Specifications</h4>
         <h5 className='state-prompt-text'>{nationalPromptText}</h5>
         <div className='link'>
@@ -88,36 +91,46 @@ const SpecificationsAndTools = ({
 
   const renderStateSpecs = () => {
     return (
-      <div className='state-specific-container' data-testid='state-specifications'>
+      <div
+        className='state-specific-container'
+        data-testid='state-specifications'
+      >
         <h4>{selectedStateName} Specifications</h4>
         <h5 className='state-prompt-text'>{statePromptText}</h5>
         <div className='link'>
           <button
-            className={fromPdfReport ? 'hidden-content' : 'practice-standard-button'}
+            className={
+              fromPdfReport ? 'hidden-content' : 'practice-standard-button'
+            }
             type='button'
             onClick={() => handleExpandTechGuide()}
           >
             Instructions for Acessing this State’s Practice Standards
           </button>
           <a
-            href={practiceStandardGuideLink.viewStateConservationPracticeLink + selectedStateAbbr}
+            href={
+              practiceStandardGuideLink.viewStateConservationPracticeLink +
+              selectedStateAbbr
+            }
             target='_blank'
             rel='noopener noreferrer'
             aria-label='Current NRCS State Conservation Practices link'
           >
-            {fromPdfReport ? practiceStandardGuideLink.pdfReportPromptText : practiceStandardGuideLink.webpagePromptText}
+            {fromPdfReport
+              ? practiceStandardGuideLink.pdfReportPromptText
+              : practiceStandardGuideLink.webpagePromptText}
             <img alt='All Conservation at Work videos' src={outerLinkImage} />
           </a>
         </div>
-        {expandTechGuide && 
-          <PracticeStandardGuide 
-            handleClick={handleExpandTechGuide} 
+        {expandTechGuide && (
+          <PracticeStandardGuide
+            handleClick={handleExpandTechGuide}
             practiceLink={practiceLink}
           />
-        }
+        )}
       </div>
     );
-  }
+  };
 
   const renderAssociatedPractice = () => {
     return (
@@ -131,11 +144,7 @@ const SpecificationsAndTools = ({
                 <div className='grid-col-6'>
                   <li>
                     <Link
-                      to={{
-                        pathname: `/ConservationPractices`,
-                        state: { detail: practice.practiceId },
-                        search: `PracticeCategory=${practiceCategory}?Practice=${practice.practiceId}?State=${selectedStateCode}`,
-                      }}
+                      to={`/${selectedStateCode}/${name}/#/${practice.practiceId}`}
                       target='_blank'
                       aria-label={`${practice.practiceName} link opens a new tab`}
                     >

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { NavItem, NavLink } from 'reactstrap';
 import './tab.scss';
 import { useAppSelector } from '../../Redux/hooks/hooks';
@@ -17,19 +17,20 @@ const SearchOption = ({
   currentSearchOption,
   handleSearchChange,
 }: ISearchOption) => {
+  const history = useHistory();
+  const { stateCode }: any = useParams();
   const listItemClassNames = classNames({
     active: option === currentSearchOption,
     // disabled: option === 0 || option === 2,
   });
 
-  const toggleTabs = (tab: number) => {
-    handleSearchChange(tab);
-  };
-
   const selectedstate = useAppSelector(
     (state) => state.stateSlice.stateAbbreviation
   );
-
+  const toggleTabs = (tab: number) => {
+    handleSearchChange(tab);
+    history.push(`/${stateCode}/${displayName.split(' ').join('')}`);
+  };
   const getTabTitle = () => {
     return `${selectedstate || 'U.S.'} ${displayName}`;
   };
@@ -43,9 +44,7 @@ const SearchOption = ({
           toggleTabs(option);
         }}
       >
-        <Link className='links' to={displayName.split(' ').join('')}>
-          {getTabTitle()}
-        </Link>
+        <p className='links'>{getTabTitle()}</p>
       </NavLink>
     </NavItem>
   );

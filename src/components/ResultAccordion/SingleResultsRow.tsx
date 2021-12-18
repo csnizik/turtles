@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from '../../Redux/hooks/hooks';
+import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 
 const SingleResultsRow = ({
   rowId,
   practiceData,
   handleSpecificPracticeSelection,
 }: any) => {
+  const stateCode: string = useAppSelector(
+    (state) => state.stateSlice.stateCode
+  );
   const { t } = useTranslation();
   return (
     <>
@@ -24,7 +29,11 @@ const SingleResultsRow = ({
                 </p>
                 <p>
                   <Link
-                    to='/ConservationPractices'
+                    to={`${
+                      stateCode || DEFAULT_NATIONAL_LOCATION
+                    }/ConservationPractices/${rowId}/${
+                      practiceData.practiceId
+                    }`}
                     onClick={() =>
                       handleSpecificPracticeSelection(
                         rowId,
