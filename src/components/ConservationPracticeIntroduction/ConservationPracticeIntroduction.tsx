@@ -21,7 +21,7 @@ const ConservationPracticeIntroduction = ({
 
       <div className='explore-box'>
         <div className='internal-box'>
-          <TableauReport pageName='RegionalConservationPractice' />
+          <TableauReport pageName={title}/>
         </div>
         <div className='link'>
           <Link

@@ -79,17 +79,17 @@ export const practiceStandardGuideLink = {
 export const tableauGraph = {
   RegionalConservationPractice: { 
     id: 0, 
-    displayName: 'RegionalConservationPractice',
-    link:'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticeListbyAcres/Dashboard1' 
+    displayName: 'Regional Conservation Practice',
+    link:'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticeListbyAcres/Dashboard1.png?Stabbr' 
   },
   ConservationPracticeCategory: { 
     id: 1, 
-    displayName: 'ConservationPracticeCategory', 
-    link:'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticesbyYearforStateandMeasure/Dashboard1' 
+    displayName: 'Conservation Practice Category', 
+    link:'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticesbyYearforStateandMeasure/Dashboard1.png?Stabbr' 
   },
   PracticeDetail: {
     id: 2,
-    displayName: 'PracticeDetail',
+    displayName: 'Practic eDetail',
     link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticebyProgramOverYears/Dashboard1'
   },
 };
