@@ -16,7 +16,6 @@ import {
 
 const SearchByConservationPractice = ({
   selectedResourceCategory,
-  secondState,
   setSecondState,
   selectedPractice,
   setSelectedPractice,
@@ -74,7 +73,7 @@ const SearchByConservationPractice = ({
       setSelectedPractice({
         id: presistSearchInput.practice_category_id,
       });
-      setSecondState({ practice: practice.data, disabled: false });
+      setSecondState({ practice: practice.data });
     }
     if (presistSearchInput?.practice_id != null) {
       setSelectedSubPractice({
@@ -116,9 +115,9 @@ const SearchByConservationPractice = ({
         practice: null,
       }));
       if (selectedPractice >= 0 && value !== selectedPractice) {
-        setSecondState({ ...intialPracticeState, disabled: false });
+        setSecondState({ ...intialPracticeState });
       } else {
-        setSecondState({ practice: practice.data, disabled: false });
+        setSecondState({ practice: practice.data });
       }
     } else {
       setSecondState({ ...intialPracticeState });
@@ -205,7 +204,7 @@ const SearchByConservationPractice = ({
             className='usa-select'
             id='specificPracticeValue'
             name='specificPracticeSelect'
-            disabled={secondState.disabled}
+            disabled={result}
             onChange={handlePracticeChange}
             value={selectedSubPractice.id}
           >

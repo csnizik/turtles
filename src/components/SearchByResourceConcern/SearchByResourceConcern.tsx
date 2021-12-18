@@ -16,7 +16,6 @@ import './search-by-resource-concern.scss';
 const SearchByResourceConcern = ({
   setSearchInput,
   setSearchInfo,
-  resourceConcernsSubgroups,
   setResourceConcernsSubgroups,
   selectedResourceCategory,
   setSelectedResourceCategory,
@@ -218,7 +217,7 @@ const SearchByResourceConcern = ({
             className='usa-select'
             id='resourceConcernValue'
             name='selectedResourceSubgroup'
-            disabled={resourceConcernsSubgroups.disabled}
+            disabled={status}
             onChange={handleSubgroupChange}
             value={selectedResourceConcern.id}
           >
