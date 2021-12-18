@@ -65,11 +65,10 @@ const MapComponent = () => {
       const view: MapView = new MapView({
         center: CENTER_COORDINATES,
         container: VIEW_DIV,
+        constraints: viewConstraints,
         map: mapRef.current.map,
         zoom: 4,
       });
-
-      view.constraints = viewConstraints;
 
       // Alaska composite view
       alaskaView.current = createMapView(
