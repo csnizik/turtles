@@ -89,7 +89,7 @@ export const tableauGraph = {
   },
   PracticeDetail: {
     id: 2,
-    displayName: 'Practic eDetail',
-    link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticebyProgramOverYears/Dashboard1'
+    displayName: 'Practice Detail',
+    link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticebyProgramOverYears/Dashboard1.png?Stabbr'
   },
 };

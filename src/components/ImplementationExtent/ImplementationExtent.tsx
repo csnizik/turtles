@@ -4,6 +4,7 @@ import { useGetPaymentScheduleLinksQuery } from '../../Redux/services/api';
 import Spinner from '../Spinner/Spinner';
 import './implementation-extent.scss';
 import image from './image/newLinkIcon.svg';
+import TableauReport from '../TableauReport/TableauReport';
 
 interface IImplementationExtentProps {
   data: any;
@@ -57,7 +58,7 @@ const ImplementationExtent = ({
         <hr />
         <div className='graph-container'>
           <div className='acres-graph'>
-            <DummyTableauImage />
+            <TableauReport pageName='Practice Detail' practiceCode={data.practiceCode}/>
           </div>
         </div>
       </div>
