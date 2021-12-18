@@ -29,7 +29,8 @@
   break-inside: avoid;
   .obligation-graph,
   .acres-graph {
-    height: 24rem;
+    min-height: 24rem;
+    height: auto;
     background: $white;
   }
 }
@@ -54,7 +55,8 @@
 
   .graph-container {
     background: $light-grey-205;
-    height: 27.75rem;
+    min-height: 27.75rem;
+    height: auto;
   }
 
   .obligation-graph,

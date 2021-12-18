@@ -11,11 +11,10 @@ const ResourceConcernTags = (category: any) => {
             <img
               className='displaying-image'
               alt={singleTag.landUseName}
-              src={`images/resource-concern-tags/${singleTag.landUseIcon}`}
+              src={`../../../images/resource-concern-tags/${singleTag.landUseIcon}`}
             />
-          )
-        })
-        }
+          );
+        })}
       </div>
     </div>
   );
