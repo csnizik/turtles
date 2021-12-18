@@ -21,6 +21,7 @@ const SearchByConservationPractice = ({
   setSelectedPractice,
   setSearchInput,
   setSearchInfo,
+  resourceId,
 }: any) => {
   const dispatch = useAppDispatch();
   const result = useAppSelector((State) => State.disableSlice.disableResource);
@@ -29,7 +30,7 @@ const SearchByConservationPractice = ({
     id: -1,
   });
   const wrapperClassNames = classNames('practice-box-wrapper', {
-    'resource-selected': +selectedResourceCategory?.id >= 0,
+    'resource-selected': +selectedResourceCategory?.id >= 0 || resourceId > 0,
   });
 
   const practiceCategory = useGetPracticeCategoryQuery();
@@ -136,11 +137,14 @@ const SearchByConservationPractice = ({
     const { value } = e.target;
     setSelectedSubPractice({ id: value });
     if (value === '') {
+      if (selectedPractice < 0) dispatch(enablePracticeDropdown());
       setSelectedSubPractice({ id: -1 });
       setSearchInfo((prevState) => ({
         ...prevState,
         practice: null,
       }));
+    } else {
+      dispatch(disablePracticeDropdown());
     }
     setSearchInput((prevState) => ({
       ...prevState,
