@@ -3,6 +3,8 @@ import Graphic from '@arcgis/core/Graphic';
 import Home from '@arcgis/core/widgets/Home';
 import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
+import Query from '@arcgis/core/rest/support/Query';
+import { useHistory, useLocation } from 'react-router-dom';
 import {
   alaskaExtent,
   ALASKA_CENTER,
@@ -22,6 +24,7 @@ import {
 } from './constants';
 import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
 import { setSearch } from '../../Redux/Slice/practiceSlice';
+import { currentState } from '../../Redux/Slice/stateSlice';
 import { usaFeatureLayer0, usaFeatureLayer1 } from './layers';
 import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 import { createMapView } from './mapUtils';
@@ -40,6 +43,8 @@ const MapComponent = () => {
   const hawaiiView = useRef({} as MapView);
   const mapRef = useRef({} as IMapProps);
   const homeBtn = useRef({} as Home);
+  const history: any = useHistory();
+  const location: any = useLocation();
 
   const usaFeatureToPointLayer = useRef(usaFeatureLayer0);
   const usaStateLayer = useRef(usaFeatureLayer1);
@@ -133,6 +138,7 @@ const MapComponent = () => {
 
             if (graphicList.length) {
               const selectedState: Graphic = graphicList[0].graphic;
+              const { attributes } = selectedState;
               const highlightedGraphic = new Graphic({
                 geometry: selectedState?.geometry,
                 symbol: highlightSymbol,
@@ -151,6 +157,20 @@ const MapComponent = () => {
                 mapRef.current.view.goTo({ target: selectedState, zoom: 6 });
               }
 
+              const updatedPathName = location.pathname.replace(
+                stateCode,
+                selectedState.attributes.STATEFP
+              );
+
+              history.push(updatedPathName);
+              dispatch(
+                currentState({
+                  stateNameDisplay: attributes.NAME,
+                  stateCode: attributes.STATEFP,
+                  stateAbbreviation: attributes.STUSPS,
+                })
+              );
+
               dispatch(setSearch(searchInput));
             }
           }
@@ -162,22 +182,25 @@ const MapComponent = () => {
   // Pre-select the state given the stateCode
   useEffect(() => {
     usaStateLayer.current.when(() => {
-      usaStateLayer.current.on('layerview-create', () => {
-        if (stateCode && stateCode !== DEFAULT_NATIONAL_LOCATION) {
-          usaStateLayer.current.queryFeatures().then((response) => {
+      if (stateCode && stateCode !== DEFAULT_NATIONAL_LOCATION) {
+        const stateLayerQuery: Query = usaStateLayer.current.createQuery();
+        stateLayerQuery.where = `STATEFP = '${stateCode}'`;
+        stateLayerQuery.outFields = ['NAME', 'STUSPS'];
+        usaStateLayer.current
+          .queryFeatures(stateLayerQuery)
+          .then((response: any) => {
             const { features } = response;
-            const foundGraphic = features.find(
-              (graphic) => graphic.attributes?.STATEFP === stateCode
-            );
-            if (foundGraphic) {
+            if (features.length) {
               const searchInput = {
                 state_county_code: stateCode || null,
               };
+              const foundGraphic: Graphic = features[0];
               const highlightedGraphic = new Graphic({
                 geometry: foundGraphic?.geometry,
                 symbol: highlightSymbol,
               });
               mapRef.current.view.graphics.add(highlightedGraphic);
+
               if (SMALL_STATES.includes(foundGraphic?.attributes.STUSPS)) {
                 mapRef.current.view.goTo({ target: foundGraphic, zoom: 7 });
               } else if (foundGraphic?.attributes.STUSPS === 'AK') {
@@ -188,8 +211,7 @@ const MapComponent = () => {
               dispatch(setSearch(searchInput));
             }
           });
-        }
-      });
+      }
     });
   }, []);
 
