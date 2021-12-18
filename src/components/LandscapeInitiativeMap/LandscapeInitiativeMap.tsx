@@ -257,29 +257,27 @@ const LandscapeInitiativeMap = ({
     ) {
       mapRef.current.map.when(() => {
         stateFeatureLayer.current.when(() => {
-          stateFeatureLayer.current.on('layerview-create', () => {
-            mapRef.current.view.graphics.removeAll();
-            stateFeatureLayer.current.queryFeatures().then((response) => {
-              const { features } = response;
-              const result: any = features.find((feat: any) => {
-                return feat.attributes?.STATEFP === selectedLocation;
-              });
-
-              const highlightedGraphic = new Graphic({
-                geometry: result?.geometry,
-                symbol: highlightSymbol,
-              });
-              mapRef.current.view.graphics.add(highlightedGraphic);
-
-              mapRef.current.view.extent = result?.geometry?.extent
-                .clone()
-                .expand(1.65);
+          mapRef.current.view.graphics.removeAll();
+          stateFeatureLayer.current.queryFeatures().then((response) => {
+            const { features } = response;
+            const result: any = features.find((feat: any) => {
+              return feat.attributes?.STATEFP === selectedLocation;
             });
+
+            const highlightedGraphic = new Graphic({
+              geometry: result?.geometry,
+              symbol: highlightSymbol,
+            });
+            mapRef.current.view.graphics.add(highlightedGraphic);
+
+            mapRef.current.view.extent = result?.geometry?.extent
+              .clone()
+              .expand(1.65);
           });
         });
       });
     }
-  }, []);
+  }, [selectedLandscapeInitiative]);
 
   // Handle map interactions
   useEffect(() => {
