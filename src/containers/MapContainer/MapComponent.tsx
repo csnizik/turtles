@@ -120,7 +120,7 @@ const MapComponent = () => {
   // Handle map interactions
   useEffect(() => {
     mapRef.current.view.when(() => {
-      mapRef.current.view.on('pointer-up', (event) => {
+      mapRef.current.view.on('click', (event) => {
         mapRef.current.view.hitTest(event).then((response) => {
           checkAndClearHighlightedGraphics();
           if (response.results.length) {
@@ -143,13 +143,16 @@ const MapComponent = () => {
               const searchInput = {
                 state_county_code: selectedState.attributes.STATEFP || null,
               };
-              dispatch(setSearch(searchInput));
               // Zoom to selected state
               if (SMALL_STATES.includes(selectedState.attributes.STUSPS)) {
                 mapRef.current.view.goTo({ target: selectedState, zoom: 7 });
+              } else if (selectedState?.attributes.STUSPS === 'AK') {
+                mapRef.current.view.goTo({ target: selectedState, zoom: 4 });
               } else {
                 mapRef.current.view.goTo({ target: selectedState, zoom: 6 });
               }
+
+              dispatch(setSearch(searchInput));
             }
           }
         });
@@ -171,7 +174,6 @@ const MapComponent = () => {
               const searchInput = {
                 state_county_code: stateCode || null,
               };
-              dispatch(setSearch(searchInput));
               const highlightedGraphic = new Graphic({
                 geometry: foundGraphic?.geometry,
                 symbol: highlightSymbol,
@@ -179,9 +181,12 @@ const MapComponent = () => {
               mapRef.current.view.graphics.add(highlightedGraphic);
               if (SMALL_STATES.includes(foundGraphic?.attributes.STUSPS)) {
                 mapRef.current.view.goTo({ target: foundGraphic, zoom: 7 });
+              } else if (foundGraphic?.attributes.STUSPS === 'AK') {
+                mapRef.current.view.goTo({ target: foundGraphic, zoom: 4 });
               } else {
                 mapRef.current.view.goTo({ target: foundGraphic, zoom: 6 });
               }
+              dispatch(setSearch(searchInput));
             }
           });
         }
@@ -192,7 +197,7 @@ const MapComponent = () => {
   // Handle alaska composite view interactions
   useEffect(() => {
     alaskaView.current.when(() => {
-      alaskaView.current.on('pointer-up', (event) => {
+      alaskaView.current.on('click', (event) => {
         alaskaView.current.hitTest(event).then((response) => {
           checkAndClearHighlightedGraphics();
           if (response.results.length) {
@@ -215,7 +220,7 @@ const MapComponent = () => {
   // Handle caribbean composite view interactions
   useEffect(() => {
     caribbeanView.current.when(() => {
-      caribbeanView.current.on('pointer-up', (event) => {
+      caribbeanView.current.on('click', (event) => {
         caribbeanView.current.hitTest(event).then((response) => {
           checkAndClearHighlightedGraphics();
           if (response.results.length) {
@@ -238,7 +243,7 @@ const MapComponent = () => {
   // Handle hawaii composite view interactions
   useEffect(() => {
     hawaiiView.current.when(() => {
-      hawaiiView.current.on('pointer-up', (event) => {
+      hawaiiView.current.on('click', (event) => {
         hawaiiView.current.hitTest(event).then((response) => {
           checkAndClearHighlightedGraphics();
           if (response.results.length) {
