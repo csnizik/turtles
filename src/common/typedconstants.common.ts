@@ -75,4 +75,22 @@ export const practiceStandardGuideLink = {
   viewStateConservationPracticeLink: `https://efotg.sc.egov.usda.gov/#/state/`,
   webpagePromptText: `Go Straight to this State’s Field Office Technical Guide`,
   pdfReportPromptText: `State Specific National Conservation Practices`,
+}
+
+export const tableauGraph = {
+  RegionalConservationPractice: { 
+    id: 0, 
+    displayName: 'Regional Conservation Practice',
+    link:'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticeListbyAcres/Dashboard1.png?Stabbr' 
+  },
+  ConservationPracticeCategory: { 
+    id: 1, 
+    displayName: 'Conservation Practice Category', 
+    link:'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticesbyYearforStateandMeasure/Dashboard1.png?Stabbr' 
+  },
+  PracticeDetail: {
+    id: 2,
+    displayName: 'Practice Detail',
+    link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticebyProgramOverYears/Dashboard1.png?Stabbr'
+  },
 };
