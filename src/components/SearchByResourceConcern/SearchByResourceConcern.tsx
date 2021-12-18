@@ -16,11 +16,11 @@ import './search-by-resource-concern.scss';
 const SearchByResourceConcern = ({
   setSearchInput,
   setSearchInfo,
-  resourceConcernsSubgroups,
   setResourceConcernsSubgroups,
   selectedResourceCategory,
   setSelectedResourceCategory,
   selectedPractice,
+  practiceId,
 }: any) => {
   const resourceCategory = useGetResourcesQuery(); //!Resource Category api
   const resourceConcern = useGetResourceConcernQuery(selectedResourceCategory); //! Resource Concern
@@ -33,7 +33,7 @@ const SearchByResourceConcern = ({
   });
 
   const wrapperClassNames = classNames('resource-box-wrapper', {
-    'practice-selected': selectedPractice >= 0,
+    'practice-selected': selectedPractice >= 0 || practiceId > 0,
   });
 
   const presistSearchInputResource = useAppSelector(
@@ -133,12 +133,13 @@ const SearchByResourceConcern = ({
     } else {
       setResourceConcernsSubgroups(initialResourceState);
       setSelectedResourceCategory({ id: -1 });
-      dispatchRequest(enableResourceDropdown());
+
       setSearchInfo((prevState) => ({
         ...prevState,
         resource_concern_category: null,
         resource_concern: null,
       }));
+      dispatchRequest(enableResourceDropdown());
       setSearchInput((prevState) => ({
         ...prevState,
         resource_concern_id: null,
@@ -149,7 +150,11 @@ const SearchByResourceConcern = ({
   const handleSubgroupChange = (e) => {
     const { value } = e.target;
     setSelectedResourceConcern({ id: +value });
+    dispatchRequest(disableResourceDropdown());
     if (value === '') {
+      if (selectedResourceCategory < 0) {
+        dispatchRequest(enableResourceDropdown());
+      }
       setSelectedResourceConcern({ id: -1 });
       setSearchInfo((prevState) => ({
         ...prevState,
@@ -218,7 +223,7 @@ const SearchByResourceConcern = ({
             className='usa-select'
             id='resourceConcernValue'
             name='selectedResourceSubgroup'
-            disabled={resourceConcernsSubgroups.disabled}
+            disabled={status}
             onChange={handleSubgroupChange}
             value={selectedResourceConcern.id}
           >

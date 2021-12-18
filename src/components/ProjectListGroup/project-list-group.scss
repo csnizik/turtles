@@ -6,6 +6,9 @@
     width: 40rem;
     .nav-item {
       width: 20rem;
+      .nav-link {
+        cursor: pointer;
+      }
     }
   }
   .centered-text {

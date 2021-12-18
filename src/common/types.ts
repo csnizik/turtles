@@ -54,7 +54,6 @@ export interface IPractice {
 }
 export interface IPracticeDropdown {
   practice?: Array<IPractice>;
-  disabled: boolean;
 }
 
 export interface IPracticeCategory {

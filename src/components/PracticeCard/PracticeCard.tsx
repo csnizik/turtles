@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import { usePostSearchDataQuery } from '../../Redux/services/api';
@@ -26,9 +26,13 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
 
   const [praticestate, setPracticestate] = useState(initialState);
 
+  const history = useHistory();
+  const { category }: any = useParams();
+
   const handleChange = (practiceId: number, practiceCategoryId: number) => {
     dispatch(setSpecificPractice(practiceId));
     dispatch(setPracticeCategory(practiceCategoryId));
+    history.push(`${category}/${practiceId}`);
     setPracticeViewType({
       allPractices: false,
       practiceCategories: false,
@@ -68,8 +72,8 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
                   <div className='full-document-box'>
                     <div className='list-box'>
                       <div className='info-box'>
-                        <Link
-                          to='/ConservationPractices'
+                        <button
+                          type='button'
                           onClick={() =>
                             handleChange(
                               practice.practiceId,
@@ -77,16 +81,18 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
                             )
                           }
                         >
-                          <h3>{practice.practiceName}</h3>
-                        </Link>
+                          <h3 className='card-titles'>
+                            {practice.practiceName}
+                          </h3>
+                        </button>
                         <p>{practice.practiceDescription}</p>
                       </div>
                       <img
                         className='practice-image'
                         src={
                           imageName
-                            ? `images/landscape-initiatives-images/${imageName}`
-                            : `images/landscape-initiatives-images/default.jpg`
+                            ? `../../images/landscape-initiatives-images/${imageName}`
+                            : `../../images/landscape-initiatives-images/default.jpg`
                         }
                         alt=''
                       />
