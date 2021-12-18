@@ -3,6 +3,7 @@ import Graphic from '@arcgis/core/Graphic';
 import Home from '@arcgis/core/widgets/Home';
 import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
+import Query from '@arcgis/core/rest/support/Query';
 import {
   alaskaExtent,
   ALASKA_CENTER,
@@ -162,22 +163,25 @@ const MapComponent = () => {
   // Pre-select the state given the stateCode
   useEffect(() => {
     usaStateLayer.current.when(() => {
-      usaStateLayer.current.on('layerview-create', () => {
-        if (stateCode && stateCode !== DEFAULT_NATIONAL_LOCATION) {
-          usaStateLayer.current.queryFeatures().then((response) => {
+      if (stateCode && stateCode !== DEFAULT_NATIONAL_LOCATION) {
+        const stateLayerQuery: Query = usaStateLayer.current.createQuery();
+        stateLayerQuery.where = `STATEFP = '${stateCode}'`;
+        stateLayerQuery.outFields = ['NAME', 'STUSPS'];
+        usaStateLayer.current
+          .queryFeatures(stateLayerQuery)
+          .then((response: any) => {
             const { features } = response;
-            const foundGraphic = features.find(
-              (graphic) => graphic.attributes?.STATEFP === stateCode
-            );
-            if (foundGraphic) {
+            if (features.length) {
               const searchInput = {
                 state_county_code: stateCode || null,
               };
+              const foundGraphic: Graphic = features[0];
               const highlightedGraphic = new Graphic({
                 geometry: foundGraphic?.geometry,
                 symbol: highlightSymbol,
               });
               mapRef.current.view.graphics.add(highlightedGraphic);
+
               if (SMALL_STATES.includes(foundGraphic?.attributes.STUSPS)) {
                 mapRef.current.view.goTo({ target: foundGraphic, zoom: 7 });
               } else if (foundGraphic?.attributes.STUSPS === 'AK') {
@@ -188,8 +192,7 @@ const MapComponent = () => {
               dispatch(setSearch(searchInput));
             }
           });
-        }
-      });
+      }
     });
   }, []);
 
