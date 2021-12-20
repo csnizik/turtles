@@ -8,10 +8,7 @@ import MapContainer from '../MapContainer';
 import ProjectListGroup from '../../components/ProjectListGroup';
 import ProjectTypeSection from '../../components/ProjectTypeSection';
 import { setSearch } from '../../Redux/Slice/practiceSlice';
-import {
-  useGetStateListQuery,
-  usePostLandscapeInitiativesQuery,
-} from '../../Redux/services/api';
+import { usePostLandscapeInitiativesQuery } from '../../Redux/services/api';
 import './project-container.scss';
 import { projectCards, projectListGroups, projectPurposes } from './constants';
 import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
@@ -40,16 +37,14 @@ const ProjectsContainer = () => {
   const [selectedLandscapeInitiative, setSelectedLandscapeInitiative] =
     useState(-1);
   const [selectedLocation, setSelectedLocation] = useState('');
-  const stateStatus: any = useGetStateListQuery();
   const stateCode = useAppSelector((state) => state?.stateSlice?.stateCode);
   const searchInput = { state_county_code: selectedLocation || null };
   let searchLandscapeInitiatives = { state_county_code: stateCode || null };
 
-  // const landscapeInitiativesData = usePostLandscapeInitiativesQuery(
-  //   searchLandscapeInitiatives
-  // );
-  const selectedState: any = { selectedState: { stateNameDisplay: '' } };
-  const selectedStateName: any = selectedState?.stateNameDisplay;
+  const landscapeInitiativesData = usePostLandscapeInitiativesQuery(
+    searchLandscapeInitiatives
+  );
+  const selectedState: any = { stateCode: '', stateNameDisplay: '' };
 
   useEffect(() => {
     setSelectedLocation(stateC);
@@ -79,7 +74,7 @@ const ProjectsContainer = () => {
         state_county_code: null,
       };
     }
-    if (selectedState) {
+    if (stateCode) {
       searchInputData = {
         state_county_code: selectedState?.stateCode,
       };
@@ -202,10 +197,7 @@ const ProjectsContainer = () => {
               <MapContainer setSelectedLocation={setSelectedLocation} />
             </div>
 
-            <ProjectListGroup
-              isMapDisplayed
-              selectedStateName={selectedStateName}
-            />
+            <ProjectListGroup isMapDisplayed />
           </>
         ) : null}
       </div>
