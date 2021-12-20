@@ -172,6 +172,7 @@ const CustomSearch = () => {
             setSelectedPractice={setSelectedPractice}
             setSearchInput={setSearchInput}
             setSearchInfo={setSearchedInfo}
+            resourceId={searchInput.resource_concern_id}
           />
           <SearchByResourceConcern
             resourceConcernsSubgroups={resourceConcernsSubgroups}
@@ -181,6 +182,7 @@ const CustomSearch = () => {
             selectedPractice={selectedPractice.id}
             setSearchInput={setSearchInput}
             setSearchInfo={setSearchedInfo}
+            practiceId={searchInput.practice_id}
           />
         </div>
       </div>

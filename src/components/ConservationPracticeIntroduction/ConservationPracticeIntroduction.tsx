@@ -1,6 +1,7 @@
 import './conservation-practice-introduction.scss';
 import { Link } from 'react-router-dom';
 import image from './image/open-in-new.svg';
+import TableauReport from '../TableauReport/TableauReport';
 
 interface IIntroProps {
   introductionParagraph: string;
@@ -19,7 +20,9 @@ const ConservationPracticeIntroduction = ({
       </div>
 
       <div className='explore-box'>
-        <div className='internal-box' />
+        <div className='internal-box'>
+          <TableauReport pageName={title}/>
+        </div>
         <div className='link'>
           <Link
             aria-label='environmental quality incentives program opens in new window'

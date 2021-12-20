@@ -7,6 +7,7 @@ import Legend from '@arcgis/core/widgets/Legend';
 import Expand from '@arcgis/core/widgets/Expand';
 import Layer from '@arcgis/core/layers/Layer';
 import Graphic from '@arcgis/core/Graphic';
+import Query from '@arcgis/core/rest/support/Query';
 import { currentState } from '../../Redux/Slice/stateSlice';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
 import '@arcgis/core/assets/esri/themes/light/main.css';
@@ -257,29 +258,32 @@ const LandscapeInitiativeMap = ({
     ) {
       mapRef.current.map.when(() => {
         stateFeatureLayer.current.when(() => {
-          stateFeatureLayer.current.on('layerview-create', () => {
-            mapRef.current.view.graphics.removeAll();
-            stateFeatureLayer.current.queryFeatures().then((response) => {
+          mapRef.current.view.graphics.removeAll();
+          const stateLayerQuery: Query =
+            stateFeatureLayer.current.createQuery();
+          stateLayerQuery.where = `STATEFP = '${selectedLocation}'`;
+          stateLayerQuery.outFields = ['NAME', 'STUSPS'];
+          stateFeatureLayer.current
+            .queryFeatures(stateLayerQuery)
+            .then((response: any) => {
               const { features } = response;
-              const result: any = features.find((feat: any) => {
-                return feat.attributes?.STATEFP === selectedLocation;
-              });
+              if (features.length) {
+                const foundState = features[0];
+                const highlightedGraphic = new Graphic({
+                  geometry: foundState?.geometry,
+                  symbol: highlightSymbol,
+                });
+                mapRef.current.view.graphics.add(highlightedGraphic);
 
-              const highlightedGraphic = new Graphic({
-                geometry: result?.geometry,
-                symbol: highlightSymbol,
-              });
-              mapRef.current.view.graphics.add(highlightedGraphic);
-
-              mapRef.current.view.extent = result?.geometry?.extent
-                .clone()
-                .expand(1.65);
+                mapRef.current.view.extent = foundState?.geometry?.extent
+                  .clone()
+                  .expand(1.65);
+              }
             });
-          });
         });
       });
     }
-  }, []);
+  }, [selectedLandscapeInitiative]);
 
   // Handle map interactions
   useEffect(() => {
