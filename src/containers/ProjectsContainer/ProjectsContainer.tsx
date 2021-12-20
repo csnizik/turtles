@@ -40,6 +40,17 @@ const ProjectsContainer = () => {
   const stateCode = useAppSelector((state) => state?.stateSlice?.stateCode);
   const searchInput = { state_county_code: selectedLocation || null };
   let searchLandscapeInitiatives = { state_county_code: stateCode || null };
+  if (stateCode !== DEFAULT_NATIONAL_LOCATION) {
+    searchLandscapeInitiatives = {
+      ...searchInput,
+      state_county_code: stateCode,
+    };
+  } else {
+    searchLandscapeInitiatives = {
+      ...searchInput,
+      state_county_code: null,
+    };
+  }
 
   const landscapeInitiativesData = usePostLandscapeInitiativesQuery(
     searchLandscapeInitiatives
@@ -63,17 +74,6 @@ const ProjectsContainer = () => {
 
   useEffect(() => {
     let searchInputData;
-    if (stateCode !== DEFAULT_NATIONAL_LOCATION) {
-      searchLandscapeInitiatives = {
-        ...searchInput,
-        state_county_code: stateCode,
-      };
-    } else {
-      searchLandscapeInitiatives = {
-        ...searchInput,
-        state_county_code: null,
-      };
-    }
     if (stateCode) {
       searchInputData = {
         state_county_code: selectedState?.stateCode,

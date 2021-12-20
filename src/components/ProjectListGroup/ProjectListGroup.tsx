@@ -23,11 +23,13 @@ import ExceptionMessage from '../ExceptionMessage/ExceptionMessage';
 
 interface IProjectListProps {
   isMapDisplayed: boolean;
+  selectedStateName?: string;
   selectedPracticeName?: string;
 }
 
 const ProjectListGroup = ({
   isMapDisplayed,
+  selectedStateName,
   selectedPracticeName,
 }: IProjectListProps) => {
   const stateInfo = useAppSelector((state) => state?.stateSlice);
@@ -64,7 +66,7 @@ const ProjectListGroup = ({
 
   const grantsLength = projectsList?.length;
   const initiativesLength = initiativesList?.length;
-  let exceptionStateName = stateInfo?.stateNameDisplay;
+  let exceptionStateName = stateInfo?.stateNameDisplay || selectedStateName;
   if (exceptionStateName === null || exceptionStateName === undefined)
     exceptionStateName = 'The U.S.';
   const exceptionTitle = `${exceptionStateName} has no ${selectedPracticeName} projects or initiatives`;
@@ -269,5 +271,6 @@ const ProjectListGroup = ({
 export default ProjectListGroup;
 
 ProjectListGroup.defaultProps = {
+  selectedStateName: '',
   selectedPracticeName: '',
 };
