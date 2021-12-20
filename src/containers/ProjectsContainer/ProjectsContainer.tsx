@@ -45,6 +45,12 @@ const ProjectsContainer = () => {
   const searchInput = { state_county_code: selectedLocation || null };
   let searchLandscapeInitiatives = { state_county_code: stateCode || null };
 
+  // const landscapeInitiativesData = usePostLandscapeInitiativesQuery(
+  //   searchLandscapeInitiatives
+  // );
+  const selectedState: any = { selectedState: { stateNameDisplay: '' } };
+  const selectedStateName: any = selectedState?.stateNameDisplay;
+
   useEffect(() => {
     setSelectedLocation(stateC);
     setSelectedProjectCard(Number(category));
@@ -60,39 +66,31 @@ const ProjectsContainer = () => {
     }
   }, [category, individual, stateC]);
 
-  if (stateCode !== DEFAULT_NATIONAL_LOCATION) {
-    searchLandscapeInitiatives = {
-      ...searchInput,
-      state_county_code: stateCode,
-    };
-  } else {
-    searchLandscapeInitiatives = {
-      ...searchInput,
-      state_county_code: null,
-    };
-  }
-  const landscapeInitiativesData = usePostLandscapeInitiativesQuery(
-    searchLandscapeInitiatives
-  );
-  const selectedState =
-    selectedLocation &&
-    stateStatus.isSuccess &&
-    stateStatus.data &&
-    stateStatus.data.find((state: any) => {
-      return state.stateCode === selectedLocation;
-    });
-  const selectedStateName = selectedState?.stateNameDisplay;
-  let searchInputData;
-  if (selectedState) {
-    searchInputData = {
-      state_county_code: selectedState?.stateCode,
-    };
-  } else {
-    searchInputData = {
-      state_county_code: DEFAULT_NATIONAL_LOCATION,
-    };
-  }
-  dispatch(setSearch(searchInputData));
+  useEffect(() => {
+    let searchInputData;
+    if (stateCode !== DEFAULT_NATIONAL_LOCATION) {
+      searchLandscapeInitiatives = {
+        ...searchInput,
+        state_county_code: stateCode,
+      };
+    } else {
+      searchLandscapeInitiatives = {
+        ...searchInput,
+        state_county_code: null,
+      };
+    }
+    if (selectedState) {
+      searchInputData = {
+        state_county_code: selectedState?.stateCode,
+      };
+    } else {
+      searchInputData = {
+        state_county_code: DEFAULT_NATIONAL_LOCATION,
+      };
+    }
+    dispatch(setSearch(searchInputData));
+  }, []);
+
   const handleSelectLandscapeInitiative = (id: number) => {
     setSelectedLandscapeInitiative(id);
     history.push(
