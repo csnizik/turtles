@@ -41,9 +41,12 @@ jest.mock('react-i18next', () => ({
 }));
 
 jest.mock('@arcgis/core/views/MapView', () => jest.fn(() => {}));
-jest.mock('@arcgis/core/widgets/Home', () => ({
-  Home: jest.fn(() => {}),
-  when: jest.fn(),
+jest.mock('@arcgis/core', () => ({
+  Home: () => {
+    return {
+      when: jest.fn(),
+    };
+  },
 }));
 // jest.mock('@arcgis/core/widgets/Home', () => ({
 //   when: jest.fn(),
