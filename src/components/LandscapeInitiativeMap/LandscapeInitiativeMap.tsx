@@ -36,16 +36,16 @@ interface IMapProps {
 }
 
 interface ILandscapeProps {
-  landscapeInitiativesData: Array<ILandscapeInitiative>;
-  selectedLocation: any;
-  selectedLandscapeInitiative: number;
-  portalId: string;
+  landscapeInitiativesData?: Array<ILandscapeInitiative>;
+  selectedLocation?: any;
+  selectedLandscapeInitiative?: number;
+  portalId?: string;
 }
 
 const LandscapeInitiativeMap = ({
-  landscapeInitiativesData,
+  landscapeInitiativesData = [],
   selectedLocation,
-  selectedLandscapeInitiative,
+  selectedLandscapeInitiative = -1,
   portalId,
 }: ILandscapeProps) => {
   const mapRef = useRef({} as IMapProps);
@@ -87,7 +87,7 @@ const LandscapeInitiativeMap = ({
       mapRef.current.view = view;
 
       // Add the home button to the top left corner of the view
-      mapRef.current.view.ui.add(homeBtn.current, 'top-left');
+      mapRef.current.view.ui?.add(homeBtn.current, 'top-left');
 
       stateFeatureLayer.current = new FeatureLayer({
         layerId: 1,
@@ -96,7 +96,7 @@ const LandscapeInitiativeMap = ({
         visible: true,
       });
 
-      mapRef.current.map.layers.add(stateFeatureLayer.current);
+      mapRef.current.map.layers?.add(stateFeatureLayer.current);
 
       return () => {
         mapRef.current.view.destroy();
@@ -331,3 +331,10 @@ const LandscapeInitiativeMap = ({
 };
 
 export default LandscapeInitiativeMap;
+
+LandscapeInitiativeMap.defaultProps = {
+  landscapeInitiativesData: [],
+  selectedLocation: '',
+  selectedLandscapeInitiative: -1,
+  portalId: '',
+};
