@@ -36,13 +36,15 @@ const ProjectListItem = ({
   if (statesInvolved) {
     return (
       <li key={id} className='list-group-item'>
-        <p>
-          <a href={link} target='_blank' rel='noreferrer'>
-            {title}
-          </a>
-        </p>
+        <p>{title}</p>
         {owner && renderProjectDetails(owner, statesInvolved, year)}
         <p>{description}</p>
+        <p>
+          <a href={link} target='_blank' rel='noreferrer'>
+            {'Go to the Conservation Innovation Grants project details page '}
+          </a>
+          <i className='fa fa-external-link' aria-hidden='true' />
+        </p>
       </li>
     );
   }
