@@ -10,7 +10,7 @@
     "search": "Quick Search",
     "here-how-you-know": "Here's how you know",
     "nrcs": "Natural Resources Conservation Service",
-    "usda": "U.S DEPARTMENT OF AGRICULTURE"
+    "usda": "U.S. DEPARTMENT OF AGRICULTURE"
   },
   "home-page": {
     "intro": "Know what you're looking for?  Do a quick search and find information fast.",
@@ -50,7 +50,7 @@
     "heading": "Conservation Practice",
     "description": "Search by Conservation Practice or Resource Concern Treated",
     "first-label-name": "Select a practice category",
-    "second-label-name": "Select a practice (optional)"
+    "second-label-name": "Select a practice"
   },
   "conservation-practice": {
     "intro": "NRCS's conservation practices help people reduce soil erosion, enhance water supplies, improve water quality, increase wildlife habitat, and reduce damages caused by floods and other natural disasters. One practice may have multiple benefits depending on when, where, and how it is applied. To illustrate the impact of our conservation practices, we group them into categories that describe their benefits.",
@@ -60,7 +60,7 @@
   "search-by-resource-concern": {
     "heading": "Resource Concerns Treated",
     "first-label-name": "Select a resource category",
-    "second-label-name": "Select a resource concern (optional)"
+    "second-label-name": "Select a resource concern"
   },
   "projects-page": {
     "page-header-01": "NRCS's natural resources conservation programs help people reduce soil erosion, enhance water supplies, improve water quality, increase wildlife habitat, and reduce damages caused by floods and other natural disasters.",
