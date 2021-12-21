@@ -1,7 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import { tableauGraph } from '../../common/typedconstants.common';
 import './tableau-report.scss';
+
+declare global {interface Window {tableau: any}}
+
+const {tableau} = window;
 
 interface ITableauReportProps {
   pageName: string;
@@ -22,9 +26,27 @@ const TableauReport = ({
     (state) => state?.stateSlice?.stateAbbreviation
   );
 
+  // let viz: any;
+  const ref = useRef(null)
   const stateAbbr = (stateAbbrInRedux === 'U.S.' || stateAbbrInRedux=== undefined) ? '' : stateAbbrInRedux;
   const [tableauLink, setTableauLink] = useState('');
   const [graph, setGraph] = useState<ITableauGraphProps>();
+  console.log('tableau-->', tableau)
+
+  const initViz = (usdaUrl: any) => {
+    const options = {
+        device: "desktop",
+        // hideToolbar: true,
+        // "Top Practice Rank": [1, 2, 3, 4, 5],
+        // "State Name with Total": sState,
+    }
+        // eslint-disable-next-line no-new
+        const viz =  new tableau.Viz(ref.current, usdaUrl, options);
+    }
+
+  useEffect (() => {
+    initViz(tableauLink)
+  }, [])
 
   const getOption = () => {
     if (pageName === 'Conservation Practice') setGraph(tableauGraph.RegionalConservationPractice);
@@ -62,11 +84,14 @@ const TableauReport = ({
 
   return (
     <div className='tableau-report-container'>
-      <img
+      {/* <img
         alt={graph?.displayName}
         src={tableauLink}
         className='tableau-graph'
-      />
+      /> */}
+      <div>
+        <div ref={ref}/>
+      </div>
     </div>
   );
 }
