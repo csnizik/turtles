@@ -74,7 +74,7 @@ const ProjectsContainer = () => {
 
   useEffect(() => {
     let searchInputData;
-    if (stateCode) {
+    if (stateCode !== DEFAULT_NATIONAL_LOCATION || !stateCode) {
       searchInputData = {
         state_county_code: selectedState?.stateCode,
       };
