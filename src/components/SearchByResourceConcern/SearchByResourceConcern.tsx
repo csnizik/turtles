@@ -21,6 +21,8 @@ const SearchByResourceConcern = ({
   setSelectedResourceCategory,
   selectedPractice,
   practiceId,
+  selectedResourceConcern,
+  setSelectedResourceConcern,
 }: any) => {
   const resourceCategory = useGetResourcesQuery(); //!Resource Category api
   const resourceConcern = useGetResourceConcernQuery(selectedResourceCategory); //! Resource Concern
@@ -28,9 +30,6 @@ const SearchByResourceConcern = ({
   const dispatchRequest = useAppDispatch();
   const status = useAppSelector((state) => state.disableSlice.disablePractice);
   const { t } = useTranslation();
-  const [selectedResourceConcern, setSelectedResourceConcern] = useState<any>({
-    id: -1,
-  });
 
   const wrapperClassNames = classNames('resource-box-wrapper', {
     'practice-selected': selectedPractice >= 0 || practiceId > 0,

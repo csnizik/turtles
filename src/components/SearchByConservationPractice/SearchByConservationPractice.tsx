@@ -22,13 +22,13 @@ const SearchByConservationPractice = ({
   setSearchInput,
   setSearchInfo,
   resourceId,
+  selectedSubPractice,
+  setSelectedSubPractice,
 }: any) => {
   const dispatch = useAppDispatch();
   const result = useAppSelector((State) => State.disableSlice.disableResource);
   const { t } = useTranslation();
-  const [selectedSubPractice, setSelectedSubPractice] = useState<any>({
-    id: -1,
-  });
+
   const wrapperClassNames = classNames('practice-box-wrapper', {
     'resource-selected': +selectedResourceCategory?.id >= 0 || resourceId > 0,
   });

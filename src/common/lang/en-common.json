@@ -50,17 +50,17 @@
     "heading": "Conservation Practice",
     "description": "Search by Conservation Practice or Resource Concern Treated",
     "first-label-name": "Select a practice category",
-    "second-label-name": "Select a practice (optional)"
+    "second-label-name": "Select a practice"
   },
   "conservation-practice": {
     "intro": "NRCS's conservation practices help people reduce soil erosion, enhance water supplies, improve water quality, increase wildlife habitat, and reduce damages caused by floods and other natural disasters. One practice may have multiple benefits depending on when, where, and how it is applied. To illustrate the impact of our conservation practices, we group them into categories that describe their benefits.",
-    "last-card-button":"Back to Quick Search",
-    "last-card-description":"Don't see the practice you're looking for?"
+    "last-card-button": "Back to Quick Search",
+    "last-card-description": "Don't see the practice you're looking for?"
   },
   "search-by-resource-concern": {
     "heading": "Resource Concerns Treated",
     "first-label-name": "Select a resource category",
-    "second-label-name": "Select a resource concern (optional)"
+    "second-label-name": "Select a resource concern"
   },
   "projects-page": {
     "page-header-01": "NRCS's natural resources conservation programs help people reduce soil erosion, enhance water supplies, improve water quality, increase wildlife habitat, and reduce damages caused by floods and other natural disasters.",

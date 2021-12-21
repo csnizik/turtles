@@ -50,8 +50,7 @@ const ConservationPracticeContainer = ({
   const stateStatus: any = useGetStateListQuery();
   const dispatch = useAppDispatch();
   const location: any = useLocation();
-
-  const sharedState = location?.state?.detail;
+  const { stateCode }: any = useParams();
   const selectedStateCode = stateInfo?.stateCode;
 
   const { category, individual }: any = useParams();
@@ -112,9 +111,8 @@ const ConservationPracticeContainer = ({
   const { data: ldata } = usePostLandscapeInitiativesQuery(searchInputData);
 
   const { data, isSuccess } = usePostSearchDataQuery({
-    practice_id: sharedState,
+    state_county_code: `${stateCode}000`,
   });
-
   const currentPracticeCategory: any =
     isSuccess &&
     data &&
@@ -209,13 +207,11 @@ const ConservationPracticeContainer = ({
     }
     return null;
   };
-
   const viewTypeList = Object.keys(practiceViewType);
   const currentViewType =
     viewTypeList.find((view: string) => {
       return practiceViewType[view];
     }) || 'allPractices';
-
   return (
     <>
       <PracticeBreadcrumbs
