@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 
 const ProjectListItem = ({
@@ -9,6 +10,7 @@ const ProjectListItem = ({
   description,
   link,
 }: any) => {
+  const { t } = useTranslation();
   const history: any = useHistory();
   const { stateCode }: any = useParams();
   //Pushes you to specific initiative pages under Initiative tab (2) in projects and initiatives
@@ -41,7 +43,7 @@ const ProjectListItem = ({
         <p>{description}</p>
         <p>
           <a href={link} target='_blank' rel='noreferrer'>
-            {'Go to the Conservation Innovation Grants project details page '}
+            {t('associated-projects-initiatives.link')}
           </a>
           <i className='fa fa-external-link' aria-hidden='true' />
         </p>
