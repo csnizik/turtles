@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 import { initialResourceState } from '../../common/typedconstants.common';
 import {
+  disablePracticeDropdown,
   disableResourceDropdown,
   enableResourceDropdown,
 } from '../../Redux/Slice/disableSlice';
@@ -44,6 +45,15 @@ const SearchByResourceConcern = ({
     (State) => State?.practiceSlice?.searchInfo
   );
 
+  useEffect(() => {
+    if (selectedPractice || practiceId) {
+      dispatchRequest(disablePracticeDropdown());
+      setResourceConcernsSubgroups({
+        resources: [],
+        disabled: true,
+      });
+    }
+  }, []);
   useEffect(() => {
     const findResourceCategoryName = resourceCategory?.data?.find((concern) => {
       const name = +selectedResourceCategory === concern.resourceConcernId;
