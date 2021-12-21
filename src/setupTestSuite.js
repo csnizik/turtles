@@ -39,23 +39,3 @@ jest.mock('react-i18next', () => ({
     };
   },
 }));
-
-jest.mock('@arcgis/core/views/MapView', () => jest.fn(() => {}));
-jest.mock('@arcgis/core', () => ({
-  Home: () => {
-    return {
-      when: jest.fn(),
-    };
-  },
-}));
-// jest.mock('@arcgis/core/widgets/Home', () => ({
-//   when: jest.fn(),
-//   on: jest.fn(),
-// }));
-jest.mock('@arcgis/core/WebMap', () => jest.fn(() => {}));
-jest.mock('@arcgis/core/layers/FeatureLayer', () => jest.fn(() => {}));
-jest.mock('@arcgis/core/widgets/Legend', () => jest.fn(() => {}));
-jest.mock('@arcgis/core/widgets/Expand', () => jest.fn(() => {}));
-jest.mock('@arcgis/core/layers/Layer', () => jest.fn(() => {}));
-jest.mock('@arcgis/core/Graphic', () => jest.fn(() => {}));
-jest.mock('@arcgis/core/rest/support/Query', () => jest.fn(() => {}));
