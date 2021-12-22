@@ -46,7 +46,7 @@ const SearchByResourceConcern = ({
   );
 
   useEffect(() => {
-    if (selectedPractice || practiceId) {
+    if (selectedPractice > 0 || practiceId > 0) {
       dispatchRequest(disablePracticeDropdown());
       setResourceConcernsSubgroups({
         resources: [],
