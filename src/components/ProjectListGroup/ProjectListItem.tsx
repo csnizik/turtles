@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 
 const ProjectListItem = ({
@@ -9,6 +10,7 @@ const ProjectListItem = ({
   description,
   link,
 }: any) => {
+  const { t } = useTranslation();
   const history: any = useHistory();
   const { stateCode }: any = useParams();
   //Pushes you to specific initiative pages under Initiative tab (2) in projects and initiatives
@@ -36,13 +38,15 @@ const ProjectListItem = ({
   if (statesInvolved) {
     return (
       <li key={id} className='list-group-item'>
-        <p>
-          <a href={link} target='_blank' rel='noreferrer'>
-            {title}
-          </a>
-        </p>
+        <p>{title}</p>
         {owner && renderProjectDetails(owner, statesInvolved, year)}
         <p>{description}</p>
+        <p>
+          <a href={link} target='_blank' rel='noreferrer'>
+            {t('associated-projects-initiatives.link')}
+          </a>
+          <i className='fa fa-external-link' aria-hidden='true' />
+        </p>
       </li>
     );
   }
