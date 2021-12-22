@@ -14,6 +14,8 @@ export const viewConstraints = {
 // Longitude / Latitude for center of map
 export const CENTER_COORDINATES = [-96, 36];
 
+export const CIG_PORTAL_ID = '5ae8e062721e4c7dac8a6bb021507fd0';
+
 // Id for the ArcGis Map Element
 export const VIEW_DIV = 'viewDiv';
 

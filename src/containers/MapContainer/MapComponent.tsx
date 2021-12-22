@@ -1,11 +1,10 @@
 import { useEffect, useRef } from 'react';
-import WebMap from '@arcgis/core/WebMap';
 import Graphic from '@arcgis/core/Graphic';
 import Home from '@arcgis/core/widgets/Home';
-import MapView from '@arcgis/core/views/MapView';
-
 import Map from '@arcgis/core/Map';
+import MapView from '@arcgis/core/views/MapView';
 import Query from '@arcgis/core/rest/support/Query';
+import WebMap from '@arcgis/core/WebMap';
 import { useHistory, useLocation } from 'react-router-dom';
 import {
   alaskaExtent,
@@ -15,22 +14,21 @@ import {
   CARIBBEAN_CENTER,
   CARIBBEAN_ZOOM,
   CENTER_COORDINATES,
+  CIG_PORTAL_ID,
   hawaiiExtent,
   HAWAII_CENTER,
   HAWAII_ZOOM,
   highlightSymbol,
   SMALL_STATES,
-  topoBaseMap,
   VIEW_DIV,
   viewConstraints,
 } from './constants';
 import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
 import { setSearch } from '../../Redux/Slice/practiceSlice';
-import { usaFeatureLayer0, usaFeatureLayer1 } from './layers';
+import { usaFeatureLayer1 } from './layers';
 import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 import { createMapView } from './mapUtils';
 import '@arcgis/core/assets/esri/themes/light/main.css';
-
 
 interface IMapProps {
   view: MapView;
@@ -39,7 +37,9 @@ interface IMapProps {
 
 const MapComponent = () => {
   const dispatch = useAppDispatch();
-  const stateCode = useAppSelector((state) => state.stateSlice?.stateCode);
+  const stateCode =
+    useAppSelector((state) => state.stateSlice?.stateCode) ||
+    DEFAULT_NATIONAL_LOCATION;
   const alaskaView = useRef({} as MapView);
   const caribbeanView = useRef({} as MapView);
   const hawaiiView = useRef({} as MapView);
@@ -48,8 +48,7 @@ const MapComponent = () => {
   const history: any = useHistory();
   const location: any = useLocation();
 
-  const usaFeatureToPointLayer = useRef(usaFeatureLayer0);
-  const usaStateLayer = useRef(usaFeatureLayer1);
+  const usaStateLayer: any = useRef(usaFeatureLayer1);
 
   const checkAndClearHighlightedGraphics = () => {
     if (alaskaView.current.graphics.length) {
@@ -67,7 +66,7 @@ const MapComponent = () => {
     if (mapRef && mapRef.current) {
       mapRef.current.map = new WebMap({
         portalItem: {
-          id: '5ae8e062721e4c7dac8a6bb021507fd0',
+          id: CIG_PORTAL_ID,
         },
       });
 
@@ -118,10 +117,6 @@ const MapComponent = () => {
       mapRef.current.view.ui.add('akViewDiv', 'bottom-left');
       mapRef.current.view.ui.add('hiViewDiv', 'bottom-left');
       mapRef.current.view.ui.add('cariViewDiv', 'bottom-left');
-
-      // Add Feature Layers
-      // mapRef.current.map.layers.add(usaFeatureToPointLayer.current);
-      mapRef.current.map.layers.add(usaStateLayer.current);
     }
   }, [mapRef]);
 
@@ -134,40 +129,65 @@ const MapComponent = () => {
           if (response.results.length) {
             const graphicList: any = response.results.filter((item: any) => {
               // check if the graphic belongs to the states layer
-              if (usaStateLayer.current) {
-                return item.graphic.layer === usaStateLayer.current;
+              if (item.graphic) {
+                return (
+                  item.graphic.layer?.id ===
+                  'Conservation_Innovation_Grant_4680'
+                );
               }
               return response.results;
             });
 
             if (graphicList.length) {
               const selectedState: Graphic = graphicList[0].graphic;
-              const updatedPathName = location.pathname.replace(
-                stateCode,
-                selectedState.attributes.STATEFP
-              );
+              const stateLayerQuery: Query =
+                usaStateLayer.current.createQuery();
+              stateLayerQuery.where = `OBJECTID = ${selectedState?.attributes.OBJECTID}`;
+              stateLayerQuery.outFields = [
+                'NAME',
+                'STUSPS',
+                'OBJECTID',
+                'STATEFP',
+              ];
+              usaStateLayer.current
+                .queryFeatures(stateLayerQuery)
+                .then((queryResults: any) => {
+                  const { features } = queryResults;
+                  if (features.length) {
+                    const foundState = features[0];
+                    const updatedPathName = location.pathname.replace(
+                      stateCode,
+                      foundState.attributes.STATEFP
+                    );
 
-              history.replace(updatedPathName);
+                    history.replace(updatedPathName);
 
-              const highlightedGraphic = new Graphic({
-                geometry: selectedState?.geometry,
-                symbol: highlightSymbol,
-              });
-              mapRef.current.view.graphics.add(highlightedGraphic);
-              // Refresh project lists
-              const searchInput = {
-                state_county_code: selectedState.attributes.STATEFP || null,
-              };
-              // Zoom to selected state
-              if (SMALL_STATES.includes(selectedState.attributes.STUSPS)) {
-                mapRef.current.view.goTo({ target: selectedState, zoom: 7 });
-              } else if (selectedState?.attributes.STUSPS === 'AK') {
-                mapRef.current.view.goTo({ target: selectedState, zoom: 4 });
-              } else {
-                mapRef.current.view.goTo({ target: selectedState, zoom: 6 });
-              }
-
-              dispatch(setSearch(searchInput));
+                    const highlightedGraphic: Graphic = new Graphic({
+                      geometry: selectedState?.geometry,
+                      symbol: highlightSymbol,
+                    });
+                    mapRef.current.view.graphics.add(highlightedGraphic);
+                    // Refresh project lists
+                    const searchInput = {
+                      state_county_code: foundState.attributes.STATEFP || null,
+                    };
+                    // Zoom to selected state
+                    if (SMALL_STATES.includes(foundState?.attributes.STUSPS)) {
+                      mapRef.current.view.extent = foundState?.geometry?.extent
+                        .clone()
+                        .expand(1.25);
+                    } else if (foundState?.attributes.STUSPS === 'AK') {
+                      mapRef.current.view.extent = foundState?.geometry?.extent
+                        .clone()
+                        .expand(2.65);
+                    } else {
+                      mapRef.current.view.extent = foundState?.geometry?.extent
+                        .clone()
+                        .expand(1.4);
+                    }
+                    dispatch(setSearch(searchInput));
+                  }
+                });
             }
           }
         });
@@ -198,11 +218,17 @@ const MapComponent = () => {
               mapRef.current.view.graphics.add(highlightedGraphic);
 
               if (SMALL_STATES.includes(foundGraphic?.attributes.STUSPS)) {
-                mapRef.current.view.goTo({ target: foundGraphic, zoom: 7 });
+                mapRef.current.view.extent = foundGraphic?.geometry?.extent
+                  .clone()
+                  .expand(1.25);
               } else if (foundGraphic?.attributes.STUSPS === 'AK') {
-                mapRef.current.view.goTo({ target: foundGraphic, zoom: 4 });
+                mapRef.current.view.extent = foundGraphic?.geometry?.extent
+                  .clone()
+                  .expand(2);
               } else {
-                mapRef.current.view.goTo({ target: foundGraphic, zoom: 6 });
+                mapRef.current.view.extent = foundGraphic?.geometry?.extent
+                  .clone()
+                  .expand(2);
               }
               dispatch(setSearch(searchInput));
             }
@@ -218,16 +244,41 @@ const MapComponent = () => {
         alaskaView.current.hitTest(event).then((response) => {
           checkAndClearHighlightedGraphics();
           if (response.results.length) {
-            const selectedState: Graphic = response.results[0]?.graphic;
-            const highlightedGraphic = new Graphic({
-              geometry: selectedState?.geometry,
-              symbol: highlightSymbol,
-            });
-            alaskaView.current.graphics.add(highlightedGraphic);
-            const searchInput = {
-              state_county_code: selectedState.attributes.STATEFP,
-            };
-            dispatch(setSearch(searchInput));
+            const graphicsList = response.results;
+
+            if (graphicsList.length) {
+              const selectedState: Graphic = graphicsList[0].graphic;
+
+              const objectId = selectedState.attributes.OBJECTID;
+              const stateLayerQuery: Query =
+                usaStateLayer.current.createQuery();
+              stateLayerQuery.where = `OBJECTID = '${objectId}'`;
+              stateLayerQuery.outFields = ['NAME', 'STUSPS', 'STATEFP'];
+              usaStateLayer.current
+                .queryFeatures(stateLayerQuery)
+                .then((queryResults: any) => {
+                  if (queryResults) {
+                    const { features } = queryResults;
+                    if (features.length) {
+                      const foundGraphic: Graphic = features[0];
+                      const updatedPathName = location.pathname.replace(
+                        stateCode,
+                        foundGraphic.attributes.STATEFP
+                      );
+                      history.replace(updatedPathName);
+                      const highlightedGraphic = new Graphic({
+                        geometry: foundGraphic?.geometry,
+                        symbol: highlightSymbol,
+                      });
+                      alaskaView.current.graphics.add(highlightedGraphic);
+                      const searchInput = {
+                        state_county_code: foundGraphic?.attributes.STATEFP,
+                      };
+                      dispatch(setSearch(searchInput));
+                    }
+                  }
+                });
+            }
           }
         });
       });
@@ -241,16 +292,41 @@ const MapComponent = () => {
         caribbeanView.current.hitTest(event).then((response) => {
           checkAndClearHighlightedGraphics();
           if (response.results.length) {
-            const selectedState: Graphic = response.results[0].graphic;
-            const highlightedGraphic = new Graphic({
-              geometry: selectedState?.geometry,
-              symbol: highlightSymbol,
-            });
-            caribbeanView.current.graphics.add(highlightedGraphic);
-            const searchInput = {
-              state_county_code: selectedState.attributes.STATEFP,
-            };
-            dispatch(setSearch(searchInput));
+            const graphicsList = response.results;
+
+            if (graphicsList.length) {
+              const selectedState: Graphic = graphicsList[0].graphic;
+
+              const objectId = selectedState.attributes.OBJECTID;
+              const stateLayerQuery: Query =
+                usaStateLayer.current.createQuery();
+              stateLayerQuery.where = `OBJECTID = '${objectId}'`;
+              stateLayerQuery.outFields = ['NAME', 'STUSPS', 'STATEFP'];
+              usaStateLayer.current
+                .queryFeatures(stateLayerQuery)
+                .then((queryResults: any) => {
+                  if (queryResults) {
+                    const { features } = queryResults;
+                    if (features.length) {
+                      const foundGraphic: Graphic = features[0];
+                      const updatedPathName = location.pathname.replace(
+                        stateCode,
+                        foundGraphic.attributes.STATEFP
+                      );
+                      history.replace(updatedPathName);
+                      const highlightedGraphic = new Graphic({
+                        geometry: foundGraphic?.geometry,
+                        symbol: highlightSymbol,
+                      });
+                      caribbeanView.current.graphics.add(highlightedGraphic);
+                      const searchInput = {
+                        state_county_code: foundGraphic?.attributes.STATEFP,
+                      };
+                      dispatch(setSearch(searchInput));
+                    }
+                  }
+                });
+            }
           }
         });
       });
@@ -264,16 +340,41 @@ const MapComponent = () => {
         hawaiiView.current.hitTest(event).then((response) => {
           checkAndClearHighlightedGraphics();
           if (response.results.length) {
-            const selectedState: Graphic = response.results[0].graphic;
-            const highlightedGraphic = new Graphic({
-              geometry: selectedState?.geometry,
-              symbol: highlightSymbol,
-            });
-            hawaiiView.current.graphics.add(highlightedGraphic);
-            const searchInput = {
-              state_county_code: selectedState.attributes.STATEFP,
-            };
-            dispatch(setSearch(searchInput));
+            const graphicsList = response.results;
+
+            if (graphicsList.length) {
+              const selectedState: Graphic = graphicsList[0].graphic;
+
+              const objectId = selectedState.attributes.OBJECTID;
+              const stateLayerQuery: Query =
+                usaStateLayer.current.createQuery();
+              stateLayerQuery.where = `OBJECTID = '${objectId}'`;
+              stateLayerQuery.outFields = ['NAME', 'STUSPS', 'STATEFP'];
+              usaStateLayer.current
+                .queryFeatures(stateLayerQuery)
+                .then((queryResults: any) => {
+                  if (queryResults) {
+                    const { features } = queryResults;
+                    if (features.length) {
+                      const foundGraphic: Graphic = features[0];
+                      const updatedPathName = location.pathname.replace(
+                        stateCode,
+                        foundGraphic.attributes.STATEFP
+                      );
+                      history.replace(updatedPathName);
+                      const highlightedGraphic = new Graphic({
+                        geometry: foundGraphic?.geometry,
+                        symbol: highlightSymbol,
+                      });
+                      hawaiiView.current.graphics.add(highlightedGraphic);
+                      const searchInput = {
+                        state_county_code: foundGraphic?.attributes.STATEFP,
+                      };
+                      dispatch(setSearch(searchInput));
+                    }
+                  }
+                });
+            }
           }
         });
       });
@@ -285,6 +386,11 @@ const MapComponent = () => {
     homeBtn.current.when(() => {
       homeBtn.current.on('go', () => {
         checkAndClearHighlightedGraphics();
+        const updatedPathName = location.pathname.replace(
+          stateCode,
+          DEFAULT_NATIONAL_LOCATION
+        );
+        history.replace(updatedPathName);
         // Refresh project list to U.S
         dispatch(
           setSearch({
