@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import Graphic from '@arcgis/core/Graphic';
 import Home from '@arcgis/core/widgets/Home';
-import Map from '@arcgis/core/Map';
 import MapView from '@arcgis/core/views/MapView';
 import Query from '@arcgis/core/rest/support/Query';
 import WebMap from '@arcgis/core/WebMap';
@@ -20,6 +19,7 @@ import {
   HAWAII_ZOOM,
   highlightSymbol,
   SMALL_STATES,
+  STATE_LAYER_ID,
   VIEW_DIV,
   viewConstraints,
 } from './constants';
@@ -32,7 +32,7 @@ import '@arcgis/core/assets/esri/themes/light/main.css';
 
 interface IMapProps {
   view: MapView;
-  map: Map;
+  map: WebMap;
 }
 
 const MapComponent = () => {
@@ -48,7 +48,7 @@ const MapComponent = () => {
   const history: any = useHistory();
   const location: any = useLocation();
 
-  const usaStateLayer: any = useRef(usaFeatureLayer1);
+  const usaStateLayer = useRef(usaFeatureLayer1);
 
   const checkAndClearHighlightedGraphics = () => {
     if (alaskaView.current.graphics.length) {
@@ -130,10 +130,7 @@ const MapComponent = () => {
             const graphicList: any = response.results.filter((item: any) => {
               // check if the graphic belongs to the states layer
               if (item.graphic) {
-                return (
-                  item.graphic.layer?.id ===
-                  'Conservation_Innovation_Grant_4680'
-                );
+                return item.graphic.layer?.id === STATE_LAYER_ID;
               }
               return response.results;
             });
@@ -197,7 +194,7 @@ const MapComponent = () => {
 
   // Pre-select the state given the stateCode
   useEffect(() => {
-    usaStateLayer.current.when(() => {
+    mapRef.current.map.when(() => {
       if (stateCode && stateCode !== DEFAULT_NATIONAL_LOCATION) {
         const stateLayerQuery: Query = usaStateLayer.current.createQuery();
         stateLayerQuery.where = `STATEFP = '${stateCode}'`;
@@ -210,6 +207,8 @@ const MapComponent = () => {
               const searchInput = {
                 state_county_code: stateCode || null,
               };
+              dispatch(setSearch(searchInput));
+
               const foundGraphic: Graphic = features[0];
               const highlightedGraphic = new Graphic({
                 geometry: foundGraphic?.geometry,
@@ -224,13 +223,12 @@ const MapComponent = () => {
               } else if (foundGraphic?.attributes.STUSPS === 'AK') {
                 mapRef.current.view.extent = foundGraphic?.geometry?.extent
                   .clone()
-                  .expand(2);
+                  .expand(2.65);
               } else {
                 mapRef.current.view.extent = foundGraphic?.geometry?.extent
                   .clone()
-                  .expand(2);
+                  .expand(1.4);
               }
-              dispatch(setSearch(searchInput));
             }
           });
       }

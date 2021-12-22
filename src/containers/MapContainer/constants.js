@@ -69,3 +69,5 @@ export const HAWAII_ZOOM = 5;
 
 // List of states that should zoom in further
 export const SMALL_STATES = ['CT', 'DE', 'NH', 'NJ', 'MD', 'RI', 'VT'];
+
+export const STATE_LAYER_ID = 'Conservation_Innovation_Grant_4680';
