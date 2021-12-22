@@ -44,7 +44,10 @@ const ImplementationExtent = ({
         <hr />
         <div className='graph-container'>
           <div className='obligation-graph'>
-            <DummyTableauImage />
+            <TableauReport pageName='EQUIPOpenData' practiceCode={data.practiceCode}/>
+          </div>
+          <div className='obligation-graph'>
+            <TableauReport pageName='SecondEQUIPOpenData' practiceCode={data.practiceCode}/>
           </div>
         </div>
       </div>

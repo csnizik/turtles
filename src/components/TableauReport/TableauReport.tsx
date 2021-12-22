@@ -23,11 +23,17 @@ interface ITableauGraphProps {
 }
 
 const TableauReport = ({ pageName, practiceCode }: ITableauReportProps) => {
+  var viz;
   const stateAbbrInRedux = useAppSelector(
-    (state) => state?.stateSlice?.stateAbbreviation
+    (state: any) => state?.stateSlice?.stateAbbreviation
   );
-
-  // let viz: any;
+  let stateName
+  stateName = useAppSelector(
+    (state: any) => state?.stateSlice?.stateNameDisplay
+  );
+  if (stateName === 'U.S.'){
+    stateName = 'National'
+  }
   const ref = useRef(null);
   const stateAbbr =
     stateAbbrInRedux === 'U.S.' || stateAbbrInRedux === undefined
@@ -35,7 +41,6 @@ const TableauReport = ({ pageName, practiceCode }: ITableauReportProps) => {
       : stateAbbrInRedux;
   const [tableauLink, setTableauLink] = useState('');
   const [graph, setGraph] = useState<ITableauGraphProps>();
-  console.log('tableau-->', tableau);
 
   const initViz = (usdaUrl: any) => {
     const options = {
@@ -45,21 +50,20 @@ const TableauReport = ({ pageName, practiceCode }: ITableauReportProps) => {
       // 'State Name with Total': 'Maryland',
     };
     // eslint-disable-next-line no-new
-    const viz = new tableau.Viz(ref.current, usdaUrl, options);
+    viz = new tableau.Viz(ref.current, usdaUrl, options);
   };
-
-  useEffect(() => {
-    const tLink =
-      // 'https://publicdashboards.dl.usda.gov/t/FPAC_PUB/views/EQIPTopPracticesTest/TopPractices';
-      'https://publicdashboards.dl.usda.gov/t/FPAC_PUB/views/EQIPTopPracticesTest/TopPractices?:size=1,1&:embed=y&:showVizHome=n&:bootstrapWhenNotified=y&:toolbar=n&:device=desktop&Top%20Practice%20Rank=1%2C2%2C3%2C4%2C5%2C6&State%20Name%20with%20Total=Maryland&:apiID=host1';
-    initViz(tLink);
-  }, []);
 
   const getOption = () => {
     if (pageName === 'Conservation Practice')
       setGraph(tableauGraph.RegionalConservationPractice);
     else if (pageName === 'Practice Detail')
       setGraph(tableauGraph.PracticeDetail);
+    else if (pageName === 'TopPracticesEQUIPOpenData')
+      setGraph(tableauGraph.TopPracticesEQUIPOpenData);
+    else if (pageName === 'EQUIPOpenData')
+      setGraph(tableauGraph.EQUIPOpenData);
+    else if (pageName === 'SecondEQUIPOpenData')
+      setGraph(tableauGraph.SecondEQUIPOpenData);
     else setGraph(tableauGraph.ConservationPracticeCategory);
   };
 
@@ -80,7 +84,15 @@ const TableauReport = ({ pageName, practiceCode }: ITableauReportProps) => {
         break;
       }
       case 3: {
-        setTableauLink(`${graph?.link}=${stateAbbr}`);
+        setTableauLink(`${graph?.link}=${stateName}&:tabs=no`);
+        break;
+      }
+      case 4: {
+        setTableauLink(`${graph?.link}=${stateName}&:tabs=no`);
+        break;
+      }
+      case 5: {
+        setTableauLink(`${graph?.link}=${stateName}&:tabs=no`);
         break;
       }
       default: {
@@ -91,11 +103,19 @@ const TableauReport = ({ pageName, practiceCode }: ITableauReportProps) => {
 
   useEffect(() => {
     getOption();
-  }, []);
+    console.log('viz', viz)
+    if(tableauLink) {
+    initViz(tableauLink)
+    console.log('Newviz', viz)
+    }
+    // if(viz) {
+    //   viz.dispose()
+    // }
+  }, [tableauLink]);
 
   useEffect(() => {
     processGraph(graph?.id);
-  }, [graph]);
+  }, [graph, stateAbbr]);
 
   return (
     <div className='tableau-report-container'>
