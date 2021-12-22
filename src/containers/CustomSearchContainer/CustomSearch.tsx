@@ -61,6 +61,12 @@ const CustomSearch = () => {
     useState<any>(initialResourceState);
   const [secondState, setSecondState] = useState<any>(intialPracticeState);
   const [checkedState, setCheckedState] = useState<any>(initialLandUse);
+  const [selectedSubPractice, setSelectedSubPractice] = useState<any>({
+    id: -1,
+  });
+  const [selectedResourceConcern, setSelectedResourceConcern] = useState<any>({
+    id: -1,
+  });
 
   const landUseState = useAppSelector(
     (state) => state?.practiceSlice?.landUseSet
@@ -81,28 +87,29 @@ const CustomSearch = () => {
   }, []);
 
   const handleClearPracticeAndConcerns = () => {
-    if (selectedPractice?.id || selectedResourceCategory) {
-      setSelectedPractice({ id: -1 });
-      setSelectedResourceCategory({ id: -1 });
-      setSearchInput((prevState) => ({
-        ...prevState,
-        resource_concern_category_id: null,
-        resource_concern_id: null,
-        practice_category_id: null,
-        practice_id: null,
-      }));
-      setSearchedInfo((prevState) => ({
-        ...prevState,
-        resource_concern_category: null,
-        resource_concern: null,
-        practice_category: null,
-        practice: null,
-      }));
-    }
+    setSelectedPractice({ id: -1 });
+    setSelectedResourceCategory({ id: -1 });
+    setSelectedSubPractice({ id: -1 });
+    setSelectedResourceConcern({ id: -1 });
+    setSearchInput((prevState) => ({
+      ...prevState,
+      resource_concern_category_id: null,
+      resource_concern_id: null,
+      practice_category_id: null,
+      practice_id: null,
+    }));
+    setSearchedInfo((prevState) => ({
+      ...prevState,
+      resource_concern_category: null,
+      resource_concern: null,
+      practice_category: null,
+      practice: null,
+    }));
+
     dispatch(enableResourceDropdown());
     dispatch(enablePracticeDropdown());
-    setResourceConcernsSubgroups({ ...initialResourceState, disabled: true });
-    setSecondState({ ...intialPracticeState, disabled: true });
+    setResourceConcernsSubgroups({ ...initialResourceState });
+    setSecondState({ ...intialPracticeState });
   };
 
   const handleEvent = () => {
@@ -132,7 +139,6 @@ const CustomSearch = () => {
     }
     return styles;
   };
-
   return (
     <div data-testid='custom-search-container' className='custom-search'>
       <div className='custom-search-header'>
@@ -173,6 +179,8 @@ const CustomSearch = () => {
             setSearchInput={setSearchInput}
             setSearchInfo={setSearchedInfo}
             resourceId={searchInput.resource_concern_id}
+            selectedSubPractice={selectedSubPractice}
+            setSelectedSubPractice={setSelectedSubPractice}
           />
           <SearchByResourceConcern
             resourceConcernsSubgroups={resourceConcernsSubgroups}
@@ -183,6 +191,8 @@ const CustomSearch = () => {
             setSearchInput={setSearchInput}
             setSearchInfo={setSearchedInfo}
             practiceId={searchInput.practice_id}
+            selectedResourceConcern={selectedResourceConcern}
+            setSelectedResourceConcern={setSelectedResourceConcern}
           />
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import CustomButton from '../CustomButton';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
@@ -9,7 +9,6 @@ import './find-by-practice.scss';
 import {
   useGetPracticeCategoryQuery,
   useGetPracticeQuery,
-  usePostSearchDataQuery,
 } from '../../Redux/services/api';
 import {
   setPracticeCategory,
@@ -53,7 +52,10 @@ const FindByPractices = () => {
   };
   const findP = (id: number) => {
     axios
-      .post(`${baseURL}practiceSearch`, { practice_id: id })
+      .post(`${baseURL}practiceSearch`, {
+        practice_id: id,
+        state_county_code: '00000',
+      })
       .then((response) =>
         setSelectedPractice(response?.data?.[0]?.practiceCategoryId)
       );

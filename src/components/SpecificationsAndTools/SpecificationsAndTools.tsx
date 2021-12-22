@@ -144,7 +144,7 @@ const SpecificationsAndTools = ({
                 <div className='grid-col-6'>
                   <li>
                     <Link
-                      to={`/${selectedStateCode}/${name}/#/${practice.practiceId}`}
+                      to={`/${selectedStateCode}/${name}/${practice.practiceCategoryId}/${practice.practiceId}`}
                       target='_blank'
                       aria-label={`${practice.practiceName} link opens a new tab`}
                     >

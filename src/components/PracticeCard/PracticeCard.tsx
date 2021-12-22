@@ -1,6 +1,6 @@
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
+import { useAppDispatch } from '../../Redux/hooks/hooks';
 import { usePostSearchDataQuery } from '../../Redux/services/api';
 import './practice-card.scss';
 import Spinner from '../Spinner/Spinner';
@@ -12,17 +12,12 @@ import {
 const PracticeCardDetails = ({ setPracticeViewType }: any) => {
   const initialState = {
     practice_category_id: 0,
+    state_county_code: '',
   };
 
   const dispatch = useAppDispatch();
 
-  const selectedPracticeCategoryId = useAppSelector(
-    (state) => state.practiceSlice.selectedPracticeCategory
-  );
-
-  const location: any = useLocation();
-
-  const sharedState = location?.state?.detail;
+  const { stateCode, category: selectedPracticeCategoryId }: any = useParams();
 
   const [praticestate, setPracticestate] = useState(initialState);
 
@@ -41,16 +36,20 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
   };
 
   useEffect(() => {
-    setPracticestate({ practice_category_id: sharedState });
+    setPracticestate({
+      practice_category_id: selectedPracticeCategoryId,
+      state_county_code: `${stateCode}000`,
+    });
   }, []);
 
   useEffect(() => {
-    setPracticestate({ practice_category_id: selectedPracticeCategoryId });
+    setPracticestate({
+      practice_category_id: selectedPracticeCategoryId,
+      state_county_code: `${stateCode}000`,
+    });
   }, [selectedPracticeCategoryId]);
-
   const { data, error, isLoading, isSuccess, isError } =
     usePostSearchDataQuery(praticestate);
-
   const practiceCategory: any = data && data[0];
 
   return (

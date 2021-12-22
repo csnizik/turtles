@@ -143,6 +143,7 @@ export interface IAssociatedPracticeList {
   practiceCode: string;
   practiceName: string;
   practiceDescription: string;
+  practiceCategoryId: number;
 }
 
 export interface IProjectType {
