@@ -1,7 +1,9 @@
 import { useEffect, useRef } from 'react';
+import WebMap from '@arcgis/core/WebMap';
 import Graphic from '@arcgis/core/Graphic';
 import Home from '@arcgis/core/widgets/Home';
 import MapView from '@arcgis/core/views/MapView';
+
 import Map from '@arcgis/core/Map';
 import Query from '@arcgis/core/rest/support/Query';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -28,6 +30,7 @@ import { usaFeatureLayer0, usaFeatureLayer1 } from './layers';
 import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 import { createMapView } from './mapUtils';
 import '@arcgis/core/assets/esri/themes/light/main.css';
+
 
 interface IMapProps {
   view: MapView;
@@ -62,8 +65,10 @@ const MapComponent = () => {
 
   useEffect(() => {
     if (mapRef && mapRef.current) {
-      mapRef.current.map = new Map({
-        basemap: topoBaseMap,
+      mapRef.current.map = new WebMap({
+        portalItem: {
+          id: '5ae8e062721e4c7dac8a6bb021507fd0',
+        },
       });
 
       const view: MapView = new MapView({
@@ -115,7 +120,7 @@ const MapComponent = () => {
       mapRef.current.view.ui.add('cariViewDiv', 'bottom-left');
 
       // Add Feature Layers
-      mapRef.current.map.layers.add(usaFeatureToPointLayer.current);
+      // mapRef.current.map.layers.add(usaFeatureToPointLayer.current);
       mapRef.current.map.layers.add(usaStateLayer.current);
     }
   }, [mapRef]);
