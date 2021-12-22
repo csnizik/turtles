@@ -3,9 +3,13 @@ import { useAppSelector } from '../../Redux/hooks/hooks';
 import { tableauGraph } from '../../common/typedconstants.common';
 import './tableau-report.scss';
 
-declare global {interface Window {tableau: any}}
+declare global {
+  interface Window {
+    tableau: any;
+  }
+}
 
-const {tableau} = window;
+const { tableau } = window;
 
 interface ITableauReportProps {
   pageName: string;
@@ -18,41 +22,46 @@ interface ITableauGraphProps {
   link: string;
 }
 
-const TableauReport = ({
-  pageName,
-  practiceCode
-}: ITableauReportProps) => {
+const TableauReport = ({ pageName, practiceCode }: ITableauReportProps) => {
   const stateAbbrInRedux = useAppSelector(
     (state) => state?.stateSlice?.stateAbbreviation
   );
 
   // let viz: any;
-  const ref = useRef(null)
-  const stateAbbr = (stateAbbrInRedux === 'U.S.' || stateAbbrInRedux=== undefined) ? '' : stateAbbrInRedux;
+  const ref = useRef(null);
+  const stateAbbr =
+    stateAbbrInRedux === 'U.S.' || stateAbbrInRedux === undefined
+      ? ''
+      : stateAbbrInRedux;
   const [tableauLink, setTableauLink] = useState('');
   const [graph, setGraph] = useState<ITableauGraphProps>();
-  console.log('tableau-->', tableau)
+  console.log('tableau-->', tableau);
 
   const initViz = (usdaUrl: any) => {
     const options = {
-        device: "desktop",
-        // hideToolbar: true,
-        // "Top Practice Rank": [1, 2, 3, 4, 5],
-        // "State Name with Total": sState,
-    }
-        // eslint-disable-next-line no-new
-        const viz =  new tableau.Viz(ref.current, usdaUrl, options);
-    }
+      device: 'desktop',
+      // hideToolbar: true,
+      // 'Top Practice Rank': [1, 2, 3, 4, 5, 6],
+      // 'State Name with Total': 'Maryland',
+    };
+    // eslint-disable-next-line no-new
+    const viz = new tableau.Viz(ref.current, usdaUrl, options);
+  };
 
-  useEffect (() => {
-    initViz(tableauLink)
-  }, [])
+  useEffect(() => {
+    const tLink =
+      // 'https://publicdashboards.dl.usda.gov/t/FPAC_PUB/views/EQIPTopPracticesTest/TopPractices';
+      'https://publicdashboards.dl.usda.gov/t/FPAC_PUB/views/EQIPTopPracticesTest/TopPractices?:size=1,1&:embed=y&:showVizHome=n&:bootstrapWhenNotified=y&:toolbar=n&:device=desktop&Top%20Practice%20Rank=1%2C2%2C3%2C4%2C5%2C6&State%20Name%20with%20Total=Maryland&:apiID=host1';
+    initViz(tLink);
+  }, []);
 
   const getOption = () => {
-    if (pageName === 'Conservation Practice') setGraph(tableauGraph.RegionalConservationPractice);
-    else if(pageName === 'Practice Detail') setGraph(tableauGraph.PracticeDetail);
+    if (pageName === 'Conservation Practice')
+      setGraph(tableauGraph.RegionalConservationPractice);
+    else if (pageName === 'Practice Detail')
+      setGraph(tableauGraph.PracticeDetail);
     else setGraph(tableauGraph.ConservationPracticeCategory);
-  }
+  };
 
   const processGraph = (id) => {
     switch (id) {
@@ -65,14 +74,20 @@ const TableauReport = ({
         break;
       }
       case 2: {
-        setTableauLink(`${graph?.link}=${stateAbbr}&Practice Code=${practiceCode}`)
+        setTableauLink(
+          `${graph?.link}=${stateAbbr}&Practice Code=${practiceCode}`
+        );
+        break;
+      }
+      case 3: {
+        setTableauLink(`${graph?.link}=${stateAbbr}`);
         break;
       }
       default: {
         break;
       }
     }
-  }
+  };
 
   useEffect(() => {
     getOption();
@@ -90,14 +105,14 @@ const TableauReport = ({
         className='tableau-graph'
       /> */}
       <div>
-        <div ref={ref}/>
+        <div ref={ref} />
       </div>
     </div>
   );
-}
+};
 
 export default TableauReport;
 
 TableauReport.defaultProps = {
-  practiceCode: 100
-}
+  practiceCode: 100,
+};
