@@ -1,9 +1,12 @@
 import { useEffect, useRef } from 'react';
+import WebMap from '@arcgis/core/WebMap';
 import Graphic from '@arcgis/core/Graphic';
 import Home from '@arcgis/core/widgets/Home';
 import MapView from '@arcgis/core/views/MapView';
+
 import Map from '@arcgis/core/Map';
 import Query from '@arcgis/core/rest/support/Query';
+import { useHistory, useLocation } from 'react-router-dom';
 import {
   alaskaExtent,
   ALASKA_CENTER,
@@ -28,6 +31,7 @@ import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 import { createMapView } from './mapUtils';
 import '@arcgis/core/assets/esri/themes/light/main.css';
 
+
 interface IMapProps {
   view: MapView;
   map: Map;
@@ -41,6 +45,8 @@ const MapComponent = () => {
   const hawaiiView = useRef({} as MapView);
   const mapRef = useRef({} as IMapProps);
   const homeBtn = useRef({} as Home);
+  const history: any = useHistory();
+  const location: any = useLocation();
 
   const usaFeatureToPointLayer = useRef(usaFeatureLayer0);
   const usaStateLayer = useRef(usaFeatureLayer1);
@@ -59,8 +65,10 @@ const MapComponent = () => {
 
   useEffect(() => {
     if (mapRef && mapRef.current) {
-      mapRef.current.map = new Map({
-        basemap: topoBaseMap,
+      mapRef.current.map = new WebMap({
+        portalItem: {
+          id: '5ae8e062721e4c7dac8a6bb021507fd0',
+        },
       });
 
       const view: MapView = new MapView({
@@ -112,7 +120,7 @@ const MapComponent = () => {
       mapRef.current.view.ui.add('cariViewDiv', 'bottom-left');
 
       // Add Feature Layers
-      mapRef.current.map.layers.add(usaFeatureToPointLayer.current);
+      // mapRef.current.map.layers.add(usaFeatureToPointLayer.current);
       mapRef.current.map.layers.add(usaStateLayer.current);
     }
   }, [mapRef]);
@@ -134,6 +142,13 @@ const MapComponent = () => {
 
             if (graphicList.length) {
               const selectedState: Graphic = graphicList[0].graphic;
+              const updatedPathName = location.pathname.replace(
+                stateCode,
+                selectedState.attributes.STATEFP
+              );
+
+              history.replace(updatedPathName);
+
               const highlightedGraphic = new Graphic({
                 geometry: selectedState?.geometry,
                 symbol: highlightSymbol,
