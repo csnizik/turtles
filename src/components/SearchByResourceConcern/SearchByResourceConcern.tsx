@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 import { initialResourceState } from '../../common/typedconstants.common';
 import {
+  disablePracticeDropdown,
   disableResourceDropdown,
   enableResourceDropdown,
 } from '../../Redux/Slice/disableSlice';
@@ -21,6 +22,8 @@ const SearchByResourceConcern = ({
   setSelectedResourceCategory,
   selectedPractice,
   practiceId,
+  selectedResourceConcern,
+  setSelectedResourceConcern,
 }: any) => {
   const resourceCategory = useGetResourcesQuery(); //!Resource Category api
   const resourceConcern = useGetResourceConcernQuery(selectedResourceCategory); //! Resource Concern
@@ -28,9 +31,6 @@ const SearchByResourceConcern = ({
   const dispatchRequest = useAppDispatch();
   const status = useAppSelector((state) => state.disableSlice.disablePractice);
   const { t } = useTranslation();
-  const [selectedResourceConcern, setSelectedResourceConcern] = useState<any>({
-    id: -1,
-  });
 
   const wrapperClassNames = classNames('resource-box-wrapper', {
     'practice-selected': selectedPractice >= 0 || practiceId > 0,
@@ -45,6 +45,15 @@ const SearchByResourceConcern = ({
     (State) => State?.practiceSlice?.searchInfo
   );
 
+  useEffect(() => {
+    if (selectedPractice || practiceId) {
+      dispatchRequest(disablePracticeDropdown());
+      setResourceConcernsSubgroups({
+        resources: [],
+        disabled: true,
+      });
+    }
+  }, []);
   useEffect(() => {
     const findResourceCategoryName = resourceCategory?.data?.find((concern) => {
       const name = +selectedResourceCategory === concern.resourceConcernId;
