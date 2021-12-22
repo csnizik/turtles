@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import Home from '@arcgis/core/widgets/Home';
 import MapView from '@arcgis/core/views/MapView';
 import WebMap from '@arcgis/core/WebMap';
@@ -9,7 +10,7 @@ import Layer from '@arcgis/core/layers/Layer';
 import Graphic from '@arcgis/core/Graphic';
 import Query from '@arcgis/core/rest/support/Query';
 import { currentState } from '../../Redux/Slice/stateSlice';
-import { useAppDispatch } from '../../Redux/hooks/hooks';
+import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
 import '@arcgis/core/assets/esri/themes/light/main.css';
 import {
   LANDSCAPE_VIEW_DIV,
@@ -56,6 +57,11 @@ const LandscapeInitiativeMap = ({
   const previousValues: any = usePrevious({
     selectedLandscapeInitiative,
   });
+  const stateCode =
+    useAppSelector((state) => state.stateSlice?.stateCode) ||
+    DEFAULT_NATIONAL_LOCATION;
+  const history: any = useHistory();
+  const location: any = useLocation();
   const homeBtn = useRef({} as Home);
 
   useEffect(() => {
@@ -109,6 +115,14 @@ const LandscapeInitiativeMap = ({
     homeBtn.current.when(() => {
       homeBtn.current.on('go', () => {
         mapRef.current.view.graphics.removeAll();
+
+        const updatedPathName = location.pathname.replace(
+          stateCode,
+          DEFAULT_NATIONAL_LOCATION
+        );
+
+        history.replace(updatedPathName);
+
         // Refresh project list to U.S
         dispatch(
           currentState({
@@ -308,6 +322,13 @@ const LandscapeInitiativeMap = ({
                 symbol: highlightSymbol,
               });
               mapRef.current.view.graphics.add(highlightedGraphic);
+
+              const updatedPathName = location.pathname.replace(
+                stateCode,
+                attributes.STATEFP
+              );
+
+              history.replace(updatedPathName);
 
               // Set stateCode to the one selected on map
               dispatch(

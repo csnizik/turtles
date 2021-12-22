@@ -14,6 +14,8 @@ export const viewConstraints = {
 // Longitude / Latitude for center of map
 export const CENTER_COORDINATES = [-96, 36];
 
+export const CIG_PORTAL_ID = '5ae8e062721e4c7dac8a6bb021507fd0';
+
 // Id for the ArcGis Map Element
 export const VIEW_DIV = 'viewDiv';
 
@@ -67,3 +69,5 @@ export const HAWAII_ZOOM = 5;
 
 // List of states that should zoom in further
 export const SMALL_STATES = ['CT', 'DE', 'NH', 'NJ', 'MD', 'RI', 'VT'];
+
+export const STATE_LAYER_ID = 'Conservation_Innovation_Grant_4680';
