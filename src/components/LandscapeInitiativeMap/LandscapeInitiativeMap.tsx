@@ -85,6 +85,7 @@ const LandscapeInitiativeMap = ({
           ? 4
           : 3,
       });
+      view.navigation.momentumEnabled = false;
 
       homeBtn.current = new Home({
         view,
