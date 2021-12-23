@@ -124,6 +124,8 @@ const LandscapeInitiativeMap = ({
 
         history.replace(updatedPathName);
 
+        // Reset map extent to map's default center
+        mapRef.current.view.extent = mapRef.current.view.center.extent;
         // Refresh project list to U.S
         dispatch(
           currentState({
