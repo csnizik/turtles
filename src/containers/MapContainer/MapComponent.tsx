@@ -77,6 +77,7 @@ const MapComponent = () => {
         map: mapRef.current.map,
         zoom: 4,
       });
+      view.navigation.momentumEnabled = false;
 
       // Alaska composite view
       alaskaView.current = createMapView(
