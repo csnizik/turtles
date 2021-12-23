@@ -24,7 +24,10 @@ interface ITableauGraphProps {
 }
 
 let viz;
-const TableauReport = ({ pageName, practiceCode }: ITableauReportProps) => {
+const TableauReportThree = ({
+  pageName,
+  practiceCode,
+}: ITableauReportProps) => {
   const stateAbbrInRedux = useAppSelector(
     (state: any) => state?.stateSlice?.stateAbbreviation
   );
@@ -132,8 +135,8 @@ const TableauReport = ({ pageName, practiceCode }: ITableauReportProps) => {
   );
 };
 
-export default TableauReport;
+export default TableauReportThree;
 
-TableauReport.defaultProps = {
+TableauReportThree.defaultProps = {
   practiceCode: 100,
 };

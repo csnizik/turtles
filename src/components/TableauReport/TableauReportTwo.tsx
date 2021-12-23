@@ -24,7 +24,7 @@ interface ITableauGraphProps {
 }
 
 let viz;
-const TableauReport = ({ pageName, practiceCode }: ITableauReportProps) => {
+const TableauReportTwo = ({ pageName, practiceCode }: ITableauReportProps) => {
   const stateAbbrInRedux = useAppSelector(
     (state: any) => state?.stateSlice?.stateAbbreviation
   );
@@ -132,8 +132,8 @@ const TableauReport = ({ pageName, practiceCode }: ITableauReportProps) => {
   );
 };
 
-export default TableauReport;
+export default TableauReportTwo;
 
-TableauReport.defaultProps = {
+TableauReportTwo.defaultProps = {
   practiceCode: 100,
 };

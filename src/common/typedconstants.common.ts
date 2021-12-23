@@ -109,26 +109,3 @@ export const tableauGraph = {
     link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/top_practices_by_obligated?state_filter',
   },
 };
-
-// EQUIP Links
-
-// Practice Detail page:
-
-// https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/practice_certification_trend?state_filter=Colorado&:tabs=no
-
-// https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/practice_obligation_trend?state_filter=Virginia&:tabs=no
-
-// Category Page:
-// https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/top_practices_by_obligated?state_filter=Virginia&:tabs=no
-
-// RCA Links
-
-// Practice Category Page (First):
-// https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticeListbyAcres/Dashboard1?Stabbr=CO
-
-// Practice Page (Second):
-// https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticesbyYearforStateandMeasure/Dashboard1?Stabbr=CO
-// https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticesbyYearforStateandMeasure/Dashboard1?Stabbr=CO&Measure=Cropland%20Soil%20Quality
-
-// Practice Details Page(last):
-// https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticebyProgramOverYears/Dashboard1?Stabbr=CO&Practice%20Code=340

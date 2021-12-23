@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   useGetStateListQuery,
@@ -49,7 +49,6 @@ const ConservationPracticeContainer = ({
   );
   const stateStatus: any = useGetStateListQuery();
   const dispatch = useAppDispatch();
-  const location: any = useLocation();
   const { stateCode }: any = useParams();
   const selectedStateCode = stateInfo?.stateCode;
 
