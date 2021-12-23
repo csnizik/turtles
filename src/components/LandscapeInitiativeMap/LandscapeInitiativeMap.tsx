@@ -10,6 +10,7 @@ import Layer from '@arcgis/core/layers/Layer';
 import Graphic from '@arcgis/core/Graphic';
 import Query from '@arcgis/core/rest/support/Query';
 import { currentState } from '../../Redux/Slice/stateSlice';
+import { setSearch } from '../../Redux/Slice/practiceSlice';
 import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
 import '@arcgis/core/assets/esri/themes/light/main.css';
 import {
@@ -125,7 +126,11 @@ const LandscapeInitiativeMap = ({
         history.replace(updatedPathName);
 
         // Reset map extent to map's default center
-        mapRef.current.view.extent = mapRef.current.view.center.extent;
+        dispatch(
+          setSearch({
+            state_county_code: null,
+          })
+        );
         // Refresh project list to U.S
         dispatch(
           currentState({
