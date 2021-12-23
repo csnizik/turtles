@@ -8,10 +8,7 @@ import MapContainer from '../MapContainer';
 import ProjectListGroup from '../../components/ProjectListGroup';
 import ProjectTypeSection from '../../components/ProjectTypeSection';
 import { setSearch } from '../../Redux/Slice/practiceSlice';
-import {
-  useGetStateListQuery,
-  usePostLandscapeInitiativesQuery,
-} from '../../Redux/services/api';
+import { usePostLandscapeInitiativesQuery } from '../../Redux/services/api';
 import './project-container.scss';
 import { projectCards, projectListGroups, projectPurposes } from './constants';
 import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
@@ -40,10 +37,25 @@ const ProjectsContainer = () => {
   const [selectedLandscapeInitiative, setSelectedLandscapeInitiative] =
     useState(-1);
   const [selectedLocation, setSelectedLocation] = useState('');
-  const stateStatus: any = useGetStateListQuery();
   const stateCode = useAppSelector((state) => state?.stateSlice?.stateCode);
   const searchInput = { state_county_code: selectedLocation || null };
   let searchLandscapeInitiatives = { state_county_code: stateCode || null };
+  if (stateCode !== DEFAULT_NATIONAL_LOCATION) {
+    searchLandscapeInitiatives = {
+      ...searchInput,
+      state_county_code: stateCode,
+    };
+  } else {
+    searchLandscapeInitiatives = {
+      ...searchInput,
+      state_county_code: null,
+    };
+  }
+
+  const landscapeInitiativesData = usePostLandscapeInitiativesQuery(
+    searchLandscapeInitiatives
+  );
+  const selectedState: any = { stateCode: '', stateNameDisplay: '' };
 
   useEffect(() => {
     setSelectedLocation(stateC);
@@ -60,39 +72,20 @@ const ProjectsContainer = () => {
     }
   }, [category, individual, stateC]);
 
-  if (stateCode !== DEFAULT_NATIONAL_LOCATION) {
-    searchLandscapeInitiatives = {
-      ...searchInput,
-      state_county_code: stateCode,
-    };
-  } else {
-    searchLandscapeInitiatives = {
-      ...searchInput,
-      state_county_code: null,
-    };
-  }
-  const landscapeInitiativesData = usePostLandscapeInitiativesQuery(
-    searchLandscapeInitiatives
-  );
-  const selectedState =
-    selectedLocation &&
-    stateStatus.isSuccess &&
-    stateStatus.data &&
-    stateStatus.data.find((state: any) => {
-      return state.stateCode === selectedLocation;
-    });
-  const selectedStateName = selectedState?.stateNameDisplay;
-  let searchInputData;
-  if (selectedState) {
-    searchInputData = {
-      state_county_code: selectedState?.stateCode,
-    };
-  } else {
-    searchInputData = {
-      state_county_code: DEFAULT_NATIONAL_LOCATION,
-    };
-  }
-  dispatch(setSearch(searchInputData));
+  useEffect(() => {
+    let searchInputData;
+    if (stateCode !== DEFAULT_NATIONAL_LOCATION || !stateCode) {
+      searchInputData = {
+        state_county_code: selectedState?.stateCode,
+      };
+    } else {
+      searchInputData = {
+        state_county_code: DEFAULT_NATIONAL_LOCATION,
+      };
+    }
+    dispatch(setSearch(searchInputData));
+  }, []);
+
   const handleSelectLandscapeInitiative = (id: number) => {
     setSelectedLandscapeInitiative(id);
     history.push(
@@ -204,10 +197,7 @@ const ProjectsContainer = () => {
               <MapContainer setSelectedLocation={setSelectedLocation} />
             </div>
 
-            <ProjectListGroup
-              isMapDisplayed
-              selectedStateName={selectedStateName}
-            />
+            <ProjectListGroup isMapDisplayed />
           </>
         ) : null}
       </div>
