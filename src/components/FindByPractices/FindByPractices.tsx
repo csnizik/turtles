@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import CustomButton from '../CustomButton';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
