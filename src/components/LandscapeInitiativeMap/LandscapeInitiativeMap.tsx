@@ -6,6 +6,7 @@ import WebMap from '@arcgis/core/WebMap';
 import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
 import Legend from '@arcgis/core/widgets/Legend';
 import Expand from '@arcgis/core/widgets/Expand';
+import Extent from '@arcgis/core/geometry/Extent';
 import Layer from '@arcgis/core/layers/Layer';
 import Graphic from '@arcgis/core/Graphic';
 import Query from '@arcgis/core/rest/support/Query';
@@ -85,6 +86,7 @@ const LandscapeInitiativeMap = ({
           ? 4
           : 3,
       });
+
       view.navigation.momentumEnabled = false;
 
       homeBtn.current = new Home({
@@ -124,6 +126,11 @@ const LandscapeInitiativeMap = ({
 
         history.replace(updatedPathName);
 
+        const defaultExtent: any = new Extent();
+        defaultExtent.centerAt([-96, 36]);
+
+        // Reset map extent to map's default center
+        mapRef.current.view.extent = defaultExtent;
         // Refresh project list to U.S
         dispatch(
           currentState({
