@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import Home from '@arcgis/core/widgets/Home';
 import MapView from '@arcgis/core/views/MapView';
 import WebMap from '@arcgis/core/WebMap';
@@ -9,7 +10,8 @@ import Layer from '@arcgis/core/layers/Layer';
 import Graphic from '@arcgis/core/Graphic';
 import Query from '@arcgis/core/rest/support/Query';
 import { currentState } from '../../Redux/Slice/stateSlice';
-import { useAppDispatch } from '../../Redux/hooks/hooks';
+import { setSearch } from '../../Redux/Slice/practiceSlice';
+import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
 import '@arcgis/core/assets/esri/themes/light/main.css';
 import {
   LANDSCAPE_VIEW_DIV,
@@ -36,16 +38,16 @@ interface IMapProps {
 }
 
 interface ILandscapeProps {
-  landscapeInitiativesData: Array<ILandscapeInitiative>;
-  selectedLocation: any;
-  selectedLandscapeInitiative: number;
-  portalId: string;
+  landscapeInitiativesData?: Array<ILandscapeInitiative>;
+  selectedLocation?: any;
+  selectedLandscapeInitiative?: number;
+  portalId?: string;
 }
 
 const LandscapeInitiativeMap = ({
-  landscapeInitiativesData,
+  landscapeInitiativesData = [],
   selectedLocation,
-  selectedLandscapeInitiative,
+  selectedLandscapeInitiative = -1,
   portalId,
 }: ILandscapeProps) => {
   const mapRef = useRef({} as IMapProps);
@@ -56,6 +58,11 @@ const LandscapeInitiativeMap = ({
   const previousValues: any = usePrevious({
     selectedLandscapeInitiative,
   });
+  const stateCode =
+    useAppSelector((state) => state.stateSlice?.stateCode) ||
+    DEFAULT_NATIONAL_LOCATION;
+  const history: any = useHistory();
+  const location: any = useLocation();
   const homeBtn = useRef({} as Home);
 
   useEffect(() => {
@@ -79,6 +86,7 @@ const LandscapeInitiativeMap = ({
           ? 4
           : 3,
       });
+      view.navigation.momentumEnabled = false;
 
       homeBtn.current = new Home({
         view,
@@ -87,7 +95,7 @@ const LandscapeInitiativeMap = ({
       mapRef.current.view = view;
 
       // Add the home button to the top left corner of the view
-      mapRef.current.view.ui.add(homeBtn.current, 'top-left');
+      mapRef.current.view.ui?.add(homeBtn.current, 'top-left');
 
       stateFeatureLayer.current = new FeatureLayer({
         layerId: 1,
@@ -96,7 +104,7 @@ const LandscapeInitiativeMap = ({
         visible: true,
       });
 
-      mapRef.current.map.layers.add(stateFeatureLayer.current);
+      mapRef.current.map.layers?.add(stateFeatureLayer.current);
 
       return () => {
         mapRef.current.view.destroy();
@@ -109,6 +117,20 @@ const LandscapeInitiativeMap = ({
     homeBtn.current.when(() => {
       homeBtn.current.on('go', () => {
         mapRef.current.view.graphics.removeAll();
+
+        const updatedPathName = location.pathname.replace(
+          stateCode,
+          DEFAULT_NATIONAL_LOCATION
+        );
+
+        history.replace(updatedPathName);
+
+        // Reset map extent to map's default center
+        dispatch(
+          setSearch({
+            state_county_code: null,
+          })
+        );
         // Refresh project list to U.S
         dispatch(
           currentState({
@@ -309,6 +331,13 @@ const LandscapeInitiativeMap = ({
               });
               mapRef.current.view.graphics.add(highlightedGraphic);
 
+              const updatedPathName = location.pathname.replace(
+                stateCode,
+                attributes.STATEFP
+              );
+
+              history.replace(updatedPathName);
+
               // Set stateCode to the one selected on map
               dispatch(
                 currentState({
@@ -331,3 +360,10 @@ const LandscapeInitiativeMap = ({
 };
 
 export default LandscapeInitiativeMap;
+
+LandscapeInitiativeMap.defaultProps = {
+  landscapeInitiativesData: [],
+  selectedLocation: '',
+  selectedLandscapeInitiative: -1,
+  portalId: '',
+};

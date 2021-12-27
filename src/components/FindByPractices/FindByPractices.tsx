@@ -9,7 +9,6 @@ import './find-by-practice.scss';
 import {
   useGetPracticeCategoryQuery,
   useGetPracticeQuery,
-  usePostSearchDataQuery,
 } from '../../Redux/services/api';
 import {
   setPracticeCategory,
@@ -53,7 +52,10 @@ const FindByPractices = () => {
   };
   const findP = (id: number) => {
     axios
-      .post(`${baseURL}practiceSearch`, { practice_id: id })
+      .post(`${baseURL}practiceSearch`, {
+        practice_id: id,
+        state_county_code: '00000',
+      })
       .then((response) =>
         setSelectedPractice(response?.data?.[0]?.practiceCategoryId)
       );

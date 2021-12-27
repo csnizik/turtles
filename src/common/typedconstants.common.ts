@@ -75,22 +75,37 @@ export const practiceStandardGuideLink = {
   viewStateConservationPracticeLink: `https://efotg.sc.egov.usda.gov/#/state/`,
   webpagePromptText: `Go Straight to this State’s Field Office Technical Guide`,
   pdfReportPromptText: `State Specific National Conservation Practices`,
-}
+};
 
 export const tableauGraph = {
-  RegionalConservationPractice: { 
-    id: 0, 
+  RegionalConservationPractice: {
+    id: 0,
     displayName: 'Regional Conservation Practice',
-    link:'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticeListbyAcres/Dashboard1.png?Stabbr' 
+    link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticeListbyAcres/Dashboard1?Stabbr',
   },
-  ConservationPracticeCategory: { 
-    id: 1, 
-    displayName: 'Conservation Practice Category', 
-    link:'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticesbyYearforStateandMeasure/Dashboard1.png?Stabbr' 
+  ConservationPracticeCategory: {
+    id: 1,
+    displayName: 'Conservation Practice Category',
+    link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticesbyYearforStateandMeasure/Dashboard1?Stabbr',
   },
   PracticeDetail: {
     id: 2,
     displayName: 'Practice Detail',
-    link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticebyProgramOverYears/Dashboard1.png?Stabbr'
+    link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticebyProgramOverYears/Dashboard1?Stabbr',
+  },
+  EQUIPOpenData: {
+    id: 3,
+    displayName: 'Equip Open Data',
+    link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/practice_certification_trend?state_filter',
+  },
+  SecondEQUIPOpenData: {
+    id: 4,
+    displayName: 'Second Equip Open Data',
+    link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/practice_obligation_trend?state_filter',
+  },
+  TopPracticesEQUIPOpenData: {
+    id: 5,
+    displayName: 'Top Practices Equip Open Data',
+    link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/top_practices_by_obligated?state_filter',
   },
 };
