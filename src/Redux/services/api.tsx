@@ -67,6 +67,14 @@ export const api = createApi({
         body: data,
       }),
     }),
+    //!Post request for Landscape Initiatives
+    postLandscapeInitiatives: builder.query<ISearchData[], ISearchData>({
+      query: (data) => ({
+        url: '/landscapeInitiatives',
+        method: 'POST',
+        body: data,
+      }),
+    }),
     getPracticeVideoLink: builder.query<IPracticeVideo[], void>({
       query: (practiceId) => `/video/${practiceId}`,
     }),
@@ -95,7 +103,6 @@ export const api = createApi({
     }),
   }),
 });
-
 export const {
   useGetResourcesQuery,
   useGetResourceConcernQuery,
@@ -112,4 +119,5 @@ export const {
   useGetAssociatedPracticeQuery,
   useGetProjectTypesQuery,
   useGetPaymentScheduleLinksQuery,
+  usePostLandscapeInitiativesQuery,
 } = api;

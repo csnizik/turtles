@@ -54,7 +54,6 @@ export interface IPractice {
 }
 export interface IPracticeDropdown {
   practice?: Array<IPractice>;
-  disabled: boolean;
 }
 
 export interface IPracticeCategory {
@@ -113,6 +112,7 @@ export interface IRCRequestBody {
 export interface IRCLandUse {
   landUseId: number;
   landUseName: string;
+  landUseIcon: string;
 }
 
 export interface IRCConcern {
@@ -143,10 +143,23 @@ export interface IAssociatedPracticeList {
   practiceCode: string;
   practiceName: string;
   practiceDescription: string;
+  practiceCategoryId: number;
 }
 
 export interface IProjectType {
   title: string;
   description: string;
   map: string;
+}
+
+/*eslint camelcase: 0*/
+export interface ILandscapeInitiative {
+  lci_id: number;
+  lci_name: string;
+  lci_resource: string;
+  lci_image_link: string;
+  lci_page_link: string;
+  lci_page_link_text: string;
+  lci_description: Array<string>;
+  lci_parent_id: number;
 }

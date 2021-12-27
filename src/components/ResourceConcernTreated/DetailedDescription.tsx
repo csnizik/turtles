@@ -15,7 +15,6 @@ const DetailedDescription = ( resourceConcerns : any) => {
                   <h4>{resourceConcern.rcName}</h4>
                   <p>{resourceConcern.rcDescription}</p>
                 </div>
-
                 <ResourceConcernTags category={resourceConcern.relatedLandUses}/>
               </div>
             );

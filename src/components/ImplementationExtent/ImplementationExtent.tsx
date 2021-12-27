@@ -1,9 +1,12 @@
-import DummyTableauImage from '../ResourceConcernTreated/DummyTableauImage';
+import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import { useGetPaymentScheduleLinksQuery } from '../../Redux/services/api';
 import Spinner from '../Spinner/Spinner';
 import './implementation-extent.scss';
 import image from './image/newLinkIcon.svg';
+import TableauReport from '../TableauReport/TableauReport';
+import TableauReportTwo from '../TableauReport/TableauReportTwo';
+import TableauReportThree from '../TableauReport/TableauReportThree';
 
 interface IImplementationExtentProps {
   data: any;
@@ -17,15 +20,9 @@ const ImplementationExtent = ({
   data,
   isSuccess,
 }: IImplementationExtentProps) => {
-  const getHeaderText = () => {
-    const practiceName = (data && data.practiceName) || '';
-    if (practiceName) {
-      return `Support for ${practiceName} in the U.S`;
-    }
-    return practiceName;
-  };
-
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
+
+  const practiceName = (data && data.practiceName) || '';
 
   const results = useGetPaymentScheduleLinksQuery(stateInfo?.stateCode);
   const data2 = results.data || [];
@@ -35,6 +32,13 @@ const ImplementationExtent = ({
   const isError2 = results.isError;
   const scheduleLink: any = data2[0]?.paymentLink || '';
 
+  const getHeaderText = () => {
+    if (practiceName) {
+      return `Support for ${practiceName} in ${stateInfo?.stateNameDisplay}`;
+    }
+    return practiceName;
+  };
+
   const renderObligations = () => {
     return (
       <div className='obligations'>
@@ -42,7 +46,33 @@ const ImplementationExtent = ({
         <hr />
         <div className='graph-container'>
           <div className='obligation-graph'>
-            <DummyTableauImage />
+            <TableauReportTwo
+              pageName='EQUIPOpenData'
+              practiceCode={data?.practiceCode}
+            />
+          </div>
+          <div className='obligation-graph'>
+            <TableauReportThree
+              pageName='SecondEQUIPOpenData'
+              practiceCode={data?.practiceCode}
+            />
+          </div>
+          <div className='link'>
+            <Link
+              aria-label='Obligations and practices implemented opens in new window'
+              style={{
+                textDecoration: 'none',
+              }}
+              to={{
+                pathname:
+                  'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/programs/financial/eqip/',
+              }}
+              target='_blank'
+            >
+              More information about obligations and practices implemented for
+              this practice
+              <img alt='link opens new window' src={image} />
+            </Link>
           </div>
         </div>
       </div>
@@ -56,7 +86,26 @@ const ImplementationExtent = ({
         <hr />
         <div className='graph-container'>
           <div className='acres-graph'>
-            <DummyTableauImage />
+            <TableauReport
+              pageName='Practice Detail'
+              practiceCode={data.practiceCode}
+            />
+          </div>
+          <div className='link'>
+            <Link
+              aria-label='Acres implemented opens in new window'
+              style={{
+                textDecoration: 'none',
+              }}
+              to={{
+                pathname:
+                  'https://www.nrcs.usda.gov/wps/portal/nrcs/rca/national/technical/nra/rca/text/',
+              }}
+              target='_blank'
+            >
+              More information about acres implemented for this practice
+              <img alt='link opens new window' src={image} />
+            </Link>
           </div>
         </div>
       </div>

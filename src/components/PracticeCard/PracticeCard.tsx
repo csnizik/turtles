@@ -1,6 +1,6 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
+import { useAppDispatch } from '../../Redux/hooks/hooks';
 import { usePostSearchDataQuery } from '../../Redux/services/api';
 import './practice-card.scss';
 import Spinner from '../Spinner/Spinner';
@@ -12,23 +12,22 @@ import {
 const PracticeCardDetails = ({ setPracticeViewType }: any) => {
   const initialState = {
     practice_category_id: 0,
+    state_county_code: '',
   };
 
   const dispatch = useAppDispatch();
 
-  const selectedPracticeCategoryId = useAppSelector(
-    (state) => state.practiceSlice.selectedPracticeCategory
-  );
-
-  const location: any = useLocation();
-
-  const sharedState = location?.state?.detail;
+  const { stateCode, category: selectedPracticeCategoryId }: any = useParams();
 
   const [praticestate, setPracticestate] = useState(initialState);
+
+  const history = useHistory();
+  const { category }: any = useParams();
 
   const handleChange = (practiceId: number, practiceCategoryId: number) => {
     dispatch(setSpecificPractice(practiceId));
     dispatch(setPracticeCategory(practiceCategoryId));
+    history.push(`${category}/${practiceId}`);
     setPracticeViewType({
       allPractices: false,
       practiceCategories: false,
@@ -37,16 +36,20 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
   };
 
   useEffect(() => {
-    setPracticestate({ practice_category_id: sharedState });
+    setPracticestate({
+      practice_category_id: selectedPracticeCategoryId,
+      state_county_code: `${stateCode}000`,
+    });
   }, []);
 
   useEffect(() => {
-    setPracticestate({ practice_category_id: selectedPracticeCategoryId });
+    setPracticestate({
+      practice_category_id: selectedPracticeCategoryId,
+      state_county_code: `${stateCode}000`,
+    });
   }, [selectedPracticeCategoryId]);
-
   const { data, error, isLoading, isSuccess, isError } =
     usePostSearchDataQuery(praticestate);
-
   const practiceCategory: any = data && data[0];
 
   return (
@@ -62,30 +65,40 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
         <>
           {practiceCategory?.practices
             ? // eslint-disable-next-line
-              practiceCategory.practices.map((practice: any) => (
-                <div className='full-document-box'>
-                  <div className='list-box'>
-                    <div className='info-box'>
-                      <Link
-                        to='/ConservationPractices'
-                        onClick={() =>
-                          handleChange(
-                            practice.practiceId,
-                            practiceCategory.practiceCategoryId
-                          )
+              practiceCategory.practices.map((practice: any) => {
+                const imageName = practice?.practiceImagePath || 'default.jpg';
+                return (
+                  <div className='full-document-box'>
+                    <div className='list-box'>
+                      <div className='info-box'>
+                        <button
+                          type='button'
+                          onClick={() =>
+                            handleChange(
+                              practice.practiceId,
+                              practiceCategory.practiceCategoryId
+                            )
+                          }
+                        >
+                          <h3 className='card-titles'>
+                            {practice.practiceName}
+                          </h3>
+                        </button>
+                        <p>{practice.practiceDescription}</p>
+                      </div>
+                      <img
+                        className='practice-image'
+                        src={
+                          imageName
+                            ? `../../images/landscape-initiatives-images/${imageName}`
+                            : `../../images/landscape-initiatives-images/default.jpg`
                         }
-                      >
-                        <h3>{practice.practiceName}</h3>
-                      </Link>
-                      <p>{practice.practiceDescription}</p>
+                        alt=''
+                      />
                     </div>
-                    <img
-                      src='images/practice_placeholder.png'
-                      alt='Practice Description'
-                    />
                   </div>
-                </div>
-              ))
+                );
+              })
             : []}
         </>
       )}

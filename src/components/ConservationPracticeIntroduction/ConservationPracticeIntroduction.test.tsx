@@ -5,7 +5,7 @@ afterEach(() => {
   cleanup();
 });
 
-describe('ConservationPracticeIntroduction is rendered correctly', () => {
+xdescribe('ConservationPracticeIntroduction is rendered correctly', () => {
   beforeEach(() => {
     render(
       <ConservationPracticeIntroduction

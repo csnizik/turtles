@@ -63,8 +63,9 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
   }, [isDisabled, stateId]);
 
   useEffect(() => {
-    if (persistLocationState)
+    if (persistLocationState) {
       setStateId({ id: persistLocationState.slice(0, 2) });
+    }
   }, []);
 
   const handleSelectState = (event: any) => {

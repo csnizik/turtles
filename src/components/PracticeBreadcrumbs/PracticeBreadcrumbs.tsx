@@ -1,3 +1,4 @@
+import { useHistory, useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
 import {
   setPracticeCategory,
@@ -13,12 +14,13 @@ const PracticeBreadcrumbs = ({
   handleCreateReport,
 }: any) => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
+  const { stateCode }: any = useParams();
   const currentPractice =
     currentPracticeCategory &&
     currentPracticeCategory.practices.find(
       (practice: any) => practice.practiceId === currentSpecificPractice
     );
-
   const handleNavigateBreadcrumb = (breadcrumbId: number) => {
     const defaultPracticeViews = {
       allPractices: false,
@@ -31,6 +33,7 @@ const PracticeBreadcrumbs = ({
         dispatch(setPracticeCategory(-1));
         dispatch(setSpecificPractice(-1));
         setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
+        history.push(`/${stateCode}/ConservationPractices`);
         break;
       }
       // Selected a practice category
@@ -39,6 +42,9 @@ const PracticeBreadcrumbs = ({
           ...defaultPracticeViews,
           practiceCategories: true,
         });
+        history.push(
+          `/${stateCode}/ConservationPractices/${currentPracticeCategory.practiceCategoryId}`
+        );
         break;
       }
       // Selected an individual / specfic practice (Eg. 'Cover Crow')
@@ -89,7 +95,7 @@ const PracticeBreadcrumbs = ({
                 type='button'
                 className='usa-breadcrumb__link btn btn-link'
               >
-                <span>{currentPracticeCategory.practiceCategoryName}</span>
+                <span>{currentPracticeCategory?.practiceCategoryName}</span>
               </button>
             </li>
             <li className='usa-breadcrumb__list-item'>
@@ -113,7 +119,7 @@ const PracticeBreadcrumbs = ({
             onKeyUp={() => handleNavigateBreadcrumb(1)}
             role='presentation'
           >
-            <span>{currentPracticeCategory.practiceCategoryName}</span>
+            <span>{currentPracticeCategory?.practiceCategoryName}</span>
           </li>
         )}
       </ol>

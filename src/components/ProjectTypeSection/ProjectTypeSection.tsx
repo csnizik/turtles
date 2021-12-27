@@ -1,31 +1,44 @@
+import LandscapeInitiativesCard from '../LandscapeInitiativesCard';
 import {
   NRCS_CONSERVATION_INITIATIVES_URL,
   nrcsLinkText,
   landscapeInitiativeMap,
 } from './constants';
-import { landscapeInitiativeTypes } from '../../containers/ProjectsContainer/constants';
 import './project-type.scss';
+import LandscapeMapContainer from '../LandscapeInitiativeMap/LandscapeMapContainer';
 
 interface IProjectTypeProps {
   selectedLandscapeInitiative: number;
   projectType: any;
+  landscapeInitiativesData: any;
 }
 
 const ProjectTypeSection = ({
   selectedLandscapeInitiative,
   projectType,
+  landscapeInitiativesData,
 }: IProjectTypeProps) => {
+  const initiativesWithWebMaps =
+    (landscapeInitiativesData &&
+      landscapeInitiativesData.data &&
+      landscapeInitiativesData.data.filter((initiative: any) => {
+        return initiative.lci_resource;
+      })) ||
+    [];
   const renderProjectDetails = () => {
     // Conservation Grants
     if (projectType.id === 1) {
       return (
-        <div className='project-type-details'>
+        <div
+          className='project-type-details'
+          data-testid='project-type-details'
+        >
           <p className='margin-top-3'>{projectType.paragraphDescription}</p>
           <p>
             Visit the{' '}
             <a
               aria-label='Conservation Innovation Grants link opens a new tab'
-              href='https://usda.gov'
+              href='https://cig.sc.egov.usda.gov/'
               target='_blank'
               rel='noreferrer'
             >
@@ -33,7 +46,7 @@ const ProjectTypeSection = ({
             </a>{' '}
             for more information. Use
             <a
-              aria-label='Conservation Innovation Grants link opens a new tab'
+              aria-label='Conservation Innovation Grants link opens in a new tab'
               href='/search'
               target='_blank'
               rel='noreferrer'
@@ -44,59 +57,108 @@ const ProjectTypeSection = ({
         </div>
       );
     }
+    // Landscape Conservation Initiatives
     if (projectType.id === 2) {
       const baseConservationInitiative: any = Object.values(
         landscapeInitiativeMap
       ).find((initiative) => initiative.id === 0);
-      const currentLandscapeInitiative: any = Object.values(
-        landscapeInitiativeMap
-      ).find((initiative) => initiative.id === selectedLandscapeInitiative);
-      return (
-        <div className='landscape-intiatives margin-top-2'>
-          <div className='landscape-img-placeholder margin-bottom-3'>
-            <h3 className='padding-3'>Placeholder for webmap or image</h3>
-          </div>
-          <a
-            aria-label='Link to NRCS website for landscape initiatives'
-            href={NRCS_CONSERVATION_INITIATIVES_URL}
-            target='_blank'
-            rel='noreferrer'
+      if (projectType.id === 2 || selectedLandscapeInitiative > 0) {
+        const foundInitiative =
+          landscapeInitiativesData?.data &&
+          landscapeInitiativesData.data.find((initiative) => {
+            return initiative.lci_id === selectedLandscapeInitiative;
+          });
+        const subInitiative =
+          landscapeInitiativesData?.data &&
+          landscapeInitiativesData.data.filter((parentId: any) => {
+            return parentId.lci_parent_id !== null;
+          });
+        return (
+          <div
+            className='landscape-intiatives margin-top-2'
+            data-testid='landscape-intiatives-details'
           >
-            {nrcsLinkText}
-          </a>
-          <hr className='margin-bottom-2' />
-          <div className='landscape-details'>
-            {selectedLandscapeInitiative > 0
-              ? currentLandscapeInitiative?.descriptions.map(
-                  (paragraphText) => {
-                    return <p>{paragraphText}</p>;
-                  }
-                )
-              : baseConservationInitiative?.descriptions.map(
-                  (paragraphText) => {
-                    return <p>{paragraphText}</p>;
-                  }
-                )}
+            {/* Webmap only available for 'Landscape Conservation Initiatives',
+            'Watersmart' and 'Working Lands for Wildlife' */}
+            {selectedLandscapeInitiative === -1 ||
+            initiativesWithWebMaps.some(
+              (initiative: any) =>
+                initiative.lci_id === selectedLandscapeInitiative
+            ) ? (
+              <LandscapeMapContainer
+                landscapeInitiativesData={landscapeInitiativesData.data || []}
+                selectedLandscapeInitiative={selectedLandscapeInitiative}
+              />
+            ) : (
+              <div className='landscape-img'>
+                <img
+                  src={foundInitiative?.lci_image_link}
+                  alt={foundInitiative?.lci_name}
+                />
+              </div>
+            )}
+            <a
+              aria-label='Link to NRCS website for landscape initiatives'
+              href={
+                foundInitiative?.lci_page_link ||
+                NRCS_CONSERVATION_INITIATIVES_URL
+              }
+              target='_blank'
+              title={foundInitiative?.lci_page_link_text || nrcsLinkText}
+              rel='noreferrer'
+            >
+              {foundInitiative?.lci_page_link_text || nrcsLinkText}{' '}
+            </a>
+            <i className='fas fa-external-link-alt' />
+            <hr className='margin-bottom-2' />
+            <div className='landscape-details'>
+              {
+                /*eslint react/no-array-index-key: 0 */
+                selectedLandscapeInitiative > 0
+                  ? foundInitiative?.lci_description.map(
+                      (paragraphText: any, id: number) => {
+                        return <p key={id}>{paragraphText}</p>;
+                      }
+                    )
+                  : baseConservationInitiative?.descriptions.map(
+                      (paragraphText) => {
+                        return <p>{paragraphText}</p>;
+                      }
+                    )
+              }
+              {foundInitiative?.lci_id === 10 && selectedLandscapeInitiative > 0
+                ? subInitiative?.map((item: any) => (
+                    /* eslint-disable */
+                    <LandscapeInitiativesCard
+                      link={item.lci_page_link}
+                      title={item.lci_name}
+                      description={item.lci_description}
+                    />
+                  ))
+                : null}
+            </div>
           </div>
-        </div>
-      );
+        );
+      }
     }
-
     return null;
   };
-
   const renderPageTitle = () => {
     if (selectedLandscapeInitiative > 0) {
-      const foundInitiative = landscapeInitiativeTypes.find((initiative) => {
-        return initiative.id === selectedLandscapeInitiative;
-      });
-      return <h3>{foundInitiative?.title}</h3>;
+      const foundInitiative = landscapeInitiativesData?.data?.find(
+        (initiative) => {
+          return initiative.lci_id === selectedLandscapeInitiative;
+        }
+      );
+      return (
+        <h3 data-testid='initiative-title'>{foundInitiative?.lci_name}</h3>
+      );
     }
-    return <h3>{projectType.title}</h3>;
+    return <h3 data-testid='project-type-title'>{projectType.title}</h3>;
   };
 
   return (
-    <div className='project-type-section'>
+    <div className='project-type-section' data-testid='project-type-overview'>
       {renderPageTitle()}
       {renderProjectDetails()}
     </div>
