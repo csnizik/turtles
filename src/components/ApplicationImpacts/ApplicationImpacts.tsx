@@ -21,7 +21,11 @@ const ApplicationImpacts = ({ data, isSuccess }: IApplicationImpactProps) => {
   if (!isSuccess) return null;
 
   return (
-    <div className='app-impact-parent' id='ImpactsPractice'>
+    <div
+      className='app-impact-parent'
+      data-testid='app-impact'
+      id='ImpactsPractice'
+    >
       <h2>{getHeaderText()}</h2>
       <h4>{intro}</h4>
       <div className='impacts-content'>

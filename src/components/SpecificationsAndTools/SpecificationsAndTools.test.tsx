@@ -79,7 +79,7 @@ describe('SpecificationsAndTools is rendered correctly', () => {
   test('Should display practice standard container after clicking the practice standard button', () => {
     fireEvent.click(
       screen.getByText(
-        'Instructions for Acessing this State’s Practice Standards'
+        'Instructions for Accessing this State’s Practice Standards'
       )
     );
     expect(screen.getByTestId('practice-standard-steps')).toBeDefined();
@@ -87,7 +87,7 @@ describe('SpecificationsAndTools is rendered correctly', () => {
   test('Should display practice standard link after clicking the practice standard button', () => {
     fireEvent.click(
       screen.getByText(
-        'Instructions for Acessing this State’s Practice Standards'
+        'Instructions for Accessing this State’s Practice Standards'
       )
     );
     expect(

@@ -312,3 +312,54 @@ export const coloradoInitiatives = [
     lci_parent_id: 10,
   },
 ];
+
+export const landUseSection = {
+  status: 'fulfilled',
+  endpointName: 'getLandUseOptions',
+  requestId: 'iUgbiRgYl3yi0U59y92-F',
+  startedTimeStamp: 1639265457582,
+  data: [
+    {
+      landUseCategoryID: 1,
+      landUseCategoryName: 'Other Farm and Rural Land',
+      landUseCategoryDesc: 'Other Farm and Rural Land',
+      landUseCategoryIconPath: 'Farm+Rural land.png',
+    },
+    {
+      landUseCategoryID: 2,
+      landUseCategoryName: 'Cropland',
+      landUseCategoryDesc: 'Cropland',
+      landUseCategoryIconPath: 'Crops.png',
+    },
+    {
+      landUseCategoryID: 3,
+      landUseCategoryName: 'Developed land/Urban Ag',
+      landUseCategoryDesc: 'Developed land and Urban Ag',
+      landUseCategoryIconPath: 'Urban Ag2.png',
+    },
+    {
+      landUseCategoryID: 4,
+      landUseCategoryName: 'Forestland',
+      landUseCategoryDesc: 'Forestland',
+      landUseCategoryIconPath: 'Forest.png',
+    },
+    {
+      landUseCategoryID: 5,
+      landUseCategoryName: 'Pasture',
+      landUseCategoryDesc: 'Pasture',
+      landUseCategoryIconPath: 'Pasture.png',
+    },
+    {
+      landUseCategoryID: 6,
+      landUseCategoryName: 'Rangeland',
+      landUseCategoryDesc: 'Rangeland',
+      landUseCategoryIconPath: 'Range2.png',
+    },
+  ],
+  fulfilledTimeStamp: 1639265458139,
+  isUninitialized: false,
+  isLoading: false,
+  isSuccess: true,
+  isError: false,
+  isFetching: false,
+};
