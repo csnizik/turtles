@@ -78,7 +78,7 @@ const GovernmentBanner = () => {
               <div className="usa-media-block__body">
                 <p>
                   <strong>The .gov means it is official.</strong>
-                  <br></br>
+                  <br/>
                   Federal government websites often end in .gov or .mil. Before sharing sensitive information, make sure you’re on a federal government site.
                 </p>
               </div>
@@ -92,7 +92,7 @@ const GovernmentBanner = () => {
               <div className="usa-media-block__body">
                 <p>
                   <strong>The site is secure.</strong>
-                  <br></br>
+                  <br/>
                   The <strong>https://</strong> ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely.
                 </p>
               </div>
@@ -100,7 +100,6 @@ const GovernmentBanner = () => {
           </div>
         </div>
       </div>
-
       <div className='usda-header row-flex-start'>
         <img src='../../../../images/usda_logo_color.png' alt='USDA LOGO' />
         <div className='government-banner'>
@@ -110,7 +109,6 @@ const GovernmentBanner = () => {
           <p>{t('header.usda')}</p>
         </div>
       </div>
-      
     </header>
   );
 
