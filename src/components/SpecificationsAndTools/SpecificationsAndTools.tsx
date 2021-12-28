@@ -105,7 +105,7 @@ const SpecificationsAndTools = ({
             type='button'
             onClick={() => handleExpandTechGuide()}
           >
-            Instructions for Acessing this State’s Practice Standards
+            Instructions for Accessing this State’s Practice Standards
           </button>
           <a
             href={
@@ -137,7 +137,7 @@ const SpecificationsAndTools = ({
       <div className='associated-prac' data-testid='associated-practice'>
         <h4>{t('associated-practices.title')}</h4>
         <p>{t('associated-practices.description')}</p>
-        <ul className='practices-row'>
+        <ul className='practices-row' data-testid='associated-practice-links'>
           {content.data?.map((practice: IAssociatedPracticeList) => {
             return (
               <Fragment key={practice.practiceId}>

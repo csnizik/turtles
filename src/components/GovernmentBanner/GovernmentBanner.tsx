@@ -42,6 +42,7 @@ const GovernmentBanner = () => {
   };
   const renderNRCSHeaderSection: Function = () => (
     <header
+      data-testid='gov-banner-header'
       className='usa-banner-header'
       aria-label='Official United States Government Website Disclaimer'
     >
@@ -69,7 +70,7 @@ const GovernmentBanner = () => {
   );
 
   const renderNavigationSection: Function = () => (
-    <div className='navigation-bar'>
+    <div data-testid='gov-banner-nav' className='navigation-bar'>
       <img
         className='nrcsLogo'
         src='../../../../images/nrcs_logo.png'

@@ -164,6 +164,7 @@ const CustomSearch = () => {
           <button
             className={clearBtnClassNames}
             type='button'
+            aria-label='practice-clear'
             onClick={handleClearPracticeAndConcerns}
           >
             {t('actions.clear')}
