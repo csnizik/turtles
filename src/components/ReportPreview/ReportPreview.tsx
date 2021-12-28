@@ -41,9 +41,11 @@ const ReportPreview = ({
       );
     });
     return (
-      <div key={projInit.title} className='projects-data'>
+      <div className='projects-data'>
         <div className='subheader-titlee'>{projInit.title}</div>
-        <ul className='bullets'>{projInitList}</ul>
+        <ul key={projInit.title} className='bullets'>
+          {projInitList}
+        </ul>
       </div>
     );
   };
