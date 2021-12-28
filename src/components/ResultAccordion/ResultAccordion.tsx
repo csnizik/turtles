@@ -68,8 +68,8 @@ const Accordion = () => {
     return (
       category.practices?.length === 1 &&
       (index === array.length - 1 ||
-        array[index].practices?.[0].practiceId ===
-          array[index + 1].practices?.[0].practiceId)
+        array[index].practices?.[0]?.practiceId ===
+          array[index + 1].practices?.[0]?.practiceId)
     );
   };
   let singleDat;
