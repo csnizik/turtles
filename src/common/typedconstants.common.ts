@@ -92,16 +92,22 @@ export const tableauGraph = {
     id: 2,
     displayName: 'Practice Detail',
     link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticebyProgramOverYears/Dashboard1?Stabbr',
+    imageLink:
+      'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticebyProgramOverYears/Dashboard1.png?Stabbr',
   },
-  EQUIPOpenData: {
+  EquipPracticeCertificationTrend: {
     id: 3,
-    displayName: 'Equip Open Data',
+    displayName: 'Equip Practice Certification Trend',
     link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/practice_certification_trend?state_filter',
+    imageLink:
+      'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/practice_certification_trend.png?state_filter',
   },
-  SecondEQUIPOpenData: {
+  EquipPracticeObligationTrend: {
     id: 4,
-    displayName: 'Second Equip Open Data',
+    displayName: 'Equip Practice Obligation Trend',
     link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/practice_obligation_trend?state_filter',
+    imageLink:
+      'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/practice_obligation_trend.png?state_filter',
   },
   TopPracticesEQUIPOpenData: {
     id: 5,
