@@ -20,12 +20,11 @@ const FilterBy = () => {
   const searchInputData = useAppSelector(
     (state) => state.practiceSlice.searchInfo
   );
-
   const handleClick = () => {
     return 0;
   };
   return (
-    <div className='filter-by-container'>
+    <div data-testid='filters' className='filter-by-container'>
       <>
         {searchInputData && (
           <>
