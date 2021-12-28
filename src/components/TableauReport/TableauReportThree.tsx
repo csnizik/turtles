@@ -80,7 +80,13 @@ const TableauReportThree = ({
         break;
       }
       case 1: {
-        setTableauLink(`${graph?.link}=${stateAbbr}&Measure=${pageName}`);
+        let practiceCategoryName;
+        if (pageName) {
+          practiceCategoryName = pageName.replace('&', '%26');
+        }
+        setTableauLink(
+          `${graph?.link}=${stateAbbr}&Measure=${practiceCategoryName}`
+        );
         break;
       }
       case 2: {
