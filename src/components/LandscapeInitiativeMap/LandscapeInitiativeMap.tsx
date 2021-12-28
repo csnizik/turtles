@@ -10,7 +10,6 @@ import Layer from '@arcgis/core/layers/Layer';
 import Graphic from '@arcgis/core/Graphic';
 import Query from '@arcgis/core/rest/support/Query';
 import { currentState } from '../../Redux/Slice/stateSlice';
-import { setSearch } from '../../Redux/Slice/practiceSlice';
 import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
 import '@arcgis/core/assets/esri/themes/light/main.css';
 import {
@@ -64,6 +63,7 @@ const LandscapeInitiativeMap = ({
   const history: any = useHistory();
   const location: any = useLocation();
   const homeBtn = useRef({} as Home);
+  const [defaultExtent, setDefaultExtent]: any = useState();
 
   useEffect(() => {
     /*eslint consistent-return: 0 */
@@ -93,6 +93,8 @@ const LandscapeInitiativeMap = ({
       });
 
       mapRef.current.view = view;
+
+      setDefaultExtent(mapRef.current.view.extent);
 
       // Add the home button to the top left corner of the view
       mapRef.current.view.ui?.add(homeBtn.current, 'top-left');
@@ -126,11 +128,7 @@ const LandscapeInitiativeMap = ({
         history.replace(updatedPathName);
 
         // Reset map extent to map's default center
-        dispatch(
-          setSearch({
-            state_county_code: null,
-          })
-        );
+        mapRef.current.view.extent = defaultExtent;
         // Refresh project list to U.S
         dispatch(
           currentState({
@@ -141,7 +139,7 @@ const LandscapeInitiativeMap = ({
         );
       });
     });
-  }, [homeBtn]);
+  }, [mapRef, homeBtn]);
 
   useEffect(() => {
     mapRef.current.view.when(() => {
