@@ -105,7 +105,7 @@ const SpecificationsAndTools = ({
             type='button'
             onClick={() => handleExpandTechGuide()}
           >
-            Instructions for Acessing this State’s Practice Standards
+            Instructions for Accessing this State’s Practice Standards
           </button>
           <a
             href={
