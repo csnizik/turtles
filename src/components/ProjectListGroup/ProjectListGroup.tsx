@@ -32,6 +32,7 @@ const ProjectListGroup = ({
   selectedStateName,
   selectedPracticeName,
 }: IProjectListProps) => {
+  const stateInfo = useAppSelector((state) => state?.stateSlice);
   let searchInputData = useAppSelector(
     (state) => state?.practiceSlice?.searchInput
   );
@@ -51,8 +52,12 @@ const ProjectListGroup = ({
     isSuccess: pisSuccess,
     isError: pisError,
   } = usePostProjectSearchDataQuery(searchInputData);
-  const { data: initiativesList } =
+
+  let { data: initiativesList } =
     usePostLandscapeInitiativesQuery(searchInputData);
+  initiativesList = initiativesList?.filter((initiative: any) => {
+    return !initiative.lci_parent_id;
+  });
 
   const [activeTab, setActiveTab] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
@@ -61,10 +66,7 @@ const ProjectListGroup = ({
 
   const grantsLength = projectsList?.length;
   const initiativesLength = initiativesList?.length;
-  let exceptionStateName =
-    selectedStateName === null || selectedStateName?.length === 0
-      ? useAppSelector((state) => state?.stateSlice?.stateNameDisplay)
-      : selectedStateName;
+  let exceptionStateName = stateInfo?.stateNameDisplay || selectedStateName;
   if (exceptionStateName === null || exceptionStateName === undefined)
     exceptionStateName = 'The U.S.';
   const exceptionTitle = `${exceptionStateName} has no ${selectedPracticeName} projects or initiatives`;
@@ -159,7 +161,7 @@ const ProjectListGroup = ({
                   indexOfLastPage={indexOfLastPage}
                   indexOfFirstCard={indexOfFirstCard}
                   indexOfLastCard={indexOfLastCard}
-                  selectedStateName={selectedStateName}
+                  selectedStateName={stateInfo?.stateNameDisplay}
                   mapComponent={true}
                 />
               ) : (
@@ -228,7 +230,7 @@ const ProjectListGroup = ({
                     indexOfLastPage={indexOfLastIPage}
                     indexOfFirstCard={indexOfFirstICard}
                     indexOfLastCard={indexOfLastICard}
-                    selectedStateName={selectedStateName}
+                    selectedStateName={stateInfo?.stateNameDisplay}
                   />
                 </>
               ) : (

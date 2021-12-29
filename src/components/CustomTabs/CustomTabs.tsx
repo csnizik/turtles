@@ -26,8 +26,9 @@ const CustomTabs = ({
   };
   const renderSearchOptions = () => {
     return (
-      <Nav {...navOptions}>
+      <Nav data-testid='custom-tabs' {...navOptions}>
         {Object.keys(searchOptionList).map((option: any) => {
+          if (searchOptionList[option].id === 0) return null;
           return (
             <Tab
               key={option}

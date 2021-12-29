@@ -17,8 +17,12 @@ const ConservationPracticeOverview = ({
           <ul className='list-document'>
             <div key={data.practiceId} className='full-component'>
               <img
-                alt='Practice'
-                src={`data:image/png;base64,${data.practiceImage}`}
+                alt=''
+                src={
+                  data.practiceImage
+                    ? `../../../images/landscape-initiatives-images/${data.practiceImage}`
+                    : `../../../images/landscape-initiatives-images/default.jpg`
+                }
               />
               <div className='overview' data-testid='overview-container'>
                 <h4>{`${data.practiceName} (${data.practiceCode})`}</h4>

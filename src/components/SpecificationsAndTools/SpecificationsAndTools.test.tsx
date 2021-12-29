@@ -10,6 +10,13 @@ afterEach(() => {
   cleanup();
 });
 
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useParams: jest.fn().mockReturnValue({
+    name: 'ConservationPractices',
+  }),
+}));
+
 describe('SpecificationsAndTools is rendered correctly', () => {
   const data = {
     practiceId: 23,
@@ -24,9 +31,9 @@ describe('SpecificationsAndTools is rendered correctly', () => {
   const isSuccess = true;
   const selectedStateCode = '06';
   const selectedPracticeId = 23;
+  const selectedPracticeCategory = 2;
 
-  const practiceCategory = 2;
-  const practiceId = 101;
+  const name = 'ConservationPractices';
   const practiceName = 'Cover Crop';
 
   beforeEach(() => {
@@ -46,13 +53,17 @@ describe('SpecificationsAndTools is rendered correctly', () => {
   test('Should display the contents of National Specifications', () => {
     expect(screen.getByTestId('national-specifications')).toBeDefined();
   });
+  test('Should display the contents of State Specifications', () => {
+    expect(screen.getByTestId('state-specifications')).toBeDefined();
+  });
   test('Should display the contents of Associated Practices', () => {
     expect(screen.getByTestId('associated-practice')).toBeDefined();
   });
   test('Should display associated practice Link', () => {
+    expect(screen.getByTestId('associated-practice-links')).toBeDefined();
     const { getByText } = render(
       <a
-        href={`http://localhost:3000/ConservationPractices?PracticeCategory=${practiceCategory}?Practice=${practiceId}`}
+        href={`http://localhost:3000//${selectedStateCode}/${name}/${selectedPracticeCategory}/${selectedPracticeId}`}
       >
         {practiceName}
       </a>
@@ -62,7 +73,25 @@ describe('SpecificationsAndTools is rendered correctly', () => {
     fireEvent.mouseOver(link);
     expect(screen.getByText('Cover Crop').closest('a')).toHaveAttribute(
       'href',
-      'http://localhost:3000/ConservationPractices?PracticeCategory=2?Practice=101'
+      'http://localhost:3000//06/ConservationPractices/2/23'
     );
+  });
+  test('Should display practice standard container after clicking the practice standard button', () => {
+    fireEvent.click(
+      screen.getByText(
+        'Instructions for Accessing this State’s Practice Standards'
+      )
+    );
+    expect(screen.getByTestId('practice-standard-steps')).toBeDefined();
+  });
+  test('Should display practice standard link after clicking the practice standard button', () => {
+    fireEvent.click(
+      screen.getByText(
+        'Instructions for Accessing this State’s Practice Standards'
+      )
+    );
+    expect(
+      screen.getByText('NRCS Conservation Practices Website').closest('a')
+    ).toHaveAttribute('href', 'https://efotg.sc.egov.usda.gov/#/state/');
   });
 });

@@ -5,6 +5,7 @@ import {
   coloradoInitiatives,
   resources,
   relatedResources,
+  landUseSection,
 } from './constants';
 
 const baseURL = 'http://localhost';
@@ -13,6 +14,7 @@ const postProjectSearchData = `${baseURL}/project/projectSearch`;
 const postSearchData = `${baseURL}/practiceSearch`;
 const getResourcesQuery = `${baseURL}/resourceConcern/concern`;
 const getRelatedResource = `${baseURL}/relatedResourceConcernCategory`;
+const landUseSectionData = `${baseURL}/categories`;
 
 const practiceHandler = rest.post(postSearchData, async (req, res, ctx) => {
   return res(ctx.json(conservationPracticeCategory));
@@ -37,6 +39,10 @@ const relatedResourceHandler = rest.get(
   getRelatedResource,
   async (req, res, ctx) => {
     return res(ctx.json(relatedResources));
+const landUseSectionHandler = rest.get(
+  landUseSectionData,
+  async (req, res, ctx) => {
+    return res(ctx.json(landUseSection));
   }
 );
 
@@ -46,4 +52,5 @@ export const handlers = [
   practiceHandler,
   resourceHandler,
   relatedResourceHandler,
+  landUseSectionHandler,
 ];

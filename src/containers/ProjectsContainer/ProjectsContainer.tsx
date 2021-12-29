@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
@@ -7,12 +8,10 @@ import MapContainer from '../MapContainer';
 import ProjectListGroup from '../../components/ProjectListGroup';
 import ProjectTypeSection from '../../components/ProjectTypeSection';
 import { setSearch } from '../../Redux/Slice/practiceSlice';
-import {
-  useGetStateListQuery,
-  usePostLandscapeInitiativesQuery,
-} from '../../Redux/services/api';
+import { usePostLandscapeInitiativesQuery } from '../../Redux/services/api';
 import './project-container.scss';
 import { projectCards, projectListGroups, projectPurposes } from './constants';
+import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 
 interface IProjectTypeCard {
   id: number;
@@ -29,6 +28,8 @@ interface IProjectListGroup {
 }
 
 const ProjectsContainer = () => {
+  const history = useHistory();
+  const { stateCode: stateC, category, individual }: any = useParams();
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const [toggleProjectView, setToggleProjectView] = useState(false);
@@ -36,12 +37,10 @@ const ProjectsContainer = () => {
   const [selectedLandscapeInitiative, setSelectedLandscapeInitiative] =
     useState(-1);
   const [selectedLocation, setSelectedLocation] = useState('');
-  const stateStatus: any = useGetStateListQuery();
   const stateCode = useAppSelector((state) => state?.stateSlice?.stateCode);
   const searchInput = { state_county_code: selectedLocation || null };
   let searchLandscapeInitiatives = { state_county_code: stateCode || null };
-
-  if (stateCode !== '00') {
+  if (stateCode !== DEFAULT_NATIONAL_LOCATION) {
     searchLandscapeInitiatives = {
       ...searchInput,
       state_county_code: stateCode,
@@ -56,45 +55,70 @@ const ProjectsContainer = () => {
   const landscapeInitiativesData = usePostLandscapeInitiativesQuery(
     searchLandscapeInitiatives
   );
+  const selectedState: any = { stateCode: '', stateNameDisplay: '' };
 
-  const selectedState =
-    selectedLocation &&
-    stateStatus.isSuccess &&
-    stateStatus.data &&
-    stateStatus.data.find((state: any) => {
-      return state.stateCode === selectedLocation;
-    });
+  useEffect(() => {
+    setSelectedLocation(stateC);
+    setSelectedProjectCard(Number(category));
+    if (individual) {
+      setSelectedLandscapeInitiative(Number(individual));
+    } else {
+      setSelectedLandscapeInitiative(-1);
+    }
+    if (Number(category) > 0) {
+      setToggleProjectView(true);
+    } else {
+      setToggleProjectView(false);
+    }
+  }, [category, individual, stateC]);
 
-  const selectedStateName = selectedState?.stateNameDisplay;
-  let searchInputData;
-  if (selectedState) {
-    searchInputData = {
-      state_county_code: selectedState.stateCode,
-    };
-  } else {
-    searchInputData = {
-      state_county_code: '00',
-    };
-  }
-  dispatch(setSearch(searchInputData));
+  useEffect(() => {
+    let searchInputData;
+    if (stateCode !== DEFAULT_NATIONAL_LOCATION || !stateCode) {
+      searchInputData = {
+        state_county_code: selectedState?.stateCode,
+      };
+    } else {
+      searchInputData = {
+        state_county_code: DEFAULT_NATIONAL_LOCATION,
+      };
+    }
+    dispatch(setSearch(searchInputData));
+  }, []);
+
   const handleSelectLandscapeInitiative = (id: number) => {
     setSelectedLandscapeInitiative(id);
+    history.push(
+      `/${
+        stateC || DEFAULT_NATIONAL_LOCATION
+      }/ProjectsAndInitiatives/${category}/${id}`
+    );
   };
 
   const handleSelectProjectCard = (id: number) => {
     setSelectedProjectCard(id);
     setToggleProjectView(!toggleProjectView);
+    history.push(
+      `/${stateC || DEFAULT_NATIONAL_LOCATION}/ProjectsAndInitiatives/${id}`
+    );
   };
 
   const handleSelectProjectItem = (id: number) => {
     if (id === 0) {
       setToggleProjectView(false);
       setSelectedProjectCard(-1);
+      history.push(
+        `/${stateC || DEFAULT_NATIONAL_LOCATION}/ProjectsAndInitiatives`
+      );
+    } else {
+      setSelectedProjectCard(id);
+      history.push(
+        `/${stateC || DEFAULT_NATIONAL_LOCATION}/ProjectsAndInitiatives/${id}`
+      );
     }
     if (selectedLandscapeInitiative > 0) {
       setSelectedLandscapeInitiative(-1);
     }
-    setSelectedProjectCard(id);
   };
 
   const renderProjectSection = () => {
@@ -173,10 +197,7 @@ const ProjectsContainer = () => {
               <MapContainer setSelectedLocation={setSelectedLocation} />
             </div>
 
-            <ProjectListGroup
-              isMapDisplayed
-              selectedStateName={selectedStateName}
-            />
+            <ProjectListGroup isMapDisplayed />
           </>
         ) : null}
       </div>

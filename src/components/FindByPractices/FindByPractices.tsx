@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 import CustomButton from '../CustomButton';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
-import {
-  IPractice,
-  IPracticeCategory,
-  IPracticeDropdown,
-} from '../../common/types';
+import { IPractice, IPracticeCategory } from '../../common/types';
 import './find-by-practice.scss';
 import {
   useGetPracticeCategoryQuery,
@@ -18,26 +15,30 @@ import {
   setSpecificPractice,
 } from '../../Redux/Slice/practiceSlice';
 
+import { baseURL } from '../../common/util/AxiosUtil';
+
 const homePagePracticeImage: string =
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5B-LQ-QdFXKeJgU9W0wxxffcnPg3FS8ox4Q&usqp=CAU';
-
-const intialState = {
-  disabled: true,
-};
 
 const FindByPractices = () => {
   const { t } = useTranslation();
   const history = useHistory();
   const dispatch = useAppDispatch();
-  const [secondState, setSecondState] =
-    useState<IPracticeDropdown>(intialState);
   const [selectedPractice, setSelectedPractice] = useState(-1);
   const [selectedSubPractice, setSelectedSubPractice] = useState(-1);
 
   const handleFindPractices = () => {
     dispatch(setPracticeCategory(+selectedPractice));
     dispatch(setSpecificPractice(+selectedSubPractice));
-    history.push('/ConservationPractices');
+    if (+selectedPractice !== -1 && +selectedSubPractice === -1) {
+      history.push(`00/ConservationPractices/${+selectedPractice}`);
+    } else if (+selectedPractice !== -1 && +selectedSubPractice !== -1) {
+      history.push(
+        `00/ConservationPractices/${+selectedPractice}/${+selectedSubPractice}`
+      );
+    } else {
+      history.push('00/ConservationPractices');
+    }
   };
 
   const practiceCategory = useGetPracticeCategoryQuery();
@@ -47,17 +48,18 @@ const FindByPractices = () => {
     const practiceVal = e.target.value;
     if (practiceVal !== '') {
       setSelectedPractice(practiceVal);
-      if (selectedPractice >= 0 && practiceVal !== selectedPractice) {
-        setSecondState({ ...intialState, disabled: false });
-        setSelectedSubPractice(-1);
-      } else {
-        setSecondState({ disabled: false });
-      }
-    } else {
-      setSecondState({ ...intialState });
     }
   };
-
+  const findP = (id: number) => {
+    axios
+      .post(`${baseURL}practiceSearch`, {
+        practice_id: id,
+        state_county_code: '00000',
+      })
+      .then((response) =>
+        setSelectedPractice(response?.data?.[0]?.practiceCategoryId)
+      );
+  };
   useEffect(() => {
     setSelectedPractice(-1);
     setSelectedSubPractice(-1);
@@ -68,6 +70,9 @@ const FindByPractices = () => {
   const handlePracticeChange = (e) => {
     const practiceSubVal = e.target.value;
     setSelectedSubPractice(practiceSubVal);
+    if (selectedPractice < 0) {
+      findP(practiceSubVal);
+    }
   };
 
   return (
@@ -109,7 +114,6 @@ const FindByPractices = () => {
             className='usa-select'
             id='practiceOptions'
             name='practiceSelect'
-            disabled={secondState.disabled || selectedPractice < 0}
             value={selectedSubPractice}
             onChange={handlePracticeChange}
           >

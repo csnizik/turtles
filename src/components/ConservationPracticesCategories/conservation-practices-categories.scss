@@ -22,4 +22,30 @@
   padding-left: 0;
   margin-right: 0;
   margin-left: -1rem;
+
+  .search-card {
+    min-height: 10.625rem;
+    background: $sfi-white;
+    box-sizing: border-box;
+    @include colored-top-box;
+    padding: 0rem 1.25rem 1.25rem 1.25rem;
+    flex: 0 0 48%;
+    margin-bottom: 1.875rem;
+    margin-left: 1.25rem;
+    @media (max-width: $medium-screen) {
+      flex: 0 0 90%;
+    }
+    .inside-card {
+      text-align: center;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      .usa-button {
+        color: $usda-blue;
+        background: $white;
+        border: 0.1rem solid $usda-blue;
+        border-radius: 0.25rem;
+      }
+    }
+  }
 }

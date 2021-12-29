@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 import { initialResourceState } from '../../common/typedconstants.common';
 import {
+  disablePracticeDropdown,
   disableResourceDropdown,
   enableResourceDropdown,
 } from '../../Redux/Slice/disableSlice';
@@ -16,11 +17,13 @@ import './search-by-resource-concern.scss';
 const SearchByResourceConcern = ({
   setSearchInput,
   setSearchInfo,
-  resourceConcernsSubgroups,
   setResourceConcernsSubgroups,
   selectedResourceCategory,
   setSelectedResourceCategory,
   selectedPractice,
+  practiceId,
+  selectedResourceConcern,
+  setSelectedResourceConcern,
 }: any) => {
   const resourceCategory = useGetResourcesQuery(); //!Resource Category api
   const resourceConcern = useGetResourceConcernQuery(selectedResourceCategory); //! Resource Concern
@@ -28,12 +31,9 @@ const SearchByResourceConcern = ({
   const dispatchRequest = useAppDispatch();
   const status = useAppSelector((state) => state.disableSlice.disablePractice);
   const { t } = useTranslation();
-  const [selectedResourceConcern, setSelectedResourceConcern] = useState<any>({
-    id: -1,
-  });
 
   const wrapperClassNames = classNames('resource-box-wrapper', {
-    'practice-selected': selectedPractice >= 0,
+    'practice-selected': selectedPractice >= 0 || practiceId > 0,
   });
 
   const presistSearchInputResource = useAppSelector(
@@ -45,6 +45,15 @@ const SearchByResourceConcern = ({
     (State) => State?.practiceSlice?.searchInfo
   );
 
+  useEffect(() => {
+    if (selectedPractice > 0 || practiceId > 0) {
+      dispatchRequest(disablePracticeDropdown());
+      setResourceConcernsSubgroups({
+        resources: [],
+        disabled: true,
+      });
+    }
+  }, []);
   useEffect(() => {
     const findResourceCategoryName = resourceCategory?.data?.find((concern) => {
       const name = +selectedResourceCategory === concern.resourceConcernId;
@@ -133,12 +142,13 @@ const SearchByResourceConcern = ({
     } else {
       setResourceConcernsSubgroups(initialResourceState);
       setSelectedResourceCategory({ id: -1 });
-      dispatchRequest(enableResourceDropdown());
+
       setSearchInfo((prevState) => ({
         ...prevState,
         resource_concern_category: null,
         resource_concern: null,
       }));
+      dispatchRequest(enableResourceDropdown());
       setSearchInput((prevState) => ({
         ...prevState,
         resource_concern_id: null,
@@ -149,7 +159,11 @@ const SearchByResourceConcern = ({
   const handleSubgroupChange = (e) => {
     const { value } = e.target;
     setSelectedResourceConcern({ id: +value });
+    dispatchRequest(disableResourceDropdown());
     if (value === '') {
+      if (selectedResourceCategory < 0) {
+        dispatchRequest(enableResourceDropdown());
+      }
       setSelectedResourceConcern({ id: -1 });
       setSearchInfo((prevState) => ({
         ...prevState,
@@ -218,7 +232,7 @@ const SearchByResourceConcern = ({
             className='usa-select'
             id='resourceConcernValue'
             name='selectedResourceSubgroup'
-            disabled={resourceConcernsSubgroups.disabled}
+            disabled={status}
             onChange={handleSubgroupChange}
             value={selectedResourceConcern.id}
           >

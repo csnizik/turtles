@@ -54,7 +54,6 @@ export interface IPractice {
 }
 export interface IPracticeDropdown {
   practice?: Array<IPractice>;
-  disabled: boolean;
 }
 
 export interface IPracticeCategory {
@@ -144,6 +143,7 @@ export interface IAssociatedPracticeList {
   practiceCode: string;
   practiceName: string;
   practiceDescription: string;
+  practiceCategoryId: number;
 }
 
 export interface IProjectType {

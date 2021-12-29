@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   useGetStateListQuery,
@@ -22,6 +22,7 @@ import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import {
   setPracticeCategory,
   setSearch,
+  setSpecificPractice,
 } from '../../Redux/Slice/practiceSlice';
 import { currentState } from '../../Redux/Slice/stateSlice';
 import ProjectListGroup from '../../components/ProjectListGroup';
@@ -46,13 +47,37 @@ const ConservationPracticeContainer = ({
   const [projectsInitiativesData, setProjectsInitiativesData]: any = useState(
     []
   );
-
   const stateStatus: any = useGetStateListQuery();
   const dispatch = useAppDispatch();
-  const location: any = useLocation();
-
-  const sharedState = location?.state?.detail;
+  const { stateCode }: any = useParams();
   const selectedStateCode = stateInfo?.stateCode;
+
+  const { category, individual }: any = useParams();
+  useEffect(() => {
+    if (individual) {
+      setPracticeViewType({
+        ...defaultPracticeViews,
+        individualPractice: true,
+      });
+      dispatch(setPracticeCategory(+category));
+      dispatch(setSpecificPractice(+individual));
+    } else if (category) {
+      setPracticeViewType({
+        ...defaultPracticeViews,
+        practiceCategories: true,
+      });
+
+      dispatch(setPracticeCategory(+category));
+      dispatch(setSpecificPractice(-1));
+    } else {
+      setPracticeViewType({
+        ...defaultPracticeViews,
+        allPractices: true,
+      });
+      dispatch(setPracticeCategory(-1));
+      dispatch(setSpecificPractice(-1));
+    }
+  }, [category, individual]);
 
   useEffect(() => {
     const selectedState =
@@ -85,7 +110,7 @@ const ConservationPracticeContainer = ({
   const { data: ldata } = usePostLandscapeInitiativesQuery(searchInputData);
 
   const { data, isSuccess } = usePostSearchDataQuery({
-    practice_id: sharedState,
+    state_county_code: `${stateCode}000`,
   });
   const currentPracticeCategory: any =
     isSuccess &&
@@ -95,13 +120,12 @@ const ConservationPracticeContainer = ({
       (practice: any) =>
         practice.practiceCategoryId === currentPracticeCategoryId
     );
-
   const currentPractice =
     currentPracticeCategory &&
     currentPracticeCategory.practices.find(
       (practice: any) => practice.practiceId === currentSpecificPractice
     );
-  
+
   const handleCreateReport = () => {
     if (openModal) {
       setOpenModal(false);
@@ -123,14 +147,17 @@ const ConservationPracticeContainer = ({
   useEffect(() => {
     if (currentPracticeCategoryId < 0 && currentSpecificPractice < 0) {
       setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
-      if (location.search) {
-        setPracticeViewType({ ...practiceViewType, individualPractice: true });
-      }
     } else if (currentPracticeCategoryId >= 0 && currentSpecificPractice < 0) {
       dispatch(setPracticeCategory(currentPracticeCategoryId));
-      setPracticeViewType({ ...practiceViewType, practiceCategories: true });
+      setPracticeViewType({
+        ...defaultPracticeViews,
+        practiceCategories: true,
+      });
     } else if (currentSpecificPractice >= 0) {
-      setPracticeViewType({ ...practiceViewType, individualPractice: true });
+      setPracticeViewType({
+        ...defaultPracticeViews,
+        individualPractice: true,
+      });
     }
   }, [currentPracticeCategoryId, currentSpecificPractice]);
 
@@ -170,19 +197,20 @@ const ConservationPracticeContainer = ({
               {t('associated-projects-initiatives.description')}
             </p>
           </div>
-          <ProjectListGroup isMapDisplayed={false} selectedPracticeName={currentPractice?.practiceName}/>
+          <ProjectListGroup
+            isMapDisplayed={false}
+            selectedPracticeName={currentPractice?.practiceName}
+          />
         </>
       );
     }
     return null;
   };
-
   const viewTypeList = Object.keys(practiceViewType);
   const currentViewType =
     viewTypeList.find((view: string) => {
       return practiceViewType[view];
     }) || 'allPractices';
-
   return (
     <>
       <PracticeBreadcrumbs
