@@ -10,7 +10,11 @@
     "search": "Quick Search",
     "here-how-you-know": "Here's how you know",
     "nrcs": "Natural Resources Conservation Service",
-    "usda": "U.S. DEPARTMENT OF AGRICULTURE"
+    "usda": "U.S. DEPARTMENT OF AGRICULTURE",
+    "OfficialHeader": "The .gov means it’s official.",
+    "Official": "Federal government websites often end in .gov or .mil. Before sharing sensitive information, make sure you are on a federal government site.",
+    "SecureHeader": "The site is secure.",
+    "Secure": "The https:// ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely."
   },
   "home-page": {
     "intro": "Know what you're looking for?  Do a quick search and find information fast.",
