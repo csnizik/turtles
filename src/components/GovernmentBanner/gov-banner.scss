@@ -59,16 +59,59 @@ header {
   }
 }
 
-/** USA flag logo **/
-.header-container {
-  width: 100%;
 
-  margin-right: 2rem;
+.usa-accordion {
+  list-style-type: none;
+  color: #1b1b1b;
   background-color: $sfi-dark-white;
-
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  position: relative;
+}
+.usa-banner__header {
+  font-size: 1rem;
   img {
     height: 1rem;
     width: 2rem;
     margin-right: 1em;
   }
+}
+.usa-banner__header--expanded {
+  .usa-banner__inner {
+    margin-left: 1.5rem;
+  }
+}
+.usa-banner__inner {
+  margin: 0;
+  margin-left: 1.5rem;
+  padding: 0;
+  max-width: 64rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: normal;
+}
+.usa-banner__button {
+  font-size: 1rem;
+  color: #005ea2;
+  display: inline;
+  text-align: left;
+  cursor: pointer;
+}
+
+.usa-banner__button-text {
+  margin-left: 0.25rem;
+}
+
+.usa-accordion__button {
+  margin: 0;
+  color: #005ea2;
+  display: inline;
+  text-align: left;
+  cursor: pointer;
+}
+.usa-banner__content {
+  max-width: 64rem;
+  overflow: hidden;
+  margin: 0;
 }
