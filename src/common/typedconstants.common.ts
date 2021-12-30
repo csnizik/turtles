@@ -81,37 +81,34 @@ export const tableauGraph = {
   RegionalConservationPractice: {
     id: 0,
     displayName: 'Regional Conservation Practice',
-    link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticeListbyAcres/Dashboard1?Stabbr',
+    link: process.env.RegionalConservationPracticeLink,
   },
   ConservationPracticeCategory: {
     id: 1,
     displayName: 'Conservation Practice Category',
-    link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticesbyYearforStateandMeasure/Dashboard1?Stabbr',
+    link: process.env.ConservationPracticeCategoryLink,
   },
   PracticeDetail: {
     id: 2,
     displayName: 'Practice Detail',
-    link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticebyProgramOverYears/Dashboard1?Stabbr',
-    imageLink:
-      'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticebyProgramOverYears/Dashboard1.png?Stabbr',
+    link: process.env.PracticeDetailLink,
+    imageLink: process.env.PracticeDetailImageLink,
   },
   EquipPracticeCertificationTrend: {
     id: 3,
     displayName: 'Equip Practice Certification Trend',
-    link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/practice_certification_trend?state_filter',
-    imageLink:
-      'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/practice_certification_trend.png?state_filter',
+    link: process.env.EquipPracticeCertificationTrendLink,
+    imageLink: process.env.EquipPracticeCertificationTrendImageLink,
   },
   EquipPracticeObligationTrend: {
     id: 4,
     displayName: 'Equip Practice Obligation Trend',
-    link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/practice_obligation_trend?state_filter',
-    imageLink:
-      'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/practice_obligation_trend.png?state_filter',
+    link: process.env.EquipPracticeObligationTrendLink,
+    imageLink: process.env.EquipPracticeObligationTrendImageLink,
   },
   TopPracticesEQUIPOpenData: {
     id: 5,
     displayName: 'Top Practices Equip Open Data',
-    link: 'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/top_practices_by_obligated?state_filter',
+    link: process.env.TopPracticesEQUIPOpenDataLink,
   },
 };

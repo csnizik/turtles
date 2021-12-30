@@ -21,7 +21,7 @@ const ConservationPracticeCategory = ({ pageName }: any) => {
     stateAbbrInRedux === 'U.S.' || stateAbbrInRedux === undefined
       ? ''
       : stateAbbrInRedux;
-  const srcLink: string = `${tableauGraph.ConservationPracticeCategory?.link}=${stateAbbr}&Measure=${pageName}`;
+  const srcLink: string = `${tableauGraph.ConservationPracticeCategory?.link}=${stateAbbr}&Measure=${pageName.replace('&', '%26')}`;
 
   const initViz = () => {
     const options = {
