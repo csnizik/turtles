@@ -29,5 +29,7 @@ describe('Verify SearchByConservationPractice is rendered correctly', () => {
       </Provider>
     );
     await findByText('All practices (default)');
+    userEvent.selectOptions(screen.getAllByRole('option')[0], ['2']);
+    expect(screen.getByText('Cropland Soil Quality'));
   });
 });
