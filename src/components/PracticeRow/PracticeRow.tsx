@@ -9,9 +9,10 @@ const PracticeRow = ({ handleRowSelect, rowData }: any) => {
   );
   return (
     <div
+      data-testid='practice-row'
       onClick={() => handleRowSelect(rowData.id)}
       className={rowContentClassNames}
-      role='presentation'
+      role='presentation' 
     >
       <span>{rowData.displayLabel}</span>
     </div>

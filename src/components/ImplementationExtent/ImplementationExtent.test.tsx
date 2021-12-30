@@ -13,7 +13,7 @@ xdescribe('ImplementationExtent is rendered correctly', () => {
     render(<ImplementationExtent data={data} isSuccess={isSuccess} />);
   });
 
-  test('Should display the contents of TabTitle', () => {
+  test('Should display the contents of ImplementationExtent', () => {
     expect(screen.getByTestId('i-extent')).toBeDefined();
   });
 });
