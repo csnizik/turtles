@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Modal, ModalBody } from 'reactstrap';
-import html2pdf from 'html2pdf.js';
+import { useReactToPrint } from 'react-to-print';
 import './report-preview-creator.scss';
 import {
   useGetRelatedResourceConcernCategoryQuery,
@@ -90,19 +90,9 @@ const ReportPreviewCreator = ({
     });
   };
 
-  const handleGeneratePdf = () => {
-    const element = document.getElementById('preview-content-pdf');
-    const opt = {
-      margin: 0.2,
-      filename: `Practice Report.pdf`,
-      image: { type: 'png', quality: 0.98 },
-      html2canvas: { scale: 1 },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-      pagebreak: { mode: ['avoid-all'] },
-    };
-
-    html2pdf().set(opt).from(element).save();
-  };
+  const handlePrint = useReactToPrint({
+    content: () => document.getElementById('preview-content-pdf'),
+  });
 
   return (
     <Modal isOpen={openModal}>
@@ -132,7 +122,7 @@ const ReportPreviewCreator = ({
               setRcTreatedInput={setRcTreatedInputs}
               getRCTreatedComponent={getRCTreatedComponent}
               reportPreviewData={reportPreviewData.data}
-              handleGeneratePdf={handleGeneratePdf}
+              handleGeneratePdf={handlePrint}
               projectsInitiativesData={projectsInitiativesData}
               setSelectedProjInitData={setSelectedProjInitData}
             />
