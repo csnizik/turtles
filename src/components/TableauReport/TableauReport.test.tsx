@@ -1,4 +1,4 @@
-import TableauReport from './TableauReport';
+import TopPracticesEQUIPOpenData from '../TableauReport/TopPracticesEQUIPOpenData';
 import { cleanup, render, screen } from '../../common/test-utils/test_utils';
 
 afterEach(() => {
@@ -7,43 +7,43 @@ afterEach(() => {
 
 xdescribe('Tableau is rendered correctly', () => {
   beforeEach(() => {
-    render(<TableauReport pageName='Conservation Practice' />);
+    render(<TopPracticesEQUIPOpenData />);
   });
 
-  test('Should display Tableau link on Conservation Practice Page', () => {
-    expect(
-      screen.getByAltText('Regional Conservation Practice')
-    ).toHaveAttribute(
-      'src',
-      'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticeListbyAcres/Dashboard1.png?Stabbr='
-    );
-  });
+  // test('Should display Tableau link on Conservation Practice Page', () => {
+  //   expect(
+  //     screen.getByAltText('Regional Conservation Practice')
+  //   ).toHaveAttribute(
+  //     'src',
+  //     'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticeListbyAcres/Dashboard1.png?Stabbr='
+  //   );
+  // });
 });
 
-xdescribe('Practice Detail Tableau Link is rendered correctly', () => {
-  beforeEach(() => {
-    render(<TableauReport pageName='Practice Detail' />);
-  });
+// xdescribe('Practice Detail Tableau Link is rendered correctly', () => {
+//   beforeEach(() => {
+//     render(<TableauReport pageName='Practice Detail' />);
+//   });
 
-  test('Should display Individual Practice Tableau link on Individual Practice Page', () => {
-    expect(screen.getByAltText('Practice Detail')).toHaveAttribute(
-      'src',
-      'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticebyProgramOverYears/Dashboard1.png?Stabbr=&Practice Code=100'
-    );
-  });
-});
+//   test('Should display Individual Practice Tableau link on Individual Practice Page', () => {
+//     expect(screen.getByAltText('Practice Detail')).toHaveAttribute(
+//       'src',
+//       'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticebyProgramOverYears/Dashboard1.png?Stabbr=&Practice Code=100'
+//     );
+//   });
+// });
 
-xdescribe('Conservation Practice Category is rendered correctly', () => {
-  beforeEach(() => {
-    render(<TableauReport pageName='Cropland Soil Quality' />);
-  });
+// xdescribe('Conservation Practice Category is rendered correctly', () => {
+//   beforeEach(() => {
+//     render(<TableauReport pageName='Cropland Soil Quality' />);
+//   });
 
-  test('Should display Cropland Soild Quality Tableau link on Conservation Practice Category Page', () => {
-    expect(
-      screen.getByAltText('Conservation Practice Category')
-    ).toHaveAttribute(
-      'src',
-      'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticesbyYearforStateandMeasure/Dashboard1.png?Stabbr=&Measure=Cropland Soil Quality'
-    );
-  });
-});
+//   test('Should display Cropland Soild Quality Tableau link on Conservation Practice Category Page', () => {
+//     expect(
+//       screen.getByAltText('Conservation Practice Category')
+//     ).toHaveAttribute(
+//       'src',
+//       'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticesbyYearforStateandMeasure/Dashboard1.png?Stabbr=&Measure=Cropland Soil Quality'
+//     );
+//   });
+// });

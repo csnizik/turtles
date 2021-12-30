@@ -42,19 +42,63 @@ const GovernmentBanner = () => {
   };
   const renderNRCSHeaderSection: Function = () => (
     <header
+      data-testid='gov-banner-header'
       className='usa-banner-header'
       aria-label='Official United States Government Website Disclaimer'
     >
-      <div className='header-container row-flex-start'>
-        <img
-          className='flex-align-self-center'
-          src='../../../../images/usa-flag-logo.png'
-          alt='USA Flag Logo'
-        />
-        {`${t('header.disclaimer')} `}
-        <a href='/#' aria-expanded='false' aria-controls='gov-banner'>
-          {t('header.here-how-you-know')}
-        </a>
+
+      <div className="usa-accordion">
+        <header className="usa-banner__header">
+          <div className="usa-banner__inner ">
+            <div className="grid-col-auto">
+              <img
+                className='flex-align-self-left'
+                src='../../../../images/usa-flag-logo.png'
+                alt='USA Flag Logo'
+              />
+            </div>
+            <div className="grid-col-fill tablet:grid-col-auto">
+              {`${t('header.disclaimer')} `}
+            </div>
+            <div className="grid-col-fill tablet:grid-col-auto">
+              <button className="usa-accordion__button usa-banner__button" aria-expanded="false" aria-controls="gov-banner">
+                <span className="usa-banner__button-text"> {`${t('header.here-how-you-know')}`}</span>
+              </button>
+            </div>
+          </div>
+        </header>
+        <div className="usa-banner__content" id="gov-banner" hidden>
+          <div className="grid-row grid-gap-lg">
+            <div className="usa-banner__guidance tablet:grid-col-6">
+              <img 
+              className="usa-banner__icon usa-media-block__img" 
+              src="../../../../images/icon-dot-gov.svg" 
+              alt="Dot gov"
+              />
+              <div className="usa-media-block__body">
+                <p>
+                  <strong>The .gov means it is official.</strong>
+                  <br/>
+                  Federal government websites often end in .gov or .mil. Before sharing sensitive information, make sure you’re on a federal government site.
+                </p>
+              </div>
+            </div>
+            <div className="usa-banner__guidance tablet:grid-col-6">
+              <img 
+                className="usa-banner__icon usa-media-block__img" 
+                src="../../../../images/icon-https.svg"
+                alt="Https"
+                />
+              <div className="usa-media-block__body">
+                <p>
+                  <strong>The site is secure.</strong>
+                  <br/>
+                  The <strong>https://</strong> ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div className='usda-header row-flex-start'>
         <img src='../../../../images/usda_logo_color.png' alt='USDA LOGO' />
@@ -69,7 +113,7 @@ const GovernmentBanner = () => {
   );
 
   const renderNavigationSection: Function = () => (
-    <div className='navigation-bar'>
+    <div data-testid='gov-banner-nav' className='navigation-bar'>
       <img
         className='nrcsLogo'
         src='../../../../images/nrcs_logo.png'

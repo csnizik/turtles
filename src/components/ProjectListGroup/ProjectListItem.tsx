@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 
 const ProjectListItem = ({
   id,
@@ -12,7 +13,7 @@ const ProjectListItem = ({
 }: any) => {
   const { t } = useTranslation();
   const history: any = useHistory();
-  const { stateCode }: any = useParams();
+  const stateCode = useAppSelector((state) => state?.stateSlice?.stateCode);
   //Pushes you to specific initiative pages under Initiative tab (2) in projects and initiatives
   const handleClick = () => {
     history.push(`/${stateCode}/ProjectsAndInitiatives/2/${id}`);

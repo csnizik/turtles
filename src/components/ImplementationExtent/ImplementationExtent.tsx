@@ -92,7 +92,7 @@ const ImplementationExtent = ({
               }}
               to={{
                 pathname:
-                  'https://www.nrcs.usda.gov/wps/portal/nrcs/rca/national/technical/nra/rca/text/',
+                  'https://www.nrcs.usda.gov/Internet/NRCS_RCA/reports/data_viewer_home.html',
               }}
               target='_blank'
             >
