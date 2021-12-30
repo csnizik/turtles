@@ -6,6 +6,7 @@ import {
   resources,
   relatedResources,
   landUseSection,
+  singleResults,
 } from './constants';
 
 const baseURL = 'http://localhost';
@@ -17,7 +18,12 @@ const getRelatedResource = `${baseURL}/relatedResourceConcernCategory`;
 const landUseSectionData = `${baseURL}/categories`;
 
 const practiceHandler = rest.post(postSearchData, async (req, res, ctx) => {
-  return res(ctx.json(conservationPracticeCategory));
+  if (req.body.practice_category_id) {
+    return res(ctx.json(conservationPracticeCategory));
+  }
+  if (req.body.practice_id) {
+    return res(ctx.json(singleResults));
+  }
 });
 
 const projHandler = rest.post(postProjectSearchData, async (req, res, ctx) => {
@@ -39,6 +45,8 @@ const relatedResourceHandler = rest.get(
   getRelatedResource,
   async (req, res, ctx) => {
     return res(ctx.json(relatedResources));
+  }
+);
 const landUseSectionHandler = rest.get(
   landUseSectionData,
   async (req, res, ctx) => {

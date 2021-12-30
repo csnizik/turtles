@@ -1,4 +1,4 @@
-import { cleanup, queryByText, render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import userEvent from '@testing-library/user-event';
 import ResourceConcernTreated from './ResourceConcernTreated';

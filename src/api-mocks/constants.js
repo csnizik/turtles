@@ -1025,6 +1025,7 @@ export const relatedResources = {
   creationOptions: 0,
   asyncState: null,
   isFaulted: false,
+};
 export const landUseSection = {
   status: 'fulfilled',
   endpointName: 'getLandUseOptions',
@@ -1075,3 +1076,116 @@ export const landUseSection = {
   isError: false,
   isFetching: false,
 };
+
+export const singleResults = [
+  {
+    practiceCategoryId: 9,
+    stateAbbr: 'US',
+    landUseName: '',
+    conservationPracticeSelected: 'Climate-Smart Agriculture',
+    resourceConcernSelected: null,
+    practiceCategoryName: 'Climate-Smart Agriculture',
+    practiceCategoryDescription:
+      'Conservation practices can help build soil health, sequester carbon, reduce greenhouse gas emissions, enhance productivity and commodity marketability, and mitigate the impacts of climate change while building the resilience of farm operations. This category includes NRCS supported climate-smart agriculture practices that can be put in place on all land uses.',
+    practiceCategoryLink: 'Climate-Smart Agriculture',
+    practices: [
+      {
+        practiceId: 20,
+        practiceName: 'Cover Crop',
+        practiceDescription:
+          'Cover and green manure crops are grown on land where seasonal or long-term benefits of a cover crop are needed. This practice is used to control erosion, add fertility and organic material to the soil, increase infiltration and aeration of the soil, and filter sediment, pathogens, and dissolved and sediment-attached pollutants out of water leaving the field. The practice is also used to increase populations of bees for pollination purposes. ',
+        practiceLink:
+          'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/technical/cp/ncps/',
+        practiceImagePath: 'Cover-Crop.jpg',
+      },
+    ],
+  },
+  {
+    practiceCategoryId: 3,
+    stateAbbr: 'US',
+    landUseName: '',
+    conservationPracticeSelected: 'Cropland Soil Health & Sustainability',
+    resourceConcernSelected: null,
+    practiceCategoryName: 'Cropland Soil Health & Sustainability',
+    practiceCategoryDescription:
+      'Farmers put in place a Soil Health Management System (SHMS) to sustain or improve soil health. A SHMS is a collection of conservation practices that addresses four soil health management principles: minimize disturbance, maximize soil cover, maximize biodiversity and maximize presence of living roots. This category includes NRCS supported practices that can be combined to implement a SHMS on cropland.',
+    practiceCategoryLink: 'Cropland Soil Health & Sustainability',
+    practices: [
+      {
+        practiceId: 20,
+        practiceName: 'Cover Crop',
+        practiceDescription:
+          'Cover and green manure crops are grown on land where seasonal or long-term benefits of a cover crop are needed. This practice is used to control erosion, add fertility and organic material to the soil, increase infiltration and aeration of the soil, and filter sediment, pathogens, and dissolved and sediment-attached pollutants out of water leaving the field. The practice is also used to increase populations of bees for pollination purposes. ',
+        practiceLink:
+          'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/technical/cp/ncps/',
+        practiceImagePath: 'Cover-Crop.jpg',
+      },
+    ],
+  },
+  {
+    practiceCategoryId: 2,
+    stateAbbr: 'US',
+    landUseName: '',
+    conservationPracticeSelected: 'Cropland Soil Quality',
+    resourceConcernSelected: null,
+    practiceCategoryName: 'Cropland Soil Quality',
+    practiceCategoryDescription:
+      'High-quality soils ensure that farmland is sustained for future generations. They support clean water, clean air, healthy plant growth, and greenhouse gas sequestration. This category includes individual NRCS supported conservation practices that can be put in place to improve soil quality on cropland.',
+    practiceCategoryLink: 'Cropland Soil Quality ',
+    practices: [
+      {
+        practiceId: 20,
+        practiceName: 'Cover Crop',
+        practiceDescription:
+          'Cover and green manure crops are grown on land where seasonal or long-term benefits of a cover crop are needed. This practice is used to control erosion, add fertility and organic material to the soil, increase infiltration and aeration of the soil, and filter sediment, pathogens, and dissolved and sediment-attached pollutants out of water leaving the field. The practice is also used to increase populations of bees for pollination purposes. ',
+        practiceLink:
+          'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/technical/cp/ncps/',
+        practiceImagePath: 'Cover-Crop.jpg',
+      },
+    ],
+  },
+  {
+    practiceCategoryId: 13,
+    stateAbbr: 'US',
+    landUseName: '',
+    conservationPracticeSelected: 'Urban Agriculture',
+    resourceConcernSelected: null,
+    practiceCategoryName: 'Urban Agriculture',
+    practiceCategoryDescription:
+      'Urban agriculture generally refers to the cultivation, processing and distribution of agricultural products in urban and suburban settings, including things like vertical production, warehouse farms, community gardens, rooftop farms, hydroponic, aeroponic, and aquaponic facilities, and other innovations.  This category includes NRCS supported practices that can help urban growers in areas such as soil health, irrigation efficiency, invasive species management, and high tunnels, which are used extend the growing season and protect plants from harsh weather, air pollution and pests.',
+    practiceCategoryLink: 'Urban Agriculture',
+    practices: [
+      {
+        practiceId: 20,
+        practiceName: 'Cover Crop',
+        practiceDescription:
+          'Cover and green manure crops are grown on land where seasonal or long-term benefits of a cover crop are needed. This practice is used to control erosion, add fertility and organic material to the soil, increase infiltration and aeration of the soil, and filter sediment, pathogens, and dissolved and sediment-attached pollutants out of water leaving the field. The practice is also used to increase populations of bees for pollination purposes. ',
+        practiceLink:
+          'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/technical/cp/ncps/',
+        practiceImagePath: 'Cover-Crop.jpg',
+      },
+    ],
+  },
+  {
+    practiceCategoryId: 10,
+    stateAbbr: 'US',
+    landUseName: '',
+    conservationPracticeSelected: 'Water Quality',
+    resourceConcernSelected: null,
+    practiceCategoryName: 'Water Quality',
+    practiceCategoryDescription:
+      'Because so much of our land is devoted to agriculture, farmers have a vital role in protecting water quality. This category includes NRCS supported practices on all land uses that reduce erosion; manage fertilizers, pesticides, and animal waste; and filter runoff to help keep our water clean.',
+    practiceCategoryLink: 'Water Quality',
+    practices: [
+      {
+        practiceId: 20,
+        practiceName: 'Cover Crop',
+        practiceDescription:
+          'Cover and green manure crops are grown on land where seasonal or long-term benefits of a cover crop are needed. This practice is used to control erosion, add fertility and organic material to the soil, increase infiltration and aeration of the soil, and filter sediment, pathogens, and dissolved and sediment-attached pollutants out of water leaving the field. The practice is also used to increase populations of bees for pollination purposes. ',
+        practiceLink:
+          'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/technical/cp/ncps/',
+        practiceImagePath: 'Cover-Crop.jpg',
+      },
+    ],
+  },
+];
