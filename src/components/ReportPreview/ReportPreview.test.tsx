@@ -11,7 +11,6 @@ xdescribe('ReportPreview is rendered correctly', () => {
     input1: true,
     input2: true,
     input3: true,
-    input4: true,
   };
   const reportPreviewData = {};
   const practiceId = 10;
@@ -99,10 +98,6 @@ xdescribe('ReportPreview is rendered correctly', () => {
   test('Should display the contents of SpecificationsAndTools;', () => {
     const specTools = screen.getByTestId('spec-tools');
     expect(specTools.childNodes.length).toEqual(1);
-  });
-  test('Should display the contents of ApplicationImpacts;', () => {
-    const appImp = screen.getByTestId('app-impacts');
-    expect(appImp.childNodes.length).toEqual(1);
   });
   test('Should display the contents of Projects and Initiatives;', () => {
     const projInit = screen.getByTestId('proj-init');

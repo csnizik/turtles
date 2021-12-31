@@ -73,7 +73,7 @@ const ReportPreview = ({
   };
   const contentToRender = () => {
     return (
-      <div className='preview-scroll'>
+      <div className='content-container'>
         <div id='preview-content'>
           <h3 id='preview-content-header'>
             {data?.practiceName} in{' '}
@@ -118,13 +118,6 @@ const ReportPreview = ({
                   data={data}
                   isSuccess={isSuccess}
                 />
-              </div>
-            )}
-          </div>
-          <div data-testid='app-impacts'>
-            {choiceInputs.input4 && (
-              <div>
-                <ApplicationImpacts data={data} isSuccess={isSuccess} />
               </div>
             )}
           </div>
