@@ -1025,6 +1025,8 @@ export const relatedResources = {
   creationOptions: 0,
   asyncState: null,
   isFaulted: false,
+};
+
 export const landUseSection = {
   status: 'fulfilled',
   endpointName: 'getLandUseOptions',

@@ -39,6 +39,9 @@ const relatedResourceHandler = rest.get(
   getRelatedResource,
   async (req, res, ctx) => {
     return res(ctx.json(relatedResources));
+  }
+);
+
 const landUseSectionHandler = rest.get(
   landUseSectionData,
   async (req, res, ctx) => {
