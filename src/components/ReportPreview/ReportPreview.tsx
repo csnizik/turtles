@@ -73,7 +73,7 @@ const ReportPreview = ({
   };
   const contentToRender = () => {
     return (
-      <div className='preview-scroll'>
+      <div className='content-container'>
         <div id='preview-content'>
           <h3 id='preview-content-header'>
             {data?.practiceName} in{' '}
