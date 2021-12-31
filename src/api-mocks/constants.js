@@ -1077,3 +1077,240 @@ export const landUseSection = {
   isError: false,
   isFetching: false,
 };
+
+export const singleResults = [
+  {
+    practiceCategoryId: 9,
+    stateAbbr: 'US',
+    landUseName: '',
+    conservationPracticeSelected: 'Climate-Smart Agriculture',
+    resourceConcernSelected: null,
+    practiceCategoryName: 'Climate-Smart Agriculture',
+    practiceCategoryDescription:
+      'Conservation practices can help build soil health, sequester carbon, reduce greenhouse gas emissions, enhance productivity and commodity marketability, and mitigate the impacts of climate change while building the resilience of farm operations. This category includes NRCS supported climate-smart agriculture practices that can be put in place on all land uses.',
+    practiceCategoryLink: 'Climate-Smart Agriculture',
+    practices: [
+      {
+        practiceId: 20,
+        practiceName: 'Cover Crop',
+        practiceDescription:
+          'Cover and green manure crops are grown on land where seasonal or long-term benefits of a cover crop are needed. This practice is used to control erosion, add fertility and organic material to the soil, increase infiltration and aeration of the soil, and filter sediment, pathogens, and dissolved and sediment-attached pollutants out of water leaving the field. The practice is also used to increase populations of bees for pollination purposes. ',
+        practiceLink:
+          'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/technical/cp/ncps/',
+        practiceImagePath: 'Cover-Crop.jpg',
+      },
+    ],
+  },
+  {
+    practiceCategoryId: 3,
+    stateAbbr: 'US',
+    landUseName: '',
+    conservationPracticeSelected: 'Cropland Soil Health & Sustainability',
+    resourceConcernSelected: null,
+    practiceCategoryName: 'Cropland Soil Health & Sustainability',
+    practiceCategoryDescription:
+      'Farmers put in place a Soil Health Management System (SHMS) to sustain or improve soil health. A SHMS is a collection of conservation practices that addresses four soil health management principles: minimize disturbance, maximize soil cover, maximize biodiversity and maximize presence of living roots. This category includes NRCS supported practices that can be combined to implement a SHMS on cropland.',
+    practiceCategoryLink: 'Cropland Soil Health & Sustainability',
+    practices: [
+      {
+        practiceId: 20,
+        practiceName: 'Cover Crop',
+        practiceDescription:
+          'Cover and green manure crops are grown on land where seasonal or long-term benefits of a cover crop are needed. This practice is used to control erosion, add fertility and organic material to the soil, increase infiltration and aeration of the soil, and filter sediment, pathogens, and dissolved and sediment-attached pollutants out of water leaving the field. The practice is also used to increase populations of bees for pollination purposes. ',
+        practiceLink:
+          'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/technical/cp/ncps/',
+        practiceImagePath: 'Cover-Crop.jpg',
+      },
+    ],
+  },
+  {
+    practiceCategoryId: 2,
+    stateAbbr: 'US',
+    landUseName: '',
+    conservationPracticeSelected: 'Cropland Soil Quality',
+    resourceConcernSelected: null,
+    practiceCategoryName: 'Cropland Soil Quality',
+    practiceCategoryDescription:
+      'High-quality soils ensure that farmland is sustained for future generations. They support clean water, clean air, healthy plant growth, and greenhouse gas sequestration. This category includes individual NRCS supported conservation practices that can be put in place to improve soil quality on cropland.',
+    practiceCategoryLink: 'Cropland Soil Quality ',
+    practices: [
+      {
+        practiceId: 20,
+        practiceName: 'Cover Crop',
+        practiceDescription:
+          'Cover and green manure crops are grown on land where seasonal or long-term benefits of a cover crop are needed. This practice is used to control erosion, add fertility and organic material to the soil, increase infiltration and aeration of the soil, and filter sediment, pathogens, and dissolved and sediment-attached pollutants out of water leaving the field. The practice is also used to increase populations of bees for pollination purposes. ',
+        practiceLink:
+          'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/technical/cp/ncps/',
+        practiceImagePath: 'Cover-Crop.jpg',
+      },
+    ],
+  },
+  {
+    practiceCategoryId: 13,
+    stateAbbr: 'US',
+    landUseName: '',
+    conservationPracticeSelected: 'Urban Agriculture',
+    resourceConcernSelected: null,
+    practiceCategoryName: 'Urban Agriculture',
+    practiceCategoryDescription:
+      'Urban agriculture generally refers to the cultivation, processing and distribution of agricultural products in urban and suburban settings, including things like vertical production, warehouse farms, community gardens, rooftop farms, hydroponic, aeroponic, and aquaponic facilities, and other innovations.  This category includes NRCS supported practices that can help urban growers in areas such as soil health, irrigation efficiency, invasive species management, and high tunnels, which are used extend the growing season and protect plants from harsh weather, air pollution and pests.',
+    practiceCategoryLink: 'Urban Agriculture',
+    practices: [
+      {
+        practiceId: 20,
+        practiceName: 'Cover Crop',
+        practiceDescription:
+          'Cover and green manure crops are grown on land where seasonal or long-term benefits of a cover crop are needed. This practice is used to control erosion, add fertility and organic material to the soil, increase infiltration and aeration of the soil, and filter sediment, pathogens, and dissolved and sediment-attached pollutants out of water leaving the field. The practice is also used to increase populations of bees for pollination purposes. ',
+        practiceLink:
+          'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/technical/cp/ncps/',
+        practiceImagePath: 'Cover-Crop.jpg',
+      },
+    ],
+  },
+  {
+    practiceCategoryId: 10,
+    stateAbbr: 'US',
+    landUseName: '',
+    conservationPracticeSelected: 'Water Quality',
+    resourceConcernSelected: null,
+    practiceCategoryName: 'Water Quality',
+    practiceCategoryDescription:
+      'Because so much of our land is devoted to agriculture, farmers have a vital role in protecting water quality. This category includes NRCS supported practices on all land uses that reduce erosion; manage fertilizers, pesticides, and animal waste; and filter runoff to help keep our water clean.',
+    practiceCategoryLink: 'Water Quality',
+    practices: [
+      {
+        practiceId: 20,
+        practiceName: 'Cover Crop',
+        practiceDescription:
+          'Cover and green manure crops are grown on land where seasonal or long-term benefits of a cover crop are needed. This practice is used to control erosion, add fertility and organic material to the soil, increase infiltration and aeration of the soil, and filter sediment, pathogens, and dissolved and sediment-attached pollutants out of water leaving the field. The practice is also used to increase populations of bees for pollination purposes. ',
+        practiceLink:
+          'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/technical/cp/ncps/',
+        practiceImagePath: 'Cover-Crop.jpg',
+      },
+    ],
+  },
+];
+
+export const practiceCategories = [
+  {
+    practiceCategoryId: 9,
+    practiceCategoryName: 'Climate-Smart Agriculture',
+    practiceCategoryDisplay:
+      'Conservation practices can help build soil health, sequester carbon, reduce greenhouse gas emissions, enhance productivity and commodity marketability, and mitigate the impacts of climate change while building the resilience of farm operations. This category includes NRCS supported climate-smart agriculture practices that can be put in place on all land uses.',
+    practiceCategoryLink: 'Climate-Smart Agriculture',
+    practiceCategoryIconPath: 'Climate.png',
+    startDate: '2021-08-05T00:00:00',
+    endDate: null,
+    practices: null,
+  },
+  {
+    practiceCategoryId: 3,
+    practiceCategoryName: 'Cropland Soil Health & Sustainability',
+    practiceCategoryDisplay:
+      'Farmers put in place a Soil Health Management System (SHMS) to sustain or improve soil health. A SHMS is a collection of conservation practices that addresses four soil health management principles: minimize disturbance, maximize soil cover, maximize biodiversity and maximize presence of living roots. This category includes NRCS supported practices that can be combined to implement a SHMS on cropland.',
+    practiceCategoryLink: 'Cropland Soil Health & Sustainability',
+    practiceCategoryIconPath: 'Soil Sustainability.png',
+    startDate: '2021-08-05T00:00:00',
+    endDate: null,
+    practices: null,
+  },
+  {
+    practiceCategoryId: 2,
+    practiceCategoryName: 'Cropland Soil Quality',
+    practiceCategoryDisplay:
+      'High-quality soils ensure that farmland is sustained for future generations. They support clean water, clean air, healthy plant growth, and greenhouse gas sequestration. This category includes individual NRCS supported conservation practices that can be put in place to improve soil quality on cropland.',
+    practiceCategoryLink: 'Cropland Soil Quality ',
+    practiceCategoryIconPath: 'Soil Quality.png',
+    startDate: '2021-08-05T00:00:00',
+    endDate: null,
+    practices: null,
+  },
+  {
+    practiceCategoryId: 4,
+    practiceCategoryName: 'Fish and Wildlife Habitat',
+    practiceCategoryDisplay:
+      'Two-thirds of the land in the lower 48 states is privately owned, and these working farms, ranches and forests produce much of the country’s food and fiber. These working lands also provide much of our nation’s open space and the habitats that wildlife need.  NRCS helps producers plan and implement a variety of conservation practices that benefit game and non-game wildlife species and agricultural operations. This category includes NRCS supported practices used on any non-federal land to benefit fish or terrestrial wildlife habitat.',
+    practiceCategoryLink: 'Fish and Wildlife Habitat',
+    practiceCategoryIconPath: 'Fish+Wildlife.png',
+    startDate: '2021-08-05T00:00:00',
+    endDate: null,
+    practices: null,
+  },
+  {
+    practiceCategoryId: 6,
+    practiceCategoryName: 'Forest Land Conservation',
+    practiceCategoryDisplay:
+      'NRCS conservation practices can help private landowners care for their forests, strengthen local economies, and maintain a high quality of life.  Practices are focused on establishing, managing, using, and conserving forests, trees and associated resources in a sustainable manner to meet desired goals, needs, and values.  This category includes NRCS supported practices used forest land to protect or improve the condition of trees and other forest plants.',
+    practiceCategoryLink: 'Forest Land Conservation',
+    practiceCategoryIconPath: 'Forest Conservation.png',
+    startDate: '2021-08-05T00:00:00',
+    endDate: null,
+    practices: null,
+  },
+  {
+    practiceCategoryId: 7,
+    practiceCategoryName: 'Grazing Land Conservation',
+    practiceCategoryDisplay:
+      'Grazing lands are found in every state of the United States in the form of rangeland, pastureland, grazed forest, hay land, and/or grazed croplands. Range and pasture management methods enhance sustainable livestock production and can improve soil and water resources by preventing erosion, increasing infiltration, facilitating soil building grasses in rotation systems, and sequestering carbon.  They also improve plant production, vigor, resilience, and diversity, and enhance wildlife habitat.  This category includes NRCS supported practices implemented on range, pasture, and other grazed land to protect or improve the resource base.',
+    practiceCategoryLink: 'Grazing Land Conservation',
+    practiceCategoryIconPath: 'Grazing Land Conservation.png',
+    startDate: '2021-08-05T00:00:00',
+    endDate: null,
+    practices: null,
+  },
+  {
+    practiceCategoryId: 12,
+    practiceCategoryName: 'Invasive Species Management',
+    practiceCategoryDisplay:
+      'Every day, invasive species are threatening the health of our nation’s vital agricultural and natural lands. Forests and rangelands are being infested, cropland production is being negatively impacted, streams and waterways are being choked with weeds, and wildlife species are losing habitat.  This category includes NRCS supported practices that combat invasive species.',
+    practiceCategoryLink: 'Invasive Species Management',
+    practiceCategoryIconPath: 'Invasive Species.png',
+    startDate: '2021-10-13T00:00:00',
+    endDate: null,
+    practices: null,
+  },
+  {
+    practiceCategoryId: 8,
+    practiceCategoryName: 'Irrigation Efficiency',
+    practiceCategoryDisplay:
+      'Agriculture is one of the largest users of the Nation’s surface water and groundwater, with irrigation being the greatest use. In arid and semi-arid areas, crop production depends almost entirely on irrigation. Competition for water in these areas is increasing as a result of increased human populations. In recent years, irrigation has been increasing in eastern States, resulting in water shortages in several States. This category includes NRCS supported practices that help producers manage irrigation water more efficiently and conserve their water resources.',
+    practiceCategoryLink: 'Irrigation Efficiency',
+    practiceCategoryIconPath: 'Irrigation.png',
+    startDate: '2021-08-05T00:00:00',
+    endDate: null,
+    practices: null,
+  },
+  {
+    practiceCategoryId: 13,
+    practiceCategoryName: 'Urban Agriculture',
+    practiceCategoryDisplay:
+      'Urban agriculture generally refers to the cultivation, processing and distribution of agricultural products in urban and suburban settings, including things like vertical production, warehouse farms, community gardens, rooftop farms, hydroponic, aeroponic, and aquaponic facilities, and other innovations.  This category includes NRCS supported practices that can help urban growers in areas such as soil health, irrigation efficiency, invasive species management, and high tunnels, which are used extend the growing season and protect plants from harsh weather, air pollution and pests.',
+    practiceCategoryLink: 'Urban Agriculture',
+    practiceCategoryIconPath: 'Urban Agriculture.png',
+    startDate: '2021-10-13T00:00:00',
+    endDate: null,
+    practices: null,
+  },
+  {
+    practiceCategoryId: 10,
+    practiceCategoryName: 'Water Quality',
+    practiceCategoryDisplay:
+      'Because so much of our land is devoted to agriculture, farmers have a vital role in protecting water quality. This category includes NRCS supported practices on all land uses that reduce erosion; manage fertilizers, pesticides, and animal waste; and filter runoff to help keep our water clean.',
+    practiceCategoryLink: 'Water Quality',
+    practiceCategoryIconPath: 'Water Quality.png',
+    startDate: '2021-08-05T00:00:00',
+    endDate: null,
+    practices: null,
+  },
+  {
+    practiceCategoryId: 5,
+    practiceCategoryName: 'Wetlands',
+    practiceCategoryDisplay:
+      'Wetlands are a home to many species and benefit society by storing floodwaters, filtering pollutants, serving as a carbon sink, and providing recreation opportunities.  This category includes NRCS supported practices that create, restore, or enhance wetlands.',
+    practiceCategoryLink: 'Wetlands',
+    practiceCategoryIconPath: 'Wetlands.png',
+    startDate: '2021-08-05T00:00:00',
+    endDate: null,
+    practices: null,
+  },
+];
