@@ -33,12 +33,12 @@ const ReportPreviewCreator = ({
   const [rcTreatedInputs, setRcTreatedInputs] = useState(new Set());
   const [childArr, setChildArr] = useState<DomParent>();
   const [childArr2, setChildArr2] = useState<DomParent>();
+  const [selectedIds, setSelectedIds] = useState(new Set());
   const [selectedProjInitData, setSelectedProjInitData] = useState([]);
   const [choiceInputs, setChoiceInputs] = useState({
     input1: false,
     input2: false,
     input3: false,
-    input4: false,
   });
 
   useEffect(() => {
@@ -49,9 +49,30 @@ const ReportPreviewCreator = ({
       input1: false,
       input2: false,
       input3: false,
-      input4: false,
     });
   }, [cleanModal]);
+
+  useEffect(() => {
+    if(!childArr) return;
+    if(!childArr.children) return;
+    Array.prototype.forEach.call(childArr?.children, child => {
+      const categoryId: number = +child.textContent.charAt(0);
+      child.className = selectedIds.has(categoryId) // eslint-disable-line no-param-reassign
+        ? 'accordion-container'
+        : 'hidden-content';
+    });
+  }, [childArr, selectedIds]);
+
+  useEffect(() => {
+    if(!childArr2) return;
+    if(!childArr2.children) return;
+    Array.prototype.forEach.call(childArr2?.children, child => {
+      const categoryId: number = +child.textContent.charAt(0);
+      child.className = selectedIds.has(categoryId) // eslint-disable-line no-param-reassign
+        ? 'accordion-container'
+        : 'hidden-content';
+    });
+  }, [childArr2, selectedIds]);
 
   const state = useAppSelector((s) => s);
   const practiceId: any = state?.practiceSlice?.selectedSpecficPractice;
@@ -72,22 +93,10 @@ const ReportPreviewCreator = ({
   const { data } = useGetRelatedResourceConcernCategoryQuery(initialFilter);
   const reportPreviewData = useGetNationalOverviewByPracticeQuery(practiceId);
 
-  const getRCTreatedComponent = (selectedIds) => {
+  const getRCTreatedComponent = (newSelectedIds) => {
+    setSelectedIds(newSelectedIds);
     setChildArr(rcRef.current);
-    childArr?.children.forEach((child) => {
-      const categoryId: number = +child.textContent.charAt(0);
-      child.className = selectedIds.has(categoryId) // eslint-disable-line no-param-reassign
-        ? 'accordion-container'
-        : 'hidden-content';
-    });
-
     setChildArr2(rcRef2.current);
-    childArr2?.children.forEach((child) => {
-      const categoryId: number = +child.textContent.charAt(0);
-      child.className = selectedIds.has(categoryId) // eslint-disable-line no-param-reassign
-        ? 'accordion-container'
-        : 'hidden-content';
-    });
   };
 
   const handlePrint = useReactToPrint({

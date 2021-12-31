@@ -121,13 +121,6 @@ const ReportPreview = ({
               </div>
             )}
           </div>
-          <div data-testid='app-impacts'>
-            {choiceInputs.input4 && (
-              <div>
-                <ApplicationImpacts data={data} isSuccess={isSuccess} />
-              </div>
-            )}
-          </div>
           <div data-testid='proj-init'>
             {selectedProjInitData.length > 0 ? (
               <div>{renderProjInits(selectedProjInitData)}</div>
