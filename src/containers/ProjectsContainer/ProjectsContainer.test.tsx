@@ -141,6 +141,21 @@ describe('Projects container is rendered correctly', () => {
       screen.getByText('Landscape Conservation Initiatives')
     ).toBeInTheDocument();
     expect(
+      screen
+        .getByRole('img', {
+          name: /Map of the United States/i,
+        })
+        .closest('img')
+    ).toHaveAttribute('src', '../images/grantMap.png');
+    expect(
+      screen
+        .getByRole('img', {
+          name: /Map of Landscape Conservation Initiatives in the United States/i,
+        })
+        .closest('img')
+    ).toHaveAttribute('src', '../images/landscapeMap.png');
+    screen.debug();
+    expect(
       fireEvent.click(
         getByText((content: any, element: any) => {
           if (element) {
