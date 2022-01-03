@@ -18,7 +18,7 @@ const defaultSearchInput: ISearchData = {
 const FilterBy = () => {
   const [searchInput] = useState<ISearchData>(defaultSearchInput);
   const searchInputData = useAppSelector(
-    (state) => state.practiceSlice.searchInfo
+    (state) => state?.practiceSlice?.searchInfo
   );
 
   const handleClick = () => {

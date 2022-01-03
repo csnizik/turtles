@@ -43,16 +43,15 @@ const ConservationPracticeContainer = ({
     useState(defaultPracticeViews);
   const [openModal, setOpenModal] = useState(false);
   const [cleanModal, setCleanModal] = useState(false);
-  const [selectedStateValue] = useState(stateInfo.stateCode);
+  const [selectedStateValue] = useState(stateInfo?.stateCode);
   const [projectsInitiativesData, setProjectsInitiativesData]: any = useState(
     []
   );
   const stateStatus: any = useGetStateListQuery();
   const dispatch = useAppDispatch();
-  const { stateCode }: any = useParams();
+  const { category, individual, stateCode }: any = useParams();
   const selectedStateCode = stateInfo?.stateCode;
 
-  const { category, individual }: any = useParams();
   useEffect(() => {
     if (individual) {
       setPracticeViewType({
@@ -85,7 +84,7 @@ const ConservationPracticeContainer = ({
       stateStatus.isSuccess &&
       stateStatus.data &&
       stateStatus.data.find((state: any) => {
-        return state.stateCode === selectedStateValue;
+        return state?.stateCode === selectedStateValue;
       });
     if (selectedState) {
       dispatch(currentState(selectedState));
@@ -185,7 +184,7 @@ const ConservationPracticeContainer = ({
       return (
         <>
           <IndividualPracticeContainer />
-          <div className='title-section'>
+          <div className='title-section' data-testid='pratice-title'>
             <div className='top-title'>
               <h4 className='project-title'>
                 {stateInfo?.stateNameDisplay || 'U.S.'}{' '}
