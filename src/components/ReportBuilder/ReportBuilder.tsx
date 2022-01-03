@@ -239,19 +239,6 @@ const ReportBuilder = ({
           </label>
         </div>
 
-        <div className='usa-checkbox'>
-          <input
-            className='usa-checkbox__input'
-            id='input4'
-            type='checkbox'
-            name='input4'
-            value={3}
-            onChange={handleInput}
-          />
-          <label className='usa-checkbox__label' htmlFor='input4'>
-            {`Impacts of Applying ${reportPreviewData?.practiceName} in ${stateName}`}
-          </label>
-        </div>
         <div className='builder-title'>
           {`${stateName} Cover Crop Projects and Initiatives`}
         </div>
@@ -264,7 +251,7 @@ const ReportBuilder = ({
         onClick={() => handleGeneratePdf()}
         type='button'
       >
-        Download Report
+        Print Report
       </button>
     </div>
   );

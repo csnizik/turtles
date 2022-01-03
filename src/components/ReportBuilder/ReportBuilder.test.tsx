@@ -16,7 +16,6 @@ describe('ReportBuilder is rendered correctly', () => {
       input1: false,
       input2: false,
       input3: false,
-      input4: false,
       input5: false,
     };
     const setChoiceInputs = () => {};
