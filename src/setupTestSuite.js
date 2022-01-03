@@ -1,5 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import 'regenerator-runtime/runtime';
+import MapView from '@arcgis/core/views/MapView';
+import Home from '@arcgis/core/widgets/Home';
 import { mswServer } from './api-mocks/msw-server';
 import 'whatwg-fetch';
 
@@ -41,3 +43,6 @@ jest.mock('react-i18next', () => ({
     };
   },
 }));
+
+jest.mock('@arcgis/core/views/MapView');
+jest.mock('@arcgis/core/widgets/Home');
