@@ -79,6 +79,9 @@ const LandscapeInitiativeMap = ({
         container: LANDSCAPE_VIEW_DIV,
         constraints: landscapeViewConstraints,
         map: mapRef.current.map,
+        navigation: {
+          momentumEnabled: false,
+        },
         zoom: [
           WATER_SMART_INITIATIVE_ID,
           NATIONAL_WATER_QUALITY_INITIATIVE_ID,
@@ -86,7 +89,6 @@ const LandscapeInitiativeMap = ({
           ? 4
           : 3,
       });
-      view.navigation.momentumEnabled = false;
 
       homeBtn.current = new Home({
         view,

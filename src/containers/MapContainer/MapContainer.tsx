@@ -11,7 +11,7 @@ const MapContainer = ({ setSelectedLocation }: IMapProps) => {
   return (
     <>
       <MapComponent />
-      <div className='webmap' id={VIEW_DIV} />
+      <div className='webmap' id={VIEW_DIV} data-testid='cig-map' />
       <div id='akViewDiv' className='esri-widget' />
       <div id='hiViewDiv' className='esri-widget' />
       <div id='cariViewDiv' className='esri-widget' />
