@@ -75,9 +75,11 @@ const MapComponent = () => {
         container: VIEW_DIV,
         constraints: viewConstraints,
         map: mapRef.current.map,
+        navigation: {
+          momentumEnabled: false,
+        },
         zoom: 4,
       });
-      view.navigation.momentumEnabled = false;
 
       // Alaska composite view
       alaskaView.current = createMapView(
@@ -112,12 +114,12 @@ const MapComponent = () => {
 
       mapRef.current.view = view;
       // Add the home button to the top left corner of the view
-      mapRef.current.view.ui.add(homeBtn.current, 'top-left');
+      mapRef.current.view.ui?.add(homeBtn.current, 'top-left');
 
       // Add composite views for Alaska, Hawaii, and Caribbean
-      mapRef.current.view.ui.add('akViewDiv', 'bottom-left');
-      mapRef.current.view.ui.add('hiViewDiv', 'bottom-left');
-      mapRef.current.view.ui.add('cariViewDiv', 'bottom-left');
+      mapRef.current.view.ui?.add('akViewDiv', 'bottom-left');
+      mapRef.current.view.ui?.add('hiViewDiv', 'bottom-left');
+      mapRef.current.view.ui?.add('cariViewDiv', 'bottom-left');
     }
   }, [mapRef]);
 
