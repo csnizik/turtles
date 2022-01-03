@@ -1,8 +1,9 @@
 import './conservation-practice-introduction.scss';
 import { Link } from 'react-router-dom';
 import image from './image/open-in-new.svg';
-import TableauReport from '../TableauReport/TableauReport';
-import TableauReportTwo from '../TableauReport/TableauReportTwo';
+import TopPracticesEQUIPOpenData from '../TableauReport/TopPracticesEQUIPOpenData';
+import ConservationPracticeCategory from '../TableauReport/ConservationPracticeCategory';
+import RegionalConservationPractice from '../TableauReport/RegionalConservationPractice';
 
 interface IIntroProps {
   introductionParagraph: string;
@@ -19,7 +20,7 @@ const ConservationPracticeIntroduction = ({
       return (
         <>
           <div className='internal-box-two'>
-            <TableauReportTwo pageName='TopPracticesEQUIPOpenData' />
+            <TopPracticesEQUIPOpenData />
             <div className='link'>
               <Link
                 aria-label='environmental quality incentives program opens in new window'
@@ -50,7 +51,9 @@ const ConservationPracticeIntroduction = ({
 
       <div className='explore-box'>
         <div className='internal-box'>
-          <TableauReport pageName={title} />
+          {(title === 'Conservation Practice' && (
+            <RegionalConservationPractice />
+          )) || <ConservationPracticeCategory pageName={title} />}
           <div className='link'>
             <Link
               aria-label='environmental quality incentives program opens in new window'
