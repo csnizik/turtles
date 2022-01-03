@@ -13,7 +13,6 @@ import {
 afterEach(() => {
   cleanup();
 });
-//const spy = jest.spyOn(LandUseSection, 'setSearchInfo');
 const setSearchInfoMock = jest.fn();
 const setCheckedStateMock = jest.fn();
 const setSearchInputMock = jest.fn();
