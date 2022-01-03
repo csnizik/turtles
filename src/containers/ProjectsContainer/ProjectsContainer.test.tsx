@@ -125,11 +125,86 @@ describe('Projects container is rendered correctly', () => {
     );
   });
 
-  //Test is incomplete beacuse the Map Component test is a blocker (This test Still achieves more then 80% coverage)
-  test('Should Click through the Tabs', () => {
+  test('Should Click through the Projects And Initiatives Tabs', () => {
     const onClick = jest.fn();
     const { getByText } = render(<Button onClick={onClick} />);
     fireEvent.click(getByText(/All U.S. Projects & Initiatives/i));
-    // expect(onClick).toHaveBeenCalled();
+    expect(
+      screen.getByText(
+        'Targeting Program dollars to advance specific natural resource objectives'
+      )
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Conservation Innovation Grants')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Landscape Conservation Initiatives')
+    ).toBeInTheDocument();
+    expect(
+      fireEvent.click(
+        getByText((content: any, element: any) => {
+          if (element) {
+            return (
+              element.tagName.toLowerCase() === 'h2' &&
+              content.startsWith('Conservation Innovation Grants')
+            );
+          }
+        })
+      )
+    );
+    expect(
+      screen.getByText((content: any) =>
+        content.startsWith(
+          'Conservation Innovation Grants (CIG) is a competitive'
+        )
+      )
+    ).toBeInTheDocument();
+    expect(
+      screen
+        .getByLabelText('Conservation Innovation Grants link opens a new tab')
+        .closest('a')
+    ).toHaveAttribute('href', 'https://cig.sc.egov.usda.gov/');
+    expect(
+      screen
+        .getByLabelText('Conservation Innovation Grants link opens a new tab')
+        .closest('a')
+    ).toHaveAttribute('target', '_blank');
+    expect(
+      screen
+        .getByLabelText(
+          'Conservation Innovation Grants link opens in a new tab'
+        )
+        .closest('a')
+    ).toHaveAttribute('href', '/search');
+    expect(
+      screen
+        .getByLabelText(
+          'Conservation Innovation Grants link opens in a new tab'
+        )
+        .closest('a')
+    ).toHaveAttribute('target', '_blank');
+    fireEvent.click(getByText(/Landscape Conservation Initiatives/i));
+    expect(
+      screen.getByText((content: any) =>
+        content.startsWith('NRCS uses Landscape Conservation')
+      )
+    ).toBeInTheDocument();
+    expect(
+      screen
+        .getByTitle(
+          'Go to the Landscape Conservation Initiatives page for detailed information'
+        )
+        .closest('a')
+    ).toHaveAttribute(
+      'href',
+      'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/programs/initiatives/'
+    );
+    expect(
+      screen
+        .getByTitle(
+          'Go to the Landscape Conservation Initiatives page for detailed information'
+        )
+        .closest('a')
+    ).toHaveAttribute('target', '_blank');
   });
 });
