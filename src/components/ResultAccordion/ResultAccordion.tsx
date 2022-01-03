@@ -16,10 +16,10 @@ import './result-accordion.scss';
 const Accordion = () => {
   const dispatch = useAppDispatch();
   const selectedPractice: number = useAppSelector(
-    (state) => state.practiceSlice.selectedSpecficPractice
+    (state) => state?.practiceSlice?.selectedSpecficPractice
   );
   const searchInputData = useAppSelector(
-    (state) => state.practiceSlice.searchInput
+    (state) => state?.practiceSlice?.searchInput
   );
 
   const { data, error, isLoading, isSuccess, isError } =
