@@ -46,54 +46,65 @@ const GovernmentBanner = () => {
       className='usa-banner-header'
       aria-label='Official United States Government Website Disclaimer'
     >
-
-      <div className="usa-accordion">
-        <header className="usa-banner__header">
-          <div className="usa-banner__inner ">
-            <div className="grid-col-auto">
+      <div className='usa-accordion'>
+        <header className='usa-banner__header'>
+          <div className='usa-banner__inner '>
+            <div className='grid-col-auto'>
               <img
                 className='flex-align-self-left'
                 src='../../../../images/usa-flag-logo.png'
                 alt='USA Flag Logo'
               />
             </div>
-            <div className="grid-col-fill tablet:grid-col-auto">
+            <div className='grid-col-fill tablet:grid-col-auto'>
               {`${t('header.disclaimer')} `}
             </div>
-            <div className="grid-col-fill tablet:grid-col-auto">
-              <button className="usa-accordion__button usa-banner__button" aria-expanded="false" aria-controls="gov-banner">
-                <span className="usa-banner__button-text"> {`${t('header.here-how-you-know')}`}</span>
+            <div className='grid-col-fill tablet:grid-col-auto'>
+              <button
+                type='button'
+                className='usa-accordion__button usa-banner__button'
+                aria-expanded='false'
+                aria-controls='gov-banner'
+              >
+                <span className='usa-banner__button-text'>
+                  {' '}
+                  {`${t('header.here-how-you-know')}`}
+                </span>
               </button>
             </div>
           </div>
         </header>
-        <div className="usa-banner__content" id="gov-banner" hidden>
-          <div className="grid-row grid-gap-lg">
-            <div className="usa-banner__guidance tablet:grid-col-6">
-              <img 
-              className="usa-banner__icon usa-media-block__img" 
-              src="../../../../images/icon-dot-gov.svg" 
-              alt="Dot gov"
+        <div className='usa-banner__content' id='gov-banner' hidden>
+          <div className='grid-row grid-gap-lg'>
+            <div className='usa-banner__guidance tablet:grid-col-6'>
+              <img
+                className='usa-banner__icon usa-media-block__img'
+                src='../../../../images/icon-dot-gov.svg'
+                alt='Dot gov'
               />
-              <div className="usa-media-block__body">
+              <div className='usa-media-block__body'>
                 <p>
                   <strong>The .gov means it is official.</strong>
-                  <br/>
-                  Federal government websites often end in .gov or .mil. Before sharing sensitive information, make sure you’re on a federal government site.
+                  <br />
+                  Federal government websites often end in .gov or .mil. Before
+                  sharing sensitive information, make sure you’re on a federal
+                  government site.
                 </p>
               </div>
             </div>
-            <div className="usa-banner__guidance tablet:grid-col-6">
-              <img 
-                className="usa-banner__icon usa-media-block__img" 
-                src="../../../../images/icon-https.svg"
-                alt="Https"
-                />
-              <div className="usa-media-block__body">
+            <div className='usa-banner__guidance tablet:grid-col-6'>
+              <img
+                className='usa-banner__icon usa-media-block__img'
+                src='../../../../images/icon-https.svg'
+                alt='Https'
+              />
+              <div className='usa-media-block__body'>
                 <p>
                   <strong>The site is secure.</strong>
-                  <br/>
-                  The <strong>https://</strong> ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely.
+                  <br />
+                  The <strong>https://</strong> ensures that you are connecting
+                  to the official website and that any information you provide
+                  is encrypted and transmitted securely.
                 </p>
               </div>
             </div>

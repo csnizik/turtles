@@ -1,14 +1,102 @@
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
+import ConservationPracticeContainer from '.';
 import { cleanup, render, screen } from '../../common/test-utils/test_utils';
 import ConservationPracticeVideo from '../../components/ConservationPracticeVideo';
 import ResourceConcernTreated from '../../components/ResourceConcernTreated';
-import ConservationPracticeOverview from '../../components/ConservationPracticeOverview';
+import { createTestStore } from '../../Redux/store';
+import { currentState } from '../../Redux/Slice/stateSlice';
+import { Provider } from 'react-redux';
+import { mswServer } from '../../api-mocks/msw-server';
+
+const router = require('react-router-dom');
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useParams: jest.fn().mockReturnValue({
+    stateCode: '06',
+    category: '2',
+  }),
+}));
+
+let store;
+let viewType;
 
 afterEach(() => {
   cleanup();
 });
 
-//Note*: Will remove the comment after api endpoint is functional, waiting for new branch that has new endpoint to be merged
-describe('Conservation practice video section is rendered correctly', () => {
+beforeAll(() => mswServer.listen({ onUnhandledRequest: 'bypass' }));
+
+describe('Conservation Practice Page is rendered correctly', () => {
+  viewType = 'practiceCategories';
+  beforeEach(() => {
+    const history = createMemoryHistory();
+    jest.spyOn(router, 'useParams').mockReturnValue({
+      stateCode: '06',
+      category: '2',
+    });
+    render(
+      <Router history={history}>
+        <ConservationPracticeContainer
+          currentPracticeCategoryId={2}
+          currentSpecificPractice={-1}
+        />
+      </Router>
+    );
+  });
+
+  test('Should display Conservation Practices BreadCrumb', () => {
+    expect(screen.getByText('Conservation Practices')).toBeInTheDocument();
+  });
+});
+
+describe('Conservation Practice Individual Page is rendered correctly', () => {
+  viewType = 'individualPractice';
+  beforeEach(() => {
+    jest.spyOn(router, 'useParams').mockReturnValue({
+      stateCode: '06',
+      category: '2',
+      individual: '20',
+    });
+    const state = {
+      stateNameDisplay: 'Colorado',
+      stateCode: '06',
+      stateAbbreviation: 'CO',
+    };
+    store = createTestStore();
+    store.dispatch(currentState(state));
+    const history = createMemoryHistory();
+    render(
+      <Router history={history}>
+        <Provider store={store}>
+          <ConservationPracticeContainer
+            currentPracticeCategoryId={2}
+            currentSpecificPractice={20}
+          />
+        </Provider>
+      </Router>
+    );
+  });
+
+  test('Should display Individual Practice Page Projects & Initiatives Section', () => {
+    expect(screen.getByTestId('pratice-title')).toBeDefined();
+  });
+
+  test('Should display Individual Practice Page Projects & Initiatives Title', () => {
+    expect(
+      screen.getByText('Colorado associated-projects-initiatives.title')
+    ).toBeInTheDocument();
+  });
+
+  test('Should display Individual Practice Page Projects & Initiatives Description', () => {
+    expect(
+      screen.getByText('associated-projects-initiatives.description')
+    ).toBeInTheDocument();
+  });
+});
+
+describe('Conservation Practice Video Section is rendered correctly', () => {
   beforeEach(() => {
     render(<ConservationPracticeVideo selectedPracticeId={9} />);
   });
@@ -22,7 +110,7 @@ describe('Conservation practice video section is rendered correctly', () => {
   });
 });
 
-describe('Resource Concerns Treated section is rendered correctly', () => {
+describe('Resource Concerns Treated Section is rendered correctly', () => {
   beforeEach(() => {
     render(
       <ResourceConcernTreated selectedStateCode='01' selectedPracticeId={1} />
@@ -36,13 +124,4 @@ describe('Resource Concerns Treated section is rendered correctly', () => {
   test('Should display an accordion for users to click', () => {
     expect(screen.queryByTestId('rc-accordion')).toBeDefined();
   });
-
-  // not sure what the idea for the test is here. toHaveClass must bee  provided at least one class  https://github.com/testing-library/jest-dom#tohaveclass
-
-  // test('Should display an accordion that face to the right', () => {
-  //   let { container } = render(
-  //     <ResourceConcernTreated selectedStateCode='01' selectedPracticeId={1} />
-  //   );
-  //   expect(container.firstChild).toHaveClass();
-  // });
 });

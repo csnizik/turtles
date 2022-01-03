@@ -6,6 +6,8 @@ import 'whatwg-fetch';
 beforeAll(() => mswServer.listen({ onUnhandledRequest: 'warn' }));
 afterEach(() => mswServer.resetHandlers());
 afterAll(() => mswServer.close());
+const noop = () => {}
+Object.defineProperty(window, "scroll", { value: noop, writable: true })
 jest.mock('../jest.config.js');
 // Mock external components and functions
 jest.mock('react-router-dom', () => ({
