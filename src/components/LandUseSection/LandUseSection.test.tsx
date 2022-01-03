@@ -67,14 +67,16 @@ describe('Land use section is rendered correctly', () => {
       })
     ).toBeDefined();
   });
-  test('Should display the tooltip on mouseOver', async () => {
+  test('Should display the checkbox', async () => {
     await waitFor(async () => {
       fireEvent.mouseOver(await screen.getByTestId('tooltp1'));
-      const zebra = await screen.findAllByText('Other Farm and Rural Land');
-      expect(zebra).toHaveLength(2);
+      const tooltipText = await screen.findAllByText(
+        'Other Farm and Rural Land'
+      );
+      expect(tooltipText).toHaveLength(2);
     });
   });
-  test('Should display the tooltip on mouseOve', async () => {
+  test('Should display the tooltip on mouseOver', async () => {
     await waitFor(async () => {
       fireEvent.click(await screen.getByTestId('checkbox1'));
       expect(setSearchInfoMock).toBeCalled();
