@@ -79,6 +79,7 @@ const LocationSearch = () => {
             className='usa-select'
             id='stateSelect'
             name='stateOptions'
+            data-testid='select-option'
             onChange={handleDropdownSelection}
             value={selectedState}
           >

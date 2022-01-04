@@ -30,6 +30,7 @@ const HorizontalScroll = () => {
         <button
           className={classState}
           type='button'
+          aria-label='left-button'
           onClick={() => handleNav('left')}
         >
           <i className='fa fa-lg fa-chevron-left button_left' />
@@ -41,7 +42,9 @@ const HorizontalScroll = () => {
           sectionState.map((section: IConservationPracticeSections) => {
             return (
               <a key={section.sectionId} href={section.anchorLink}>
-                <p className='skin_option'>{section.sectionName}</p>
+                <p aria-label={section.sectionName} className='skin_option'>
+                  {section.sectionName}
+                </p>
               </a>
             );
           })}
@@ -50,6 +53,7 @@ const HorizontalScroll = () => {
         <button
           className='right-button'
           type='button'
+          aria-label='right-button'
           onClick={() => handleNav('right')}
         >
           <i className='fa fa-lg fa-chevron-right' />
