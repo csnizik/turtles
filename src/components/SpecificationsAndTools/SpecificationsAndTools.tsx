@@ -173,7 +173,7 @@ const SpecificationsAndTools = ({
       <h4>{intro}</h4>
       {renderNationalSpecs()}
       {selectedStateName === 'U.S.' ? null : renderStateSpecs()}
-      {renderAssociatedPractice()}
+      {content?.data?.length ? renderAssociatedPractice() : null}
     </section>
   );
 };

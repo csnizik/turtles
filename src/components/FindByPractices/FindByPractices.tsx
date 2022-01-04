@@ -49,6 +49,8 @@ const FindByPractices = () => {
     if (practiceVal !== '') {
       setSelectedPractice(practiceVal);
     }
+    setSelectedSubPractice(-1);
+    dispatch(setSpecificPractice(-1));
   };
   const findP = (id: number) => {
     axios

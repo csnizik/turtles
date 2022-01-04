@@ -4,9 +4,9 @@ import { useGetPaymentScheduleLinksQuery } from '../../Redux/services/api';
 import Spinner from '../Spinner/Spinner';
 import './implementation-extent.scss';
 import image from './image/newLinkIcon.svg';
-import TableauReport from '../TableauReport/TableauReport';
-import TableauReportTwo from '../TableauReport/TableauReportTwo';
-import TableauReportThree from '../TableauReport/TableauReportThree';
+import PracticeDetailReport from '../TableauReport/PracticeDetailReport';
+import EquipPracticeCertificationTrend from '../TableauReport/EquipPracticeCertificationTrend';
+import EquipPracticeObligationTrend from '../TableauReport/EquipPracticeObligationTrend';
 
 interface IImplementationExtentProps {
   data: any;
@@ -46,16 +46,12 @@ const ImplementationExtent = ({
         <hr />
         <div className='graph-container'>
           <div className='obligation-graph'>
-            <TableauReportTwo
-              pageName='EQUIPOpenData'
+            <EquipPracticeCertificationTrend
               practiceCode={data?.practiceCode}
             />
           </div>
           <div className='obligation-graph'>
-            <TableauReportThree
-              pageName='SecondEQUIPOpenData'
-              practiceCode={data?.practiceCode}
-            />
+            <EquipPracticeObligationTrend practiceCode={data?.practiceCode} />
           </div>
           <div className='link'>
             <Link
@@ -86,10 +82,7 @@ const ImplementationExtent = ({
         <hr />
         <div className='graph-container'>
           <div className='acres-graph'>
-            <TableauReport
-              pageName='Practice Detail'
-              practiceCode={data.practiceCode}
-            />
+            <PracticeDetailReport practiceCode={data.practiceCode} />
           </div>
           <div className='link'>
             <Link
@@ -143,7 +136,7 @@ const ImplementationExtent = ({
   if (!isSuccess) return null;
 
   return (
-    <div className='ie-parent' id='SupportPractice'>
+    <div className='ie-parent' id='SupportPractice' data-testid='i-extent'>
       <h2>{getHeaderText()}</h2>
       <h4>{intro}</h4>
       <div className='extent-content'>
