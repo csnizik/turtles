@@ -6,6 +6,7 @@ import { useAppSelector } from '../../Redux/hooks/hooks';
 const ConservationPracticeVideo = ({ selectedPracticeId }: any) => {
   const { data, error, isLoading, isSuccess, isError } =
     useGetPracticeVideoLinkQuery(selectedPracticeId);
+
   const fromPdfReport = useAppSelector(
     (state) => state?.pdfGenSlice?.enablePdfGen
   );
