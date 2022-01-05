@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import { tableauGraph } from '../../common/typedconstants.common';
+import verifyTableauIsEmpty from '../../common/util/tableau';
 import './tableau-report.scss';
 
 declare global {
@@ -12,7 +13,7 @@ declare global {
 
 let viz;
 const { tableau } = window;
-const ConservationPracticeCategory = ({ pageName }: any) => {
+const ConservationPracticeCategory = ({ pageName, setIsTableauEmpty }: any) => {
   const ref = useRef(null);
   const stateAbbrInRedux = useAppSelector(
     (state: any) => state?.stateSlice?.stateAbbreviation
@@ -21,11 +22,16 @@ const ConservationPracticeCategory = ({ pageName }: any) => {
     stateAbbrInRedux === 'U.S.' || stateAbbrInRedux === undefined
       ? ''
       : stateAbbrInRedux;
-  const srcLink: string = `${tableauGraph.ConservationPracticeCategory?.link}=${stateAbbr}&Measure=${pageName.replace('&', '%26')}`;
+  const srcLink: string = `${
+    tableauGraph.ConservationPracticeCategory?.link
+  }=${stateAbbr}&Measure=${pageName.replace('&', '%26')}`;
 
   const initViz = () => {
     const options = {
       device: 'desktop',
+      onFirstInteractive: function () {
+        verifyTableauIsEmpty(viz, setIsTableauEmpty);
+      },
     };
     // eslint-disable-next-line no-new
     if (viz) viz.dispose();

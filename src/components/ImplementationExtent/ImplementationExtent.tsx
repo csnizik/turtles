@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import { useGetPaymentScheduleLinksQuery } from '../../Redux/services/api';
 import Spinner from '../Spinner/Spinner';
@@ -11,6 +12,7 @@ import EquipPracticeObligationTrend from '../TableauReport/EquipPracticeObligati
 interface IImplementationExtentProps {
   data: any;
   isSuccess: boolean;
+  tableauTrigger?: any;
 }
 
 const intro: string =
@@ -19,9 +21,10 @@ const intro: string =
 const ImplementationExtent = ({
   data,
   isSuccess,
+  tableauTrigger,
 }: IImplementationExtentProps) => {
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
-
+  const [isPdTableauEmpty, setIsPdTableauEmpty] = useState(false);
   const practiceName = (data && data.practiceName) || '';
 
   const results = useGetPaymentScheduleLinksQuery(stateInfo?.stateCode);
@@ -38,6 +41,19 @@ const ImplementationExtent = ({
     }
     return practiceName;
   };
+
+  const setTableauStatus = (status: boolean) => {
+    if (isPdTableauEmpty) return;
+    setIsPdTableauEmpty(status);
+  };
+
+  useEffect(() => {
+    if (tableauTrigger) {
+      if (isPdTableauEmpty) return;
+      console.log('changing tableau trigger, status now: ', isPdTableauEmpty);
+      tableauTrigger(isPdTableauEmpty);
+    }
+  }, [isPdTableauEmpty]);
 
   const renderObligations = () => {
     return (
@@ -76,13 +92,18 @@ const ImplementationExtent = ({
   };
 
   const renderAcresImplemented = () => {
+    console.log('acres', isPdTableauEmpty); //false false, after some secs, it finally turn into true
+    if (isPdTableauEmpty) return null;
     return (
       <div className='arces-implemented'>
         <h3>Acres Implemented from 2014 - 2020</h3>
         <hr />
         <div className='graph-container'>
           <div className='acres-graph'>
-            <PracticeDetailReport practiceCode={data.practiceCode} />
+            <PracticeDetailReport
+              practiceCode={data.practiceCode}
+              checkTableauIsEmpty={setTableauStatus}
+            />
           </div>
           <div className='link'>
             <Link
@@ -153,3 +174,7 @@ const ImplementationExtent = ({
 };
 
 export default ImplementationExtent;
+
+ImplementationExtent.defaultProps = {
+  tableauTrigger: null,
+};

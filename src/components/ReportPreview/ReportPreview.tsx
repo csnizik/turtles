@@ -1,5 +1,5 @@
 import './report-preview.scss';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ConservationPracticeOverview from '../ConservationPracticeOverview';
 import ImplementationExtent from '../ImplementationExtent';
 import SpecificationsAndTools from '../SpecificationsAndTools';
@@ -21,6 +21,8 @@ const ReportPreview = ({
 }: any) => {
   const { data, error, isLoading, isSuccess, isError } = reportPreviewData;
   const mountedRef = useRef(true);
+  const [tableauChangedTrigger, setTableauTrigger] = useState(false);
+
   const renderProjInit = (projInit) => {
     const projInitList = projInit.data.map((item) => {
       return (
@@ -105,7 +107,11 @@ const ReportPreview = ({
           <div data-testid='implementation-extent'>
             {choiceInputs.input2 && (
               <div>
-                <ImplementationExtent data={data} isSuccess={isSuccess} />
+                <ImplementationExtent
+                  data={data}
+                  isSuccess={isSuccess}
+                  tableauTrigger={setTableauTrigger}
+                />
               </div>
             )}
           </div>
@@ -185,11 +191,17 @@ const ReportPreview = ({
   };
 
   useEffect(() => {
+    console.log('preview re-rendered, trigger is: ', tableauChangedTrigger);
     mountedRef.current = true;
     return () => {
       mountedRef.current = false;
     };
-  }, [choiceInputs, rcTreatedInputs, selectedProjInitData]);
+  }, [
+    choiceInputs,
+    rcTreatedInputs,
+    selectedProjInitData,
+    tableauChangedTrigger,
+  ]);
 
   return (
     <div data-testid='preview' className='pdf-preview'>
