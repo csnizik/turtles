@@ -153,7 +153,7 @@ const ImplementationExtent = ({
   if (!isSuccess) return null;
 
   return (
-    <div className='ie-parent' id='SupportPractice'>
+    <div className='ie-parent' id='SupportPractice' data-testid='i-extent'>
       <h2>{getHeaderText()}</h2>
       <h4>{intro}</h4>
       <div className='extent-content'>

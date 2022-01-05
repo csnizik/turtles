@@ -5,13 +5,13 @@ import { ALL_LANDSCAPE_INITIATIVES_PORTAL_URL } from './constants';
 import './landscape-init-map.scss';
 
 interface ILandscapeContainerProps {
-  landscapeInitiativesData: Array<ILandscapeInitiative>;
-  selectedLandscapeInitiative: number;
+  landscapeInitiativesData?: Array<ILandscapeInitiative>;
+  selectedLandscapeInitiative?: number;
 }
 
 const LandscapeMapContainer = ({
-  landscapeInitiativesData,
-  selectedLandscapeInitiative,
+  landscapeInitiativesData = [],
+  selectedLandscapeInitiative = -1,
 }: ILandscapeContainerProps) => {
   const stateCode = useAppSelector((state) => state?.stateSlice?.stateCode);
   const initiativesWithWebMaps =
@@ -37,9 +37,14 @@ const LandscapeMapContainer = ({
           ALL_LANDSCAPE_INITIATIVES_PORTAL_URL
         }
       />
-      <div className='webmap' id='landscapeViewDiv' />
+      <div className='webmap' id='landscapeViewDiv' data-testid='lci-webmap' />
     </>
   );
 };
 
 export default LandscapeMapContainer;
+
+LandscapeMapContainer.defaultProps = {
+  landscapeInitiativesData: [],
+  selectedLandscapeInitiative: -1,
+};

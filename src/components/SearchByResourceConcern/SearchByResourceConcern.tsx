@@ -177,7 +177,7 @@ const SearchByResourceConcern = ({
   };
 
   return (
-    <div className={wrapperClassNames}>
+    <div className={wrapperClassNames} data-testid='rc-search'>
       <div className='search-by-resource-section'>
         <label
           className='usa-label resource-search-header'
