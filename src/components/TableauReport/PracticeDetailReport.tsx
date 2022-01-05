@@ -25,7 +25,7 @@ const PracticeDetailReport = ({ practiceCode, checkTableauIsEmpty }: any) => {
   const initViz = () => {
     const options = {
       device: 'desktop',
-      onFirstInteractive: function () {
+      onFirstInteractive: function checkEmpty() {
         verifyTableauIsEmpty(viz, checkTableauIsEmpty);
       },
     };

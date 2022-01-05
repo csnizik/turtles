@@ -3,15 +3,15 @@ const verifyTableauIsEmpty = (viz, setTableauIsEmpty) => {
   const workbook = viz.getWorkbook();
   const sheet = workbook.getActiveSheet().getWorksheets();
 
-  sheet.map(function (worksheet) {
+  sheet.map((worksheet) => {
     return worksheet
       .getSummaryDataAsync({ maxRows: 1 })
-      .then(function (table) {
+      .then((table) => {
         const dataLength = table.getData().length;
         if (dataLength === 0) setTableauIsEmpty(true);
         else setTableauIsEmpty(false);
       })
-      .otherwise(function () {
+      .otherwise(() => {
         setTableauIsEmpty(true);
       });
   });

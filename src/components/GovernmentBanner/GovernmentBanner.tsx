@@ -61,6 +61,7 @@ const GovernmentBanner = () => {
             </div>
             <div className='grid-col-fill tablet:grid-col-auto'>
               <button
+                type='button'
                 className='usa-accordion__button usa-banner__button'
                 aria-expanded='false'
                 aria-controls='gov-banner'

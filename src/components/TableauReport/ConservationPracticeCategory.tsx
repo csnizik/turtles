@@ -29,7 +29,7 @@ const ConservationPracticeCategory = ({ pageName, setIsTableauEmpty }: any) => {
   const initViz = () => {
     const options = {
       device: 'desktop',
-      onFirstInteractive: function () {
+      onFirstInteractive: function checkEmpty() {
         verifyTableauIsEmpty(viz, setIsTableauEmpty);
       },
     };

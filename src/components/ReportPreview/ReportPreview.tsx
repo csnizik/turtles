@@ -1,5 +1,5 @@
 import './report-preview.scss';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import ConservationPracticeOverview from '../ConservationPracticeOverview';
 import ImplementationExtent from '../ImplementationExtent';
 import SpecificationsAndTools from '../SpecificationsAndTools';
@@ -198,7 +198,6 @@ const ReportPreview = ({
   };
 
   useEffect(() => {
-    console.log('preview re-rendered, trigger is: ', isPdTableauEmpty);
     mountedRef.current = true;
     return () => {
       mountedRef.current = false;
