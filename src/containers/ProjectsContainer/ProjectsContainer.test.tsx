@@ -154,7 +154,6 @@ describe('Projects container is rendered correctly', () => {
         })
         .closest('img')
     ).toHaveAttribute('src', '../images/landscapeMap.png');
-    screen.debug();
     expect(
       fireEvent.click(
         getByText((content: any, element: any) => {

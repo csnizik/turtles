@@ -95,7 +95,7 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
   };
 
   return (
-    <div className='search-by-location-section'>
+    <div className='search-by-location-section' data-testid='location-search'>
       <div className='search-labels'>
         <label
           className='usa-label location-search-header'
