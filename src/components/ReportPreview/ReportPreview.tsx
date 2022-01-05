@@ -7,6 +7,7 @@ import ResourceConcernTreated from '../ResourceConcernTreated';
 import ProjectListItem from '../ProjectListGroup/ProjectListItem';
 import ApplicationImpacts from '../ApplicationImpacts';
 import ConservationPracticeVideo from '../ConservationPracticeVideo';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 
 const ReportPreview = ({
   selectedStateName,
@@ -21,7 +22,9 @@ const ReportPreview = ({
 }: any) => {
   const { data, error, isLoading, isSuccess, isError } = reportPreviewData;
   const mountedRef = useRef(true);
-  const [tableauChangedTrigger, setTableauTrigger] = useState(false);
+  const isPdTableauEmpty = useAppSelector(
+    (state) => state?.pdfGenSlice?.isPdTableauEmpty
+  );
 
   const renderProjInit = (projInit) => {
     const projInitList = projInit.data.map((item) => {
@@ -110,7 +113,7 @@ const ReportPreview = ({
                 <ImplementationExtent
                   data={data}
                   isSuccess={isSuccess}
-                  tableauTrigger={setTableauTrigger}
+                  isPdFromRPEmpty={isPdTableauEmpty}
                 />
               </div>
             )}
@@ -169,7 +172,11 @@ const ReportPreview = ({
             />
           </div>
           {choiceInputs.input2 && (
-            <ImplementationExtent data={data} isSuccess={isSuccess} />
+            <ImplementationExtent
+              data={data}
+              isSuccess={isSuccess}
+              isPdFromRPEmpty={isPdTableauEmpty}
+            />
           )}
           {choiceInputs.input3 && (
             <SpecificationsAndTools
@@ -191,17 +198,12 @@ const ReportPreview = ({
   };
 
   useEffect(() => {
-    console.log('preview re-rendered, trigger is: ', tableauChangedTrigger);
+    console.log('preview re-rendered, trigger is: ', isPdTableauEmpty);
     mountedRef.current = true;
     return () => {
       mountedRef.current = false;
     };
-  }, [
-    choiceInputs,
-    rcTreatedInputs,
-    selectedProjInitData,
-    tableauChangedTrigger,
-  ]);
+  }, [choiceInputs, rcTreatedInputs, selectedProjInitData, isPdTableauEmpty]);
 
   return (
     <div data-testid='preview' className='pdf-preview'>

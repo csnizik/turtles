@@ -9,7 +9,6 @@ const verifyTableauIsEmpty = (viz, setTableauIsEmpty) => {
       .then(function (table) {
         const dataLength = table.getData().length;
         if (dataLength === 0) setTableauIsEmpty(true);
-        //calling function passed from ImplementationExtent
         else setTableauIsEmpty(false);
       })
       .otherwise(function () {

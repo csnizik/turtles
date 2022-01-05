@@ -27,7 +27,6 @@ const PracticeDetailReport = ({ practiceCode, checkTableauIsEmpty }: any) => {
       device: 'desktop',
       onFirstInteractive: function () {
         verifyTableauIsEmpty(viz, checkTableauIsEmpty);
-        if (fromPdfReport) viz.dispose();
       },
     };
     const containerDiv = document.getElementById('practice-detail');
@@ -37,7 +36,7 @@ const PracticeDetailReport = ({ practiceCode, checkTableauIsEmpty }: any) => {
   };
 
   useEffect(() => {
-    initViz();
+    if (!fromPdfReport) initViz();
   }, [stateAbbrInRedux, fromPdfReport]);
 
   return (
