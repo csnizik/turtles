@@ -41,7 +41,6 @@ interface IMapComponentProps {
 
 const MapComponent = ({ stateCode }: IMapComponentProps) => {
   const dispatch = useAppDispatch();
-
   const alaskaView = useRef({} as MapView);
   const caribbeanView = useRef({} as MapView);
   const hawaiiView = useRef({} as MapView);
@@ -49,7 +48,6 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
   const homeBtn = useRef({} as Home);
   const history: any = useHistory();
   const location: any = useLocation();
-
   const usaStateLayer = useRef(usaFeatureLayer1);
 
   const checkAndClearHighlightedGraphics = () => {
@@ -126,7 +124,13 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
       HAWAII_ZOOM,
       HAWAII_CENTER
     );
-  }, [alaskaView.current, caribbeanView.current, hawaiiView.current]);
+  }, [
+    mapRef,
+    alaskaView.current,
+    caribbeanView.current,
+    hawaiiView.current,
+    stateCode,
+  ]);
 
   // Handle map interactions
   useEffect(() => {

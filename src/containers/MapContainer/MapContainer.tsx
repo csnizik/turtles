@@ -11,8 +11,12 @@ interface IMapProps {
 }
 /* eslint-disable no-unused-vars */
 const MapContainer = ({ stateCode, setSelectedLocation }: IMapProps) => {
+  // Exclude Alaska, Caribbean and Hawaii
+  const exclusiveStateCodes: string[] = ['02', '15', '72'];
   const compositeViewClassNames = classNames('esri-widget', {
-    hiddenView: stateCode !== DEFAULT_NATIONAL_LOCATION,
+    hiddenView:
+      stateCode !== DEFAULT_NATIONAL_LOCATION &&
+      !exclusiveStateCodes.includes(stateCode),
   });
   return (
     <>
