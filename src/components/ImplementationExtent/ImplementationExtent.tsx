@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../Redux/hooks/hooks';
+import { useState, useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
 import { useGetPaymentScheduleLinksQuery } from '../../Redux/services/api';
 import Spinner from '../Spinner/Spinner';
 import './implementation-extent.scss';
@@ -7,10 +8,12 @@ import image from './image/newLinkIcon.svg';
 import PracticeDetailReport from '../TableauReport/PracticeDetailReport';
 import EquipPracticeCertificationTrend from '../TableauReport/EquipPracticeCertificationTrend';
 import EquipPracticeObligationTrend from '../TableauReport/EquipPracticeObligationTrend';
+import { pdTabStatus } from '../../Redux/Slice/pdfGenSlice';
 
 interface IImplementationExtentProps {
   data: any;
   isSuccess: boolean;
+  isPdFromRPEmpty?: boolean;
 }
 
 const intro: string =
@@ -19,11 +22,13 @@ const intro: string =
 const ImplementationExtent = ({
   data,
   isSuccess,
+  isPdFromRPEmpty,
 }: IImplementationExtentProps) => {
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
-
+  const [isPdTableauEmpty, setIsPdTableauEmpty] = useState(false);
   const practiceName = (data && data.practiceName) || '';
 
+  const dispatch = useAppDispatch();
   const results = useGetPaymentScheduleLinksQuery(stateInfo?.stateCode);
   const data2 = results.data || [];
   const error2 = results.error;
@@ -38,6 +43,14 @@ const ImplementationExtent = ({
     }
     return practiceName;
   };
+
+  const setTableauStatus = (status: boolean) => {
+    setIsPdTableauEmpty(status);
+  };
+
+  useEffect(() => {
+    if (!isPdFromRPEmpty) dispatch(pdTabStatus(isPdTableauEmpty));
+  }, [isPdTableauEmpty]);
 
   const renderObligations = () => {
     return (
@@ -76,13 +89,17 @@ const ImplementationExtent = ({
   };
 
   const renderAcresImplemented = () => {
+    if (isPdTableauEmpty || isPdFromRPEmpty) return null;
     return (
       <div className='arces-implemented'>
         <h3>Acres Implemented from 2014 - 2020</h3>
         <hr />
         <div className='graph-container'>
           <div className='acres-graph'>
-            <PracticeDetailReport practiceCode={data.practiceCode} />
+            <PracticeDetailReport
+              practiceCode={data.practiceCode}
+              checkTableauIsEmpty={setTableauStatus}
+            />
           </div>
           <div className='link'>
             <Link
@@ -153,3 +170,7 @@ const ImplementationExtent = ({
 };
 
 export default ImplementationExtent;
+
+ImplementationExtent.defaultProps = {
+  isPdFromRPEmpty: false,
+};
