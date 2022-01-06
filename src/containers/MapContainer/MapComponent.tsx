@@ -23,7 +23,7 @@ import {
   VIEW_DIV,
   viewConstraints,
 } from './constants';
-import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
+import { useAppDispatch } from '../../Redux/hooks/hooks';
 import { setSearch } from '../../Redux/Slice/practiceSlice';
 import { usaFeatureLayer1 } from './layers';
 import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
@@ -35,11 +35,13 @@ interface IMapProps {
   map: WebMap;
 }
 
-const MapComponent = () => {
+interface IMapComponentProps {
+  stateCode: string;
+}
+
+const MapComponent = ({ stateCode }: IMapComponentProps) => {
   const dispatch = useAppDispatch();
-  const stateCode =
-    useAppSelector((state) => state.stateSlice?.stateCode) ||
-    DEFAULT_NATIONAL_LOCATION;
+
   const alaskaView = useRef({} as MapView);
   const caribbeanView = useRef({} as MapView);
   const hawaiiView = useRef({} as MapView);
@@ -81,47 +83,50 @@ const MapComponent = () => {
         zoom: 4,
       });
 
-      // Alaska composite view
-      alaskaView.current = createMapView(
-        'akViewDiv',
-        mapRef.current.map,
-        alaskaExtent,
-        ALASKA_ZOOM,
-        ALASKA_CENTER
-      );
-
-      // Caribbean composite view
-      caribbeanView.current = createMapView(
-        'cariViewDiv',
-        mapRef.current.map,
-        caribbeanExtent,
-        CARIBBEAN_ZOOM,
-        CARIBBEAN_CENTER
-      );
-
-      // Hawaii composite view
-      hawaiiView.current = createMapView(
-        'hiViewDiv',
-        mapRef.current.map,
-        hawaiiExtent,
-        HAWAII_ZOOM,
-        HAWAII_CENTER
-      );
-
       homeBtn.current = new Home({
         view,
       });
 
       mapRef.current.view = view;
+
       // Add the home button to the top left corner of the view
       mapRef.current.view.ui?.add(homeBtn.current, 'top-left');
-
       // Add composite views for Alaska, Hawaii, and Caribbean
-      mapRef.current.view.ui?.add('akViewDiv', 'bottom-left');
-      mapRef.current.view.ui?.add('hiViewDiv', 'bottom-left');
-      mapRef.current.view.ui?.add('cariViewDiv', 'bottom-left');
+      mapRef.current.view.ui?.add(
+        ['akViewDiv', 'cariViewDiv', 'hiViewDiv'],
+        'bottom-left'
+      );
     }
   }, [mapRef]);
+
+  useEffect(() => {
+    // Alaska composite view
+    alaskaView.current = createMapView(
+      'akViewDiv',
+      mapRef.current.map,
+      alaskaExtent,
+      ALASKA_ZOOM,
+      ALASKA_CENTER
+    );
+
+    // Caribbean composite view
+    caribbeanView.current = createMapView(
+      'cariViewDiv',
+      mapRef.current.map,
+      caribbeanExtent,
+      CARIBBEAN_ZOOM,
+      CARIBBEAN_CENTER
+    );
+
+    // Hawaii composite view
+    hawaiiView.current = createMapView(
+      'hiViewDiv',
+      mapRef.current.map,
+      hawaiiExtent,
+      HAWAII_ZOOM,
+      HAWAII_CENTER
+    );
+  }, [alaskaView.current, caribbeanView.current, hawaiiView.current]);
 
   // Handle map interactions
   useEffect(() => {
@@ -392,6 +397,7 @@ const MapComponent = () => {
           DEFAULT_NATIONAL_LOCATION
         );
         history.replace(updatedPathName);
+
         // Refresh project list to U.S
         dispatch(
           setSearch({
