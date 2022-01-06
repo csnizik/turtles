@@ -27,7 +27,7 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
   const handleChange = (practiceId: number, practiceCategoryId: number) => {
     dispatch(setSpecificPractice(practiceId));
     dispatch(setPracticeCategory(practiceCategoryId));
-    history.push(`${category}/${practiceId}`);
+    history?.push(`${category}/${practiceId}`);
     setPracticeViewType({
       allPractices: false,
       practiceCategories: false,
@@ -53,7 +53,7 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
   const practiceCategory: any = data && data[0];
 
   return (
-    <div className='heading'>
+    <div className='heading' data-testid='Practice-Card'>
       {practiceCategory?.practices?.length !== 1 ? (
         <h2>{practiceCategory?.practices?.length} Practices</h2>
       ) : (
@@ -68,11 +68,12 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
               practiceCategory.practices.map((practice: any) => {
                 const imageName = practice?.practiceImagePath || 'default.jpg';
                 return (
-                  <div className='full-document-box'>
+                  <div className='full-document-box' data-testid='Practice-box'>
                     <div className='list-box'>
                       <div className='info-box'>
                         <button
                           type='button'
+                          aria-label={practice.practiceName}
                           onClick={() =>
                             handleChange(
                               practice.practiceId,
@@ -93,7 +94,7 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
                             ? `../../images/landscape-initiatives-images/${imageName}`
                             : `../../images/landscape-initiatives-images/default.jpg`
                         }
-                        alt=''
+                        alt={practice.practiceName}
                       />
                     </div>
                   </div>
