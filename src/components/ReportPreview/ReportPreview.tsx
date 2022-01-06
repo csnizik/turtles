@@ -7,6 +7,7 @@ import ResourceConcernTreated from '../ResourceConcernTreated';
 import ProjectListItem from '../ProjectListGroup/ProjectListItem';
 import ApplicationImpacts from '../ApplicationImpacts';
 import ConservationPracticeVideo from '../ConservationPracticeVideo';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 
 const ReportPreview = ({
   selectedStateName,
@@ -21,6 +22,10 @@ const ReportPreview = ({
 }: any) => {
   const { data, error, isLoading, isSuccess, isError } = reportPreviewData;
   const mountedRef = useRef(true);
+  const isPdTableauEmpty = useAppSelector(
+    (state) => state?.pdfGenSlice?.isPdTableauEmpty
+  );
+
   const renderProjInit = (projInit) => {
     const projInitList = projInit.data.map((item) => {
       return (
@@ -105,7 +110,11 @@ const ReportPreview = ({
           <div data-testid='implementation-extent'>
             {choiceInputs.input2 && (
               <div>
-                <ImplementationExtent data={data} isSuccess={isSuccess} />
+                <ImplementationExtent
+                  data={data}
+                  isSuccess={isSuccess}
+                  isPdFromRPEmpty={isPdTableauEmpty}
+                />
               </div>
             )}
           </div>
@@ -163,7 +172,11 @@ const ReportPreview = ({
             />
           </div>
           {choiceInputs.input2 && (
-            <ImplementationExtent data={data} isSuccess={isSuccess} />
+            <ImplementationExtent
+              data={data}
+              isSuccess={isSuccess}
+              isPdFromRPEmpty={isPdTableauEmpty}
+            />
           )}
           {choiceInputs.input3 && (
             <SpecificationsAndTools
@@ -189,7 +202,7 @@ const ReportPreview = ({
     return () => {
       mountedRef.current = false;
     };
-  }, [choiceInputs, rcTreatedInputs, selectedProjInitData]);
+  }, [choiceInputs, rcTreatedInputs, selectedProjInitData, isPdTableauEmpty]);
 
   return (
     <div data-testid='preview' className='pdf-preview'>

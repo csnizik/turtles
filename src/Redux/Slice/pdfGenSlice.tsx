@@ -2,10 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 interface IdisableState {
   enablePdfGen: boolean;
+  isPdTableauEmpty: boolean;
 }
 
 const initialState = {
   enablePdfGen: false,
+  isPdTableauEmpty: false,
 } as IdisableState;
 
 /* eslint-disable no-param-reassign */
@@ -19,12 +21,13 @@ const pdfGenSlice = createSlice({
     enablePdfGenState(state) {
       state.enablePdfGen = true;
     },
+    pdTabStatus(state, action) {
+      state.isPdTableauEmpty = action.payload;
+    },
   },
 });
 /* eslint-disable no-param-reassign */
 
-export const {
-  disablePdfGenState,
-  enablePdfGenState,
-} = pdfGenSlice.actions;
+export const { disablePdfGenState, enablePdfGenState, pdTabStatus } =
+  pdfGenSlice.actions;
 export default pdfGenSlice.reducer;
