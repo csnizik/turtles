@@ -9,7 +9,7 @@ afterEach(() => {
 });
 let store;
 //commented out as testing needs more work to be completed
-describe('Verify ProductListGroup is rendered correctly', () => {
+describe('Verify ProjectListGroup is rendered correctly', () => {
   beforeEach(() => {
     const searchInput = {
       state_county_code: '08',
@@ -17,7 +17,7 @@ describe('Verify ProductListGroup is rendered correctly', () => {
     store = createTestStore();
     store.dispatch(setSearch(searchInput));
   });
-  xtest('Verify project component', async () => {
+  test('Verify project component', async () => {
     // Create a redux store
     const { findByText } = render(
       <Provider store={store}>

@@ -11,7 +11,7 @@ afterEach(() => {
 describe('Verify SearchByConservationPractice is rendered correctly', () => {
   const store = createTestStore();
 
-  test('Verify SearchByConservationPractice component', async () => {
+  xtest('Verify SearchByConservationPractice component', async () => {
     // Create a redux store
     const { findByText } = render(
       <Provider store={store}>
