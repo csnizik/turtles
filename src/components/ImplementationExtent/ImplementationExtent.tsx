@@ -7,13 +7,13 @@ import './implementation-extent.scss';
 import image from './image/newLinkIcon.svg';
 import PracticeDetailReport from '../TableauReport/PracticeDetailReport';
 import EquipPracticeCertificationTrend from '../TableauReport/EquipPracticeCertificationTrend';
-import EquipPracticeObligationTrend from '../TableauReport/EquipPracticeObligationTrend';
-import { pdTabStatus } from '../../Redux/Slice/pdfGenSlice';
+import { eipcTabStatus, pdTabStatus } from '../../Redux/Slice/pdfGenSlice';
 
 interface IImplementationExtentProps {
   data: any;
   isSuccess: boolean;
   isPdFromRPEmpty?: boolean;
+  isEipcFromRPEmpty?: boolean;
 }
 
 const intro: string =
@@ -23,9 +23,11 @@ const ImplementationExtent = ({
   data,
   isSuccess,
   isPdFromRPEmpty,
+  isEipcFromRPEmpty,
 }: IImplementationExtentProps) => {
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
   const [isPdTableauEmpty, setIsPdTableauEmpty] = useState(false);
+  const [isEipcTableauEmpty, setIsEipcTableauEmpty] = useState(false);
   const practiceName = (data && data.practiceName) || '';
 
   const dispatch = useAppDispatch();
@@ -44,13 +46,13 @@ const ImplementationExtent = ({
     return practiceName;
   };
 
-  const setTableauStatus = (status: boolean) => {
-    setIsPdTableauEmpty(status);
-  };
-
   useEffect(() => {
     if (!isPdFromRPEmpty) dispatch(pdTabStatus(isPdTableauEmpty));
   }, [isPdTableauEmpty]);
+
+  useEffect(() => {
+    if (!isEipcFromRPEmpty) dispatch(eipcTabStatus(isEipcTableauEmpty));
+  }, [isEipcTableauEmpty]);
 
   const renderObligations = () => {
     return (
@@ -61,10 +63,8 @@ const ImplementationExtent = ({
           <div className='obligation-graph'>
             <EquipPracticeCertificationTrend
               practiceCode={data?.practiceCode}
+              checkTableauIsEmpty={setIsEipcTableauEmpty}
             />
-          </div>
-          <div className='obligation-graph'>
-            <EquipPracticeObligationTrend practiceCode={data?.practiceCode} />
           </div>
           <div className='link'>
             <Link
@@ -98,7 +98,7 @@ const ImplementationExtent = ({
           <div className='acres-graph'>
             <PracticeDetailReport
               practiceCode={data.practiceCode}
-              checkTableauIsEmpty={setTableauStatus}
+              checkTableauIsEmpty={setIsPdTableauEmpty}
             />
           </div>
           <div className='link'>
@@ -173,4 +173,5 @@ export default ImplementationExtent;
 
 ImplementationExtent.defaultProps = {
   isPdFromRPEmpty: false,
+  isEipcFromRPEmpty: false,
 };
