@@ -2,10 +2,11 @@ import { useEffect } from 'react';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import { tableauGraph } from '../../common/typedconstants.common';
 import './tableau-report.scss';
+import verifyTableauIsEmpty from '../../common/util/tableau';
 
 let viz;
 const { tableau } = window;
-const PracticeDetailReport = ({ practiceCode }: any) => {
+const PracticeDetailReport = ({ practiceCode, checkTableauIsEmpty }: any) => {
   const stateAbbrInRedux = useAppSelector(
     (state: any) => state?.stateSlice?.stateAbbreviation
   );
@@ -18,14 +19,15 @@ const PracticeDetailReport = ({ practiceCode }: any) => {
       ? ''
       : stateAbbrInRedux;
 
-  const finalLink = fromPdfReport
-    ? tableauGraph.PracticeDetail.imageLink
-    : tableauGraph.PracticeDetail.link;
-  const srcLink: string = `${finalLink}=${stateAbbr}&Practice Code=${practiceCode}`;
+  const srcLink: string = `${tableauGraph.PracticeDetail.link}=${stateAbbr}&Practice Code=${practiceCode}`;
+  const srcImageLink: string = `${tableauGraph.PracticeDetail.imageLink}=${stateAbbr}&Practice Code=${practiceCode}`;
 
   const initViz = () => {
     const options = {
       device: 'desktop',
+      onFirstInteractive: function checkEmpty() {
+        verifyTableauIsEmpty(viz, checkTableauIsEmpty);
+      },
     };
     const containerDiv = document.getElementById('practice-detail');
     // eslint-disable-next-line no-new
@@ -34,13 +36,13 @@ const PracticeDetailReport = ({ practiceCode }: any) => {
   };
 
   useEffect(() => {
-    initViz();
+    if (!fromPdfReport) initViz();
   }, [stateAbbrInRedux, fromPdfReport]);
 
   return (
     <div className='tableau-report-container' id='practice-detail'>
       {fromPdfReport && (
-        <img src={srcLink} alt={tableauGraph.PracticeDetail.displayName} />
+        <img src={srcImageLink} alt={tableauGraph.PracticeDetail.displayName} />
       )}
     </div>
   );
