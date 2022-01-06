@@ -10,8 +10,11 @@
       margin: 0;
     }
     p {
-      font-size: 17px;
-      font-weight: $medium-weight;
+      font-family: Roboto;
+      font-style: normal;
+      color: $nrcs-dark;
+      font-size: 22px;
+      font-weight: $semi-heavy-weight;
       background-color: $light-grey-205;
       border-top: solid $dark-grey 1px;
       padding: 2.5rem 2.188rem;
@@ -52,7 +55,7 @@
   }
 
   @media only screen and (max-width: $small-screen) {
-    .search-criteria div{
+    .search-criteria div {
       margin: 0rem 0rem 0rem -1rem;
       padding: 0rem 0rem 0rem 2.25rem;
       display: block;
