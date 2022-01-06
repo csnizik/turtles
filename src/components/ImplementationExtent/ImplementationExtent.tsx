@@ -55,6 +55,7 @@ const ImplementationExtent = ({
   }, [isEipcTableauEmpty]);
 
   const renderObligations = () => {
+    if (isEipcTableauEmpty || isEipcFromRPEmpty) return null;
     return (
       <div className='obligations'>
         <h3>Obligations and Practices Implemented from 2014 - 2020</h3>

@@ -6,7 +6,10 @@ import verifyTableauIsEmpty from '../../common/util/tableau';
 
 const { tableau } = window;
 let viz;
-const EquipPracticeCertificationTrend = ({ practiceCode, checkTableauIsEmpty }: any) => {
+const EquipPracticeCertificationTrend = ({
+  practiceCode,
+  checkTableauIsEmpty,
+}: any) => {
   let stateName = useAppSelector(
     (state: any) => state?.stateSlice?.stateNameDisplay
   );
