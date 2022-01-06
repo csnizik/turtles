@@ -24,7 +24,7 @@ const ConservationPracticeIntroduction = ({
 
   // eslint-disable-next-line consistent-return
   const EQUIPRender = () => {
-    if (title === 'Conservation Practice') {
+    if (title === 'Conservation Practices') {
       return (
         <>
           <div className='internal-box-two'>
@@ -61,7 +61,7 @@ const ConservationPracticeIntroduction = ({
         className={isCpCategoryTableauEmpty ? 'hidden-content' : 'explore-box'}
       >
         <div className='internal-box'>
-          {(title === 'Conservation Practice' && (
+          {(title === 'Conservation Practices' && (
             <RegionalConservationPractice />
           )) || (
             <ConservationPracticeCategory
