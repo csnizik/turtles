@@ -25,6 +25,9 @@ const ReportPreview = ({
   const isPdTableauEmpty = useAppSelector(
     (state) => state?.pdfGenSlice?.isPdTableauEmpty
   );
+  const isEipcTableauEmpty = useAppSelector(
+    (state) => state?.pdfGenSlice?.isEipcTableauEmpty
+  );
 
   const renderProjInit = (projInit) => {
     const projInitList = projInit.data.map((item) => {
@@ -114,6 +117,7 @@ const ReportPreview = ({
                   data={data}
                   isSuccess={isSuccess}
                   isPdFromRPEmpty={isPdTableauEmpty}
+                  isEipcFromRPEmpty={isEipcTableauEmpty}
                 />
               </div>
             )}
@@ -176,6 +180,7 @@ const ReportPreview = ({
               data={data}
               isSuccess={isSuccess}
               isPdFromRPEmpty={isPdTableauEmpty}
+              isEipcFromRPEmpty={isEipcTableauEmpty}
             />
           )}
           {choiceInputs.input3 && (
@@ -202,7 +207,7 @@ const ReportPreview = ({
     return () => {
       mountedRef.current = false;
     };
-  }, [choiceInputs, rcTreatedInputs, selectedProjInitData, isPdTableauEmpty]);
+  }, [choiceInputs, rcTreatedInputs, selectedProjInitData, isPdTableauEmpty, isEipcTableauEmpty]);
 
   return (
     <div data-testid='preview' className='pdf-preview'>

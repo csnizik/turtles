@@ -101,14 +101,8 @@ export const tableauGraph = {
     link: process.env.REACT_APP_EquipPracticeCertificationTrendLink,
     imageLink: process.env.REACT_APP_EquipPracticeCertificationTrendImageLink,
   },
-  EquipPracticeObligationTrend: {
-    id: 4,
-    displayName: 'Equip Practice Obligation Trend',
-    link: process.env.REACT_APP_EquipPracticeObligationTrendLink,
-    imageLink: process.env.REACT_APP_EquipPracticeObligationTrendImageLink,
-  },
   TopPracticesEQUIPOpenData: {
-    id: 5,
+    id: 4,
     displayName: 'Top Practices Equip Open Data',
     link: process.env.REACT_APP_TopPracticesEQUIPOpenDataLink,
   },
