@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import { tableauGraph } from '../../common/typedconstants.common';
-import verifyTableauIsEmpty from '../../common/util/tableau';
+import verifyTableauIsEmpty, { verifyUrlIsValid } from '../../common/util/tableau';
 import './tableau-report.scss';
 
 const { tableau } = window;
@@ -21,6 +21,7 @@ const EquipPracticeCertificationTrend = ({ practiceCode, checkTableauIsEmpty }: 
   const srcLink: string = `${finalLink}=${stateName}&practice_code_num=${practiceCode}&:tabs=no`;
 
   const initViz = () => {
+    if (!verifyUrlIsValid(srcLink)) checkTableauIsEmpty(true);
     const options = {
       device: 'desktop',
       onFirstInteractive: function checkEmpty() {
