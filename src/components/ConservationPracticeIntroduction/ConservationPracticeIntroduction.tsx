@@ -16,7 +16,7 @@ const ConservationPracticeIntroduction = ({
 }: IIntroProps) => {
   // eslint-disable-next-line consistent-return
   const EQUIPRender = () => {
-    if (title === 'Conservation Practice') {
+    if (title === 'Conservation Practices') {
       return (
         <>
           <div className='internal-box-two'>
@@ -51,7 +51,7 @@ const ConservationPracticeIntroduction = ({
 
       <div className='explore-box'>
         <div className='internal-box'>
-          {(title === 'Conservation Practice' && (
+          {(title === 'Conservation Practices' && (
             <RegionalConservationPractice />
           )) || <ConservationPracticeCategory pageName={title} />}
           <div className='link'>
