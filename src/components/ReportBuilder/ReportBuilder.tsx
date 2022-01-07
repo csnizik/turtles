@@ -221,7 +221,7 @@ const ReportBuilder = ({
             onChange={handleInput}
           />
           <label className='usa-checkbox__label' htmlFor='input2'>
-            {`Support for ${reportPreviewData?.practiceName} in ${stateName}`}
+            {`Support for ${reportPreviewData?.practiceName} in the ${stateName}`}
           </label>
         </div>
 
