@@ -18,14 +18,7 @@ const LandscapeInitiativesCard = ({
           className='related-initiatives-name'
           data-testid='subInitiativesTitle'
         >
-          <a
-            aria-label='Link to NRCS website for landscape sub-initiatives'
-            href={link}
-            target='_blank'
-            rel='noreferrer'
-          >
-            {title}
-          </a>
+          {title}
         </div>
       </div>
       <div
@@ -39,6 +32,17 @@ const LandscapeInitiativesCard = ({
           })
         }
       </div>
+      <p className='link-text'>
+        <a
+          aria-label='Link to NRCS website for landscape sub-initiatives'
+          href={link}
+          target='_blank'
+          rel='noreferrer'
+        >
+          {`Go to the ${title} detail page `}
+        </a>
+        <i className='fa fa-external-link' aria-hidden='true' />
+      </p>
     </div>
   );
 };
