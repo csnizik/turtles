@@ -147,6 +147,7 @@ const Pagination = ({
 
           {currentPage < indexOfLastPage - 3 ? (
             <li
+              aria-label='pagination-overflow'
               className='usa-pagination__item usa-pagination__overflow'
               role='presentation'
             >

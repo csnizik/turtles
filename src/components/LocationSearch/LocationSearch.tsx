@@ -62,7 +62,10 @@ const LocationSearch = () => {
   };
 
   return (
-    <section className='grid-row location-search-container' data-testid='location-search'>
+    <section
+      className='grid-row location-search-container'
+      data-testid='location-search'
+    >
       <div className='desktop:grid-col-4 img-row margin-right-3'>
         <img src='images/homePageUSMap.png' alt='Map of the United States' />
       </div>
@@ -79,11 +82,13 @@ const LocationSearch = () => {
             className='usa-select'
             id='stateSelect'
             name='stateOptions'
-            data-testid='select-option'
+            data-testid='select'
             onChange={handleDropdownSelection}
             value={selectedState}
           >
-            <option value='00'>{t('location-search.national')}</option>
+            <option data-testid='select-option' value='00'>
+              {t('location-search.national')}
+            </option>
             {stateStatus.isSuccess &&
               stateStatus.data &&
               stateStatus.data.map((state: IStateDropdownOption) => {

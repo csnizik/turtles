@@ -37,6 +37,7 @@ describe('Practice Card is rendered correctly', () => {
 
     await findByText('Conservation Crop Rotation');
     await findByText('Cover Crop');
+    await findByText('2 Practices');
 
     expect(screen.getAllByTestId('Practice-box')).toBeDefined();
 
@@ -54,6 +55,17 @@ describe('Practice Card is rendered correctly', () => {
       '../../images/landscape-initiatives-images/Conservation-Crop-Rotation.png'
     );
 
+    expect(
+      screen.getByText((content: any, element: any) => {
+        if (element) {
+          return (
+            element.tagName.toLowerCase() === 'p' &&
+            content.startsWith('Crops included in conservation crop rotation')
+          );
+        }
+      })
+    );
+
     const secondButton = screen.getByLabelText('Cover Crop');
     fireEvent.click(secondButton);
 
@@ -66,6 +78,17 @@ describe('Practice Card is rendered correctly', () => {
     ).toHaveAttribute(
       'src',
       '../../images/landscape-initiatives-images/Cover-Crop.png'
+    );
+
+    expect(
+      screen.getByText((content: any, element: any) => {
+        if (element) {
+          return (
+            element.tagName.toLowerCase() === 'p' &&
+            content.startsWith('Cover and green manure crops are grown')
+          );
+        }
+      })
     );
   });
 });

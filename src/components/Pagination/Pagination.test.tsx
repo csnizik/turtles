@@ -41,40 +41,46 @@ describe('Pagination is rendered correctly', () => {
     expect(screen.getByTestId('Pagination')).toBeDefined();
   });
 
-  test('Should display the Pagination Title without state name', () => {
+  test('Should display the Pagination Title with state name', () => {
     expect(
       screen.getByText('11 - 20 of 770 projects for Colorado')
     ).toBeDefined();
+  });
 
+  test('Should display Pagination numbers and buttons', () => {
     const onClick = jest.fn();
     const { getByText } = render(<Button onClick={onClick} />);
     const { getByLabelText } = render(<Button onClick={onClick} />);
 
-    fireEvent.click(getByLabelText(/Page 2/i));
-    fireEvent.click(getByLabelText(/Page 77/i));
-
-    fireEvent.click(getByLabelText(/Page 3/i));
-    fireEvent.keyUp(getByLabelText(/Page 3/i));
-
+    expect(screen.getByLabelText('Previous page')).toBeDefined();
+    expect(screen.getByTestId('prev-button')).toBeDefined();
     fireEvent.click(getByText(/Previous/i));
     fireEvent.keyUp(getByText(/Previous/i));
 
+    expect(screen.getByLabelText('Page 1')).toBeDefined();
+    fireEvent.click(getByLabelText(/Page 1/i));
+
+    expect(screen.getByLabelText('Page 2')).toBeDefined();
+    fireEvent.click(getByLabelText(/Page 2/i));
+
+    expect(screen.getByLabelText('Page 3')).toBeDefined();
+    fireEvent.click(getByLabelText(/Page 3/i));
+    fireEvent.keyUp(getByLabelText(/Page 3/i));
+
+    expect(screen.getByLabelText('pagination-overflow')).toBeDefined();
+
+    expect(screen.getByLabelText('Page 76')).toBeDefined();
+    fireEvent.click(getByLabelText(/Page 76/i));
+
+    expect(screen.getByLabelText('Page 77')).toBeDefined();
+    fireEvent.click(getByLabelText(/Page 77/i));
+
+    expect(screen.getByLabelText('Next page')).toBeDefined();
+    expect(screen.getByTestId('next-button')).toBeDefined();
+
     fireEvent.click(getByText(/Next/i));
     fireEvent.keyUp(getByText(/Next/i));
-    screen.debug();
   });
-  // test('Should display the Pagination Component', () => {
-  //   expect(screen.getByTestId('Pagination')).toBeDefined();
-  // });
-  // test('Should NOT display the Previous Pagination Button', () => {
-  //   expect(screen.getByTestId('prev-button')).toBeDefined();
-  // });
-  // test('Should display the First Pagination Number', () => {
-  //   expect(screen.getByTestId('first-pagination')).toBeDefined();
-  // });
-  // test('Should display the Next Pagination Button', () => {
-  //   expect(screen.getByTestId('next-button')).toBeDefined();
-  // });
 });
 
 describe('Pagination is rendered correctly', () => {
