@@ -197,10 +197,7 @@ const ConservationPracticeContainer = ({
               {t('associated-projects-initiatives.description')}
             </p>
           </div>
-          <ProjectListGroup
-            isMapDisplayed={false}
-            selectedPracticeName={currentPractice?.practiceName}
-          />
+          <ProjectListGroup isMapDisplayed={false} />
         </>
       );
     }
