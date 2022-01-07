@@ -17,6 +17,7 @@ const ConservationPracticeIntroduction = ({
 }: IIntroProps) => {
   const [isCpCategoryTableauEmpty, setIsCpCategoryTableauEmpty] =
     useState(false);
+  const [isTpEquipTableauEmpty, setIsTpEquipTableauEmpty] = useState(false);
 
   const setCpCategoryTableauStatus = (status: boolean) => {
     setIsCpCategoryTableauEmpty(status);
@@ -24,11 +25,14 @@ const ConservationPracticeIntroduction = ({
 
   // eslint-disable-next-line consistent-return
   const EQUIPRender = () => {
-    if (title === 'Conservation Practices') {
+    if (title === 'Conservation Practice') {
+      if (isTpEquipTableauEmpty) return null;
       return (
         <>
           <div className='internal-box-two'>
-            <TopPracticesEQUIPOpenData />
+            <TopPracticesEQUIPOpenData
+              setIsTableauEmpty={setIsTpEquipTableauEmpty}
+            />
             <div className='link'>
               <Link
                 aria-label='environmental quality incentives program opens in new window'
