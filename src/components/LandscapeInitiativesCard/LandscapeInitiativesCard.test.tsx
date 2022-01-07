@@ -33,10 +33,14 @@ describe('Landscape Initiatives Card is rendered correctly', () => {
   });
   test('Should test Landscape Initiatives Card Link', () => {
     expect(
-      screen.getByText('Golden-Winged Warbler').closest('a')
+      screen
+        .getByText('Go to the Golden-Winged Warbler detail page')
+        .closest('a')
     ).toHaveAttribute('href', 'https://www.nrcs.usda.gov/');
     expect(
-      screen.getByText('Golden-Winged Warbler').closest('a')
+      screen
+        .getByText('Go to the Golden-Winged Warbler detail page')
+        .closest('a')
     ).toHaveAttribute('target', '_blank');
   });
 });

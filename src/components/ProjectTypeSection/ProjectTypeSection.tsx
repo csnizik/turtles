@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import LandscapeInitiativesCard from '../LandscapeInitiativesCard';
 import {
   NRCS_CONSERVATION_INITIATIVES_URL,
@@ -18,6 +19,7 @@ const ProjectTypeSection = ({
   projectType,
   landscapeInitiativesData,
 }: IProjectTypeProps) => {
+  const { t } = useTranslation();
   const initiativesWithWebMaps =
     (landscapeInitiativesData &&
       landscapeInitiativesData.data &&
@@ -126,16 +128,22 @@ const ProjectTypeSection = ({
                       }
                     )
               }
-              {foundInitiative?.lci_id === 10 && selectedLandscapeInitiative > 0
-                ? subInitiative?.map((item: any) => (
+              {foundInitiative?.lci_id === 10 &&
+              selectedLandscapeInitiative > 0 ? (
+                <>
+                  <h3 className='wlfw-header'>
+                    {t('projects-page.wlfw-header')}
+                  </h3>
+                  {subInitiative?.map((item: any) => (
                     /* eslint-disable */
                     <LandscapeInitiativesCard
                       link={item.lci_page_link}
                       title={item.lci_name}
                       description={item.lci_description}
                     />
-                  ))
-                : null}
+                  ))}
+                </>
+              ) : null}
             </div>
           </div>
         );
