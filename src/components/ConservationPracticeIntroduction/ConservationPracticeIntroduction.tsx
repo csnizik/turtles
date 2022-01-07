@@ -25,7 +25,7 @@ const ConservationPracticeIntroduction = ({
 
   // eslint-disable-next-line consistent-return
   const EQUIPRender = () => {
-    if (title === 'Conservation Practice') {
+    if (title === 'Conservation Practices') {
       if (isTpEquipTableauEmpty) return null;
       return (
         <>
