@@ -42,7 +42,7 @@ const ProjectListItem = ({
         <p>{title}</p>
         {owner && renderProjectDetails(owner, statesInvolved, year)}
         <p>{description}</p>
-        <p>
+        <p className='link-text'>
           <a href={link} target='_blank' rel='noreferrer'>
             {t('associated-projects-initiatives.link')}
           </a>
