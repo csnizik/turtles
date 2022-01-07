@@ -17,7 +17,7 @@ describe('Verify ProductListGroup is rendered correctly', () => {
     store = createTestStore();
     store.dispatch(setSearch(searchInput));
   });
-  xtest('Verify project component', async () => {
+  test('Verify project component', async () => {
     // Create a redux store
     const { findByText } = render(
       <Provider store={store}>
@@ -30,7 +30,7 @@ describe('Verify ProductListGroup is rendered correctly', () => {
   });
 });
 
-describe('Exception Message is rendered correctly', () => {
+xdescribe('Exception Message is rendered correctly', () => {
   beforeEach(() => {
     render(
       <ProjectListGroup
