@@ -6,6 +6,7 @@ import { useAppSelector } from '../../Redux/hooks/hooks';
 const ConservationPracticeVideo = ({ selectedPracticeId }: any) => {
   const { data, error, isLoading, isSuccess, isError } =
     useGetPracticeVideoLinkQuery(selectedPracticeId);
+
   const fromPdfReport = useAppSelector(
     (state) => state?.pdfGenSlice?.enablePdfGen
   );
@@ -30,18 +31,17 @@ const ConservationPracticeVideo = ({ selectedPracticeId }: any) => {
                 />
               )}
               {fromPdfReport && (
-                <>
-                  <img
-                    alt='Conservation Practice Dummy'
-                    src={
-                      // eslint-disable-next-line global-require
-                      require('./image/conservation-practice-video.png').default
-                    }
+                <a href={data[0].videoLink} className='video-outer-link'> 
+                  <iframe
+                    name= 'iframeVideo'
+                    className='videoImg'
+                    src={data[0].videoLink}
+                    frameBorder='1'
+                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; X-Frame-Options'
+                    allowFullScreen
+                    title={`${data[0].videoName} Embedded Video`} 
                   />
-                  <a href={data[0].videoLink} className='video-outer-link'>
-                    {data[0].videoName} Video
-                  </a>
-                </>
+                </a>
               )}
             </div>
             <div className='video-description'>

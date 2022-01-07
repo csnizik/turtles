@@ -1,5 +1,6 @@
 import './conservation-practice-introduction.scss';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import image from './image/open-in-new.svg';
 import TopPracticesEQUIPOpenData from '../TableauReport/TopPracticesEQUIPOpenData';
 import ConservationPracticeCategory from '../TableauReport/ConservationPracticeCategory';
@@ -14,9 +15,16 @@ const ConservationPracticeIntroduction = ({
   introductionParagraph,
   title,
 }: IIntroProps) => {
+  const [isCpCategoryTableauEmpty, setIsCpCategoryTableauEmpty] =
+    useState(false);
+
+  const setCpCategoryTableauStatus = (status: boolean) => {
+    setIsCpCategoryTableauEmpty(status);
+  };
+
   // eslint-disable-next-line consistent-return
   const EQUIPRender = () => {
-    if (title === 'Conservation Practice') {
+    if (title === 'Conservation Practices') {
       return (
         <>
           <div className='internal-box-two'>
@@ -49,11 +57,18 @@ const ConservationPracticeIntroduction = ({
         <p>{introductionParagraph}</p>
       </div>
 
-      <div className='explore-box'>
+      <div
+        className={isCpCategoryTableauEmpty ? 'hidden-content' : 'explore-box'}
+      >
         <div className='internal-box'>
-          {(title === 'Conservation Practice' && (
+          {(title === 'Conservation Practices' && (
             <RegionalConservationPractice />
-          )) || <ConservationPracticeCategory pageName={title} />}
+          )) || (
+            <ConservationPracticeCategory
+              pageName={title}
+              setIsTableauEmpty={setCpCategoryTableauStatus}
+            />
+          )}
           <div className='link'>
             <Link
               aria-label='environmental quality incentives program opens in new window'

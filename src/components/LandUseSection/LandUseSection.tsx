@@ -156,6 +156,7 @@ const LandUseSection = ({
             return (
               <div className='usa-checkbox' key={landId}>
                 <input
+                  data-testid={`checkbox${landId}`}
                   className='usa-checkbox__input'
                   id={`landUseOption${landId}`}
                   type='checkbox'
@@ -176,6 +177,7 @@ const LandUseSection = ({
                   className='fas fa-info-circle'
                   aria-hidden='true'
                   id={`tooltip${landId}`}
+                  data-testid={`tooltp${landId}`}
                 />
                 <Tooltip
                   placement='right'

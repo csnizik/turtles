@@ -62,7 +62,7 @@ const LocationSearch = () => {
   };
 
   return (
-    <section className='grid-row location-search-container'>
+    <section className='grid-row location-search-container' data-testid='location-search'>
       <div className='desktop:grid-col-4 img-row margin-right-3'>
         <img src='images/homePageUSMap.png' alt='Map of the United States' />
       </div>
