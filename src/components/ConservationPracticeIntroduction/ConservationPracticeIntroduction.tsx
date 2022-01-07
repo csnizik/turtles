@@ -26,11 +26,13 @@ const ConservationPracticeIntroduction = ({
   // eslint-disable-next-line consistent-return
   const EQUIPRender = () => {
     if (title === 'Conservation Practice') {
-      if(isTpEquipTableauEmpty) return null;
+      if (isTpEquipTableauEmpty) return null;
       return (
         <>
           <div className='internal-box-two'>
-            <TopPracticesEQUIPOpenData setIsTableauEmpty={setIsTpEquipTableauEmpty}/>
+            <TopPracticesEQUIPOpenData
+              setIsTableauEmpty={setIsTpEquipTableauEmpty}
+            />
             <div className='link'>
               <Link
                 aria-label='environmental quality incentives program opens in new window'
@@ -63,7 +65,7 @@ const ConservationPracticeIntroduction = ({
         className={isCpCategoryTableauEmpty ? 'hidden-content' : 'explore-box'}
       >
         <div className='internal-box'>
-          {(title === 'Conservation Practice' && (
+          {(title === 'Conservation Practices' && (
             <RegionalConservationPractice />
           )) || (
             <ConservationPracticeCategory
