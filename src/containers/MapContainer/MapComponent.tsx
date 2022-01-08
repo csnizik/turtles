@@ -167,15 +167,18 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
       );
 
       mapRef.current.map.loadAll();
-
-      hawaiiView.current.map.layers.items[0].refresh();
-      hawaiiView.current.map.layers.items[1].refresh();
-
-      alaskaView.current.map.layers.items[0].refresh();
-      alaskaView.current.map.layers.items[1].refresh();
-
-      caribbeanView.current.map.layers.items[0].refresh();
-      caribbeanView.current.map.layers.items[1].refresh();
+      if (hawaiiView.current.map?.layers?.items.length >= 2) {
+        hawaiiView.current.map.layers.items[0].refresh();
+        hawaiiView.current.map.layers.items[1].refresh();
+      }
+      if (alaskaView.current.map?.layers?.items.length >= 2) {
+        alaskaView.current.map.layers.items[0].refresh();
+        alaskaView.current.map.layers.items[1].refresh();
+      }
+      if (caribbeanView.current.map?.layers?.items.length >= 2) {
+        caribbeanView.current.map.layers.items[0].refresh();
+        caribbeanView.current.map.layers.items[1].refresh();
+      }
     }
   }, [stateCode]);
 
@@ -296,11 +299,7 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
 
   // Handle alaska composite view interactions
   useEffect(() => {
-    alaskaView.current.on('pointer-down', () => {
-      console.log('down down');
-    });
     alaskaView.current.when(() => {
-      console.log('asa: ', alaskaView.current);
       alaskaView.current.on('click', (event) => {
         alaskaView.current.hitTest(event).then((response) => {
           checkAndClearHighlightedGraphics();
@@ -348,7 +347,6 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
 
   // Handle caribbean composite view interactions
   useEffect(() => {
-    console.log('cari: ', caribbeanView.current);
     caribbeanView.current.when(() => {
       caribbeanView.current.on('click', (event) => {
         caribbeanView.current.hitTest(event).then((response) => {
@@ -357,7 +355,6 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
             const graphicsList = response.results;
 
             if (graphicsList.length) {
-              console.log('graphic list: ', graphicsList);
               const selectedState: Graphic = graphicsList[0].graphic;
 
               const objectId = selectedState.attributes.OBJECTID;
