@@ -42,9 +42,9 @@ interface IMapComponentProps {
 
 const MapComponent = ({ stateCode }: IMapComponentProps) => {
   const dispatch = useAppDispatch();
-  const alaskaView = useRef({} as MapView);
-  const caribbeanView = useRef({} as MapView);
-  const hawaiiView = useRef({} as MapView);
+  const alaskaView = useRef({} as any);
+  const caribbeanView = useRef({} as any);
+  const hawaiiView = useRef({} as any);
   const mapRef = useRef({} as IMapProps);
   const homeBtn = useRef({} as Home);
   const history: any = useHistory();
@@ -165,20 +165,6 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
         ['akViewDiv', 'hiViewDiv', 'cariViewDiv'],
         'bottom-left'
       );
-
-      mapRef.current.map.loadAll();
-      if (hawaiiView.current.map?.layers?.items.length >= 2) {
-        hawaiiView.current.map.layers.items[0].refresh();
-        hawaiiView.current.map.layers.items[1].refresh();
-      }
-      if (alaskaView.current.map?.layers?.items.length >= 2) {
-        alaskaView.current.map.layers.items[0].refresh();
-        alaskaView.current.map.layers.items[1].refresh();
-      }
-      if (caribbeanView.current.map?.layers?.items.length >= 2) {
-        caribbeanView.current.map.layers.items[0].refresh();
-        caribbeanView.current.map.layers.items[1].refresh();
-      }
     }
   }, [stateCode]);
 
@@ -343,7 +329,7 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
         });
       });
     });
-  }, [alaskaView]);
+  }, [mapRef.current, alaskaView.current]);
 
   // Handle caribbean composite view interactions
   useEffect(() => {
@@ -391,7 +377,7 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
         });
       });
     });
-  }, [caribbeanView]);
+  }, [mapRef.current, caribbeanView.current]);
 
   // Handle hawaii composite view interactions
   useEffect(() => {
@@ -439,7 +425,7 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
         });
       });
     });
-  }, [hawaiiView]);
+  }, [mapRef.current, hawaiiView.current]);
 
   // Handle interaction with 'Home' button
   useEffect(() => {
