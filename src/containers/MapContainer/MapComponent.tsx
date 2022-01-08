@@ -42,9 +42,9 @@ interface IMapComponentProps {
 
 const MapComponent = ({ stateCode }: IMapComponentProps) => {
   const dispatch = useAppDispatch();
-  const alaskaView = useRef({} as any);
-  const caribbeanView = useRef({} as any);
-  const hawaiiView = useRef({} as any);
+  const alaskaView = useRef({} as MapView);
+  const caribbeanView = useRef({} as MapView);
+  const hawaiiView = useRef({} as MapView);
   const mapRef = useRef({} as IMapProps);
   const homeBtn = useRef({} as Home);
   const history: any = useHistory();
@@ -391,7 +391,7 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
         });
       });
     });
-  }, [mapRef.current, caribbeanView.current]);
+  }, [caribbeanView]);
 
   // Handle hawaii composite view interactions
   useEffect(() => {
