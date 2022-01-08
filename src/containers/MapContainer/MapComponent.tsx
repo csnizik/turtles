@@ -134,7 +134,6 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
       previousValues.stateCode !== DEFAULT_NATIONAL_LOCATION &&
       stateCode === DEFAULT_NATIONAL_LOCATION
     ) {
-      console.log('I was hit...');
       // Alaska composite view
       alaskaView.current = createMapView(
         'akViewDiv',
@@ -162,16 +161,23 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
         CARIBBEAN_CENTER
       );
 
+      mapRef.current.view.ui?.add(
+        ['akViewDiv', 'hiViewDiv', 'cariViewDiv'],
+        'bottom-left'
+      );
+
+      mapRef.current.map.loadAll();
+
+      hawaiiView.current.map.layers.items[0].refresh();
+      hawaiiView.current.map.layers.items[1].refresh();
+
+      alaskaView.current.map.layers.items[0].refresh();
+      alaskaView.current.map.layers.items[1].refresh();
+
       caribbeanView.current.map.layers.items[0].refresh();
       caribbeanView.current.map.layers.items[1].refresh();
     }
-  }, [
-    mapRef,
-    alaskaView.current,
-    caribbeanView.current,
-    hawaiiView.current,
-    stateCode,
-  ]);
+  }, [stateCode]);
 
   // Handle map interactions
   useEffect(() => {
@@ -290,7 +296,11 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
 
   // Handle alaska composite view interactions
   useEffect(() => {
+    alaskaView.current.on('pointer-down', () => {
+      console.log('down down');
+    });
     alaskaView.current.when(() => {
+      console.log('asa: ', alaskaView.current);
       alaskaView.current.on('click', (event) => {
         alaskaView.current.hitTest(event).then((response) => {
           checkAndClearHighlightedGraphics();
