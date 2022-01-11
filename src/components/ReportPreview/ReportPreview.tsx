@@ -207,7 +207,13 @@ const ReportPreview = ({
     return () => {
       mountedRef.current = false;
     };
-  }, [choiceInputs, rcTreatedInputs, selectedProjInitData, isPdTableauEmpty, isEipcTableauEmpty]);
+  }, [
+    choiceInputs,
+    rcTreatedInputs,
+    selectedProjInitData,
+    isPdTableauEmpty,
+    isEipcTableauEmpty,
+  ]);
 
   return (
     <div data-testid='preview' className='pdf-preview'>

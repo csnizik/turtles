@@ -128,6 +128,7 @@ const ProjectTypeSection = ({
                       }
                     )
               }
+
               {foundInitiative?.lci_id === 10 &&
               selectedLandscapeInitiative > 0 ? (
                 <>

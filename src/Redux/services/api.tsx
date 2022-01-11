@@ -13,7 +13,6 @@ import {
   IRCCategory,
   IRCRequestBody,
   IAssociatedPracticeList,
-  IProjectType,
 } from '../../common/types';
 
 export const api = createApi({
@@ -24,9 +23,12 @@ export const api = createApi({
     getResources: builder.query<IResourceConcernList[], void>({
       query: () => '/resourceConcern/concern',
     }),
-    getNationalOverviewByPractice: builder.query<IConservationPractice, void>({
-      query: (practiceId) => `/nationalPracticeOverview/${practiceId}`,
-    }),
+    getNationalOverviewByPractice: builder.query<IConservationPractice, number>(
+      {
+        query: (practiceId: number) =>
+          `/nationalPracticeOverview/${practiceId}`,
+      }
+    ),
 
     getStateList: builder.query<IStateDropdownOption[], void>({
       query: () => `/states`,
@@ -75,8 +77,8 @@ export const api = createApi({
         body: data,
       }),
     }),
-    getPracticeVideoLink: builder.query<IPracticeVideo[], void>({
-      query: (practiceId) => `/video/${practiceId}`,
+    getPracticeVideoLink: builder.query<IPracticeVideo[], number>({
+      query: (practiceId: number) => `/video/${practiceId}`,
     }),
     getRelatedResourceConcernCategory: builder.query<
       IRCCategory,
@@ -97,10 +99,6 @@ export const api = createApi({
     getPaymentScheduleLinks: builder.query<any, any>({
       query: (stateCode) => `/payment/link?stateCode=${stateCode}`,
     }),
-    // Retrieve project types
-    getProjectTypes: builder.query<IProjectType[], void>({
-      query: () => `project/projectTypes`,
-    }),
   }),
 });
 export const {
@@ -117,7 +115,6 @@ export const {
   useGetPracticeVideoLinkQuery,
   useGetRelatedResourceConcernCategoryQuery,
   useGetAssociatedPracticeQuery,
-  useGetProjectTypesQuery,
   useGetPaymentScheduleLinksQuery,
   usePostLandscapeInitiativesQuery,
 } = api;

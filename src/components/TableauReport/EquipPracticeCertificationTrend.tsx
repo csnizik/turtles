@@ -5,6 +5,7 @@ import verifyTableauIsEmpty, {
   verifyUrlIsValid,
 } from '../../common/util/tableau';
 import './tableau-report.scss';
+import verifyTableauIsEmpty from '../../common/util/tableau';
 
 const { tableau } = window;
 let viz;
