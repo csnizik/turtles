@@ -27,7 +27,7 @@ const pdfGenSlice = createSlice({
       state.isPdTableauEmpty = action.payload;
     },
     eipcTabStatus(state, action) {
-          state.isEipcTableauEmpty = action.payload;
+      state.isEipcTableauEmpty = action.payload;
     }
   },
 });

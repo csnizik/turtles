@@ -12,6 +12,10 @@
   height: 175px;
   width: 225px;
   background-color: $white;
+
+  &.hiddenView {
+    display: none;
+  }
 }
 
 #hiViewDiv {
@@ -20,6 +24,10 @@
   height: 150px;
   width: 220px;
   background-color: $white;
+
+  &.hiddenView {
+    display: none;
+  }
 }
 
 #cariViewDiv {
@@ -28,6 +36,10 @@
   height: 120px;
   width: 175px;
   background-color: $white;
+
+  &.hiddenView {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: $macbook-pro-screen) {
