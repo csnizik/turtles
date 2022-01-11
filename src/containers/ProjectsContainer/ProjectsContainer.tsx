@@ -194,7 +194,10 @@ const ProjectsContainer = () => {
             <div className='projets-map-section'>
               <hr />
               <h3>{t('projects-page.map-instructions')}</h3>
-              <MapContainer setSelectedLocation={setSelectedLocation} />
+              <MapContainer
+                stateCode={stateCode}
+                setSelectedLocation={setSelectedLocation}
+              />
             </div>
 
             <ProjectListGroup isMapDisplayed />
