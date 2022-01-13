@@ -42,7 +42,7 @@ const ImplementationExtent = ({
 
   const getHeaderText = () => {
     if (practiceName) {
-      return `Support for ${practiceName} in the ${stateInfo?.stateNameDisplay}`;
+      return `Support for the ${practiceName} practice in ${stateInfo?.stateNameDisplay === 'U.S.'?'the U.S.':stateInfo?.stateNameDisplay}`;
     }
     return practiceName;
   };
