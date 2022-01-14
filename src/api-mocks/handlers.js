@@ -22,7 +22,7 @@ const projHandler = rest.post(postProjectSearchData, async (req, res, ctx) => {
   return res(ctx.json(coloradoProjects));
 });
 
-const stateHandler = rest.post(StateListData, async (req, res, ctx) => {
+const stateHandler = rest.get(StateListData, async (req, res, ctx) => {
   return res(ctx.json(statesList));
 });
 

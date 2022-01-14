@@ -2,7 +2,6 @@ import LocationSearch from './LocationSearch';
 import {
   cleanup,
   fireEvent,
-  getAllByTestId,
   render,
   screen,
 } from '../../common/test-utils/test_utils';
@@ -18,8 +17,8 @@ let store;
 describe('Location Search is rendered correctly', () => {
   store = createTestStore();
 
-  test('Should select a location from the dropdown', async () => {
-    const { getAllByTestId } = render(
+  test('Should test dropdown and state selection functionality', async () => {
+    const { findByText } = render(
       <Provider store={store}>
         <LocationSearch />
       </Provider>
@@ -27,31 +26,27 @@ describe('Location Search is rendered correctly', () => {
     expect(
       screen.getByText('location-search.labels.select-state')
     ).toBeInTheDocument();
+
     fireEvent.click(screen.getByText('location-search.national'));
+
+    await findByText('Colorado');
+
+    fireEvent.click(screen.getByText('Colorado'));
 
     fireEvent.change(screen.getByTestId('select'), {
       target: { value: '08' },
     });
-    let options = getAllByTestId('select-option');
 
-    screen.debug();
+    expect(screen.getByTestId('select')).toHaveValue('08');
 
-    // fireEvent.click(screen.getByText('Colorado'));
-    // expect(screen.getByTestId('select-option')).toHaveValue('08');
-  });
-
-  test('Should test the Explore Location button', () => {
-    const { findByText } = render(
-      <Provider store={store}>
-        <LocationSearch />
-      </Provider>
-    );
-
-    const button = screen.getByRole('button');
-    fireEvent.click(button);
+    fireEvent.click(screen.getByRole('button'));
 
     expect(
-      screen.getByText('location-search.explore-location')
-    ).toBeInTheDocument();
+      screen
+        .getByRole('img', {
+          name: /Map of the United States/i,
+        })
+        .closest('img')
+    ).toHaveAttribute('src', 'images/homePageUSMap.png');
   });
 });
