@@ -2,7 +2,9 @@ import { useEffect } from 'react';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import { tableauGraph } from '../../common/typedconstants.common';
 import './tableau-report.scss';
-import verifyTableauIsEmpty from '../../common/util/tableau';
+import verifyTableauIsEmpty, {
+  verifyUrlIsValid,
+} from '../../common/util/tableau';
 
 let viz;
 const { tableau } = window;
@@ -23,6 +25,10 @@ const PracticeDetailReport = ({ practiceCode, checkTableauIsEmpty }: any) => {
   const srcImageLink: string = `${tableauGraph.PracticeDetail.imageLink}=${stateAbbr}&Practice Code=${practiceCode}`;
 
   const initViz = () => {
+    if (!verifyUrlIsValid(srcLink)) {
+      checkTableauIsEmpty(true);
+      return;
+    }
     const options = {
       device: 'desktop',
       onFirstInteractive: function checkEmpty() {

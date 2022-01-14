@@ -187,19 +187,17 @@ const ConservationPracticeContainer = ({
           <div className='title-section' data-testid='pratice-title'>
             <div className='top-title'>
               <h4 className='project-title'>
-                {stateInfo?.stateNameDisplay || 'U.S.'}{' '}
+                {stateInfo?.stateNameDisplay || 'The U.S.'}{' '}
                 {t('associated-projects-initiatives.title')}{' '}
                 {currentPractice?.practiceName}
+                {' practice'}
               </h4>
             </div>
             <p className='intro-desc'>
               {t('associated-projects-initiatives.description')}
             </p>
           </div>
-          <ProjectListGroup
-            isMapDisplayed={false}
-            selectedPracticeName={currentPractice?.practiceName}
-          />
+          <ProjectListGroup isMapDisplayed={false} />
         </>
       );
     }

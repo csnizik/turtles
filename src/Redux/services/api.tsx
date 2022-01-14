@@ -13,7 +13,6 @@ import {
   IRCCategory,
   IRCRequestBody,
   IAssociatedPracticeList,
-  IProjectType,
 } from '../../common/types';
 
 export const api = createApi({

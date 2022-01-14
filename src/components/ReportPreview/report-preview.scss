@@ -76,7 +76,9 @@ div#preview-content {
     border-radius: 6px;
     margin: 0rem 0rem 1rem 0rem;
     padding: 0 1.563rem 0 1.563rem;
-
+    content: '';
+    clear: both;
+    display: table;
     a {
       text-decoration: none;
     }
@@ -101,9 +103,13 @@ div#preview-content {
       margin: 1.563rem 0 0.625rem 0;
       font-size: 18px;
       font-weight: $heavier-weight;
-      color: $usda-blue;
     }
-
+    .link-text {
+      float: right;
+      content: '';
+      clear: both;
+      display: table;
+    }
     p:nth-of-type(2) {
       font-size: 16px;
       margin: 1.25rem 0 1.563rem 0;

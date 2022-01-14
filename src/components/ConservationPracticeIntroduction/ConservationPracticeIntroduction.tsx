@@ -15,8 +15,10 @@ const ConservationPracticeIntroduction = ({
   introductionParagraph,
   title,
 }: IIntroProps) => {
+  const [isRcTableauEmpty, setIsRcTableauEmpty] = useState(false);
   const [isCpCategoryTableauEmpty, setIsCpCategoryTableauEmpty] =
     useState(false);
+  const [isTpEquipTableauEmpty, setIsTpEquipTableauEmpty] = useState(false);
 
   const setCpCategoryTableauStatus = (status: boolean) => {
     setIsCpCategoryTableauEmpty(status);
@@ -24,11 +26,14 @@ const ConservationPracticeIntroduction = ({
 
   // eslint-disable-next-line consistent-return
   const EQUIPRender = () => {
-    if (title === 'Conservation Practice') {
+    if (title === 'Conservation Practices') {
+      if (isTpEquipTableauEmpty) return null;
       return (
         <>
           <div className='internal-box-two'>
-            <TopPracticesEQUIPOpenData />
+            <TopPracticesEQUIPOpenData
+              setIsTableauEmpty={setIsTpEquipTableauEmpty}
+            />
             <div className='link'>
               <Link
                 aria-label='environmental quality incentives program opens in new window'
@@ -58,11 +63,23 @@ const ConservationPracticeIntroduction = ({
       </div>
 
       <div
-        className={isCpCategoryTableauEmpty ? 'hidden-content' : 'explore-box'}
+        className={
+          title !== 'Conservation Practices' && isCpCategoryTableauEmpty
+            ? 'hidden-content'
+            : 'explore-box'
+        }
       >
-        <div className='internal-box'>
-          {(title === 'Conservation Practice' && (
-            <RegionalConservationPractice />
+        <div
+          className={
+            title === 'Conservation Practices' && isRcTableauEmpty
+              ? 'hidden-content'
+              : 'internal-box'
+          }
+        >
+          {(title === 'Conservation Practices' && (
+            <RegionalConservationPractice
+              setIsTableauEmpty={setIsRcTableauEmpty}
+            />
           )) || (
             <ConservationPracticeCategory
               pageName={title}

@@ -53,7 +53,7 @@ const ConservationPracticeLandingScreen = ({
     <div>
       <ConservationPracticeIntroduction
         introductionParagraph={intro}
-        title='Conservation Practice'
+        title='Conservation Practices'
       />
       <div className='landing-screen-categories'>
         <ConservationPracticesCategories

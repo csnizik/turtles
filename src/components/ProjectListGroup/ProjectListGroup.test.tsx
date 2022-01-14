@@ -30,7 +30,7 @@ describe('Verify ProjectListGroup is rendered correctly', () => {
   });
 });
 
-describe('Exception Message is rendered correctly', () => {
+xdescribe('Exception Message is rendered correctly', () => {
   beforeEach(() => {
     render(
       <ProjectListGroup

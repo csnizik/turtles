@@ -1,11 +1,17 @@
 import { useEffect } from 'react';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import { tableauGraph } from '../../common/typedconstants.common';
+import verifyTableauIsEmpty, {
+  verifyUrlIsValid,
+} from '../../common/util/tableau';
 import './tableau-report.scss';
 
 const { tableau } = window;
 let viz;
-const EquipPracticeCertificationTrend = ({ practiceCode }: any) => {
+const EquipPracticeCertificationTrend = ({
+  practiceCode,
+  checkTableauIsEmpty,
+}: any) => {
   let stateName = useAppSelector(
     (state: any) => state?.stateSlice?.stateNameDisplay
   );
@@ -20,8 +26,15 @@ const EquipPracticeCertificationTrend = ({ practiceCode }: any) => {
   const srcLink: string = `${finalLink}=${stateName}&practice_code_num=${practiceCode}&:tabs=no`;
 
   const initViz = () => {
+    if (!verifyUrlIsValid(srcLink)) {
+      checkTableauIsEmpty(true);
+      return;
+    }
     const options = {
       device: 'desktop',
+      onFirstInteractive: function checkEmpty() {
+        verifyTableauIsEmpty(viz, checkTableauIsEmpty);
+      },
     };
     const containerDiv = document.getElementById(
       'equip-practice-certification-trend'
@@ -32,7 +45,7 @@ const EquipPracticeCertificationTrend = ({ practiceCode }: any) => {
   };
 
   useEffect(() => {
-    initViz();
+    if (!fromPdfReport) initViz();
   }, [stateName, fromPdfReport]);
 
   return (

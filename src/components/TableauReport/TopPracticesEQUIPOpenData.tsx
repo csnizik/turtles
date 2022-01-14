@@ -2,10 +2,11 @@ import { useEffect, useRef } from 'react';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import { tableauGraph } from '../../common/typedconstants.common';
 import './tableau-report.scss';
+import { verifyUrlIsValid } from '../../common/util/tableau';
 
 let viz;
 const { tableau } = window;
-const TopPracticesEQUIPOpenData = () => {
+const TopPracticesEQUIPOpenData = ({ setIsTableauEmpty }: any) => {
   const ref = useRef(null);
   let stateName = useAppSelector(
     (state: any) => state?.stateSlice?.stateNameDisplay
@@ -15,6 +16,10 @@ const TopPracticesEQUIPOpenData = () => {
   const srcLink: string = `${tableauGraph.TopPracticesEQUIPOpenData?.link}=${stateName}&:tabs=no`;
 
   const initViz = () => {
+    if (!verifyUrlIsValid(srcLink)) {
+      setIsTableauEmpty(true);
+      return;
+    }
     const options = {
       device: 'desktop',
     };
