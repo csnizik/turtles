@@ -240,7 +240,10 @@ const ReportBuilder = ({
         </div>
 
         <div className='builder-title'>
-          {`${stateName} Cover Crop Projects and Initiatives`}
+          {stateName === 'U.S.' ? 'The U.S.' : stateName}{' '}
+          {'Projects & Initiatives Using the '}
+          {reportPreviewData?.practiceName}
+          {' practice'}
         </div>
         <div className='projects-initiatives-list'>
           {buildProjectsInitiativesCheckboxList(projectsInitiativesData)}

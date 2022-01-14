@@ -1,7 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import { tableauGraph } from '../../common/typedconstants.common';
-import verifyTableauIsEmpty from '../../common/util/tableau';
+import verifyTableauIsEmpty, {
+  verifyUrlIsValid,
+} from '../../common/util/tableau';
 import './tableau-report.scss';
 
 declare global {
@@ -27,6 +29,10 @@ const ConservationPracticeCategory = ({ pageName, setIsTableauEmpty }: any) => {
   }=${stateAbbr}&Measure=${pageName.replace('&', '%26')}`;
 
   const initViz = () => {
+    if (!verifyUrlIsValid(srcLink)) {
+      setIsTableauEmpty(true);
+      return;
+    }
     const options = {
       device: 'desktop',
       onFirstInteractive: function checkEmpty() {
