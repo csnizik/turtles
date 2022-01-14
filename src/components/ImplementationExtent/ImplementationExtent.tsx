@@ -8,6 +8,7 @@ import image from './image/newLinkIcon.svg';
 import PracticeDetailReport from '../TableauReport/PracticeDetailReport';
 import EquipPracticeCertificationTrend from '../TableauReport/EquipPracticeCertificationTrend';
 import { eipcTabStatus, pdTabStatus } from '../../Redux/Slice/pdfGenSlice';
+import { tableauGraph } from '../../common/typedconstants.common';
 
 interface IImplementationExtentProps {
   data: any;
@@ -41,7 +42,7 @@ const ImplementationExtent = ({
 
   const getHeaderText = () => {
     if (practiceName) {
-      return `Support for ${practiceName} in ${stateInfo?.stateNameDisplay}`;
+      return `Support for the ${practiceName} practice in ${stateInfo?.stateNameDisplay === 'U.S.'?'the U.S.':stateInfo?.stateNameDisplay}`;
     }
     return practiceName;
   };
@@ -75,12 +76,11 @@ const ImplementationExtent = ({
               }}
               to={{
                 pathname:
-                  'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/programs/financial/eqip/',
+                tableauGraph.EquipPracticeCertificationTrend.link,
               }}
               target='_blank'
             >
-              More information about obligations and practices implemented for
-              this practice
+              More information about obligations for NRCS practices
               <img alt='link opens new window' src={image} />
             </Link>
           </div>
@@ -114,7 +114,7 @@ const ImplementationExtent = ({
               }}
               target='_blank'
             >
-              More information about acres implemented for this practice
+              More information about acres implemented for NRCS practices
               <img alt='link opens new window' src={image} />
             </Link>
           </div>
@@ -126,8 +126,8 @@ const ImplementationExtent = ({
   const renderPaymentScheduleLink = () => {
     const selectedLocation =
       stateInfo.stateCode === '00'
-        ? '2021 State Payment Schedules | NRCS'
-        : `${stateInfo?.stateNameDisplay} Payment Schedules | NRCS`;
+        ? 'Current State Payment Schedules | NRCS'
+        : `Current ${stateInfo?.stateNameDisplay} Payment Schedules | NRCS`;
     return (
       <div className='payment-schedule'>
         <h3 id='payment-title'>Payment Schedules</h3>

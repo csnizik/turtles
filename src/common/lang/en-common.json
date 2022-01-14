@@ -21,12 +21,12 @@
     "title": "Conservation Practice Data and Innovations"
   },
   "find-by-practice": {
-    "find-practices": "Find Practices",
+    "find-practices": "Search by practice",
     "heading": "Find U.S. Conservation Practices",
     "intro": "A conservation practice is a specific treatment, such as a structural or vegetative measure, or management technique, commonly used to meet specific needs in planning and implementing conservation, for which standards and specifications have been developed."
   },
   "search-page": {
-    "intro": "Search for information on practice impacts, practice extent, and impacts of practice implementation.",
+    "intro": "Search for information on practice applications, practice support, and impacts of practice implementation.",
     "quick-search": "Quick Search",
     "filter-by-land-use": "Filter By Land Use"
   },
@@ -38,7 +38,7 @@
   },
   "location-search": {
     "explore-by-location": "Explore NRCS Practices and Activities by Location",
-    "explore-location": "Explore Location",
+    "explore-location": "Search by location",
     "national": "National (default)",
     "introductory-paragraph": "Find conservation practices and NRCS sponsored projects & initiatives in your location.",
     "labels": {
@@ -82,7 +82,7 @@
     "description": "These are conservation practices that are commonly applied in association with this practice."
   },
   "associated-projects-initiatives": {
-    "title": "Projects & Initiatives Using",
+    "title": "Projects & Initiatives Using the",
     "description": "NRCS projects and initiatives on the ground assess the impacts of conservation practices, build scientific understanding of those impacts and the processes underlying them, explore the potential of innovative conservation activities, and coordinate planning efforts at larger scales to address resource concerns from a watershed or landscape perspective.",
     "link": "Go to the Conservation Innovation Grants project details page "
   },

@@ -187,9 +187,10 @@ const ConservationPracticeContainer = ({
           <div className='title-section' data-testid='pratice-title'>
             <div className='top-title'>
               <h4 className='project-title'>
-                {stateInfo?.stateNameDisplay || 'U.S.'}{' '}
+                {stateInfo?.stateNameDisplay === 'U.S.' ? 'The U.S.' : stateInfo?.stateNameDisplay}{' '}
                 {t('associated-projects-initiatives.title')}{' '}
                 {currentPractice?.practiceName}
+                {' practice'}
               </h4>
             </div>
             <p className='intro-desc'>
