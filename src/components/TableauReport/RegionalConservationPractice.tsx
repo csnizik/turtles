@@ -2,10 +2,11 @@ import { useEffect, useRef } from 'react';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import { tableauGraph } from '../../common/typedconstants.common';
 import './tableau-report.scss';
+import { verifyUrlIsValid } from '../../common/util/tableau';
 
 let viz;
 const { tableau } = window;
-const RegionalConservationPractice = () => {
+const RegionalConservationPractice = ({ setIsTableauEmpty }: any) => {
   const ref = useRef(null);
   const stateAbbrInRedux = useAppSelector(
     (state: any) => state?.stateSlice?.stateAbbreviation
@@ -17,6 +18,10 @@ const RegionalConservationPractice = () => {
   const srcLink: string = `${tableauGraph.RegionalConservationPractice?.link}=${stateAbbr}`;
 
   const initViz = () => {
+    if (!verifyUrlIsValid(srcLink)) {
+      setIsTableauEmpty(true);
+      return;
+    }
     const options = {
       device: 'desktop',
     };

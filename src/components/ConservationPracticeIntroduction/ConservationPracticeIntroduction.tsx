@@ -15,6 +15,7 @@ const ConservationPracticeIntroduction = ({
   introductionParagraph,
   title,
 }: IIntroProps) => {
+  const [isRcTableauEmpty, setIsRcTableauEmpty] = useState(false);
   const [isCpCategoryTableauEmpty, setIsCpCategoryTableauEmpty] =
     useState(false);
   const [isTpEquipTableauEmpty, setIsTpEquipTableauEmpty] = useState(false);
@@ -62,11 +63,23 @@ const ConservationPracticeIntroduction = ({
       </div>
 
       <div
-        className={isCpCategoryTableauEmpty ? 'hidden-content' : 'explore-box'}
+        className={
+          title !== 'Conservation Practices' && isCpCategoryTableauEmpty
+            ? 'hidden-content'
+            : 'explore-box'
+        }
       >
-        <div className='internal-box'>
+        <div
+          className={
+            title === 'Conservation Practices' && isRcTableauEmpty
+              ? 'hidden-content'
+              : 'internal-box'
+          }
+        >
           {(title === 'Conservation Practices' && (
-            <RegionalConservationPractice />
+            <RegionalConservationPractice
+              setIsTableauEmpty={setIsRcTableauEmpty}
+            />
           )) || (
             <ConservationPracticeCategory
               pageName={title}
