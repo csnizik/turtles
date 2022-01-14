@@ -65,7 +65,7 @@ const ReportPreview = ({
     return (
       <div className='proj-inits'>
         <h2 className='bold-header'>
-          {`${selectedStateName} ${data?.practiceName} Projects and Initiatives`}
+          {`${selectedStateName === 'U.S.' ? 'The U.S.' : selectedStateName} Projects & Initiatives Using the ${data?.practiceName} practice`}
         </h2>
         <p>
           NRCS projects and initiatives on the ground assess the impacts of
