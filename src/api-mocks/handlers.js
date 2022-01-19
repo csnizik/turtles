@@ -8,6 +8,7 @@ import {
   landUseSection,
   singleResults,
   practiceCategories,
+  statesList,
 } from './constants';
 
 const baseURL = 'http://localhost';
@@ -18,6 +19,7 @@ const getResourcesQuery = `${baseURL}/resourceConcern/concern`;
 const getRelatedResource = `${baseURL}/relatedResourceConcernCategory`;
 const landUseSectionData = `${baseURL}/categories`;
 const getCategoryQuery = `${baseURL}/practice/categories`;
+const StateListData = `${baseURL}/states`;
 
 const practiceHandler = rest.post(postSearchData, async (req, res, ctx) => {
   if (req.body.practice_category_id) {
@@ -30,6 +32,10 @@ const practiceHandler = rest.post(postSearchData, async (req, res, ctx) => {
 
 const projHandler = rest.post(postProjectSearchData, async (req, res, ctx) => {
   return res(ctx.json(coloradoProjects));
+});
+
+const stateHandler = rest.get(StateListData, async (req, res, ctx) => {
+  return res(ctx.json(statesList));
 });
 
 const initHandler = rest.post(
@@ -63,6 +69,7 @@ const getCategoryHandler = rest.get(getCategoryQuery, async (req, res, ctx) => {
 
 export const handlers = [
   initHandler,
+  stateHandler,
   projHandler,
   practiceHandler,
   resourceHandler,

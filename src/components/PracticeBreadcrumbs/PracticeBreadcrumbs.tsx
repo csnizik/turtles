@@ -33,7 +33,7 @@ const PracticeBreadcrumbs = ({
         dispatch(setPracticeCategory(-1));
         dispatch(setSpecificPractice(-1));
         setPracticeViewType({ ...defaultPracticeViews, allPractices: true });
-        history.push(`/${stateCode}/ConservationPractices`);
+        history?.push(`/${stateCode}/ConservationPractices`);
         break;
       }
       // Selected a practice category
@@ -42,7 +42,7 @@ const PracticeBreadcrumbs = ({
           ...defaultPracticeViews,
           practiceCategories: true,
         });
-        history.push(
+        history?.push(
           `/${stateCode}/ConservationPractices/${currentPracticeCategory.practiceCategoryId}`
         );
         break;
@@ -60,10 +60,12 @@ const PracticeBreadcrumbs = ({
     <nav
       className='usa-breadcrumb margin-top-1 margin-left-3 crumbs-container'
       aria-label='Conservation practice breadcrumbs'
+      data-testid='PracticeBreadcrumbs'
     >
       <ol className='usa-breadcrumb__list'>
         <li
           className='usa-breadcrumb__list-item'
+          aria-label='PracticeCategory-breadcrumb'
           onClick={() => handleNavigateBreadcrumb(0)}
           onKeyUp={() => handleNavigateBreadcrumb(0)}
           role='presentation'
@@ -81,12 +83,13 @@ const PracticeBreadcrumbs = ({
           )}
         </li>
 
-        {currentView.individualPractice &&
+        {currentView?.individualPractice &&
         currentSpecificPractice &&
         currentPractice ? (
           <>
             <li
               className='usa-breadcrumb__list-item'
+              aria-label='Practice-breadcrumb'
               onClick={() => handleNavigateBreadcrumb(1)}
               onKeyUp={() => handleNavigateBreadcrumb(1)}
               role='presentation'

@@ -10,9 +10,12 @@ module.exports = {
     '\\.svg': '<rootDir>/src/__mocks__/svgrMock.js',
     '\\.png': '<rootDir>/src/__mocks__/svgrMock.js',
   },
-  setupFilesAfterEnv: ['<rootDir>/src/setupTestSuite.js'],
+  setupFilesAfterEnv: [
+    '<rootDir>/src/setupTestSuite.js',
+    '<rootDir>/src/window-jest.js',
+  ],
   testMatch: ['**/?(*.)+(spec|test).[jt]s?(x)'],
-  //coverageDirectory: '<rootDir>/src/__tests__/coverage',
+  // coverageDirectory: '<rootDir>/src/__tests__/coverage',
   coverageReporters: ['json', 'lcov', 'text', 'clover', 'cobertura'],
   // use below option to show all files in specified folders in coverage
   // report including files not touched by unit tests

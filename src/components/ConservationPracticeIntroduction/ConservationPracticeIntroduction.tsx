@@ -1,10 +1,10 @@
-import './conservation-practice-introduction.scss';
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import image from './image/open-in-new.svg';
-import TopPracticesEQUIPOpenData from '../TableauReport/TopPracticesEQUIPOpenData';
+import { Link } from 'react-router-dom';
 import ConservationPracticeCategory from '../TableauReport/ConservationPracticeCategory';
 import RegionalConservationPractice from '../TableauReport/RegionalConservationPractice';
+import TopPracticesEQUIPOpenData from '../TableauReport/TopPracticesEQUIPOpenData';
+import './conservation-practice-introduction.scss';
+import image from './image/open-in-new.svg';
 
 interface IIntroProps {
   introductionParagraph: string;
@@ -55,6 +55,50 @@ const ConservationPracticeIntroduction = ({
       );
     }
   };
+
+  const RCARender = () => {
+    if (title === 'Conservation Practices' && isRcTableauEmpty) return null;
+    return (
+      <div className='internal-box'>
+        {(title === 'Conservation Practices' && (
+          <RegionalConservationPractice
+            setIsTableauEmpty={setIsRcTableauEmpty}
+          />
+        )) || (
+          <ConservationPracticeCategory
+            pageName={title}
+            setIsTableauEmpty={setCpCategoryTableauStatus}
+          />
+        )}
+        <div className='link'>
+          <Link
+            aria-label='environmental quality incentives program opens in new window'
+            style={{
+              textDecoration: 'none',
+            }}
+            to={{
+              pathname:
+                'https://www.nrcs.usda.gov/Internet/NRCS_RCA/reports/data_viewer_home.html',
+            }}
+            target='_blank'
+          >
+            Explore more practice data
+            <img alt='link opens new window' src={image} />
+          </Link>
+        </div>
+      </div>
+    );
+  };
+
+  const TableauGraphs = () => {
+    return (
+      <div className='explore-box'>
+        {RCARender()}
+        {EQUIPRender()}
+      </div>
+    );
+  };
+
   return (
     <div data-testid='introduction-content' className='conservation-practice'>
       <div className='conservation-practice-header'>
@@ -62,49 +106,12 @@ const ConservationPracticeIntroduction = ({
         <p>{introductionParagraph}</p>
       </div>
 
-      <div
-        className={
-          title !== 'Conservation Practices' && isCpCategoryTableauEmpty
-            ? 'hidden-content'
-            : 'explore-box'
-        }
-      >
-        <div
-          className={
-            title === 'Conservation Practices' && isRcTableauEmpty
-              ? 'hidden-content'
-              : 'internal-box'
-          }
-        >
-          {(title === 'Conservation Practices' && (
-            <RegionalConservationPractice
-              setIsTableauEmpty={setIsRcTableauEmpty}
-            />
-          )) || (
-            <ConservationPracticeCategory
-              pageName={title}
-              setIsTableauEmpty={setCpCategoryTableauStatus}
-            />
-          )}
-          <div className='link'>
-            <Link
-              aria-label='environmental quality incentives program opens in new window'
-              style={{
-                textDecoration: 'none',
-              }}
-              to={{
-                pathname:
-                  'https://www.nrcs.usda.gov/Internet/NRCS_RCA/reports/data_viewer_home.html',
-              }}
-              target='_blank'
-            >
-              Explore more practice data
-              <img alt='link opens new window' src={image} />
-            </Link>
-          </div>
-        </div>
-        {EQUIPRender()}
-      </div>
+      {(title === 'Conservation Practices' &&
+        isRcTableauEmpty &&
+        isTpEquipTableauEmpty) ||
+      (title !== 'Conservation Practices' && isCpCategoryTableauEmpty)
+        ? null
+        : TableauGraphs()}
     </div>
   );
 };
