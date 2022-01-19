@@ -1,6 +1,5 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import userEvent from '@testing-library/user-event';
 import SearchByConservationPractice from './SearchByConservationPractice';
 import { createTestStore } from '../../Redux/store';
 
@@ -11,7 +10,7 @@ afterEach(() => {
 describe('Verify SearchByConservationPractice is rendered correctly', () => {
   const store = createTestStore();
 
-  xtest('Verify SearchByConservationPractice component', async () => {
+  test('Verify SearchByConservationPractice component', async () => {
     // Create a redux store
     const { findByText } = render(
       <Provider store={store}>
@@ -28,8 +27,7 @@ describe('Verify SearchByConservationPractice is rendered correctly', () => {
         />
       </Provider>
     );
-    await findByText('All practices (default)');
-    userEvent.selectOptions(screen.getAllByRole('option')[0], ['2']);
+    await findByText('Cropland Soil Quality');
     expect(screen.getByText('Cropland Soil Quality'));
   });
 });

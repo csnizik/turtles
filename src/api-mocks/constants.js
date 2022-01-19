@@ -1,15 +1,15 @@
 export const statesList = [
   {
-    stateCode: "06",
-    stateAbbreviation: "CA",
-    stateNameDisplay: "California"
+    stateCode: '06',
+    stateAbbreviation: 'CA',
+    stateNameDisplay: 'California',
   },
   {
-    stateCode: "08",
-    stateAbbreviation: "CO",
-    stateNameDisplay: "Colorado"
+    stateCode: '08',
+    stateAbbreviation: 'CO',
+    stateNameDisplay: 'Colorado',
   },
-]
+];
 
 export const conservationPracticeCategory = [
   {
@@ -1042,56 +1042,44 @@ export const relatedResources = {
   isFaulted: false,
 };
 
-export const landUseSection = {
-  status: 'fulfilled',
-  endpointName: 'getLandUseOptions',
-  requestId: 'iUgbiRgYl3yi0U59y92-F',
-  startedTimeStamp: 1639265457582,
-  data: [
-    {
-      landUseCategoryID: 1,
-      landUseCategoryName: 'Other Farm and Rural Land',
-      landUseCategoryDesc: 'Other Farm and Rural Land',
-      landUseCategoryIconPath: 'Farm+Rural land.png',
-    },
-    {
-      landUseCategoryID: 2,
-      landUseCategoryName: 'Cropland',
-      landUseCategoryDesc: 'Cropland',
-      landUseCategoryIconPath: 'Crops.png',
-    },
-    {
-      landUseCategoryID: 3,
-      landUseCategoryName: 'Developed land/Urban Ag',
-      landUseCategoryDesc: 'Developed land and Urban Ag',
-      landUseCategoryIconPath: 'Urban Ag2.png',
-    },
-    {
-      landUseCategoryID: 4,
-      landUseCategoryName: 'Forestland',
-      landUseCategoryDesc: 'Forestland',
-      landUseCategoryIconPath: 'Forest.png',
-    },
-    {
-      landUseCategoryID: 5,
-      landUseCategoryName: 'Pasture',
-      landUseCategoryDesc: 'Pasture',
-      landUseCategoryIconPath: 'Pasture.png',
-    },
-    {
-      landUseCategoryID: 6,
-      landUseCategoryName: 'Rangeland',
-      landUseCategoryDesc: 'Rangeland',
-      landUseCategoryIconPath: 'Range2.png',
-    },
-  ],
-  fulfilledTimeStamp: 1639265458139,
-  isUninitialized: false,
-  isLoading: false,
-  isSuccess: true,
-  isError: false,
-  isFetching: false,
-};
+export const landUseSection = [
+  {
+    landUseCategoryID: 1,
+    landUseCategoryName: 'Other Farm and Rural Land',
+    landUseCategoryDesc: 'Other Farm and Rural Land',
+    landUseCategoryIconPath: 'Farm+Rural land.png',
+  },
+  {
+    landUseCategoryID: 2,
+    landUseCategoryName: 'Cropland',
+    landUseCategoryDesc: 'Cropland',
+    landUseCategoryIconPath: 'Crops.png',
+  },
+  {
+    landUseCategoryID: 3,
+    landUseCategoryName: 'Developed land/Urban Ag',
+    landUseCategoryDesc: 'Developed land and Urban Ag',
+    landUseCategoryIconPath: 'Urban Ag2.png',
+  },
+  {
+    landUseCategoryID: 4,
+    landUseCategoryName: 'Forestland',
+    landUseCategoryDesc: 'Forestland',
+    landUseCategoryIconPath: 'Forest.png',
+  },
+  {
+    landUseCategoryID: 5,
+    landUseCategoryName: 'Pasture',
+    landUseCategoryDesc: 'Pasture',
+    landUseCategoryIconPath: 'Pasture.png',
+  },
+  {
+    landUseCategoryID: 6,
+    landUseCategoryName: 'Rangeland',
+    landUseCategoryDesc: 'Rangeland',
+    landUseCategoryIconPath: 'Range2.png',
+  },
+];
 
 export const singleResults = [
   {
@@ -1327,5 +1315,32 @@ export const practiceCategories = [
     startDate: '2021-08-05T00:00:00',
     endDate: null,
     practices: null,
+  },
+];
+
+export const associatedPractices = [
+  {
+    practiceId: 80,
+    practiceName: 'Mulching',
+    practiceCode: '484',
+    practiceDefinition:
+      'Applying plant residues or other suitable materials to the land surface.',
+    practiceCategoryId: 2,
+  },
+  {
+    practiceId: 120,
+    practiceName: 'Nutrient Management',
+    practiceCode: '590',
+    practiceDefinition:
+      'Managing the amount (rate), source, placement (method of application), and timing of plant nutrients and soil amendments.',
+    practiceCategoryId: 2,
+  },
+  {
+    practiceId: 515,
+    practiceName: 'Herbaceous Weed Treatment',
+    practiceCode: '315',
+    practiceDefinition:
+      'The removal or control of herbaceous weeds including invasive, noxious, prohibited, or undesirable plants.',
+    practiceCategoryId: 6,
   },
 ];

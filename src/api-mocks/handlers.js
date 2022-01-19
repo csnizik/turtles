@@ -9,6 +9,7 @@ import {
   singleResults,
   practiceCategories,
   statesList,
+  associatedPractices,
 } from './constants';
 
 const baseURL = 'http://localhost';
@@ -20,6 +21,7 @@ const getRelatedResource = `${baseURL}/relatedResourceConcernCategory`;
 const landUseSectionData = `${baseURL}/categories`;
 const getCategoryQuery = `${baseURL}/practice/categories`;
 const StateListData = `${baseURL}/states`;
+const assocPracticeQuery = `${baseURL}/practice/associatedPractice`;
 
 const practiceHandler = rest.post(postSearchData, async (req, res, ctx) => {
   if (req.body.practice_category_id) {
@@ -67,6 +69,13 @@ const getCategoryHandler = rest.get(getCategoryQuery, async (req, res, ctx) => {
   return res(ctx.json(practiceCategories));
 });
 
+const getAssocPracticeHandler = rest.get(
+  assocPracticeQuery,
+  async (req, res, ctx) => {
+    return res(ctx.json(associatedPractices));
+  }
+);
+
 export const handlers = [
   initHandler,
   stateHandler,
@@ -76,4 +85,5 @@ export const handlers = [
   relatedResourceHandler,
   landUseSectionHandler,
   getCategoryHandler,
+  getAssocPracticeHandler,
 ];

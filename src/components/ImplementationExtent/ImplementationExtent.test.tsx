@@ -5,10 +5,10 @@ afterEach(() => {
   cleanup();
 });
 
-let data = {};
-let isSuccess = true;
+const data = {};
+const isSuccess = true;
 
-xdescribe('ImplementationExtent is rendered correctly', () => {
+describe('ImplementationExtent is rendered correctly', () => {
   beforeEach(() => {
     render(<ImplementationExtent data={data} isSuccess={isSuccess} />);
   });
