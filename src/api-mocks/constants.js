@@ -1,3 +1,16 @@
+export const statesList = [
+  {
+    stateCode: "06",
+    stateAbbreviation: "CA",
+    stateNameDisplay: "California"
+  },
+  {
+    stateCode: "08",
+    stateAbbreviation: "CO",
+    stateNameDisplay: "Colorado"
+  },
+]
+
 export const conservationPracticeCategory = [
   {
     practiceCategoryId: 3,
@@ -17,6 +30,7 @@ export const conservationPracticeCategory = [
           'Crops included in conservation crop rotation include high-residue producing crops such as corn or wheat in rotation with low-residueproducing crops such as vegetables or soybeans. The rotation may also involve growing forage crops in rotation with other field crops. Crop rotations vary with soil type, crops produced, farming operations, and how the crop residue is managed. The most effective crops for soil improvement are fibrous-rooted high-residue producing crops such as grass and small grain. Perennial plants used for forage are very effective in crop rotations due to increases in organic matter and reduced soil erosion. In addition, crop rotations help break insect, disease, and weed cycles. Rotations add diversity to farm operations and often reduce economic and environmental risks.',
         practiceLink:
           'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/technical/cp/ncps/',
+        practiceImagePath: 'Conservation-Crop-Rotation.png',
       },
       {
         practiceId: 20,
@@ -25,6 +39,7 @@ export const conservationPracticeCategory = [
           'Cover and green manure crops are grown on land where seasonal or long-term benefits of a cover crop are needed. This practice is used to control erosion, add fertility and organic material to the soil, improve soil tilth, increase infiltration and aeration of the soil, and improve overall soil health. The practice is also used to increase populations of bees for pollination purposes. Cover and green manure crops have beneficial effects on water quantity and quality. Cover crops have a filtering effect on movement of sediment, pathogens, and dissolved and sediment-attached pollutants. Operation and maintenance of cover crops include: controlling weeds by mowing or by using other pest management techniques, and managing for the efficient use of soil moisture by selecting water-efficient plant species and terminating the cover crop before excessive transpiration. Use of the cover crop as a green manure crop to cycle nutrients will impact when to terminate the cover to match release of nutrient with uptake by following cash crop.',
         practiceLink:
           'https://www.nrcs.usda.gov/Internet/FSE_DOCUMENTS/stelprdb1263481.pdf',
+        practiceImagePath: 'Cover-Crop.png',
       },
     ],
   },
