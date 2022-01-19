@@ -15,7 +15,6 @@ jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useParams: jest.fn().mockReturnValue({
     stateCode: '06',
-    category: '2',
   }),
 }));
 
@@ -46,13 +45,12 @@ describe('Conservation Practice Page is rendered correctly', () => {
     );
   });
 
-  xtest('Should display Conservation Practices BreadCrumb', () => {
+  test('Should display Conservation Practices BreadCrumb', () => {
     expect(screen.getByText('Conservation Practices')).toBeInTheDocument();
   });
 });
 
-//Tests are commented out until Tableau Report test has been added
-xdescribe('Conservation Practice Individual Page is rendered correctly', () => {
+describe('Conservation Practice Individual Page is rendered correctly', () => {
   viewType = 'individualPractice';
   beforeEach(() => {
     jest.spyOn(router, 'useParams').mockReturnValue({
@@ -86,7 +84,9 @@ xdescribe('Conservation Practice Individual Page is rendered correctly', () => {
 
   test('Should display Individual Practice Page Projects & Initiatives Title', () => {
     expect(
-      screen.getByText('Colorado associated-projects-initiatives.title')
+      screen.getByText(
+        'Colorado associated-projects-initiatives.title practice'
+      )
     ).toBeInTheDocument();
   });
 
@@ -97,7 +97,7 @@ xdescribe('Conservation Practice Individual Page is rendered correctly', () => {
   });
 });
 
-xdescribe('Conservation Practice Video Section is rendered correctly', () => {
+describe('Conservation Practice Video Section is rendered correctly', () => {
   beforeEach(() => {
     render(<ConservationPracticeVideo selectedPracticeId={9} />);
   });
@@ -111,7 +111,7 @@ xdescribe('Conservation Practice Video Section is rendered correctly', () => {
   });
 });
 
-xdescribe('Resource Concerns Treated Section is rendered correctly', () => {
+describe('Resource Concerns Treated Section is rendered correctly', () => {
   beforeEach(() => {
     render(
       <ResourceConcernTreated selectedStateCode='01' selectedPracticeId={1} />
