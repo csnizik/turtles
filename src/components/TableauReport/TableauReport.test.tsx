@@ -1,4 +1,4 @@
-import TopPracticesEQUIPOpenData from '../TableauReport/TopPracticesEQUIPOpenData';
+import TopPracticesEQUIPOpenData from './TopPracticesEQUIPOpenData';
 import { cleanup, render, screen } from '../../common/test-utils/test_utils';
 
 afterEach(() => {
@@ -10,14 +10,14 @@ xdescribe('Tableau is rendered correctly', () => {
     render(<TopPracticesEQUIPOpenData />);
   });
 
-  // test('Should display Tableau link on Conservation Practice Page', () => {
-  //   expect(
-  //     screen.getByAltText('Regional Conservation Practice')
-  //   ).toHaveAttribute(
-  //     'src',
-  //     'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticeListbyAcres/Dashboard1.png?Stabbr='
-  //   );
-  // });
+  test('Should display Tableau link on Conservation Practice Page', () => {
+    expect(
+      screen.getByAltText('Regional Conservation Practice')
+    ).toHaveAttribute(
+      'src',
+      'https://publicdashboards-dev.dl.usda.gov/t/FPAC_PUB/views/CPDPracticeListbyAcres/Dashboard1.png?Stabbr='
+    );
+  });
 });
 
 // xdescribe('Practice Detail Tableau Link is rendered correctly', () => {

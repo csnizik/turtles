@@ -1,3 +1,6 @@
+import { createMemoryHistory } from 'history';
+import { Provider } from 'react-redux';
+import { Router } from 'react-router-dom';
 import SpecificationsAndTools from './SpecificationsAndTools';
 import {
   cleanup,
@@ -5,6 +8,8 @@ import {
   render,
   screen,
 } from '../../common/test-utils/test_utils';
+import { createTestStore } from '../../Redux/store';
+import { currentState } from '../../Redux/Slice/stateSlice';
 
 afterEach(() => {
   cleanup();
@@ -18,6 +23,14 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('SpecificationsAndTools is rendered correctly', () => {
+  const history = createMemoryHistory();
+  const store = createTestStore();
+  const initialState = {
+    stateNameDisplay: 'Californa',
+    stateCode: '06',
+    stateAbbreviation: 'CA',
+  };
+  store.dispatch(currentState(initialState));
   const data = {
     practiceId: 23,
     practiceImage: '',
@@ -36,15 +49,20 @@ describe('SpecificationsAndTools is rendered correctly', () => {
   const name = 'ConservationPractices';
   const practiceName = 'Cover Crop';
 
-  beforeEach(() => {
-    render(
-      <SpecificationsAndTools
-        data={data}
-        isSuccess={isSuccess}
-        selectedStateCode={selectedStateCode}
-        selectedPracticeId={selectedPracticeId}
-      />
+  beforeEach(async () => {
+    const { findByText } = render(
+      <Provider store={store}>
+        <Router history={history}>
+          <SpecificationsAndTools
+            data={data}
+            isSuccess={isSuccess}
+            selectedStateCode={selectedStateCode}
+            selectedPracticeId={selectedPracticeId}
+          />
+        </Router>
+      </Provider>
     );
+    await findByText('Mulching');
   });
 
   test('Should display the contents of SpecificationsAndTools', () => {
@@ -56,7 +74,7 @@ describe('SpecificationsAndTools is rendered correctly', () => {
   test('Should display the contents of State Specifications', () => {
     expect(screen.getByTestId('state-specifications')).toBeDefined();
   });
-  xtest('Should display the contents of Associated Practices', () => {
+  test('Should display the contents of Associated Practices', () => {
     expect(screen.getByTestId('associated-practice')).toBeDefined();
   });
   test('Should display associated practice Link', () => {
@@ -92,6 +110,6 @@ describe('SpecificationsAndTools is rendered correctly', () => {
     );
     expect(
       screen.getByText('NRCS Conservation Practices Website').closest('a')
-    ).toHaveAttribute('href', 'https://efotg.sc.egov.usda.gov/#/state/');
+    ).toHaveAttribute('href', 'https://efotg.sc.egov.usda.gov/#/state/CA');
   });
 });

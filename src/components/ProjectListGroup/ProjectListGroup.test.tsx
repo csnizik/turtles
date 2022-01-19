@@ -14,8 +14,8 @@ afterEach(() => {
   cleanup();
 });
 let store;
-
-describe('Verify ProductListGroup is rendered correctly', () => {
+//commented out as testing needs more work to be completed
+describe('Verify ProjectListGroup is rendered correctly', () => {
   beforeEach(() => {
     const searchInput = {
       state_county_code: '08',
