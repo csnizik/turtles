@@ -68,18 +68,26 @@ describe('Land use section is rendered correctly', () => {
       })
     ).toBeDefined();
   });
-  test('Should display the checkbox', async () => {
-    jest.setTimeout(30000);
+  test('Should display the tooltip on mouseOver', async () => {
+    // jest.setTimeout(30000);
     await waitFor(async () => {
-      // fireEvent.mouseOver(await screen.findByTestId('tooltp1'));
+      fireEvent.mouseOver(await screen.findByTestId('tooltp1'));
       const tooltipText = await screen.findAllByText(
         'Other Farm and Rural Land'
       );
-      expect(tooltipText).toHaveLength(1);
+      expect(tooltipText).toHaveLength(2);
     });
   });
-  test('Should display the tooltip on mouseOver', async () => {
+  test('Should pass checked item to parent', async () => {
     await waitFor(async () => {
+      fireEvent.click(await screen.getByTestId('checkbox1'));
+      expect(setSearchInfoMock).toBeCalled();
+    });
+  });
+  test('Should pass unchecked item to parent', async () => {
+    await waitFor(async () => {
+      fireEvent.click(await screen.getByTestId('checkbox1'));
+      expect(setSearchInfoMock).toBeCalled();
       fireEvent.click(await screen.getByTestId('checkbox1'));
       expect(setSearchInfoMock).toBeCalled();
     });
