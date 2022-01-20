@@ -67,12 +67,23 @@ describe('Projects container is rendered correctly', () => {
       category: '2',
       individual: '1',
     });
-    render(<ProjectsContainer />);
+    const state = {
+      stateNameDisplay: 'Colorado',
+      stateCode: '06',
+      stateAbbreviation: 'CO',
+    };
+    store = createTestStore();
+    store.dispatch(currentState(state));
+    render(
+      <Provider store={store}>
+        <ProjectsContainer />
+      </Provider>
+    );
   });
 
   test('Should display the Side Tabs and Links of the projects container', () => {
     expect(
-      screen.getByText('All U.S. Projects & Initiatives')
+      screen.getByText('All Colorado Projects & Initiatives')
     ).toBeInTheDocument();
     expect(
       screen.getByText('Conservation Innovation Grants')
@@ -128,7 +139,7 @@ describe('Projects container is rendered correctly', () => {
   test('Should Click through the Projects And Initiatives Tabs', () => {
     const onClick = jest.fn();
     const { getByText } = render(<Button onClick={onClick} />);
-    fireEvent.click(getByText(/All U.S. Projects & Initiatives/i));
+    fireEvent.click(getByText(/All Colorado Projects & Initiatives/i));
     expect(
       screen.getByText(
         'Targeting Program dollars to advance specific natural resource objectives'
