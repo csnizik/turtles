@@ -14,7 +14,14 @@ afterEach(() => {
   cleanup();
 });
 let store;
-//commented out as testing needs more work to be completed
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useParams: jest.fn().mockReturnValue({
+    stateCode: '08',
+  }),
+}));
+
 describe('Verify ProjectListGroup is rendered correctly', () => {
   beforeEach(() => {
     const searchInput = {
