@@ -28,6 +28,10 @@ const ConservationPracticeCategory = ({ pageName, setIsTableauEmpty }: any) => {
     tableauGraph.ConservationPracticeCategory?.link
   }=${stateAbbr}&Measure=${pageName.replace('&', '%26')}`;
 
+  const receiveMessage = () => {
+    verifyTableauIsEmpty(viz, setIsTableauEmpty);
+  };
+
   const initViz = () => {
     if (!verifyUrlIsValid(srcLink)) {
       setIsTableauEmpty(true);
@@ -35,13 +39,14 @@ const ConservationPracticeCategory = ({ pageName, setIsTableauEmpty }: any) => {
     }
     const options = {
       device: 'desktop',
-      onFirstInteractive: function checkEmpty() {
-        verifyTableauIsEmpty(viz, setIsTableauEmpty);
-      },
     };
     // eslint-disable-next-line no-new
     if (viz) viz.dispose();
     viz = new tableau.Viz(ref.current, srcLink, options);
+    viz.addEventListener(
+      tableau.TableauEventName.CUSTOM_VIEW_LOAD,
+      receiveMessage
+    );
   };
 
   useEffect(() => {
