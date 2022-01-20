@@ -24,8 +24,6 @@ const RegionalConservationPractice = ({ setIsTableauEmpty }: any) => {
     verifyTableauIsEmpty(viz, setIsTableauEmpty);
   };
 
-  //window.addEventListener('message', receiveMessage, false);
-  //tableau.TableauEventName.FirstVizSizeKnown
   const initViz = () => {
     if (!verifyUrlIsValid(srcLink)) {
       setIsTableauEmpty(true);
