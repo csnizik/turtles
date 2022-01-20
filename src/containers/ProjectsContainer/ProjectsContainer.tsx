@@ -54,7 +54,6 @@ const ProjectsContainer = () => {
   const landscapeInitiativesData = usePostLandscapeInitiativesQuery(
     searchLandscapeInitiatives
   );
-  // const selectedState: any = { stateCode: '', stateNameDisplay: '' };
 
   useEffect(() => {
     setSelectedLocation(stateC);
@@ -70,20 +69,6 @@ const ProjectsContainer = () => {
       setToggleProjectView(false);
     }
   }, [category, individual, stateC]);
-
-  // useEffect(() => {
-  //   let searchInputData;
-  //   if (stateCode !== DEFAULT_NATIONAL_LOCATION || !stateCode) {
-  //     searchInputData = {
-  //       state_county_code: selectedState?.stateCode,
-  //     };
-  //   } else {
-  //     searchInputData = {
-  //       state_county_code: DEFAULT_NATIONAL_LOCATION,
-  //     };
-  //   }
-  //   dispatch(setSearch(searchInputData));
-  // }, []);
 
   const handleSelectLandscapeInitiative = (id: number) => {
     setSelectedLandscapeInitiative(id);
