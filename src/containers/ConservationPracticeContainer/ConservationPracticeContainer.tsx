@@ -21,7 +21,6 @@ import {
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import {
   setPracticeCategory,
-  setSearch,
   setSpecificPractice,
 } from '../../Redux/Slice/practiceSlice';
 import { currentState } from '../../Redux/Slice/stateSlice';
@@ -104,7 +103,6 @@ const ConservationPracticeContainer = ({
     searchInputData = { ...searchInputData };
     delete searchInputData.state_county_code;
   }
-  dispatch(setSearch(searchInputData));
   const { data: pdata } = usePostProjectSearchDataQuery(searchInputData);
   const { data: ldata } = usePostLandscapeInitiativesQuery(searchInputData);
 
@@ -187,7 +185,9 @@ const ConservationPracticeContainer = ({
           <div className='title-section' data-testid='pratice-title'>
             <div className='top-title'>
               <h4 className='project-title'>
-                {stateInfo?.stateNameDisplay === 'U.S.' ? 'The U.S.' : stateInfo?.stateNameDisplay}{' '}
+                {stateInfo?.stateNameDisplay === 'U.S.'
+                  ? 'The U.S.'
+                  : stateInfo?.stateNameDisplay}{' '}
                 {t('associated-projects-initiatives.title')}{' '}
                 {currentPractice?.practiceName}
                 {' practice'}

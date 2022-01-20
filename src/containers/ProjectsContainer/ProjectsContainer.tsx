@@ -3,11 +3,10 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ListGroup, ListGroupItem } from 'reactstrap';
-import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 import MapContainer from '../MapContainer';
 import ProjectListGroup from '../../components/ProjectListGroup';
 import ProjectTypeSection from '../../components/ProjectTypeSection';
-import { setSearch } from '../../Redux/Slice/practiceSlice';
 import { usePostLandscapeInitiativesQuery } from '../../Redux/services/api';
 import './project-container.scss';
 import { projectCards, projectListGroups, projectPurposes } from './constants';
@@ -30,7 +29,7 @@ interface IProjectListGroup {
 const ProjectsContainer = () => {
   const history = useHistory();
   const { stateCode: stateC, category, individual }: any = useParams();
-  const dispatch = useAppDispatch();
+  const stateInfo = useAppSelector((state: any) => state?.stateSlice);
   const { t } = useTranslation();
   const [toggleProjectView, setToggleProjectView] = useState(false);
   const [selectedProjectCard, setSelectedProjectCard] = useState(-1);
@@ -55,7 +54,7 @@ const ProjectsContainer = () => {
   const landscapeInitiativesData = usePostLandscapeInitiativesQuery(
     searchLandscapeInitiatives
   );
-  const selectedState: any = { stateCode: '', stateNameDisplay: '' };
+  // const selectedState: any = { stateCode: '', stateNameDisplay: '' };
 
   useEffect(() => {
     setSelectedLocation(stateC);
@@ -72,19 +71,19 @@ const ProjectsContainer = () => {
     }
   }, [category, individual, stateC]);
 
-  useEffect(() => {
-    let searchInputData;
-    if (stateCode !== DEFAULT_NATIONAL_LOCATION || !stateCode) {
-      searchInputData = {
-        state_county_code: selectedState?.stateCode,
-      };
-    } else {
-      searchInputData = {
-        state_county_code: DEFAULT_NATIONAL_LOCATION,
-      };
-    }
-    dispatch(setSearch(searchInputData));
-  }, []);
+  // useEffect(() => {
+  //   let searchInputData;
+  //   if (stateCode !== DEFAULT_NATIONAL_LOCATION || !stateCode) {
+  //     searchInputData = {
+  //       state_county_code: selectedState?.stateCode,
+  //     };
+  //   } else {
+  //     searchInputData = {
+  //       state_county_code: DEFAULT_NATIONAL_LOCATION,
+  //     };
+  //   }
+  //   dispatch(setSearch(searchInputData));
+  // }, []);
 
   const handleSelectLandscapeInitiative = (id: number) => {
     setSelectedLandscapeInitiative(id);
@@ -155,7 +154,11 @@ const ProjectsContainer = () => {
                     role='presentation'
                     onClick={() => handleSelectProjectItem(listItem.id)}
                   >
-                    {listItem.title}
+                    {listItem.title === 'All U.S. Projects & Initiatives'
+                      ? t(
+                          `All ${stateInfo?.stateNameDisplay} Projects & Initiatives`
+                        )
+                      : listItem.title}
                   </ListGroupItem>
                 );
               })}

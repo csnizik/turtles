@@ -11,6 +11,10 @@ import { useAppDispatch } from '../../Redux/hooks/hooks';
 import { currentState } from '../../Redux/Slice/stateSlice';
 import './gov-banner.scss';
 import { initialLandUse } from '../../common/typedconstants.common';
+import {
+  enablePracticeDropdown,
+  enableResourceDropdown,
+} from '../../Redux/Slice/disableSlice';
 
 const initialState = {
   stateNameDisplay: 'U.S.',
@@ -38,6 +42,8 @@ const GovernmentBanner = () => {
     dispatch(setLandUse(initialLandUse));
     dispatch(setSearchInfo(defaultSearchInfo));
     dispatch(setSearch(defaultSearchInput));
+    dispatch(enablePracticeDropdown());
+    dispatch(enableResourceDropdown());
     window.localStorage.clear();
   };
   const renderNRCSHeaderSection: Function = () => (
