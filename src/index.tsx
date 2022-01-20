@@ -34,6 +34,9 @@ const App = () => (
         <Route path='/search-results'>
           <ResultsContainer />
         </Route>
+        <Route path='/health/Alive.html'>
+          <h3>The App is Healthy</h3>
+        </Route>
         <Route path='/:stateCode/:name/:category?/:individual?'>
           <LocationContainer />
         </Route>
