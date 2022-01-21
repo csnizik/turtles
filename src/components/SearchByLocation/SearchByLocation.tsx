@@ -117,6 +117,7 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
             {t('location-search.labels.select-state')}
           </label>
           <select
+            data-testid='select'
             className='usa-select'
             id='stateValue'
             name='selectedStateId'

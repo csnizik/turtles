@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Modal, ModalBody } from 'reactstrap';
+/* eslint-disable-next-line import/no-unresolved */
 import { useReactToPrint } from 'react-to-print';
 import './report-preview-creator.scss';
 import {
@@ -53,9 +54,9 @@ const ReportPreviewCreator = ({
   }, [cleanModal]);
 
   useEffect(() => {
-    if(!childArr) return;
-    if(!childArr.children) return;
-    Array.prototype.forEach.call(childArr?.children, child => {
+    if (!childArr) return;
+    if (!childArr.children) return;
+    Array.prototype.forEach.call(childArr?.children, (child) => {
       const categoryId: number = +child.textContent.charAt(0);
       child.className = selectedIds.has(categoryId) // eslint-disable-line no-param-reassign
         ? 'accordion-container'
@@ -64,9 +65,9 @@ const ReportPreviewCreator = ({
   }, [childArr, selectedIds]);
 
   useEffect(() => {
-    if(!childArr2) return;
-    if(!childArr2.children) return;
-    Array.prototype.forEach.call(childArr2?.children, child => {
+    if (!childArr2) return;
+    if (!childArr2.children) return;
+    Array.prototype.forEach.call(childArr2?.children, (child) => {
       const categoryId: number = +child.textContent.charAt(0);
       child.className = selectedIds.has(categoryId) // eslint-disable-line no-param-reassign
         ? 'accordion-container'
