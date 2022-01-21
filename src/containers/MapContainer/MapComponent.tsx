@@ -212,10 +212,6 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
                       symbol: highlightSymbol,
                     });
                     mapRef.current.view.graphics.add(highlightedGraphic);
-                    // Refresh project lists
-                    // const searchInput = {
-                    //   state_county_code: foundState.attributes.STATEFP || null,
-                    // };
                     // Zoom to selected state
                     if (SMALL_STATES.includes(foundState?.attributes.STUSPS)) {
                       mapRef.current.view.extent = foundState?.geometry?.extent
@@ -230,7 +226,6 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
                         .clone()
                         .expand(1.4);
                     }
-                    // dispatch(setSearch(searchInput));
                   }
                 });
             }
@@ -252,11 +247,6 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
           .then((response: any) => {
             const { features } = response;
             if (features.length) {
-              // const searchInput = {
-              //   state_county_code: stateCode || null,
-              // };
-              // dispatch(setSearch(searchInput));
-
               const foundGraphic: Graphic = features[0];
               const highlightedGraphic = new Graphic({
                 geometry: foundGraphic?.geometry,
@@ -317,10 +307,6 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
                         symbol: highlightSymbol,
                       });
                       alaskaView.current.graphics.add(highlightedGraphic);
-                      // const searchInput = {
-                      //   state_county_code: foundGraphic?.attributes.STATEFP,
-                      // };
-                      // dispatch(setSearch(searchInput));
                     }
                   }
                 });
@@ -365,10 +351,6 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
                         symbol: highlightSymbol,
                       });
                       caribbeanView.current.graphics.add(highlightedGraphic);
-                      // const searchInput = {
-                      //   state_county_code: foundGraphic?.attributes.STATEFP,
-                      // };
-                      // dispatch(setSearch(searchInput));
                     }
                   }
                 });
@@ -413,10 +395,6 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
                         symbol: highlightSymbol,
                       });
                       hawaiiView.current.graphics.add(highlightedGraphic);
-                      // const searchInput = {
-                      //   state_county_code: foundGraphic?.attributes.STATEFP,
-                      // };
-                      // dispatch(setSearch(searchInput));
                     }
                   }
                 });
