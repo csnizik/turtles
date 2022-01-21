@@ -26,6 +26,7 @@ import {
 } from '../../Redux/Slice/practiceSlice';
 import SearchByResourceConcern from '../../components/SearchByResourceConcern/SearchByResourceConcern';
 import './custom-search.scss';
+import { currentState, initialState } from '../../Redux/Slice/stateSlice';
 
 const defaultSearchInput: ISearchData = {
   resource_concern_category_id: null,
@@ -128,6 +129,9 @@ const CustomSearch = () => {
     dispatch(setSearch(searchInput));
     dispatch(setSearchInfo(searchedInfo));
     dispatch(setLandUse(checkedState));
+    if (searchInput.state_county_code === '00000') {
+      dispatch(currentState(initialState));
+    }
   };
 
   const searchButtonStyles = () => {

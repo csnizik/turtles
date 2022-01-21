@@ -37,7 +37,8 @@ const Pagination = ({
     return (
       <h4>
         Showing {cards ? 1 : 0} -{' '}
-        {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards} projects/initiatives
+        {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards}{' '}
+        projects/initiatives
       </h4>
     );
   };
@@ -146,6 +147,7 @@ const Pagination = ({
 
           {currentPage < indexOfLastPage - 3 ? (
             <li
+              aria-label='pagination-overflow'
               className='usa-pagination__item usa-pagination__overflow'
               role='presentation'
             >
@@ -161,6 +163,7 @@ const Pagination = ({
                   className='usa-pagination__item usa-pagination__page-no'
                 >
                   <button
+                    data-testid='last-pagination'
                     type='button'
                     className='usa-pagination__button'
                     aria-label={`Page ${number}`}

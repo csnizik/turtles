@@ -25,6 +25,10 @@ const EquipPracticeCertificationTrend = ({
     : tableauGraph.EquipPracticeCertificationTrend.link;
   const srcLink: string = `${finalLink}=${stateName}&practice_code_num=${practiceCode}&:tabs=no`;
 
+  const receiveMessage = () => {
+    verifyTableauIsEmpty(viz, checkTableauIsEmpty);
+  };
+
   const initViz = () => {
     if (!verifyUrlIsValid(srcLink)) {
       checkTableauIsEmpty(true);
@@ -32,9 +36,6 @@ const EquipPracticeCertificationTrend = ({
     }
     const options = {
       device: 'desktop',
-      onFirstInteractive: function checkEmpty() {
-        verifyTableauIsEmpty(viz, checkTableauIsEmpty);
-      },
     };
     const containerDiv = document.getElementById(
       'equip-practice-certification-trend'
@@ -42,6 +43,10 @@ const EquipPracticeCertificationTrend = ({
     // eslint-disable-next-line no-new
     if (viz) viz.dispose();
     viz = new tableau.Viz(containerDiv, srcLink, options);
+    viz.addEventListener(
+      tableau.TableauEventName.CUSTOM_VIEW_LOAD,
+      receiveMessage
+    );
   };
 
   useEffect(() => {

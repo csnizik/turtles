@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import classnames from 'classnames';
 import {
   Row,
@@ -20,6 +21,7 @@ import {
   usePostProjectSearchDataQuery,
 } from '../../Redux/services/api';
 import ExceptionMessage from '../ExceptionMessage/ExceptionMessage';
+import { ISearchData } from '../../common/types';
 
 interface IProjectListProps {
   isMapDisplayed: boolean;
@@ -31,28 +33,45 @@ const ProjectListGroup = ({
   selectedStateName,
 }: IProjectListProps) => {
   const stateInfo = useAppSelector((state) => state?.stateSlice);
-  let searchInputData = useAppSelector(
+  const practiceInfo = useAppSelector(
     (state) => state?.practiceSlice?.searchInput
   );
 
-  if (
-    searchInputData &&
-    (searchInputData?.state_county_code === '00' ||
-      searchInputData?.state_county_code === '00000')
-  ) {
-    searchInputData = { ...searchInputData };
-    delete searchInputData.state_county_code;
+  const { category, individual }: any = useParams();
+
+  let inputdata: ISearchData = {
+    state_county_code: stateInfo?.stateCode || null,
+    practice_category_id: Number(category),
+    practice_id: Number(individual),
+  };
+
+  if (window.location.pathname.includes('/search-results')) {
+    inputdata = practiceInfo;
   }
+
+  if (
+    inputdata &&
+    (inputdata?.state_county_code === '00' ||
+      inputdata?.state_county_code === '00000')
+  ) {
+    inputdata = { ...inputdata };
+    delete inputdata.state_county_code;
+  }
+
+  if (window.location.pathname.includes('/ProjectsAndInitiatives/')) {
+    delete inputdata.practice_category_id;
+    delete inputdata.practice_id;
+  }
+
   const {
     data: projectsList,
     error: perror,
     isLoading: pisLoading,
     isSuccess: pisSuccess,
     isError: pisError,
-  } = usePostProjectSearchDataQuery(searchInputData);
+  } = usePostProjectSearchDataQuery(inputdata);
 
-  let { data: initiativesList } =
-    usePostLandscapeInitiativesQuery(searchInputData);
+  let { data: initiativesList } = usePostLandscapeInitiativesQuery(inputdata);
   initiativesList = initiativesList?.filter((initiative: any) => {
     return !initiative.lci_parent_id;
   });

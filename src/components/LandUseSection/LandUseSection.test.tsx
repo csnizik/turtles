@@ -47,8 +47,8 @@ describe('Land use section is rendered correctly', () => {
   store.dispatch(setSearchInfo(searchInfo));
   store.dispatch(setSearch(searchInput));
 
-  beforeEach(() => {
-    render(
+  beforeEach(async () => {
+    const { findByText } = render(
       <Provider store={store}>
         <LandUseSection
           setSearchInput={setSearchInputMock}
@@ -58,6 +58,7 @@ describe('Land use section is rendered correctly', () => {
         />
       </Provider>
     );
+    await findByText('Cropland');
   });
 
   test('Should display the group of checkboxes', async () => {
@@ -67,34 +68,28 @@ describe('Land use section is rendered correctly', () => {
       })
     ).toBeDefined();
   });
-  xtest('Should display the checkbox', async () => {
-    jest.setTimeout(30000);
+  test('Should display the tooltip on mouseOver', async () => {
+    // jest.setTimeout(30000);
     await waitFor(async () => {
-      // fireEvent.mouseOver(await screen.findByTestId('tooltp1'));
+      fireEvent.mouseOver(await screen.findByTestId('tooltp1'));
       const tooltipText = await screen.findAllByText(
         'Other Farm and Rural Land'
       );
       expect(tooltipText).toHaveLength(2);
     });
   });
-  xtest('Should display the tooltip on mouseOver', async () => {
+  test('Should pass checked item to parent', async () => {
     await waitFor(async () => {
       fireEvent.click(await screen.getByTestId('checkbox1'));
       expect(setSearchInfoMock).toBeCalled();
     });
   });
-  xtest('Should display the tooltip on mouseOve', async () => {
+  test('Should pass unchecked item to parent', async () => {
     await waitFor(async () => {
       fireEvent.click(await screen.getByTestId('checkbox1'));
-      expect(setCheckedStateMock).toBeCalled();
-    });
-  });
-  xtest('Should display the tooltip on mouseOve', async () => {
-    await waitFor(async () => {
+      expect(setSearchInfoMock).toBeCalled();
       fireEvent.click(await screen.getByTestId('checkbox1'));
-      expect(setSearchInputMock).toBeCalled();
-      fireEvent.click(await screen.getByTestId('checkbox1'));
-      expect(setSearchInputMock).toBeCalled();
+      expect(setSearchInfoMock).toBeCalled();
     });
   });
 });

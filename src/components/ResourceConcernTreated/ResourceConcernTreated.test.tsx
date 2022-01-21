@@ -1,10 +1,34 @@
+import { cleanup, render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import userEvent from '@testing-library/user-event';
 import ResourceConcernTreated from './ResourceConcernTreated';
-import { cleanup, render, screen } from '../../common/test-utils/test_utils';
+import { createTestStore } from '../../Redux/store';
 
 afterEach(() => {
   cleanup();
 });
 
-test('adds 1 + 2 to equal 3', () => {
-  expect(1 + 2).toBe(3);
+describe('Verify ResourceConcernList is rendered correctly', () => {
+  const store = createTestStore();
+
+  test('Verify ResourceConcernTreated component', async () => {
+    // Create a redux store
+    const { findByText } = render(
+      <Provider store={store}>
+        <ResourceConcernTreated />
+      </Provider>
+    );
+    await findByText('Soil');
+  });
+  test('Verify tabs open and close', async () => {
+    render(
+      <Provider store={store}>
+        <ResourceConcernTreated />
+      </Provider>
+    );
+    userEvent.click(screen.getByText('Water'));
+    expect(screen.getByText('Drifted snow'));
+    userEvent.click(screen.getByText('Water'));
+    expect(screen.queryByText('Drifted snow')).not.toBeInTheDocument();
+  });
 });

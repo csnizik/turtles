@@ -6,7 +6,7 @@ afterEach(() => {
   cleanup();
 });
 
-xdescribe('ReportPreviewCreator is rendered correctly', () => {
+describe('ReportPreviewCreator is rendered correctly', () => {
   const selectedStateCode = {
     stateCode: '00',
   };

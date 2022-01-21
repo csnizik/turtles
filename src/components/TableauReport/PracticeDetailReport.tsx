@@ -24,6 +24,10 @@ const PracticeDetailReport = ({ practiceCode, checkTableauIsEmpty }: any) => {
   const srcLink: string = `${tableauGraph.PracticeDetail.link}=${stateAbbr}&Practice Code=${practiceCode}`;
   const srcImageLink: string = `${tableauGraph.PracticeDetail.imageLink}=${stateAbbr}&Practice Code=${practiceCode}`;
 
+  const receiveMessage = () => {
+    verifyTableauIsEmpty(viz, checkTableauIsEmpty);
+  };
+
   const initViz = () => {
     if (!verifyUrlIsValid(srcLink)) {
       checkTableauIsEmpty(true);
@@ -31,14 +35,15 @@ const PracticeDetailReport = ({ practiceCode, checkTableauIsEmpty }: any) => {
     }
     const options = {
       device: 'desktop',
-      onFirstInteractive: function checkEmpty() {
-        verifyTableauIsEmpty(viz, checkTableauIsEmpty);
-      },
     };
     const containerDiv = document.getElementById('practice-detail');
     // eslint-disable-next-line no-new
     if (viz) viz.dispose();
     viz = new tableau.Viz(containerDiv, srcLink, options);
+    viz.addEventListener(
+      tableau.TableauEventName.CUSTOM_VIEW_LOAD,
+      receiveMessage
+    );
   };
 
   useEffect(() => {

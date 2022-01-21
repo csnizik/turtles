@@ -24,7 +24,6 @@ const ReportBuilder = ({
     swapaData?.result.forEach((childData) => {
       tempSet.add(childData.rcCategoryId);
     });
-
     setSwapaCategoryIds(tempSet);
   };
 
@@ -47,7 +46,6 @@ const ReportBuilder = ({
 
   const toggleAll = () => {
     const tempSet = new Set();
-
     if (rcTreatedInputs.size < swapaCategoryCnt) {
       swapaCategoryIds.forEach((id) => {
         tempSet.add(id);
@@ -80,12 +78,14 @@ const ReportBuilder = ({
     const allInput = (
       <div className='usa-checkbox'>
         <input
+          data-testid='all-option'
           className='usa-checkbox__input'
           id='swapaInputAll'
           type='checkbox'
           name='swapaInputAll'
           value='All'
           checked={rcTreatedInputs.size >= swapaCategoryCnt}
+          //checked={false}
           onChange={() => toggleAll()}
         />
         <label className='usa-checkbox__label' htmlFor='swapaInputAll'>
@@ -97,6 +97,7 @@ const ReportBuilder = ({
       return (
         <div key={item.rcCategoryId} className='usa-checkbox'>
           <input
+            data-testid={`${item.rcCategoryName}-option`}
             className='usa-checkbox__input'
             id={getIdName(index)}
             type='checkbox'
@@ -221,7 +222,9 @@ const ReportBuilder = ({
             onChange={handleInput}
           />
           <label className='usa-checkbox__label' htmlFor='input2'>
-            {`Support for the ${reportPreviewData?.practiceName} practice in ${stateName === 'U.S.'?'the U.S.':stateName}`}
+            {`Support for the ${reportPreviewData?.practiceName} practice in ${
+              stateName === 'U.S.' ? 'the U.S.' : stateName
+            }`}
           </label>
         </div>
 
