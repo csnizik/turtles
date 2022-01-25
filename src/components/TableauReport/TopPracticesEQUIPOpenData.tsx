@@ -13,7 +13,7 @@ const TopPracticesEQUIPOpenData = ({ setIsTableauEmpty }: any) => {
   let stateName = useAppSelector(
     (state: any) => state?.stateSlice?.stateNameDisplay
   );
-  if (stateName === 'U.S.') stateName = 'National';
+  if (stateName === 'U.S.' || stateName === undefined) stateName = 'National';
 
   const srcLink: string = `${tableauGraph.TopPracticesEQUIPOpenData?.link}=${stateName}&:tabs=no`;
 
@@ -43,7 +43,10 @@ const TopPracticesEQUIPOpenData = ({ setIsTableauEmpty }: any) => {
   }, [stateName]);
 
   return (
-    <div className='tableau-report-container'>
+    <div
+      className='tableau-report-container'
+      data-testid='tableau-report-container'
+    >
       <div ref={ref} />
     </div>
   );
