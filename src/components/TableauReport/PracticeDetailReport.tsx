@@ -51,7 +51,11 @@ const PracticeDetailReport = ({ practiceCode, checkTableauIsEmpty }: any) => {
   }, [stateAbbrInRedux, fromPdfReport]);
 
   return (
-    <div className='tableau-report-container' id='practice-detail'>
+    <div
+      className='tableau-report-container'
+      id='practice-detail'
+      data-testid='tableau-report-container'
+    >
       {fromPdfReport && (
         <img src={srcImageLink} alt={tableauGraph.PracticeDetail.displayName} />
       )}
