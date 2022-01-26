@@ -13,6 +13,7 @@ module.exports = {
   setupFilesAfterEnv: [
     '<rootDir>/src/setupTestSuite.js',
     '<rootDir>/src/window-jest.js',
+    '<rootDir>/src/tableau-jest.js',
   ],
   testMatch: ['**/?(*.)+(spec|test).[jt]s?(x)'],
   // coverageDirectory: '<rootDir>/src/__tests__/coverage',

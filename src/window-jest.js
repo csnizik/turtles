@@ -205,6 +205,17 @@ global.tableau = {
   MenuType: {
     UBERTIP: 'ubertip',
   },
-  Viz: () => {},
+  Viz: (data, link, options) => {
+    const oid = {
+      name: data,
+    };
+    Object.defineProperty(oid, 'addEventListener', {
+      value: () => data,
+    });
+    Object.defineProperty(oid, 'dispose', {
+      value: () => data,
+    });
+    return oid;
+  },
   _apiLoaded: true,
 };
