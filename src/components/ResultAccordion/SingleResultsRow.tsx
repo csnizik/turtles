@@ -15,13 +15,13 @@ const SingleResultsRow = ({
   return (
     <>
       <div className='top-title'>
-        <h4>{t('search-results-page.conservation-practices')}</h4>
+        <h2>{t('search-results-page.conservation-practices')}</h2>
       </div>
       <div className='accordion-section'>
         <div className='child-accordion-container'>
           <li key={practiceData.practiceId} role='presentation'>
             <div className='single-child-data'>
-              <h4>{practiceData.practiceName}</h4>
+              <h3>{practiceData.practiceName}</h3>
               <div>
                 <p>
                   {practiceData.practiceDescription ||

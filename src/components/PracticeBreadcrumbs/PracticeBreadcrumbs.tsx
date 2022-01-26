@@ -65,7 +65,7 @@ const PracticeBreadcrumbs = ({
       <ol className='usa-breadcrumb__list'>
         <li
           className='usa-breadcrumb__list-item'
-          aria-label='PracticeCategory-breadcrumb'
+          aria-label='Conservation Practice Overview breadcrumb'
           onClick={() => handleNavigateBreadcrumb(0)}
           onKeyUp={() => handleNavigateBreadcrumb(0)}
           role='presentation'
@@ -89,7 +89,7 @@ const PracticeBreadcrumbs = ({
           <>
             <li
               className='usa-breadcrumb__list-item'
-              aria-label='Practice-breadcrumb'
+              aria-label='Conservation Practice Category Breadcrumb'
               onClick={() => handleNavigateBreadcrumb(1)}
               onKeyUp={() => handleNavigateBreadcrumb(1)}
               role='presentation'

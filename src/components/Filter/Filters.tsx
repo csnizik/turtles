@@ -29,9 +29,7 @@ const FilterBy = () => {
         {searchInputData && (
           <>
             <div className='grid-row'>
-              <p aria-label='Filter By' className='filter-style'>
-                Active Filters:
-              </p>
+              <p className='filter-style'>Active Filters:</p>
 
               <div className='filter-box'>
                 <p className='p-label'>Location:</p>

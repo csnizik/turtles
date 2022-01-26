@@ -42,7 +42,11 @@ const ImplementationExtent = ({
 
   const getHeaderText = () => {
     if (practiceName) {
-      return `Support for the ${practiceName} practice in ${stateInfo?.stateNameDisplay === 'U.S.'?'the U.S.':stateInfo?.stateNameDisplay}`;
+      return `Support for the ${practiceName} practice in ${
+        stateInfo?.stateNameDisplay === 'U.S.'
+          ? 'the U.S.'
+          : stateInfo?.stateNameDisplay
+      }`;
     }
     return practiceName;
   };
@@ -75,8 +79,7 @@ const ImplementationExtent = ({
                 textDecoration: 'none',
               }}
               to={{
-                pathname:
-                tableauGraph.EquipPracticeCertificationTrend.link,
+                pathname: tableauGraph.EquipPracticeCertificationTrend.link,
               }}
               target='_blank'
             >
