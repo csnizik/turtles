@@ -144,7 +144,7 @@ const SpecificationsAndTools = ({
                 <Link
                   to={`/${selectedStateCode}/${name}/${practice.practiceCategoryId}/${practice.practiceId}`}
                   target='_blank'
-                  aria-label={`${practice.practiceName} link opens a new tab`}
+                  aria-label={`${practice.practiceName} practiceCode ${practice.practiceCode} opens a new tab`}
                 >
                   {practice.practiceName}
                 </Link>
