@@ -27,7 +27,7 @@ const ConservationPracticesCategories = ({
   };
   return (
     <div data-testid='practice-content' className='categoryListContainer'>
-      <div className='headerText'>Conservation Practice Categories</div>
+      <h3 className='headerText'>Conservation Practice Categories</h3>
       <div className='introText'>{t('conservation-practice.intro')}</div>
       {categories.length > 0 ? (
         <>
