@@ -59,10 +59,10 @@ const ResourceConcernTreated = ({
               <li key={categoryId}>
                 <i className={chevronClassName} />
                 <div className='accordion-data'>
-                  <h4>
+                  <h3>
                     {rcCategory.rcCategoryName}
                     <span className='num-rc-count'>{`(${rcCategory.resourceConcerns.length} resource concerns)`}</span>
-                  </h4>
+                  </h3>
                 </div>
               </li>
               {(tab === categoryId || fromPdfReport) && (

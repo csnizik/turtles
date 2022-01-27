@@ -7,6 +7,9 @@
 .usa-pagination {
   justify-content: right;
   justify-content: space-between;
+  p {
+    font-size: calc(1.269rem + 0.228vw);
+  }
 }
 
 button {

@@ -72,8 +72,8 @@ const SpecificationsAndTools = ({
         className='state-specific-container'
         data-testid='national-specifications'
       >
-        <h4>National Specifications</h4>
-        <h5 className='state-prompt-text'>{nationalPromptText}</h5>
+        <h3>National Specifications</h3>
+        <p className='state-prompt-text'>{nationalPromptText}</p>
         <div className='link'>
           <a
             href='https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/cp/ncps/?cid=nrcs143_026849'
@@ -95,8 +95,8 @@ const SpecificationsAndTools = ({
         className='state-specific-container'
         data-testid='state-specifications'
       >
-        <h4>{selectedStateName} Specifications</h4>
-        <h5 className='state-prompt-text'>{statePromptText}</h5>
+        <h3>{selectedStateName} Specifications</h3>
+        <p className='state-prompt-text'>{statePromptText}</p>
         <div className='link'>
           <button
             className={
@@ -135,7 +135,7 @@ const SpecificationsAndTools = ({
   const renderAssociatedPractice = () => {
     return (
       <div className='associated-prac' data-testid='associated-practice'>
-        <h4>{t('associated-practices.title')}</h4>
+        <h3>{t('associated-practices.title')}</h3>
         <p>{t('associated-practices.description')}</p>
         <ul className='practices-row' data-testid='associated-practice-links'>
           {content.data?.map((practice: IAssociatedPracticeList) => {
@@ -170,7 +170,7 @@ const SpecificationsAndTools = ({
       id='PracticeSpecifications'
     >
       <h2>{getHeaderText()}</h2>
-      <h4>{intro}</h4>
+      <p>{intro}</p>
       {renderNationalSpecs()}
       {selectedStateName === 'U.S.' ? null : renderStateSpecs()}
       {content?.data?.length ? renderAssociatedPractice() : null}
