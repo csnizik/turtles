@@ -15,7 +15,7 @@ const ConservationPracticeOverview = ({
       {isSuccess && data && (
         <section className='practice-box' data-testid='consrv-prac-overview'>
           <ul className='list-document'>
-            <div key={data.practiceId} className='full-component'>
+            <li key={data.practiceId} className='full-component'>
               <img
                 alt=''
                 src={
@@ -30,7 +30,7 @@ const ConservationPracticeOverview = ({
                 <h2>Practice Information</h2>
                 <p>{data.practiceInfo}</p>
               </div>
-            </div>
+            </li>
           </ul>
         </section>
       )}

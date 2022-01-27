@@ -140,20 +140,16 @@ const SpecificationsAndTools = ({
         <ul className='practices-row' data-testid='associated-practice-links'>
           {content.data?.map((practice: IAssociatedPracticeList) => {
             return (
-              <Fragment key={practice.practiceId}>
-                <div className='grid-col-6'>
-                  <li>
-                    <Link
-                      to={`/${selectedStateCode}/${name}/${practice.practiceCategoryId}/${practice.practiceId}`}
-                      target='_blank'
-                      aria-label={`${practice.practiceName} link opens a new tab`}
-                    >
-                      {practice.practiceName}
-                    </Link>
-                    &ensp;({practice.practiceCode})
-                  </li>
-                </div>
-              </Fragment>
+              <li key={practice.practiceId} className='grid-col-6'>
+                <Link
+                  to={`/${selectedStateCode}/${name}/${practice.practiceCategoryId}/${practice.practiceId}`}
+                  target='_blank'
+                  aria-label={`${practice.practiceName} practiceCode ${practice.practiceCode} opens a new tab`}
+                >
+                  {practice.practiceName}
+                </Link>
+                &ensp;({practice.practiceCode})
+              </li>
             );
           })}
         </ul>
