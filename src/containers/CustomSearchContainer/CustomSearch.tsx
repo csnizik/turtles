@@ -175,75 +175,49 @@ const CustomSearch = () => {
               {t('actions.clear')}
             </button>
           </div>
-
-          <SearchByLocation
-            setSearchInput={setSearchInput}
-            setSearchInfo={setSearchedInfo}
-          />
-          <LandUseSection
-            setSearchInput={setSearchInput}
-            setSearchInfo={setSearchedInfo}
-            checkedState={checkedState}
-            setCheckedState={setCheckedState}
-          />
-          <div className='bottom-container'>
-            <div className='practice-labels'>
-              <p className='practice-description'>
-                {t('search-by-conservation-practice.description')}
-              </p>
-              <button
-                className={clearBtnClassNames}
-                type='button'
-                aria-label='practice-clear'
-                onClick={handleClearPracticeAndConcerns}
-              >
-                {t('actions.clear')}
-              </button>
-            </div>
-            <div className='search-criteria'>
-              <SearchByConservationPractice
-                selectedResourceCategory={selectedResourceCategory}
-                secondState={secondState}
-                setSecondState={setSecondState}
-                selectedPractice={selectedPractice.id}
-                setSelectedPractice={setSelectedPractice}
-                setSearchInput={setSearchInput}
-                setSearchInfo={setSearchedInfo}
-                resourceId={searchInput.resource_concern_id}
-                selectedSubPractice={selectedSubPractice}
-                setSelectedSubPractice={setSelectedSubPractice}
-              />
-              <SearchByResourceConcern
-                resourceConcernsSubgroups={resourceConcernsSubgroups}
-                setResourceConcernsSubgroups={setResourceConcernsSubgroups}
-                setSelectedResourceCategory={setSelectedResourceCategory}
-                selectedResourceCategory={selectedResourceCategory.id}
-                selectedPractice={selectedPractice.id}
-                setSearchInput={setSearchInput}
-                setSearchInfo={setSearchedInfo}
-                practiceId={searchInput.practice_id}
-                selectedResourceConcern={selectedResourceConcern}
-                setSelectedResourceConcern={setSelectedResourceConcern}
-              />
-            </div>
+          <div className='search-criteria'>
+            <SearchByConservationPractice
+              selectedResourceCategory={selectedResourceCategory}
+              secondState={secondState}
+              setSecondState={setSecondState}
+              selectedPractice={selectedPractice.id}
+              setSelectedPractice={setSelectedPractice}
+              setSearchInput={setSearchInput}
+              setSearchInfo={setSearchedInfo}
+              resourceId={searchInput.resource_concern_id}
+              selectedSubPractice={selectedSubPractice}
+              setSelectedSubPractice={setSelectedSubPractice}
+            />
+            <SearchByResourceConcern
+              resourceConcernsSubgroups={resourceConcernsSubgroups}
+              setResourceConcernsSubgroups={setResourceConcernsSubgroups}
+              setSelectedResourceCategory={setSelectedResourceCategory}
+              selectedResourceCategory={selectedResourceCategory.id}
+              selectedPractice={selectedPractice.id}
+              setSearchInput={setSearchInput}
+              setSearchInfo={setSearchedInfo}
+              practiceId={searchInput.practice_id}
+              selectedResourceConcern={selectedResourceConcern}
+              setSelectedResourceConcern={setSelectedResourceConcern}
+            />
           </div>
-          <Link
-            to={{
-              pathname: '/search-results',
-              state: { detail: searchInput },
-            }}
-          >
-            <CustomButton
-              data-testid='custom-search-button'
-              role='button'
-              ariaLabel='search'
-              additionalClassName={searchButtonStyles()}
-              onClick={handleSearch}
-            >
-              {t('actions.search')}
-            </CustomButton>
-          </Link>
         </div>
+        <Link
+          to={{
+            pathname: '/search-results',
+            state: { detail: searchInput },
+          }}
+        >
+          <CustomButton
+            data-testid='custom-search-button'
+            role='button'
+            ariaLabel='search'
+            additionalClassName={searchButtonStyles()}
+            onClick={handleSearch}
+          >
+            {t('actions.search')}
+          </CustomButton>
+        </Link>
       </div>
     </main>
   );
