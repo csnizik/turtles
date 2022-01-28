@@ -27,19 +27,19 @@ const Pagination = ({
   const renderTitle = () => {
     if (mapComponent) {
       return (
-        <h4>
+        <p>
           {indexOfFirstCard + 1} -{' '}
           {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards}{' '}
           projects for {selectedStateName || 'the U.S.'}
-        </h4>
+        </p>
       );
     }
     return (
-      <h4>
+      <p>
         Showing {cards ? 1 : 0} -{' '}
         {indexOfLastCard < cards ? indexOfLastCard : cards} of {cards}{' '}
         projects/initiatives
-      </h4>
+      </p>
     );
   };
   return (
@@ -130,7 +130,6 @@ const Pagination = ({
 
           {currentPage < indexOfLastPage - 3 ? (
             <li
-              aria-label='pagination-overflow'
               className='usa-pagination__item usa-pagination__overflow'
               role='presentation'
             >

@@ -67,7 +67,7 @@ describe('Pagination is rendered correctly', () => {
     fireEvent.click(getByLabelText(/Page 3/i));
     fireEvent.keyUp(getByLabelText(/Page 3/i));
 
-    expect(screen.getByLabelText('pagination-overflow')).toBeDefined();
+    expect(screen.getByText('…')).toBeDefined();
 
     expect(screen.getByLabelText('Go to Page 76')).toBeDefined();
     fireEvent.click(getByLabelText(/Page 76/i));

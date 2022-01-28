@@ -27,9 +27,9 @@
     border: 1px solid $philippine-silver;
     border-bottom: 0;
 
-    h4 {
+    h3 {
       font-weight: $medium-light-weight;
-      margin: 0;
+      margin: 0 0 0 $short-space-size;
       font-size: 17px;
       line-height: 20px;
     }
@@ -52,8 +52,7 @@
       }
 
       .accordion-data {
-        margin: 0 0 0 0.625rem;
-        h4 {
+        h3 {
           font-weight: $semi-heavy-weight;
         }
 
@@ -79,18 +78,12 @@
     padding-bottom: 0;
     display: flex;
 
-    h4 {
+    p {
       font-size: $h4-font-size;
       line-height: 19px;
       font-weight: $semi-heavy-weight;
       margin: 0;
       margin-bottom: $short-space-size;
-    }
-
-    p {
-      font-size: $h5-font-size;
-      line-height: $h4-font-size;
-      margin-bottom: $medium-space-size;
     }
 
     .content-description {

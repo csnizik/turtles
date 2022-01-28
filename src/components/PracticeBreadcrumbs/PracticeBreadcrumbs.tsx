@@ -71,7 +71,7 @@ const PracticeBreadcrumbs = ({
       <ol className='usa-breadcrumb__list'>
         <li
           className='usa-breadcrumb__list-item'
-          aria-label='PracticeCategory-breadcrumb'
+          aria-label='Conservation Practice Overview breadcrumb'
           onClick={() => handleNavigateBreadcrumb(0)}
           onKeyUp={(e) => handleKeyPressed(0, e)}
           role='presentation'
@@ -95,7 +95,7 @@ const PracticeBreadcrumbs = ({
           <>
             <li
               className='usa-breadcrumb__list-item'
-              aria-label='Practice-breadcrumb'
+              aria-label='Conservation Practice Category Breadcrumb'
               onClick={() => handleNavigateBreadcrumb(1)}
               onKeyUp={(e) => handleKeyPressed(0, e)}
               role='presentation'
@@ -110,9 +110,9 @@ const PracticeBreadcrumbs = ({
             <li className='usa-breadcrumb__list-item'>
               <span>{currentPractice.practiceName}</span>
               <div className='practice-title-w-button'>
-                <h3 className='practice-title'>
+                <h2 className='practice-title'>
                   {currentPractice.practiceName}
-                </h3>
+                </h2>
                 <div className='create-report-button'>
                   <button onClick={handleCreateReport} type='button'>
                     Create a Custom Report
