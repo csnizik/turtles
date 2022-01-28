@@ -16,9 +16,9 @@ const ResultsContainer = () => {
       <Filters />
       <Accordion />
       <div className='top-title'>
-        <h4 className='title'>
+        <h2 className='title'>
           {t('search-results-page.project-initiatives')}
-        </h4>
+        </h2>
       </div>
       <ProjectListGroup isMapDisplayed={false} />
     </div>

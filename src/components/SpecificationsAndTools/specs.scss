@@ -5,7 +5,7 @@
   padding: 5rem $large-space-size;
   break-inside: avoid;
   h2,
-  h4 {
+  p {
     margin: 0;
     padding: 0;
   }
@@ -16,7 +16,7 @@
     line-height: 37.5px;
   }
 
-  h4 {
+  p {
     padding-top: 0.625rem;
     font-weight: $medium-weight;
     font-size: $h4-font-size;
@@ -31,7 +31,7 @@
   border: 1px solid $philippine-silver;
   border-radius: 6px;
 
-  h4 {
+  h3 {
     padding: 0;
     font-size: $h3-font-size;
     font-weight: $semi-heavy-weight;
@@ -59,7 +59,7 @@
     display: flex;
     align-items: center;
 
-    .practice-standard-button{
+    .practice-standard-button {
       background-color: $usda-blue;
       color: $white;
       width: 27.8125rem;
@@ -82,14 +82,14 @@
     }
   }
 
-  .practice-standard-steps{
+  .practice-standard-steps {
     margin-top: 1.25rem;
 
     h4 {
       font-size: $h4-font-size;
       font-weight: $medium-weight;
       line-height: 22px;
-      margin-bottom: .25rem;
+      margin-bottom: 0.25rem;
     }
 
     .guide-icons {
@@ -120,12 +120,11 @@
   border: 1px solid $philippine-silver;
   border-radius: 6px;
 
-  h4 {
+  h3 {
     padding: 0;
     font-size: $h3-font-size;
     font-weight: $semi-heavy-weight;
     line-height: 26px;
-    padding: 0 0 1rem 0;
   }
 
   p {

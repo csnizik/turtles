@@ -179,10 +179,7 @@ const SearchByResourceConcern = ({
   return (
     <div className={wrapperClassNames} data-testid='rc-search'>
       <div className='search-by-resource-section'>
-        <label
-          className='usa-label resource-search-header'
-          aria-labelledby='resourceConcernCategoryValue resourceConcernValue'
-        >
+        <label className='usa-label resource-search-header'>
           {t('search-by-resource-concern.heading')}
         </label>
 

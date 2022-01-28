@@ -17,25 +17,25 @@ describe('Horizontal Scroll Bar is rendered correctly', () => {
 
   test('Should display the contents of the Horizontal Scroll Bar', () => {
     expect(
-      screen.getByLabelText('Resource Concerns Treated').closest('a')
+      screen.getByText('Resource Concerns Treated').closest('a')
     ).toHaveAttribute('href', '#ResourceConcernsTreated');
     expect(
-      screen.getByLabelText('Support for this Practice').closest('a')
+      screen.getByText('Support for this Practice').closest('a')
     ).toHaveAttribute('href', '#SupportPractice');
     expect(
-      screen.getByLabelText('Practice Specifications and Tools').closest('a')
+      screen.getByText('Practice Specifications and Tools').closest('a')
     ).toHaveAttribute('href', '#PracticeSpecifications');
     expect(
-      screen.getByLabelText('Practice Projects & Initiatives').closest('a')
+      screen.getByText('Practice Projects & Initiatives').closest('a')
     ).toHaveAttribute('href', '#ProjectsInitiatives');
   });
   test('Should display the right arrow', () => {
-    const button = screen.getByLabelText('right-button');
+    const button = screen.getByLabelText('Right button');
     fireEvent.click(button);
     expect(screen.queryByText('Yes')).not.toBeInTheDocument();
   });
   test('Should display the left arrow', () => {
-    const button = screen.getByLabelText('left-button');
+    const button = screen.getByLabelText('Left button');
     fireEvent.click(button);
     expect(screen.queryByText('Yes')).not.toBeInTheDocument();
   });

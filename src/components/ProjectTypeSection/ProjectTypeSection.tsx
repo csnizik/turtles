@@ -160,10 +160,10 @@ const ProjectTypeSection = ({
         }
       );
       return (
-        <h3 data-testid='initiative-title'>{foundInitiative?.lci_name}</h3>
+        <h2 data-testid='initiative-title'>{foundInitiative?.lci_name}</h2>
       );
     }
-    return <h3 data-testid='project-type-title'>{projectType.title}</h3>;
+    return <h2 data-testid='project-type-title'>{projectType.title}</h2>;
   };
 
   return (
