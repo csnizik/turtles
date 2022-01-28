@@ -56,6 +56,12 @@ const PracticeBreadcrumbs = ({
       }
     }
   };
+
+  const handleKeyPressed = (breadcrumbId: number, event: any) => {
+    if (event.keyCode === 9 || event.key === 'Tab') return;
+    handleNavigateBreadcrumb(breadcrumbId);
+  };
+
   return (
     <nav
       className='usa-breadcrumb margin-top-1 margin-left-3 crumbs-container'
@@ -67,7 +73,7 @@ const PracticeBreadcrumbs = ({
           className='usa-breadcrumb__list-item'
           aria-label='PracticeCategory-breadcrumb'
           onClick={() => handleNavigateBreadcrumb(0)}
-          onKeyUp={() => handleNavigateBreadcrumb(0)}
+          onKeyUp={(e) => handleKeyPressed(0, e)}
           role='presentation'
         >
           {currentPracticeCategory ? (
@@ -91,7 +97,7 @@ const PracticeBreadcrumbs = ({
               className='usa-breadcrumb__list-item'
               aria-label='Practice-breadcrumb'
               onClick={() => handleNavigateBreadcrumb(1)}
-              onKeyUp={() => handleNavigateBreadcrumb(1)}
+              onKeyUp={(e) => handleKeyPressed(0, e)}
               role='presentation'
             >
               <button
@@ -119,7 +125,7 @@ const PracticeBreadcrumbs = ({
           <li
             className='usa-breadcrumb__list-item'
             onClick={() => handleNavigateBreadcrumb(1)}
-            onKeyUp={() => handleNavigateBreadcrumb(1)}
+            onKeyUp={(e) => handleKeyPressed(0, e)}
             role='presentation'
           >
             <span>{currentPracticeCategory?.practiceCategoryName}</span>

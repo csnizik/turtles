@@ -217,7 +217,9 @@ const ProjectsContainer = () => {
             >
               <div className='usa-card__container'>
                 <header className='usa-card__header'>
-                  <h2 className='usa-card__heading'>{project.title}</h2>
+                  <button type='button' className='usa-card__heading'>
+                    {project.title}
+                  </button>
                 </header>
                 <div className='usa-card__body'>
                   <p className='lead'>{project.paragraphText}</p>
