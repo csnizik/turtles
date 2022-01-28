@@ -58,12 +58,12 @@ const ResourceConcernTreated = ({
               <p className='hidden-content'>{categoryId}</p>
               <li key={categoryId}>
                 <i className={chevronClassName} />
-                <div className='accordion-data'>
-                  <h4>
+                <button type='button' className='accordion-data'>
+                  <h3>
                     {rcCategory.rcCategoryName}
                     <span className='num-rc-count'>{`(${rcCategory.resourceConcerns.length} resource concerns)`}</span>
-                  </h4>
-                </div>
+                  </h3>
+                </button>
               </li>
               {(tab === categoryId || fromPdfReport) && (
                 <DetailedDescription

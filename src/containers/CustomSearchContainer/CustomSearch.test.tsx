@@ -44,12 +44,18 @@ describe('Custom search container is rendered correctly', () => {
   });
 
   test('Should display Practices Dropdown Clear Button', () => {
-    expect(screen.getByRole('button', { name: /practice-clear/i }));
+    expect(
+      screen.getByRole('button', {
+        name: 'Clear Practices and Resource Concerns',
+      })
+    );
     expect(screen.getAllByText('actions.clear')).toBeDefined();
   });
 
   test('Should Clear the Practices Dropdowns', () => {
-    const btn = screen.getByRole('button', { name: /practice-clear/i });
+    const btn = screen.getByRole('button', {
+      name: 'Clear Practices and Resource Concerns',
+    });
     userEvent.click(btn);
     expect(
       screen.getByRole(

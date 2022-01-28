@@ -3,7 +3,12 @@
     padding-bottom: 1rem;
   }
 }
-
+.project-type-section {
+  h2 {
+    font-size: calc(1.2978rem + 0.5736vw);
+    font-weight: 650;
+  }
+}
 .wlfw-header {
   margin-bottom: 1rem;
 }

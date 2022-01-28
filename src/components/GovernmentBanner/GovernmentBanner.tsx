@@ -119,9 +119,9 @@ const GovernmentBanner = () => {
       <div className='usda-header row-flex-start'>
         <img src='../../../../images/usda_logo_color.png' alt='USDA LOGO' />
         <div className='government-banner'>
-          <h4 className='page-title' data-testid='page-title'>
+          <h1 className='page-title header-sizing' data-testid='page-title'>
             {t('header.nrcs')}
-          </h4>
+          </h1>
           <p>{t('header.usda')}</p>
         </div>
       </div>

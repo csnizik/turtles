@@ -97,10 +97,7 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
   return (
     <div className='search-by-location-section' data-testid='location-search'>
       <div className='search-labels'>
-        <label
-          className='usa-label location-search-header'
-          aria-labelledby='stateValue'
-        >
+        <label className='usa-label location-search-header'>
           {t('location-search.search-by-location')}
         </label>
         <button

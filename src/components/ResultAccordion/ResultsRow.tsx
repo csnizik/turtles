@@ -20,7 +20,7 @@ const ResultsRow = ({
   return (
     <>
       <div className='top-title'>
-        <h4>{t('search-results-page.conservation-practices')}</h4>
+        <h2>{t('search-results-page.conservation-practices')}</h2>
       </div>
       <div className='accordion-section'>
         {rowData.map((practiceCategory: any) => {
@@ -43,7 +43,7 @@ const ResultsRow = ({
                     role='presentation'
                   />
                   <div className='accordion-data'>
-                    <h4>{practiceCategory.practiceCategoryName}</h4>
+                    <h3>{practiceCategory.practiceCategoryName}</h3>
                     <div>
                       {currentTab === categoryId && (
                         <p>
