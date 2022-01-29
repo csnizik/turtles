@@ -222,7 +222,7 @@ const ReportBuilder = ({
             onChange={handleInput}
           />
           <label className='usa-checkbox__label' htmlFor='input2'>
-            {`Support for the ${reportPreviewData?.practiceName} practice in ${
+            {`Support for the ${reportPreviewData?.practiceName} Practice in ${
               stateName === 'U.S.' ? 'the U.S.' : stateName
             }`}
           </label>

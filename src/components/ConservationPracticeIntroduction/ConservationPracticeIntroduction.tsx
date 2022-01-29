@@ -82,7 +82,7 @@ const ConservationPracticeIntroduction = ({
             }}
             target='_blank'
           >
-            Explore more practice data
+            Explore more data on acres receiving conservation at the RCA Data Viewer
             <img alt='link opens new window' src={image} />
           </Link>
         </div>
