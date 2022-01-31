@@ -10,16 +10,16 @@ const Home = () => {
 
   const renderMainContent = () => {
     return (
-      <main data-testid='home-content'>
+      <div data-testid='home-content'>
         <QuickSearchBar />
         <LocationSearch />
         <FindByPractices />
-      </main>
+      </div>
     );
   };
 
   return (
-    <div className='home-page'>
+    <main className='home-page'>
       <Header
         headerText={t('home-page.title')}
         headerClassNames='display-4'
@@ -27,7 +27,7 @@ const Home = () => {
         priority='1'
       />
       {renderMainContent()}
-    </div>
+    </main>
   );
 };
 
