@@ -213,16 +213,18 @@ const ProjectListGroup = ({
                 <ul className='list-group projects-data'>
                   {currentCards?.map((project: any) => {
                     return (
-                      <ProjectListItem
-                        key={project.projectId}
-                        id={project.projectId}
-                        description={project.projectDescription}
-                        title={project.projectTitle}
-                        owner={project.projectOwner}
-                        statesInvolved={project.statesInvolved}
-                        year={project.awardeeYear}
-                        link={project.projectLink}
-                      />
+                      <li>
+                        <ProjectListItem
+                          key={project.projectId}
+                          id={project.projectId}
+                          description={project.projectDescription}
+                          title={project.projectTitle}
+                          owner={project.projectOwner}
+                          statesInvolved={project.statesInvolved}
+                          year={project.awardeeYear}
+                          link={project.projectLink}
+                        />
+                      </li>
                     );
                   })}
                 </ul>
@@ -262,7 +264,7 @@ const ProjectListGroup = ({
                 {currentICards?.map((initiative: any) => {
                   const initiativeID = initiative.initiativeId;
                   return (
-                    <div key={initiativeID}>
+                    <li key={initiativeID}>
                       <ProjectListItem
                         id={initiative.lci_id}
                         description={initiative.lci_description}
@@ -272,7 +274,7 @@ const ProjectListGroup = ({
                         year={initiative.initiativeYear}
                         link={initiative.lci_page_link}
                       />
-                    </div>
+                    </li>
                   );
                 })}
               </ul>

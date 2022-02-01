@@ -212,26 +212,24 @@ const ProjectsContainer = () => {
             <li
               className='tablet:grid-col-4 usa-card usa-card--header-first'
               key={project.id}
-              role='presentation'
-              onClick={() => handleSelectProjectCard(project.id)}
             >
-              <div className='usa-card__container'>
-                <header className='usa-card__header'>
-                  <button type='button' className='usa-card__heading'>
-                    {project.title}
-                  </button>
-                </header>
-                <div className='usa-card__body'>
-                  <p className='lead'>{project.paragraphText}</p>
-                </div>
-                <div className='usa-card__footer'>
-                  <div className='usa-card__media'>
-                    <div className='usa-card__img'>
-                      <img src={project.imgSrc} alt={project.imgAlt} />
+              <button onClick={() => handleSelectProjectCard(project.id)}>
+                <div className='usa-card__container'>
+                  <header className='usa-card__header'>
+                    <p className='usa-card__heading'>{project.title}</p>
+                  </header>
+                  <div className='usa-card__body'>
+                    <p className='lead'>{project.paragraphText}</p>
+                  </div>
+                  <div className='usa-card__footer'>
+                    <div className='usa-card__media'>
+                      <div className='usa-card__img'>
+                        <img src={project.imgSrc} alt={project.imgAlt} />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </button>
             </li>
           );
         })}
