@@ -42,11 +42,11 @@ const ConservationPracticeIntroduction = ({
                 }}
                 to={{
                   pathname:
-                    'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/programs/financial/eqip/',
+                    'https://www.farmers.gov/data',
                 }}
                 target='_blank'
               >
-                Explore more practice data
+                Explore more data on practice obligations at the Financial Assistance Dashboard
                 <img alt='link opens new window' src={image} />
               </Link>
             </div>
