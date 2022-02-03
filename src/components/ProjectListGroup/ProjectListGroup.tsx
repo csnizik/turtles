@@ -26,11 +26,13 @@ import { ISearchData } from '../../common/types';
 interface IProjectListProps {
   isMapDisplayed: boolean;
   selectedStateName?: string;
+  noListDots?: boolean;
 }
 
 const ProjectListGroup = ({
   isMapDisplayed,
   selectedStateName,
+  noListDots,
 }: IProjectListProps) => {
   const stateInfo = useAppSelector((state) => state?.stateSlice);
   const practiceInfo = useAppSelector(
@@ -131,18 +133,16 @@ const ProjectListGroup = ({
         {projectTabs.map((tab: any) => {
           const tabID = tab.id;
           return (
-            <div key={tabID}>
-              <NavItem>
-                <NavLink
-                  className={classnames({ active: activeTab === tab.id })}
-                  onClick={() => {
-                    toggleProjectsTab(tab.id);
-                  }}
-                >
-                  {getTitle(tab)}
-                </NavLink>
-              </NavItem>
-            </div>
+            <NavItem key={tabID}>
+              <NavLink
+                className={classnames({ active: activeTab === tab.id })}
+                onClick={() => {
+                  toggleProjectsTab(tab.id);
+                }}
+              >
+                {getTitle(tab)}
+              </NavLink>
+            </NavItem>
           );
         })}
       </Nav>
@@ -210,7 +210,13 @@ const ProjectListGroup = ({
               {pisLoading && <Spinner />}
               {pisError && perror}
               {pisSuccess && grantsLength ? (
-                <ul className='list-group projects-data'>
+                <ul
+                  className={
+                    noListDots
+                      ? 'list-group projects-data no-dots'
+                      : 'list-group projects-data'
+                  }
+                >
                   {currentCards?.map((project: any) => {
                     return (
                       <li>
@@ -290,4 +296,5 @@ export default ProjectListGroup;
 
 ProjectListGroup.defaultProps = {
   selectedStateName: '',
+  noListDots: false,
 };

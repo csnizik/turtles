@@ -136,7 +136,7 @@ const ProjectsContainer = () => {
                   <ListGroupItem
                     key={listItem.id}
                     className={listGroupItemClassNames}
-                    role='presentation'
+                    // role='presentation'
                     onClick={() => handleSelectProjectItem(listItem.id)}
                   >
                     {listItem.title === 'All U.S. Projects & Initiatives'
@@ -162,7 +162,7 @@ const ProjectsContainer = () => {
                     <ListGroupItem
                       key={initiative.lci_id}
                       className={listGroupItemClassNames}
-                      role='presentation'
+                      //role='presentation'
                       title={initiative.lci_page_link_text}
                       onClick={() =>
                         handleSelectLandscapeInitiative(initiative.lci_id)
@@ -210,13 +210,15 @@ const ProjectsContainer = () => {
         {projectCards.map((project: IProjectTypeCard) => {
           return (
             <li
+              onClick={() => handleSelectProjectCard(project.id)}
+              onKeyPress={() => handleSelectProjectCard(project.id)}
               className='tablet:grid-col-4 usa-card usa-card--header-first'
               key={project.id}
             >
-              <button onClick={() => handleSelectProjectCard(project.id)}>
+              <button className='card-button'>
                 <div className='usa-card__container'>
                   <header className='usa-card__header'>
-                    <p className='usa-card__heading'>{project.title}</p>
+                    <h2 className='usa-card__heading'>{project.title}</h2>
                   </header>
                   <div className='usa-card__body'>
                     <p className='lead'>{project.paragraphText}</p>

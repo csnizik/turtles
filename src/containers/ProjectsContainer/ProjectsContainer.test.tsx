@@ -41,7 +41,7 @@ describe('Projects container is rendered correctly', () => {
       screen.getByText((content: any, element: any) => {
         if (element) {
           return (
-            element.tagName.toLowerCase() === 'button' &&
+            element.tagName.toLowerCase() === 'h2' &&
             content.startsWith('Conservation')
           );
         }
@@ -51,7 +51,7 @@ describe('Projects container is rendered correctly', () => {
       screen.getByText((content: any, element: any) => {
         if (element) {
           return (
-            element.tagName.toLowerCase() === 'button' &&
+            element.tagName.toLowerCase() === 'h2' &&
             content.startsWith('Landscape')
           );
         }
@@ -170,7 +170,7 @@ describe('Projects container is rendered correctly', () => {
         getByText((content: any, element: any) => {
           if (element) {
             return (
-              element.tagName.toLowerCase() === 'button' &&
+              element.tagName.toLowerCase() === 'h2' &&
               content.startsWith('Conservation Innovation Grants')
             );
           }

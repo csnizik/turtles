@@ -27,7 +27,7 @@
 }
 
 .projects-data {
-  li.list-group-item {
+  div.list-group-item {
     border: 1px solid $light-grey-5;
     border-radius: 6px;
     margin: 0rem 0rem 1rem 0rem;
@@ -96,6 +96,6 @@
     }
   }
 }
-ul {
+.no-dots {
   list-style-type: none;
 }
