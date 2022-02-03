@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useGetAssociatedPracticeQuery } from '../../Redux/services/api';
 import './specs.scss';

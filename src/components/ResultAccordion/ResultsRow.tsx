@@ -17,6 +17,10 @@ const ResultsRow = ({
   const stateCode: string = useAppSelector(
     (state) => state.stateSlice.stateCode
   );
+  const handleKeyPressed = (practiceId: number, event: any) => {
+    if (event.keyCode === 9 || event.key === 'Tab') return;
+    toggleExpandCategory(practiceId);
+  };
   return (
     <>
       <div className='top-title'>
@@ -34,14 +38,17 @@ const ResultsRow = ({
             'accordion-container-blue': currentTab === categoryId,
           });
           return (
-            <>
-              <div key={categoryId} className={accordionClass}>
-                <li>
-                  <i
-                    className={chevronClassName}
-                    onClick={() => toggleExpandCategory(categoryId)}
-                    role='presentation'
-                  />
+            <ul>
+              <div className={accordionClass}>
+                <li
+                  key={categoryId}
+                  role='menuitem'
+                  aria-label={practiceCategory.practiceCategoryName}
+                  tabIndex={0}
+                  onClick={() => toggleExpandCategory(categoryId)}
+                  onKeyUp={(e) => handleKeyPressed(0, e)}
+                >
+                  <i className={chevronClassName} />
                   <div className='accordion-data'>
                     <h3>{practiceCategory.practiceCategoryName}</h3>
                     <div>
@@ -82,8 +89,11 @@ const ResultsRow = ({
                     return (
                       <li
                         key={ele.practiceId}
+                        role='menuitem'
+                        aria-label={ele.practiceName}
+                        tabIndex={0}
                         onClick={() => toggleChild(ele.practiceId)}
-                        role='presentation'
+                        onKeyUp={(e) => handleKeyPressed(0, e)}
                       >
                         <i className={childChevronClassName} />
                         <div className='child-data'>
@@ -122,7 +132,7 @@ const ResultsRow = ({
                   <hr />
                 </div>
               )}
-            </>
+            </ul>
           );
         })}
       </div>
