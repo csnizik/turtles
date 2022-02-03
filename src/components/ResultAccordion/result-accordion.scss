@@ -29,6 +29,12 @@ hr {
   border: 1px solid $philippine-silver;
   border-bottom: none;
 
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
   h3 {
     margin: 0 0 0 1rem;
     display: flex;
