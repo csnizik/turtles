@@ -8,20 +8,22 @@ const ResultsContainer = () => {
   const { t } = useTranslation();
 
   return (
-    <div className='results-page' data-testid='results-container'>
-      <div className='search-title'>
-        <h1>{t('search-results-page.header')}</h1>
-        <hr />
+    <main>
+      <div className='results-page' data-testid='results-container'>
+        <div className='search-title'>
+          <h1>{t('search-results-page.header')}</h1>
+          <hr />
+        </div>
+        <Filters />
+        <Accordion />
+        <div className='top-title'>
+          <h2 className='title'>
+            {t('search-results-page.project-initiatives')}
+          </h2>
+        </div>
+        <ProjectListGroup isMapDisplayed={false} />
       </div>
-      <Filters />
-      <Accordion />
-      <div className='top-title'>
-        <h2 className='title'>
-          {t('search-results-page.project-initiatives')}
-        </h2>
-      </div>
-      <ProjectListGroup isMapDisplayed={false} />
-    </div>
+    </main>
   );
 };
 
