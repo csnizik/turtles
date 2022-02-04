@@ -42,6 +42,7 @@ const ImplementationExtent = ({
   const getHeaderText = () => {
     if (practiceName) {
       return `Support for the ${practiceName} Practice in ${
+
         stateInfo?.stateNameDisplay === 'U.S.'
           ? 'the U.S.'
           : stateInfo?.stateNameDisplay
@@ -160,7 +161,7 @@ const ImplementationExtent = ({
   return (
     <div className='ie-parent' id='SupportPractice' data-testid='i-extent'>
       <h2>{getHeaderText()}</h2>
-      <h4>{intro}</h4>
+      <p>{intro}</p>
       <div className='extent-content'>
         {renderObligations()}
         {renderAcresImplemented()}

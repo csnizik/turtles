@@ -72,7 +72,7 @@ const ConservationPracticeIntroduction = ({
         )}
         <div className='link'>
           <Link
-            aria-label='environmental quality incentives program opens in new window'
+            aria-label='RCA data viewer opens in new window'
             style={{
               textDecoration: 'none',
             }}

@@ -57,6 +57,7 @@ const EquipPracticeCertificationTrend = ({
     <div
       className='tableau-report-container'
       id='equip-practice-certification-trend'
+      data-testid='tableau-report-container'
     >
       {fromPdfReport && (
         <img

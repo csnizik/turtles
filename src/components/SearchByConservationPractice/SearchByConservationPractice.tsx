@@ -155,10 +155,7 @@ const SearchByConservationPractice = ({
   return (
     <div className={wrapperClassNames}>
       <div className='search-by-practice-section'>
-        <label
-          className='usa-label practice-label'
-          aria-labelledby='practiceCategoryValue specificPracticeValue'
-        >
+        <label className='usa-label practice-label'>
           {t('search-by-conservation-practice.heading')}
         </label>
         <div className='desktop:grid-col-8'>

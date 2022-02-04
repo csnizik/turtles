@@ -47,13 +47,12 @@ const GovernmentBanner = () => {
     window.localStorage.clear();
   };
   const renderNRCSHeaderSection: Function = () => (
-    <header
+    <div
       data-testid='gov-banner-header'
       className='usa-banner-header'
-      aria-label='Official United States Government Website Disclaimer'
     >
       <div className='usa-accordion'>
-        <header className='usa-banner__header'>
+        <div className='usa-banner__header'>
           <div className='usa-banner__inner '>
             <div className='grid-col-auto'>
               <img
@@ -79,7 +78,7 @@ const GovernmentBanner = () => {
               </button>
             </div>
           </div>
-        </header>
+        </div>
         <div className='usa-banner__content' id='gov-banner' hidden>
           <div className='grid-row grid-gap-lg'>
             <div className='usa-banner__guidance tablet:grid-col-6'>
@@ -120,13 +119,13 @@ const GovernmentBanner = () => {
       <div className='usda-header row-flex-start'>
         <img src='../../../../images/usda_logo_color.png' alt='USDA LOGO' />
         <div className='government-banner'>
-          <h4 className='page-title' data-testid='page-title'>
+          <h1 className='page-title header-sizing' data-testid='page-title'>
             {t('header.nrcs')}
-          </h4>
+          </h1>
           <p>{t('header.usda')}</p>
         </div>
       </div>
-    </header>
+    </div>
   );
 
   const renderNavigationSection: Function = () => (
@@ -152,10 +151,10 @@ const GovernmentBanner = () => {
   );
 
   return (
-    <>
+    <header>
       {renderNRCSHeaderSection()}
       {renderNavigationSection()}
-    </>
+    </header>
   );
 };
 
