@@ -139,6 +139,7 @@ const ProjectListGroup = ({
                 onClick={() => {
                   toggleProjectsTab(tab.id);
                 }}
+                tabIndex={0}
               >
                 {getTitle(tab)}
               </NavLink>
