@@ -59,6 +59,7 @@ const LocationContainer = () => {
     // ) {
     //   setTabOption(0);
     // }
+    window.scroll(0, 0);
   }, [selectedPracticeCategory, selectedPractice, option]);
 
   const renderTabContent = () => (
