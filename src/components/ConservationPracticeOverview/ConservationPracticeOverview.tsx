@@ -14,7 +14,7 @@ const ConservationPracticeOverview = ({
       {isError && error}
       {isSuccess && data && (
         <section className='practice-box' data-testid='consrv-prac-overview'>
-          <ul className='list-document'>
+          <ul className='list-document no-dot'>
             <li key={data.practiceId} className='full-component'>
               <img
                 alt=''
