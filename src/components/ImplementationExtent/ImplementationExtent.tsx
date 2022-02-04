@@ -8,7 +8,6 @@ import image from './image/newLinkIcon.svg';
 import PracticeDetailReport from '../TableauReport/PracticeDetailReport';
 import EquipPracticeCertificationTrend from '../TableauReport/EquipPracticeCertificationTrend';
 import { eipcTabStatus, pdTabStatus } from '../../Redux/Slice/pdfGenSlice';
-import { tableauGraph } from '../../common/typedconstants.common';
 
 interface IImplementationExtentProps {
   data: any;
@@ -42,7 +41,11 @@ const ImplementationExtent = ({
 
   const getHeaderText = () => {
     if (practiceName) {
-      return `Support for the ${practiceName} Practice in ${stateInfo?.stateNameDisplay === 'U.S.'?'the U.S.':stateInfo?.stateNameDisplay}`;
+      return `Support for the ${practiceName} Practice in ${
+        stateInfo?.stateNameDisplay === 'U.S.'
+          ? 'the U.S.'
+          : stateInfo?.stateNameDisplay
+      }`;
     }
     return practiceName;
   };
@@ -75,12 +78,12 @@ const ImplementationExtent = ({
                 textDecoration: 'none',
               }}
               to={{
-                pathname:
-                'https://www.farmers.gov/data',
+                pathname: 'https://www.farmers.gov/data',
               }}
               target='_blank'
             >
-              Explore more data on practice obligations at the Financial Assistance Dashboard
+              Explore more data on practice obligations at the Financial
+              Assistance Dashboard
               <img alt='link opens new window' src={image} />
             </Link>
           </div>
@@ -114,7 +117,8 @@ const ImplementationExtent = ({
               }}
               target='_blank'
             >
-              Explore more data on acres receiving conservation at the RCA Data Viewer
+              Explore more data on acres receiving conservation at the RCA Data
+              Viewer
               <img alt='link opens new window' src={image} />
             </Link>
           </div>
