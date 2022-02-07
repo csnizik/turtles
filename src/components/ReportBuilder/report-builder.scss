@@ -6,10 +6,15 @@
   .checkbox-container {
     border-bottom: 1px solid $philippine-silver;
     padding-bottom: $medium-space-size;
-  }
 
-  .usa-checkbox {
-    padding-bottom: $short-space-size;
+    .usa-checkbox {
+      padding-bottom: $short-space-size;
+    }
+
+    .usa-checkbox input:focus + .usa-checkbox__label {
+      border: 4px solid #2491ff;
+      border-radius: 7px;
+    }
   }
 
   .pdf-button {
@@ -28,25 +33,10 @@
 
 .swapa-checkbox-list {
   margin-left: 2.1875rem;
-
-  .usa-checkbox {
-    padding-bottom: $short-space-size;
-  }
-  .usa-checkbox__label {
-    color: $nrcs-dark;
-    font-family: Roboto;
-    font-size: 1rem;
-  }
 }
 
 .projects-initiatives-list {
   margin-left: 2.1875rem;
-
-  .usa-checkbox__label {
-    color: $nrcs-dark;
-    font-family: Roboto;
-    font-size: 1rem;
-  }
 }
 
 .builder-title {

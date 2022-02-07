@@ -41,13 +41,13 @@ const ConservationPracticeIntroduction = ({
                   textDecoration: 'none',
                 }}
                 to={{
-                  pathname:
-                    'https://www.farmers.gov/data',
+                  pathname: 'https://www.farmers.gov/data',
                 }}
                 target='_blank'
               >
-                Explore more data on practice obligations at the Financial Assistance Dashboard
-                <img alt='link opens new window' src={image} />
+                Explore more data on practice obligations at the Financial
+                Assistance Dashboard
+                <img alt='Explore more practice obligations data' src={image} />
               </Link>
             </div>
           </div>
@@ -82,8 +82,12 @@ const ConservationPracticeIntroduction = ({
             }}
             target='_blank'
           >
-            Explore more data on acres receiving conservation at the RCA Data Viewer
-            <img alt='link opens new window' src={image} />
+            Explore more data on acres receiving conservation at the RCA Data
+            Viewer
+            <img
+              alt='Explore more acres receiving conservation data"'
+              src={image}
+            />
           </Link>
         </div>
       </div>

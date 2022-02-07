@@ -42,7 +42,6 @@ const ImplementationExtent = ({
   const getHeaderText = () => {
     if (practiceName) {
       return `Support for the ${practiceName} Practice in ${
-
         stateInfo?.stateNameDisplay === 'U.S.'
           ? 'the U.S.'
           : stateInfo?.stateNameDisplay
@@ -74,7 +73,7 @@ const ImplementationExtent = ({
           </div>
           <div className='link'>
             <Link
-              aria-label='Obligations and practices implemented opens in new window'
+              aria-label='Obligations and practices implemented opens in new browser tab'
               style={{
                 textDecoration: 'none',
               }}
@@ -85,7 +84,10 @@ const ImplementationExtent = ({
             >
               Explore more data on practice obligations at the Financial
               Assistance Dashboard
-              <img alt='link opens new window' src={image} />
+              <img
+                alt='Explore more data on practice obligations opens in new browser tab'
+                src={image}
+              />
             </Link>
           </div>
         </div>
@@ -108,7 +110,7 @@ const ImplementationExtent = ({
           </div>
           <div className='link'>
             <Link
-              aria-label='Acres implemented opens in new window'
+              aria-label='Acres implemented opens in new browser tab'
               style={{
                 textDecoration: 'none',
               }}
@@ -120,7 +122,10 @@ const ImplementationExtent = ({
             >
               Explore more data on acres receiving conservation at the RCA Data
               Viewer
-              <img alt='link opens new window' src={image} />
+              <img
+                alt='Explore more data on acres opens in a new browser tab'
+                src={image}
+              />
             </Link>
           </div>
         </div>
@@ -146,10 +151,13 @@ const ImplementationExtent = ({
             href={scheduleLink}
             target='_blank'
             rel='noopener noreferrer'
-            aria-label={`${stateInfo?.stateNameDisplay} Payment Schedules link opens a new browser tab`}
+            aria-label={`${stateInfo?.stateNameDisplay} Payment Schedules opens in a new browser tab`}
           >
             {selectedLocation}
-            <img alt='' src={image} />
+            <img
+              alt='Current State Payment Schedules opens in a new browser tab'
+              src={image}
+            />
           </a>
         </div>
       </div>

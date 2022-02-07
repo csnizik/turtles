@@ -79,7 +79,7 @@ const SpecificationsAndTools = ({
             href='https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/cp/ncps/?cid=nrcs143_026849'
             target='_blank'
             rel='noopener noreferrer'
-            aria-label='NRCS National Conservation Practice Guidance link'
+            aria-label='NRCS National Conservation Practice Guidance'
           >
             NRCS National Conservation Practice Guidance
             <img alt='All Conservation at Work videos' src={outerLinkImage} />
