@@ -124,6 +124,7 @@ const PracticeBreadcrumbs = ({
         ) : (
           <li
             className='usa-breadcrumb__list-item'
+            aria-label='Conservation Practice Category Breadcrumb'
             onClick={() => handleNavigateBreadcrumb(1)}
             onKeyUp={(e) => handleKeyPressed(0, e)}
             role='presentation'

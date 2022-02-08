@@ -8,7 +8,6 @@ import image from './image/newLinkIcon.svg';
 import PracticeDetailReport from '../TableauReport/PracticeDetailReport';
 import EquipPracticeCertificationTrend from '../TableauReport/EquipPracticeCertificationTrend';
 import { eipcTabStatus, pdTabStatus } from '../../Redux/Slice/pdfGenSlice';
-import { tableauGraph } from '../../common/typedconstants.common';
 
 interface IImplementationExtentProps {
   data: any;
@@ -42,7 +41,7 @@ const ImplementationExtent = ({
 
   const getHeaderText = () => {
     if (practiceName) {
-      return `Support for the ${practiceName} practice in ${
+      return `Support for the ${practiceName} Practice in ${
         stateInfo?.stateNameDisplay === 'U.S.'
           ? 'the U.S.'
           : stateInfo?.stateNameDisplay
@@ -63,7 +62,7 @@ const ImplementationExtent = ({
     if (isEipcTableauEmpty || isEipcFromRPEmpty) return null;
     return (
       <div className='obligations'>
-        <h3>Obligations and Practices Implemented from 2014 - 2020</h3>
+        <h3>Obligations and Practices Implemented</h3>
         <hr />
         <div className='graph-container'>
           <div className='obligation-graph'>
@@ -71,21 +70,6 @@ const ImplementationExtent = ({
               practiceCode={data?.practiceCode}
               checkTableauIsEmpty={setIsEipcTableauEmpty}
             />
-          </div>
-          <div className='link'>
-            <Link
-              aria-label='Obligations and practices implemented opens in new window'
-              style={{
-                textDecoration: 'none',
-              }}
-              to={{
-                pathname: tableauGraph.EquipPracticeCertificationTrend.link,
-              }}
-              target='_blank'
-            >
-              More information about obligations for NRCS practices
-              <img alt='link opens new window' src={image} />
-            </Link>
           </div>
         </div>
       </div>
@@ -96,7 +80,7 @@ const ImplementationExtent = ({
     if (isPdTableauEmpty || isPdFromRPEmpty) return null;
     return (
       <div className='arces-implemented'>
-        <h3>Acres Implemented from 2014 - 2020</h3>
+        <h3>Acres Receiving Conservation</h3>
         <hr />
         <div className='graph-container'>
           <div className='acres-graph'>
@@ -117,7 +101,8 @@ const ImplementationExtent = ({
               }}
               target='_blank'
             >
-              More information about acres implemented for NRCS practices
+              Explore more data on acres receiving conservation at the RCA Data
+              Viewer
               <img alt='link opens new window' src={image} />
             </Link>
           </div>

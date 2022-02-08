@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import {
@@ -45,9 +44,6 @@ const IndividualPracticeContainer = () => {
     dispatch(currentState(selectedState));
   }
 
-  useEffect(() => {
-    window.scroll(0, 0);
-  }, []);
   return (
     <>
       <HorizontalScroll />

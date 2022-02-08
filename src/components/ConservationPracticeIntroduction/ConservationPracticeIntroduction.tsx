@@ -34,22 +34,6 @@ const ConservationPracticeIntroduction = ({
             <TopPracticesEQUIPOpenData
               setIsTableauEmpty={setIsTpEquipTableauEmpty}
             />
-            <div className='link'>
-              <Link
-                aria-label='environmental quality incentives program opens in new window'
-                style={{
-                  textDecoration: 'none',
-                }}
-                to={{
-                  pathname:
-                    'https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/programs/financial/eqip/',
-                }}
-                target='_blank'
-              >
-                Explore more practice data
-                <img alt='link opens new window' src={image} />
-              </Link>
-            </div>
           </div>
         </>
       );
@@ -82,7 +66,8 @@ const ConservationPracticeIntroduction = ({
             }}
             target='_blank'
           >
-            Explore more practice data
+            Explore more data on acres receiving conservation at the RCA Data
+            Viewer
             <img alt='link opens new window' src={image} />
           </Link>
         </div>

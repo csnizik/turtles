@@ -54,7 +54,11 @@ const ProjectListItem = ({
   return (
     <div key={id} className='list-group-item'>
       <p>
-        <button onClick={handleClick} type='button'>
+        <button
+          onClick={handleClick}
+          type='button'
+          className='internal-title-link'
+        >
           {title}
         </button>
       </p>
