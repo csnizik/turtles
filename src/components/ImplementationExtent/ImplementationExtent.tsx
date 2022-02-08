@@ -71,22 +71,6 @@ const ImplementationExtent = ({
               checkTableauIsEmpty={setIsEipcTableauEmpty}
             />
           </div>
-          <div className='link'>
-            <Link
-              aria-label='Obligations and practices implemented opens in new window'
-              style={{
-                textDecoration: 'none',
-              }}
-              to={{
-                pathname: 'https://www.farmers.gov/data',
-              }}
-              target='_blank'
-            >
-              Explore more data on practice obligations at the Financial
-              Assistance Dashboard
-              <img alt='link opens new window' src={image} />
-            </Link>
-          </div>
         </div>
       </div>
     );
