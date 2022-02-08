@@ -58,9 +58,16 @@ describe('Practice Breadcrumbs is rendered correctly', () => {
     expect(screen.getByTestId('PracticeBreadcrumbs')).toBeDefined();
   });
   test('Should stimulate a click on the Practice Category Breadcrumb', () => {
-    const breadcrumb_link = screen.getByTestId('PracticeBreadcrumbs');
-    fireEvent.click(breadcrumb_link);
-    fireEvent.keyUp(breadcrumb_link);
+    const breadcrumb = screen.getByLabelText(
+      'Conservation practice breadcrumbs'
+    );
+    fireEvent.click(breadcrumb);
+    fireEvent.keyUp(breadcrumb);
+    const breadcrumb_Category = screen.getByLabelText(
+      'Conservation Practice Category Breadcrumb'
+    );
+    fireEvent.click(breadcrumb_Category);
+    fireEvent.keyUp(breadcrumb_Category);
     expect(screen.queryByText('Yes')).not.toBeInTheDocument();
   });
 });
@@ -87,9 +94,21 @@ describe('Practice Breadcrumbs is rendered correctly', () => {
   });
 
   test('Should stimulate a click on the Practice Breadcrumb', () => {
-    const breadcrumb_link = screen.getByTestId('PracticeBreadcrumbs');
-    fireEvent.click(breadcrumb_link);
-    fireEvent.keyUp(breadcrumb_link);
+    const breadcrumb = screen.getByLabelText(
+      'Conservation practice breadcrumbs'
+    );
+    fireEvent.click(breadcrumb);
+    fireEvent.keyUp(breadcrumb);
+    const breadcrumb_Overview = screen.getByLabelText(
+      'Conservation Practice Overview breadcrumb'
+    );
+    fireEvent.click(breadcrumb_Overview);
+    fireEvent.keyUp(breadcrumb_Overview);
+    const breadcrumb_Category = screen.getByLabelText(
+      'Conservation Practice Category Breadcrumb'
+    );
+    fireEvent.click(breadcrumb_Category);
+    fireEvent.keyUp(breadcrumb_Category);
     expect(screen.queryByText('Yes')).not.toBeInTheDocument();
   });
 });
