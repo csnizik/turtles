@@ -32,7 +32,7 @@ const ReportPreview = ({
   const renderProjInit = (projInit) => {
     const projInitList = projInit.data.map((item) => {
       return (
-        <div
+        <li
           className='proj-list-item'
           key={item?.[`projectTitle` || `lci_name`]}
         >
@@ -45,7 +45,7 @@ const ReportPreview = ({
             year={item?.awardeeYear}
             link={item?.projectLink || item?.lci_page_link}
           />
-        </div>
+        </li>
       );
     });
     return (
@@ -65,7 +65,9 @@ const ReportPreview = ({
     return (
       <div className='proj-inits'>
         <h2 className='bold-header'>
-          {`${selectedStateName === 'U.S.' ? 'The U.S.' : selectedStateName} Projects & Initiatives Using the ${data?.practiceName} practice`}
+          {`${
+            selectedStateName === 'U.S.' ? 'The U.S.' : selectedStateName
+          } Projects & Initiatives Using the ${data?.practiceName} practice`}
         </h2>
         <p>
           NRCS projects and initiatives on the ground assess the impacts of

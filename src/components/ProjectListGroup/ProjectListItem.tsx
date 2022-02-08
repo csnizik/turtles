@@ -38,7 +38,7 @@ const ProjectListItem = ({
   };
   if (statesInvolved) {
     return (
-      <li key={id} className='list-group-item'>
+      <div key={id} className='list-group-item'>
         <p>{title}</p>
         {owner && renderProjectDetails(owner, statesInvolved, year)}
         <p>{description}</p>
@@ -48,11 +48,11 @@ const ProjectListItem = ({
           </a>
           <i className='fa fa-external-link' aria-hidden='true' />
         </p>
-      </li>
+      </div>
     );
   }
   return (
-    <li key={id} className='list-group-item'>
+    <div key={id} className='list-group-item'>
       <p>
         <button
           onClick={handleClick}
@@ -64,7 +64,7 @@ const ProjectListItem = ({
       </p>
       {owner && renderProjectDetails(owner, statesInvolved, year)}
       <p>{description}</p>
-    </li>
+    </div>
   );
 };
 

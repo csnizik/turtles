@@ -197,7 +197,7 @@ const ConservationPracticeContainer = ({
               {t('associated-projects-initiatives.description')}
             </p>
           </div>
-          <ProjectListGroup isMapDisplayed={false} />
+          <ProjectListGroup isMapDisplayed={false} noListDots={true} />
         </>
       );
     }
