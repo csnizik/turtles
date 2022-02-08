@@ -267,7 +267,13 @@ const ProjectListGroup = ({
           )}
           <Row>
             <Col sm='12' className='p-3'>
-              <ul className='list-group projects-data'>
+              <ul
+                className={
+                  noListDots
+                    ? 'list-group projects-data no-dots'
+                    : 'list-group projects-data'
+                }
+              >
                 {currentICards?.map((initiative: any) => {
                   const initiativeID = initiative.initiativeId;
                   return (
