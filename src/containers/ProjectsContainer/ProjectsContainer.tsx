@@ -134,10 +134,12 @@ const ProjectsContainer = () => {
                 );
                 return (
                   <ListGroupItem
+                    tabindex={0}
                     key={listItem.id}
                     className={listGroupItemClassNames}
                     // role='presentation'
                     onClick={() => handleSelectProjectItem(listItem.id)}
+                    onKeyPress={() => handleSelectProjectItem(listItem.id)}
                   >
                     {listItem.title === 'All U.S. Projects & Initiatives'
                       ? t(
@@ -160,11 +162,15 @@ const ProjectsContainer = () => {
                   );
                   return initiative.lci_parent_id === null ? (
                     <ListGroupItem
+                      tabindex={0}
                       key={initiative.lci_id}
                       className={listGroupItemClassNames}
                       //role='presentation'
                       title={initiative.lci_page_link_text}
                       onClick={() =>
+                        handleSelectLandscapeInitiative(initiative.lci_id)
+                      }
+                      onKeyPress={() =>
                         handleSelectLandscapeInitiative(initiative.lci_id)
                       }
                     >
@@ -188,7 +194,7 @@ const ProjectsContainer = () => {
               />
             </div>
 
-            <ProjectListGroup isMapDisplayed />
+            <ProjectListGroup isMapDisplayed noListDots />
           </>
         ) : null}
       </div>
