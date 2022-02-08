@@ -1,4 +1,3 @@
-import { current } from '@reduxjs/toolkit';
 import { useParams } from 'react-router-dom';
 import './tab-title.scss';
 
