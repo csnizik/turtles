@@ -56,6 +56,12 @@ const PracticeBreadcrumbs = ({
       }
     }
   };
+
+  const handleKeyPressed = (breadcrumbId: number, event: any) => {
+    if (event.keyCode === 9 || event.key === 'Tab') return;
+    handleNavigateBreadcrumb(breadcrumbId);
+  };
+
   return (
     <nav
       className='usa-breadcrumb margin-top-1 margin-left-3 crumbs-container'
@@ -65,9 +71,9 @@ const PracticeBreadcrumbs = ({
       <ol className='usa-breadcrumb__list'>
         <li
           className='usa-breadcrumb__list-item'
-          aria-label='PracticeCategory-breadcrumb'
+          aria-label='Conservation Practice Overview breadcrumb'
           onClick={() => handleNavigateBreadcrumb(0)}
-          onKeyUp={() => handleNavigateBreadcrumb(0)}
+          onKeyUp={(e) => handleKeyPressed(0, e)}
           role='presentation'
         >
           {currentPracticeCategory ? (
@@ -89,9 +95,9 @@ const PracticeBreadcrumbs = ({
           <>
             <li
               className='usa-breadcrumb__list-item'
-              aria-label='Practice-breadcrumb'
+              aria-label='Conservation Practice Category Breadcrumb'
               onClick={() => handleNavigateBreadcrumb(1)}
-              onKeyUp={() => handleNavigateBreadcrumb(1)}
+              onKeyUp={(e) => handleKeyPressed(0, e)}
               role='presentation'
             >
               <button
@@ -104,9 +110,9 @@ const PracticeBreadcrumbs = ({
             <li className='usa-breadcrumb__list-item'>
               <span>{currentPractice.practiceName}</span>
               <div className='practice-title-w-button'>
-                <h3 className='practice-title'>
+                <h2 className='practice-title'>
                   {currentPractice.practiceName}
-                </h3>
+                </h2>
                 <div className='create-report-button'>
                   <button onClick={handleCreateReport} type='button'>
                     Create a Custom Report
@@ -118,8 +124,9 @@ const PracticeBreadcrumbs = ({
         ) : (
           <li
             className='usa-breadcrumb__list-item'
+            aria-label='Conservation Practice Category Breadcrumb'
             onClick={() => handleNavigateBreadcrumb(1)}
-            onKeyUp={() => handleNavigateBreadcrumb(1)}
+            onKeyUp={(e) => handleKeyPressed(0, e)}
             role='presentation'
           >
             <span>{currentPracticeCategory?.practiceCategoryName}</span>

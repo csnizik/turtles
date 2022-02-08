@@ -1,5 +1,5 @@
-import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useGetAssociatedPracticeQuery } from '../../Redux/services/api';
 import './specs.scss';
@@ -72,8 +72,8 @@ const SpecificationsAndTools = ({
         className='state-specific-container'
         data-testid='national-specifications'
       >
-        <h4>National Specifications</h4>
-        <h5 className='state-prompt-text'>{nationalPromptText}</h5>
+        <h3>National Specifications</h3>
+        <p className='state-prompt-text'>{nationalPromptText}</p>
         <div className='link'>
           <a
             href='https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/cp/ncps/?cid=nrcs143_026849'
@@ -95,8 +95,8 @@ const SpecificationsAndTools = ({
         className='state-specific-container'
         data-testid='state-specifications'
       >
-        <h4>{selectedStateName} Specifications</h4>
-        <h5 className='state-prompt-text'>{statePromptText}</h5>
+        <h3>{selectedStateName} Specifications</h3>
+        <p className='state-prompt-text'>{statePromptText}</p>
         <div className='link'>
           <button
             className={
@@ -135,25 +135,21 @@ const SpecificationsAndTools = ({
   const renderAssociatedPractice = () => {
     return (
       <div className='associated-prac' data-testid='associated-practice'>
-        <h4>{t('associated-practices.title')}</h4>
+        <h3>{t('associated-practices.title')}</h3>
         <p>{t('associated-practices.description')}</p>
         <ul className='practices-row' data-testid='associated-practice-links'>
           {content.data?.map((practice: IAssociatedPracticeList) => {
             return (
-              <Fragment key={practice.practiceId}>
-                <div className='grid-col-6'>
-                  <li>
-                    <Link
-                      to={`/${selectedStateCode}/${name}/${practice.practiceCategoryId}/${practice.practiceId}`}
-                      target='_blank'
-                      aria-label={`${practice.practiceName} link opens a new tab`}
-                    >
-                      {practice.practiceName}
-                    </Link>
-                    &ensp;({practice.practiceCode})
-                  </li>
-                </div>
-              </Fragment>
+              <li key={practice.practiceId} className='grid-col-6'>
+                <Link
+                  to={`/${selectedStateCode}/${name}/${practice.practiceCategoryId}/${practice.practiceId}`}
+                  target='_blank'
+                  aria-label={`${practice.practiceName} practiceCode ${practice.practiceCode} opens a new tab`}
+                >
+                  {practice.practiceName}
+                </Link>
+                &ensp;({practice.practiceCode})
+              </li>
             );
           })}
         </ul>
@@ -170,7 +166,7 @@ const SpecificationsAndTools = ({
       id='PracticeSpecifications'
     >
       <h2>{getHeaderText()}</h2>
-      <h4>{intro}</h4>
+      <p>{intro}</p>
       {renderNationalSpecs()}
       {selectedStateName === 'U.S.' ? null : renderStateSpecs()}
       {content?.data?.length ? renderAssociatedPractice() : null}

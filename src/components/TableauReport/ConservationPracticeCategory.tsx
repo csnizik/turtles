@@ -54,7 +54,10 @@ const ConservationPracticeCategory = ({ pageName, setIsTableauEmpty }: any) => {
   }, [stateAbbrInRedux]);
 
   return (
-    <div className='tableau-report-container'>
+    <div
+      className='tableau-report-container'
+      data-testid='tableau-report-container'
+    >
       <div ref={ref} />
     </div>
   );

@@ -4,7 +4,13 @@ import { cleanup, render, screen } from '../../common/test-utils/test_utils';
 afterEach(() => {
   cleanup();
 });
-
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useParams: jest.fn().mockReturnValue({
+    stateCode: '06',
+    category: '2',
+  }),
+}));
 let stateName = 'Colorado';
 let currentTab = '';
 

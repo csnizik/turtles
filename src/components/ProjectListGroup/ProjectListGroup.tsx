@@ -131,18 +131,17 @@ const ProjectListGroup = ({
         {projectTabs.map((tab: any) => {
           const tabID = tab.id;
           return (
-            <div key={tabID}>
-              <NavItem>
-                <NavLink
-                  className={classnames({ active: activeTab === tab.id })}
-                  onClick={() => {
-                    toggleProjectsTab(tab.id);
-                  }}
-                >
-                  {getTitle(tab)}
-                </NavLink>
-              </NavItem>
-            </div>
+            <NavItem key={tabID}>
+              <NavLink
+                className={classnames({ active: activeTab === tab.id })}
+                onClick={() => {
+                  toggleProjectsTab(tab.id);
+                }}
+                tabIndex={0}
+              >
+                {getTitle(tab)}
+              </NavLink>
+            </NavItem>
           );
         })}
       </Nav>

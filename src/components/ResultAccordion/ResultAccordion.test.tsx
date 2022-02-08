@@ -1,6 +1,11 @@
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
-import { cleanup, render, screen } from '../../common/test-utils/test_utils';
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+} from '../../common/test-utils/test_utils';
 import { setSearch } from '../../Redux/Slice/practiceSlice';
 import { createTestStore } from '../../Redux/store';
 import ResultAccordion from './ResultAccordion';
@@ -26,12 +31,15 @@ describe('Verify ProductListGroup is rendered correctly', () => {
       </Provider>
     );
     await findByText('Cropland Soil Health & Sustainability');
-    userEvent.click(screen.getByRole('presentation'));
+    userEvent.click(screen.getByRole('menuitem'));
     expect(screen.getByText('Cover Crop'));
     userEvent.click(screen.getByText('Cover Crop'));
     expect(screen.getByText('Cover Crop Details'));
-    userEvent.click(screen.getAllByRole('presentation')[0]);
+    userEvent.click(screen.getAllByRole('menuitem')[0]);
     expect(screen.queryByText('Cover Crop')).not.toBeInTheDocument();
+    fireEvent.keyUp(await findByText('Cropland Soil Health & Sustainability'));
+    userEvent.click(screen.getByRole('menuitem'));
+    fireEvent.keyUp(screen.getByText('Cover Crop'));
   });
 });
 

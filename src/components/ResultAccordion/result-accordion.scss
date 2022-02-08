@@ -5,11 +5,11 @@ html {
   background-color: $light-grey-205;
 }
 
-.result-accordion-container{
+.result-accordion-container {
   .top-title {
     margin: 3.75rem 2.188rem 1.25rem;
-  
-    h4 {
+
+    h2 {
       font-size: 32px;
       font-weight: 900;
     }
@@ -29,13 +29,24 @@ hr {
   border: 1px solid $philippine-silver;
   border-bottom: none;
 
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  h3 {
+    margin: 0 0 0 1rem;
+    display: flex;
+    font-size: 17px;
+    line-height: 20px;
+  }
   h4 {
     margin: 0 0 0 1rem;
     display: flex;
     font-size: 17px;
     line-height: 20px;
   }
-
   .accordion-container {
     li {
       color: black;
