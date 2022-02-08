@@ -174,7 +174,7 @@ const ProjectListGroup = ({
               ) : (
                 <div className='margin-top-30'>
                   <ExceptionMessage
-                    exceptionTitle={`${exceptionStateName} has no Conservation Innovation Grant data avaliable at this time.`}
+                    exceptionTitle={`${exceptionStateName} has no Conservation Innovation Grant data available at this time.`}
                     exceptionMessage=''
                   />
                 </div>
@@ -197,7 +197,7 @@ const ProjectListGroup = ({
               ) : (
                 <div className='margin-top-30 padding-top-3'>
                   <ExceptionMessage
-                    exceptionTitle='No related Conservation Innovation Grant data is avaliable at this time.'
+                    exceptionTitle='No related Conservation Innovation Grant data are available at this time.'
                     exceptionMessage=''
                   />
                 </div>
@@ -249,7 +249,7 @@ const ProjectListGroup = ({
               ) : (
                 <div className='margin-top-30 padding-top-3'>
                   <ExceptionMessage
-                    exceptionTitle='No related Landscape Conservation Initiative data is avaliable at this time.'
+                    exceptionTitle='No related Landscape Conservation Initiative data are available at this time.'
                     exceptionMessage=''
                   />
                 </div>
