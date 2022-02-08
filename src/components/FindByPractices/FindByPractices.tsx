@@ -26,15 +26,16 @@ const FindByPractices = () => {
   const dispatch = useAppDispatch();
   const [selectedPractice, setSelectedPractice] = useState(-1);
   const [selectedSubPractice, setSelectedSubPractice] = useState(-1);
+  const [hiddenSelectedPractice, setHiddenSelectedPractice] = useState(-1);
 
   const handleFindPractices = () => {
-    dispatch(setPracticeCategory(+selectedPractice));
+    dispatch(setPracticeCategory(+hiddenSelectedPractice));
     dispatch(setSpecificPractice(+selectedSubPractice));
-    if (+selectedPractice !== -1 && +selectedSubPractice === -1) {
-      history.push(`00/ConservationPractices/${+selectedPractice}`);
-    } else if (+selectedPractice !== -1 && +selectedSubPractice !== -1) {
+    if (+hiddenSelectedPractice !== -1 && +selectedSubPractice === -1) {
+      history.push(`00/ConservationPractices/${+hiddenSelectedPractice}`);
+    } else if (+hiddenSelectedPractice !== -1 && +selectedSubPractice !== -1) {
       history.push(
-        `00/ConservationPractices/${+selectedPractice}/${+selectedSubPractice}`
+        `00/ConservationPractices/${+hiddenSelectedPractice}/${+selectedSubPractice}`
       );
     } else {
       history.push('00/ConservationPractices');
@@ -48,6 +49,7 @@ const FindByPractices = () => {
     const practiceVal = e.target.value;
     if (practiceVal !== '') {
       setSelectedPractice(practiceVal);
+      setHiddenSelectedPractice(practiceVal);
     }
     setSelectedSubPractice(-1);
     dispatch(setSpecificPractice(-1));
@@ -59,7 +61,7 @@ const FindByPractices = () => {
         state_county_code: '00000',
       })
       .then((response) =>
-        setSelectedPractice(response?.data?.[0]?.practiceCategoryId)
+        setHiddenSelectedPractice(response?.data?.[0]?.practiceCategoryId)
       );
   };
   useEffect(() => {
