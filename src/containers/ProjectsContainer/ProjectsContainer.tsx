@@ -137,7 +137,6 @@ const ProjectsContainer = () => {
                     tabindex={0}
                     key={listItem.id}
                     className={listGroupItemClassNames}
-                    // role='presentation'
                     onClick={() => handleSelectProjectItem(listItem.id)}
                     onKeyPress={() => handleSelectProjectItem(listItem.id)}
                   >
@@ -165,7 +164,6 @@ const ProjectsContainer = () => {
                       tabindex={0}
                       key={initiative.lci_id}
                       className={listGroupItemClassNames}
-                      //role='presentation'
                       title={initiative.lci_page_link_text}
                       onClick={() =>
                         handleSelectLandscapeInitiative(initiative.lci_id)
