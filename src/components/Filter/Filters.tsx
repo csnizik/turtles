@@ -23,6 +23,7 @@ const FilterBy = () => {
   const handleClick = () => {
     return 0;
   };
+  const landUse = searchInputData?.land_use_list?.split(',');
   return (
     <div data-testid='filters' className='filter-by-container'>
       <>
@@ -30,7 +31,6 @@ const FilterBy = () => {
           <>
             <div className='grid-row'>
               <p className='filter-style'>Active Filters:</p>
-
               <div className='filter-box'>
                 <p className='p-label'>Location:</p>
                 <div className='filter-pill'>
@@ -42,14 +42,16 @@ const FilterBy = () => {
               {searchInputData.land_use_list ? (
                 <div className='filter-box'>
                   <p className='p-label'>Land Use:</p>
-                  <div className='filter-pill'>
-                    <p className='filter-label'>
-                      {searchInputData.land_use_list}
-                    </p>
-                  </div>
+                  {landUse?.map((landUseName: any) => {
+                    return (
+                      <div className='filter-pill'>
+                        <p className='filter-label'>{landUseName}</p>
+                      </div>
+                    );
+                  })}
                 </div>
               ) : null}
-              {searchInputData.practice_category ? (
+              {searchInputData.practice_category || searchInputData.practice ? (
                 <div className='filter-box'>
                   <p className='p-label'>Conservation Practice(s):</p>
                   <div className='filter-pill'>
@@ -60,7 +62,8 @@ const FilterBy = () => {
                   </div>
                 </div>
               ) : null}
-              {searchInputData.resource_concern_category ? (
+              {searchInputData.resource_concern_category ||
+              searchInputData.resource_concern ? (
                 <div className='filter-box'>
                   <p className='p-label'>Resource Concern(s) Treated:</p>
                   <div className='filter-pill'>
