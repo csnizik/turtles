@@ -27,7 +27,7 @@
 }
 
 .projects-data {
-  li.list-group-item {
+  div.list-group-item {
     border: 1px solid $light-grey-5;
     border-radius: 6px;
     margin: 0rem 0rem 1rem 0rem;
@@ -35,6 +35,11 @@
     content: '';
     clear: both;
     display: table;
+
+    .internal-title-link {
+      color: $usda-blue;
+    }
+
     a {
       text-decoration: none;
     }
@@ -95,4 +100,7 @@
       }
     }
   }
+}
+.no-dots {
+  list-style-type: none;
 }

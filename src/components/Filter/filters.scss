@@ -14,7 +14,7 @@
     margin-top: 1rem;
     margin-bottom: 1.438rem;
     margin-left: 1.25rem;
-    height: 4rem;
+    height: auto;
     border-left: 1px solid $light-grey-5;
     .p-label {
       margin-left: 1.25rem;
@@ -27,15 +27,29 @@
         padding: 0 5px 0 5px;
         text-align: center;
         width: auto;
+        margin: 0;
       }
-      margin-left: 1.25rem;
-      margin-top: 0.5rem;
+      margin-left: 0.625rem;
+      margin-top: 0.2rem;
       background-color: $usda-light-blue;
       border: 1px solid $usda-light-blue;
       border-radius: 0.56rem;
       height: 2rem;
       padding: 0.25rem;
       width: fit-content;
+      display: inline-block;
+    }
+    :first-of-type {
+      margin-left: 1.25rem;
+      p {
+        margin: 0;
+      }
+    }
+    :nth-child(7) {
+      margin-left: 1.25rem;
+      p {
+        margin: 0;
+      }
     }
   }
   .usa-button {

@@ -10,11 +10,6 @@
     .usa-checkbox {
       padding-bottom: $short-space-size;
     }
-
-    .usa-checkbox input:focus + .usa-checkbox__label {
-      border: 4px solid #2491ff;
-      border-radius: 7px;
-    }
   }
 
   .pdf-button {

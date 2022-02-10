@@ -21,7 +21,7 @@ const ResultsContainer = () => {
             {t('search-results-page.project-initiatives')}
           </h2>
         </div>
-        <ProjectListGroup isMapDisplayed={false} />
+        <ProjectListGroup isMapDisplayed={false} noListDots={true} />
       </div>
     </main>
   );

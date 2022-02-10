@@ -134,10 +134,11 @@ const ProjectsContainer = () => {
                 );
                 return (
                   <ListGroupItem
+                    tabindex={0}
                     key={listItem.id}
                     className={listGroupItemClassNames}
-                    role='presentation'
                     onClick={() => handleSelectProjectItem(listItem.id)}
+                    onKeyPress={() => handleSelectProjectItem(listItem.id)}
                   >
                     {listItem.title === 'All U.S. Projects & Initiatives'
                       ? t(
@@ -160,11 +161,14 @@ const ProjectsContainer = () => {
                   );
                   return initiative.lci_parent_id === null ? (
                     <ListGroupItem
+                      tabindex={0}
                       key={initiative.lci_id}
                       className={listGroupItemClassNames}
-                      role='presentation'
                       title={initiative.lci_page_link_text}
                       onClick={() =>
+                        handleSelectLandscapeInitiative(initiative.lci_id)
+                      }
+                      onKeyPress={() =>
                         handleSelectLandscapeInitiative(initiative.lci_id)
                       }
                     >
@@ -188,7 +192,7 @@ const ProjectsContainer = () => {
               />
             </div>
 
-            <ProjectListGroup isMapDisplayed />
+            <ProjectListGroup isMapDisplayed noListDots />
           </>
         ) : null}
       </div>
@@ -210,28 +214,28 @@ const ProjectsContainer = () => {
         {projectCards.map((project: IProjectTypeCard) => {
           return (
             <li
+              onClick={() => handleSelectProjectCard(project.id)}
+              onKeyPress={() => handleSelectProjectCard(project.id)}
               className='tablet:grid-col-4 usa-card usa-card--header-first'
               key={project.id}
-              role='presentation'
-              onClick={() => handleSelectProjectCard(project.id)}
             >
-              <div className='usa-card__container'>
-                <header className='usa-card__header'>
-                  <button type='button' className='usa-card__heading'>
-                    {project.title}
-                  </button>
-                </header>
-                <div className='usa-card__body'>
-                  <p className='lead'>{project.paragraphText}</p>
-                </div>
-                <div className='usa-card__footer'>
-                  <div className='usa-card__media'>
-                    <div className='usa-card__img'>
-                      <img src={project.imgSrc} alt={project.imgAlt} />
+              <button className='card-button'>
+                <div className='usa-card__container'>
+                  <header className='usa-card__header'>
+                    <h2 className='usa-card__heading'>{project.title}</h2>
+                  </header>
+                  <div className='usa-card__body'>
+                    <p className='lead'>{project.paragraphText}</p>
+                  </div>
+                  <div className='usa-card__footer'>
+                    <div className='usa-card__media'>
+                      <div className='usa-card__img'>
+                        <img src={project.imgSrc} alt={project.imgAlt} />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </button>
             </li>
           );
         })}

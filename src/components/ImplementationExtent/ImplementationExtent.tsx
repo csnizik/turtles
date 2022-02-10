@@ -71,25 +71,6 @@ const ImplementationExtent = ({
               checkTableauIsEmpty={setIsEipcTableauEmpty}
             />
           </div>
-          <div className='link'>
-            <Link
-              aria-label='Obligations and practices implemented opens in new browser tab'
-              style={{
-                textDecoration: 'none',
-              }}
-              to={{
-                pathname: 'https://www.farmers.gov/data',
-              }}
-              target='_blank'
-            >
-              Explore more data on practice obligations at the Financial
-              Assistance Dashboard
-              <img
-                alt='Explore more data on practice obligations opens in new browser tab'
-                src={image}
-              />
-            </Link>
-          </div>
         </div>
       </div>
     );
@@ -110,7 +91,8 @@ const ImplementationExtent = ({
           </div>
           <div className='link'>
             <Link
-              aria-label='Acres implemented opens in new browser tab'
+              aria-label='Explore more data on acres receiving conservation at the RCA Data
+              Viewer opens in a new browser tab'
               style={{
                 textDecoration: 'none',
               }}
@@ -123,7 +105,8 @@ const ImplementationExtent = ({
               Explore more data on acres receiving conservation at the RCA Data
               Viewer
               <img
-                alt='Explore more data on acres opens in a new browser tab'
+                alt='Explore more data on acres receiving conservation at the RCA Data
+                Viewer opens in a new browser tab'
                 src={image}
               />
             </Link>
@@ -151,11 +134,11 @@ const ImplementationExtent = ({
             href={scheduleLink}
             target='_blank'
             rel='noopener noreferrer'
-            aria-label={`${stateInfo?.stateNameDisplay} Payment Schedules opens in a new browser tab`}
+            aria-label={`${selectedLocation} opens in a new browser tab`}
           >
             {selectedLocation}
             <img
-              alt='Current State Payment Schedules opens in a new browser tab'
+              alt={`${selectedLocation} opens in a new browser tab`}
               src={image}
             />
           </a>
