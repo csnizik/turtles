@@ -68,7 +68,10 @@ const ConservationPracticeIntroduction = ({
           >
             Explore more data on acres receiving conservation at the RCA Data
             Viewer
-            <img alt='link opens new window' src={image} />
+            <img
+              alt='Explore more acres receiving conservation data'
+              src={image}
+            />
           </Link>
         </div>
       </div>
