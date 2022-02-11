@@ -1344,3 +1344,70 @@ export const associatedPractices = [
     practiceCategoryId: 6,
   },
 ];
+
+export const practices = [
+  {
+    practiceId: 2,
+    practiceCategoryName: "Cropland Soil Quality",
+    practiceCategoryId: 2,
+    practiceCode: "311",
+    practiceName: "Alley Cropping",
+    practiceCategoryIconPath: "Soil Quality.png"
+  },
+  {
+    practiceId: 11,
+    practiceCategoryName: "Cropland Soil Quality",
+    practiceCategoryId: 2,
+    practiceCode: "327",
+    practiceName: "Conservation Cover",
+    practiceCategoryIconPath: "Soil Quality.png"
+  },
+  {
+    practiceId: 12,
+    practiceCategoryName: "Cropland Soil Quality",
+    practiceCategoryId: 2,
+    practiceCode: "328",
+    practiceName: "Conservation Crop Rotation",
+    practiceCategoryIconPath: "Soil Quality.png"
+  },
+  {
+    practiceId: 18,
+    practiceCategoryName: "Cropland Soil Quality",
+    practiceCategoryId: 2,
+    practiceCode: "332",
+    practiceName: "Contour Buffer Strips",
+    practiceCategoryIconPath: "Soil Quality.png"
+  },
+  {
+    practiceId: 16,
+    practiceCategoryName: "Cropland Soil Quality",
+    practiceCategoryId: 2,
+    practiceCode: "330",
+    practiceName: "Contour Farming",
+    practiceCategoryIconPath: "Soil Quality.png"
+  },
+  {
+    practiceId: 17,
+    practiceCategoryName: "Cropland Soil Quality",
+    practiceCategoryId: 2,
+    practiceCode: "331",
+    practiceName: "Contour Orchard and Other Perennial Crops",
+    practiceCategoryIconPath: "Soil Quality.png"
+  },
+  {
+    practiceId: 703,
+    practiceCategoryName: "Cropland Soil Quality",
+    practiceCategoryId: 2,
+    practiceCode: "334",
+    practiceName: "Controlled Traffic Farming",
+    practiceCategoryIconPath: "Soil Quality.png"
+  },
+  {
+    practiceId: 20,
+    practiceCategoryName: "Cropland Soil Quality",
+    practiceCategoryId: 2,
+    practiceCode: "340",
+    practiceName: "Cover Crop",
+    practiceCategoryIconPath: "Soil Quality.png"
+  },
+];

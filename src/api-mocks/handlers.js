@@ -8,6 +8,7 @@ import {
   landUseSection,
   singleResults,
   practiceCategories,
+  practices,
   statesList,
   associatedPractices,
 } from './constants';
@@ -20,6 +21,7 @@ const getResourcesQuery = `${baseURL}/resourceConcern/concern`;
 const getRelatedResource = `${baseURL}/relatedResourceConcernCategory`;
 const landUseSectionData = `${baseURL}/categories`;
 const getCategoryQuery = `${baseURL}/practice/categories`;
+const getPracticeQuery = `${baseURL}/practice/catagories/practices`;
 const StateListData = `${baseURL}/states`;
 const assocPracticeQuery = `${baseURL}/practice/associatedPractice`;
 
@@ -69,6 +71,10 @@ const getCategoryHandler = rest.get(getCategoryQuery, async (req, res, ctx) => {
   return res(ctx.json(practiceCategories));
 });
 
+const getPracticeHandler = rest.get(getPracticeQuery, async (req, res, ctx) => {
+  return res(ctx.json(practices));
+});
+
 const getAssocPracticeHandler = rest.get(
   assocPracticeQuery,
   async (req, res, ctx) => {
@@ -86,4 +92,5 @@ export const handlers = [
   landUseSectionHandler,
   getCategoryHandler,
   getAssocPracticeHandler,
+  getPracticeHandler,
 ];
