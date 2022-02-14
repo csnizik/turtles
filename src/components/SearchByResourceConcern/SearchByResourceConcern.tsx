@@ -27,8 +27,6 @@ const SearchByResourceConcern = ({
 }: any) => {
   const resourceCategory = useGetResourcesQuery(); //!Resource Category api
   const resourceConcern = useGetResourceConcernQuery(selectedResourceCategory); //! Resource Concern
-  // console.log('resourceCategory: ', resourceCategory);
-  console.log('resourceConcern: ', resourceConcern);
   const dispatchRequest = useAppDispatch();
   const status = useAppSelector((state) => state.disableSlice.disablePractice);
   const { t } = useTranslation();

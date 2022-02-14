@@ -22,8 +22,6 @@ const SearchByLocation = ({ setSearchInput, setSearchInfo }: any) => {
     id: DEFAULT_NATIONAL_LOCATION,
   });
   const stateStatus: any = useGetStateListQuery();
-  console.log('stateStatus: ', stateStatus);
-
   const persistLocationState = useAppSelector(
     (state) => state?.practiceSlice?.searchInput.state_county_code
   );
