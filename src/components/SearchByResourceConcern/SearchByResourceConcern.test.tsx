@@ -1,5 +1,12 @@
+import { Provider } from 'react-redux';
 import SearchByResourceConcern from './SearchByResourceConcern';
-import { cleanup, render, screen } from '../../common/test-utils/test_utils';
+import {
+  cleanup,
+  render,
+  screen,
+  fireEvent,
+} from '../../common/test-utils/test_utils';
+import { createTestStore } from '../../Redux/store';
 
 afterEach(() => {
   cleanup();
@@ -7,29 +14,51 @@ afterEach(() => {
 
 let setSearchInput = jest.fn;
 let setSearchInfo = jest.fn;
-let setResourceConcernsSubgroups = null;
-let selectedResourceCategory = null;
-let setSelectedResourceCategory = null;
-let selectedPractice = null;
-let practiceId = null;
+let setResourceConcernsSubgroups = jest.fn;
+let selectedResourceCategory = jest.fn;
+let setSelectedResourceCategory = jest.fn;
+let selectedPractice = jest.fn;
+let practiceId = jest.fn;
 let selectedResourceConcern = {};
-let setSelectedResourceConcern = null;
+let setSelectedResourceConcern = jest.fn;
 let store;
 
 describe('SearchByResourceConcern is rendered correctly', () => {
-  beforeEach(() => {
-    render(<SearchByResourceConcern setSearchInput = {setSearchInput}
-        setSearchInfo= {setSearchInfo}
-        setResourceConcernsSubgroups = {setResourceConcernsSubgroups}
-        selectedResourceCategory = {selectedResourceCategory}
-        setSelectedResourceCategory = {setSelectedResourceCategory}
-        selectedPractice = {selectedPractice}
-        practiceId = {practiceId}
-        selectedResourceConcern = {selectedResourceConcern}
-        setSelectedResourceConcern = {setSelectedResourceConcern}/>);
+  store = createTestStore();
+
+  test('Should test dropdown and resource category selection functionality', async () => {
+    const { findByText } = render(
+      <Provider store={store}>
+        <SearchByResourceConcern
+          setSearchInput={setSearchInput}
+          setSearchInfo={setSearchInfo}
+          setResourceConcernsSubgroups={setResourceConcernsSubgroups}
+          selectedResourceCategory={selectedResourceCategory}
+          setSelectedResourceCategory={setSelectedResourceCategory}
+          selectedPractice={selectedPractice}
+          practiceId={practiceId}
+          selectedResourceConcern={selectedResourceConcern}
+          setSelectedResourceConcern={setSelectedResourceConcern}
+        />
+      </Provider>
+    );
+    await findByText('Air');
+
+    fireEvent.click(screen.getByText('Air'));
+
+    fireEvent.change(screen.getByTestId('select'), {
+      target: { value: '3' },
+    });
+
+    await findByText('Emissions of ozone precursors');
+    screen.debug();
+    // expect(screen.getByTestId('select')).toHaveValue('08');
+
+    //   await findByText('actions.clear');
+    //   fireEvent.click(screen.getByText('actions.clear'));
   });
 
-  test('Should display the contents of SearchByResourceConcern', () => {
-    expect(screen.getByTestId('rc-search')).toBeDefined();
-  });
+  // test('Should display the contents of SearchByResourceConcern', () => {
+  //   expect(screen.getByTestId('rc-search')).toBeDefined();
+  // });
 });

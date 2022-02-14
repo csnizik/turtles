@@ -1344,3 +1344,37 @@ export const associatedPractices = [
     practiceCategoryId: 6,
   },
 ];
+
+export const resourceConcern = [
+  {
+    resourceConcernId: 178,
+    resourceConcernName: 'Emissions of airborne reactive nitrogen',
+    resourceConcernDescription: null,
+    highlighted: false,
+  },
+  {
+    resourceConcernId: 179,
+    resourceConcernName: 'Emissions of greenhouse gases - GHGs',
+    resourceConcernDescription: null,
+    highlighted: false,
+  },
+  {
+    resourceConcernId: 180,
+    resourceConcernName: 'Emissions of ozone precursors',
+    resourceConcernDescription: null,
+    highlighted: false,
+  },
+  {
+    resourceConcernId: 181,
+    resourceConcernName:
+      'Emissions of particulate matter (PM) and PM precursors',
+    resourceConcernDescription: null,
+    highlighted: false,
+  },
+  {
+    resourceConcernId: 182,
+    resourceConcernName: 'Objectionable odor',
+    resourceConcernDescription: null,
+    highlighted: false,
+  },
+];
