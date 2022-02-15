@@ -97,6 +97,7 @@ const FindByPractices = () => {
             className='usa-select'
             id='categoryOptions'
             name='categorySelect'
+            data-testid='categoryOptions'
             value={selectedPractice}
             onChange={handleCategoryChange}
           >
@@ -118,6 +119,7 @@ const FindByPractices = () => {
             className='usa-select'
             id='practiceOptions'
             name='practiceSelect'
+            data-testid='practiceOptions'
             value={selectedSubPractice}
             onChange={handlePracticeChange}
           >

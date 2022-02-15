@@ -79,10 +79,13 @@ const SpecificationsAndTools = ({
             href='https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/cp/ncps/?cid=nrcs143_026849'
             target='_blank'
             rel='noopener noreferrer'
-            aria-label='NRCS National Conservation Practice Guidance link'
+            aria-label='NRCS National Conservation Practice Guidance opens in a new browser tab'
           >
             NRCS National Conservation Practice Guidance
-            <img alt='All Conservation at Work videos' src={outerLinkImage} />
+            <img
+              alt='NRCS National Conservation Practice Guidance opens in a new browser tab'
+              src={outerLinkImage}
+            />
           </a>
         </div>
       </div>
@@ -114,12 +117,23 @@ const SpecificationsAndTools = ({
             }
             target='_blank'
             rel='noopener noreferrer'
-            aria-label='Current NRCS State Conservation Practices link'
+            aria-label={`${
+              fromPdfReport
+                ? practiceStandardGuideLink.pdfReportPromptText
+                : practiceStandardGuideLink.webpagePromptText
+            } opens in a new browser tab`}
           >
             {fromPdfReport
               ? practiceStandardGuideLink.pdfReportPromptText
               : practiceStandardGuideLink.webpagePromptText}
-            <img alt='All Conservation at Work videos' src={outerLinkImage} />
+            <img
+              alt={`${
+                fromPdfReport
+                  ? practiceStandardGuideLink.pdfReportPromptText
+                  : practiceStandardGuideLink.webpagePromptText
+              } opens in a new browser tab`}
+              src={outerLinkImage}
+            />
           </a>
         </div>
         {expandTechGuide && (
@@ -144,7 +158,7 @@ const SpecificationsAndTools = ({
                 <Link
                   to={`/${selectedStateCode}/${name}/${practice.practiceCategoryId}/${practice.practiceId}`}
                   target='_blank'
-                  aria-label={`${practice.practiceName} practiceCode ${practice.practiceCode} opens a new tab`}
+                  aria-label={`${practice.practiceName} practiceCode ${practice.practiceCode} opens a new browser tab`}
                 >
                   {practice.practiceName}
                 </Link>
