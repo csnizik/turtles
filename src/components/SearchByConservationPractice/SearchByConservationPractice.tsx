@@ -40,7 +40,6 @@ const SearchByConservationPractice = ({
     (State) => State?.practiceSlice?.searchInput
   );
 
-  //Temporary Solution
   const presistSearchInfo = useAppSelector(
     (State) => State?.practiceSlice?.searchInfo
   );
@@ -172,6 +171,7 @@ const SearchByConservationPractice = ({
             className='usa-select'
             id='practiceCategoryValue'
             name='practiceCategorySelect'
+            data-testid='categoryOptions'
             disabled={result}
             onChange={handlePracticeCategoryChange}
             value={selectedPractice}
@@ -205,6 +205,7 @@ const SearchByConservationPractice = ({
             className='usa-select'
             id='specificPracticeValue'
             name='specificPracticeSelect'
+            data-testid='practiceOptions'
             disabled={result}
             onChange={handlePracticeChange}
             value={selectedSubPractice.id}
