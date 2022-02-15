@@ -227,6 +227,7 @@ const SearchByResourceConcern = ({
           </label>
           <select
             className='usa-select'
+            data-testid='subselect'
             id='resourceConcernValue'
             name='selectedResourceSubgroup'
             disabled={status}

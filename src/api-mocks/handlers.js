@@ -22,7 +22,7 @@ const landUseSectionData = `${baseURL}/categories`;
 const getCategoryQuery = `${baseURL}/practice/categories`;
 const StateListData = `${baseURL}/states`;
 const assocPracticeQuery = `${baseURL}/practice/associatedPractice`;
-const getResourceConcern = `${baseURL}/resourceConcern/concern/category/:swapa_category`;
+const getResourceConcern = `${baseURL}/resourceConcern/concern/category/:swapaCategory`;
 
 const practiceHandler = rest.post(postSearchData, async (req, res, ctx) => {
   if (req.body.practice_category_id) {
@@ -55,8 +55,9 @@ const resourceHandler = rest.get(getResourcesQuery, async (req, res, ctx) => {
 const resourceConcernHandler = rest.get(
   getResourceConcern,
   async (req, res, ctx) => {
-    const { swapa_category } = req.params
-    return res(ctx.json(resourceConcern));  }
+    const { swapaCategory } = req.params;
+    return res(ctx.json(resourceConcern));
+  }
 );
 
 const relatedResourceHandler = rest.get(

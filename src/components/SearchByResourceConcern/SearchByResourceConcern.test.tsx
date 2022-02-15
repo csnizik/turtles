@@ -11,16 +11,17 @@ import { createTestStore } from '../../Redux/store';
 afterEach(() => {
   cleanup();
 });
+const spy = jest.fn().mockReturnValue(() => {});
 
 let setSearchInput = jest.fn;
 let setSearchInfo = jest.fn;
 let setResourceConcernsSubgroups = jest.fn;
 let selectedResourceCategory = jest.fn;
-let setSelectedResourceCategory = jest.fn;
+let setSelectedResourceCategory = spy;
 let selectedPractice = jest.fn;
 let practiceId = jest.fn;
 let selectedResourceConcern = {};
-let setSelectedResourceConcern = jest.fn;
+let setSelectedResourceConcern = spy;
 let store;
 
 describe('SearchByResourceConcern is rendered correctly', () => {
@@ -42,6 +43,7 @@ describe('SearchByResourceConcern is rendered correctly', () => {
         />
       </Provider>
     );
+
     await findByText('Air');
 
     fireEvent.click(screen.getByText('Air'));
@@ -50,15 +52,34 @@ describe('SearchByResourceConcern is rendered correctly', () => {
       target: { value: '3' },
     });
 
-    await findByText('Emissions of ozone precursors');
-    screen.debug();
-    // expect(screen.getByTestId('select')).toHaveValue('08');
+    expect(setSelectedResourceCategory).toHaveBeenCalled();
 
-    //   await findByText('actions.clear');
-    //   fireEvent.click(screen.getByText('actions.clear'));
+    await findByText('Emissions of ozone precursors');
+
+    fireEvent.click(screen.getByText('Emissions of ozone precursors'));
+
+    fireEvent.change(screen.getByTestId('subselect'), {
+      target: { value: '180' },
+    });
+    expect(setSelectedResourceConcern).toHaveBeenCalled();
   });
 
-  // test('Should display the contents of SearchByResourceConcern', () => {
-  //   expect(screen.getByTestId('rc-search')).toBeDefined();
-  // });
+  test('Should display the contents of SearchByResourceConcern', () => {
+    render(
+      <Provider store={store}>
+        <SearchByResourceConcern
+          setSearchInput={setSearchInput}
+          setSearchInfo={setSearchInfo}
+          setResourceConcernsSubgroups={setResourceConcernsSubgroups}
+          selectedResourceCategory={selectedResourceCategory}
+          setSelectedResourceCategory={setSelectedResourceCategory}
+          selectedPractice={selectedPractice}
+          practiceId={practiceId}
+          selectedResourceConcern={selectedResourceConcern}
+          setSelectedResourceConcern={setSelectedResourceConcern}
+        />
+      </Provider>
+    );
+    expect(screen.getByTestId('rc-search')).toBeDefined();
+  });
 });
