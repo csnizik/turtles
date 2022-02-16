@@ -1,12 +1,10 @@
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useGetAssociatedPracticeQuery } from '../../Redux/services/api';
 import './specs.scss';
 import { IAssociatedPracticeList } from '../../common/types';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import outerLinkImage from './image/newLinkIcon.svg';
-import PracticeStandardGuide from './PracticeStandardGuide';
 import { practiceStandardGuideLink } from '../../common/typedconstants.common';
 
 interface ISpecAndToolsProps {
@@ -34,7 +32,6 @@ const SpecificationsAndTools = ({
     practiceId: selectedPracticeId,
   };
   const { t } = useTranslation();
-  const [expandTechGuide, setExpandTechGuide] = useState(false);
 
   const { name }: any = useParams();
 
@@ -61,9 +58,6 @@ const SpecificationsAndTools = ({
       return `${practiceName} Specifications and Tools`;
     }
     return practiceName;
-  };
-  const handleExpandTechGuide = () => {
-    setExpandTechGuide(!expandTechGuide);
   };
 
   const renderNationalSpecs = () => {
@@ -101,15 +95,6 @@ const SpecificationsAndTools = ({
         <h3>{selectedStateName} Specifications</h3>
         <p className='state-prompt-text'>{statePromptText}</p>
         <div className='link'>
-          <button
-            className={
-              fromPdfReport ? 'hidden-content' : 'practice-standard-button'
-            }
-            type='button'
-            onClick={() => handleExpandTechGuide()}
-          >
-            Instructions for Accessing this State’s Practice Standards
-          </button>
           <a
             href={
               practiceStandardGuideLink.viewStateConservationPracticeLink +
@@ -136,12 +121,6 @@ const SpecificationsAndTools = ({
             />
           </a>
         </div>
-        {expandTechGuide && (
-          <PracticeStandardGuide
-            handleClick={handleExpandTechGuide}
-            practiceLink={practiceLink}
-          />
-        )}
       </div>
     );
   };
