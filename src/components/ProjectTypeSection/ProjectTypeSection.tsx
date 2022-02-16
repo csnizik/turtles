@@ -100,7 +100,7 @@ const ProjectTypeSection = ({
               </div>
             )}
             <a
-              aria-label='Link to NRCS website for landscape initiatives'
+              aria-label={foundInitiative?.lci_page_link_text || nrcsLinkText}
               href={
                 foundInitiative?.lci_page_link ||
                 NRCS_CONSERVATION_INITIATIVES_URL
