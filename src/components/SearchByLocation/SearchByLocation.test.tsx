@@ -1,3 +1,4 @@
+import { Provider } from 'react-redux';
 import SearchByLocation from './SearchByLocation';
 import {
   cleanup,
@@ -6,7 +7,6 @@ import {
   screen,
 } from '../../common/test-utils/test_utils';
 import { createTestStore } from '../../Redux/store';
-import { Provider } from 'react-redux';
 
 afterEach(() => {
   cleanup();

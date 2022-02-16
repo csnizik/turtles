@@ -11,8 +11,8 @@ import {
   practices,
   statesList,
   associatedPractices,
+  resourceConcern,
 } from './constants';
-
 const baseURL = 'http://localhost';
 const postLandscapeInitiatives = `${baseURL}/landscapeInitiatives`;
 const postProjectSearchData = `${baseURL}/project/projectSearch`;
@@ -24,6 +24,7 @@ const getCategoryQuery = `${baseURL}/practice/categories`;
 const getPracticeQuery = `${baseURL}/practice/catagories/practices`;
 const StateListData = `${baseURL}/states`;
 const assocPracticeQuery = `${baseURL}/practice/associatedPractice`;
+const getResourceConcern = `${baseURL}/resourceConcern/concern/category/:swapaCategory`;
 
 const practiceHandler = rest.post(postSearchData, async (req, res, ctx) => {
   if (req.body.practice_category_id) {
@@ -52,6 +53,14 @@ const initHandler = rest.post(
 const resourceHandler = rest.get(getResourcesQuery, async (req, res, ctx) => {
   return res(ctx.json(resources));
 });
+
+const resourceConcernHandler = rest.get(
+  getResourceConcern,
+  async (req, res, ctx) => {
+    const { swapaCategory } = req.params;
+    return res(ctx.json(resourceConcern));
+  }
+);
 
 const relatedResourceHandler = rest.get(
   getRelatedResource,
@@ -92,5 +101,6 @@ export const handlers = [
   landUseSectionHandler,
   getCategoryHandler,
   getAssocPracticeHandler,
+  resourceConcernHandler,
   getPracticeHandler,
 ];

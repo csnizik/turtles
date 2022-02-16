@@ -27,7 +27,6 @@ const SearchByResourceConcern = ({
 }: any) => {
   const resourceCategory = useGetResourcesQuery(); //!Resource Category api
   const resourceConcern = useGetResourceConcernQuery(selectedResourceCategory); //! Resource Concern
-
   const dispatchRequest = useAppDispatch();
   const status = useAppSelector((state) => state.disableSlice.disablePractice);
   const { t } = useTranslation();
@@ -193,6 +192,7 @@ const SearchByResourceConcern = ({
             </p>
           </label>
           <select
+            data-testid='select'
             className='usa-select'
             id='resourceConcernCategoryValue'
             name='selectedResourceCategory'
@@ -227,6 +227,7 @@ const SearchByResourceConcern = ({
           </label>
           <select
             className='usa-select'
+            data-testid='subselect'
             id='resourceConcernValue'
             name='selectedResourceSubgroup'
             disabled={status}

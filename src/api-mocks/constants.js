@@ -1345,69 +1345,102 @@ export const associatedPractices = [
   },
 ];
 
+export const resourceConcern = [
+  {
+    resourceConcernId: 178,
+    resourceConcernName: 'Emissions of airborne reactive nitrogen',
+    resourceConcernDescription: null,
+    highlighted: false,
+  },
+  {
+    resourceConcernId: 179,
+    resourceConcernName: 'Emissions of greenhouse gases - GHGs',
+    resourceConcernDescription: null,
+    highlighted: false,
+  },
+  {
+    resourceConcernId: 180,
+    resourceConcernName: 'Emissions of ozone precursors',
+    resourceConcernDescription: null,
+    highlighted: false,
+  },
+  {
+    resourceConcernId: 181,
+    resourceConcernName:
+      'Emissions of particulate matter (PM) and PM precursors',
+    resourceConcernDescription: null,
+    highlighted: false,
+  },
+  {
+    resourceConcernId: 182,
+    resourceConcernName: 'Objectionable odor',
+    resourceConcernDescription: null,
+    highlighted: false,
+  },
+];
 export const practices = [
   {
     practiceId: 2,
-    practiceCategoryName: "Cropland Soil Quality",
+    practiceCategoryName: 'Cropland Soil Quality',
     practiceCategoryId: 2,
-    practiceCode: "311",
-    practiceName: "Alley Cropping",
-    practiceCategoryIconPath: "Soil Quality.png"
+    practiceCode: '311',
+    practiceName: 'Alley Cropping',
+    practiceCategoryIconPath: 'Soil Quality.png',
   },
   {
     practiceId: 11,
-    practiceCategoryName: "Cropland Soil Quality",
+    practiceCategoryName: 'Cropland Soil Quality',
     practiceCategoryId: 2,
-    practiceCode: "327",
-    practiceName: "Conservation Cover",
-    practiceCategoryIconPath: "Soil Quality.png"
+    practiceCode: '327',
+    practiceName: 'Conservation Cover',
+    practiceCategoryIconPath: 'Soil Quality.png',
   },
   {
     practiceId: 12,
-    practiceCategoryName: "Cropland Soil Quality",
+    practiceCategoryName: 'Cropland Soil Quality',
     practiceCategoryId: 2,
-    practiceCode: "328",
-    practiceName: "Conservation Crop Rotation",
-    practiceCategoryIconPath: "Soil Quality.png"
+    practiceCode: '328',
+    practiceName: 'Conservation Crop Rotation',
+    practiceCategoryIconPath: 'Soil Quality.png',
   },
   {
     practiceId: 18,
-    practiceCategoryName: "Cropland Soil Quality",
+    practiceCategoryName: 'Cropland Soil Quality',
     practiceCategoryId: 2,
-    practiceCode: "332",
-    practiceName: "Contour Buffer Strips",
-    practiceCategoryIconPath: "Soil Quality.png"
+    practiceCode: '332',
+    practiceName: 'Contour Buffer Strips',
+    practiceCategoryIconPath: 'Soil Quality.png',
   },
   {
     practiceId: 16,
-    practiceCategoryName: "Cropland Soil Quality",
+    practiceCategoryName: 'Cropland Soil Quality',
     practiceCategoryId: 2,
-    practiceCode: "330",
-    practiceName: "Contour Farming",
-    practiceCategoryIconPath: "Soil Quality.png"
+    practiceCode: '330',
+    practiceName: 'Contour Farming',
+    practiceCategoryIconPath: 'Soil Quality.png',
   },
   {
     practiceId: 17,
-    practiceCategoryName: "Cropland Soil Quality",
+    practiceCategoryName: 'Cropland Soil Quality',
     practiceCategoryId: 2,
-    practiceCode: "331",
-    practiceName: "Contour Orchard and Other Perennial Crops",
-    practiceCategoryIconPath: "Soil Quality.png"
+    practiceCode: '331',
+    practiceName: 'Contour Orchard and Other Perennial Crops',
+    practiceCategoryIconPath: 'Soil Quality.png',
   },
   {
     practiceId: 703,
-    practiceCategoryName: "Cropland Soil Quality",
+    practiceCategoryName: 'Cropland Soil Quality',
     practiceCategoryId: 2,
-    practiceCode: "334",
-    practiceName: "Controlled Traffic Farming",
-    practiceCategoryIconPath: "Soil Quality.png"
+    practiceCode: '334',
+    practiceName: 'Controlled Traffic Farming',
+    practiceCategoryIconPath: 'Soil Quality.png',
   },
   {
     practiceId: 20,
-    practiceCategoryName: "Cropland Soil Quality",
+    practiceCategoryName: 'Cropland Soil Quality',
     practiceCategoryId: 2,
-    practiceCode: "340",
-    practiceName: "Cover Crop",
-    practiceCategoryIconPath: "Soil Quality.png"
+    practiceCode: '340',
+    practiceName: 'Cover Crop',
+    practiceCategoryIconPath: 'Soil Quality.png',
   },
 ];
