@@ -94,22 +94,4 @@ describe('SpecificationsAndTools is rendered correctly', () => {
       'http://localhost:3000//06/ConservationPractices/2/23'
     );
   });
-  test('Should display practice standard container after clicking the practice standard button', () => {
-    fireEvent.click(
-      screen.getByText(
-        'Instructions for Accessing this State’s Practice Standards'
-      )
-    );
-    expect(screen.getByTestId('practice-standard-steps')).toBeDefined();
-  });
-  test('Should display practice standard link after clicking the practice standard button', () => {
-    fireEvent.click(
-      screen.getByText(
-        'Instructions for Accessing this State’s Practice Standards'
-      )
-    );
-    expect(
-      screen.getByText('NRCS Conservation Practices Website').closest('a')
-    ).toHaveAttribute('href', 'https://efotg.sc.egov.usda.gov/#/state/CA');
-  });
 });
