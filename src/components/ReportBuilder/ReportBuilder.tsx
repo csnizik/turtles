@@ -80,15 +80,15 @@ const ReportBuilder = ({
         <input
           data-testid='all-option'
           className='usa-checkbox__input'
-          id='swapaInputAll'
+          id='allRc'
           type='checkbox'
-          name='All resource concerns'
+          name='allRc'
           aria-label='All resource concerns treated'
           value='All'
           checked={rcTreatedInputs.size >= swapaCategoryCnt}
           onChange={() => toggleAll()}
         />
-        <label className='usa-checkbox__label' htmlFor='All resource concerns'>
+        <label className='usa-checkbox__label' htmlFor='allRc'>
           All
         </label>
       </div>
@@ -197,14 +197,14 @@ const ReportBuilder = ({
         <div className='usa-checkbox'>
           <input
             className='usa-checkbox__input'
-            id='input1'
+            id='practiceOverview'
             type='checkbox'
-            name='PracticeOverview'
+            name='practiceOverview'
             aria-label='Practice Overview'
             value={0}
             onChange={handleInput}
           />
-          <label className='usa-checkbox__label' htmlFor='PracticeOverview'>
+          <label className='usa-checkbox__label' htmlFor='practiceOverview'>
             Practice Overview
           </label>
         </div>
@@ -217,18 +217,18 @@ const ReportBuilder = ({
         <div className='usa-checkbox'>
           <input
             className='usa-checkbox__input'
-            id='input2'
+            id='currentPracticeSupport'
             type='checkbox'
             aria-label={`Support for the ${
               reportPreviewData?.practiceName
             } Practice in ${stateName === 'U.S.' ? 'the U.S.' : stateName}`}
-            name='Support for the current practice in the current state'
+            name='currentPracticeSupport'
             value={1}
             onChange={handleInput}
           />
           <label
             className='usa-checkbox__label'
-            htmlFor='Support for the current practice in the current state'
+            htmlFor='currentPracticeSupport'
           >
             {`Support for the ${reportPreviewData?.practiceName} Practice in ${
               stateName === 'U.S.' ? 'the U.S.' : stateName
@@ -239,17 +239,14 @@ const ReportBuilder = ({
         <div className='usa-checkbox'>
           <input
             className='usa-checkbox__input'
-            id='input3'
+            id='currentPracticeST'
             type='checkbox'
-            name='Current practice specifications and tools'
+            name='currentPracticeST'
             aria-label={`${reportPreviewData?.practiceName} Specifications & Tools`}
             value={2}
             onChange={handleInput}
           />
-          <label
-            className='usa-checkbox__label'
-            htmlFor='Current practice specifications and tools'
-          >
+          <label className='usa-checkbox__label' htmlFor='currentPracticeST'>
             {`${reportPreviewData?.practiceName} Specifications & Tools`}
           </label>
         </div>
