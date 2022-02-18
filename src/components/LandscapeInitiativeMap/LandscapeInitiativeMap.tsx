@@ -4,7 +4,7 @@ import Home from '@arcgis/core/widgets/Home';
 import MapView from '@arcgis/core/views/MapView';
 import WebMap from '@arcgis/core/WebMap';
 import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
-import Legend from '@arcgis/core/widgets/Legend';
+import LayerList from '@arcgis/core/widgets/LayerList';
 import Expand from '@arcgis/core/widgets/Expand';
 import Layer from '@arcgis/core/layers/Layer';
 import Graphic from '@arcgis/core/Graphic';
@@ -172,6 +172,7 @@ const LandscapeInitiativeMap = ({
               );
 
               filteredLayers.forEach((layer: Layer) => {
+                console.log('legendData1: ', layer.title);
                 featureLayerInfos.push({
                   layer,
                   title: layer.title,
@@ -179,6 +180,7 @@ const LandscapeInitiativeMap = ({
               });
             } else {
               allFeatureLayers.forEach((layer: Layer) => {
+                console.log('legendData2: ', layer);
                 featureLayerInfos.push({
                   layer,
                   title: layer.title,
@@ -186,17 +188,31 @@ const LandscapeInitiativeMap = ({
               });
             }
 
-            const legendContent: any = new Legend({
-              layerInfos: featureLayerInfos,
-              style: 'classic',
+            // const legendContent: any = new Legend({
+            //   layerInfos: featureLayerInfos,
+            //   style: 'classic',
+            //   view: mapRef.current.view,
+            // });
+
+            const layerList = new LayerList({
               view: mapRef.current.view,
+              listItemCreatedFunction: (event) => {
+                const { item } = event;
+                if (item.layer.type !== 'group') {
+                  // don't show legend twice
+                  item.panel = {
+                    content: 'legend',
+                    open: true,
+                  };
+                }
+              },
             });
 
-            legendContent.hideLayersNotInCurrentView = true;
+            //    legendContent.hideLayersNotInCurrentView = true;
 
             legendRef.current = new Expand({
               id: 'landscapeInitiativeLegend',
-              content: legendContent,
+              content: layerList,
               expanded: true,
               view: mapRef.current.view,
             });
