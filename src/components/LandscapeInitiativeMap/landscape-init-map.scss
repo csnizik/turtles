@@ -16,4 +16,19 @@
       }
     }
   }
+  // .esri-layer-list__child-toggle
+  //   + .esri-layer-list__item-label:not([role='radio'])
+  //   > .esri-layer-list__item-toggle {
+  //   display: none;
+  // }
+
+  .esri-icon-non-visible::before {
+    content: '\e610';
+  }
+  .esri-icon-visible::before {
+    content: '\e611';
+  }
+  //     .esri-icon-layer-list:before {
+  //     display:none;
+  // }
 }

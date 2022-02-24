@@ -188,12 +188,6 @@ const LandscapeInitiativeMap = ({
               });
             }
 
-            // const legendContent: any = new Legend({
-            //   layerInfos: featureLayerInfos,
-            //   style: 'classic',
-            //   view: mapRef.current.view,
-            // });
-
             const layerList = new LayerList({
               view: mapRef.current.view,
               listItemCreatedFunction: (event) => {
@@ -207,8 +201,6 @@ const LandscapeInitiativeMap = ({
                 }
               },
             });
-
-            //    legendContent.hideLayersNotInCurrentView = true;
 
             legendRef.current = new Expand({
               id: 'landscapeInitiativeLegend',
