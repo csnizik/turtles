@@ -16,19 +16,32 @@
       }
     }
   }
-  // .esri-layer-list__child-toggle
-  //   + .esri-layer-list__item-label:not([role='radio'])
-  //   > .esri-layer-list__item-toggle {
-  //   display: none;
-  // }
 
+  // code to add checkboxes
   .esri-icon-non-visible::before {
     content: '\e610';
   }
   .esri-icon-visible::before {
     content: '\e611';
   }
-  //     .esri-icon-layer-list:before {
-  //     display:none;
-  // }
+}
+
+// remove extra spacing above and below icons
+.esri-layer-list-panel {
+  margin: 0px 15px;
+}
+
+// remove extra spacing above and below icons
+.esri-layer-list-panel__content--legend .esri-legend__service {
+  padding: 0;
+}
+
+// removes right arrow before group legend item
+.esri-icon-right-triangle-arrow::before {
+  content: ' ';
+}
+
+// removes down arrow before  group legend item
+.esri-icon-down-arrow::before {
+  content: ' ';
 }

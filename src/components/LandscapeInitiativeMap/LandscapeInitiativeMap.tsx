@@ -172,7 +172,6 @@ const LandscapeInitiativeMap = ({
               );
 
               filteredLayers.forEach((layer: Layer) => {
-                console.log('legendData1: ', layer.title);
                 featureLayerInfos.push({
                   layer,
                   title: layer.title,
@@ -180,14 +179,13 @@ const LandscapeInitiativeMap = ({
               });
             } else {
               allFeatureLayers.forEach((layer: Layer) => {
-                console.log('legendData2: ', layer);
                 featureLayerInfos.push({
                   layer,
                   title: layer.title,
                 });
               });
             }
-
+            // using layerList to allow for the use of checkboxes
             const layerList = new LayerList({
               view: mapRef.current.view,
               listItemCreatedFunction: (event) => {
