@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-
+import TagManager from 'react-gtm-module';
 import CustomButton from '../CustomButton';
 import './quick-search-bar.scss';
 
@@ -11,6 +11,9 @@ const QuickSearchBar = () => {
   const handleCustomSearch = () => {
     history.push('search');
   };
+
+  const GTMArg = { gtmId: 'G-JXBFW848RQ' }; 
+  TagManager.initialize(GTMArg);
 
   return (
     <div className='grid-row quick-search-bar'>
@@ -25,6 +28,9 @@ const QuickSearchBar = () => {
           {t('search-page.quick-search')}
         </CustomButton>
       </div>
+      <noscript>
+        <iframe title="ga4" src="https://www.googletagmanager.com/ns.html?id=G-JXBFW848RQ" height="0" width="0" style={ {display:'none',visibility:'hidden'}}> </iframe>
+      </noscript>
     </div>
   );
 };
