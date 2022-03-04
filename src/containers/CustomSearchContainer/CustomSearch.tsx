@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-//import  'react-gtm-module';
 import  TagManager from 'react-gtm-module';
 import useBreakpoint from 'use-breakpoint';
 import { useTranslation } from 'react-i18next';
@@ -147,7 +146,6 @@ const CustomSearch = () => {
               });
           
   };
-  //const test = REACT_APP_TopPracticesEQUIPOpenDataLink;
 
   const searchButtonStyles = () => {
     let styles;
