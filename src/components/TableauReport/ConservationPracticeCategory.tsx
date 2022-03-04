@@ -10,6 +10,7 @@ declare global {
   // eslint-disable-next-line  no-unused-vars
   interface Window {
     tableau: any;
+    dataLayer: any;
   }
 }
 

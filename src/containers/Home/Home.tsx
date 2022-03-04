@@ -1,4 +1,6 @@
 import { useTranslation } from 'react-i18next';
+//import 'react-gtm-module';
+import TagManager from 'react-gtm-module';
 import Header from '../../components/Header';
 import LocationSearch from '../../components/LocationSearch';
 import FindByPractices from '../../components/FindByPractices';
@@ -18,6 +20,9 @@ const Home = () => {
     );
   };
 
+  const GTMArg = { gtmId: 'G-JXBFW848RQ'  };
+  TagManager.initialize(GTMArg);
+
   return (
     <main className='home-page'>
       <Header
@@ -27,6 +32,9 @@ const Home = () => {
         priority='1'
       />
       {renderMainContent()}
+      <noscript>
+        <iframe title="ga4" src="https://www.googletagmanager.com/ns.html?id=G-JXBFW848RQ" height="0" width="0" style={ {visibility:'hidden'}}> </iframe>
+      </noscript>
     </main>
   );
 };
