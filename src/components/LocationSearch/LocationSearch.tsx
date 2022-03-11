@@ -1,4 +1,5 @@
 import { useHistory } from 'react-router-dom';
+import TagManager from 'react-gtm-module';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IStateDropdownOption } from '../../common/types';
@@ -38,6 +39,9 @@ const LocationSearch = () => {
     }
   };
 
+  const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag ||"" }; 
+  TagManager.initialize(GTMArg);
+  
   useEffect(() => {
     dispatch(currentState(initialState));
   }, []);
@@ -59,6 +63,15 @@ const LocationSearch = () => {
         selectedStateCode?.stateCode || DEFAULT_NATIONAL_LOCATION
       }/ConservationPractices`,
     });
+
+    //Google Analytics code for LocationSearch (selectedStateCode)
+    window.dataLayer.push ( { 'js': new Date()});
+    window.dataLayer.push ( { event:'LocationSearch',
+    EventProps:{
+    SearchState: selectedStateCode
+  }
+    });
+
   };
 
   return (
