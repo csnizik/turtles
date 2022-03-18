@@ -39,9 +39,7 @@ const Home = () => {
           height='0'
           width='0'
           style={{ visibility: 'hidden' }}
-        >
-          {' '}
-        </iframe>
+        />
       </noscript>
     </main>
   );
