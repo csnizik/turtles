@@ -32,9 +32,7 @@ const QuickSearchBar = () => {
         <iframe
           title='ga4'
           src='https://www.googletagmanager.com/ns.html?id=G-JXBFW848RQ'
-          height='0'
-          width='0'
-          style={{ display: 'none', visibility: 'hidden' }}
+          className='hidden-content'
         />
       </noscript>
     </div>
