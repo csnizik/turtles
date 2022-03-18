@@ -15,6 +15,16 @@ import {
   IAssociatedPracticeList,
 } from '../../common/types';
 
+export const api2 = createApi({
+  reducerPath: 'api2',
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://efotg.sc.egov.usda.gov/api/StateLevelDocument' }),
+  endpoints: (builder) => ({
+    //! Resource Concern Get the SWAPA data
+    getFotgFolderUrl: builder.query<any, any>({
+      query: (data) => `?stateCode=36&practiceCode=472`,
+    }),
+  }),
+});
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
@@ -29,7 +39,6 @@ export const api = createApi({
           `/nationalPracticeOverview/${practiceId}`,
       }
     ),
-
     getStateList: builder.query<IStateDropdownOption[], void>({
       query: () => `/states`,
     }),
@@ -99,7 +108,12 @@ export const api = createApi({
     getPaymentScheduleLinks: builder.query<any, any>({
       query: (stateCode) => `/payment/link?stateCode=${stateCode}`,
     }),
+    getConfigurationSettings: builder.query<any, any>({
+      query: (fotgId) => `/parameter?key=${fotgId}`,
+    }),
+    
   }),
+  
 });
 export const {
   useGetResourcesQuery,
@@ -117,4 +131,8 @@ export const {
   useGetAssociatedPracticeQuery,
   useGetPaymentScheduleLinksQuery,
   usePostLandscapeInitiativesQuery,
+  useGetConfigurationSettingsQuery,
 } = api;
+export const {
+  useGetFotgFolderUrlQuery
+} = api2;

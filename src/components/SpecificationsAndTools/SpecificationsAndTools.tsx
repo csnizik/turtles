@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router-dom';
-import { useGetAssociatedPracticeQuery } from '../../Redux/services/api';
+import { skipToken } from '@reduxjs/toolkit/query/react';
+import { useGetAssociatedPracticeQuery, useGetConfigurationSettingsQuery, useGetFotgFolderUrlQuery } from '../../Redux/services/api';
 import './specs.scss';
 import { IAssociatedPracticeList } from '../../common/types';
 import { useAppSelector } from '../../Redux/hooks/hooks';
@@ -44,6 +45,18 @@ const SpecificationsAndTools = ({
   const fromPdfReport = useAppSelector(
     (state) => state?.pdfGenSlice?.enablePdfGen
   );
+  
+  const fotgLink = useGetConfigurationSettingsQuery("fotg_practice_deeplink_webservice");
+  const data2 = fotgLink.data || [];
+  const fotgLink2: any = data2[0]?.configurationValue || '';
+
+  const fotgInfo = {
+    practiceCode: data?.practiceCode,
+    stateCode: selectedStateCode,
+    fotgLink: fotgLink2,
+  };
+  const fotgFolderLink = useGetFotgFolderUrlQuery(fotgInfo)
+  console.log("fotgFolderLink: ", fotgFolderLink);
 
   const content = useGetAssociatedPracticeQuery(userSelectedFilter);
   const practiceLink =
@@ -59,6 +72,7 @@ const SpecificationsAndTools = ({
     }
     return practiceName;
   };
+  
 
   const renderNationalSpecs = () => {
     return (
