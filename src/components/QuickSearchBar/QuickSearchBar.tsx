@@ -12,7 +12,7 @@ const QuickSearchBar = () => {
     history.push('search');
   };
 
-  const GTMArg = { gtmId: 'G-JXBFW848RQ' }; 
+  const GTMArg = { gtmId: 'G-JXBFW848RQ' };
   TagManager.initialize(GTMArg);
 
   return (
@@ -29,7 +29,15 @@ const QuickSearchBar = () => {
         </CustomButton>
       </div>
       <noscript>
-        <iframe title="ga4" src="https://www.googletagmanager.com/ns.html?id=G-JXBFW848RQ" height="0" width="0" style={ {display:'none',visibility:'hidden'}}> </iframe>
+        <iframe
+          title='ga4'
+          src='https://www.googletagmanager.com/ns.html?id=G-JXBFW848RQ'
+          height='0'
+          width='0'
+          style={{ display: 'none', visibility: 'hidden' }}
+        >
+          {' '}
+        </iframe>
       </noscript>
     </div>
   );

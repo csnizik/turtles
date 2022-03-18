@@ -20,7 +20,7 @@ const Home = () => {
     );
   };
 
-  const GTMArg = { gtmId: 'G-JXBFW848RQ'  };
+  const GTMArg = { gtmId: 'G-JXBFW848RQ' };
   TagManager.initialize(GTMArg);
 
   return (
@@ -33,7 +33,15 @@ const Home = () => {
       />
       {renderMainContent()}
       <noscript>
-        <iframe title="ga4" src="https://www.googletagmanager.com/ns.html?id=G-JXBFW848RQ" height="0" width="0" style={ {visibility:'hidden'}}> </iframe>
+        <iframe
+          title='ga4'
+          src='https://www.googletagmanager.com/ns.html?id=G-JXBFW848RQ'
+          height='0'
+          width='0'
+          style={{ visibility: 'hidden' }}
+        >
+          {' '}
+        </iframe>
       </noscript>
     </main>
   );
