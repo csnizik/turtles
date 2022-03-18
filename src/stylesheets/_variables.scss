@@ -76,7 +76,7 @@ $alpha-large-space-size: 2.5rem;
 
 /** Mixins **/
 @mixin colored-top-box {
-  border: 0.0625rem solid $light-grey-6;
+  border: 0.0625rem solid $nrcs-dark;
   border-bottom-left-radius: 0.375rem;
   border-bottom-right-radius: 0.375rem;
   border-top: 0.3125rem solid $usda-blue;

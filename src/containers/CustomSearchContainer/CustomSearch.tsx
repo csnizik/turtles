@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import  TagManager from 'react-gtm-module';
+import TagManager from 'react-gtm-module';
 import useBreakpoint from 'use-breakpoint';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
@@ -29,7 +29,7 @@ import SearchByResourceConcern from '../../components/SearchByResourceConcern/Se
 import './custom-search.scss';
 import { currentState, initialState } from '../../Redux/Slice/stateSlice';
 
-const GTMArg = { gtmId: 'G-JXBFW848RQ' };  
+const GTMArg = { gtmId: 'G-JXBFW848RQ' };
 
 TagManager.initialize(GTMArg);
 
@@ -138,13 +138,13 @@ const CustomSearch = () => {
       dispatch(currentState(initialState));
     }
 
-    console.log(window.dataLayer);
-         window.dataLayer.push ( { 'js': new Date()});
-          window.dataLayer.push ( { event:'Search',
-              EventProps:{
-              SearchParameter: searchedInfo}
-              });
-          
+    window.dataLayer.push({ js: new Date() });
+    window.dataLayer.push({
+      event: 'Search',
+      EventProps: {
+        SearchParameter: searchedInfo,
+      },
+    });
   };
 
   const searchButtonStyles = () => {
