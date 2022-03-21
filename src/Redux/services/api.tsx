@@ -15,8 +15,8 @@ import {
   IAssociatedPracticeList,
 } from '../../common/types';
 
-export const api2 = createApi({
-  reducerPath: 'api2',
+export const fotgApi = createApi({
+  reducerPath: 'fotgApi',
   baseQuery: fetchBaseQuery({ baseUrl: '' }),
   endpoints: (builder) => ({
     //! Resource Concern Get the SWAPA data
@@ -135,4 +135,4 @@ export const {
 } = api;
 export const {
   useGetFotgFolderUrlQuery
-} = api2;
+} = fotgApi;
