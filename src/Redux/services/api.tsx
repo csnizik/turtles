@@ -17,11 +17,11 @@ import {
 
 export const api2 = createApi({
   reducerPath: 'api2',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://efotg.sc.egov.usda.gov/api/StateLevelDocument' }),
+  baseQuery: fetchBaseQuery({ baseUrl: '' }),
   endpoints: (builder) => ({
     //! Resource Concern Get the SWAPA data
     getFotgFolderUrl: builder.query<any, any>({
-      query: (data) => `?stateCode=36&practiceCode=472`,
+      query: (fotgInfo) => `${fotgInfo.fotgLink}?stateCode=${fotgInfo.stateCode}&practiceCode=${fotgInfo.practiceCode}`,
     }),
   }),
 });

@@ -47,16 +47,16 @@ const SpecificationsAndTools = ({
   );
   
   const fotgLink = useGetConfigurationSettingsQuery("fotg_practice_deeplink_webservice");
-  const data2 = fotgLink.data || [];
-  const fotgLink2: any = data2[0]?.configurationValue || '';
+  const fotgLinkData = fotgLink.data || [];
+  const fotgWebServiceLink: any = fotgLinkData[0]?.configurationValue || '';
 
   const fotgInfo = {
     practiceCode: data?.practiceCode,
     stateCode: selectedStateCode,
-    fotgLink: fotgLink2,
+    fotgLink: fotgWebServiceLink,
   };
   const fotgFolderLink = useGetFotgFolderUrlQuery(fotgInfo)
-  console.log("fotgFolderLink: ", fotgFolderLink);
+  const fotgFolderURL = fotgFolderLink?.data?.folder_url;
 
   const content = useGetAssociatedPracticeQuery(userSelectedFilter);
   const practiceLink =
@@ -84,7 +84,7 @@ const SpecificationsAndTools = ({
         <p className='state-prompt-text'>{nationalPromptText}</p>
         <div className='link'>
           <a
-            href='https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/cp/ncps/?cid=nrcs143_026849'
+            href="https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/cp/ncps/?cid=nrcs143_026849"
             target='_blank'
             rel='noopener noreferrer'
             aria-label='NRCS National Conservation Practice Guidance opens in a new browser tab'
@@ -111,7 +111,7 @@ const SpecificationsAndTools = ({
         <div className='link'>
           <a
             href={
-              practiceStandardGuideLink.viewStateConservationPracticeLink +
+              fotgFolderURL !=null ? fotgFolderURL: practiceStandardGuideLink.viewStateConservationPracticeLink +
               selectedStateAbbr
             }
             target='_blank'
