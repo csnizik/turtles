@@ -49,13 +49,13 @@ const SpecificationsAndTools = ({
   const fotgLink = useGetConfigurationSettingsQuery("fotg_practice_deeplink_webservice");
   const fotgLinkData = fotgLink.data || [];
   const fotgWebServiceLink: any = fotgLinkData[0]?.configurationValue || '';
-
+  
   const fotgInfo = {
     practiceCode: data?.practiceCode,
     stateCode: selectedStateCode,
     fotgLink: fotgWebServiceLink,
   };
-  const fotgFolderLink = useGetFotgFolderUrlQuery(fotgInfo)
+  const fotgFolderLink = useGetFotgFolderUrlQuery(fotgLink.isSuccess ?  fotgInfo: skipToken);
   const fotgFolderURL = fotgFolderLink?.data?.folder_url;
 
   const content = useGetAssociatedPracticeQuery(userSelectedFilter);
