@@ -106,7 +106,7 @@ const SpecificationsAndTools = ({
         <div className='link'>
           <a
             href={
-              fotgFolderURL !=null ? fotgFolderURL: practiceStandardGuideLink.viewStateConservationPracticeLink +
+              fotgFolderURL !==null ? fotgFolderURL: practiceStandardGuideLink.viewStateConservationPracticeLink +
               selectedStateAbbr
             }
             target='_blank'
