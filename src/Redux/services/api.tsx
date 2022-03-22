@@ -19,7 +19,7 @@ export const fotgApi = createApi({
   reducerPath: 'fotgApi',
   baseQuery: fetchBaseQuery({ baseUrl: '' }),
   endpoints: (builder) => ({
-    //! Resource Concern Get the SWAPA data
+    //Get the specific FOTG State and Practice Folder Link given a state code practice code and URL
     getFotgFolderUrl: builder.query<any, any>({
       query: (fotgInfo) => `${fotgInfo.fotgLink}?stateCode=${fotgInfo.stateCode}&practiceCode=${fotgInfo.practiceCode}`,
     }),
