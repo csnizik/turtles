@@ -59,11 +59,6 @@ const SpecificationsAndTools = ({
   const fotgFolderURL = fotgFolderLink?.data?.folder_url;
 
   const content = useGetAssociatedPracticeQuery(userSelectedFilter);
-  const practiceLink =
-    selectedStateAbbr === 'U.S.' || selectedStateAbbr === undefined
-      ? practiceStandardGuideLink.viewStateConservationPracticeLink
-      : practiceStandardGuideLink.viewStateConservationPracticeLink +
-        selectedStateAbbr;
 
   const getHeaderText = () => {
     const practiceName = (data && data?.practiceName) || '';
