@@ -50,6 +50,7 @@ const SpecificationsAndTools = ({
   const fotgLinkData = fotgLink.data || [];
   const fotgWebServiceLink: any = fotgLinkData[0]?.configurationValue || '';
   
+  
   const fotgInfo = {
     practiceCode: data?.practiceCode,
     stateCode: selectedStateCode,
@@ -106,7 +107,7 @@ const SpecificationsAndTools = ({
         <div className='link'>
           <a
             href={
-              fotgFolderURL !==null ? fotgFolderURL: practiceStandardGuideLink.viewStateConservationPracticeLink +
+              fotgFolderLink.isSuccess ? fotgFolderURL: practiceStandardGuideLink.viewStateConservationPracticeLink +
               selectedStateAbbr
             }
             target='_blank'
