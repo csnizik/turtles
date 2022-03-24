@@ -99,6 +99,15 @@ export const api = createApi({
     getPaymentScheduleLinks: builder.query<any, any>({
       query: (stateCode) => `/payment/link?stateCode=${stateCode}`,
     }),
+    // configuration settings
+    getConfigurationSettingsPoc: builder.query<any, void>({
+      query: () => `/ui/parameters`,
+      transformResponse: (response: any) =>
+        response.reduce((acc, curr) => {
+          acc[curr.configurationSettingName] = curr;
+          return acc;
+        }, {}),
+    }),
   }),
 });
 export const {
@@ -117,4 +126,5 @@ export const {
   useGetAssociatedPracticeQuery,
   useGetPaymentScheduleLinksQuery,
   usePostLandscapeInitiativesQuery,
+  useGetConfigurationSettingsPocQuery,
 } = api;

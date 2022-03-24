@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -15,6 +16,8 @@ import {
   enablePracticeDropdown,
   enableResourceDropdown,
 } from '../../Redux/Slice/disableSlice';
+
+import { useGetConfigurationSettingsPocQuery } from '../../Redux/services/api';
 
 const initialState = {
   stateNameDisplay: 'U.S.',
@@ -34,6 +37,25 @@ const GovernmentBanner = () => {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
 
+  const { refetch } = useGetConfigurationSettingsPocQuery();
+
+  let settingsInterval;
+
+  const startSettingsTime = () => {
+    if (!settingsInterval) {
+      settingsInterval = setInterval(refetch, 20000);
+    }
+  };
+
+  useEffect(() => {
+    console.log('useEffect');
+    startSettingsTime();
+    return () => {
+      clearInterval(settingsInterval);
+      settingsInterval = null;
+    };
+  }, []);
+
   const handleNavigateHome = () => {
     window.dispatchEvent(new Event('navigateHome'));
     dispatch(currentState(initialState));
@@ -47,10 +69,7 @@ const GovernmentBanner = () => {
     window.localStorage.clear();
   };
   const renderNRCSHeaderSection: Function = () => (
-    <div
-      data-testid='gov-banner-header'
-      className='usa-banner-header'
-    >
+    <div data-testid='gov-banner-header' className='usa-banner-header'>
       <div className='usa-accordion'>
         <div className='usa-banner__header'>
           <div className='usa-banner__inner '>

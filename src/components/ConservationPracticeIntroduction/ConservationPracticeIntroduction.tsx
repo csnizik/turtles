@@ -8,11 +8,14 @@ import image from './image/open-in-new.svg';
 
 interface IIntroProps {
   introductionParagraph: string;
+  // eslint-disable-next-line react/require-default-props
+  introductionParagraph2?: string | null;
   title: string;
 }
 
 const ConservationPracticeIntroduction = ({
   introductionParagraph,
+  introductionParagraph2,
   title,
 }: IIntroProps) => {
   const [isRcTableauEmpty, setIsRcTableauEmpty] = useState(false);
@@ -92,6 +95,7 @@ const ConservationPracticeIntroduction = ({
       <div className='conservation-practice-header'>
         <h2>{title}</h2>
         <p>{introductionParagraph}</p>
+        <p>{introductionParagraph2}</p>
       </div>
 
       {(title === 'Conservation Practices' &&
