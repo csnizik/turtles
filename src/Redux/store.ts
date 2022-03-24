@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage/session'; // SessionStorage for web
-import { api } from './services/api';
+import { api, fotgApi } from './services/api';
 import disableSlice from './Slice/disableSlice';
 import pdfGenSlice from './Slice/pdfGenSlice';
 import practiceSlice from './Slice/practiceSlice';
@@ -10,6 +10,7 @@ import stateSlice from './Slice/stateSlice';
 
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
+  [fotgApi.reducerPath]: fotgApi.reducer,
   disableSlice,
   pdfGenSlice,
   practiceSlice,
