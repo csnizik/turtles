@@ -50,6 +50,7 @@ const SpecificationsAndTools = ({
   const fotgLinkData = fotgLink.data || [];
   const fotgWebServiceLink: any = fotgLinkData[0]?.configurationValue || '';
   
+  
   const fotgInfo = {
     practiceCode: data?.practiceCode,
     stateCode: selectedStateCode,
@@ -57,8 +58,14 @@ const SpecificationsAndTools = ({
   };
   const fotgFolderLink = useGetFotgFolderUrlQuery(fotgLink.isSuccess ?  fotgInfo: skipToken);
   const fotgFolderURL = fotgFolderLink?.data?.folder_url;
+  console.log("fotgFolderUrl: ", fotgFolderLink);
 
   const content = useGetAssociatedPracticeQuery(userSelectedFilter);
+  const practiceLink =
+    selectedStateAbbr === 'U.S.' || selectedStateAbbr === undefined
+      ? practiceStandardGuideLink.viewStateConservationPracticeLink
+      : practiceStandardGuideLink.viewStateConservationPracticeLink +
+        selectedStateAbbr;
 
   const getHeaderText = () => {
     const practiceName = (data && data?.practiceName) || '';
@@ -106,7 +113,7 @@ const SpecificationsAndTools = ({
         <div className='link'>
           <a
             href={
-              fotgFolderURL !==null ? fotgFolderURL: practiceStandardGuideLink.viewStateConservationPracticeLink +
+              fotgFolderLink.isSuccess ? fotgFolderURL: practiceStandardGuideLink.viewStateConservationPracticeLink +
               selectedStateAbbr
             }
             target='_blank'
