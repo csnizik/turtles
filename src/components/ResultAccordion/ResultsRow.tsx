@@ -17,10 +17,18 @@ const ResultsRow = ({
   const stateCode: string = useAppSelector(
     (state) => state.stateSlice.stateCode
   );
-  const handleKeyPressed = (practiceId: number, event: any) => {
-    if (event.keyCode === 9 || event.key === 'Tab') return;
-    toggleExpandCategory(practiceId);
+
+  //eslint-disable-next-line
+  const handleCategoryKeyPressed = (practiceCategoryId: number, event: any) => {
+    if (event.keyCode === 13 || event.key === 'Enter')
+      return toggleExpandCategory(practiceCategoryId);
   };
+  //eslint-disable-next-line
+  const handlePracticeKeyPressed = (practiceId: number, event: any) => {
+    if (event.keyCode === 13 || event.key === 'Enter')
+      return toggleChild(practiceId);
+  };
+
   return (
     <>
       <div className='top-title'>
@@ -38,7 +46,7 @@ const ResultsRow = ({
             'accordion-container-blue': currentTab === categoryId,
           });
           return (
-            <ul>
+            <ul role='menu'>
               <div className={accordionClass}>
                 <li
                   key={categoryId}
@@ -46,7 +54,7 @@ const ResultsRow = ({
                   aria-label={practiceCategory.practiceCategoryName}
                   tabIndex={0}
                   onClick={() => toggleExpandCategory(categoryId)}
-                  onKeyUp={(e) => handleKeyPressed(0, e)}
+                  onKeyUp={(e) => handleCategoryKeyPressed(categoryId, e)}
                 >
                   <i className={chevronClassName} />
                   <div className='accordion-data'>
@@ -93,7 +101,9 @@ const ResultsRow = ({
                         aria-label={ele.practiceName}
                         tabIndex={0}
                         onClick={() => toggleChild(ele.practiceId)}
-                        onKeyUp={(e) => handleKeyPressed(0, e)}
+                        onKeyUp={(e) =>
+                          handlePracticeKeyPressed(ele.practiceId, e)
+                        }
                       >
                         <i className={childChevronClassName} />
                         <div className='child-data'>

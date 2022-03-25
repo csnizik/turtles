@@ -58,18 +58,14 @@ const Pagination = ({
                 type='button'
                 className='usa-pagination__link usa-pagination__previous-page'
                 aria-label='Go to Previous page'
+                onClick={() => handlePrevClick()}
+                onSubmit={() => handlePrevClick()}
               >
                 <svg className='usa-icon' aria-hidden='true' role='img'>
                   <use href='/assets/img/sprite.svg#navigate_before' />
                 </svg>
 
-                <span
-                  role='button'
-                  tabIndex={-1}
-                  className='usa-pagination__link-text'
-                  onClick={() => handlePrevClick()}
-                  onKeyUp={() => handlePrevClick()}
-                >
+                <span role='presentation' className='usa-pagination__link-text'>
                   Previous
                 </span>
               </button>
@@ -169,14 +165,10 @@ const Pagination = ({
                 type='button'
                 className='usa-pagination__link usa-pagination__next-page'
                 aria-label='Go to Next page'
+                onClick={() => handleNextClick()}
+                onSubmit={() => handleNextClick()}
               >
-                <span
-                  role='button'
-                  tabIndex={-1}
-                  className='usa-pagination__link-text'
-                  onClick={() => handleNextClick()}
-                  onKeyUp={() => handleNextClick()}
-                >
+                <span role='presentation' className='usa-pagination__link-text'>
                   Next
                 </span>
 
