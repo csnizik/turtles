@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import  TagManager from 'react-gtm-module';
+import TagManager from 'react-gtm-module';
 import useBreakpoint from 'use-breakpoint';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';

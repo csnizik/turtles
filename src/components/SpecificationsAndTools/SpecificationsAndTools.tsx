@@ -1,6 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router-dom';
-import { useGetAssociatedPracticeQuery } from '../../Redux/services/api';
+import { skipToken } from '@reduxjs/toolkit/query/react';
+import {
+  useGetAssociatedPracticeQuery,
+  useGetConfigurationSettingsQuery,
+  useGetFotgFolderUrlQuery,
+} from '../../Redux/services/api';
 import './specs.scss';
 import { IAssociatedPracticeList } from '../../common/types';
 import { useAppSelector } from '../../Redux/hooks/hooks';
@@ -45,12 +50,23 @@ const SpecificationsAndTools = ({
     (state) => state?.pdfGenSlice?.enablePdfGen
   );
 
+  const fotgLink = useGetConfigurationSettingsQuery(
+    'fotg_practice_deeplink_webservice'
+  );
+  const fotgLinkData = fotgLink.data || [];
+  const fotgWebServiceLink: any = fotgLinkData[0]?.configurationValue || '';
+
+  const fotgInfo = {
+    practiceCode: data?.practiceCode,
+    stateCode: selectedStateCode,
+    fotgLink: fotgWebServiceLink,
+  };
+  const fotgFolderLink = useGetFotgFolderUrlQuery(
+    fotgLink.isSuccess ? fotgInfo : skipToken
+  );
+  const fotgFolderURL = fotgFolderLink?.data?.folder_url;
+
   const content = useGetAssociatedPracticeQuery(userSelectedFilter);
-  const practiceLink =
-    selectedStateAbbr === 'U.S.' || selectedStateAbbr === undefined
-      ? practiceStandardGuideLink.viewStateConservationPracticeLink
-      : practiceStandardGuideLink.viewStateConservationPracticeLink +
-        selectedStateAbbr;
 
   const getHeaderText = () => {
     const practiceName = (data && data?.practiceName) || '';
@@ -97,8 +113,10 @@ const SpecificationsAndTools = ({
         <div className='link'>
           <a
             href={
-              practiceStandardGuideLink.viewStateConservationPracticeLink +
-              selectedStateAbbr
+              fotgFolderLink.isSuccess
+                ? fotgFolderURL
+                : practiceStandardGuideLink.viewStateConservationPracticeLink +
+                  selectedStateAbbr
             }
             target='_blank'
             rel='noopener noreferrer'

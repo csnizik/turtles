@@ -28,7 +28,6 @@ const QuickSearchBar = () => {
           {t('search-page.quick-search')}
         </CustomButton>
       </div>
-
     </div>
   );
 };

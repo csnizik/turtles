@@ -16,7 +16,8 @@
     margin-bottom: 0rem;
     position: relative;
     background-size: cover;
-    background-position: center;
+    background-position: center 20px;
+    background-color: $white;
     min-height: 350px;
     height: auto;
     background-repeat: no-repeat;
@@ -24,7 +25,7 @@
 
     h1 {
       position: absolute;
-      top: 0.5em;
+      top: 1rem;
       font-weight: 900;
     }
   }
