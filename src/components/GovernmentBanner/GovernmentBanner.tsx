@@ -37,24 +37,9 @@ const GovernmentBanner = () => {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
 
-  const { refetch } = useGetConfigurationSettingsPocQuery();
-
-  let settingsInterval;
-
-  const startSettingsTime = () => {
-    if (!settingsInterval) {
-      settingsInterval = setInterval(refetch, 20000);
-    }
-  };
-
-  useEffect(() => {
-    console.log('useEffect');
-    startSettingsTime();
-    return () => {
-      clearInterval(settingsInterval);
-      settingsInterval = null;
-    };
-  }, []);
+  useGetConfigurationSettingsPocQuery(null, {
+    pollingInterval: 5000,
+  });
 
   const handleNavigateHome = () => {
     window.dispatchEvent(new Event('navigateHome'));

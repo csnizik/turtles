@@ -100,7 +100,7 @@ export const api = createApi({
       query: (stateCode) => `/payment/link?stateCode=${stateCode}`,
     }),
     // configuration settings
-    getConfigurationSettingsPoc: builder.query<any, void>({
+    getConfigurationSettingsPoc: builder.query<any, any>({
       query: () => `/ui/parameters`,
       transformResponse: (response: any) =>
         response.reduce((acc, curr) => {
