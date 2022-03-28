@@ -66,7 +66,6 @@ window.dataLayer.push ( { event:'PracticeContainer',
     SearchState: selectedStateCode
   }
     });
-console.log(window.dataLayer); 
   }, [  category, individual, stateCode ]);
 
   useEffect(() => {
