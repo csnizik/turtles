@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import TagManager from 'react-gtm-module';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -40,7 +41,18 @@ const FindByPractices = () => {
     } else {
       history.push('00/ConservationPractices');
     }
+    //Google Analytics code for PracticeSearch(hiddenSelectedPractice, selectedSubPractice)
+    window.dataLayer.push ( { 'js': new Date()});
+    window.dataLayer.push ( { event:'PracticeSearch',
+    EventProps:{
+    SearchPractice: hiddenSelectedPractice, 
+    SearchState: selectedSubPractice
+  }
+    });
   };
+
+  const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag ||"" }; 
+  TagManager.initialize(GTMArg);
 
   const practiceCategory = useGetPracticeCategoryQuery();
   const subPractice = useGetPracticeQuery(selectedPractice);

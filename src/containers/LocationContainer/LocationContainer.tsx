@@ -1,4 +1,5 @@
 import { TabContent, TabPane } from 'reactstrap';
+import TagManager from 'react-gtm-module';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CustomTabs from '../../components/CustomTabs';
@@ -20,6 +21,9 @@ const tabStyleOptions: any = {
   default: 0,
   fpacStyle: 1,
 };
+
+const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag ||"" }; 
+TagManager.initialize(GTMArg);
 
 const LocationContainer = () => {
   const dispatch = useAppDispatch();
@@ -61,6 +65,17 @@ const LocationContainer = () => {
     // }
     window.scroll(0, 0);
   }, [selectedPracticeCategory, selectedPractice, option]);
+
+  useEffect(() => {
+    //Google Analytics code for LocationContainerTab (stateCode and name) 
+    window.dataLayer.push ( { 'js': new Date()});
+    window.dataLayer.push ( { event:'LocationContainerTab',
+        EventProps:{
+        SearchState: stateCode,
+        SearchName : name
+      }
+        });
+      }, [  name ]);
 
   const renderTabContent = () => (
     <TabContent activeTab={currentTabOption}>
