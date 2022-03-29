@@ -96,6 +96,19 @@ const SpecificationsAndTools = ({
     );
   };
 
+  const stateConservationPracticeLink = () => {
+    if(fotgFolderLink.isSuccess && fotgFolderURL != null){
+      return fotgFolderURL;
+    }
+    else if(selectedStateAbbr === "MD" || selectedStateAbbr === "DC"){
+      return practiceStandardGuideLink.viewStateConservationPracticeDCLink;
+    }
+    else{
+      return practiceStandardGuideLink.viewStateConservationPracticeLink +
+      selectedStateAbbr;
+    }
+  }
+
   const renderStateSpecs = () => {
     return (
       <div
@@ -106,10 +119,7 @@ const SpecificationsAndTools = ({
         <p className='state-prompt-text'>{statePromptText}</p>
         <div className='link'>
           <a
-            href={
-              fotgFolderLink.isSuccess ? fotgFolderURL: practiceStandardGuideLink.viewStateConservationPracticeLink +
-              selectedStateAbbr
-            }
+            href={stateConservationPracticeLink()}
             target='_blank'
             rel='noopener noreferrer'
             aria-label={`${

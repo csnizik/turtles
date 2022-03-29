@@ -73,6 +73,7 @@ export const practiceStandardGuideLink = {
   stateConservationPracticeText: `${' '}NRCS Conservation Practices Website${' '}`,
   viewStateConservationPracticeText: `${' '}View this State's Conservation Practices${' '}`,
   viewStateConservationPracticeLink: `https://efotg.sc.egov.usda.gov/#/state/`,
+  viewStateConservationPracticeDCLink: `https://efotg.sc.egov.usda.gov/#/state/MW`,
   webpagePromptText: `Go Straight to this State’s Field Office Technical Guide`,
   pdfReportPromptText: `State Specific National Conservation Practices`,
 };
