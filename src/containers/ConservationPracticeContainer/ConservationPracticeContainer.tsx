@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import TagManager from 'react-gtm-module';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -32,6 +33,9 @@ const defaultPracticeViews = {
   individualPractice: false,
 };
 
+const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag ||"" }; 
+TagManager.initialize(GTMArg);
+
 const ConservationPracticeContainer = ({
   currentSpecificPractice,
   currentPracticeCategoryId,
@@ -48,8 +52,34 @@ const ConservationPracticeContainer = ({
   );
   const stateStatus: any = useGetStateListQuery();
   const dispatch = useAppDispatch();
-  const { category, individual, stateCode }: any = useParams();
+  const { category, individual, stateCode, name }: any = useParams();
   const selectedStateCode = stateInfo?.stateCode;
+
+
+  useEffect(() => {
+//GA code for  currentSpecificPractice & currentPracticeCategoryId ** might duplicate and code for stateC
+window.dataLayer.push ( { 'js': new Date()});
+window.dataLayer.push ( { event:'PracticeContainer',
+    EventProps:{
+    SearchPractice: currentSpecificPractice, 
+    SearchCategory: currentPracticeCategoryId,
+    SearchState: selectedStateCode
+  }
+    });
+  }, [  category, individual, stateCode ]);
+
+  useEffect(() => {
+    //Google Analytics code for PracticeContainerTab() currentSpecificPractice & currentPracticeCategoryId and statecode) 
+    window.dataLayer.push ( { 'js': new Date()});
+    window.dataLayer.push ( { event:'PracticeContainerTab',
+        EventProps:{
+        SearchPractice: currentSpecificPractice, 
+        SearchCategory: currentPracticeCategoryId,
+        SearchState: selectedStateCode,
+        SearchName : name
+      }
+        });
+      }, [  name ]);
 
   useEffect(() => {
     if (individual) {

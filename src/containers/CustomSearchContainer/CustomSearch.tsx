@@ -29,8 +29,7 @@ import SearchByResourceConcern from '../../components/SearchByResourceConcern/Se
 import './custom-search.scss';
 import { currentState, initialState } from '../../Redux/Slice/stateSlice';
 
-const GTMArg = { gtmId: 'G-JXBFW848RQ' };
-
+const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag ||"" }; 
 TagManager.initialize(GTMArg);
 
 const defaultSearchInput: ISearchData = {
@@ -137,14 +136,12 @@ const CustomSearch = () => {
     if (searchInput.state_county_code === '00000') {
       dispatch(currentState(initialState));
     }
-
-    window.dataLayer.push({ js: new Date() });
-    window.dataLayer.push({
-      event: 'Search',
-      EventProps: {
-        SearchParameter: searchedInfo,
-      },
-    });
+   //Google Analytics code for SearchClick (searchedInfo)
+    window.dataLayer.push ( { 'js': new Date()});
+    window.dataLayer.push ( { event:'SearchClick',
+        EventProps:{
+        SearchParameter: searchedInfo}
+        });
   };
 
   const searchButtonStyles = () => {

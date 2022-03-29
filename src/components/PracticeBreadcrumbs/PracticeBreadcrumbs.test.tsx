@@ -58,9 +58,7 @@ describe('Practice Breadcrumbs is rendered correctly', () => {
     expect(screen.getByTestId('PracticeBreadcrumbs')).toBeDefined();
   });
   test('Should stimulate a click on the Practice Category Breadcrumb', () => {
-    const breadcrumb = screen.getByLabelText(
-      'Conservation practice breadcrumbs'
-    );
+    const breadcrumb = screen.getByLabelText('Breadcrumbs');
     fireEvent.click(breadcrumb);
     fireEvent.keyUp(breadcrumb);
     const breadcrumb_Category = screen.getByLabelText(
@@ -94,9 +92,7 @@ describe('Practice Breadcrumbs is rendered correctly', () => {
   });
 
   test('Should stimulate a click on the Practice Breadcrumb', () => {
-    const breadcrumb = screen.getByLabelText(
-      'Conservation practice breadcrumbs'
-    );
+    const breadcrumb = screen.getByLabelText('Breadcrumbs');
     fireEvent.click(breadcrumb);
     fireEvent.keyUp(breadcrumb);
     const breadcrumb_Overview = screen.getByLabelText(

@@ -65,16 +65,15 @@ const PracticeBreadcrumbs = ({
   return (
     <nav
       className='usa-breadcrumb margin-top-1 margin-left-3 crumbs-container'
-      aria-label='Conservation practice breadcrumbs'
+      aria-label='Breadcrumbs'
       data-testid='PracticeBreadcrumbs'
     >
       <ol className='usa-breadcrumb__list'>
-        <li
+        <li // eslint-disable-line
           className='usa-breadcrumb__list-item'
           aria-label='Conservation Practice Overview breadcrumb'
           onClick={() => handleNavigateBreadcrumb(0)}
           onKeyUp={(e) => handleKeyPressed(0, e)}
-          role='presentation'
         >
           {currentPracticeCategory ? (
             <button
@@ -93,12 +92,11 @@ const PracticeBreadcrumbs = ({
         currentSpecificPractice &&
         currentPractice ? (
           <>
-            <li
+            <li // eslint-disable-line
               className='usa-breadcrumb__list-item'
               aria-label='Conservation Practice Category Breadcrumb'
               onClick={() => handleNavigateBreadcrumb(1)}
               onKeyUp={(e) => handleKeyPressed(0, e)}
-              role='presentation'
             >
               <button
                 type='button'
@@ -122,12 +120,11 @@ const PracticeBreadcrumbs = ({
             </li>
           </>
         ) : (
-          <li
+          <li // eslint-disable-line
             className='usa-breadcrumb__list-item'
             aria-label='Conservation Practice Category Breadcrumb'
             onClick={() => handleNavigateBreadcrumb(1)}
             onKeyUp={(e) => handleKeyPressed(0, e)}
-            role='presentation'
           >
             <span>{currentPracticeCategory?.practiceCategoryName}</span>
           </li>

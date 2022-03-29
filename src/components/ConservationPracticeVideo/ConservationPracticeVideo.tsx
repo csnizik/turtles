@@ -28,18 +28,19 @@ const ConservationPracticeVideo = ({ selectedPracticeId }: any) => {
                   allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; X-Frame-Options'
                   allowFullScreen
                   title={`${data[0].videoName} Embedded Video`}
+                  aria-hidden='true'
                 />
               )}
               {fromPdfReport && (
-                <a href={data[0].videoLink} className='video-outer-link'> 
+                <a href={data[0].videoLink} className='video-outer-link'>
                   <iframe
-                    name= 'iframeVideo'
+                    name='iframeVideo'
                     className='videoImg'
                     src={data[0].videoLink}
                     frameBorder='1'
                     allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; X-Frame-Options'
                     allowFullScreen
-                    title={`${data[0].videoName} Embedded Video`} 
+                    title={`${data[0].videoName} Embedded Video`}
                   />
                 </a>
               )}
