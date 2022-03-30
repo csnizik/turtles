@@ -61,6 +61,28 @@ const SpecificationsAndTools = ({
     stateCode: selectedStateCode,
     fotgLink: fotgWebServiceLink,
   };
+
+  //this method adjusts the state code to be what the FOTG endpoint expects to see for the
+  //listed territories. Currently it is hardcoded not best practice.
+  const calculateAdjustedStateCode = () => {
+    //Maryland, and DC 
+    if(selectedStateAbbr === "MD" || selectedStateAbbr === "DC"){
+      fotgInfo.stateCode = "MW";
+    }
+    //Carribean Region Territories
+    if(selectedStateAbbr === "PR" || selectedStateAbbr === "VI"){
+      fotgInfo.stateCode = "CR";
+    }
+    //Pacific Basin territories: HI, AS, FM, GU, MH, MP, PW
+    if(selectedStateAbbr === "GU" || selectedStateAbbr === "MP"){
+      fotgInfo.stateCode = "15";
+    }
+  }
+  
+  //this line calls the previous method to ensure the correct state code is applied
+  //before the FOTG endpoint is called
+  calculateAdjustedStateCode();
+
   const fotgFolderLink = useGetFotgFolderUrlQuery(
     fotgLink.isSuccess ? fotgInfo : skipToken
   );
@@ -102,18 +124,7 @@ const SpecificationsAndTools = ({
     );
   };
 
-  const stateConservationPracticeLink = () => {
-    if(fotgFolderLink.isSuccess && fotgFolderURL != null){
-      return fotgFolderURL;
-    }
-    else if(selectedStateAbbr === "MD" || selectedStateAbbr === "DC"){
-      return practiceStandardGuideLink.viewStateConservationPracticeDCLink;
-    }
-    else{
-      return practiceStandardGuideLink.viewStateConservationPracticeLink +
-      selectedStateAbbr;
-    }
-  }
+
 
   const renderStateSpecs = () => {
     return (
@@ -125,7 +136,8 @@ const SpecificationsAndTools = ({
         <p className='state-prompt-text'>{statePromptText}</p>
         <div className='link'>
           <a
-            href={stateConservationPracticeLink()}
+            href={ fotgFolderLink.isSuccess && fotgFolderURL !=null ? fotgFolderURL: practiceStandardGuideLink.viewStateConservationPracticeLink +
+                selectedStateAbbr}
             target='_blank'
             rel='noopener noreferrer'
             aria-label={`${
