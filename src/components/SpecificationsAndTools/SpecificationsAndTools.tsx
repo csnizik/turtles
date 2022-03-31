@@ -66,15 +66,18 @@ const SpecificationsAndTools = ({
   //listed territories. Currently it is hardcoded not best practice.
   const calculateAdjustedStateCode = () => {
     //Maryland, and DC 
-    if(selectedStateAbbr === "MD" || selectedStateAbbr === "DC"){
+    if(selectedStateCode === "11" || selectedStateCode === "24"){
       fotgInfo.stateCode = "MW";
     }
     //Carribean Region Territories
-    if(selectedStateAbbr === "PR" || selectedStateAbbr === "VI"){
+    if(selectedStateCode === "72" || selectedStateCode === "78"){
       fotgInfo.stateCode = "CR";
     }
-    //Pacific Basin territories: HI, AS, FM, GU, MH, MP, PW
-    if(selectedStateAbbr === "GU" || selectedStateAbbr === "MP"){
+    //Pacific Basin territories: HI, AS, FM, GU, MH, MP, PW 
+    if(selectedStateCode === "60" || selectedStateCode === "64" || 
+    selectedStateCode === "66" || selectedStateCode === "68" ||
+    selectedStateCode === "69" || selectedStateCode === "70" || 
+    selectedStateCode === "74"){
       fotgInfo.stateCode = "15";
     }
   }
