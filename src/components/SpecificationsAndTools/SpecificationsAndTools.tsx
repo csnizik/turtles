@@ -56,35 +56,37 @@ const SpecificationsAndTools = ({
   const fotgLinkData = fotgLink.data || [];
   const fotgWebServiceLink: any = fotgLinkData[0]?.configurationValue || '';
 
-  const fotgInfo = {
-    practiceCode: data?.practiceCode,
-    stateCode: selectedStateCode,
-    fotgLink: fotgWebServiceLink,
-  };
+  
 
   //this method adjusts the state code to be what the FOTG endpoint expects to see for the
   //listed territories. Currently it is hardcoded not best practice.
   const calculateAdjustedStateCode = () => {
     //Maryland, and DC 
     if(selectedStateCode === "11" || selectedStateCode === "24"){
-      fotgInfo.stateCode = "MW";
+      return "MW";
     }
     //Carribean Region Territories
-    if(selectedStateCode === "72" || selectedStateCode === "78"){
-      fotgInfo.stateCode = "CR";
+    else if(selectedStateCode === "72" || selectedStateCode === "78"){
+      return "CR";
     }
     //Pacific Basin territories: HI, AS, FM, GU, MH, MP, PW 
-    if(selectedStateCode === "60" || selectedStateCode === "64" || 
+    else if(selectedStateCode === "60" || selectedStateCode === "64" || 
     selectedStateCode === "66" || selectedStateCode === "68" ||
     selectedStateCode === "69" || selectedStateCode === "70" || 
     selectedStateCode === "74"){
-      fotgInfo.stateCode = "15";
+      return "15";
     }
+    else{
+      return selectedStateCode;
+    }
+    
   }
   
-  //this line calls the previous method to ensure the correct state code is applied
-  //before the FOTG endpoint is called
-  calculateAdjustedStateCode();
+  const fotgInfo = {
+    practiceCode: data?.practiceCode,
+    stateCode: calculateAdjustedStateCode(),
+    fotgLink: fotgWebServiceLink,
+  };
 
   const fotgFolderLink = useGetFotgFolderUrlQuery(
     fotgLink.isSuccess ? fotgInfo : skipToken
