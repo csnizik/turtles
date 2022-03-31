@@ -81,7 +81,7 @@ const SpecificationsAndTools = ({
     }
     
   }
-  
+
   const fotgInfo = {
     practiceCode: data?.practiceCode,
     stateCode: calculateAdjustedStateCode(),
@@ -141,8 +141,7 @@ const SpecificationsAndTools = ({
         <p className='state-prompt-text'>{statePromptText}</p>
         <div className='link'>
           <a
-            href={ fotgFolderLink.isSuccess && fotgFolderURL !=null ? fotgFolderURL: practiceStandardGuideLink.viewStateConservationPracticeLink +
-                selectedStateAbbr}
+            href={ fotgFolderLink.isSuccess && fotgFolderURL !== null ? fotgFolderURL: `${practiceStandardGuideLink.viewStateConservationPracticeLink}${selectedStateAbbr}`}
             target='_blank'
             rel='noopener noreferrer'
             aria-label={`${
