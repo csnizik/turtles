@@ -39,9 +39,9 @@ const LocationSearch = () => {
     }
   };
 
-  const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag ||"" }; 
+  const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag || '' };
   TagManager.initialize(GTMArg);
-  
+
   useEffect(() => {
     dispatch(currentState(initialState));
   }, []);
@@ -65,13 +65,13 @@ const LocationSearch = () => {
     });
 
     //Google Analytics code for LocationSearch (selectedStateCode)
-    window.dataLayer.push ( { 'js': new Date()});
-    window.dataLayer.push ( { event:'LocationSearch',
-    EventProps:{
-    SearchState: selectedStateCode
-  }
+    window.dataLayer.push({ js: new Date() });
+    window.dataLayer.push({
+      event: 'LocationSearch',
+      EventProps: {
+        SearchState: selectedStateCode,
+      },
     });
-
   };
 
   return (
