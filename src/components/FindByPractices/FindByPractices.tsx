@@ -42,16 +42,17 @@ const FindByPractices = () => {
       history.push('00/ConservationPractices');
     }
     //Google Analytics code for PracticeSearch(hiddenSelectedPractice, selectedSubPractice)
-    window.dataLayer.push ( { 'js': new Date()});
-    window.dataLayer.push ( { event:'PracticeSearch',
-    EventProps:{
-    SearchPractice: hiddenSelectedPractice, 
-    SearchState: selectedSubPractice
-  }
+    window.dataLayer.push({ js: new Date() });
+    window.dataLayer.push({
+      event: 'PracticeSearch',
+      EventProps: {
+        SearchPractice: hiddenSelectedPractice,
+        SearchState: selectedSubPractice,
+      },
     });
   };
 
-  const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag ||"" }; 
+  const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag || '' };
   TagManager.initialize(GTMArg);
 
   const practiceCategory = useGetPracticeCategoryQuery();

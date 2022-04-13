@@ -22,7 +22,7 @@ const tabStyleOptions: any = {
   fpacStyle: 1,
 };
 
-const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag ||"" }; 
+const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag || '' };
 TagManager.initialize(GTMArg);
 
 const LocationContainer = () => {
@@ -67,15 +67,16 @@ const LocationContainer = () => {
   }, [selectedPracticeCategory, selectedPractice, option]);
 
   useEffect(() => {
-    //Google Analytics code for LocationContainerTab (stateCode and name) 
-    window.dataLayer.push ( { 'js': new Date()});
-    window.dataLayer.push ( { event:'LocationContainerTab',
-        EventProps:{
+    //Google Analytics code for LocationContainerTab (stateCode and name)
+    window.dataLayer.push({ js: new Date() });
+    window.dataLayer.push({
+      event: 'LocationContainerTab',
+      EventProps: {
         SearchState: stateCode,
-        SearchName : name
-      }
-        });
-      }, [  name ]);
+        SearchName: name,
+      },
+    });
+  }, [name]);
 
   const renderTabContent = () => (
     <TabContent activeTab={currentTabOption}>

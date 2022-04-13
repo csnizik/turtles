@@ -12,7 +12,7 @@ const QuickSearchBar = () => {
     history.push('search');
   };
 
-  const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag ||"" }; 
+  const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag || '' };
   TagManager.initialize(GTMArg);
 
   return (
