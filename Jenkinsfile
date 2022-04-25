@@ -45,7 +45,7 @@ pipeline {
       stage("Build Docker Deploy Image") {
         when {
             anyOf {
-                branch 'devRedo';
+                branch 'develop';
                 branch 'release'
             }
         }
@@ -59,7 +59,7 @@ pipeline {
       stage("Push Docker Image to AWS ECR") {
           when {
             anyOf {
-                branch 'devRedo';
+                branch 'develop';
                 branch 'release'
             }
         }
@@ -72,7 +72,7 @@ pipeline {
       stage("Rebuild Docker Container on Server") {
           when {
             anyOf {
-                branch 'devRedo';
+                branch 'develop';
                 branch 'release'
             }
         }
