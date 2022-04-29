@@ -28,7 +28,6 @@ const OverviewContainer = () => {
 
   // eslint-disable-next-line consistent-return
   const EQUIPRender = () => {
-    // if (title === 'Conservation Practices') {
     if (isTpEquipTableauEmpty) return null;
     return (
       <>
@@ -39,7 +38,6 @@ const OverviewContainer = () => {
         </div>
       </>
     );
-    //  }
   };
 
   return (
