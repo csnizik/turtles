@@ -61,7 +61,7 @@ const LocationSearch = () => {
     history.push({
       pathname: `${
         selectedStateCode?.stateCode || DEFAULT_NATIONAL_LOCATION
-      }/ConservationPractices`,
+      }/Overview`,
     });
 
     //Google Analytics code for LocationSearch (selectedStateCode)
