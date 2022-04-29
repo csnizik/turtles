@@ -58,7 +58,7 @@ const OverviewContainer = () => {
       />
       <div className='top-five-container'>
         <h2>U.S. Top 5 Conservation Practices</h2>
-        <p className='lead margin-top-3 margin-bottom-3'>description</p>
+        <p className='lead margin-top-3 margin-bottom-3'>These are the top practices by dollars.</p>
         <div className='top-five-box margin-bottom-7'> {EQUIPRender()} </div>
       </div>
     </>
