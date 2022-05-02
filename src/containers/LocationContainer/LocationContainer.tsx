@@ -36,12 +36,15 @@ const LocationContainer = () => {
     stateStatus.data.find((stateInfo: any) => {
       return stateInfo.stateCode === stateCode;
     });
+
   if (selectedState) {
     dispatch(currentState(selectedState));
   } else {
     dispatch(currentState(initialState));
   }
+
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
+  console.log('StateInfo: ', stateInfo);
   const selectedPracticeCategory: number = useAppSelector(
     (state) => state.practiceSlice.selectedPracticeCategory
   );
@@ -49,6 +52,7 @@ const LocationContainer = () => {
     (state) => state.practiceSlice.selectedSpecficPractice
   );
   const option = searchOptionMap[name];
+
   const [currentTabOption, setTabOption] = useState(option?.id);
   useEffect(() => {
     setTabOption(option?.id);
@@ -82,7 +86,7 @@ const LocationContainer = () => {
     <TabContent activeTab={currentTabOption}>
       {currentTabOption === 0 && (
         <TabPane tabId={0}>
-          <OverviewContainer />
+          <OverviewContainer stateAbbreviation={stateInfo.stateAbbreviation} />
         </TabPane>
       )}
       {currentTabOption === 1 && (

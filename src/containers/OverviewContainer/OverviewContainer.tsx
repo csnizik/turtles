@@ -4,19 +4,23 @@ import TopFiveContainer from './TopFiveContainer';
 import TopPracticesEQUIPOpenData from '../../components/TableauReport/TopPracticesEQUIPOpenData';
 import './overview-container.scss';
 
-const OverviewContainer = () => {
+interface IOverviewContainerProps {
+  stateAbbreviation: string;
+}
+
+const OverviewContainer = ({ stateAbbreviation }: IOverviewContainerProps) => {
   const { t } = useTranslation();
   const [isTpEquipTableauEmpty, setIsTpEquipTableauEmpty] = useState(false);
 
   const overviewBoxes: any = [
     {
       id: 0,
-      title: 'U.S. Top 5 Resource Concerns',
+      title: `${stateAbbreviation} Top 5 Resource Concerns`,
       description: t('overview.description'),
     },
     {
       id: 1,
-      title: 'U.S. Top 5 Conservation Practices',
+      title: `${stateAbbreviation} Top 5 Conservation Practice`,
       description: t('overview.description'),
     },
     {
@@ -51,12 +55,14 @@ const OverviewContainer = () => {
       </section>
       <TopFiveContainer
         id={0}
-        title='U.S. Top 5 Resource Concerns'
+        title={`${stateAbbreviation} Top 5 Resource Concerns`}
         description='Description of this section...'
       />
       <div className='top-five-container'>
-        <h2>U.S. Top 5 Conservation Practices</h2>
-        <p className='lead margin-top-3 margin-bottom-3'>These are the top practices by dollars.</p>
+        <h2>{`${stateAbbreviation} Top 5 Conservation Practices`}</h2>
+        <p className='lead margin-top-3 margin-bottom-3'>
+          These are the top practices by dollars.
+        </p>
         <div className='top-five-box margin-bottom-7'> {EQUIPRender()} </div>
       </div>
     </>
