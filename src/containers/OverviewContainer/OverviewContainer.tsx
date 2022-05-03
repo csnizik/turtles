@@ -39,14 +39,14 @@ const OverviewContainer = ({ stateNameDisplay }: IOverviewContainerProps) => {
         id={0}
         title={`${stateNameDisplay} Top 5 Resource Concerns`}
         description='Description of this section...'
+        content={null}
       />
-      <div className='top-five-container'>
-        <h2>{`${stateNameDisplay} Top 5 Conservation Practices`}</h2>
-        <p className='lead margin-top-3 margin-bottom-3'>
-          These are the top practices by dollars.
-        </p>
-        <div className='top-five-box margin-bottom-7'> {EQUIPRender()} </div>
-      </div>
+      <TopFiveContainer
+        id={1}
+        title={`${stateNameDisplay} Top 5 Conservation Practices`}
+        description='These are the top practices by dollars.'
+        content={EQUIPRender()}
+      />
     </>
   );
 };
