@@ -86,7 +86,7 @@ const LocationContainer = () => {
     <TabContent activeTab={currentTabOption}>
       {currentTabOption === 0 && (
         <TabPane tabId={0}>
-          <OverviewContainer stateAbbreviation={stateInfo.stateAbbreviation} />
+          <OverviewContainer stateNameDisplay={stateInfo.stateNameDisplay} />
         </TabPane>
       )}
       {currentTabOption === 1 && (

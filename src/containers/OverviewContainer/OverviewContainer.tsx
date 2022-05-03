@@ -5,30 +5,12 @@ import TopPracticesEQUIPOpenData from '../../components/TableauReport/TopPractic
 import './overview-container.scss';
 
 interface IOverviewContainerProps {
-  stateAbbreviation: string;
+  stateNameDisplay: string;
 }
 
-const OverviewContainer = ({ stateAbbreviation }: IOverviewContainerProps) => {
+const OverviewContainer = ({ stateNameDisplay }: IOverviewContainerProps) => {
   const { t } = useTranslation();
   const [isTpEquipTableauEmpty, setIsTpEquipTableauEmpty] = useState(false);
-
-  const overviewBoxes: any = [
-    {
-      id: 0,
-      title: `${stateAbbreviation} Top 5 Resource Concerns`,
-      description: t('overview.description'),
-    },
-    {
-      id: 1,
-      title: `${stateAbbreviation} Top 5 Conservation Practice`,
-      description: t('overview.description'),
-    },
-    {
-      id: 2,
-      title: 'Outcomes of NRCS Applied Practices',
-      description: t('overview.outcomes'),
-    },
-  ];
 
   // eslint-disable-next-line consistent-return
   const EQUIPRender = () => {
@@ -55,11 +37,11 @@ const OverviewContainer = ({ stateAbbreviation }: IOverviewContainerProps) => {
       </section>
       <TopFiveContainer
         id={0}
-        title={`${stateAbbreviation} Top 5 Resource Concerns`}
+        title={`${stateNameDisplay} Top 5 Resource Concerns`}
         description='Description of this section...'
       />
       <div className='top-five-container'>
-        <h2>{`${stateAbbreviation} Top 5 Conservation Practices`}</h2>
+        <h2>{`${stateNameDisplay} Top 5 Conservation Practices`}</h2>
         <p className='lead margin-top-3 margin-bottom-3'>
           These are the top practices by dollars.
         </p>
