@@ -44,7 +44,6 @@ const LocationContainer = () => {
   }
 
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
-  console.log('StateInfo: ', stateInfo);
   const selectedPracticeCategory: number = useAppSelector(
     (state) => state.practiceSlice.selectedPracticeCategory
   );
