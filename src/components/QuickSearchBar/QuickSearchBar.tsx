@@ -12,7 +12,7 @@ const QuickSearchBar = () => {
     history.push('search');
   };
 
-  const GTMArg = { gtmId: 'G-JXBFW848RQ' };
+  const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag || '' };
   TagManager.initialize(GTMArg);
 
   return (
@@ -28,13 +28,6 @@ const QuickSearchBar = () => {
           {t('search-page.quick-search')}
         </CustomButton>
       </div>
-      <noscript>
-        <iframe
-          title='ga4'
-          src='https://www.googletagmanager.com/ns.html?id=G-JXBFW848RQ'
-          className='hidden-content'
-        />
-      </noscript>
     </div>
   );
 };

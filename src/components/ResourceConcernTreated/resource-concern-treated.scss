@@ -87,12 +87,12 @@
     }
 
     .content-description {
-      width: 54%;
+      width: 40%;
       border-bottom: 1px solid $philippine-silver;
     }
 
     .content-tag {
-      width: 46%;
+      width: 100%;
       border-bottom: 1px solid $philippine-silver;
       display: flex;
       flex-direction: row;
@@ -109,8 +109,9 @@
       }
 
       .displaying-image {
-        width: 80px;
+        width: 120px;
         padding-left: 20px;
+        padding-bottom: 1rem;
         float: right;
       }
 

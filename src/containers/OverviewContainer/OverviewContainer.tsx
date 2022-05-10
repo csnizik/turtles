@@ -1,27 +1,30 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import TopFiveContainer from './TopFiveContainer';
+import TopPracticesEQUIPOpenData from '../../components/TableauReport/TopPracticesEQUIPOpenData';
 import './overview-container.scss';
 
-const OverviewContainer = () => {
-  const { t } = useTranslation();
+interface IOverviewContainerProps {
+  stateNameDisplay: string;
+}
 
-  const overviewBoxes: any = [
-    {
-      id: 0,
-      title: 'U.S. Top 5 Resource Concerns',
-      description: t('overview.description'),
-    },
-    {
-      id: 1,
-      title: 'U.S. Top 5 Conservation Practices',
-      description: t('overview.description'),
-    },
-    {
-      id: 2,
-      title: 'Outcomes of NRCS Applied Practices',
-      description: t('overview.outcomes'),
-    },
-  ];
+const OverviewContainer = ({ stateNameDisplay }: IOverviewContainerProps) => {
+  const { t } = useTranslation();
+  const [isTpEquipTableauEmpty, setIsTpEquipTableauEmpty] = useState(false);
+
+  // eslint-disable-next-line consistent-return
+  const EQUIPRender = () => {
+    if (isTpEquipTableauEmpty) return null;
+    return (
+      <>
+        <div className='internal-box-two'>
+          <TopPracticesEQUIPOpenData
+            setIsTableauEmpty={setIsTpEquipTableauEmpty}
+          />
+        </div>
+      </>
+    );
+  };
 
   return (
     <>
@@ -32,16 +35,18 @@ const OverviewContainer = () => {
           {t('overview.introductory-paragraph')}
         </p>
       </section>
-      {overviewBoxes.map((box: any) => {
-        return (
-          <TopFiveContainer
-            key={box.id}
-            id={box.id}
-            title={box.title}
-            description={box.description}
-          />
-        );
-      })}
+      <TopFiveContainer
+        id={0}
+        title={`${stateNameDisplay} Top 5 Resource Concerns`}
+        description='Description of this section...'
+        content={null}
+      />
+      <TopFiveContainer
+        id={1}
+        title={`${stateNameDisplay} Top 5 Conservation Practices`}
+        description='These are the top practices by dollars.'
+        content={EQUIPRender()}
+      />
     </>
   );
 };

@@ -15,6 +15,17 @@ import {
   IAssociatedPracticeList,
 } from '../../common/types';
 
+export const fotgApi = createApi({
+  reducerPath: 'fotgApi',
+  baseQuery: fetchBaseQuery({ baseUrl: '' }),
+  endpoints: (builder) => ({
+    //Get the specific FOTG State and Practice Folder Link given a state code practice code and URL
+    getFotgFolderUrl: builder.query<any, any>({
+      query: (fotgInfo) =>
+        `${fotgInfo.fotgLink}?stateCode=${fotgInfo.stateCode}&practiceCode=${fotgInfo.practiceCode}`,
+    }),
+  }),
+});
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
@@ -29,7 +40,6 @@ export const api = createApi({
           `/nationalPracticeOverview/${practiceId}`,
       }
     ),
-
     getStateList: builder.query<IStateDropdownOption[], void>({
       query: () => `/states`,
     }),
@@ -108,6 +118,9 @@ export const api = createApi({
           return acc;
         }, {}),
     }),
+    getConfigurationSettings: builder.query<any, any>({
+      query: (fotgId) => `/parameter?key=${fotgId}`,
+    }),
   }),
 });
 export const {
@@ -127,4 +140,6 @@ export const {
   useGetPaymentScheduleLinksQuery,
   usePostLandscapeInitiativesQuery,
   useGetConfigurationSettingsPocQuery,
+  useGetConfigurationSettingsQuery,
 } = api;
+export const { useGetFotgFolderUrlQuery } = fotgApi;

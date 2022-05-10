@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import TagManager from 'react-gtm-module';
 import { useHistory, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -51,11 +52,24 @@ const ProjectsContainer = () => {
     };
   }
 
+  const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag || '' };
+  TagManager.initialize(GTMArg);
+
   const landscapeInitiativesData = usePostLandscapeInitiativesQuery(
     searchLandscapeInitiatives
   );
 
   useEffect(() => {
+    //Google Analytics code for ProjectContainer ( stateCode, category (category), and individual (sub-initive)
+    window.dataLayer.push({ js: new Date() });
+    window.dataLayer.push({
+      event: 'ProjectContainer',
+      EventProps: {
+        SearchSubinitive: individual,
+        SearchCategory: category,
+        SearchState: stateCode,
+      },
+    });
     setSelectedLocation(stateC);
     setSelectedProjectCard(Number(category));
     if (individual) {
@@ -213,13 +227,13 @@ const ProjectsContainer = () => {
       <ul className='usa-card-group'>
         {projectCards.map((project: IProjectTypeCard) => {
           return (
-            <li
+            <li // eslint-disable-line
               onClick={() => handleSelectProjectCard(project.id)}
               onKeyPress={() => handleSelectProjectCard(project.id)}
               className='tablet:grid-col-4 usa-card usa-card--header-first'
               key={project.id}
             >
-              <button className='card-button'>
+              <button type='button' className='card-button'>
                 <div className='usa-card__container'>
                   <header className='usa-card__header'>
                     <h2 className='usa-card__heading'>{project.title}</h2>

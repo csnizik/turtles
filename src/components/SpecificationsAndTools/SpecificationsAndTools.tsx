@@ -1,6 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router-dom';
-import { useGetAssociatedPracticeQuery } from '../../Redux/services/api';
+import { skipToken } from '@reduxjs/toolkit/query/react';
+import {
+  useGetAssociatedPracticeQuery,
+  useGetConfigurationSettingsQuery,
+  useGetFotgFolderUrlQuery,
+} from '../../Redux/services/api';
 import './specs.scss';
 import { IAssociatedPracticeList } from '../../common/types';
 import { useAppSelector } from '../../Redux/hooks/hooks';
@@ -44,6 +49,50 @@ const SpecificationsAndTools = ({
   const fromPdfReport = useAppSelector(
     (state) => state?.pdfGenSlice?.enablePdfGen
   );
+
+  const fotgLink = useGetConfigurationSettingsQuery(
+    'fotg_practice_deeplink_webservice'
+  );
+  const fotgLinkData = fotgLink.data || [];
+  const fotgWebServiceLink: any = fotgLinkData[0]?.configurationValue || '';
+
+  //this method adjusts the state code to be what the FOTG endpoint expects to see for the
+  //listed territories. Currently it is hardcoded not best practice.
+  const calculateAdjustedStateCode = () => {
+    //Maryland, and DC
+    if (selectedStateCode === '11' || selectedStateCode === '24') {
+      return 'MW';
+    }
+    //Carribean Region Territories
+    // eslint-disable-next-line
+    else if (selectedStateCode === '72' || selectedStateCode === '78') {
+      return 'CR';
+    }
+    //Pacific Basin territories: HI, AS, FM, GU, MH, MP, PW
+    else if (
+      selectedStateCode === '60' ||
+      selectedStateCode === '64' ||
+      selectedStateCode === '66' ||
+      selectedStateCode === '68' ||
+      selectedStateCode === '69' ||
+      selectedStateCode === '70' ||
+      selectedStateCode === '74'
+    ) {
+      return '15';
+    }
+    return selectedStateCode;
+  };
+
+  const fotgInfo = {
+    practiceCode: data?.practiceCode,
+    stateCode: calculateAdjustedStateCode(),
+    fotgLink: fotgWebServiceLink,
+  };
+
+  const fotgFolderLink = useGetFotgFolderUrlQuery(
+    fotgLink.isSuccess ? fotgInfo : skipToken
+  );
+  const fotgFolderURL = fotgFolderLink?.data?.folder_url;
 
   const content = useGetAssociatedPracticeQuery(userSelectedFilter);
 
@@ -92,8 +141,9 @@ const SpecificationsAndTools = ({
         <div className='link'>
           <a
             href={
-              practiceStandardGuideLink.viewStateConservationPracticeLink +
-              selectedStateAbbr
+              fotgFolderLink.isSuccess && fotgFolderURL !== null
+                ? fotgFolderURL
+                : `${practiceStandardGuideLink.viewStateConservationPracticeLink}${selectedStateAbbr}`
             }
             target='_blank'
             rel='noopener noreferrer'

@@ -6,8 +6,9 @@ afterEach(() => {
 });
 
 describe('Overview container is rendered correctly', () => {
+  const stateNameDisplay = 'U.S.';
   beforeEach(() => {
-    render(<OverviewContainer />);
+    render(<OverviewContainer stateNameDisplay={stateNameDisplay} />);
   });
 
   test('Should display the contents of the overview container', () => {
@@ -16,13 +17,13 @@ describe('Overview container is rendered correctly', () => {
 
   test('Should display a section for the top five conservation practices', () => {
     expect(
-      screen.getByText(/U.S. Top 5 Conservation Practices/)
+      screen.getByText(`${stateNameDisplay} Top 5 Conservation Practices`)
     ).toBeInTheDocument();
   });
 
   test('Should display a section for the top five resource concerns', () => {
     expect(
-      screen.getByText(/U.S. Top 5 Resource Concerns/)
+      screen.getByText(`${stateNameDisplay} Top 5 Resource Concerns`)
     ).toBeInTheDocument();
   });
 });

@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import TagManager from 'react-gtm-module';
 import { useHistory, useParams } from 'react-router-dom';
 import { NavItem, NavLink } from 'reactstrap';
 import './tab.scss';
@@ -10,6 +11,9 @@ interface ISearchOption {
   currentSearchOption: number;
   handleSearchChange: Function;
 }
+
+const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag || '' };
+TagManager.initialize(GTMArg);
 
 const SearchOption = ({
   displayName,
@@ -29,6 +33,14 @@ const SearchOption = ({
   );
   const toggleTabs = (tab: number) => {
     handleSearchChange(tab);
+    //Google Analytics code for TabClick (tab)
+    window.dataLayer.push({ js: new Date() });
+    window.dataLayer.push({
+      event: 'TabClick',
+      EventProps: {
+        SearchParameter: tab,
+      },
+    });
     history.push(`/${stateCode}/${displayName.split(' ').join('')}`);
   };
   const getTabTitle = () => {

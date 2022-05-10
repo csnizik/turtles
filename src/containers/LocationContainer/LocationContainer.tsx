@@ -1,4 +1,5 @@
 import { TabContent, TabPane } from 'reactstrap';
+import TagManager from 'react-gtm-module';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CustomTabs from '../../components/CustomTabs';
@@ -21,6 +22,9 @@ const tabStyleOptions: any = {
   fpacStyle: 1,
 };
 
+const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag || '' };
+TagManager.initialize(GTMArg);
+
 const LocationContainer = () => {
   const dispatch = useAppDispatch();
   const { stateCode, name }: any = useParams();
@@ -32,11 +36,13 @@ const LocationContainer = () => {
     stateStatus.data.find((stateInfo: any) => {
       return stateInfo.stateCode === stateCode;
     });
+
   if (selectedState) {
     dispatch(currentState(selectedState));
   } else {
     dispatch(currentState(initialState));
   }
+
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
   const selectedPracticeCategory: number = useAppSelector(
     (state) => state.practiceSlice.selectedPracticeCategory
@@ -45,6 +51,7 @@ const LocationContainer = () => {
     (state) => state.practiceSlice.selectedSpecficPractice
   );
   const option = searchOptionMap[name];
+
   const [currentTabOption, setTabOption] = useState(option?.id);
   useEffect(() => {
     setTabOption(option?.id);
@@ -62,11 +69,23 @@ const LocationContainer = () => {
     window.scroll(0, 0);
   }, [selectedPracticeCategory, selectedPractice, option]);
 
+  useEffect(() => {
+    //Google Analytics code for LocationContainerTab (stateCode and name)
+    window.dataLayer.push({ js: new Date() });
+    window.dataLayer.push({
+      event: 'LocationContainerTab',
+      EventProps: {
+        SearchState: stateCode,
+        SearchName: name,
+      },
+    });
+  }, [name]);
+
   const renderTabContent = () => (
     <TabContent activeTab={currentTabOption}>
       {currentTabOption === 0 && (
         <TabPane tabId={0}>
-          <OverviewContainer />
+          <OverviewContainer stateNameDisplay={stateInfo.stateNameDisplay} />
         </TabPane>
       )}
       {currentTabOption === 1 && (
