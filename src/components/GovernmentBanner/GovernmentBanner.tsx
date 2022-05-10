@@ -47,10 +47,7 @@ const GovernmentBanner = () => {
     window.localStorage.clear();
   };
   const renderNRCSHeaderSection: Function = () => (
-    <div
-      data-testid='gov-banner-header'
-      className='usa-banner-header'
-    >
+    <div data-testid='gov-banner-header' className='usa-banner-header'>
       <div className='usa-accordion'>
         <div className='usa-banner__header'>
           <div className='usa-banner__inner '>

@@ -55,7 +55,7 @@ const ConservationPracticeVideo = ({ selectedPracticeId }: any) => {
                 >
                   All Conservation at Work videos{' '}
                   <img
-                    alt='All Conservation at Work videos'
+                    alt='All Conservation at Work videos open in a new tab'
                     // eslint-disable-next-line global-require
                     src={require('./image/newLinkIcon.svg').default}
                   />
