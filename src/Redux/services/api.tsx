@@ -115,6 +115,7 @@ export const api = createApi({
       transformResponse: (response: any) =>
         response.reduce((acc, curr) => {
           acc[curr.configurationSettingName] = curr;
+          // console.log('acc: ', acc);
           return acc;
         }, {}),
     }),

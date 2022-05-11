@@ -19,7 +19,7 @@ const ConservationPracticeLandingScreen = ({
   const mountedRef = useRef(true);
   const { t } = useTranslation();
   const uiText = useAppSelector(
-    (app: any) => app.api.queries['getConfigurationSettingsPoc(undefined)'].data
+    (app: any) => app.api.queries['getConfigurationSettingsPoc(null)'].data
   );
   const dispatch = useAppDispatch();
 
