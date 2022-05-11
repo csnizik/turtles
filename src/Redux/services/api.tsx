@@ -110,8 +110,8 @@ export const api = createApi({
       query: (stateCode) => `/payment/link?stateCode=${stateCode}`,
     }),
     // configuration settings
-    getConfigurationSettingsPoc: builder.query<any, any>({
-      query: () => `/ui/parameters`,
+    getConfigurationSettingsStaticText: builder.query<any, any>({
+      query: () => `/parameters`,
       transformResponse: (response: any) =>
         response.reduce((acc, curr) => {
           acc[curr.configurationSettingName] = curr;
@@ -139,7 +139,7 @@ export const {
   useGetAssociatedPracticeQuery,
   useGetPaymentScheduleLinksQuery,
   usePostLandscapeInitiativesQuery,
-  useGetConfigurationSettingsPocQuery,
+  useGetConfigurationSettingsStaticTextQuery,
   useGetConfigurationSettingsQuery,
 } = api;
 export const { useGetFotgFolderUrlQuery } = fotgApi;

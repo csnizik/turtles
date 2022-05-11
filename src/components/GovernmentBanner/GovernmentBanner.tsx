@@ -17,7 +17,7 @@ import {
   enableResourceDropdown,
 } from '../../Redux/Slice/disableSlice';
 
-import { useGetConfigurationSettingsPocQuery } from '../../Redux/services/api';
+import { useGetConfigurationSettingsStaticTextQuery } from '../../Redux/services/api';
 
 const initialState = {
   stateNameDisplay: 'U.S.',
@@ -37,8 +37,8 @@ const GovernmentBanner = () => {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
 
-  useGetConfigurationSettingsPocQuery(null, {
-    pollingInterval: 5000,
+  useGetConfigurationSettingsStaticTextQuery(null, {
+    pollingInterval: 60000,
   });
 
   const handleNavigateHome = () => {
