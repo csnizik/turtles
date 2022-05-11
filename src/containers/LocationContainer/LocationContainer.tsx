@@ -104,7 +104,7 @@ const LocationContainer = () => {
     </TabContent>
   );
   return (
-    <>
+    <main>
       <TabTitle
         stateName={stateInfo?.stateNameDisplay}
         currentTab={option?.displayName}
@@ -116,7 +116,7 @@ const LocationContainer = () => {
         handleChangeSearchOption={setTabOption}
       />
       {renderTabContent()}
-    </>
+    </main>
   );
 };
 

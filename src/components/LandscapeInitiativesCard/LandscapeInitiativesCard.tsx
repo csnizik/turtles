@@ -34,7 +34,7 @@ const LandscapeInitiativesCard = ({
       </div>
       <p className='link-text'>
         <a
-          aria-label='Link to NRCS website for landscape sub-initiatives'
+          aria-label={`Link to NRCS website for ${title}`}
           href={link}
           target='_blank'
           rel='noreferrer'

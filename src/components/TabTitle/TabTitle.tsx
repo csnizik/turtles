@@ -24,13 +24,13 @@ const TabTitle = ({ stateName, currentTab }: any) => {
     return `${first} ${second}`;
   };
   return (
-    <header data-testid='tab-title'>
+    <div data-testid='tab-title'>
       <div className='tab-title-container'>
         <h1 className='tab-title-name' aria-label={ariaTitleParse()}>
           {stateName || 'U.S.'} {currentTab}
         </h1>
       </div>
-    </header>
+    </div>
   );
 };
 
