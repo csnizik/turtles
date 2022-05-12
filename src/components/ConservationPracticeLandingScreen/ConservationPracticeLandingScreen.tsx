@@ -20,7 +20,7 @@ const ConservationPracticeLandingScreen = ({
   const { t } = useTranslation();
   const uiText = useAppSelector(
     (app: any) =>
-      app.api.queries['getConfigurationSettingsStaticText(null)'].data
+      app?.api?.queries['getConfigurationSettingsStaticText(null)']?.data
   );
   const dispatch = useAppDispatch();
 

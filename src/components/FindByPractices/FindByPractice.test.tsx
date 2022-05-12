@@ -24,8 +24,6 @@ describe('Find by Practice Search component is rendered correctly', () => {
       </Provider>
     );
 
-    expect(screen.getByText('find-by-practice.heading')).toBeInTheDocument();
-    expect(screen.getByText('find-by-practice.intro')).toBeInTheDocument();
     expect(
       screen.getByText('search-by-conservation-practice.first-label-name')
     ).toBeInTheDocument();

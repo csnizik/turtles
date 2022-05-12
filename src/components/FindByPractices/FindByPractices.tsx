@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import CustomButton from '../CustomButton';
-import { useAppDispatch } from '../../Redux/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
 import { IPractice, IPracticeCategory } from '../../common/types';
 import './find-by-practice.scss';
 import {
@@ -58,6 +58,11 @@ const FindByPractices = () => {
   const practiceCategory = useGetPracticeCategoryQuery();
   const subPractice = useGetPracticeQuery(selectedPractice);
 
+  const uiText = useAppSelector(
+    (app: any) =>
+    app?.api?.queries['getConfigurationSettingsStaticText(null)']?.data
+    );
+
   const handleCategoryChange = (e) => {
     const practiceVal = e.target.value;
     if (practiceVal !== '') {
@@ -95,8 +100,8 @@ const FindByPractices = () => {
   return (
     <section className='grid-row find-practice-container'>
       <div className='tablet:grid-col-7 content-row'>
-        <h2 className='h2-style'>{t('find-by-practice.heading')}</h2>
-        <p className='p-style'>{t('find-by-practice.intro')}</p>
+        <h2 className='h2-style'>{uiText?.homePracticeTitle?.configurationValue}</h2>
+        <p className='p-style'>{uiText?.homePracticeDescription?.configurationValue}</p>
         <div className='practice-label-grid'>
           <label className='usa-label' htmlFor='categoryOptions'>
             {t('search-by-conservation-practice.first-label-name')}
