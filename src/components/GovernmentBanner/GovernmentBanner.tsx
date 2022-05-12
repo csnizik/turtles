@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -38,7 +37,7 @@ const GovernmentBanner = () => {
   const dispatch = useAppDispatch();
 
   useGetConfigurationSettingsStaticTextQuery(null, {
-    pollingInterval: 60000,
+    pollingInterval: 900000,
   });
 
   const handleNavigateHome = () => {
