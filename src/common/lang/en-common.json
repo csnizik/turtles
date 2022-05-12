@@ -16,15 +16,9 @@
     "SecureHeader": "The site is secure.",
     "Secure": "The https:// ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely."
   },
-  "home-page": {
-    "intro": "Know what you're looking for?  Do a quick search and find information fast.",
-    "title": "Conservation Practice Data and Innovations"
-  },
   "find-by-practice": {
-    "find-practices": "Search by practice",
-    "heading": "Find NRCS Conservation Practices by Practice Category",
-    "intro": "A conservation practice is a specific treatment, such as a structural or vegetative measure, or management technique, commonly used to meet specific needs in planning and implementing conservation, for which standards and specifications have been developed."
-  },
+    "find-practices": "Search by practice"
+ },
   "search-page": {
     "intro": "Search for information on practice applications, practice support, and impacts of practice implementation.",
     "quick-search": "Quick Search",
@@ -37,10 +31,8 @@
     "no-practices-found": "No Conservation Practices Found"
   },
   "location-search": {
-    "explore-by-location": "Find NRCS Conservation Practices and Activities by Location",
     "explore-location": "Search by location",
     "national": "National (default)",
-    "introductory-paragraph": "Find conservation practices and NRCS sponsored projects & initiatives in your location.",
     "labels": {
       "select-state": "Select a state",
       "select-county": "Select a county (optional)"

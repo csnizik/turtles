@@ -21,7 +21,8 @@ export const fotgApi = createApi({
   endpoints: (builder) => ({
     //Get the specific FOTG State and Practice Folder Link given a state code practice code and URL
     getFotgFolderUrl: builder.query<any, any>({
-      query: (fotgInfo) => `${fotgInfo.fotgLink}?stateCode=${fotgInfo.stateCode}&practiceCode=${fotgInfo.practiceCode}`,
+      query: (fotgInfo) =>
+        `${fotgInfo.fotgLink}?stateCode=${fotgInfo.stateCode}&practiceCode=${fotgInfo.practiceCode}`,
     }),
   }),
 });
@@ -108,12 +109,19 @@ export const api = createApi({
     getPaymentScheduleLinks: builder.query<any, any>({
       query: (stateCode) => `/payment/link?stateCode=${stateCode}`,
     }),
+    // configuration settings
+    getConfigurationSettingsStaticText: builder.query<any, any>({
+      query: () => `/parameters`,
+      transformResponse: (response: any) =>
+        response.reduce((acc, curr) => {
+          acc[curr.configurationSettingName] = curr;
+          return acc;
+        }, {}),
+    }),
     getConfigurationSettings: builder.query<any, any>({
       query: (fotgId) => `/parameter?key=${fotgId}`,
     }),
-    
   }),
-  
 });
 export const {
   useGetResourcesQuery,
@@ -131,8 +139,7 @@ export const {
   useGetAssociatedPracticeQuery,
   useGetPaymentScheduleLinksQuery,
   usePostLandscapeInitiativesQuery,
+  useGetConfigurationSettingsStaticTextQuery,
   useGetConfigurationSettingsQuery,
 } = api;
-export const {
-  useGetFotgFolderUrlQuery
-} = fotgApi;
+export const { useGetFotgFolderUrlQuery } = fotgApi;

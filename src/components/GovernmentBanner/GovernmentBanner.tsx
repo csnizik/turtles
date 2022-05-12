@@ -16,6 +16,8 @@ import {
   enableResourceDropdown,
 } from '../../Redux/Slice/disableSlice';
 
+import { useGetConfigurationSettingsStaticTextQuery } from '../../Redux/services/api';
+
 const initialState = {
   stateNameDisplay: 'U.S.',
   stateCode: '00',
@@ -33,6 +35,10 @@ const GovernmentBanner = () => {
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
+
+  useGetConfigurationSettingsStaticTextQuery(null, {
+    pollingInterval: 900000,
+  });
 
   const handleNavigateHome = () => {
     window.dispatchEvent(new Event('navigateHome'));
