@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { getRequest } from '../../common/util/AxiosUtil';
 import { setPracticeCategory } from '../../Redux/Slice/practiceSlice';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks/hooks';
@@ -13,7 +12,6 @@ const ConservationPracticeLandingScreen = ({
 }: any) => {
   const [categories, setCategories] = useState([]);
   const mountedRef = useRef(true);
-  const { t } = useTranslation();
   const uiText = useAppSelector(
     (app: any) =>
       app?.api?.queries['getConfigurationSettingsStaticText(null)']?.data
