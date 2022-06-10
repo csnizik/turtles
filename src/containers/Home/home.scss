@@ -8,10 +8,6 @@
     font-weight: $medium-weight;
   }
 
-  .jumbotron {
-    border-radius: 0.3rem;
-  }
-
   .landing-page-image-wrapper {
     position: relative;
 
@@ -20,6 +16,8 @@
       background-color: $white;
       min-height: 360px;
       height: auto;
+      border-radius: 0.3rem;
+      margin-bottom: 0rem;
     }
 
     h1 {

@@ -22,7 +22,7 @@ const Header = ({
         alt='Conservation Practice Data and Innovations Background'
       />
       <DynmaicHeader className={headerClassNames}>{headerText}</DynmaicHeader>
-      <p>{paragraphText}</p>
+      {paragraphText ? <p>{paragraphText}</p> : null}
     </div>
   );
 };
