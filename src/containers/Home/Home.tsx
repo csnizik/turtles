@@ -6,13 +6,11 @@ import QuickSearchBar from '../../components/QuickSearchBar';
 import './home.scss';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 
-
 const Home = () => {
-  
   const uiText = useAppSelector(
     (app: any) =>
-    app?.api?.queries['getConfigurationSettingsStaticText(null)']?.data
-    );
+      app?.api?.queries['getConfigurationSettingsStaticText(null)']?.data
+  );
 
   const renderMainContent = () => {
     return (
@@ -32,7 +30,7 @@ const Home = () => {
       <Header
         headerText={uiText?.homeTitle?.configurationValue}
         headerClassNames='display-4'
-        parentClassNames='jumbotron landing-page-image'
+        parentClassNames='landing-page-image-wrapper'
         priority='1'
       />
       {renderMainContent()}

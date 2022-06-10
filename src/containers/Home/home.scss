@@ -8,22 +8,20 @@
     font-weight: $medium-weight;
   }
 
-  .jumbotron {
-    padding: 2rem 2rem;
-    border-radius: 0.3rem;
-  }
-  .landing-page-image {
-    margin-bottom: 0rem;
+  .landing-page-image-wrapper {
     position: relative;
-    background-size: cover;
-    background-position: center 20px;
-    background-color: $white;
-    min-height: 350px;
-    height: auto;
-    background-repeat: no-repeat;
-    background-image: url('http://greyworm-epi-dev.spatialfrontlab.com/images/landing-page.png');
+
+    .landing-page-image {
+      padding-top: 1rem;
+      background-color: $white;
+      min-height: 360px;
+      height: auto;
+      border-radius: 0.3rem;
+      margin-bottom: 0rem;
+    }
 
     h1 {
+      padding: 0rem 2rem;
       position: absolute;
       top: 1rem;
       font-weight: 900;
