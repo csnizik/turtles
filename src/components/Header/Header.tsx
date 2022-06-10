@@ -16,6 +16,11 @@ const Header = ({
   const DynmaicHeader: any = `h${priority}`;
   return (
     <div className={parentClassNames}>
+      <img
+        className='landing-page-image'
+        src='../images/landing-page.png'
+        alt='Conservation Practice Data and Innovations Background'
+      />
       <DynmaicHeader className={headerClassNames}>{headerText}</DynmaicHeader>
       <p>{paragraphText}</p>
     </div>
