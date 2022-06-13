@@ -28,6 +28,7 @@ import {
 import SearchByResourceConcern from '../../components/SearchByResourceConcern/SearchByResourceConcern';
 import './custom-search.scss';
 import { currentState, initialState } from '../../Redux/Slice/stateSlice';
+import SearchBar from '../../components/SearchBar';
 
 const GTMArg = { gtmId: process.env.REACT_APP_Google_Tag || '' };
 TagManager.initialize(GTMArg);
@@ -162,7 +163,7 @@ const CustomSearch = () => {
           <h1>{t('search-page.quick-search')}</h1>
           <p>{t('search-page.intro')}</p>
         </div>
-
+        <SearchBar />
         <SearchByLocation
           setSearchInput={setSearchInput}
           setSearchInfo={setSearchedInfo}

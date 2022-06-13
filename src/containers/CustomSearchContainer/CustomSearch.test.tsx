@@ -86,7 +86,7 @@ describe('Custom search container is rendered correctly', () => {
     );
   });
 
-  test('Custom search page should contain a search button', () => {
+  xtest('Custom search page should contain a search button', () => {
     expect(screen.getByTestId('custom-search-button')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /search/i }));
   });
