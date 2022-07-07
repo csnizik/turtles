@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import TagManager from 'react-gtm-module';
 import { useParams } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import {
   useGetStateListQuery,
   usePostLandscapeInitiativesQuery,
@@ -40,7 +39,6 @@ const ConservationPracticeContainer = ({
   currentSpecificPractice,
   currentPracticeCategoryId,
 }: any) => {
-  const { t } = useTranslation();
   const stateInfo = useAppSelector((state: any) => state?.stateSlice);
   const [practiceViewType, setPracticeViewType] =
     useState(defaultPracticeViews);
@@ -54,6 +52,10 @@ const ConservationPracticeContainer = ({
   const dispatch = useAppDispatch();
   const { category, individual, stateCode, name }: any = useParams();
   const selectedStateCode = stateInfo?.stateCode;
+
+  const uiText: any = useAppSelector(
+    (state) => (state?.staticTextSlice?.staticData as any)?.data
+  ); 
 
   useEffect(() => {
     //GA code for  currentSpecificPractice & currentPracticeCategoryId ** might duplicate and code for stateC
@@ -103,8 +105,6 @@ const ConservationPracticeContainer = ({
         ...defaultPracticeViews,
         allPractices: true,
       });
-      dispatch(setPracticeCategory(-1));
-      dispatch(setSpecificPractice(-1));
     }
   }, [category, individual]);
 
@@ -219,13 +219,13 @@ const ConservationPracticeContainer = ({
                 {stateInfo?.stateNameDisplay === 'U.S.'
                   ? 'The U.S.'
                   : stateInfo?.stateNameDisplay}{' '}
-                {t('associated-projects-initiatives.title')}{' '}
+                {uiText?.cpDetailHeading5?.configurationValue}{' '}
                 {currentPractice?.practiceName}
                 {' practice'}
               </h4>
             </div>
             <p className='intro-desc'>
-              {t('associated-projects-initiatives.description')}
+              {uiText?.cpDetailHeadingPiDescription?.configurationValue}
             </p>
           </div>
           <ProjectListGroup isMapDisplayed={false} noListDots={true} />

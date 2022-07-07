@@ -1,7 +1,7 @@
 import { TabContent, TabPane } from 'reactstrap';
 import TagManager from 'react-gtm-module';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import CustomTabs from '../../components/CustomTabs';
 import { searchOptionMap } from '../../common/typedconstants.common';
 import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
@@ -27,7 +27,8 @@ TagManager.initialize(GTMArg);
 
 const LocationContainer = () => {
   const dispatch = useAppDispatch();
-  const { stateCode, name }: any = useParams();
+  const history = useHistory();
+  const { stateCode, name, category, individual }: any = useParams();
   const stateStatus: any = useGetStateListQuery();
   const selectedState =
     stateCode &&
@@ -55,17 +56,25 @@ const LocationContainer = () => {
   const [currentTabOption, setTabOption] = useState(option?.id);
   useEffect(() => {
     setTabOption(option?.id);
-    // Commented on 12/11. To be released in the future.
-    // More details: CIG-1019
-    // if (selectedPracticeCategory >= 0 && !currentTabOption) {
-    //   setTabOption(1);
-    // }
-    // if (
-    //   (!currentTabOption && selectedPracticeCategory < 0) ||
-    //   !selectedPractice
-    // ) {
-    //   setTabOption(0);
-    // }
+    if (
+      selectedPracticeCategory &&
+      selectedPracticeCategory !== -1 &&
+      selectedPractice === -1 &&
+      category == null &&
+      name === 'ConservationPractices'
+    ) {
+      history.push(`${name}/${selectedPracticeCategory}`);
+    }
+    if (
+      selectedPracticeCategory &&
+      selectedPracticeCategory !== -1 &&
+      selectedPractice !== -1 &&
+      category == null &&
+      individual == null &&
+      name === 'ConservationPractices'
+    ) {
+      history.push(`${name}/${selectedPracticeCategory}/${selectedPractice}`);
+    }
     window.scroll(0, 0);
   }, [selectedPracticeCategory, selectedPractice, option]);
 
@@ -80,7 +89,6 @@ const LocationContainer = () => {
       },
     });
   }, [name]);
-
   const renderTabContent = () => (
     <TabContent activeTab={currentTabOption}>
       {currentTabOption === 0 && (

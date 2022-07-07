@@ -3,10 +3,11 @@
 .custom-search {
   .custom-search-header {
     background-color: $white;
+    border-bottom: solid $dark-blue 2px;
     h1 {
       font-size: 42px;
       font-weight: $heavy-weight;
-      padding: 2.5rem 2.188rem;
+      padding: 2.5rem 2.188rem 0rem;
       margin: 0;
     }
     p {
@@ -15,11 +16,23 @@
       color: $nrcs-dark;
       font-size: 22px;
       font-weight: $semi-heavy-weight;
-      background-color: $light-grey-205;
-      border-top: solid $dark-grey 1px;
-      padding: 2.5rem 2.188rem;
+      padding: 0rem 2.5rem 2.5rem;
       margin: 0;
     }
+  }
+
+  .filter-component > * {
+    background-color: $sfi-dark-white !important;
+  }
+
+  .filter-info {
+    font-family: Roboto;
+    font-style: normal;
+    color: $nrcs-dark;
+    font-size: 21px;
+    font-weight: $semi-heavy-weight;
+    padding: 2.5rem 2.188rem;
+    margin: 0;
   }
 
   .practice-description {
@@ -52,6 +65,13 @@
     justify-content: space-between;
     margin-top: 1.25rem;
     flex-basis: 100%;
+  }
+
+  .apply-filters-button{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: $h4-font-size;
   }
 
   @media only screen and (max-width: $small-screen) {

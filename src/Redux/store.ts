@@ -7,6 +7,7 @@ import disableSlice from './Slice/disableSlice';
 import pdfGenSlice from './Slice/pdfGenSlice';
 import practiceSlice from './Slice/practiceSlice';
 import stateSlice from './Slice/stateSlice';
+import staticTextSlice from './Slice/staticTextSlice';
 
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
@@ -15,13 +16,14 @@ const rootReducer = combineReducers({
   pdfGenSlice,
   practiceSlice,
   stateSlice,
+  staticTextSlice,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
   blacklist: [''], // State will not be persisted
-  whitelist: ['stateSlice', 'practiceSlice', 'disableSlice'], // only State will be persisted
+  whitelist: ['stateSlice', 'practiceSlice', 'disableSlice', 'staticTextSlice'], // only State will be persisted
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

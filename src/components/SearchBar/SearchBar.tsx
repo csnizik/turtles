@@ -1,37 +1,59 @@
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../Redux/hooks/hooks';
-import { setSearch } from '../../Redux/Slice/practiceSlice';
-import './search-bar.scss'
+import { useAppSelector } from '../../Redux/hooks/hooks';
+import CustomButton from '../CustomButton';
+import './search-bar.scss';
 
-const SearchBar = () => {
-  const dispatch = useAppDispatch();
+const SearchBar = ({ searchInput, handleSearch }: any) => {
+  const { t } = useTranslation();
 
-  const handleSearch = () => {
-    const searchInput = {
-      state_county_code: "00000",
-      free_text: (document.getElementById("search-field") as HTMLInputElement).value
+  const persistText = useAppSelector(
+    (state) => state?.practiceSlice?.searchInput.free_text
+  );
+
+  const handleEnterKey = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
     }
-    dispatch(setSearch(searchInput));
-  }
-    
-    return (
-        <>
-<section className='text-search-box' aria-label="Search component">
-<p>Enter Search Criteria</p>
-  <form className="usa-search input-box" role="search">
-    <input className="usa-input" id="search-field" type="search" name="search" placeholder='Search NRCS Website'/>
-    <Link
-          to={{
-            pathname: '/search-results',
-          }}
-        ><button className="usa-button" type="submit" onClick={handleSearch}>
-      <span className="usa-search__submit-text">Search </span>
-    </button>
-    </Link>
-  </form>
-</section>
-</>
-    )
-}
+  };
 
-export default SearchBar
+  return (
+    <>
+      <section className='text-search-box' aria-label='Search component'>
+        <label className='search-criteria' htmlFor='searchCriteria'>
+          {t('text-search.labels.enter-search-criteria')}
+        </label>
+        <form className='usa-search input-box' role='search'>
+          <input
+            className='usa-input'
+            id='search-field'
+            data-testid='search-field'
+            type='search'
+            name='search'
+            placeholder='Search NRCS Website'
+            defaultValue={persistText}
+            onKeyDown={handleEnterKey}
+          />
+          <Link
+            to={{
+              pathname: '/search-results',
+              state: { detail: searchInput },
+            }}
+          >
+            <CustomButton
+              additionalClassName='free-text-search-button'
+              data-testid='search-button'
+              role='button'
+              ariaLabel='search'
+              onClick={handleSearch}
+            >
+              {t('actions.search')}
+            </CustomButton>
+          </Link>
+        </form>
+      </section>
+    </>
+  );
+};
+
+export default SearchBar;

@@ -1444,3 +1444,239 @@ export const practices = [
     practiceCategoryIconPath: 'Soil Quality.png',
   },
 ];
+
+export const staticText = {
+  status: 'fulfilled',
+  endpointName: 'getConfigurationSettingsStaticText',
+  requestId: '0XKaCfZvl6L-UdZsNeh0G',
+  originalArgs: null,
+  startedTimeStamp: 1656022943246,
+  data: {
+    cpCategoryHeading: {
+      configurationSettingName: 'cpCategoryHeading',
+      configurationValue: 'Conservation Practices',
+    },
+    cpCategoryHeadingDescription: {
+      configurationSettingName: 'cpCategoryHeadingDescription',
+      configurationValue:
+        'Through the Farm Bill, NRCS is able to provide assistance to agricultural producers who want to voluntarily make changes to their land or production operations to improve conditions related to soil, water, air, plants, wildlife and other natural resources. These conservation activities, or ////"practices", improve the health of ecosystems while also boosting the land\'s resiliency and production.',
+    },
+    cpCategoryHeadingDescription2: {
+      configurationSettingName: 'cpCategoryHeadingDescription2',
+      configurationValue:
+        'Technical assistance and financial assistance is available. Technical assistance is free to producers, and involves a team of agency experts working with producers to develop a customized conservation plan and system of conservation practices. Financial assistance helps producers pay for the adoption of those practices and is available through multiple Farm Bill programs, such as the Environmental Quality Incentives Program (EQIP) and the Conservation Stewardship Program (CSP). NRCS assistance varies by state, practice, and program, but generally covers 50 to 70 percent of the cost. Rates may be higher for priority practices or to address the unique circumstances of producers in historically underserved groups.',
+    },
+    cpCategoryHeadingSubHeading: {
+      configurationSettingName: 'cpCategoryHeadingSubHeading',
+      configurationValue: 'Conservation Practice Categories',
+    },
+    cpCategoryHeadingSubHeadingDescription: {
+      configurationSettingName: 'cpCategoryHeadingSubHeadingDescription',
+      configurationValue:
+        "NRCS's conservation practices help people reduce soil erosion, enhance water supplies, improve water quality, increase wildlife habitat, and reduce damages caused by floods and other natural disasters. One practice may have multiple benefits depending on when, where, and how it is applied. To illustrate the impact of our conservation practices, we group them into categories that describe their benefits.",
+    },
+    cpDetailHeading5: {
+      configurationSettingName: 'cpDetailHeading5',
+      configurationValue: 'Projects and Initiatives Using the Practice',
+    },
+    cpDetailHeadingPiDescription: {
+      configurationSettingName: 'cpDetailHeadingPiDescription',
+      configurationValue:
+        'NRCS projects and initiatives on the ground assess the impacts of conservation practices, build scientific understanding of those impacts and the processes underlying them, explore the potential of innovative conservation activities, and coordinate planning efforts at larger scales to address resource concerns from a watershed or landscape perspective.',
+    },
+    cpDetailHeadingRC: {
+      configurationSettingName: 'cpDetailHeadingRC',
+      configurationValue: 'Resource Concerns Treated',
+    },
+    cpDetailHeadingRCDescription: {
+      configurationSettingName: 'cpDetailHeadingRCDescription',
+      configurationValue:
+        'NRCS conservation activities are carried out according to a conservation plan developed with the producer that identifies the appropriate conservation practice or practices to address the resource concerns affecting their farm, ranch, or forest. The resource concerns addressed by this practice are listed below.',
+    },
+    cpDetailHeadingSubheading2: {
+      configurationSettingName: 'cpDetailHeadingSubheading2',
+      configurationValue: 'Practice Information',
+    },
+    cpDetailHeadingSupport: {
+      configurationSettingName: 'cpDetailHeadingSupport',
+      configurationValue: 'Support',
+    },
+    cpDetailHeadingSupportDescription: {
+      configurationSettingName: 'cpDetailHeadingSupportDescription',
+      configurationValue:
+        'NRCS provides financial and technical support for practices through a number of programs and initiatives that promote agricultural production and environmental quality as compatible national goals.',
+    },
+    cpDetailHeadingSupportSubheading: {
+      configurationSettingName: 'cpDetailHeadingSupportSubheading',
+      configurationValue: 'Payment Schedules',
+    },
+    cpDetailHeadingSupportSubheadingDescription: {
+      configurationSettingName: 'cpDetailHeadingSupportSubheadingDescription',
+      configurationValue:
+        'NRCS provides financial assistance for selected conservation practices. The availability and amount of financial assistance can vary between states.',
+    },
+    cpDetailHeadingTools: {
+      configurationSettingName: 'cpDetailHeadingTools',
+      configurationValue: 'Specifications and. Tools',
+    },
+    cpDetailHeadingToolsDescription: {
+      configurationSettingName: 'cpDetailHeadingToolsDescription',
+      configurationValue:
+        'NRCS technical standards guide proper implementation of recommended practices. Each practice also has a payment schedule that determines how much financial assistance is available for beginning or installing it. The following links provide details about practice standards and payment schedules specific to your region.',
+    },
+    cpDetailHeadingToolsSubheading: {
+      configurationSettingName: 'cpDetailHeadingToolsSubheading',
+      configurationValue: 'National Specifications',
+    },
+    cpDetailHeadingToolsSubheading2: {
+      configurationSettingName: 'cpDetailHeadingToolsSubheading2',
+      configurationValue: 'Associated Practices',
+    },
+    cpDetailHeadingToolsSubheading2Description: {
+      configurationSettingName: 'cpDetailHeadingToolsSubheading2Description',
+      configurationValue:
+        'These are conservation practices that are commonly applied in association with this practice.',
+    },
+    cpDetailHeadingToolsSubheadingDescriptionState: {
+      configurationSettingName:
+        'cpDetailHeadingToolsSubheadingDescriptionState',
+      configurationValue:
+        'You can access this state’s conservation practice standards on the NRCS Field Office Technical Guide.',
+    },
+    cpDetailHeadingToolsSubheadingDescriptionUS: {
+      configurationSettingName: 'cpDetailHeadingToolsSubheadingDescriptionUS',
+      configurationValue:
+        'You can find national conservation practice standards, overviews, conservation practice effects and network effects diagrams on the NRCS website.',
+    },
+    cpTitle: {
+      configurationSettingName: 'cpTitle',
+      configurationValue: 'Conservation Practices',
+    },
+    customReportDescription: {
+      configurationSettingName: 'customReportDescription',
+      configurationValue:
+        "Select the information you'd like to include in your report:",
+    },
+    customReportHeading: {
+      configurationSettingName: 'customReportHeading',
+      configurationValue: 'Preview',
+    },
+    customReportTitle: {
+      configurationSettingName: 'customReportTitle',
+      configurationValue: 'Create a Custom Report',
+    },
+    fotg_practice_deeplink_webservice: {
+      configurationSettingName: 'fotg_practice_deeplink_webservice',
+      configurationValue:
+        'https://efotg.sc.egov.usda.gov/api/StateLevelDocument',
+    },
+    homeLocationDescription: {
+      configurationSettingName: 'homeLocationDescription',
+      configurationValue:
+        'Find conservation practices and NRCS sponsored projects & initiatives in your location.',
+    },
+    homeLocationTitle: {
+      configurationSettingName: 'homeLocationTitle',
+      configurationValue:
+        'Find NRCS Conservation Practices and Activities by Location',
+    },
+    homePracticeDescription: {
+      configurationSettingName: 'homePracticeDescription',
+      configurationValue:
+        'A conservation practice is a specific treatment, such as a structural or vegetative measure, or management technique, commonly used to meet specific needs in planning and implementing conservation, for which standards and specifications have been developed.',
+    },
+    homePracticeTitle: {
+      configurationSettingName: 'homePracticeTitle',
+      configurationValue:
+        'Find NRCS Conservation Practices by Practice Category',
+    },
+    homeQuickSearchDescription: {
+      configurationSettingName: 'homeQuickSearchDescription',
+      configurationValue:
+        "Know what you're looking for? Do a quick search and find information fast.",
+    },
+    homeTitle: {
+      configurationSettingName: 'homeTitle',
+      configurationValue: 'Conservation Practice Data and Innovations',
+    },
+    overviewDescription: {
+      configurationSettingName: 'overviewDescription',
+      configurationValue:
+        'NRCS planners assess the existing condition of natural resources on a site to determine whether additional treatment is needed to address a potential resource concern. The natural resource concerns most frequently identified, and the conservation practices applied, vary across states and regions based on predominant land uses, topography, soil conditions, ...',
+    },
+    overviewHeadingCP: {
+      configurationSettingName: 'overviewHeadingCP',
+      configurationValue: 'Top 5 Conservation Practices',
+    },
+    overviewHeadingCPDescription: {
+      configurationSettingName: 'overviewHeadingCPDescription',
+      configurationValue: 'Description of this section...',
+    },
+    overviewHeadingRC: {
+      configurationSettingName: 'overviewHeadingRC',
+      configurationValue: 'Top 5 Resource Concerns',
+    },
+    overviewHeadingRCDescription: {
+      configurationSettingName: 'overviewHeadingRCDescription',
+      configurationValue: 'Description of this section...',
+    },
+    overviewTitle: {
+      configurationSettingName: 'overviewTitle',
+      configurationValue: 'Overview',
+    },
+    piCigHeading: {
+      configurationSettingName: 'piCigHeading',
+      configurationValue: 'Conservation Innovation Grants',
+    },
+    piCigHeadingDescription: {
+      configurationSettingName: 'piCigHeadingDescription',
+      configurationValue:
+        'Conservation Innovation Grants (CIG) is a competitive program that supports the development of new tools, approaches, practices, and technologies to further natural resource conservation on private lands. Through creative problem solving and innovation, CIG partners work to address our nations water quality, air quality, soil health and wildlife habitat challenges, all while improving agricultural operations. Public and private grantees develop the tools, technologies, and strategies to support next-generation conservation efforts on working lands and develop market-based solutions to resource challenges.',
+    },
+    piDescription: {
+      configurationSettingName: 'piDescription',
+      configurationValue:
+        "NRCS's natural resources conservation programs help people reduce soil erosion, enhance water supplies, improve water quality, increase wildlife habitat, and reduce damages caused by floods and other natural disasters.",
+    },
+    piDescription2: {
+      configurationSettingName: 'piDescription2',
+      configurationValue:
+        'In addition to the Farm Bill Programs, which offer Conservation Technical Assistance and Financial Assistance to producers interested in engaging in voluntary conservation on their land, NRCS manages a number of Projects and Initiatives that operate at the landscape scale and above. These Projects and Initiatives serve a variety of purposes, including:',
+    },
+    piDescription3: {
+      configurationSettingName: 'piDescription3',
+      configurationValue:
+        '*Targeting Program dollars to advance specific natural resource objectives\r\n*Collecting information on the resource impacts of applied conservation building partnerships that expand NRCS’ ability to develop innovative solutions to conservation challenges\r\n*Building the science base necessary to continually improve program delivery in pursuit of measurable improvements and outcomes in natural resource management',
+    },
+    piLciHeading: {
+      configurationSettingName: 'piLciHeading',
+      configurationValue: 'Landscape Conservation Initiatives',
+    },
+    piTitle: {
+      configurationSettingName: 'piTitle',
+      configurationValue: 'Projects And Initiatives',
+    },
+    quickSearchDescription: {
+      configurationSettingName: 'quickSearchDescription',
+      configurationValue:
+        'Search for information on practice applications, practice support, and impacts of practice implementation.',
+    },
+    QuickSearchResultsHeading: {
+      configurationSettingName: 'QuickSearchResultsHeading',
+      configurationValue: 'ConservationPractices',
+    },
+    QuickSearchResultsHeading2: {
+      configurationSettingName: 'QuickSearchResultsHeading2',
+      configurationValue: 'Projects & Initiatives',
+    },
+    QuickSearchResultsTitle: {
+      configurationSettingName: 'QuickSearchResultsTitle',
+      configurationValue: 'QuickSearchResults',
+    },
+    quickSearchTitle: {
+      configurationSettingName: 'quickSearchTitle',
+      configurationValue: 'Quick Search',
+    },
+  },
+  fulfilledTimeStamp: 1656022943774,
+};

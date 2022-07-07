@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router-dom';
 import { skipToken } from '@reduxjs/toolkit/query/react';
 import {
@@ -19,13 +18,6 @@ interface ISpecAndToolsProps {
   selectedPracticeId: number;
 }
 
-const intro: string =
-  'NRCS technical standards guide proper implementation of recommended practices.  Each practice also has a payment schedule that determines how much financial assistance is available for beginning or installing it. The following links provide details about practice standards and payment schedules specific to your region.';
-const nationalPromptText: string =
-  'You can find national conservation practice standards, overviews, conservation practice effects and network effects diagrams on the NRCS website.';
-const statePromptText: string =
-  'You can access this state’s conservation practice standards on the NRCS Field Office Technical Guide.';
-
 const SpecificationsAndTools = ({
   data,
   isSuccess,
@@ -36,8 +28,6 @@ const SpecificationsAndTools = ({
     stateCode: selectedStateCode,
     practiceId: selectedPracticeId,
   };
-  const { t } = useTranslation();
-
   const { name }: any = useParams();
 
   const selectedStateName = useAppSelector(
@@ -49,6 +39,10 @@ const SpecificationsAndTools = ({
   const fromPdfReport = useAppSelector(
     (state) => state?.pdfGenSlice?.enablePdfGen
   );
+
+  const uiText: any = useAppSelector(
+    (state) => (state?.staticTextSlice?.staticData as any)?.data
+  ); 
 
   const fotgLink = useGetConfigurationSettingsQuery(
     'fotg_practice_deeplink_webservice'
@@ -99,7 +93,7 @@ const SpecificationsAndTools = ({
   const getHeaderText = () => {
     const practiceName = (data && data?.practiceName) || '';
     if (practiceName) {
-      return `${practiceName} Specifications and Tools`;
+      return `${practiceName} ${uiText?.cpDetailHeadingTools?.configurationValue}`;
     }
     return practiceName;
   };
@@ -110,8 +104,8 @@ const SpecificationsAndTools = ({
         className='state-specific-container'
         data-testid='national-specifications'
       >
-        <h3>National Specifications</h3>
-        <p className='state-prompt-text'>{nationalPromptText}</p>
+        <h3>{uiText?.cpDetailHeadingToolsSubheading?.configurationValue}</h3>
+        <p className='state-prompt-text'>{uiText?.cpDetailHeadingToolsSubheadingDescriptionUS?.configurationValue}</p>
         <div className='link'>
           <a
             href='https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/technical/cp/ncps/?cid=nrcs143_026849'
@@ -137,7 +131,7 @@ const SpecificationsAndTools = ({
         data-testid='state-specifications'
       >
         <h3>{selectedStateName} Specifications</h3>
-        <p className='state-prompt-text'>{statePromptText}</p>
+        <p className='state-prompt-text'>{uiText?.cpDetailHeadingToolsSubheadingDescriptionState?.configurationValue}</p>
         <div className='link'>
           <a
             href={
@@ -173,8 +167,8 @@ const SpecificationsAndTools = ({
   const renderAssociatedPractice = () => {
     return (
       <div className='associated-prac' data-testid='associated-practice'>
-        <h3>{t('associated-practices.title')}</h3>
-        <p>{t('associated-practices.description')}</p>
+        <h3>{uiText?.cpDetailHeadingToolsSubheading2?.configurationValue}</h3>
+        <p>{uiText?.cpDetailHeadingToolsSubheading2Description?.configurationValue}</p>
         <ul className='practices-row' data-testid='associated-practice-links'>
           {content.data?.map((practice: IAssociatedPracticeList) => {
             return (
@@ -204,7 +198,7 @@ const SpecificationsAndTools = ({
       id='PracticeSpecifications'
     >
       <h2>{getHeaderText()}</h2>
-      <p>{intro}</p>
+      <p>{uiText?.cpDetailHeadingToolsDescription?.configurationValue}</p>
       {renderNationalSpecs()}
       {selectedStateName === 'U.S.' ? null : renderStateSpecs()}
       {content?.data?.length ? renderAssociatedPractice() : null}

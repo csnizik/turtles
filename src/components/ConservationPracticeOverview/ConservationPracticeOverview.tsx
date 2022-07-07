@@ -1,5 +1,6 @@
 import './conservation-practice-overview.scss';
 import Spinner from '../Spinner/Spinner';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 
 const ConservationPracticeOverview = ({
   data,
@@ -8,6 +9,10 @@ const ConservationPracticeOverview = ({
   isSuccess,
   isError,
 }: any) => {
+  const uiText: any = useAppSelector(
+    (state) => (state?.staticTextSlice?.staticData as any)?.data
+  ); 
+
   return (
     <>
       {isLoading && <Spinner />}
@@ -27,7 +32,9 @@ const ConservationPracticeOverview = ({
               <div className='overview' data-testid='overview-container'>
                 <h2>{`${data.practiceName} (${data.practiceCode})`}</h2>
                 <p>{data.practiceOverview}</p>
-                <h2>Practice Information</h2>
+                <h2>
+                  {uiText?.cpDetailHeadingSubheading2?.configurationValue}
+                </h2>
                 <p>{data.practiceInfo}</p>
               </div>
             </li>

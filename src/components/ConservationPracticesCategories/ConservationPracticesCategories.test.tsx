@@ -1,5 +1,6 @@
 import ConservationPracticesCategories from './ConservationPracticesCategories';
 import { cleanup, render, screen } from '../../common/test-utils/test_utils';
+import { staticText } from '../../api-mocks/constants';
 
 afterEach(() => {
   cleanup();
@@ -34,6 +35,11 @@ describe('ConservationPracticesCategories is rendered correctly', () => {
       <ConservationPracticesCategories
         categories={categories}
         selectPractice={selectPractice}
+        heading={staticText.data.cpCategoryHeadingSubHeading.configurationValue}
+        intro={
+          staticText.data.cpCategoryHeadingSubHeadingDescription
+            .configurationValue
+        }
       />
     );
   });

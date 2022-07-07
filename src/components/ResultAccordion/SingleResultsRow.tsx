@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 
@@ -11,11 +10,14 @@ const SingleResultsRow = ({
   const stateCode: string = useAppSelector(
     (state) => state.stateSlice.stateCode
   );
-  const { t } = useTranslation();
+  const uiText: any = useAppSelector(
+    (state) => (state?.staticTextSlice?.staticData as any)?.data
+  );
+
   return (
     <>
       <div className='top-title'>
-        <h2>{t('search-results-page.conservation-practices')}</h2>
+        <h2>{uiText?.QuickSearchResultsHeading?.configurationValue}</h2>
       </div>
       <div className='accordion-section'>
         <div className='child-accordion-container'>

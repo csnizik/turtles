@@ -1,6 +1,7 @@
 {
   "actions": {
     "clear": "Clear",
+    "apply-filters": "Apply Filters",
     "search": "Search",
     "select": "- Select -"
   },
@@ -20,8 +21,9 @@
     "find-practices": "Search by practice"
  },
   "search-page": {
-    "intro": "Search for information on practice applications, practice support, and impacts of practice implementation.",
+    "intro": "Search for information on practice impacts, practice extent, and impacts of practice implementation.",
     "quick-search": "Quick Search",
+    "about-filter": "Use the filters below to further refine your search",
     "filter-by-land-use": "Filter By Land Use"
   },
   "search-results-page": {
@@ -29,6 +31,11 @@
     "conservation-practices": "Conservation Practices",
     "project-initiatives": "Projects & Initiatives",
     "no-practices-found": "No Conservation Practices Found"
+  },
+  "text-search": {
+    "labels": {
+      "enter-search-criteria": "Enter Search Criteria"
+    }
   },
   "location-search": {
     "explore-location": "Search by location",

@@ -139,6 +139,7 @@ const LandUseSection = ({
 
   return (
     <fieldset className='land-use-fieldset'>
+      < hr className='land-use-top-border'/>
       <legend className='usa-legend'>
         {t('search-page.filter-by-land-use')}
       </legend>
@@ -191,6 +192,7 @@ const LandUseSection = ({
             );
           })}
       </div>
+      < hr className='land-use-bottom-border'/>
     </fieldset>
   );
 };

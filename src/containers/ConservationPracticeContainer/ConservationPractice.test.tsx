@@ -1,13 +1,15 @@
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import { Provider } from 'react-redux';
 import ConservationPracticeContainer from '.';
 import { cleanup, render, screen } from '../../common/test-utils/test_utils';
 import ConservationPracticeVideo from '../../components/ConservationPracticeVideo';
 import ResourceConcernTreated from '../../components/ResourceConcernTreated';
 import { createTestStore } from '../../Redux/store';
 import { currentState } from '../../Redux/Slice/stateSlice';
-import { Provider } from 'react-redux';
 import { mswServer } from '../../api-mocks/msw-server';
+import { setStaticText } from '../../Redux/Slice/staticTextSlice';
+import { staticText } from '../../api-mocks/constants';
 
 const router = require('react-router-dom');
 
@@ -30,6 +32,8 @@ beforeAll(() => mswServer.listen({ onUnhandledRequest: 'bypass' }));
 describe('Conservation Practice Page is rendered correctly', () => {
   viewType = 'practiceCategories';
   beforeEach(() => {
+    store = createTestStore();
+    store.dispatch(setStaticText(staticText));
     const history = createMemoryHistory();
     jest.spyOn(router, 'useParams').mockReturnValue({
       stateCode: '06',
@@ -37,10 +41,12 @@ describe('Conservation Practice Page is rendered correctly', () => {
     });
     render(
       <Router history={history}>
-        <ConservationPracticeContainer
-          currentPracticeCategoryId={2}
-          currentSpecificPractice={-1}
-        />
+        <Provider store={store}>
+          <ConservationPracticeContainer
+            currentPracticeCategoryId={2}
+            currentSpecificPractice={-1}
+          />
+        </Provider>
       </Router>
     );
   });
@@ -64,7 +70,9 @@ describe('Conservation Practice Individual Page is rendered correctly', () => {
       stateAbbreviation: 'CO',
     };
     store = createTestStore();
+    store.dispatch(setStaticText(staticText));
     store.dispatch(currentState(state));
+    store.dispatch(setStaticText(staticText));
     const history = createMemoryHistory();
     render(
       <Router history={history}>
@@ -85,14 +93,16 @@ describe('Conservation Practice Individual Page is rendered correctly', () => {
   test('Should display Individual Practice Page Projects & Initiatives Title', () => {
     expect(
       screen.getByText(
-        'Colorado associated-projects-initiatives.title practice'
+        `Colorado ${staticText.data.cpDetailHeading5.configurationValue} practice`
       )
     ).toBeInTheDocument();
   });
 
   test('Should display Individual Practice Page Projects & Initiatives Description', () => {
     expect(
-      screen.getByText('associated-projects-initiatives.description')
+      screen.getByText(
+        `${staticText.data.cpDetailHeadingPiDescription.configurationValue}`
+      )
     ).toBeInTheDocument();
   });
 });

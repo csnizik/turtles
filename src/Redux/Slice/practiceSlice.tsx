@@ -24,6 +24,7 @@ const defaultSearchInput: any = {
   practice_id: null,
   state_county_code: null,
   land_use_list: null,
+  free_text: null,
 };
 const defaultSearchInfo: any = {
   resource_concern_category: null,
@@ -32,6 +33,7 @@ const defaultSearchInfo: any = {
   practice: null,
   state: null,
   land_use_list: null,
+  free_text: null,
 };
 
 const initialState = {

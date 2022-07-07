@@ -86,6 +86,7 @@ export interface ISearchData {
   state_county_code?: string | null;
   land_use_list?: string | null;
   practices?: Array<Practice> | null | undefined;
+  free_text?: string | null;
 }
 
 export interface ISearchInfo {
@@ -95,6 +96,7 @@ export interface ISearchInfo {
   practice?: string | null;
   state?: string | null;
   land_use_list?: string | null;
+  free_text?: string | null;
 }
 
 export interface IPracticeVideo {

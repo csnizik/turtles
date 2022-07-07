@@ -1,6 +1,13 @@
 import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import * as redux from 'react-redux';
+import { createTestStore } from '../../Redux/store';
+import { api } from '../../Redux/services/api';
+
 import CustomSearch from '.';
 import { cleanup, render, screen } from '../../common/test-utils/test_utils';
+import { setStaticText } from '../../Redux/Slice/staticTextSlice';
+import { staticText } from '../../api-mocks/constants';
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -21,41 +28,54 @@ afterEach(() => {
 });
 
 describe('Custom search container is rendered correctly', () => {
+  const store = createTestStore();
+  store.dispatch(setStaticText(staticText));
+
   beforeEach(() => {
-    render(<CustomSearch />);
+    render(
+      <Provider store={store}>
+        <CustomSearch />
+      </Provider>
+    );
   });
 
   test('Should display the contents of the custom search container', () => {
-    expect(screen.getByTestId('custom-search-container')).toBeDefined();
+    expect(screen.queryByTestId('custom-search-container')).toBeDefined();
   });
 
   test('Should display the Search Page Title', () => {
-    expect(screen.getByText('search-page.quick-search')).toBeDefined();
+    expect(
+      screen.queryByText(staticText.data.quickSearchTitle.configurationValue)
+    ).toBeDefined();
   });
 
   test('Should display the Search Page Intro', () => {
-    expect(screen.getByText('search-page.intro')).toBeDefined();
+    expect(
+      screen.queryByText(
+        staticText.data.quickSearchDescription.configurationValue
+      )
+    ).toBeDefined();
+  });
+
+  test('Should display the Search Page Filter Info', () => {
+    expect(screen.queryByText('search-page.about-filter')).toBeDefined();
   });
 
   test('Should display the Search by Description', () => {
     expect(
-      screen.getByText('search-by-conservation-practice.description')
+      screen.queryByText('search-by-conservation-practice.description')
     ).toBeDefined();
   });
 
   test('Should display Practices Dropdown Clear Button', () => {
-    expect(
-      screen.getByRole('button', {
-        name: 'Clear Practices and Resource Concerns',
-      })
-    );
-    expect(screen.getAllByText('actions.clear')).toBeDefined();
+    expect(screen.queryAllByText('actions.clear')).toBeDefined();
   });
 
   test('Should Clear the Practices Dropdowns', () => {
     const btn = screen.getByRole('button', {
       name: 'Clear Practices and Resource Concerns',
     });
+
     userEvent.click(btn);
     expect(
       screen.getByRole(
@@ -65,20 +85,20 @@ describe('Custom search container is rendered correctly', () => {
       )
     );
     expect(
-      screen.getByRole(
+      screen.queryByRole(
         (role, element) =>
           role === 'option' && element?.textContent === '- Select practice -'
       )
     );
     expect(
-      screen.getByRole(
+      screen.queryByRole(
         (role, element) =>
           role === 'option' &&
           element?.textContent === 'All resource concerns (default)'
       )
     );
     expect(
-      screen.getByRole(
+      screen.queryByRole(
         (role, element) =>
           role === 'option' &&
           element?.textContent === '- Select resource concern -'
@@ -86,8 +106,11 @@ describe('Custom search container is rendered correctly', () => {
     );
   });
 
-  xtest('Custom search page should contain a search button', () => {
-    expect(screen.getByTestId('custom-search-button')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /search/i }));
+  test('Custom search page should contain a search button', () => {
+    expect(screen.queryByRole('button', { name: /search/i }));
+  });
+
+  test('Custom search page should contain an Apply Filters button', () => {
+    expect(screen.queryByRole('button', { name: /apply filters/i }));
   });
 });

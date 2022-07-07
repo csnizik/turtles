@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { Practice } from '../../common/types';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 
@@ -13,9 +12,12 @@ const ResultsRow = ({
   handlePracticeCategorySelection,
   handleSpecificPracticeSelection,
 }: any) => {
-  const { t } = useTranslation();
   const stateCode: string = useAppSelector(
     (state) => state.stateSlice.stateCode
+  );
+
+  const uiText: any = useAppSelector(
+    (state) => (state?.staticTextSlice?.staticData as any)?.data
   );
 
   //eslint-disable-next-line
@@ -32,7 +34,7 @@ const ResultsRow = ({
   return (
     <>
       <div className='top-title'>
-        <h2>{t('search-results-page.conservation-practices')}</h2>
+        <h2>{uiText?.QuickSearchResultsHeading?.configurationValue}</h2>
       </div>
       <div className='accordion-section'>
         {rowData.map((practiceCategory: any) => {

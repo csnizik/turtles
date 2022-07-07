@@ -1,3 +1,4 @@
+import { Provider } from 'react-redux';
 import FindByPractices from './FindByPractices';
 import {
   cleanup,
@@ -6,7 +7,9 @@ import {
   screen,
 } from '../../common/test-utils/test_utils';
 import { createTestStore } from '../../Redux/store';
-import { Provider } from 'react-redux';
+
+import { setStaticText } from '../../Redux/Slice/staticTextSlice';
+import { staticText } from '../../api-mocks/constants';
 
 afterEach(() => {
   cleanup();
@@ -17,12 +20,24 @@ let store;
 describe('Find by Practice Search component is rendered correctly', () => {
   store = createTestStore();
 
+  store.dispatch(setStaticText(staticText));
+
   test('Should test dropdown and practice selection functionality', async () => {
     const { findByText } = render(
       <Provider store={store}>
         <FindByPractices />
       </Provider>
     );
+
+    expect(
+      screen.queryByText(staticText.data.homePracticeTitle.configurationValue)
+    ).toBeInTheDocument();
+
+    expect(
+      screen.queryByText(
+        staticText.data.homePracticeDescription.configurationValue
+      )
+    ).toBeInTheDocument();
 
     expect(
       screen.getByText('search-by-conservation-practice.first-label-name')

@@ -7,6 +7,8 @@ import {
 } from '../../common/test-utils/test_utils';
 import { createTestStore } from '../../Redux/store';
 import { Provider } from 'react-redux';
+import { setStaticText } from '../../Redux/Slice/staticTextSlice';
+import { staticText } from '../../api-mocks/constants';
 
 afterEach(() => {
   cleanup();
@@ -17,12 +19,25 @@ let store;
 describe('Location Search is rendered correctly', () => {
   store = createTestStore();
 
+  store.dispatch(setStaticText(staticText));
+
   test('Should test dropdown and state selection functionality', async () => {
     const { findByText } = render(
       <Provider store={store}>
         <LocationSearch />
       </Provider>
     );
+
+    expect(
+      screen.queryByText(staticText.data.homeLocationTitle.configurationValue)
+    ).toBeInTheDocument();
+
+    expect(
+      screen.queryByText(
+        staticText.data.homeLocationDescription.configurationValue
+      )
+    ).toBeInTheDocument();
+
     expect(
       screen.getByText('location-search.labels.select-state')
     ).toBeInTheDocument();

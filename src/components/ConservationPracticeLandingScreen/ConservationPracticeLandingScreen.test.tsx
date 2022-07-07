@@ -1,19 +1,28 @@
+import { Provider } from 'react-redux';
 import ConservationPracticeLandingScreen from './ConservationPracticeLandingScreen';
 import { cleanup, render, screen } from '../../common/test-utils/test_utils';
+import { setStaticText } from '../../Redux/Slice/staticTextSlice';
+import { staticText } from '../../api-mocks/constants';
+import { createTestStore } from '../../Redux/store';
 
 afterEach(() => {
   cleanup();
 });
-let setPracticeViewType = () => {};
-let stateCode = '06';
+const setPracticeViewType = () => {};
+const stateCode = '06';
 
 describe('ConservationPracticeLandingScreen is rendered correctly', () => {
   beforeEach(() => {
+    let store;
+    store = createTestStore();
+    store.dispatch(setStaticText(staticText));
     render(
-      <ConservationPracticeLandingScreen
-        setPracticeViewType={setPracticeViewType}
-        stateCode={stateCode}
-      />
+      <Provider store={store}>
+        <ConservationPracticeLandingScreen
+          setPracticeViewType={setPracticeViewType}
+          stateCode={stateCode}
+        />
+      </Provider>
     );
   });
 

@@ -13,6 +13,7 @@ const defaultSearchInput: ISearchData = {
   state_county_code: null,
   land_use_list: null,
   practices: null,
+  free_text: null,
 };
 
 const FilterBy = () => {
@@ -70,6 +71,16 @@ const FilterBy = () => {
                     <p className='filter-label'>
                       {searchInputData.resource_concern ||
                         searchInputData.resource_concern_category}
+                    </p>
+                  </div>
+                </div>
+              ) : null}
+              {searchInputData.free_text ? (
+                <div className='filter-box'>
+                  <p className='p-label'>Custom Text Search:</p>
+                  <div className='filter-pill'>
+                    <p className='filter-label'>
+                      {searchInputData.free_text}
                     </p>
                   </div>
                 </div>

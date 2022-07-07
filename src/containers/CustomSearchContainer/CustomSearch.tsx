@@ -41,6 +41,7 @@ const defaultSearchInput: ISearchData = {
   state_county_code: null,
   land_use_list: null,
   practices: null,
+  free_text: null,
 };
 const defaultSearchInfo: ISearchInfo = {
   resource_concern_category: null,
@@ -49,6 +50,7 @@ const defaultSearchInfo: ISearchInfo = {
   practice: null,
   state: null,
   land_use_list: null,
+  free_text: null,
 };
 
 const CustomSearch = () => {
@@ -76,6 +78,10 @@ const CustomSearch = () => {
 
   const landUseState = useAppSelector(
     (state) => state?.practiceSlice?.landUseSet
+  );
+
+  const uiText: any = useAppSelector(
+    (state) => (state?.staticTextSlice?.staticData as any)?.data
   );
 
   const clearBtnClassNames = classNames(
@@ -131,6 +137,15 @@ const CustomSearch = () => {
   });
 
   const handleSearch = () => {
+    // eslint-disable-next-line
+    var userSearch = (
+      document?.getElementById('search-field') as HTMLInputElement
+    )?.value;
+    userSearch = userSearch?.trim();
+
+    searchInput.free_text = userSearch === '' ? null : userSearch;
+    searchedInfo.free_text = searchInput.free_text;
+
     dispatch(setSearch(searchInput));
     dispatch(setSearchInfo(searchedInfo));
     dispatch(setLandUse(checkedState));
@@ -150,7 +165,8 @@ const CustomSearch = () => {
   const searchButtonStyles = () => {
     let styles;
     if (breakpoint !== 'mobile') {
-      styles = 'margin-top-3 margin-bottom-3 margin-left-4';
+      styles =
+        'margin-top-3 margin-bottom-3 margin-left-4 apply-filters-button';
     } else {
       styles = 'margin-top-3 margin-bottom-3 mobile-btn-width';
     }
@@ -160,59 +176,63 @@ const CustomSearch = () => {
     <main>
       <div data-testid='custom-search-container' className='custom-search'>
         <div className='custom-search-header'>
-          <h1>{t('search-page.quick-search')}</h1>
-          <p>{t('search-page.intro')}</p>
+          <h1>{uiText?.quickSearchTitle?.configurationValue}</h1>
+          <p>{uiText?.quickSearchDescription?.configurationValue}</p>
+          <SearchBar searchInput={searchInput} handleSearch={handleSearch} />
         </div>
-        <SearchBar />
-        <SearchByLocation
-          setSearchInput={setSearchInput}
-          setSearchInfo={setSearchedInfo}
-        />
-        <LandUseSection
-          setSearchInput={setSearchInput}
-          setSearchInfo={setSearchedInfo}
-          checkedState={checkedState}
-          setCheckedState={setCheckedState}
-        />
-        <div className='bottom-container'>
-          <div className='practice-labels'>
-            <p className='practice-description'>
-              {t('search-by-conservation-practice.description')}
-            </p>
-            <button
-              className={clearBtnClassNames}
-              type='button'
-              aria-label='Clear Practices and Resource Concerns'
-              onClick={handleClearPracticeAndConcerns}
-            >
-              {t('actions.clear')}
-            </button>
-          </div>
-          <div className='search-criteria'>
-            <SearchByConservationPractice
-              selectedResourceCategory={selectedResourceCategory}
-              secondState={secondState}
-              setSecondState={setSecondState}
-              selectedPractice={selectedPractice.id}
-              setSelectedPractice={setSelectedPractice}
-              setSearchInput={setSearchInput}
-              setSearchInfo={setSearchedInfo}
-              resourceId={searchInput.resource_concern_id}
-              selectedSubPractice={selectedSubPractice}
-              setSelectedSubPractice={setSelectedSubPractice}
-            />
-            <SearchByResourceConcern
-              resourceConcernsSubgroups={resourceConcernsSubgroups}
-              setResourceConcernsSubgroups={setResourceConcernsSubgroups}
-              setSelectedResourceCategory={setSelectedResourceCategory}
-              selectedResourceCategory={selectedResourceCategory.id}
-              selectedPractice={selectedPractice.id}
-              setSearchInput={setSearchInput}
-              setSearchInfo={setSearchedInfo}
-              practiceId={searchInput.practice_id}
-              selectedResourceConcern={selectedResourceConcern}
-              setSelectedResourceConcern={setSelectedResourceConcern}
-            />
+        <div className='filter-component'>
+          <p className='filter-info'>{t('search-page.about-filter')}</p>
+          <SearchByLocation
+            setSearchInput={setSearchInput}
+            setSearchInfo={setSearchedInfo}
+          />
+          <LandUseSection
+            setSearchInput={setSearchInput}
+            setSearchInfo={setSearchedInfo}
+            checkedState={checkedState}
+            setCheckedState={setCheckedState}
+          />
+          <div className='bottom-container'>
+            <div className='practice-labels'>
+              <p className='practice-description'>
+                {t('search-by-conservation-practice.description')}
+              </p>
+              <button
+                data-testid='clear-btn'
+                className={clearBtnClassNames}
+                type='button'
+                aria-label='Clear Practices and Resource Concerns'
+                onClick={handleClearPracticeAndConcerns}
+              >
+                {t('actions.clear')}
+              </button>
+            </div>
+            <div className='search-criteria'>
+              <SearchByConservationPractice
+                selectedResourceCategory={selectedResourceCategory}
+                secondState={secondState}
+                setSecondState={setSecondState}
+                selectedPractice={selectedPractice.id}
+                setSelectedPractice={setSelectedPractice}
+                setSearchInput={setSearchInput}
+                setSearchInfo={setSearchedInfo}
+                resourceId={searchInput.resource_concern_id}
+                selectedSubPractice={selectedSubPractice}
+                setSelectedSubPractice={setSelectedSubPractice}
+              />
+              <SearchByResourceConcern
+                resourceConcernsSubgroups={resourceConcernsSubgroups}
+                setResourceConcernsSubgroups={setResourceConcernsSubgroups}
+                setSelectedResourceCategory={setSelectedResourceCategory}
+                selectedResourceCategory={selectedResourceCategory.id}
+                selectedPractice={selectedPractice.id}
+                setSearchInput={setSearchInput}
+                setSearchInfo={setSearchedInfo}
+                practiceId={searchInput.practice_id}
+                selectedResourceConcern={selectedResourceConcern}
+                setSelectedResourceConcern={setSelectedResourceConcern}
+              />
+            </div>
           </div>
         </div>
         <Link
@@ -224,11 +244,11 @@ const CustomSearch = () => {
           <CustomButton
             data-testid='custom-search-button'
             role='button'
-            ariaLabel='search'
+            ariaLabel='apply filter'
             additionalClassName={searchButtonStyles()}
             onClick={handleSearch}
           >
-            {t('actions.search')}
+            {t('actions.apply-filters')}
           </CustomButton>
         </Link>
       </div>

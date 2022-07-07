@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import CustomButton from '../CustomButton';
 import PracticeCategoriesCard from '../PracticeCategoryCard';
 import './conservation-practices-categories.scss';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 
 interface ICategoryData {
   practiceCategoryName: string;
@@ -14,11 +15,15 @@ interface ICategoryData {
 interface ICategories {
   categories: ICategoryData[];
   selectPractice: Function;
+  heading: string;
+  intro: string;
 }
 
 const ConservationPracticesCategories = ({
   categories,
   selectPractice,
+  heading,
+  intro,
 }: ICategories) => {
   const history: any = useHistory();
   const { t } = useTranslation();
@@ -27,8 +32,8 @@ const ConservationPracticesCategories = ({
   };
   return (
     <div data-testid='practice-content' className='categoryListContainer'>
-      <h3 className='headerText'>Conservation Practice Categories</h3>
-      <div className='introText'>{t('conservation-practice.intro')}</div>
+      <h3 className='headerText'>{heading}</h3>
+      <div className='introText'>{intro}</div>
       {categories.length > 0 ? (
         <>
           <div className='card-container'>

@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   setLandUse,
@@ -17,6 +18,7 @@ import {
 } from '../../Redux/Slice/disableSlice';
 
 import { useGetConfigurationSettingsStaticTextQuery } from '../../Redux/services/api';
+import { setStaticText } from '../../Redux/Slice/staticTextSlice';
 
 const initialState = {
   stateNameDisplay: 'U.S.',
@@ -36,9 +38,16 @@ const GovernmentBanner = () => {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
 
-  useGetConfigurationSettingsStaticTextQuery(null, {
+  const uiText = useGetConfigurationSettingsStaticTextQuery(null, {
     pollingInterval: 900000,
   });
+
+  // eslint-disable-next-line
+  useEffect(() => {
+    if (uiText && uiText?.data != null) {
+      dispatch(setStaticText(uiText));
+    }
+  }, [uiText]);
 
   const handleNavigateHome = () => {
     window.dispatchEvent(new Event('navigateHome'));

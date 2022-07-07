@@ -16,9 +16,6 @@ interface IImplementationExtentProps {
   isEipcFromRPEmpty?: boolean;
 }
 
-const intro: string =
-  'NRCS provides financial and technical support for practices through a number of programs and initiatives that promote agricultural production and environmental quality as compatible national goals.';
-
 const ImplementationExtent = ({
   data,
   isSuccess,
@@ -39,9 +36,13 @@ const ImplementationExtent = ({
   const isError2 = results.isError;
   const scheduleLink: any = data2[0]?.paymentLink || '';
 
+  const uiText: any = useAppSelector(
+    (state) => (state?.staticTextSlice?.staticData as any)?.data
+  ); 
+  
   const getHeaderText = () => {
     if (practiceName) {
-      return `Support for the ${practiceName} Practice in ${
+      return `${uiText?.cpDetailHeadingSupport?.configurationValue} for the ${practiceName} Practice in ${
         stateInfo?.stateNameDisplay === 'U.S.'
           ? 'the U.S.'
           : stateInfo?.stateNameDisplay
@@ -123,11 +124,9 @@ const ImplementationExtent = ({
         : `Current ${stateInfo?.stateNameDisplay} Payment Schedules | NRCS`;
     return (
       <div className='payment-schedule'>
-        <h3 id='payment-title'>Payment Schedules</h3>
+        <h3 id='payment-title'>{uiText?.cpDetailHeadingSupportSubheading?.configurationValue}</h3>
         <p>
-          NRCS provides financial assistance for selected conservation
-          practices. The availability and amount of financial assistance can
-          vary between states.
+          {uiText?.cpDetailHeadingSupportSubheadingDescription?.configurationValue}
         </p>
         <div className='link'>
           <a
@@ -152,7 +151,7 @@ const ImplementationExtent = ({
   return (
     <div className='ie-parent' id='SupportPractice' data-testid='i-extent'>
       <h2>{getHeaderText()}</h2>
-      <p>{intro}</p>
+      <p>{uiText?.cpDetailHeadingSupportDescription?.configurationValue}</p>
       <div className='extent-content'>
         {renderObligations()}
         {renderAcresImplemented()}

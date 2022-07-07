@@ -37,14 +37,14 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
 
   useEffect(() => {
     setPracticestate({
-      practice_category_id: selectedPracticeCategoryId,
+      practice_category_id: +selectedPracticeCategoryId,
       state_county_code: `${stateCode}000`,
     });
   }, []);
 
   useEffect(() => {
     setPracticestate({
-      practice_category_id: selectedPracticeCategoryId,
+      practice_category_id: +selectedPracticeCategoryId,
       state_county_code: `${stateCode}000`,
     });
   }, [selectedPracticeCategoryId]);

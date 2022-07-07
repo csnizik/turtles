@@ -58,10 +58,9 @@ const FindByPractices = () => {
   const practiceCategory = useGetPracticeCategoryQuery();
   const subPractice = useGetPracticeQuery(selectedPractice);
 
-  const uiText = useAppSelector(
-    (app: any) =>
-    app?.api?.queries['getConfigurationSettingsStaticText(null)']?.data
-    );
+  const uiText: any = useAppSelector(
+    (state) => (state?.staticTextSlice?.staticData as any)?.data
+  );
 
   const handleCategoryChange = (e) => {
     const practiceVal = e.target.value;
@@ -100,8 +99,12 @@ const FindByPractices = () => {
   return (
     <section className='grid-row find-practice-container'>
       <div className='tablet:grid-col-7 content-row'>
-        <h2 className='h2-style'>{uiText?.homePracticeTitle?.configurationValue}</h2>
-        <p className='p-style'>{uiText?.homePracticeDescription?.configurationValue}</p>
+        <h2 className='h2-style'>
+          {uiText?.homePracticeTitle?.configurationValue}
+        </h2>
+        <p className='p-style'>
+          {uiText?.homePracticeDescription?.configurationValue}
+        </p>
         <div className='practice-label-grid'>
           <label className='usa-label' htmlFor='categoryOptions'>
             {t('search-by-conservation-practice.first-label-name')}

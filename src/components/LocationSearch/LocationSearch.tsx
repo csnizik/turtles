@@ -29,11 +29,10 @@ const LocationSearch = () => {
   );
   const stateStatus = useGetStateListQuery();
   const dispatch = useAppDispatch();
-  
-  const uiText = useAppSelector(
-    (app: any) =>
-    app?.api?.queries['getConfigurationSettingsStaticText(null)']?.data
-    );
+
+  const uiText: any = useAppSelector(
+    (state) => (state?.staticTextSlice?.staticData as any)?.data
+  );
 
   const handleDropdownSelection = (event: any) => {
     const { name, value } = event.target;
@@ -89,7 +88,9 @@ const LocationSearch = () => {
       </div>
       <div className='desktop:grid-col-7 content-row margin-top-4'>
         <h2>{uiText?.homeLocationTitle?.configurationValue}</h2>
-        <p className='p-style'>{uiText?.homeLocationDescription?.configurationValue}</p>
+        <p className='p-style'>
+          {uiText?.homeLocationDescription?.configurationValue}
+        </p>
         <div className='location-label-grid'>
           <label className='usa-label' htmlFor='stateSelect'>
             {t('location-search.labels.select-state')}

@@ -77,19 +77,19 @@ const ResourceConcernTreated = ({
     );
   };
 
+  const uiText: any = useAppSelector(
+    (state) => (state?.staticTextSlice?.staticData as any)?.data
+  ); 
+
   return (
     <>
       {isLoading && <Spinner />}
       {isError && error}
       {isSuccess && data && (
         <section className='rc-treated-box' id='ResourceConcernsTreated'>
-          <h2>Resource Concerns Treated</h2>
+          <h2>{uiText?.cpDetailHeadingRC?.configurationValue}</h2>
           <p data-testid='rc-description'>
-            NRCS conservation activities are carried out according to a
-            conservation plan developed with the producer that identifies the
-            appropriate conservation practice or practices to address the
-            resource concerns affecting their farm, ranch, or forest. The
-            resource concerns addressed by this practice are listed below.
+            {uiText?.cpDetailHeadingRCDescription?.configurationValue}
           </p>
           {renderAccordionSection(data)}
         </section>

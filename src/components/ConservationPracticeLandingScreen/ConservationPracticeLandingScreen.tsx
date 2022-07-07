@@ -13,8 +13,7 @@ const ConservationPracticeLandingScreen = ({
   const [categories, setCategories] = useState([]);
   const mountedRef = useRef(true);
   const uiText = useAppSelector(
-    (app: any) =>
-      app?.api?.queries['getConfigurationSettingsStaticText(null)']?.data
+    (state) => (state?.staticTextSlice?.staticData as any)?.data
   );
   const dispatch = useAppDispatch();
 
@@ -54,12 +53,16 @@ const ConservationPracticeLandingScreen = ({
       <ConservationPracticeIntroduction
         introductionParagraph={uiText?.cp_paragraph_1?.configurationValue}
         introductionParagraph2={uiText?.cp_paragraph_2?.configurationValue}
-        title='Conservation Practices'
+        title={uiText?.cpCategoryHeading?.configurationValue}
       />
       <div className='landing-screen-categories'>
         <ConservationPracticesCategories
           selectPractice={selectPractice}
           categories={categories}
+          heading={uiText?.cpCategoryHeadingSubHeading?.configurationValue}
+          intro={
+            uiText?.cpCategoryHeadingSubHeadingDescription?.configurationValue
+          }
         />
       </div>
     </div>

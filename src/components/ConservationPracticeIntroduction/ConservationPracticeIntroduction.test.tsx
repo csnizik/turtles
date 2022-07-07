@@ -18,4 +18,10 @@ describe('ConservationPracticeIntroduction is rendered correctly', () => {
   test('Should display the contents of ConservationPracticeIntroduction', () => {
     expect(screen.getByTestId('introduction-content')).toBeDefined();
   });
+  test('Should display the ConservationPractice title', () => {
+    expect(screen.getByText('Conservation Practice')).toBeDefined();
+  });
+  test('Should display the ConservationPractice introduction Paragraph', () => {
+    expect(screen.getByText('This is the intro paragraph')).toBeDefined();
+  });
 });
