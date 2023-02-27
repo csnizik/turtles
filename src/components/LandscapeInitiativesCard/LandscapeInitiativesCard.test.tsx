@@ -6,16 +6,16 @@ afterEach(() => {
 });
 
 describe('Landscape Initiatives Card is rendered correctly', () => {
-  const lci_name = 'Golden-Winged Warbler';
-  const lci_description = ['Identified target species'];
-  const lci_link = 'https://www.nrcs.usda.gov/';
+  const lciName = 'Golden-Winged Warbler';
+  const lciDescription = ['Identified target species'];
+  const lciLink = 'https://www.nrcs.usda.gov/';
 
   beforeEach(() => {
     render(
       <LandscapeInitiativesCard
-        title={lci_name}
-        description={lci_description}
-        link={lci_link}
+        title={lciName}
+        description={lciDescription}
+        link={lciLink}
       />
     );
   });

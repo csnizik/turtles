@@ -173,48 +173,48 @@ export const coloradoProjects = [
 
 export const coloradoInitiatives = [
   {
-    lci_id: 2,
-    lci_name: 'Joint Chiefs Landscape Restoration Partnership',
-    lci_resource: '',
-    lci_image_link: 'jclrp.map',
-    lci_page_link:
+    lciId: 2,
+    lciName: 'Joint Chiefs Landscape Restoration Partnership',
+    lciResource: '',
+    lciImageLink: 'jclrp.map',
+    lciPageLink:
       'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/programs/initiatives/?cid=stelprdb1244394',
-    lci_page_link_text:
+    lciPageLinkText:
       'Go to the Joint Chiefs Landscape Restoration Partnership page for detailed information',
-    lci_description: [
+    lciDescription: [
       'Under the Joint Chiefs’ Landscape Restoration Partnership (JCLRP), NRCS and the U.S. Forest Service are working together to target conservation and restoration to measurably improve the health and resiliency of forest ecosystems where public and private lands meet to provide for long-term natural resources and production benefits. Priorities for the effort are:\r',
       ' • Reducing and mitigating wildfire threats to communities and landowners. \r',
       ' • Protecting water quality and supply for communities and industry. \r',
       ' • Improving habitat conditions for at-risk species.\r',
       '',
     ],
-    lci_parent_id: null,
+    lciParentId: null,
   },
   {
-    lci_id: 7,
-    lci_name: 'National Water Quality Initiative',
-    lci_resource: '',
-    lci_image_link: 'jclrp.map',
-    lci_page_link:
+    lciId: 7,
+    lciName: 'National Water Quality Initiative',
+    lciResource: '',
+    lciImageLink: 'jclrp.map',
+    lciPageLink:
       'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/programs/initiatives/?cid=stelprdb1047761',
-    lci_page_link_text:
+    lciPageLinkText:
       'Go to the National Water Quality Initiative page for detailed information',
-    lci_description: [
+    lciDescription: [
       'The purpose of NWQI is to work with producers and landowners to implement voluntary conservation practices as part of areawide efforts to improve water quality in high-priority areas. These areas are defined primarily by subwatersheds (HUC 12) and referred to in this guidance generally as NWQI watersheds.  NWQI is designed to help individual agricultural producers take actions to reduce the runoff of sediment, nutrients, and pathogens into surface waters where water quality is a critical concern. Practice implementation is focused to identified areas of the watershed most in need of treatment. NWQI also assists with practice implementation on priority source water protection areas (SWPAs), where the drinking water source is surface or ground water. In this case, NWQI addresses identified threats to drinking water, either to remediate impairments or protect clean sources.\r',
       'NWQI is governed by a board of directors chaired by a regional conservationist (RC) and composed of select States from each Region. All NWQI guidance and instructions are reviewed by the board, assisted by the initiative coordinator.\r',
       '',
     ],
-    lci_parent_id: null,
+    lciParentId: null,
   },
   {
-    lci_id: 9,
-    lci_name: 'WaterSMART',
-    lci_resource: '821a9b7fe7d44d92bb0ce60c0d5bcb8b',
-    lci_image_link: 'jclrp.map',
-    lci_page_link:
+    lciId: 9,
+    lciName: 'WaterSMART',
+    lciResource: '821a9b7fe7d44d92bb0ce60c0d5bcb8b',
+    lciImageLink: 'jclrp.map',
+    lciPageLink:
       'https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/programs/financial/eqip/?cid=nrcseprd1685421',
-    lci_page_link_text: 'Go to the WaterSMART page for detailed information',
-    lci_description: [
+    lciPageLinkText: 'Go to the WaterSMART page for detailed information',
+    lciDescription: [
       'The purpose of WSI is to assist producers and landowners in implementing voluntary conservation that is complimentary to the water conservation assistance provided through the Department of Interior’s Bureau of Reclamation (Reclamation) Sustain and Manage America’s Resources for Tomorrow (WaterSMART) program. Where Reclamation supports water conservation planning and improvement projects by States, tribes, local governments, irrigation water companies, and other organizations, NRCS targets assistance to agricultural producers to improve water conservation and irrigation water use efficiency on their operation.\r',
       'Priorities for the joint effort are—\r',
       '    • Improving irrigation water use efficiency\r',
@@ -222,109 +222,109 @@ export const coloradoInitiatives = [
       '    • Preventing surface water depletion\r',
       '    • Optimal use of naturally available moisture and prevention of drought stress',
     ],
-    lci_parent_id: null,
+    lciParentId: null,
   },
   {
-    lci_id: 10,
-    lci_name: 'Working Lands for Wildlife',
-    lci_resource: '821a9b7fe7d44d92bb0ce60c0d5bcb8b',
-    lci_image_link: 'wlfw.map',
-    lci_page_link:
+    lciId: 10,
+    lciName: 'Working Lands for Wildlife',
+    lciResource: '821a9b7fe7d44d92bb0ce60c0d5bcb8b',
+    lciImageLink: 'wlfw.map',
+    lciPageLink:
       'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/fishwildlife/?cid=stelprdb1046975',
-    lci_page_link_text:
+    lciPageLinkText:
       'Go to the Working Lands for Wildlife page for detailed information',
-    lci_description: [
+    lciDescription: [
       'The WLFW initiative is a partnership with the U.S. Fish and Wildlife Service (FWS) that targets conservation efforts to improve agricultural and forest productivity and enhance wildlife habitat. Nine species are used as barometers of success because their habitat needs are representative of healthy, functioning ecosystems where conservation efforts benefit a much broader suite of species. NRCS provides technical and financial assistance to participants who voluntarily make improvements to working lands.\r',
       'In the event any of the species are listed, the FWS is committed to validating the conference reports and opinions (linked below) as biological opinions for NRCS under section 7 of the Endangered Species Act (ESA), and exempting any incidental take as described in the biological opinions associated with implementing the specified conservation practices. As a result, the participants will know that the conservation practices will continue to benefit wildlife for as long as they are implemented, and that any ESA issues associated with their implementation have been already addressed in full. Thus, FWS provides regulatory predictability relative to the ESA such that no matter what the legal status of a species, participants may have the peace of mind to keep their working lands working with NRCS conservation systems in place.',
     ],
-    lci_parent_id: null,
+    lciParentId: null,
   },
   {
-    lci_id: 11,
-    lci_name: 'Golden-Winged Warbler',
-    lci_resource: '',
-    lci_image_link: 'goldenwingedwarbler.map',
-    lci_page_link:
+    lciId: 11,
+    lciName: 'Golden-Winged Warbler',
+    lciResource: '',
+    lciImageLink: 'goldenwingedwarbler.map',
+    lciPageLink:
       'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/fishwildlife/?cid=stelprdb1046990',
-    lci_page_link_text:
+    lciPageLinkText:
       'Go to the Golden-Winged Warbler page for detailed information',
-    lci_description: [
+    lciDescription: [
       'The golden-winged warbler is a nationally identified target species of the Working Lands for Wildlife (WLFW) partnership, a collaborative approach to conserve habitat on working lands. From 2012 to 2016, WLFW enabled producers to conserve or create more than 13,000 acres of early successional habitat through the implementation of science-based habitat guidelines developed especially for the golden-winged warbler. By the end of 2021, the agency aims to help landowners manage for an additional 15,000 acres of habitat.\r',
       'WLFW provides technical and financial assistance through the Environmental Quality Incentives Program, which is funded through the Farm Bill, the largest funding source for wildlife habitat conservation on private lands. Habitat restored for the golden-winged warbler benefits many other species, including songbirds like indigo bunting, gray catbird and prairie warbler as well as game species like American woodcock, cottontail, wild turkey, deer and grouse.',
     ],
-    lci_parent_id: 10,
+    lciParentId: 10,
   },
   {
-    lci_id: 12,
-    lci_name: 'Gopher Tortoise',
-    lci_resource: '',
-    lci_image_link: 'gophertortoise.map',
-    lci_page_link:
+    lciId: 12,
+    lciName: 'Gopher Tortoise',
+    lciResource: '',
+    lciImageLink: 'gophertortoise.map',
+    lciPageLink:
       'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/fishwildlife/?cid=stelprdb1047006',
-    lci_page_link_text:
+    lciPageLinkText:
       'Go to the Gopher Tortoise page for detailed information',
-    lci_description: [
+    lciDescription: [
       'The gopher tortoise is a nationally identified target species of the Working Lands for Wildlife (WLFW) partnership, a collaborative approach to conserve habitat on working lands. Since 2012, WLFW has enabled producers to conserve or create more than 278,000 acres of longleaf pine forests. WLFW provides technical and financial assistance through the Environmental Quality Incentives Program, which is funded through the Farm Bill, the largest funding source for wildlife habitat conservation on private lands. Additionally, NRCS is working to restore longleaf pine across its historic range -- from Texas to Virginia – through the Longleaf Pine Initiative. Since 2010, more than 278,000 acres of forests have been restored or enhanced.\r',
       ' Habitat restored for the gopher tortoise benefits many other species, including red cockaded woodpecker, black pine snake, bobwhite quail, white-tailed deer, turkey and dusky gopher frog. In total, 28 threatened and endangered species are dependent on longleaf pine forests.',
     ],
-    lci_parent_id: 10,
+    lciParentId: 10,
   },
   {
-    lci_id: 13,
-    lci_name: 'Lesser Prairie-Chicken',
-    lci_resource: '',
-    lci_image_link: 'lesserprairiechicken.map',
-    lci_page_link:
+    lciId: 13,
+    lciName: 'Lesser Prairie-Chicken',
+    lciResource: '',
+    lciImageLink: 'lesserprairiechicken.map',
+    lciPageLink:
       'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/fishwildlife/?cid=stelprdb1047028',
-    lci_page_link_text:
+    lciPageLinkText:
       'Go to the Lesser Prairie-Chicken page for detailed information',
-    lci_description: [
+    lciDescription: [
       'The lesser prairie-chicken is a nationally identified target species of the Working Lands for Wildlife (WLFW) partnership, a collaborative approach to conserve habitat while keeping working lands working. From 2010 to 2015, the Lesser Prairie-Chicken Initiative (part of the WLFW family) enabled producers to conserve more than 1 million acres of prime habitat. From 2016 to 2018, NRCS aims to conserve 500,000 additional acres.\r',
       ' Through WLFW, NRCS targets conservation efforts where the returns are highest by targeting threats to the bird. For the lesser prairie-chicken, the loss and fragmentation of habitat is caused by invading mesquite and redcedars, poor grassland and prairie health and conversion to cropland. WLFW is able to provide technical and financial assistance through the Environmental Quality Incentives Program and Agricultural Conservation Easement Program, two programs funded through the Farm Bill.',
     ],
-    lci_parent_id: 10,
+    lciParentId: 10,
   },
   {
-    lci_id: 14,
-    lci_name: 'Monarch Butterfly',
-    lci_resource: '',
-    lci_image_link: 'monarchbutterfly.map',
-    lci_page_link:
+    lciId: 14,
+    lciName: 'Monarch Butterfly',
+    lciResource: '',
+    lciImageLink: 'monarchbutterfly.map',
+    lciPageLink:
       'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/pollinate/?cid=nrcseprd402207',
-    lci_page_link_text:
+    lciPageLinkText:
       'Go to the Monarch Butterfly page for detailed information',
-    lci_description: [
+    lciDescription: [
       'The monarch butterfly is one of the most iconic butterflies in North America and is known in part for its annual multi-generational migration from overwintering sites in central Mexico and coastal California to as far north as Canada. Multiple critical population stressors including the loss and degradation of habitat across the species range have led to a significant decrease in the number of monarchs in the U.S. over the past few decades.',
     ],
-    lci_parent_id: 10,
+    lciParentId: 10,
   },
   {
-    lci_id: 15,
-    lci_name: 'Southwestern Willow Flycatcher',
-    lci_resource: '',
-    lci_image_link: 'swwillowflycatcher.map',
-    lci_page_link:
+    lciId: 15,
+    lciName: 'Southwestern Willow Flycatcher',
+    lciResource: '',
+    lciImageLink: 'swwillowflycatcher.map',
+    lciPageLink:
       'https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/plantsanimals/fishwildlife/?cid=stelprdb1047041',
-    lci_page_link_text:
+    lciPageLinkText:
       'Go to the Southwestern Willow Flycatcher page for detailed information',
-    lci_description: [
+    lciDescription: [
       'The southwestern willow flycatcher is a nationally identified target species of the Working Lands for Wildlife (WLFW) partnership, a collaborative approach to conserve habitat on working lands. Since 2012, WLFW enabled producers to conserve or create more than 8,000 acres of riparian areas and adjacent upland habitat. WLFW provides technical and financial assistance through the Environmental Quality Incentives Program, which is funded through the Farm Bill, the largest funding source for wildlife habitat conservation on private lands.\r',
       ' Through WLFW, NRCS targets conservation efforts where the returns are highest by targeting threats to the bird. The flycatcher nests in native trees and shrubs where available but also nests in thickets dominated by the non-native invasive species like tamarisk and Russian olive. Efforts to control non-native species can be detrimental to flycatchers, especially if those plants are removed in places lacking in suitable native riparian habitat.',
     ],
-    lci_parent_id: 10,
+    lciParentId: 10,
   },
   {
-    lci_id: 16,
-    lci_name: 'Sage Grouse',
-    lci_resource: '',
-    lci_image_link: 'sagegrouse.map',
-    lci_page_link:
+    lciId: 16,
+    lciName: 'Sage Grouse',
+    lciResource: '',
+    lciImageLink: 'sagegrouse.map',
+    lciPageLink:
       'https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/national/plantsanimals/fishwildlife/?cid=steldevb1027671',
-    lci_page_link_text: 'Go to the Sage Grouse page for detailed information',
-    lci_description: [
+    lciPageLinkText: 'Go to the Sage Grouse page for detailed information',
+    lciDescription: [
       'NRCS launched the Sage Grouse Initiative (SGI) in 2010 as a highly targeted and science-based landscape approach to proactively conserve sage-grouse and sustain the working rangelands that support western ranching economies. This innovative partnership of ranchers, agencies, universities, non-profit groups and businesses all embrace a common vision – achieving wildlife conservation through sustainable ranching.',
     ],
-    lci_parent_id: 10,
+    lciParentId: 10,
   },
 ];
 
@@ -1446,237 +1446,271 @@ export const practices = [
 ];
 
 export const staticText = {
-  status: 'fulfilled',
-  endpointName: 'getConfigurationSettingsStaticText',
-  requestId: '0XKaCfZvl6L-UdZsNeh0G',
+  status: "fulfilled",
+  endpointName: "getConfigurationSettingsStaticText",
+  requestId: "MFlz4P-l1e3FbV5AzHFoZ",
   originalArgs: null,
-  startedTimeStamp: 1656022943246,
+  startedTimeStamp: 1658174455909,
   data: {
+    ConservationPracticeCategoryLink: {
+      configurationSettingName: "ConservationPracticeCategoryLink",
+      configurationValue: "https://publicdashboards.dl.usda.gov/t/FPAC_PUB/views/CPDPracticesbyYearforStateandMeasure/Dashboard1?Stabbr"
+    },
+    cp_paragraph_1: {
+      configurationSettingName: "cp_paragraph_1",
+      configurationValue: "Through the Farm Bill, NRCS is able to provide assistance to agricultural producers who want to voluntarily make changes to their land or production operations to improve conditions related to soil, water, air, plants, wildlife and other natural resources. These conservation activities, or \"practices\", improve the health of ecosystems while also boosting the land's resiliency and production."
+    },
+    cp_paragraph_2: {
+      configurationSettingName: "cp_paragraph_2",
+      configurationValue: "Technical assistance and financial assistance is available. Technical assistance is free to producers, and involves a team of agency experts working with producers to develop a customized conservation plan and system of conservation practices. Financial assistance helps producers pay for the adoption of those practices and is available through multiple Farm Bill programs, such as the Environmental Quality Incentives Program (EQIP) and the Conservation Stewardship Program (CSP). NRCS assistance varies by state, practice, and program, but generally covers 50 to 70 percent of the cost. Rates may be higher for priority practices or to address the unique circumstances of producers in historically underserved groups."
+    },
     cpCategoryHeading: {
-      configurationSettingName: 'cpCategoryHeading',
-      configurationValue: 'Conservation Practices',
+      configurationSettingName: "cpCategoryHeading",
+      configurationValue: "Conservation Practices"
     },
     cpCategoryHeadingDescription: {
-      configurationSettingName: 'cpCategoryHeadingDescription',
-      configurationValue:
-        'Through the Farm Bill, NRCS is able to provide assistance to agricultural producers who want to voluntarily make changes to their land or production operations to improve conditions related to soil, water, air, plants, wildlife and other natural resources. These conservation activities, or ////"practices", improve the health of ecosystems while also boosting the land\'s resiliency and production.',
+      configurationSettingName: "cpCategoryHeadingDescription",
+      configurationValue: "Through the Farm Bill, NRCS is able to provide assistance to agricultural producers who want to voluntarily make changes to their land or production operations to improve conditions related to soil, water, air, plants, wildlife and other natural resources. These conservation activities, or \"practices\", improve the health of ecosystems while also boosting the land's resiliency and production."
     },
     cpCategoryHeadingDescription2: {
-      configurationSettingName: 'cpCategoryHeadingDescription2',
-      configurationValue:
-        'Technical assistance and financial assistance is available. Technical assistance is free to producers, and involves a team of agency experts working with producers to develop a customized conservation plan and system of conservation practices. Financial assistance helps producers pay for the adoption of those practices and is available through multiple Farm Bill programs, such as the Environmental Quality Incentives Program (EQIP) and the Conservation Stewardship Program (CSP). NRCS assistance varies by state, practice, and program, but generally covers 50 to 70 percent of the cost. Rates may be higher for priority practices or to address the unique circumstances of producers in historically underserved groups.',
+      configurationSettingName: "cpCategoryHeadingDescription2",
+      configurationValue: "Technical assistance and financial assistance is available. Technical assistance is free to producers, and involves a team of agency experts working with producers to develop a customized conservation plan and system of conservation practices. Financial assistance helps producers pay for the adoption of those practices and is available through multiple Farm Bill programs, such as the Environmental Quality Incentives Program (EQIP) and the Conservation Stewardship Program (CSP). NRCS assistance varies by state, practice, and program, but generally covers 50 to 70 percent of the cost. Rates may be higher for priority practices or to address the unique circumstances of producers in historically underserved groups."
     },
     cpCategoryHeadingSubHeading: {
-      configurationSettingName: 'cpCategoryHeadingSubHeading',
-      configurationValue: 'Conservation Practice Categories',
+      configurationSettingName: "cpCategoryHeadingSubHeading",
+      configurationValue: "Conservation Practice Categories"
     },
     cpCategoryHeadingSubHeadingDescription: {
-      configurationSettingName: 'cpCategoryHeadingSubHeadingDescription',
-      configurationValue:
-        "NRCS's conservation practices help people reduce soil erosion, enhance water supplies, improve water quality, increase wildlife habitat, and reduce damages caused by floods and other natural disasters. One practice may have multiple benefits depending on when, where, and how it is applied. To illustrate the impact of our conservation practices, we group them into categories that describe their benefits.",
+      configurationSettingName: "cpCategoryHeadingSubHeadingDescription",
+      configurationValue: "NRCS's conservation practices help people reduce soil erosion, enhance water supplies, improve water quality, increase wildlife habitat, and reduce damages caused by floods and other natural disasters. One practice may have multiple benefits depending on when, where, and how it is applied. To illustrate the impact of our conservation practices, we group them into categories that describe their benefits."
     },
     cpDetailHeading5: {
-      configurationSettingName: 'cpDetailHeading5',
-      configurationValue: 'Projects and Initiatives Using the Practice',
+      configurationSettingName: "cpDetailHeading5",
+      configurationValue: "Projects and Initiatives Using the"
     },
     cpDetailHeadingPiDescription: {
-      configurationSettingName: 'cpDetailHeadingPiDescription',
-      configurationValue:
-        'NRCS projects and initiatives on the ground assess the impacts of conservation practices, build scientific understanding of those impacts and the processes underlying them, explore the potential of innovative conservation activities, and coordinate planning efforts at larger scales to address resource concerns from a watershed or landscape perspective.',
+      configurationSettingName: "cpDetailHeadingPiDescription",
+      configurationValue: "NRCS projects and initiatives on the ground assess the impacts of conservation practices, build scientific understanding of those impacts and the processes underlying them, explore the potential of innovative conservation activities, and coordinate planning efforts at larger scales to address resource concerns from a watershed or landscape perspective."
     },
     cpDetailHeadingRC: {
-      configurationSettingName: 'cpDetailHeadingRC',
-      configurationValue: 'Resource Concerns Treated',
+      configurationSettingName: "cpDetailHeadingRC",
+      configurationValue: "Resource Concerns Treated"
     },
     cpDetailHeadingRCDescription: {
-      configurationSettingName: 'cpDetailHeadingRCDescription',
-      configurationValue:
-        'NRCS conservation activities are carried out according to a conservation plan developed with the producer that identifies the appropriate conservation practice or practices to address the resource concerns affecting their farm, ranch, or forest. The resource concerns addressed by this practice are listed below.',
+      configurationSettingName: "cpDetailHeadingRCDescription",
+      configurationValue: "NRCS conservation activities are carried out according to a conservation plan developed with the producer that identifies the appropriate conservation practice or practices to address the resource concerns affecting their farm, ranch, or forest. The resource concerns addressed by this practice are listed below."
     },
     cpDetailHeadingSubheading2: {
-      configurationSettingName: 'cpDetailHeadingSubheading2',
-      configurationValue: 'Practice Information',
+      configurationSettingName: "cpDetailHeadingSubheading2",
+      configurationValue: "Practice Information"
     },
     cpDetailHeadingSupport: {
-      configurationSettingName: 'cpDetailHeadingSupport',
-      configurationValue: 'Support',
+      configurationSettingName: "cpDetailHeadingSupport",
+      configurationValue: "Support"
     },
     cpDetailHeadingSupportDescription: {
-      configurationSettingName: 'cpDetailHeadingSupportDescription',
-      configurationValue:
-        'NRCS provides financial and technical support for practices through a number of programs and initiatives that promote agricultural production and environmental quality as compatible national goals.',
+      configurationSettingName: "cpDetailHeadingSupportDescription",
+      configurationValue: "NRCS provides financial and technical support for practices through a number of programs and initiatives that promote agricultural production and environmental quality as compatible national goals."
     },
     cpDetailHeadingSupportSubheading: {
-      configurationSettingName: 'cpDetailHeadingSupportSubheading',
-      configurationValue: 'Payment Schedules',
+      configurationSettingName: "cpDetailHeadingSupportSubheading",
+      configurationValue: "Payment Schedules"
     },
     cpDetailHeadingSupportSubheadingDescription: {
-      configurationSettingName: 'cpDetailHeadingSupportSubheadingDescription',
-      configurationValue:
-        'NRCS provides financial assistance for selected conservation practices. The availability and amount of financial assistance can vary between states.',
+      configurationSettingName: "cpDetailHeadingSupportSubheadingDescription",
+      configurationValue: "NRCS provides financial assistance for selected conservation practices. The availability and amount of financial assistance can vary between states."
     },
     cpDetailHeadingTools: {
-      configurationSettingName: 'cpDetailHeadingTools',
-      configurationValue: 'Specifications and. Tools',
+      configurationSettingName: "cpDetailHeadingTools",
+      configurationValue: "Specifications and Tools"
     },
     cpDetailHeadingToolsDescription: {
-      configurationSettingName: 'cpDetailHeadingToolsDescription',
-      configurationValue:
-        'NRCS technical standards guide proper implementation of recommended practices. Each practice also has a payment schedule that determines how much financial assistance is available for beginning or installing it. The following links provide details about practice standards and payment schedules specific to your region.',
+      configurationSettingName: "cpDetailHeadingToolsDescription",
+      configurationValue: "NRCS technical standards guide proper implementation of recommended practices. Each practice also has a payment schedule that determines how much financial assistance is available for beginning or installing it. The following links provide details about practice standards and payment schedules specific to your region."
     },
     cpDetailHeadingToolsSubheading: {
-      configurationSettingName: 'cpDetailHeadingToolsSubheading',
-      configurationValue: 'National Specifications',
+      configurationSettingName: "cpDetailHeadingToolsSubheading",
+      configurationValue: "National Specifications"
     },
     cpDetailHeadingToolsSubheading2: {
-      configurationSettingName: 'cpDetailHeadingToolsSubheading2',
-      configurationValue: 'Associated Practices',
+      configurationSettingName: "cpDetailHeadingToolsSubheading2",
+      configurationValue: "Associated Practices"
     },
     cpDetailHeadingToolsSubheading2Description: {
-      configurationSettingName: 'cpDetailHeadingToolsSubheading2Description',
-      configurationValue:
-        'These are conservation practices that are commonly applied in association with this practice.',
+      configurationSettingName: "cpDetailHeadingToolsSubheading2Description",
+      configurationValue: "These are conservation practices that are commonly applied in association with this practice."
     },
     cpDetailHeadingToolsSubheadingDescriptionState: {
-      configurationSettingName:
-        'cpDetailHeadingToolsSubheadingDescriptionState',
-      configurationValue:
-        'You can access this state’s conservation practice standards on the NRCS Field Office Technical Guide.',
+      configurationSettingName: "cpDetailHeadingToolsSubheadingDescriptionState",
+      configurationValue: "You can access this state’s conservation practice standards on the NRCS Field Office Technical Guide."
     },
     cpDetailHeadingToolsSubheadingDescriptionUS: {
-      configurationSettingName: 'cpDetailHeadingToolsSubheadingDescriptionUS',
-      configurationValue:
-        'You can find national conservation practice standards, overviews, conservation practice effects and network effects diagrams on the NRCS website.',
+      configurationSettingName: "cpDetailHeadingToolsSubheadingDescriptionUS",
+      configurationValue: "You can find national conservation practice standards, overviews, conservation practice effects and network effects diagrams on the NRCS website."
     },
     cpTitle: {
-      configurationSettingName: 'cpTitle',
-      configurationValue: 'Conservation Practices',
+      configurationSettingName: "cpTitle",
+      configurationValue: "Conservation Practices"
     },
     customReportDescription: {
-      configurationSettingName: 'customReportDescription',
-      configurationValue:
-        "Select the information you'd like to include in your report:",
+      configurationSettingName: "customReportDescription",
+      configurationValue: "Select the information you'd like to include in your report:"
     },
     customReportHeading: {
-      configurationSettingName: 'customReportHeading',
-      configurationValue: 'Preview',
+      configurationSettingName: "customReportHeading",
+      configurationValue: "Preview"
     },
     customReportTitle: {
-      configurationSettingName: 'customReportTitle',
-      configurationValue: 'Create a Custom Report',
+      configurationSettingName: "customReportTitle",
+      configurationValue: "Create a Custom Report"
+    },
+    EquipPracticeCertificationTrendImageLink: {
+      configurationSettingName: "EquipPracticeCertificationTrendImageLink",
+      configurationValue: "https://publicdashboards.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/practice_obligation_trend.png?state_filter"
+    },
+    EquipPracticeCertificationTrendLink: {
+      configurationSettingName: "EquipPracticeCertificationTrendLink",
+      configurationValue: "https://publicdashboards.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/practice_obligation_trend?state_filter"
     },
     fotg_practice_deeplink_webservice: {
-      configurationSettingName: 'fotg_practice_deeplink_webservice',
-      configurationValue:
-        'https://efotg.sc.egov.usda.gov/api/StateLevelDocument',
+      configurationSettingName: "fotg_practice_deeplink_webservice",
+      configurationValue: "https://efotg.sc.egov.usda.gov/api/StateLevelDocument"
     },
     homeLocationDescription: {
-      configurationSettingName: 'homeLocationDescription',
-      configurationValue:
-        'Find conservation practices and NRCS sponsored projects & initiatives in your location.',
+      configurationSettingName: "homeLocationDescription",
+      configurationValue: "Find conservation practices and NRCS sponsored projects & initiatives in your location."
     },
     homeLocationTitle: {
-      configurationSettingName: 'homeLocationTitle',
-      configurationValue:
-        'Find NRCS Conservation Practices and Activities by Location',
+      configurationSettingName: "homeLocationTitle",
+      configurationValue: "Find NRCS Conservation Practices and Activities by Location"
     },
     homePracticeDescription: {
-      configurationSettingName: 'homePracticeDescription',
-      configurationValue:
-        'A conservation practice is a specific treatment, such as a structural or vegetative measure, or management technique, commonly used to meet specific needs in planning and implementing conservation, for which standards and specifications have been developed.',
+      configurationSettingName: "homePracticeDescription",
+      configurationValue: "A conservation practice is a specific treatment, such as a structural or vegetative measure, or management technique, commonly used to meet specific needs in planning and implementing conservation, for which standards and specifications have been developed."
     },
     homePracticeTitle: {
-      configurationSettingName: 'homePracticeTitle',
-      configurationValue:
-        'Find NRCS Conservation Practices by Practice Category',
+      configurationSettingName: "homePracticeTitle",
+      configurationValue: "Find NRCS Conservation Practices by Practice Category"
     },
     homeQuickSearchDescription: {
-      configurationSettingName: 'homeQuickSearchDescription',
-      configurationValue:
-        "Know what you're looking for? Do a quick search and find information fast.",
+      configurationSettingName: "homeQuickSearchDescription",
+      configurationValue: "Know what you're looking for? Do a quick search and find information fast."
     },
     homeTitle: {
-      configurationSettingName: 'homeTitle',
-      configurationValue: 'Conservation Practice Data and Innovations',
+      configurationSettingName: "homeTitle",
+      configurationValue: "Conservation Practice Data and Innovations"
     },
     overviewDescription: {
-      configurationSettingName: 'overviewDescription',
-      configurationValue:
-        'NRCS planners assess the existing condition of natural resources on a site to determine whether additional treatment is needed to address a potential resource concern. The natural resource concerns most frequently identified, and the conservation practices applied, vary across states and regions based on predominant land uses, topography, soil conditions, ...',
+      configurationSettingName: "overviewDescription",
+      configurationValue: "NRCS planners assess the existing condition of natural resources on a site to determine whether additional treatment is needed to address a potential resource concern. The natural resource concerns most frequently identified, and the conservation practices applied, vary across states and regions based on predominant land uses, topography, soil conditions, ..."
     },
     overviewHeadingCP: {
-      configurationSettingName: 'overviewHeadingCP',
-      configurationValue: 'Top 5 Conservation Practices',
+      configurationSettingName: "overviewHeadingCP",
+      configurationValue: "Top 5 Conservation Practices"
     },
     overviewHeadingCPDescription: {
-      configurationSettingName: 'overviewHeadingCPDescription',
-      configurationValue: 'Description of this section...',
+      configurationSettingName: "overviewHeadingCPDescription",
+      configurationValue: "Description of this section..."
     },
     overviewHeadingRC: {
-      configurationSettingName: 'overviewHeadingRC',
-      configurationValue: 'Top 5 Resource Concerns',
+      configurationSettingName: "overviewHeadingRC",
+      configurationValue: "Top 5 Resource Concerns"
     },
     overviewHeadingRCDescription: {
-      configurationSettingName: 'overviewHeadingRCDescription',
-      configurationValue: 'Description of this section...',
+      configurationSettingName: "overviewHeadingRCDescription",
+      configurationValue: "Description of this section..."
     },
     overviewTitle: {
-      configurationSettingName: 'overviewTitle',
-      configurationValue: 'Overview',
+      configurationSettingName: "overviewTitle",
+      configurationValue: "Overview"
     },
     piCigHeading: {
-      configurationSettingName: 'piCigHeading',
-      configurationValue: 'Conservation Innovation Grants',
+      configurationSettingName: "piCigHeading",
+      configurationValue: "Conservation Innovation Grants"
     },
     piCigHeadingDescription: {
-      configurationSettingName: 'piCigHeadingDescription',
-      configurationValue:
-        'Conservation Innovation Grants (CIG) is a competitive program that supports the development of new tools, approaches, practices, and technologies to further natural resource conservation on private lands. Through creative problem solving and innovation, CIG partners work to address our nations water quality, air quality, soil health and wildlife habitat challenges, all while improving agricultural operations. Public and private grantees develop the tools, technologies, and strategies to support next-generation conservation efforts on working lands and develop market-based solutions to resource challenges.',
+      configurationSettingName: "piCigHeadingDescription",
+      configurationValue: "Conservation Innovation Grants (CIG) is a competitive program that supports the development of new tools, approaches, practices, and technologies to further natural resource conservation on private lands."
+    },
+    piCigHeadingDescription2: {
+      configurationSettingName: "piCigHeadingDescription2",
+      configurationValue: "Conservation Innovation Grants (CIG) is a competitive program that supports the development of new tools, approaches, practices, and technologies to further natural resource conservation on private lands. Through creative problem solving and innovation, CIG partners work to address our nations water quality, air quality, soil health and wildlife habitat challenges, all while improving agricultural operations. Public and private grantees develop the tools, technologies, and strategies to support next-generation conservation efforts on working lands and develop market-based solutions to resource challenges."
+    },
+    piCigHeadingImage: {
+      configurationSettingName: "piCigHeadingImage",
+      configurationValue: "../images/grantMap.png*Map of the United States"
     },
     piDescription: {
-      configurationSettingName: 'piDescription',
-      configurationValue:
-        "NRCS's natural resources conservation programs help people reduce soil erosion, enhance water supplies, improve water quality, increase wildlife habitat, and reduce damages caused by floods and other natural disasters.",
+      configurationSettingName: "piDescription",
+      configurationValue: "NRCS's natural resources conservation programs help people reduce soil erosion, enhance water supplies, improve water quality, increase wildlife habitat, and reduce damages caused by floods and other natural disasters."
     },
     piDescription2: {
-      configurationSettingName: 'piDescription2',
-      configurationValue:
-        'In addition to the Farm Bill Programs, which offer Conservation Technical Assistance and Financial Assistance to producers interested in engaging in voluntary conservation on their land, NRCS manages a number of Projects and Initiatives that operate at the landscape scale and above. These Projects and Initiatives serve a variety of purposes, including:',
+      configurationSettingName: "piDescription2",
+      configurationValue: "In addition to the Farm Bill Programs, which offer Conservation Technical Assistance and Financial Assistance to producers interested in engaging in voluntary conservation on their land, NRCS manages a number of Projects and Initiatives that operate at the landscape scale and above. These Projects and Initiatives serve a variety of purposes, including:"
     },
     piDescription3: {
-      configurationSettingName: 'piDescription3',
-      configurationValue:
-        '*Targeting Program dollars to advance specific natural resource objectives\r\n*Collecting information on the resource impacts of applied conservation building partnerships that expand NRCS’ ability to develop innovative solutions to conservation challenges\r\n*Building the science base necessary to continually improve program delivery in pursuit of measurable improvements and outcomes in natural resource management',
+      configurationSettingName: "piDescription3",
+      configurationValue: "Targeting Program dollars to advance specific natural resource objectives\r\n*Collecting information on the resource impacts of applied conservation building partnerships that expand NRCS’ ability to develop innovative solutions to conservation challenges\r\n*Building the science base necessary to continually improve program delivery in pursuit of measurable improvements and outcomes in natural resource management"
     },
     piLciHeading: {
-      configurationSettingName: 'piLciHeading',
-      configurationValue: 'Landscape Conservation Initiatives',
+      configurationSettingName: "piLciHeading",
+      configurationValue: "Landscape Conservation Initiatives"
+    },
+    piLciHeadingDescription: {
+      configurationSettingName: "piLciHeadingDescription",
+      configurationValue: "NRCS uses Landscape Conservation Initiatives to accelerate the benefits of voluntary conservation programs, such as cleaner water and air, healthier soil and enhanced wildlife habitat."
+    },
+    piLciHeadingDescription2: {
+      configurationSettingName: "piLciHeadingDescription2",
+      configurationValue: "NRCS uses Landscape Conservation Initiatives to accelerate the benefits of voluntary conservation programs, such as cleaner water and air, healthier soil and enhanced wildlife habitat. NRCS conservation programs help agricultural producers improve the environment while maintaining a vibrant agricultural sector."
+    },
+    piLciHeadingDescription3: {
+      configurationSettingName: "piLciHeadingDescription3",
+      configurationValue: "These initiatives enhance the locally driven process for identifying conservation priorities to better address nationally and regionally important conservation goals that transcend localities. They build on locally led efforts and partnerships, and they’re based on science. Through the initiatives, NRCS and its partners coordinate the delivery of assistance where it can have the most impact. These landscape-level efforts have seen success across the country. From the removal of streams from the federal impaired streams list to the determination not to list the greater sage-grouse and New England cottontail, NRCS’ work with producers benefits wildlife, natural resources and agricultural operations across the country."
+    },
+    piLciHeadingImage: {
+      configurationSettingName: "piLciHeadingImage",
+      configurationValue: "../images/landscapeMap.png*Map of Landscape Conservation Initiatives in the United States"
     },
     piTitle: {
-      configurationSettingName: 'piTitle',
-      configurationValue: 'Projects And Initiatives',
+      configurationSettingName: "piTitle",
+      configurationValue: "Projects And Initiatives"
+    },
+    PracticeDetailImageLink: {
+      configurationSettingName: "PracticeDetailImageLink",
+      configurationValue: "https://publicdashboards.dl.usda.gov/t/FPAC_PUB/views/CPDPracticebyProgramOverYears/Dashboard1.png?Stabbr"
+    },
+    PracticeDetailLink: {
+      configurationSettingName: "PracticeDetailLink",
+      configurationValue: "https://publicdashboards.dl.usda.gov/t/FPAC_PUB/views/CPDPracticebyProgramOverYears/Dashboard1?Stabbr"
     },
     quickSearchDescription: {
-      configurationSettingName: 'quickSearchDescription',
-      configurationValue:
-        'Search for information on practice applications, practice support, and impacts of practice implementation.',
+      configurationSettingName: "quickSearchDescription",
+      configurationValue: "Search for information on practice applications, practice support, and impacts of practice implementation."
     },
     QuickSearchResultsHeading: {
-      configurationSettingName: 'QuickSearchResultsHeading',
-      configurationValue: 'ConservationPractices',
+      configurationSettingName: "QuickSearchResultsHeading",
+      configurationValue: "Conservation Practices"
     },
     QuickSearchResultsHeading2: {
-      configurationSettingName: 'QuickSearchResultsHeading2',
-      configurationValue: 'Projects & Initiatives',
+      configurationSettingName: "QuickSearchResultsHeading2",
+      configurationValue: "Projects & Initiatives"
     },
     QuickSearchResultsTitle: {
-      configurationSettingName: 'QuickSearchResultsTitle',
-      configurationValue: 'QuickSearchResults',
+      configurationSettingName: "QuickSearchResultsTitle",
+      configurationValue: "Quick Search Results"
     },
     quickSearchTitle: {
-      configurationSettingName: 'quickSearchTitle',
-      configurationValue: 'Quick Search',
+      configurationSettingName: "quickSearchTitle",
+      configurationValue: "Quick Search"
     },
+    RegionalConservationPracticeLink: {
+      configurationSettingName: "RegionalConservationPracticeLink",
+      configurationValue: "https://publicdashboards.dl.usda.gov/t/FPAC_PUB/views/CPDPracticeListbyAcres/Dashboard1?Stabbr"
+    },
+    TopPracticesEQUIPOpenDataLink: {
+      configurationSettingName: "TopPracticesEQUIPOpenDataLink",
+      configurationValue: "https://publicdashboards.dl.usda.gov/t/FPAC_PUB/views/CODP_Conservation_Practice_Embeds/top_practices_by_obligated?state_filter"
+    }
   },
-  fulfilledTimeStamp: 1656022943774,
 };

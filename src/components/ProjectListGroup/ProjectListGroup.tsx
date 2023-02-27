@@ -75,7 +75,7 @@ const ProjectListGroup = ({
 
   let { data: initiativesList } = usePostLandscapeInitiativesQuery(inputdata);
   initiativesList = initiativesList?.filter((initiative: any) => {
-    return !initiative.lci_parent_id;
+    return !initiative.lciParentId;
   });
 
   const [activeTab, setActiveTab] = useState(1);
@@ -279,13 +279,13 @@ const ProjectListGroup = ({
                   return (
                     <li key={initiativeID}>
                       <ProjectListItem
-                        id={initiative.lci_id}
-                        description={initiative.lci_description}
-                        title={initiative.lci_name}
+                        id={initiative.lciId}
+                        description={initiative.lciDescription}
+                        title={initiative.lciName}
                         owner={initiative.initiativeOwner}
                         statesInvolved={initiative.statesInvolved}
                         year={initiative.initiativeYear}
-                        link={initiative.lci_page_link}
+                        link={initiative.lciPageLink}
                       />
                     </li>
                   );

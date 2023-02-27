@@ -6,6 +6,7 @@ import { api, fotgApi } from './services/api';
 import disableSlice from './Slice/disableSlice';
 import pdfGenSlice from './Slice/pdfGenSlice';
 import practiceSlice from './Slice/practiceSlice';
+import resourceConcernSlice from './Slice/resourceConcernSlice';
 import stateSlice from './Slice/stateSlice';
 import staticTextSlice from './Slice/staticTextSlice';
 
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   disableSlice,
   pdfGenSlice,
   practiceSlice,
+  resourceConcernSlice,
   stateSlice,
   staticTextSlice,
 });
@@ -23,7 +25,7 @@ const persistConfig = {
   key: 'root',
   storage,
   blacklist: [''], // State will not be persisted
-  whitelist: ['stateSlice', 'practiceSlice', 'disableSlice', 'staticTextSlice'], // only State will be persisted
+  whitelist: ['stateSlice', 'practiceSlice', 'resourceConcernSlice', 'disableSlice', 'staticTextSlice'], // only State will be persisted
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

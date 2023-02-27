@@ -11,6 +11,8 @@ import {
 } from '../../common/test-utils/test_utils';
 import { currentState } from '../../Redux/Slice/stateSlice';
 import { createTestStore } from '../../Redux/store';
+import { setStaticText } from '../../Redux/Slice/staticTextSlice';
+import { staticText } from '../../api-mocks/constants';
 
 const router = require('react-router-dom');
 
@@ -29,7 +31,13 @@ afterEach(() => {
 
 describe('Projects container is rendered correctly', () => {
   beforeEach(() => {
-    render(<ProjectsContainer />);
+    store = createTestStore();
+    store.dispatch(setStaticText(staticText));
+    render(
+      <Provider store={store}>
+        <ProjectsContainer />
+      </Provider>
+    );
   });
 
   test('Should display the contents of the projects container', () => {
@@ -37,6 +45,14 @@ describe('Projects container is rendered correctly', () => {
   });
 
   test('Projects container should contain two map components', () => {
+    expect(
+      screen.queryByText(staticText.data.piDescription.configurationValue)
+    ).toBeInTheDocument();
+
+    expect(
+      screen.queryByText(staticText.data.piDescription2.configurationValue)
+    ).toBeInTheDocument();
+
     expect(
       screen.getByText((content: any, element: any) => {
         if (element) {
@@ -74,6 +90,7 @@ describe('Projects container is rendered correctly', () => {
     };
     store = createTestStore();
     store.dispatch(currentState(state));
+    store.dispatch(setStaticText(staticText));
     render(
       <Provider store={store}>
         <ProjectsContainer />
@@ -127,6 +144,7 @@ describe('Projects container is rendered correctly', () => {
     const history = createMemoryHistory();
     store = createTestStore();
     store.dispatch(currentState(state));
+    store.dispatch(setStaticText(staticText));
     render(
       <Router history={history}>
         <Provider store={store}>

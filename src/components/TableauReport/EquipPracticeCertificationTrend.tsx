@@ -12,6 +12,10 @@ const EquipPracticeCertificationTrend = ({
   practiceCode,
   checkTableauIsEmpty,
 }: any) => {
+  const uiText = useAppSelector(
+    (state) => (state?.staticTextSlice?.staticData as any)?.data
+  ); 
+  
   let stateName = useAppSelector(
     (state: any) => state?.stateSlice?.stateNameDisplay
   );
@@ -21,8 +25,8 @@ const EquipPracticeCertificationTrend = ({
   );
 
   const finalLink = fromPdfReport
-    ? tableauGraph.EquipPracticeCertificationTrend.imageLink
-    : tableauGraph.EquipPracticeCertificationTrend.link;
+    ? uiText?.EquipPracticeCertificationTrendImageLink?.configurationValue
+    : uiText?.EquipPracticeCertificationTrendLink?.configurationValue;
   const srcLink: string = `${finalLink}=${stateName}&practice_code_num=${practiceCode}&:tabs=no`;
 
   const receiveMessage = () => {

@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { useAppSelector } from '../../Redux/hooks/hooks';
-import { tableauGraph } from '../../common/typedconstants.common';
 import verifyTableauIsEmpty, {
   verifyUrlIsValid,
 } from '../../common/util/tableau';
@@ -17,6 +16,10 @@ declare global {
 let viz;
 const { tableau } = window;
 const ConservationPracticeCategory = ({ pageName, setIsTableauEmpty }: any) => {
+  const uiText = useAppSelector(
+    (state) => (state?.staticTextSlice?.staticData as any)?.data
+  ); 
+
   const ref = useRef(null);
   const stateAbbrInRedux = useAppSelector(
     (state: any) => state?.stateSlice?.stateAbbreviation
@@ -26,7 +29,7 @@ const ConservationPracticeCategory = ({ pageName, setIsTableauEmpty }: any) => {
       ? ''
       : stateAbbrInRedux;
   const srcLink: string = `${
-    tableauGraph.ConservationPracticeCategory?.link
+    uiText?.ConservationPracticeCategoryLink?.configurationValue
   }=${stateAbbr}&Measure=${pageName.replace('&', '%26')}`;
 
   const receiveMessage = () => {

@@ -1,12 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import LandscapeInitiativesCard from '../LandscapeInitiativesCard';
-import {
-  NRCS_CONSERVATION_INITIATIVES_URL,
-  nrcsLinkText,
-  landscapeInitiativeMap,
-} from './constants';
+import { NRCS_CONSERVATION_INITIATIVES_URL, nrcsLinkText } from './constants';
 import './project-type.scss';
 import LandscapeMapContainer from '../LandscapeInitiativeMap/LandscapeMapContainer';
+import { useAppSelector } from '../../Redux/hooks/hooks';
 
 interface IProjectTypeProps {
   selectedLandscapeInitiative: number;
@@ -24,9 +21,14 @@ const ProjectTypeSection = ({
     (landscapeInitiativesData &&
       landscapeInitiativesData.data &&
       landscapeInitiativesData.data.filter((initiative: any) => {
-        return initiative.lci_resource;
+        return initiative.lciResource;
       })) ||
     [];
+
+  const uiText = useAppSelector(
+    (state) => (state?.staticTextSlice?.staticData as any)?.data
+  );
+
   const renderProjectDetails = () => {
     // Conservation Grants
     if (projectType.id === 1) {
@@ -61,19 +63,20 @@ const ProjectTypeSection = ({
     }
     // Landscape Conservation Initiatives
     if (projectType.id === 2) {
-      const baseConservationInitiative: any = Object.values(
-        landscapeInitiativeMap
-      ).find((initiative) => initiative.id === 0);
+      const lciParagraphText1 =
+        uiText?.piLciHeadingDescription2?.configurationValue;
+      const lciParagraphText2 =
+        uiText?.piLciHeadingDescription3?.configurationValue;
       if (projectType.id === 2 || selectedLandscapeInitiative > 0) {
         const foundInitiative =
           landscapeInitiativesData?.data &&
           landscapeInitiativesData.data.find((initiative) => {
-            return initiative.lci_id === selectedLandscapeInitiative;
+            return initiative.lciId === selectedLandscapeInitiative;
           });
         const subInitiative =
           landscapeInitiativesData?.data &&
           landscapeInitiativesData.data.filter((parentId: any) => {
-            return parentId.lci_parent_id !== null;
+            return parentId.lciParentId !== null;
           });
         return (
           <div
@@ -85,7 +88,7 @@ const ProjectTypeSection = ({
             {selectedLandscapeInitiative === -1 ||
             initiativesWithWebMaps.some(
               (initiative: any) =>
-                initiative.lci_id === selectedLandscapeInitiative
+                initiative.lciId === selectedLandscapeInitiative
             ) ? (
               <LandscapeMapContainer
                 landscapeInitiativesData={landscapeInitiativesData.data || []}
@@ -93,43 +96,58 @@ const ProjectTypeSection = ({
               />
             ) : (
               <div className='landscape-img'>
-                <img
-                  src={foundInitiative?.lci_image_link}
-                  alt={foundInitiative?.lci_name}
-                />
+                {foundInitiative?.lciImageLink.includes('.pdf') ? (
+                  <object
+                    data-testid='pdf-map'
+                    className='map'
+                    data={foundInitiative?.lciImageLink}
+                    // we may need this version that hides the toolbar later
+                    // data={`${foundInitiative?.lciImageLink}#toolbar=0&navpanes=0&scrollbar=0`}}
+                    type='application/pdf'
+                    width='100%'
+                    title={foundInitiative?.lciName}
+                  />
+                ) : (
+                  <img
+                    data-testid='img-map'
+                    src={foundInitiative?.lciImageLink}
+                    alt={foundInitiative?.lciName}
+                  />
+                )}
               </div>
             )}
             <a
-              aria-label={foundInitiative?.lci_page_link_text || nrcsLinkText}
+              aria-label={foundInitiative?.lciPageLinkText || nrcsLinkText}
               href={
-                foundInitiative?.lci_page_link ||
+                foundInitiative?.lciPageLink ||
                 NRCS_CONSERVATION_INITIATIVES_URL
               }
               target='_blank'
-              title={foundInitiative?.lci_page_link_text || nrcsLinkText}
+              title={foundInitiative?.lciPageLinkText || nrcsLinkText}
               rel='noreferrer'
             >
-              {foundInitiative?.lci_page_link_text || nrcsLinkText}{' '}
+              {foundInitiative?.lciPageLinkText || nrcsLinkText}{' '}
             </a>
             <i className='fas fa-external-link-alt' />
             <hr className='margin-bottom-2' />
             <div className='landscape-details'>
               {
                 /*eslint react/no-array-index-key: 0 */
-                selectedLandscapeInitiative > 0
-                  ? foundInitiative?.lci_description.map(
-                      (paragraphText: any, id: number) => {
-                        return <p key={id}>{paragraphText}</p>;
-                      }
-                    )
-                  : baseConservationInitiative?.descriptions.map(
-                      (paragraphText) => {
-                        return <p>{paragraphText}</p>;
-                      }
-                    )
+                selectedLandscapeInitiative > 0 ? (
+                  foundInitiative?.lciDescription.map(
+                    (paragraphText: any, id: number) => {
+                      return <p key={id}>{paragraphText}</p>;
+                    }
+                  )
+                ) : (
+                  <>
+                    <p>{lciParagraphText1}</p>
+                    <p>{lciParagraphText2}</p>
+                  </>
+                )
               }
 
-              {foundInitiative?.lci_id === 10 &&
+              {foundInitiative?.lciId === 10 &&
               selectedLandscapeInitiative > 0 ? (
                 <>
                   <h3 className='wlfw-header'>
@@ -138,9 +156,9 @@ const ProjectTypeSection = ({
                   {subInitiative?.map((item: any) => (
                     /* eslint-disable */
                     <LandscapeInitiativesCard
-                      link={item.lci_page_link}
-                      title={item.lci_name}
-                      description={item.lci_description}
+                      link={item.lciPageLink}
+                      title={item.lciName}
+                      description={item.lciDescription}
                     />
                   ))}
                 </>
@@ -156,12 +174,10 @@ const ProjectTypeSection = ({
     if (selectedLandscapeInitiative > 0) {
       const foundInitiative = landscapeInitiativesData?.data?.find(
         (initiative) => {
-          return initiative.lci_id === selectedLandscapeInitiative;
+          return initiative.lciId === selectedLandscapeInitiative;
         }
       );
-      return (
-        <h2 data-testid='initiative-title'>{foundInitiative?.lci_name}</h2>
-      );
+      return <h2 data-testid='initiative-title'>{foundInitiative?.lciName}</h2>;
     }
     return <h2 data-testid='project-type-title'>{projectType.title}</h2>;
   };

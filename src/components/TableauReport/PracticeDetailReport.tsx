@@ -9,6 +9,10 @@ import verifyTableauIsEmpty, {
 let viz;
 const { tableau } = window;
 const PracticeDetailReport = ({ practiceCode, checkTableauIsEmpty }: any) => {
+  const uiText = useAppSelector(
+    (state) => (state?.staticTextSlice?.staticData as any)?.data
+  ); 
+
   const stateAbbrInRedux = useAppSelector(
     (state: any) => state?.stateSlice?.stateAbbreviation
   );
@@ -21,8 +25,8 @@ const PracticeDetailReport = ({ practiceCode, checkTableauIsEmpty }: any) => {
       ? ''
       : stateAbbrInRedux;
 
-  const srcLink: string = `${tableauGraph.PracticeDetail.link}=${stateAbbr}&Practice Code=${practiceCode}`;
-  const srcImageLink: string = `${tableauGraph.PracticeDetail.imageLink}=${stateAbbr}&Practice Code=${practiceCode}`;
+  const srcLink: string = `${uiText?.PracticeDetailLink?.configurationValue}=${stateAbbr}&Practice Code=${practiceCode}`;
+  const srcImageLink: string = `${uiText?.PracticeDetailImageLink?.configurationValue}=${stateAbbr}&Practice Code=${practiceCode}`;
 
   const receiveMessage = () => {
     verifyTableauIsEmpty(viz, checkTableauIsEmpty);

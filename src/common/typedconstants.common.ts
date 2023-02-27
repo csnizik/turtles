@@ -8,6 +8,7 @@ export const searchOptionMap: ISearchOptionMap = {
     id: 2,
     displayName: 'Projects And Initiatives',
   },
+  ResourceConcerns: { id: 3, displayName: 'Resource Concerns' },
 };
 
 export const ConservationPracticeSections: any = [
@@ -81,29 +82,21 @@ export const tableauGraph = {
   RegionalConservationPractice: {
     id: 0,
     displayName: 'Regional Conservation Practice',
-    link: process.env.REACT_APP_RegionalConservationPracticeLink,
   },
   ConservationPracticeCategory: {
     id: 1,
     displayName: 'Conservation Practice Category',
-    link: process.env.REACT_APP_ConservationPracticeCategoryLink,
   },
   PracticeDetail: {
     id: 2,
     displayName: 'Practice Detail',
-    link: process.env.REACT_APP_PracticeDetailLink,
-    imageLink:
-      process.env.REACT_APP_PracticeDetailImageLink,
   },
   EquipPracticeCertificationTrend: {
     id: 3,
     displayName: 'Equip Practice Certification Trend',
-    link: process.env.REACT_APP_EquipPracticeCertificationTrendLink,
-    imageLink: process.env.REACT_APP_EquipPracticeCertificationTrendImageLink,
   },
   TopPracticesEQUIPOpenData: {
     id: 4,
     displayName: 'Top Practices Equip Open Data',
-    link: process.env.REACT_APP_TopPracticesEQUIPOpenDataLink,
   },
 };

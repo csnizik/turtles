@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { useAppSelector } from '../../Redux/hooks/hooks';
-import { tableauGraph } from '../../common/typedconstants.common';
 import './tableau-report.scss';
 import verifyTableauIsEmpty, {
   verifyUrlIsValid,
@@ -9,13 +8,17 @@ import verifyTableauIsEmpty, {
 let viz;
 const { tableau } = window;
 const TopPracticesEQUIPOpenData = ({ setIsTableauEmpty }: any) => {
+  const uiText = useAppSelector(
+    (state) => (state?.staticTextSlice?.staticData as any)?.data
+  ); 
+
   const ref = useRef(null);
   let stateName = useAppSelector(
     (state: any) => state?.stateSlice?.stateNameDisplay
   );
   if (stateName === 'U.S.' || stateName === undefined) stateName = 'National';
 
-  const srcLink: string = `${tableauGraph.TopPracticesEQUIPOpenData?.link}=${stateName}&:tabs=no`;
+  const srcLink: string = `${uiText?.TopPracticesEQUIPOpenDataLink?.configurationValue}=${stateName}&:tabs=no`;
 
   const receiveMessage = () => {
     verifyTableauIsEmpty(viz, setIsTableauEmpty);

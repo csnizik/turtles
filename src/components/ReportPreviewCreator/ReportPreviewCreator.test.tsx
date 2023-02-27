@@ -44,18 +44,18 @@ describe('ReportPreviewCreator is rendered correctly', () => {
       title: 'Landscape Conservation Initiatives',
       data: [
         {
-          lci_id: 0,
-          lci_name: 'Great Lakes Restoration Initiative',
-          lci_description:
+          lciId: 0,
+          lciName: 'Great Lakes Restoration Initiative',
+          lciDescription:
             'Great Lakes Restoration Initiative  lorum ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula diam et diam tempor fringilla. Additional contextual information lorum ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula diam et diam tempor fringilla. Aenean vehicula diam et diam tempor fringilla. Aenean vehicula diam et diam tempor fringilla. Aenean vehicula diam et diam tempor.',
           initiativeOwner: '',
           statesInvolved: [],
           initiativeYear: '',
         },
         {
-          lci_id: 1,
-          lci_name: 'Rangelands Initiative Efforts',
-          lci_description:
+          lciId: 1,
+          lciName: 'Rangelands Initiative Efforts',
+          lciDescription:
             'This project aims to conserve native tree species within midwests range lands.',
           initiativeOwner: '',
           statesInvolved: [],

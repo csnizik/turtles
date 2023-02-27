@@ -60,6 +60,10 @@
     "last-card-button": "Back to Quick Search",
     "last-card-description": "Don't see the practice you're looking for?"
   },
+  "resource-concern": {
+    "last-card-button": "Back to Quick Search",
+    "last-card-description": "Don't see the resource concern you're looking for?"
+  },
   "search-by-resource-concern": {
     "heading": "Resource Concerns Treated",
     "first-label-name": "Select a resource category",

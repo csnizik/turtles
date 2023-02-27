@@ -29,9 +29,18 @@ const IndividualPracticeContainer = () => {
   const { data, error, isLoading, isSuccess, isError } =
     useGetNationalOverviewByPracticeQuery(practiceId);
 
-  const { stateCode: stateCodeSelect, category, individual }: any = useParams();
+  const {
+    stateCode: stateCodeSelect,
+    category,
+    individual,
+    name,
+  }: any = useParams();
 
-  if (individual && +individual !== practiceId) {
+  if (
+    individual &&
+    +individual !== practiceId &&
+    name !== 'ProjectsAndInitiatives'
+  ) {
     const selectedState =
       stateCodeSelect &&
       stateStatus.isSuccess &&

@@ -6,6 +6,7 @@ import CustomTabs from '../../components/CustomTabs';
 import { searchOptionMap } from '../../common/typedconstants.common';
 import { useAppSelector, useAppDispatch } from '../../Redux/hooks/hooks';
 import ConservationPracticeContainer from '../ConservationPracticeContainer';
+import ResourceConcernContainer from '../ResourceConcernContainer';
 import ProjectsContainer from '../ProjectsContainer';
 import OverviewContainer from '../OverviewContainer';
 import './location-search.scss';
@@ -48,14 +49,26 @@ const LocationContainer = () => {
   const selectedPracticeCategory: number = useAppSelector(
     (state) => state.practiceSlice.selectedPracticeCategory
   );
+  
   const selectedPractice: number = useAppSelector(
     (state) => state.practiceSlice.selectedSpecficPractice
+  );
+  const selectedResourceConcernCategory: number = useAppSelector(
+    (state) => state.resourceConcernSlice.selectedResourceConcernCategory
+  );
+  
+  const selectedResourceConcern: number = useAppSelector(
+    (state) => state.resourceConcernSlice.selectedSpecficResourceConcern
   );
   const option = searchOptionMap[name];
 
   const [currentTabOption, setTabOption] = useState(option?.id);
   useEffect(() => {
     setTabOption(option?.id);
+    // console.log('selectedPracticeCategory ',selectedPracticeCategory);
+    // console.log('selectedPractice ',selectedPractice);
+    // console.log('selectedResourceConcernCategory ',selectedResourceConcernCategory);
+    // console.log('selectedResourceConcern ',selectedResourceConcern);
     if (
       selectedPracticeCategory &&
       selectedPracticeCategory !== -1 &&
@@ -75,8 +88,27 @@ const LocationContainer = () => {
     ) {
       history.push(`${name}/${selectedPracticeCategory}/${selectedPractice}`);
     }
+    if (
+      selectedResourceConcernCategory &&
+      selectedResourceConcernCategory !== -1 &&
+      selectedResourceConcern === -1 &&
+      category == null &&
+      name === 'ResourceConcerns'
+    ) {
+      history.push(`${name}/${selectedResourceConcernCategory}`);
+    }
+    if (
+      selectedResourceConcernCategory &&
+      selectedResourceConcernCategory !== -1 &&
+      selectedResourceConcern !== -1 &&
+      category == null &&
+      individual == null &&
+      name === 'ResourceConcerns'
+    ) {
+      history.push(`${name}/${selectedResourceConcernCategory}/${selectedResourceConcern}`);
+    }
     window.scroll(0, 0);
-  }, [selectedPracticeCategory, selectedPractice, option]);
+  }, [selectedPracticeCategory, selectedPractice, selectedResourceConcernCategory, selectedResourceConcern, option]);
 
   useEffect(() => {
     //Google Analytics code for LocationContainerTab (stateCode and name)
@@ -107,6 +139,14 @@ const LocationContainer = () => {
       {currentTabOption === 2 && (
         <TabPane tabId={2}>
           <ProjectsContainer />
+        </TabPane>
+      )}
+      {currentTabOption === 3 && (
+        <TabPane tabId={3}>
+          <ResourceConcernContainer
+            currentResourceConcernCategoryId={selectedResourceConcernCategory}
+            currentSpecificResourceConcern={selectedResourceConcern}
+          />
         </TabPane>
       )}
     </TabContent>

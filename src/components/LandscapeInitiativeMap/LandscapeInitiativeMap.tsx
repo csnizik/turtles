@@ -162,7 +162,7 @@ const LandscapeInitiativeMap = ({
             ) {
               const relatedLandscpaeInitiativesPerSelectedLocation =
                 landscapeInitiativesData.map((init: any) => {
-                  return landscapeInitiativeToLegendMap[init.lci_id];
+                  return landscapeInitiativeToLegendMap[init.lciId];
                 });
 
               let filteredLayers: Array<any> = [];

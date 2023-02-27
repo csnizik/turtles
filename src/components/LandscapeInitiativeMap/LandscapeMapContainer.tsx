@@ -16,7 +16,7 @@ const LandscapeMapContainer = ({
   const stateCode = useAppSelector((state) => state?.stateSlice?.stateCode);
   const initiativesWithWebMaps =
     landscapeInitiativesData.filter((initiative: ILandscapeInitiative) => {
-      return initiative.lci_resource;
+      return initiative.lciResource;
     }) || [];
 
   return (
@@ -32,8 +32,8 @@ const LandscapeMapContainer = ({
             selectedLandscapeInitiative >= 0 &&
             initiativesWithWebMaps.find(
               (initiative: any) =>
-                initiative.lci_id === selectedLandscapeInitiative
-            )?.lci_resource) ||
+                initiative.lciId === selectedLandscapeInitiative
+            )?.lciResource) ||
           ALL_LANDSCAPE_INITIATIVES_PORTAL_URL
         }
       />

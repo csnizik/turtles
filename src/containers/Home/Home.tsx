@@ -3,6 +3,7 @@ import Header from '../../components/Header';
 import LocationSearch from '../../components/LocationSearch';
 import FindByPractices from '../../components/FindByPractices';
 import QuickSearchBar from '../../components/QuickSearchBar';
+import GovernmentFooter from '../../components/GovernmentFooter';
 import './home.scss';
 import { useAppSelector } from '../../Redux/hooks/hooks';
 

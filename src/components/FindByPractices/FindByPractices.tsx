@@ -15,6 +15,10 @@ import {
   setPracticeCategory,
   setSpecificPractice,
 } from '../../Redux/Slice/practiceSlice';
+import {
+  setResourceConcernCategory,
+  setSpecificResourceConcern,
+} from '../../Redux/Slice/resourceConcernSlice';
 
 import { baseURL } from '../../common/util/AxiosUtil';
 
@@ -86,6 +90,8 @@ const FindByPractices = () => {
     setSelectedSubPractice(-1);
     dispatch(setPracticeCategory(-1));
     dispatch(setSpecificPractice(-1));
+    dispatch(setResourceConcernCategory(-1));
+    dispatch(setSpecificResourceConcern(-1));
   }, []);
 
   const handlePracticeChange = (e) => {
@@ -97,73 +103,84 @@ const FindByPractices = () => {
   };
 
   return (
-    <section className='grid-row find-practice-container'>
-      <div className='tablet:grid-col-7 content-row'>
-        <h2 className='h2-style'>
-          {uiText?.homePracticeTitle?.configurationValue}
-        </h2>
-        <p className='p-style'>
-          {uiText?.homePracticeDescription?.configurationValue}
-        </p>
-        <div className='practice-label-grid'>
-          <label className='usa-label' htmlFor='categoryOptions'>
-            {t('search-by-conservation-practice.first-label-name')}
-          </label>
-          <label className='usa-label' htmlFor='practiceOptions'>
-            {t('search-by-conservation-practice.second-label-name')}
-          </label>
+    <div>
+      {/* section above button */}
+      <div className='find-practice-container'>
+        {/* left of image */}
+        <div className='find-by-practice-select-container'>
+          <h2 className='h2-style'>
+            {uiText?.homePracticeTitle?.configurationValue}
+          </h2>
+          <p className='p-style'>
+            {uiText?.homePracticeDescription?.configurationValue}
+          </p>
+          {/* select elments and labels */}
+          <div className='practice-select-container'>
+            <div>
+              <label className='usa-label' htmlFor='categoryOptions'>
+                {t('search-by-conservation-practice.first-label-name')}
+              </label>
+              <select
+                className='usa-select'
+                id='categoryOptions'
+                name='categorySelect'
+                data-testid='categoryOptions'
+                value={selectedPractice}
+                onChange={handleCategoryChange}
+              >
+                <option value={-1}>All practices (default)</option>
+                {practiceCategory.isSuccess && practiceCategory.data
+                  ? practiceCategory.data.map((practice: IPracticeCategory) => {
+                      return (
+                        <option
+                          key={practice.practiceCategoryId}
+                          value={practice.practiceCategoryId}
+                        >
+                          {practice.practiceCategoryName}
+                        </option>
+                      );
+                    })
+                  : null}
+              </select>
+            </div>
+            <div>
+              <label className='usa-label' htmlFor='practiceOptions'>
+                {t('search-by-conservation-practice.second-label-name')}
+              </label>
+              <select
+                className='usa-select'
+                id='practiceOptions'
+                name='practiceSelect'
+                data-testid='practiceOptions'
+                value={selectedSubPractice}
+                onChange={handlePracticeChange}
+              >
+                <option value={-1}>- Select practice -</option>
+                {subPractice.isSuccess && subPractice.data
+                  ? subPractice.data.map((item: IPractice) => {
+                      return (
+                        <option key={item.practiceId} value={item.practiceId}>
+                          {item.practiceName}
+                        </option>
+                      );
+                    })
+                  : null}
+              </select>
+            </div>
+          </div>
+          {/* select elments and labels */}
+          <CustomButton onClick={handleFindPractices}>
+            {t('find-by-practice.find-practices')}
+          </CustomButton>
         </div>
-        <div className='practice-select-grid'>
-          <select
-            className='usa-select'
-            id='categoryOptions'
-            name='categorySelect'
-            data-testid='categoryOptions'
-            value={selectedPractice}
-            onChange={handleCategoryChange}
-          >
-            <option value={-1}>All practices (default)</option>
-            {practiceCategory.isSuccess && practiceCategory.data
-              ? practiceCategory.data.map((practice: IPracticeCategory) => {
-                  return (
-                    <option
-                      key={practice.practiceCategoryId}
-                      value={practice.practiceCategoryId}
-                    >
-                      {practice.practiceCategoryName}
-                    </option>
-                  );
-                })
-              : null}
-          </select>
-          <select
-            className='usa-select'
-            id='practiceOptions'
-            name='practiceSelect'
-            data-testid='practiceOptions'
-            value={selectedSubPractice}
-            onChange={handlePracticeChange}
-          >
-            <option value={-1}>- Select practice -</option>
-            {subPractice.isSuccess && subPractice.data
-              ? subPractice.data.map((item: IPractice) => {
-                  return (
-                    <option key={item.practiceId} value={item.practiceId}>
-                      {item.practiceName}
-                    </option>
-                  );
-                })
-              : null}
-          </select>
+
+        {/* left of image */}
+        <div className='practice-image'>
+          <img src={homePagePracticeImage} alt='Soil' />
         </div>
-        <CustomButton onClick={handleFindPractices}>
-          {t('find-by-practice.find-practices')}
-        </CustomButton>
       </div>
-      <div className='tablet:grid-col-4 tablet:grid-offset-1 practice-image'>
-        <img src={homePagePracticeImage} alt='Soil' />
-      </div>
-    </section>
+      {/* section above button */}
+    </div>
   );
 };
 

@@ -10,7 +10,7 @@ import ProjectListGroup from '../../components/ProjectListGroup';
 import ProjectTypeSection from '../../components/ProjectTypeSection';
 import { usePostLandscapeInitiativesQuery } from '../../Redux/services/api';
 import './project-container.scss';
-import { projectCards, projectListGroups, projectPurposes } from './constants';
+import { projectListGroups } from './constants';
 import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 
 interface IProjectTypeCard {
@@ -40,6 +40,31 @@ const ProjectsContainer = () => {
   const stateCode = useAppSelector((state) => state?.stateSlice?.stateCode);
   const searchInput = { state_county_code: selectedLocation || null };
   let searchLandscapeInitiatives = { state_county_code: stateCode || null };
+
+  const uiText = useAppSelector(
+    (state) => (state?.staticTextSlice?.staticData as any)?.data
+  );
+
+  const projectCards: any = [
+    {
+      id: 1,
+      title: uiText?.piCigHeading?.configurationValue,
+      paragraphText: uiText?.piCigHeadingDescription?.configurationValue,
+      paragraphDescription:
+        uiText?.piCigHeadingDescription2?.configurationValue,
+      imgSrc: uiText?.piCigHeadingImage?.configurationValue.split('*')[0],
+      imgAlt: uiText?.piCigHeadingImage?.configurationValue.split('*')[1],
+    },
+    {
+      id: 2,
+      title: uiText?.piLciHeading?.configurationValue,
+      paragraphText: uiText?.piLciHeadingDescription?.configurationValue,
+      paragraphDescription: uiText?.piLciHeadingDescription?.configurationValue,
+      imgSrc: uiText?.piLciHeadingImage?.configurationValue.split('*')[0],
+      imgAlt: uiText?.piLciHeadingImage?.configurationValue.split('*')[1],
+    },
+  ];
+
   if (stateCode !== DEFAULT_NATIONAL_LOCATION) {
     searchLandscapeInitiatives = {
       ...searchInput,
@@ -58,6 +83,8 @@ const ProjectsContainer = () => {
   const landscapeInitiativesData = usePostLandscapeInitiativesQuery(
     searchLandscapeInitiatives
   );
+
+  const piDescription3 = uiText?.piDescription3?.configurationValue.split('*');
 
   useEffect(() => {
     //Google Analytics code for ProjectContainer ( stateCode, category (category), and individual (sub-initive)
@@ -148,7 +175,7 @@ const ProjectsContainer = () => {
                 );
                 return (
                   <ListGroupItem
-                    tabindex={0}
+                    tabIndex={0}
                     key={listItem.id}
                     className={listGroupItemClassNames}
                     onClick={() => handleSelectProjectItem(listItem.id)}
@@ -170,23 +197,23 @@ const ProjectsContainer = () => {
                     'justify-content-between',
                     {
                       selected:
-                        initiative.lci_id === selectedLandscapeInitiative,
+                        initiative.lciId === selectedLandscapeInitiative,
                     }
                   );
-                  return initiative.lci_parent_id === null ? (
+                  return initiative.lciParentId === null ? (
                     <ListGroupItem
-                      tabindex={0}
-                      key={initiative.lci_id}
+                      tabIndex={0}
+                      key={initiative.lciId}
                       className={listGroupItemClassNames}
-                      title={initiative.lci_page_link_text}
+                      title={initiative.lciPageLinkText}
                       onClick={() =>
-                        handleSelectLandscapeInitiative(initiative.lci_id)
+                        handleSelectLandscapeInitiative(initiative.lciId)
                       }
                       onKeyPress={() =>
-                        handleSelectLandscapeInitiative(initiative.lci_id)
+                        handleSelectLandscapeInitiative(initiative.lciId)
                       }
                     >
-                      {initiative.lci_name}
+                      {initiative.lciName}
                     </ListGroupItem>
                   ) : null;
                 })}
@@ -216,11 +243,11 @@ const ProjectsContainer = () => {
   return (
     <div className='projects-tab' data-testid='projects-container'>
       <div className='project-tab-header'>
-        <p>{t('projects-page.page-header-01')}</p>
-        <p>{t('projects-page.page-header-02')}</p>
+        <p>{uiText?.piDescription?.configurationValue}</p>
+        <p>{uiText?.piDescription2?.configurationValue}</p>
         <ul className='margin-bottom-5'>
-          {projectPurposes.map((purpose: any) => {
-            return <li key={purpose.id}>{purpose.purpose}</li>;
+          {piDescription3?.map((purpose: any) => {
+            return <li key={purpose.id}>{purpose}</li>;
           })}
         </ul>
       </div>

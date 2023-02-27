@@ -1,0 +1,47 @@
+@import '../../stylesheets/variables';
+
+.heading {
+  margin: 0 0 1em 0;
+
+  h2 {
+    margin: 5rem 0 1.25rem 2.188rem;
+  }
+  .card-titles {
+    color: $usda-blue;
+  }
+  .full-document-box {
+    margin: 0 2.188rem 1.875rem 2.188rem;
+
+    .list-box {
+      @include colored-top-box;
+      border-radius: 0.5em;
+      text-align: left;
+      background-color: $white;
+      display: grid;
+      grid-template-columns: 6fr 1fr;
+
+      .info-box {
+        padding: 1.25rem 1.563rem 0rem 1.563rem;
+
+        a {
+          text-decoration: none;
+        }
+      }
+
+      img {
+        min-width: 300px;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0 0 0.5em 0;
+        margin: 0 0 -1px 0;
+      }
+
+      h3 {
+        font-size: 25px;
+        font-weight: 900;
+        font-style: normal;
+        padding-bottom: 0.625rem;
+      }
+    }
+  }
+}

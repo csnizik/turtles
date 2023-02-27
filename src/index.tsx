@@ -14,6 +14,9 @@ const Home = lazy(() => import('./containers/Home'));
 const GovernmentBanner = lazy(
   () => import('./components/GovernmentBanner/GovernmentBanner')
 );
+const GovernmentFooter = lazy(
+  () => import('./components/GovernmentFooter/GovernmentFooter')
+);
 const CustomSearch = lazy(
   () => import('./containers/CustomSearchContainer/CustomSearch')
 );
@@ -41,6 +44,7 @@ const App = () => (
           <LocationContainer />
         </Route>
       </Switch>
+      <GovernmentFooter />
     </Suspense>
   </Router>
 );

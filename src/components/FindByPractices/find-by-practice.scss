@@ -1,17 +1,30 @@
 @import '../../stylesheets/variables';
+.practice-select-container {
+  display: flex;
+}
 
-.find-practice-container {
-  padding: 2rem;
-  max-height: 0.5rem;
-
-  div:first-of-type {
-    .usa-button:first-of-type {
-      color: $usda-blue;
-      background: $white;
-      border: 0.2rem solid $usda-blue;
-      border-radius: 0.25rem;
-    }
+div.practice-select-container select#categoryOptions.usa-select {
+  margin: 0rem 2rem 0rem 0rem;
+  align-self: center;
+  width: 318px;
+  &:disabled {
+    background-color: $medium-darkgrey;
   }
+}
+
+div.practice-select-container select#practiceOptions.usa-select {
+  margin: 0rem 0rem 0rem 0rem;
+  width: 318px;
+  align-self: center;
+  &:disabled {
+    background-color: $medium-darkgrey;
+  }
+}
+.find-practice-container {
+  display: flex;
+  padding: 2rem 2rem 0rem 2rem;
+  width: 100%;
+  justify-content: space-between;
   h2.h2-style {
     font-weight: 900;
   }
@@ -34,24 +47,25 @@
       }
     }
     .practice-select-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 2rem;
-      select {
-        margin: 0rem 0rem 2rem 0rem;
-        align-self: center;
-        &:disabled {
-          background-color: $medium-darkgrey;
-        }
-      }
+      display: flex;
     }
   }
   .practice-image {
     img:first-of-type {
-      margin-top: 4rem;
-      float: right;
-      height: auto;
       width: 100%;
+    }
+    width: 34%;
+  }
+  .find-by-practice-select-container {
+    width: 58%;
+
+    .usa-button:first-of-type {
+      margin-top: 32px;
+      margin-bottom: 60px;
+      color: $usda-blue;
+      background: $white;
+      border: 0.2rem solid $usda-blue;
+      border-radius: 0.25rem;
     }
   }
 }
@@ -61,6 +75,7 @@
   .find-practice-container {
     .usa-button {
       width: 60%;
+      margin-left: 32px;
     }
     .practice-image {
       align-items: center;

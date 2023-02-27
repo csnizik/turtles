@@ -8,6 +8,13 @@ import {
   setSearchInfo,
   setSpecificPractice,
 } from '../../Redux/Slice/practiceSlice';
+import {
+  setLandUse as setLandUseResourceConcern,
+  setResourceConcernCategory,
+  setSearch as setSearchResourceConcern,
+  setSearchInfo as setSearchInfoResourceConcern,
+  setSpecificResourceConcern,
+} from '../../Redux/Slice/resourceConcernSlice';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
 import { currentState } from '../../Redux/Slice/stateSlice';
 import './gov-banner.scss';
@@ -52,11 +59,19 @@ const GovernmentBanner = () => {
   const handleNavigateHome = () => {
     window.dispatchEvent(new Event('navigateHome'));
     dispatch(currentState(initialState));
+
+    dispatch(setResourceConcernCategory(-1));
+    dispatch(setSpecificResourceConcern(-1));
+    dispatch(setLandUseResourceConcern(initialLandUse));
+    dispatch(setSearchInfoResourceConcern(defaultSearchInfo));
+    dispatch(setSearchResourceConcern(defaultSearchInput));
+
     dispatch(setPracticeCategory(-1));
     dispatch(setSpecificPractice(-1));
     dispatch(setLandUse(initialLandUse));
     dispatch(setSearchInfo(defaultSearchInfo));
     dispatch(setSearch(defaultSearchInput));
+
     dispatch(enablePracticeDropdown());
     dispatch(enableResourceDropdown());
     window.localStorage.clear();

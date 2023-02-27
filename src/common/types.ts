@@ -156,12 +156,21 @@ export interface IProjectType {
 
 /*eslint camelcase: 0*/
 export interface ILandscapeInitiative {
-  lci_id: number;
-  lci_name: string;
-  lci_resource: string;
-  lci_image_link: string;
-  lci_page_link: string;
-  lci_page_link_text: string;
-  lci_description: Array<string>;
-  lci_parent_id: number;
+  lciId: number;
+  lciName: string;
+  lciResource: string;
+  lciImageLink: string;
+  lciPageLink: string;
+  lciPageLinkText: string;
+  lciDescription: Array<string>;
+  lciParentId: number;
 }
+
+export interface IIndividualResourceConcern{
+  resourceConcernId: number;
+  resourceConcernCategoryId: number;
+  rcSwapacategoryId: number;
+  resourceConcernName: string;
+  resourceConcernDescription: string;
+}
+

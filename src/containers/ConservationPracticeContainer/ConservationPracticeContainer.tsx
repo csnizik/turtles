@@ -55,7 +55,7 @@ const ConservationPracticeContainer = ({
 
   const uiText: any = useAppSelector(
     (state) => (state?.staticTextSlice?.staticData as any)?.data
-  ); 
+  );
 
   useEffect(() => {
     //GA code for  currentSpecificPractice & currentPracticeCategoryId ** might duplicate and code for stateC
@@ -85,19 +85,18 @@ const ConservationPracticeContainer = ({
   }, [name]);
 
   useEffect(() => {
-    if (individual) {
+    if (individual && name !== 'ProjectsAndInitiatives') {
       setPracticeViewType({
         ...defaultPracticeViews,
         individualPractice: true,
       });
       dispatch(setPracticeCategory(+category));
       dispatch(setSpecificPractice(+individual));
-    } else if (category) {
+    } else if (category && name !== 'ProjectsAndInitiatives') {
       setPracticeViewType({
         ...defaultPracticeViews,
         practiceCategories: true,
       });
-
       dispatch(setPracticeCategory(+category));
       dispatch(setSpecificPractice(-1));
     } else {

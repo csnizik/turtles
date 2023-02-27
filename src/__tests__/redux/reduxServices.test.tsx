@@ -1,5 +1,6 @@
 import fetchMock from 'jest-fetch-mock';
 import { renderHook } from '@testing-library/react-hooks';
+import { Provider } from 'react-redux';
 import {
   useGetAssociatedPracticeQuery,
   useGetResourcesQuery,
@@ -25,7 +26,6 @@ import {
   mockedCountyResponse,
   mockedSwapaCategoryResponse,
 } from './mockedResponses';
-import { Provider } from 'react-redux';
 
 const updateTimeout = 5000;
 
@@ -180,7 +180,7 @@ describe('Verify redux services are working properly', () => {
   test('getResourceConcernQuery', async () => {
     fetchMock.mockResponse(JSON.stringify(mockedSwapaCategoryResponse));
     const { result, waitForNextUpdate } = renderHook(
-      () => useGetResourceConcernQuery('2'),
+      () => useGetResourceConcernQuery(2),
       { wrapper }
     );
     await waitForNextUpdate({ timeout: updateTimeout });

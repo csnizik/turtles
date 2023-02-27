@@ -34,16 +34,16 @@ const ReportPreview = ({
       return (
         <li
           className='proj-list-item'
-          key={item?.[`projectTitle` || `lci_name`]}
+          key={item?.[`projectTitle` || `lciName`]}
         >
           <ProjectListItem
-            id={item?.projectId || item?.lci_id}
-            description={item?.projectDescription || item?.lci_description}
-            title={item?.projectTitle || item?.lci_name}
+            id={item?.projectId || item?.lciId}
+            description={item?.projectDescription || item?.lciDescription}
+            title={item?.projectTitle || item?.lciName}
             owner={item?.projectOwner}
             statesInvolved={item?.statesInvolved}
             year={item?.awardeeYear}
-            link={item?.projectLink || item?.lci_page_link}
+            link={item?.projectLink || item?.lciPageLink}
           />
         </li>
       );

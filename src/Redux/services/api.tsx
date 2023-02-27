@@ -13,6 +13,7 @@ import {
   IRCCategory,
   IRCRequestBody,
   IAssociatedPracticeList,
+  IIndividualResourceConcern,
 } from '../../common/types';
 
 export const fotgApi = createApi({
@@ -59,9 +60,14 @@ export const api = createApi({
       query: (id) => `/practice/catagories/practices?id=${id}`,
     }),
     //! Resource Concern depending on SWAPA category
-    getResourceConcern: builder.query<IResourceConcernList[], string>({
+    getResourceConcern: builder.query<IResourceConcernList[], number>({
       query: (swapaCategory) =>
         `/resourceConcern/concern/category/${swapaCategory}`,
+    }),
+    //! Resource Concern depending on SWAPA category
+    getIndividualResourceConcern: builder.query<IIndividualResourceConcern, any>({
+      query: (resourceId) =>
+        `/resourceConcern/individual/concern/${resourceId}`,
     }),
     //!Post request for Search
     postSearchData: builder.query<ISearchData[], ISearchData>({
@@ -141,5 +147,6 @@ export const {
   usePostLandscapeInitiativesQuery,
   useGetConfigurationSettingsStaticTextQuery,
   useGetConfigurationSettingsQuery,
+  useGetIndividualResourceConcernQuery,
 } = api;
 export const { useGetFotgFolderUrlQuery } = fotgApi;
