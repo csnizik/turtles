@@ -14,6 +14,7 @@ import {
   IRCRequestBody,
   IAssociatedPracticeList,
   IIndividualResourceConcern,
+  ICPPEScore,
 } from '../../common/types';
 
 export const fotgApi = createApi({
@@ -64,10 +65,17 @@ export const api = createApi({
       query: (swapaCategory) =>
         `/resourceConcern/concern/category/${swapaCategory}`,
     }),
-    //! Resource Concern depending on SWAPA category
+    // Individual Resource Concern Info based on ID
     getIndividualResourceConcern: builder.query<IIndividualResourceConcern, any>({
       query: (resourceId) =>
         `/resourceConcern/individual/concern/${resourceId}`,
+    }),
+    // Get the CPPE score for a individual resource concern
+    getCPPEScores: builder.query<ICPPEScore[], { resourceId: number; stateCode: number }>({
+      query: (data) => {
+        const {resourceId, stateCode} = data;
+        return `/CPPE/${resourceId}/${stateCode}`
+      }
     }),
     //!Post request for Search
     postSearchData: builder.query<ISearchData[], ISearchData>({
@@ -148,5 +156,6 @@ export const {
   useGetConfigurationSettingsStaticTextQuery,
   useGetConfigurationSettingsQuery,
   useGetIndividualResourceConcernQuery,
+  useGetCPPEScoresQuery,
 } = api;
 export const { useGetFotgFolderUrlQuery } = fotgApi;

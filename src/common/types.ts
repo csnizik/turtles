@@ -174,3 +174,10 @@ export interface IIndividualResourceConcern{
   resourceConcernDescription: string;
 }
 
+export interface ICPPEScore{
+  CPPEEffectValue: number;
+  practiceId: number;
+  practiceName: string;
+  practiceDescription: string;
+  practiceCategory: number;
+}

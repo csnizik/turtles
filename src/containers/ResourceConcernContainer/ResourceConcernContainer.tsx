@@ -142,7 +142,6 @@ const ResourceConcernContainer = ({
   const { data: ldata } = usePostLandscapeInitiativesQuery(searchInputData);
 
   const { data, isSuccess } = useGetResourcesQuery();
-  console.log(data);
   const currentResourceConcernCategory: any =
     isSuccess &&
     data &&
@@ -153,7 +152,6 @@ const ResourceConcernContainer = ({
     );
 
   const { data : rcdata, isSuccess : rcisSuccess } = useGetResourceConcernQuery(currentResourceConcernCategoryId);
-  console.log(rcdata);
   const currentResourceConcern =
     rcisSuccess &&
     rcdata &&
