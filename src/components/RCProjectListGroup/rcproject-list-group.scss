@@ -1,0 +1,106 @@
+@import '../../stylesheets/variables';
+
+.projects-list-group {
+  padding: 1.25rem 2.188rem;
+  ul.nav-fpac {
+    width: 40rem;
+    .nav-item {
+      width: 20rem;
+      .nav-link {
+        cursor: pointer;
+      }
+    }
+  }
+  .centered-text {
+    margin-top: 2.166rem;
+    text-align: center;
+  }
+  .usa-pagination h4 {
+    margin: 0;
+  }
+  .title {
+    margin-left: -2.188rem;
+  }
+  .intro-desc {
+    margin: 1.25rem 0 2.5rem 0;
+  }
+}
+
+.projects-data {
+  div.list-group-item {
+    border: 1px solid $light-grey-5;
+    border-radius: 6px;
+    margin: 0rem 0rem 1rem 0rem;
+    padding: 0 1.563rem 0 1.563rem;
+    content: '';
+    clear: both;
+    display: table;
+
+    .internal-title-link {
+      color: $usda-blue;
+    }
+
+    a {
+      text-decoration: none;
+    }
+    .outer-box {
+      margin: 0 0 0 1.5rem;
+      .project-details {
+        margin: 0rem 0rem 1rem -1.5rem;
+        font-size: 15px;
+        span {
+          padding-left: 3rem;
+          margin: 0rem 1.5rem 0rem 1.5rem;
+          border-left: 1px solid $light-grey-6;
+        }
+        span:first-of-type {
+          padding-left: 0rem;
+          margin: 0rem 1.5rem 0rem 0rem;
+          border: none;
+        }
+      }
+    }
+    p:first-of-type {
+      margin: 1.563rem 0 0.625rem 0;
+      font-size: 18px;
+      font-weight: $heavier-weight;
+    }
+
+    .link-text {
+      float: right;
+    }
+    p:nth-of-type(2) {
+      font-size: 16px;
+      margin: 1.25rem 0 1.563rem 0;
+    }
+  }
+}
+
+@media only screen and (max-width: $large-screen) {
+  .projects-list-group {
+    margin: 1rem 2rem;
+    ul.nav-fpac {
+      display: contents;
+    }
+  }
+  .outer-box {
+    margin: 0 0 0 0 !important;
+    .project-details {
+      margin: 0rem 0rem 1rem 0rem !important;
+      font-size: 13px !important;
+      span {
+        padding-left: 0.6rem;
+        margin: 0rem 0.6rem 0rem 0.6rem;
+        border-left: 1px solid $light-grey-6;
+      }
+      span:first-of-type {
+        padding-left: 0rem;
+        margin: 0rem 0.6rem 0rem 0rem;
+        border: none;
+      }
+    }
+  }
+}
+.no-dots {
+  list-style-type: none;
+}

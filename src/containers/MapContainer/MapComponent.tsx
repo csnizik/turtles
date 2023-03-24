@@ -5,6 +5,7 @@ import MapView from '@arcgis/core/views/MapView';
 import Query from '@arcgis/core/rest/support/Query';
 import WebMap from '@arcgis/core/WebMap';
 import { useHistory, useLocation } from 'react-router-dom';
+import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
 import { usePrevious } from '../../common/util/helperHooks';
 import {
   alaskaExtent,
@@ -14,19 +15,18 @@ import {
   CARIBBEAN_CENTER,
   CARIBBEAN_ZOOM,
   CENTER_COORDINATES,
-  CIG_PORTAL_ID,
   hawaiiExtent,
   HAWAII_CENTER,
   HAWAII_ZOOM,
   highlightSymbol,
   SMALL_STATES,
-  STATE_LAYER_ID,
   VIEW_DIV,
   viewConstraints,
+  stateCodes,
+  stAbbrs
 } from './constants';
 import { useAppDispatch } from '../../Redux/hooks/hooks';
 import { setSearch } from '../../Redux/Slice/practiceSlice';
-import { usaFeatureLayer1 } from './layers';
 import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
 import { createMapView } from './mapUtils';
 import '@arcgis/core/assets/esri/themes/light/main.css';
@@ -38,9 +38,11 @@ interface IMapProps {
 
 interface IMapComponentProps {
   stateCode: string;
+  CIG_PORTAL_ID: string;
+  STATE_FEATURE_LAYER_URL: string;
 }
 
-const MapComponent = ({ stateCode }: IMapComponentProps) => {
+const MapComponent = ({ stateCode, CIG_PORTAL_ID, STATE_FEATURE_LAYER_URL }: IMapComponentProps) => {
   const dispatch = useAppDispatch();
   const alaskaView = useRef({} as any);
   const caribbeanView = useRef({} as any);
@@ -49,13 +51,20 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
   const homeBtn = useRef({} as Home);
   const history: any = useHistory();
   const location: any = useLocation();
+  const usaFeatureLayer1 = new FeatureLayer({
+    url: STATE_FEATURE_LAYER_URL,
+    outFields: ['NAME', 'state_abbr'],
+    layerId: 5,
+  });
   const usaStateLayer = useRef(usaFeatureLayer1);
   const previousValues: any = usePrevious({
     stateCode,
   });
 
+  
+
   const checkAndClearHighlightedGraphics = () => {
-    if (alaskaView.current.graphics.length) {
+     if (alaskaView.current.graphics.length) {
       alaskaView.current.graphics.removeAll();
     } else if (caribbeanView.current.graphics.length) {
       caribbeanView.current.graphics.removeAll();
@@ -86,22 +95,22 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
       });
 
       // Alaska composite view
-      alaskaView.current = createMapView(
+       alaskaView.current = createMapView(
         'akViewDiv',
         mapRef.current.map,
         alaskaExtent,
         ALASKA_ZOOM,
         ALASKA_CENTER
       );
-
+ 
       // Hawaii composite view
-      hawaiiView.current = createMapView(
+       hawaiiView.current = createMapView(
         'hiViewDiv',
         mapRef.current.map,
         hawaiiExtent,
         HAWAII_ZOOM,
         HAWAII_CENTER
-      );
+      ); 
 
       // Caribbean composite view
       caribbeanView.current = createMapView(
@@ -110,7 +119,7 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
         caribbeanExtent,
         CARIBBEAN_ZOOM,
         CARIBBEAN_CENTER
-      );
+      ); 
 
       homeBtn.current = new Home({
         view,
@@ -135,31 +144,31 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
       stateCode === DEFAULT_NATIONAL_LOCATION
     ) {
       // Alaska composite view
-      alaskaView.current = createMapView(
+       alaskaView.current = createMapView(
         'akViewDiv',
         mapRef.current.map,
         alaskaExtent,
         ALASKA_ZOOM,
         ALASKA_CENTER
-      );
+      ); 
 
       // Hawaii composite view
-      hawaiiView.current = createMapView(
+       hawaiiView.current = createMapView(
         'hiViewDiv',
         mapRef.current.map,
         hawaiiExtent,
         HAWAII_ZOOM,
         HAWAII_CENTER
-      );
+      ); 
 
       // Caribbean composite view
-      caribbeanView.current = createMapView(
+       caribbeanView.current = createMapView(
         'cariViewDiv',
         mapRef.current.map,
         caribbeanExtent,
         CARIBBEAN_ZOOM,
         CARIBBEAN_CENTER
-      );
+      ); 
 
       mapRef.current.view.ui?.add(
         ['akViewDiv', 'hiViewDiv', 'cariViewDiv'],
@@ -178,7 +187,7 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
             const graphicList: any = response.results.filter((item: any) => {
               // check if the graphic belongs to the states layer
               if (item.graphic) {
-                return item.graphic.layer?.id === STATE_LAYER_ID;
+                return item.graphic.layer?.id !== null;
               }
               return response.results;
             });
@@ -190,19 +199,19 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
               stateLayerQuery.where = `OBJECTID = ${selectedState?.attributes.OBJECTID}`;
               stateLayerQuery.outFields = [
                 'NAME',
-                'STUSPS',
                 'OBJECTID',
-                'STATEFP',
+                'state_abbr'
               ];
-              usaStateLayer.current
+               usaStateLayer.current
                 .queryFeatures(stateLayerQuery)
                 .then((queryResults: any) => {
                   const { features } = queryResults;
                   if (features.length) {
                     const foundState = features[0];
+                    const newStateCode = stateCodes[foundState?.attributes.state_abbr];
                     const updatedPathName = location.pathname.replace(
                       stateCode,
-                      foundState.attributes.STATEFP
+                      newStateCode
                     );
 
                     history.replace(updatedPathName);
@@ -213,11 +222,11 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
                     });
                     mapRef.current.view.graphics.add(highlightedGraphic);
                     // Zoom to selected state
-                    if (SMALL_STATES.includes(foundState?.attributes.STUSPS)) {
+                    if (SMALL_STATES.includes(foundState?.attributes.state_abbr)) {
                       mapRef.current.view.extent = foundState?.geometry?.extent
                         .clone()
                         .expand(1.25);
-                    } else if (foundState?.attributes.STUSPS === 'AK') {
+                    } else if (foundState?.attributes.state_abbr === 'AK') {
                       mapRef.current.view.extent = foundState?.geometry?.extent
                         .clone()
                         .expand(2.65);
@@ -240,8 +249,8 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
     mapRef.current.map.when(() => {
       if (stateCode && stateCode !== DEFAULT_NATIONAL_LOCATION) {
         const stateLayerQuery: Query = usaStateLayer.current.createQuery();
-        stateLayerQuery.where = `STATEFP = '${stateCode}'`;
-        stateLayerQuery.outFields = ['NAME', 'STUSPS'];
+        stateLayerQuery.where = `state_abbr = '${stAbbrs[stateCode]}'`;
+        stateLayerQuery.outFields = ['NAME', 'state_abbr'];
         usaStateLayer.current
           .queryFeatures(stateLayerQuery)
           .then((response: any) => {
@@ -254,11 +263,11 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
               });
               mapRef.current.view.graphics.add(highlightedGraphic);
 
-              if (SMALL_STATES.includes(foundGraphic?.attributes.STUSPS)) {
+              if (SMALL_STATES.includes(foundGraphic?.attributes.state_abbr)) {
                 mapRef.current.view.extent = foundGraphic?.geometry?.extent
                   .clone()
                   .expand(1.25);
-              } else if (foundGraphic?.attributes.STUSPS === 'AK') {
+              } else if (foundGraphic?.attributes.state_abbr === 'AK') {
                 mapRef.current.view.extent = foundGraphic?.geometry?.extent
                   .clone()
                   .expand(2.65);
@@ -289,7 +298,7 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
               const stateLayerQuery: Query =
                 usaStateLayer.current.createQuery();
               stateLayerQuery.where = `OBJECTID = '${objectId}'`;
-              stateLayerQuery.outFields = ['NAME', 'STUSPS', 'STATEFP'];
+              stateLayerQuery.outFields = ['NAME', 'state_abbr'];
               usaStateLayer.current
                 .queryFeatures(stateLayerQuery)
                 .then((queryResults: any) => {
@@ -297,9 +306,10 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
                     const { features } = queryResults;
                     if (features.length) {
                       const foundGraphic: Graphic = features[0];
+                      const newStateCode = stateCodes[foundGraphic?.attributes.state_abbr];
                       const updatedPathName = location.pathname.replace(
                         stateCode,
-                        foundGraphic.attributes.STATEFP
+                        newStateCode
                       );
                       history.replace(updatedPathName);
                       const highlightedGraphic = new Graphic({
@@ -332,8 +342,8 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
               const objectId = selectedState.attributes.OBJECTID;
               const stateLayerQuery: Query =
                 usaStateLayer.current.createQuery();
-              stateLayerQuery.where = `OBJECTID = '${objectId}'`;
-              stateLayerQuery.outFields = ['NAME', 'STUSPS', 'STATEFP'];
+                stateLayerQuery.where = `state_abbr = 'PR'`;
+              stateLayerQuery.outFields = ['NAME', 'state_abbr'];
               usaStateLayer.current
                 .queryFeatures(stateLayerQuery)
                 .then((queryResults: any) => {
@@ -341,9 +351,10 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
                     const { features } = queryResults;
                     if (features.length) {
                       const foundGraphic: Graphic = features[0];
+                      const newStateCode = stateCodes[foundGraphic?.attributes.state_abbr];
                       const updatedPathName = location.pathname.replace(
                         stateCode,
-                        foundGraphic.attributes.STATEFP
+                        newStateCode
                       );
                       history.replace(updatedPathName);
                       const highlightedGraphic = new Graphic({
@@ -376,8 +387,8 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
               const objectId = selectedState.attributes.OBJECTID;
               const stateLayerQuery: Query =
                 usaStateLayer.current.createQuery();
-              stateLayerQuery.where = `OBJECTID = '${objectId}'`;
-              stateLayerQuery.outFields = ['NAME', 'STUSPS', 'STATEFP'];
+                stateLayerQuery.where = `state_abbr = 'HI'`;
+              stateLayerQuery.outFields = ['NAME', 'state_abbr'];
               usaStateLayer.current
                 .queryFeatures(stateLayerQuery)
                 .then((queryResults: any) => {
@@ -385,9 +396,10 @@ const MapComponent = ({ stateCode }: IMapComponentProps) => {
                     const { features } = queryResults;
                     if (features.length) {
                       const foundGraphic: Graphic = features[0];
+                      const newStateCode = stateCodes[foundGraphic?.attributes.state_abbr];
                       const updatedPathName = location.pathname.replace(
                         stateCode,
-                        foundGraphic.attributes.STATEFP
+                        newStateCode
                       );
                       history.replace(updatedPathName);
                       const highlightedGraphic = new Graphic({
