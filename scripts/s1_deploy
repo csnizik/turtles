@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# place in the /app/scripts folder with execute permission for all
+# executed from users home folder as the user, where they copied the tarball to
+echo "moving tar file to /app/tmp"
+mv cpdifrontend.tar.gz /app/tmp
+echo "changing to /app/cpdifrontend-Dev.Dev/cpdifrontend folder" CONFIRM THIS LOCATION
+cd /app/cpdifrontend-Dev.Dev/cpdifrontend
+echo "change to root for the next part"
+sudo su root
