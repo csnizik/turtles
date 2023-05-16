@@ -1,9 +1,9 @@
 @import '../../stylesheets/variables';
-.practice-select-container {
+.resource-select-container {
   display: flex;
 }
 
-div.practice-select-container select#categoryOptions.usa-select {
+div.resource-select-container select#categoryOptions.usa-select {
   margin: 0rem 2rem 0rem 0rem;
   align-self: center;
   width: 318px;
@@ -12,7 +12,7 @@ div.practice-select-container select#categoryOptions.usa-select {
   }
 }
 
-div.practice-select-container select#practiceOptions.usa-select {
+div.resource-select-container select#resourceOptions.usa-select {
   margin: 0rem 0rem 0rem 0rem;
   width: 318px;
   align-self: center;
@@ -20,7 +20,7 @@ div.practice-select-container select#practiceOptions.usa-select {
     background-color: $medium-darkgrey;
   }
 }
-.find-practice-container {
+.find-resource-container {
   background: $white;
   display: flex;
   padding: 2rem 2rem 0rem 2rem;
@@ -35,7 +35,7 @@ div.practice-select-container select#practiceOptions.usa-select {
   .content-row {
     margin-top: 4rem;
     margin-bottom: 5rem;
-    .practice-label-grid {
+    .resource-label-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       label {
@@ -47,17 +47,17 @@ div.practice-select-container select#practiceOptions.usa-select {
         padding-left: 1rem;
       }
     }
-    .practice-select-grid {
+    .resource-select-grid {
       display: flex;
     }
   }
-  .practice-image {
+  .resource-image {
     img:first-of-type {
       width: 100%;
     }
     width: 34%;
   }
-  .find-by-practice-select-container {
+  .find-by-resource-select-container {
     width: 58%;
 
     .usa-button:first-of-type {
@@ -73,12 +73,12 @@ div.practice-select-container select#practiceOptions.usa-select {
 
 /** Media Queries **/
 @media only screen and (max-width: $large-screen) {
-  .find-practice-container {
+  .find-resource-container {
     .usa-button {
       width: 60%;
       margin-left: 32px;
     }
-    .practice-image {
+    .resource-image {
       align-items: center;
       img {
         margin-bottom: 2rem;

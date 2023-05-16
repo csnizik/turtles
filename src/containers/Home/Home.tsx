@@ -2,6 +2,7 @@ import TagManager from 'react-gtm-module';
 import Header from '../../components/Header';
 import LocationSearch from '../../components/LocationSearch';
 import FindByPractices from '../../components/FindByPractices';
+import FindByResources from '../../components/FindByResources';
 import QuickSearchBar from '../../components/QuickSearchBar';
 import GovernmentFooter from '../../components/GovernmentFooter';
 import './home.scss';
@@ -18,7 +19,9 @@ const Home = () => {
       <div data-testid='home-content'>
         <QuickSearchBar />
         <LocationSearch />
+        <FindByResources />
         <FindByPractices />
+        
       </div>
     );
   };

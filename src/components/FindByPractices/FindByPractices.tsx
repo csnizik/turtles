@@ -107,6 +107,9 @@ const FindByPractices = () => {
       {/* section above button */}
       <div className='find-practice-container'>
         {/* left of image */}
+        <div className='practice-image'>
+          <img src={homePagePracticeImage} alt='Soil' />
+        </div>
         <div className='find-by-practice-select-container'>
           <h2 className='h2-style'>
             {uiText?.homePracticeTitle?.configurationValue}
@@ -175,9 +178,7 @@ const FindByPractices = () => {
         </div>
 
         {/* left of image */}
-        <div className='practice-image'>
-          <img src={homePagePracticeImage} alt='Soil' />
-        </div>
+        
       </div>
       {/* section above button */}
     </div>
