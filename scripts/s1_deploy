@@ -4,7 +4,7 @@
 # executed from users home folder as the user, where they copied the tarball to
 echo "moving tar file to /app/tmp"
 mv cpdifrontend.tar.gz /app/tmp
-echo "changing to /app/cpdifrontend-Dev.Dev/cpdifrontend folder" CONFIRM THIS LOCATION
-cd /app/cpdifrontend-Dev.Dev/cpdifrontend
+echo "changing to /app/www/html/cpdifrontend-Dev.Dev folder" CONFIRM THIS LOCATION
+cd /app/www/html/cpdifrontend-Dev.Dev
 echo "change to root for the next part"
 sudo su root

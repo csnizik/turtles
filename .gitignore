@@ -47,6 +47,6 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
-
+build
 public/assets
 src/__tests__/coverage

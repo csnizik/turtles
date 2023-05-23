@@ -3,9 +3,9 @@
 # place in the /app/scripts folder with execute permission for appadmin
 # run directly after the s1_deploy script in the folder that script sets
 
-if ! [[ -d "../cpdifrontend" ]]
+if ! [[ -d "../cpdifrontend-Dev.Dev" ]]
 then
-    echo "Run this from inside the /app/cpdifrontend-Dev.Dev/cpdifrontend directory."
+    echo "Run this from inside the /app/www/html/cpdifrontend-Dev.Dev."
     exit 1
 fi
 

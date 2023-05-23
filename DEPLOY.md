@@ -9,7 +9,7 @@ Build the tarball
 5. the build will take a while. When it is finished an up-to-date cpdifrontend.tar.gz file will exist in the project root folder.
 
 Prep and install 1st server
-6. $ scp cpdifrontend.tar.gz <paccount>@10.203.24.12
+6. $ scp cpdifrontend.tar.gz <paccount>@10.203.24.12:cpdifrontend.tar.gz
 7. $ ssh <paccount>@10.203.24.12
 8. $ /app/scripts/s1_deploy
 9. $ systemctl stop cpdifrontend-dev.dev.service
