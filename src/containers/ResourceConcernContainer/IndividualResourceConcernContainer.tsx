@@ -4,6 +4,7 @@ import {
   useGetIndividualResourceConcernQuery,
 } from '../../Redux/services/api';
 import ResourceConcernOverview from '../../components/ResourceConcernOverview';
+import CPPEScoreLegend from '../../components/CPPESoreLegend/CPPEScoreLegend';
 import HorizontalScroll from '../../components/HorizontalScroll';
 import { setResourceConcernCategory, setSpecificResourceConcern} from '../../Redux/Slice/resourceConcernSlice';
 import CPPEScore from '../../components/CPPEScore/CPPEScore';
@@ -47,12 +48,13 @@ const IndividualResourceConcernContainer = () => {
         isError={isError}
         isLoading={isLoading}
       />
-      <CPPEScore
+      {/* <CPPEScore
         selectedStateCode={stateCode}
         selectedResourceConcernId={resourceId}
-      />
+      /> */}
       {/* Impacts: TO DO Put back in the next PI */}
       {/* <ApplicationImpacts data={data} isSuccess={isSuccess} /> */}
+      <CPPEScoreLegend/>
     </>
   );
 };

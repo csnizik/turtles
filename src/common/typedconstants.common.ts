@@ -100,3 +100,8 @@ export const tableauGraph = {
     displayName: 'Top Practices Equip Open Data',
   },
 };
+
+export const CPPEScoreLegendData = {
+  title: "Conservation Practices Ranked by Physical Effects (CPPE) | NRCS",
+  disclaimer: "This page provides a screening tool to view the effectiveness of conservation practices in treating the specific resource concern at a national level. The positive CPPE score does not ensure treatment of resource concernsand may conflict with other resource concerns. Please contact your local NRCS conservation planners for professional assistance."
+}
