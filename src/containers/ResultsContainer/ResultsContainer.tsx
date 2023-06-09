@@ -10,7 +10,7 @@ const ResultsContainer = () => {
   );
 
   return (
-    <main>
+    <main id='main-content'>
       <div className='results-page' data-testid='results-container'>
         <div className='search-title'>
           <h1>{uiText?.QuickSearchResultsTitle?.configurationValue}</h1>

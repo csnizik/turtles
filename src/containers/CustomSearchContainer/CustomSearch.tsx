@@ -173,7 +173,7 @@ const CustomSearch = () => {
     return styles;
   };
   return (
-    <main>
+    <main id='main-content'>
       <div data-testid='custom-search-container' className='custom-search'>
         <div className='custom-search-header'>
           <h1>{uiText?.quickSearchTitle?.configurationValue}</h1>

@@ -25,6 +25,26 @@ body {
   overflow: wrap;
 }
 
+a.skip-main {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 1em;
+  opacity: 0;
+}
+
+a.skip-main:focus, a.skip-main:active {
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: $usda-blue;
+  color: $sfi-white;
+  font-weight: 600;
+  &:hover {
+    background-color: $usda-blue;
+  }
+  opacity: 1;
+}
+
 .hidden-content {
   display: none;
 }

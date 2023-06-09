@@ -30,7 +30,7 @@ const Home = () => {
   TagManager.initialize(GTMArg);
 
   return (
-    <main className='home-page'>
+    <main id='main-content' className='home-page'>
       <Header
         headerText={uiText?.homeTitle?.configurationValue}
         headerClassNames='display-4'

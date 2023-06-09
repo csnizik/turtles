@@ -152,7 +152,7 @@ const LocationContainer = () => {
     </TabContent>
   );
   return (
-    <main>
+    <main id='main-content'>
       <TabTitle
         stateName={stateInfo?.stateNameDisplay}
         currentTab={option?.displayName}

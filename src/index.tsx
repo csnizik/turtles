@@ -26,6 +26,7 @@ const ResultsContainer = lazy(() => import('./containers/ResultsContainer'));
 const App = () => (
   <Router>
     <Suspense fallback={<Spinner />}>
+    <a className="skip-main" href="#main-content"><p>Skip to Main Content - Keyboard Accessible</p></a>
       <GovernmentBanner />
       <Switch>
         <Route exact path='/'>
