@@ -144,12 +144,26 @@ const GovernmentBanner = () => {
         </div>
       </div>
       <div className='usda-header row-flex-start'>
-        <img src='../../../../images/usda_logo_color.png' alt='USDA LOGO' />
+        <Link 
+          to='/'
+          onClick={handleNavigateHome}>
+          <img src='../../../../images/usda_logo_color.png' alt='USDA LOGO' />
+        </Link>
         <div className='government-banner'>
+        <Link 
+          to='/'
+          onClick={handleNavigateHome}
+          className='usa-link'>
           <h1 className='page-title header-sizing' data-testid='page-title'>
             {t('header.nrcs')}
           </h1>
+        </Link>
+        <Link
+          to='/'
+          onClick={handleNavigateHome}
+          className='usa-link'>
           <p>{t('header.usda')}</p>
+        </Link>
         </div>
       </div>
     </div>
@@ -157,11 +171,15 @@ const GovernmentBanner = () => {
 
   const renderNavigationSection: Function = () => (
     <div data-testid='gov-banner-nav' className='navigation-bar'>
-      <img
-        className='nrcsLogo'
-        src='../../../../images/nrcs_logo.png'
-        alt='NRCS Logo'
-      />
+      <Link
+        to='/'
+        onClick={handleNavigateHome}>
+        <img
+          className='nrcsLogo'
+          src='../../../../images/nrcs_logo.png'
+          alt='NRCS Logo'
+        />
+      </Link>
       <Link
         to='/'
         onClick={handleNavigateHome}

@@ -11,6 +11,13 @@ header {
     .header-sizing {
       font-size: calc(1.269rem + 0.228vw);
     }
+    .usa-link {
+      text-decoration: none;
+      &:hover :focus {
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
   }
 }
 
