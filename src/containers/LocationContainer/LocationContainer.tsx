@@ -60,6 +60,7 @@ const LocationContainer = () => {
   const selectedResourceConcern: number = useAppSelector(
     (state) => state.resourceConcernSlice.selectedSpecficResourceConcern
   );
+  
   const option = searchOptionMap[name];
 
   const [currentTabOption, setTabOption] = useState(option?.id);
@@ -130,9 +131,9 @@ const LocationContainer = () => {
       )}
       {currentTabOption === 1 && (
         <TabPane tabId={1}>
-          <ConservationPracticeContainer
-            currentPracticeCategoryId={selectedPracticeCategory}
-            currentSpecificPractice={selectedPractice}
+          <ResourceConcernContainer
+            currentResourceConcernCategoryId={selectedResourceConcernCategory}
+            currentSpecificResourceConcern={selectedResourceConcern}
           />
         </TabPane>
       )}
@@ -143,9 +144,9 @@ const LocationContainer = () => {
       )}
       {currentTabOption === 3 && (
         <TabPane tabId={3}>
-          <ResourceConcernContainer
-            currentResourceConcernCategoryId={selectedResourceConcernCategory}
-            currentSpecificResourceConcern={selectedResourceConcern}
+          <ConservationPracticeContainer
+            currentPracticeCategoryId={selectedPracticeCategory}
+            currentSpecificPractice={selectedPractice}
           />
         </TabPane>
       )}

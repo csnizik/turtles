@@ -3,12 +3,9 @@ export interface ISearchOptionMap {
 }
 export const searchOptionMap: ISearchOptionMap = {
   Overview: { id: 0, displayName: 'Overview' },
-  ConservationPractices: { id: 1, displayName: 'Conservation Practices' },
-  ProjectsAndInitiatives: {
-    id: 2,
-    displayName: 'Projects And Initiatives',
-  },
-  ResourceConcerns: { id: 3, displayName: 'Resource Concerns' },
+  ResourceConcerns: { id: 1, displayName: 'Resource Concerns'},
+  ProjectsAndInitiatives: { id: 2,displayName: 'Projects And Initiatives',},
+  ConservationPractices: { id: 3, displayName:  'Conservation Practices' },
 };
 
 export const ConservationPracticeSections: any = [

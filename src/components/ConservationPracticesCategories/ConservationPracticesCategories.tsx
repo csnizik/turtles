@@ -36,7 +36,7 @@ const ConservationPracticesCategories = ({
       <div className='introText'>{intro}</div>
       {categories.length > 0 ? (
         <>
-          <div className='card-container'>
+           <div className='card-container'>
             {categories.map((category: ICategoryData) => {
               return (
                 <PracticeCategoriesCard
@@ -46,7 +46,7 @@ const ConservationPracticesCategories = ({
                   practiceCategoryDisplay={category.practiceCategoryDisplay}
                   practiceCategoryId={category.practiceCategoryId}
                   practiceCategoryIconPath={category.practiceCategoryIconPath}
-                />
+                /> 
               );
             })}
             <div className='search-card'>

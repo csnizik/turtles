@@ -31,7 +31,7 @@ const ConcernCategoryCard = ({
       <div className='top-container'>
         <div className='practice-category-name'>{concernCategoryName}</div>
       </div>
-      <div className='practice-categoryisplay'>{concernCategoryDisplay}</div>
+       <div className='practice-categoryisplay'>{concernCategoryDisplay}</div> 
     </div>
   );
 };

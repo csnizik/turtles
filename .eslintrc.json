@@ -22,6 +22,7 @@
   },
   "rules": {
     "react/jsx-boolean-value": "off",
+    "react/prop-types":"off",
     "spaced-comment": "off",
     "arrow-body-style": "off",
     "import/extensions": "off",

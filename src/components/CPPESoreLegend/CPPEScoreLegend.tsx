@@ -2,6 +2,7 @@ import './CPPEScoreLegend.scss'
 import {
     CPPEScoreLegendData
   } from '../../common/typedconstants.common';
+import CPPERow from '../CPPEScore/CPPERow';
 const CPPEScoreLegend = (props) => {
     const numbers = [5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5];
     const ScoreBoxes: React.ReactElement[] = [];
@@ -50,8 +51,11 @@ const CPPEScoreLegend = (props) => {
                         <div className='disclaimer-section'>
                             <h3 className="fsa-alert__heading">Disclaimer</h3>
                             <p className="fsa-alert__text">
-                                {CPPEScoreLegendData.disclaimer}
+                             {CPPEScoreLegendData.disclaimer}
+                         
                             </p>
+                            <p>{CPPERow}</p>
+                            
                         </div>
                     </div>
                 </div>

@@ -1453,7 +1453,7 @@ export const staticText = {
   startedTimeStamp: 1658174455909,
   data: {
     ConservationPracticeCategoryLink: {
-      configurationSettingName: "ConservationPracticeCategoryLink",
+      configurationSettingName: "Link",
       configurationValue: "https://publicdashboards.dl.usda.gov/t/FPAC_PUB/views/CPDPracticesbyYearforStateandMeasure/Dashboard1?Stabbr"
     },
     cp_paragraph_1: {

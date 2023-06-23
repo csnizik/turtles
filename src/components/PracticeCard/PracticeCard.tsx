@@ -80,7 +80,7 @@ const PracticeCardDetails = ({ setPracticeViewType }: any) => {
                               practiceCategory.practiceCategoryId
                             )
                           }
-                        >
+                        > 
                           <h3 className='card-titles'>
                             {practice.practiceName}
                           </h3>

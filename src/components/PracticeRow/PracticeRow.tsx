@@ -15,7 +15,7 @@ const PracticeRow = ({ handleRowSelect, rowData }: any) => {
       role='presentation' 
     >
       <span>{rowData.displayLabel}</span>
-    </div>
+     </div> 
   );
 };
 

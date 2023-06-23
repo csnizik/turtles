@@ -35,6 +35,7 @@ describe('Location Container is rendered correctly', () => {
   });
 
   test('Should display Location Container Tabs', () => {
+    expect(screen.getByText('U.S. Resource Concerns')).toBeInTheDocument();
     expect(screen.getByText('U.S. Conservation Practices')).toBeInTheDocument();
     expect(
       screen.getByText('U.S. Projects And Initiatives')

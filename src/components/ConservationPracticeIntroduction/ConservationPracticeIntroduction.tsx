@@ -84,7 +84,7 @@ const ConservationPracticeIntroduction = ({
   const TableauGraphs = () => {
     return (
       <div className='explore-box'>
-        {RCARender()}
+        {RCARender()} 
         {EQUIPRender()}
       </div>
     );
@@ -96,7 +96,7 @@ const ConservationPracticeIntroduction = ({
         <h2>{title}</h2>
         <p>{introductionParagraph}</p>
         <p>{introductionParagraph2}</p>
-      </div>
+      </div> 
 
       {(title === 'Conservation Practices' &&
         isRcTableauEmpty &&
