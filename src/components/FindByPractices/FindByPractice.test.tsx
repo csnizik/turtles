@@ -42,8 +42,17 @@ describe('Find by Practice Search component is rendered correctly', () => {
     expect(
       screen.getByText('search-by-conservation-practice.first-label-name')
     ).toBeInTheDocument();
+
     expect(
       screen.getByText('search-by-conservation-practice.second-label-name')
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByText('aria-label')
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByText('practice-category-displayname')
     ).toBeInTheDocument();
 
     await findByText('Cropland Soil Quality');

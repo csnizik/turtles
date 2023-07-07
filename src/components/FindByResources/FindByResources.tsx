@@ -29,6 +29,8 @@ const FindByResources = () => {
   const [selectedResource, setSelectedResource] = useState(-1);
   const [selectedSubResource, setSelectedSubResource] = useState(-1);
   const [hiddenSelectedResource, setHiddenSelectedResource] = useState(-1);
+  const [selectedResourceConcern, setSelectedResourceConcern] = useState<string>('ALL'); 
+  const [selectedResourceConcernName, setSelectedResourceConcernName] = useState<string>('Select resource');
 
   const handleFindResources = () => {
     dispatch(setResourceConcernCategory(+hiddenSelectedResource));
@@ -64,10 +66,15 @@ const FindByResources = () => {
   );
 
   const handleCategoryChange = (e) => {
+     // The next three lines are for ANDI accebility tool
+    const selectedInd = e.target.selectedIndex; 
+    const selectedOption = e.target.options[selectedInd];
+    const selectedCategory = selectedOption.getAttribute('concern-displayname');
     const resourceVal = e.target.value;
     if (resourceVal !== '') {
       setSelectedResource(resourceVal);
       setHiddenSelectedResource(resourceVal);
+      setSelectedResourceConcern(selectedCategory);
     }
     setSelectedSubResource(-1);
     dispatch(setSpecificResourceConcern(-1));
@@ -91,9 +98,14 @@ const FindByResources = () => {
     dispatch(setSpecificResourceConcern(-1));
   }, []);
 
-  const handleResourceChange = (e) => {
+  const handleResourceChange = (e) => {  
+     // The next three lines are for ANDI accebility tool
+    const selectedInd = e.target.selectedIndex; 
+    const selectedOption = e.target.options[selectedInd];
+    const selectedCategory = selectedOption.getAttribute('concern-displayname');
     const resourceSubVal = e.target.value;
     setSelectedSubResource(resourceSubVal);
+    setSelectedResourceConcernName(selectedCategory);
     if (selectedResource < 0) {
       findP(resourceSubVal);
     }
@@ -114,16 +126,18 @@ const FindByResources = () => {
           {/* select elments and labels */}
           <div className='resource-select-container'>
             <div>
-              <label className='usa-label' htmlFor='categoryOptions'>
+              <label className='usa-label' htmlFor='rccategoryOptions'>
                 {t('search-by-resource-concern-home.first-label-name')}
               </label>
               <select
                 className='usa-select'
-                id='categoryOptions'
+                id='rccategoryOptions'
                 name='categorySelect'
-                data-testid='categoryOptions'
+                data-testid='rccategoryOptions'
+                aria-required="true"
                 value={selectedResource}
                 onChange={handleCategoryChange}
+                aria-label={`Rescource Concern: ${selectedResourceConcern}`}
               >
                 <option value={-1}>All Resources (default)</option>
                 {resourceCategory.isSuccess && resourceCategory.data
@@ -132,6 +146,7 @@ const FindByResources = () => {
                         <option
                           key={resource.resourceConcernId}
                           value={resource.resourceConcernId}
+                          concern-displayname={resource.resourceConcernName}
                         >
                           {resource.resourceConcernName}
                         </option>
@@ -149,14 +164,16 @@ const FindByResources = () => {
                 id='resourceOptions'
                 name='resourceSelect'
                 data-testid='resourceOptions'
+                aria-required="true"
                 value={selectedSubResource}
                 onChange={handleResourceChange}
+                aria-label={`Selected Rescource Concern: ${selectedResourceConcernName}`}
               >
                 <option value={-1}>- Select resource -</option>
                 {subResource.isSuccess && subResource.data
                   ? subResource.data.map((item: IResourceConcernList) => {
                       return (
-                        <option key={item.resourceConcernId} value={item.resourceConcernId}>
+                        <option key={item.resourceConcernId} value={item.resourceConcernId} concern-displayname={item.resourceConcernName}>
                           {item.resourceConcernName}
                         </option>
                       );

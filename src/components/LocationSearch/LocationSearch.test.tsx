@@ -42,6 +42,14 @@ describe('Location Search is rendered correctly', () => {
       screen.getByText('location-search.labels.select-state')
     ).toBeInTheDocument();
 
+    expect(
+      screen.getByText('aria-label')
+    ).toBeInTheDocument();
+    
+    expect(
+      screen.getByText('state-displayname')
+    ).toBeInTheDocument();
+  
     fireEvent.click(screen.getByText('location-search.national'));
 
     await findByText('Colorado');

@@ -32,6 +32,9 @@ const FindByPractices = () => {
   const [selectedPractice, setSelectedPractice] = useState(-1);
   const [selectedSubPractice, setSelectedSubPractice] = useState(-1);
   const [hiddenSelectedPractice, setHiddenSelectedPractice] = useState(-1);
+  const [selectedPracticeCategoryName, setSelectedPracticeCategoryName] = useState('All practices(default)'); 
+  const [selectedPracticeDisplayName, setSelectedPracticeDisplayName] = useState('-Select practice-');  
+  
 
   const handleFindPractices = () => {
     dispatch(setPracticeCategory(+hiddenSelectedPractice));
@@ -67,8 +70,13 @@ const FindByPractices = () => {
   );
 
   const handleCategoryChange = (e) => {
+    // The next three lines are for ANDI accebility tool
+    const selectedInd = e.target.selectedIndex; 
+    const selectedOption = e.target.options[selectedInd];
+    const selectedPract = selectedOption.getAttribute('practice-category-displayname');
     const practiceVal = e.target.value;
     if (practiceVal !== '') {
+      setSelectedPracticeCategoryName(selectedPract);
       setSelectedPractice(practiceVal);
       setHiddenSelectedPractice(practiceVal);
     }
@@ -94,12 +102,17 @@ const FindByPractices = () => {
     dispatch(setSpecificResourceConcern(-1));
   }, []);
 
-  const handlePracticeChange = (e) => {
+  const handlePracticeChange = (e) => { 
     const practiceSubVal = e.target.value;
     setSelectedSubPractice(practiceSubVal);
     if (selectedPractice < 0) {
       findP(practiceSubVal);
     }
+    // For ANDI Tool 
+    const selectedInd = e.target.selectedIndex; 
+    const selectedOption = e.target.options[selectedInd];
+    const selectedPract = selectedOption.getAttribute('practice-displayname');
+    setSelectedPracticeDisplayName(selectedPract);
   };
 
   return (
@@ -128,8 +141,10 @@ const FindByPractices = () => {
                 id='categoryOptions'
                 name='categorySelect'
                 data-testid='categoryOptions'
+                aria-required="true"
                 value={selectedPractice}
                 onChange={handleCategoryChange}
+                aria-label={`Selected practice category: ${selectedPracticeCategoryName}`}
               >
                 <option value={-1}>All practices (default)</option>
                 {practiceCategory.isSuccess && practiceCategory.data
@@ -138,6 +153,7 @@ const FindByPractices = () => {
                         <option
                           key={practice.practiceCategoryId}
                           value={practice.practiceCategoryId}
+                          practice-category-displayname={practice.practiceCategoryName}
                         >
                           {practice.practiceCategoryName}
                         </option>
@@ -155,14 +171,16 @@ const FindByPractices = () => {
                 id='practiceOptions'
                 name='practiceSelect'
                 data-testid='practiceOptions'
+                aria-required = "true"
                 value={selectedSubPractice}
                 onChange={handlePracticeChange}
+                aria-label={`Selected practice: ${selectedPracticeDisplayName}`}
               >
                 <option value={-1}>- Select practice -</option>
                 {subPractice.isSuccess && subPractice.data
                   ? subPractice.data.map((item: IPractice) => {
                       return (
-                        <option key={item.practiceId} value={item.practiceId}>
+                        <option key={item.practiceId} value={item.practiceId} practice-displayname={item.practiceName}>
                           {item.practiceName}
                         </option>
                       );

@@ -27,6 +27,10 @@ const LocationSearch = () => {
   const [selectedState, setSelectedState]: any = useState<string>(
     DEFAULT_NATIONAL_LOCATION
   );
+
+  const [selectedStateName, setSelectedStateName] = useState<string>(
+    UNITED_STATES_ABBR
+  );
   const stateStatus = useGetStateListQuery();
   const dispatch = useAppDispatch();
 
@@ -34,10 +38,15 @@ const LocationSearch = () => {
     (state) => (state?.staticTextSlice?.staticData as any)?.data
   );
 
-  const handleDropdownSelection = (event: any) => {
+  const handleDropdownSelection = (event) => {
+     // The next three lines are for ANDI accebility tool
+    const selectedInd = event.target.selectedIndex; 
+    const selectedOption = event.target.options[selectedInd];
+    const selectedDisplayName = selectedOption.getAttribute('state-displayname');
     const { name, value } = event.target;
-    if (name === 'stateOptions' && value) {
+    if (name === 'stateOptions' && value) { 
       setSelectedState(value);
+      setSelectedStateName(selectedDisplayName);
     } else {
       dispatch(currentState(initialState));
     }
@@ -101,9 +110,11 @@ const LocationSearch = () => {
             className='usa-select'
             id='stateSelect'
             name='stateOptions'
+            aria-required="true"
             data-testid='select'
             onChange={handleDropdownSelection}
             value={selectedState}
+            aria-label={`Selected state: ${selectedStateName}`}
           >
             <option data-testid='select-option' value='00'>
               {t('location-search.national')}
@@ -112,7 +123,7 @@ const LocationSearch = () => {
               stateStatus.data &&
               stateStatus.data.map((state: IStateDropdownOption) => {
                 return (
-                  <option key={state.stateCode} value={state.stateCode}>
+                  <option key={state.stateCode} value={state.stateCode} state-displayname={state.stateNameDisplay}>
                     {state.stateNameDisplay}
                   </option>
                 );
