@@ -85,7 +85,7 @@ const GovernmentBanner = () => {
               <img
                 className='flex-align-self-left'
                 src='../../../../images/usa-flag-logo.png'
-                alt='USA Flag Logo'
+                alt=''
               />
             </div>
             <div className='grid-col-fill tablet:grid-col-auto'>
@@ -112,7 +112,7 @@ const GovernmentBanner = () => {
               <img
                 className='usa-banner__icon usa-media-block__img'
                 src='../../../../images/icon-dot-gov.svg'
-                alt='Dot gov'
+                alt=''
               />
               <div className='usa-media-block__body'>
                 <p>
@@ -128,7 +128,7 @@ const GovernmentBanner = () => {
               <img
                 className='usa-banner__icon usa-media-block__img'
                 src='../../../../images/icon-https.svg'
-                alt='Https'
+                alt=''
               />
               <div className='usa-media-block__body'>
                 <p>
@@ -177,7 +177,7 @@ const GovernmentBanner = () => {
         <img
           className='nrcsLogo'
           src='../../../../images/nrcs_logo.png'
-          alt='NRCS Logo'
+          alt=''
         />
       </Link>
       <Link
