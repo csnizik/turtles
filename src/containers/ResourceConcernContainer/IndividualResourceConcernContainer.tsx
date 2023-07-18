@@ -9,6 +9,7 @@ import HorizontalScroll from '../../components/HorizontalScroll';
 import { setResourceConcernCategory, setSpecificResourceConcern} from '../../Redux/Slice/resourceConcernSlice';
 import CPPEScore from '../../components/CPPEScore/CPPEScore';
 import CPPESCoreView from '../../components/CPPEScoreView/CPPEScoreColumnView';
+import Spinner from '../../components/Spinner/Spinner';
 
 const IndividualResourceConcernContainer = () => {
   const state = useAppSelector((s) => s);
@@ -56,7 +57,14 @@ const IndividualResourceConcernContainer = () => {
       {/* Impacts: TO DO Put back in the next PI */}
       {/* <ApplicationImpacts data={data} isSuccess={isSuccess} /> */}   
       <CPPEScoreLegend/>
-      <CPPESCoreView />
+      {isLoading && <Spinner />}
+      {isError && error}
+      {isSuccess && data && (
+        <CPPESCoreView
+          resourceConcern={data[0]}
+          stateCode={stateCode}
+        />
+      )}
     </>
   );
 };

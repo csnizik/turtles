@@ -66,12 +66,12 @@ export const api = createApi({
         `/resourceConcern/concern/category/${swapaCategory}`,
     }),
     // Individual Resource Concern Info based on ID
-    getIndividualResourceConcern: builder.query<IIndividualResourceConcern, any>({
+    getIndividualResourceConcern: builder.query<[IIndividualResourceConcern], any>({
       query: (resourceId) =>
         `/resourceConcern/individual/concern/${resourceId}`,
     }),
     // Get the CPPE score for a individual resource concern
-    getCPPEScores: builder.query<ICPPEScore[], { resourceId: number; stateCode: number }>({
+    getCPPEScores: builder.query<ICPPEScore[], { resourceId: number; stateCode: string }>({
       query: (data) => {
         const {resourceId, stateCode} = data;
         return `/CPPE/${resourceId}/${stateCode}`

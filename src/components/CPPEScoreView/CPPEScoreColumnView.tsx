@@ -1,68 +1,39 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import './cppe-score.scss'
 import { CPPESCoreEntry } from './CPPEScoreColumnEntry';
+import { useGetCPPEScoresQuery } from '../../Redux/services/api';
+import { IIndividualResourceConcern } from '../../common/types';
+import Spinner from '../Spinner/Spinner';
+import { PracticeEntry, getCheckedEntriesKey } from './utils';
 
+// CSV download
+export const download = (filename: string, text: string) => {
+    const element = document.createElement('a');
+    element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(text)}`);
+    element.setAttribute('download', filename);
 
-const CPPESCoreView = () => {
+    element.style.display = 'none';
+    document.body.appendChild(element);
 
-const getData = () => {
-        //simulating an api or data retrieval
-        const fetchData = [
-            {
-                id: -1,
-                Id2: 100,
-                title: 'Alley Cropping (311)',
-                shortDescription: 'Alley cropping is an agroforestry practice where agricultural or horticultural crops are grown in the alleyways between widely spaced rows of woody plants. By combining annual and perennial crops that yield varied products and profits at different times, a landowner can more effectively use available space, time, and resources.',
-            },
-            {
-                id: 2,
-                Id2: 101,
-                title: 'Cover Crop (340)',
-                shortDescription: 'Critical area planting establishes permanent vegetation on sites that have, or are expected to have, high erosion rates, and on sites that have conditions that prevent the establishment of vegetation with normal practices.',
-            },
-            {
-                id: -3,
-                Id2: 102,
-                title: 'Critical Area Planting (342)',
-                shortDescription: 'this is a short description this is a short description this is a short description this is a short description this is a short description  ',
+    element.click();
 
+    document.body.removeChild(element);
 
-            },
-            {
-                id: 0,
-                Id2: 103,
-                title: 'Deep Tillage (324)',
-                shortDescription: 'This practice includes tillage methods commonly referred to as mulch tillage where a majority of the soil surface is disturbed by noninversion tillage operations such as vertical tillage, chiseling, and disking, and also includes tillage/planting systems with relatively minimal soil disturbance. ',
+    return element;
+}
 
+const csvFields = ['Conservation Practice', 'Code', 'CPPE', 'Effect', 'Rationale'] as const;
 
-            },
-            {
-                id: 0,
-                Id2: 104,
-                title: 'Compaction',
-                shortDescription: 'Management-induced soil compaction at any level throughout the soil profile resulting in reduced plant productivity, biological activity, infiltration and aeration.',
+const csvFieldNameToProperty = {
+    CPPE: 'id',
+    Code: 'Id2',
+    'Conservation Practice': 'title',
+    Rationale: 'shortDescription',
+} as const;
 
+const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndividualResourceConcern, stateCode: string }) => {
 
-            },
-            {
-                id: -5,
-                Id2: 105,
-                title: 'Organic matter depletion',
-                shortDescription: 'Management-induced depletion of any or all pools of soil organic matter resulting in limited soil function and processes that support plant productivity, biological activity and water and nutrient cycling.',
-
-
-            },
-            {
-                id: 5,
-                Id2: 106,
-                title: 'Sheet and rill erosion',
-                shortDescription: 'Detachment and transport of soil particles caused by rainfall, melting snow, or irrigation.this is a short description this is a short description this is a short description this is a short description this is a short description.',
-
-            },
-        ];
-        return fetchData;
-    };
     // Declaration and initilazations of const and properties
     const intialpractice = [
         {
@@ -72,43 +43,43 @@ const getData = () => {
             shortDescription: 'Alley cropping is an agroforestry practice where agricultural or horticultural crops are grown in the alleyways between widely spaced rows of woody plants. By combining annual and perennial crops that yield varied products and profits at different times, a landowner can more effectively use available space, time, and resources.',
         },
     ]
-    const [flag, setFlag]= useState(false);
+    const [flag, setFlag] = useState(false);
     const [activeClassName, setactiveClassName] = useState<Number>();
     const [activeCheckClass, setactiveCheckClass] = useState<Number[]>([]);
     const [sortBySelect, setsortBySelect] = useState<string>('');
-    const [selected , setSelected ] = useState<Number>(0);
-    const [data, setData] = useState<Array<{ id: number, title: String, shortDescription: String, Id2: number }>>([]);
-    const [practice, setPractice] = useState<Array<{ id: number, title: String, shortDescription: String, Id2: number }>>([]);
+    const [selected, setSelected] = useState<Number>(0);
+    const [data, setData] = useState<Array<PracticeEntry>>([]);
+    const [practice, setPractice] = useState<Array<PracticeEntry>>([]);
+    const [checkedEntries, setCheckedEntries] = useState<{ [id: number]: boolean }>({});
+    const numSelectedEntries = useMemo(() => Object.values(checkedEntries).reduce((acc, curr) => acc + (curr ? 1 : 0), 0), [checkedEntries])
+    const [selectAllChecked, setSelectAllChecked] = useState(false);
     const property = 'title';
     const index = 'id';
-    let hidKey: number = 0; 
-    const categoryChart = [
-        { number: 5, description: 'Substantial Improvement' },
-        { number: 4, description: 'Moderate to Substantial Improvement' },
-        { number: 3, description: 'Moderate Improvement' },
-        { number: 2, description: 'Slight to Moderate Improvement' },
-        { number: 1, description: 'Slight Improvement' },
-        { number: -1, description: 'Slight Worsening' },
-        { number: -2, description: 'Slight to Moderate Worsening' },
-        { number: -3, description: 'Moderate Worsening' },
-        { number: -4, description: 'Moderate to Substantial Worsening' },
-        { number: -5, description: 'Moderate to Substantial Worsening' },
-      ];
+    let hidKey: number = 0;
+    const categoryChart = {
+        5: 'Substantial Improvement',
+        4: 'Moderate to Substantial Improvement',
+        3: 'Moderate Improvement',
+        2: 'Slight to Moderate Improvement',
+        1: 'Slight Improvement',
+        '-1': 'Slight Worsening',
+        '-2': 'Slight to Moderate Worsening',
+        '-3': 'Moderate Worsening',
+        '-4': 'Moderate to Substantial Worsening',
+        '-5': 'Moderate to Substantial Worsening',
+    };
 
     // Event handlers and functions 
     // Left panel Row Click event handler 
     const handleRowClick = (id) => {
         setFlag(true);
-        //console.log('Handle Row events clicked ID = ',id); 
         setactiveClassName(id);
         setSelected(id);
         const ID2 = 'Id2'
-        const value =data[id][ID2]; 
+        const value = data[id][ID2];
         setPractice(id);
-       // console.log('Active value Id2 = ', value); 
-        let practice2 = data.filter(x=>x.Id2 === value)
-       //console.log('filter result = ', practice2);
-        setPractice(practice2); 
+        let practice2 = data.filter(x => x.Id2 === value)
+        setPractice(practice2);
         setData(data);
     }
 
@@ -148,66 +119,112 @@ const getData = () => {
         const arr = []
         setactiveCheckClass(arr)
     }
-     
+
+    const { data: getCppeScoresData, error, isLoading, isSuccess, isError } = useGetCPPEScoresQuery({ resourceId: resourceConcern.resourceConcernId, stateCode })
+
     // use effect 
     useEffect(() => {
-        // Call API from here 
-        const fetchData = getData();
-        fetchData.sort((a: any, b: any): any => {
-            return b.id - a.id;
-        });
-        setData(fetchData);
-    }, []);
+        if (getCppeScoresData !== undefined) {
+            // Call API from here 
+            const fetchData: PracticeEntry[] = getCppeScoresData.map(practice => ({
+                id: practice.cppeEffectValue,
+                Id2: practice.practiceId,
+                title: practice.practiceName,
+                shortDescription: practice.practiceDescription,
+                practiceCategory: practice.practiceCategory,
+            }));
+            fetchData.sort((a: any, b: any): any => {
+                return b.id - a.id;
+            });
+            setData(fetchData);
+            const checkedEntries = {};
+            fetchData.forEach(d => {
+                checkedEntries[getCheckedEntriesKey(d)] = false;
+            });
+            setCheckedEntries(checkedEntries);
+        }
+    }, [getCppeScoresData]);
+
+    //ensures that whenever the checkedEntries object changes, 
+    //the state of the "Select all" checkbox is updated based on whether all checkboxes are checked or not.
+    useEffect(() => {
+        setSelectAllChecked(!Object.values(checkedEntries).some(isChecked => !isChecked));
+    }, [checkedEntries])
 
     // Function given the array and index return value of the property 
-    function GetElement({array, index, property})
-    {   
-        if(index < 0 || index >=array.lenght){
+    function GetElement({ array, index, property }) {
+        if (index < 0 || index >= array.lenght) {
             return <div> Invalid index</div>
         }
-        const value =array[index][property]; 
+        const value = array[index][property];
         if (value === undefined) {
-           return <div> Invalid property: {property} </div>
-           //The value of property {property} at index {index} is:
+            return <div> Invalid property: {property} </div>
+            //The value of property {property} at index {index} is:
         }
         return <div> {value} </div>;
     }
 
     // Function return the CPPEScore for a given index 
-    function getCPPScore(array, index, property)
-    {   
-        if(index < 0 || index >=array.lenght){
+    function getCPPScore(array, index, property) {
+        if (index < 0 || index >= array.lenght) {
             return <div> Invalid index</div>
         }
-        const value =array[index][property]; 
+        const value = array[index][property];
         if (value === undefined) {
-           return null;
+            return null;
         }
         return parseInt(value, 10);
     }
 
     // Renders the CPPE description 
     const renderDescription = (number) => {
-        const i = categoryChart.find((i) => i.number === number); 
-        if (i){
-          return <div key={ i.number}  className="desc" style={{paddingLeft:'20px'}}> {i.description}</div>
+        if (number in categoryChart) {
+            return <div key={number} className="desc" style={{ paddingLeft: '20px' }}> {categoryChart[number]}</div>
         }
-        return <div style={{paddingLeft:'20px'}} >  No Comment</div>
-    } 
+        return <div style={{ paddingLeft: '20px' }} >  No Comment</div>
+    }
 
     function id(value: { id: number; title: String; shortDescription: String; Id2: number; }, index: number, array: { id: number; title: String; shortDescription: String; Id2: number; }[]): value is { id: number; title: String; shortDescription: String; Id2: number; } {
         throw new Error('Function not implemented.');
     }
 
+    function handleExport() {
+        const exportedPractices = data.filter(practice => checkedEntries[getCheckedEntriesKey(practice)]);
+        const numExportedPractices = exportedPractices.length;
+        const filename = `${resourceConcern.resourceConcernName.replaceAll(' ', '_')}_CPPE_export_${numExportedPractices}_practices.csv`;
+        const csvHeader = `${csvFields.join(',')}\n`;
+        const csvBody = exportedPractices.reduce((acc, curr) => `${acc}${csvFields.map(field => {
+            if (field === 'Effect') {
+                return categoryChart[curr.id] ?? 'No Comment';
+            }
+            return `"${curr[csvFieldNameToProperty[field]]}"`;
+        }).join(',')}\n`, '');
+        download(filename, `${csvHeader}${csvBody}`);
+    }
+
     return (
         <>
-        <div className='Alert-container-box'>
-            <div className='container'>
-                <p className='title'>Conservation Practice(s)</p>
-                <div className='dropdown'>
+            <div className='Alert-container-box'>
+                <div className='container'>
+                    <p className='title'>Conservation Practice(s)</p>
+                    <div className='dropdown'>
                         <label className='check'>
                             <input type="checkbox"
+                                data-testid="selectAll"
                                 className='selectAll'
+                                checked={selectAllChecked}
+                                onChange={() => {
+                                    setSelectAllChecked((prevSelectAllChecked) => {
+                                        setCheckedEntries((prevCheckedEntries) => {
+                                            const result = {};
+                                            for (const k of Object.keys(prevCheckedEntries)) {
+                                                result[k] = !prevSelectAllChecked;
+                                            }
+                                            return result;
+                                        });
+                                        return !prevSelectAllChecked;
+                                    });
+                                }}
                             />
                             Select all
                         </label>
@@ -217,61 +234,73 @@ const getData = () => {
                                 <option value='practiceName'>Practice Name</option>
                             </select>
                         </label>
-                </div>
-                <div className='child-container'>
-                    <div className="conservation-practice-wrapper">
-                        {data.length ? (
-                            <div className="conservation-practices">
-                                {data.map((item) => (
-                                    <CPPESCoreEntry key={hidKey} handleCheckClick={handleCheckClick} handleRowClick={handleRowClick} item={item} 
-                                        hiddenKey={hidKey++} activeCheckClass={activeCheckClass} activeClassName={activeClassName}/>                                        
-                                ))}
-                            </div>
-                        ) : (
-                            <h1>Loading</h1>
-                        )}
-                        <div className="details"> 
-                            { (flag===false) ?  (<h1>...</h1> ) : (
-                            <div className='practice-item'>
-                                    <h2><GetElement array={practice} index={0} property={property} /></h2> 
-                                    <div className='flexdata' >
+                    </div>
+                    <div className='child-container'>
+                        <div className="conservation-practice-wrapper">
+                            {!isLoading && isSuccess && data.length > 0 && Object.keys(checkedEntries).length > 0 ? (
+                                <div className="conservation-practices">
+                                    {data.map((item) => (
+                                        <CPPESCoreEntry key={hidKey} handleRowClick={handleRowClick} item={item}
+                                            hiddenKey={hidKey++} activeClassName={activeClassName} checked={checkedEntries[getCheckedEntriesKey(item)]}
+                                            handleChange={(item: PracticeEntry) => () => setCheckedEntries((prevCheckedEntries) => ({ ...prevCheckedEntries, [getCheckedEntriesKey(item)]: !prevCheckedEntries[getCheckedEntriesKey(item)] }))} />
+
+                                    ))}
+                                </div>
+                            ) : (
+                                <Spinner />
+                            )}
+                            {isError && error}
+                            <div className="details">
+                                {(flag === false) ? (<h1>...</h1>) : (
+                                    <div className='practice-item'>
+                                        <h2><GetElement array={practice} index={0} property={property} /></h2>
+                                        <div className='flexdata' >
                                             {(() => {
-                                                let item = getCPPScore(practice, 0 , index); 
-                                               
-                                                const numericValue = Number(item); 
-                                               
+                                                let item = getCPPScore(practice, 0, index);
+
+                                                const numericValue = Number(item);
+
                                                 let text = `+${item}`;
-                                                if ( numericValue > 0 ) return  <div className='green-box'>{text} </div>
+                                                if (numericValue > 0) return <div className='green-box'>{text} </div>
                                                 else if (numericValue < 0) return <div className='red-box'>{item}</div>
-                                                else return <p className='grey-box'>{item}</p>     
+                                                else return <p className='grey-box'>{item}</p>
                                             })()}
-                                        
-                                             {(() => {
-                                                 let item = getCPPScore(practice, 0 , index);
+
+                                            {(() => {
+                                                let item = getCPPScore(practice, 0, index);
                                                 return renderDescription(item)
-                                            })()}        
-                                    </div> 
-                                    <h3> Practice Information</h3> 
-                                    <img className='practice-item' alt='' src="../../../images/landscape-initiatives-images/default.jpg"/>
-                                    <p><GetElement array={practice} index={0} property={'shortDescription'} /></p>  
-                                            <div className="caution-container"> 
+                                            })()}
+                                        </div>
+                                        <h3> Practice Information</h3>
+                                        <img className='practice-item' alt='' src="../../../images/landscape-initiatives-images/default.jpg" />
+                                        <p><GetElement array={practice} index={0} property={'shortDescription'} /></p>
+                                        <div className="caution-container">
                                             <img src={'../../../../images/ic_error_24px.svg'} alt="Warning" />
-                                                <h2> Caution for application</h2>
-                                                <p> This practice has a negative effect on the following resource concerns: </p>
-                                                <ul>
-                                                    <li><Link to={{ pathname: 'https://www.nrcs.usda.gov/Internet/NRCS_RCA/reports/data_viewer_home.html',}} target='_blank' > <text> Placeholder Resource Concern 1</text> </Link></li>
-                                                    <li><Link to={{ pathname: 'https://www.nrcs.usda.gov/Internet/NRCS_RCA/reports/data_viewer_home.html',}} target='_blank' > Placeholder Resource Concern 2 </Link></li>
-                                                    <li><Link to={{ pathname: 'https://www.nrcs.usda.gov/Internet/NRCS_RCA/reports/data_viewer_home.html',}} target='_blank' > Placeholder Resource Concern 3 </Link></li>
-                                                </ul>
-                                            </div>  
-                            </div>                             
-                            )}  
-                        </div> 
+                                            <h2> Caution for application</h2>
+                                            <p> This practice has a negative effect on the following resource concerns: </p>
+                                            <ul>
+                                                <li><Link to={{ pathname: 'https://www.nrcs.usda.gov/Internet/NRCS_RCA/reports/data_viewer_home.html', }} target='_blank' > <text> Placeholder Resource Concern 1</text> </Link></li>
+                                                <li><Link to={{ pathname: 'https://www.nrcs.usda.gov/Internet/NRCS_RCA/reports/data_viewer_home.html', }} target='_blank' > Placeholder Resource Concern 2 </Link></li>
+                                                <li><Link to={{ pathname: 'https://www.nrcs.usda.gov/Internet/NRCS_RCA/reports/data_viewer_home.html', }} target='_blank' > Placeholder Resource Concern 3 </Link></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </div>
-             </div>
-         </div>
-     </>
+                <div className='export-container container'>
+                    <button
+                        type='button'
+                        className='usa-button'
+                        onClick={handleExport}
+                    >
+                        Export {numSelectedEntries} Select Practice(s)
+                    </button>
+                </div>
+            </div>
+        </>
     )
 }
 
