@@ -18,6 +18,10 @@ import CPPESCoreView from './CPPEScoreColumnView';
     test('Verify CPPEScoreEntry component', async () => {
       expect(screen.getByText('Sort By:')).toBeInTheDocument();
       expect(screen.getByText('Conservation Practice(s)')).toBeInTheDocument();
+      expect(screen.getByText('Filter by CPPE')).toBeInTheDocument();
+      expect(screen.getByText('Filter by practice category')).toBeInTheDocument();
+      expect(screen.getByText('Apply')).toBeInTheDocument();
     });
+
   });
   

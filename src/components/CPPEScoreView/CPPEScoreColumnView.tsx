@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect, useMemo } from 'react';
 import './cppe-score.scss'
 import { CPPESCoreEntry } from './CPPEScoreColumnEntry';
@@ -6,20 +6,17 @@ import { useGetCPPEScoresQuery } from '../../Redux/services/api';
 import { IIndividualResourceConcern } from '../../common/types';
 import Spinner from '../Spinner/Spinner';
 import { PracticeEntry, getCheckedEntriesKey } from './utils';
+import InputTag from '../InputTag/InputTag'; 
 
 // CSV download
 export const download = (filename: string, text: string) => {
     const element = document.createElement('a');
     element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(text)}`);
     element.setAttribute('download', filename);
-
     element.style.display = 'none';
     document.body.appendChild(element);
-
     element.click();
-
     document.body.removeChild(element);
-
     return element;
 }
 
@@ -35,6 +32,7 @@ const csvFieldNameToProperty = {
 const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndividualResourceConcern, stateCode: string }) => {
 
     // Declaration and initilazations of const and properties
+    const location = useLocation(); 
     const intialpractice = [
         {
             id: -1,
@@ -48,6 +46,7 @@ const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndi
     const [activeCheckClass, setactiveCheckClass] = useState<Number[]>([]);
     const [sortBySelect, setsortBySelect] = useState<string>('');
     const [selected, setSelected] = useState<Number>(0);
+    const [initialData,setInitialData] = useState<Array<PracticeEntry>>([]);
     const [data, setData] = useState<Array<PracticeEntry>>([]);
     const [practice, setPractice] = useState<Array<PracticeEntry>>([]);
     const [checkedEntries, setCheckedEntries] = useState<{ [id: number]: boolean }>({});
@@ -68,6 +67,7 @@ const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndi
         '-4': 'Moderate to Substantial Worsening',
         '-5': 'Moderate to Substantial Worsening',
     };
+    const CPPE = ["+5", "+4", "+3","+2","+1"," 0","-1","-2","-3","-4","-5"];
 
     // Event handlers and functions 
     // Left panel Row Click event handler 
@@ -93,7 +93,12 @@ const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndi
             ]);
         } else setactiveCheckClass([...activeCheckClass, id]);
     }
-
+    // Data from the CPPE Selection box filter 
+    const [dataFromCppeCheckBox,setDataFromCppeCheckBox] = useState('');
+    const handleDataFromChild = (data) => {
+        setDataFromCppeCheckBox(data);
+    }
+   
     // Sort By Event handler 
     const handleSelectChange = (value) => {
         if (value === 'score') {
@@ -137,6 +142,7 @@ const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndi
                 return b.id - a.id;
             });
             setData(fetchData);
+            setInitialData(fetchData);
             const checkedEntries = {};
             fetchData.forEach(d => {
                 checkedEntries[getCheckedEntriesKey(d)] = false;
@@ -176,6 +182,25 @@ const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndi
         return parseInt(value, 10);
     }
 
+    function GetFilter({array, index, property})
+    {   
+        if(index < 0 || index >=array.lenght){
+            return <div> Invalid index</div>
+        }
+        const value =array[index][property]; 
+        if (value === undefined) {
+           return <div> Invalid property: {property} </div>
+           //The value of property {property} at index {index} is:
+        }
+        return <div> {value} </div>;
+    }
+
+    const [practiceSelected,setpPacticeSelected]= useState('');
+
+    const handlePracticeChange = (value) => {
+        setpPacticeSelected(value);
+    }
+
     // Renders the CPPE description 
     const renderDescription = (number) => {
         if (number in categoryChart) {
@@ -202,12 +227,108 @@ const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndi
         download(filename, `${csvHeader}${csvBody}`);
     }
 
+    // properties for checkbox 
+    const [expanded, setExpanded] = useState(false);
+    const [filterSelections,setFilterSelections] = useState([""]);
+
+    const toggleExpanded = () => {
+      if (!expanded) {
+        setExpanded(true);
+       setFilterSelections([""]);
+      } else {
+        setExpanded(false);
+      }
+    };
+  
+    const handleSelectionChange = event => { 
+      if (event.target.checked  && !filterSelections.includes(event.target.name)) {
+        console.log(" Event target name :", event.target.name);
+       setFilterSelections([...filterSelections, event.target.name]);
+      } else if (!event.target.checked && filterSelections.includes(event.target.name))
+      {  
+        setFilterSelections(filterSelections.filter(q => q !== event.target.name));
+      }
+      return filterSelections;
+    };
+    
+    const [isVisable, setIsVisable] = useState(false);
+
+    const handleApplyFilter = () => {
+      //console.log("Submitted! Values selected are", filterSelections);
+      const filter = filterSelections.slice(1).map(Number);
+      const filterData = data.filter(item => filter.includes(item.id));
+      setIsVisable(!isVisable);
+      setData(filterData);
+    };
+
+    const clearFilter = () => { 
+        console.log(" isVisable", isVisable)
+        setIsVisable(!isVisable);
+       setData(initialData);
+    };
+
     return (
         <>
-            <div className='Alert-container-box'>
-                <div className='container'>
-                    <p className='title'>Conservation Practice(s)</p>
-                    <div className='dropdown'>
+        <div className='Alert-container-box'>
+            <div className='container'>
+                <p className='title'>Conservation Practice(s)</p>
+                <hr />
+                <div className='filter-container' > 
+                    <div className='.filter-dropdown'> 
+                        <div onClick={toggleExpanded} className={`filter-button ${expanded ? "up-arrow" : "down-arrow"}`}> Filter by CPPE 
+                        </div>
+                        {expanded && (
+                        <div className="flexbox-vertical">
+                            <div className="border-gray-200 border border-solid">
+                                {CPPE.map(platform => (
+                                <label htmlFor="one" className="flexbox-select" key={platform}>
+                                    <input
+                                    type="checkbox"
+                                    name= {platform}
+                                    value= {platform}
+                                    onChange={handleSelectionChange}
+                                    className="m-3 cursor-pointer" />
+                                    {(() => {
+                                    const numericValue = Number(platform);
+                                    if (numericValue > 0) return <div className='green-box'>{platform} </div>;
+                                    else if (numericValue < 0) return <div className='red-box'>{platform}</div>;
+                                    else return <p className='grey-box'>{platform}</p>;
+                                    })()}
+                                </label>
+                         ))}
+                            </div>
+                        </div>
+                       )}
+                        {isVisable && (
+                           <div className='flexbox-select'>
+                            {/* <span className='filter-lable'>Active Filter: </span>  */}
+                            {filterSelections.slice(1).map((filter,index) => (
+                               <InputTag description={`CPPE: ${filter}`}/>
+                               
+                            ))}
+                            {(() => { if (practiceSelected !== ''){
+                                          return <InputTag description={practiceSelected}/>
+                                      }
+                                      return null;
+                                    })()} 
+                            <Link to={location.pathname} style={{display: 'flex', marginLeft: '1px', width: '300rem', fontSize:'14px'}} onClick={clearFilter}> Clear All </Link>
+                           </div>
+                        )}    
+                    </div>
+                    <select className='filter-button-practice' onChange={(e) => handlePracticeChange(e.target.value)}>
+                        <option value='' > Filter by practice category</option> 
+                        <option value='Soil Quality' >Cropland Soil Quality</option>
+                        <option value='Soil Health'>Cropland Soil Health</option>
+                        <option value='Climate-Smart'>Climate-Smart Agriculture</option>
+                        <option value='Fish and Wildlife'>Fish and Wildlife Habitat</option>
+                        <option value='Irrigation Efficiency'>Irrigation Efficiency</option>
+                        <option value='Invasive Species'>Invasive Species Management</option>
+                        <option value='Urban Agriculture'>Urban Agriculture</option>
+                        <option value='Water Quality'>Water Quality</option>
+                    </select>
+                    <button className='filter-button' onClick={handleApplyFilter}> Apply</button> 
+                </div>
+                <div className='dropdown'>
                         <label className='check'>
                             <input type="checkbox"
                                 data-testid="selectAll"
@@ -271,12 +392,16 @@ const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndi
                                                 return renderDescription(item)
                                             })()}
                                         </div>
-                                        <h3> Practice Information</h3>
-                                        <img className='practice-item' alt='' src="../../../images/landscape-initiatives-images/default.jpg" />
-                                        <p><GetElement array={practice} index={0} property={'shortDescription'} /></p>
+                                        <div className='practice-info-component'>
+                                            <h3> Practice Information</h3>
+                                            <img  alt='' src="../../../images/landscape-initiatives-images/default.jpg" />
+                                            <p><GetElement array={practice} index={0} property={'shortDescription'} /></p>
+                                        </div>
                                         <div className="caution-container">
-                                            <img src={'../../../../images/ic_error_24px.svg'} alt="Warning" />
-                                            <h2> Caution for application</h2>
+                                            <div className="row-container"> 
+                                                <img src={'../../../../images/ic_error_24px.svg'} alt="Warning" /> 
+                                                <h2> Caution for application </h2>
+                                            </div>
                                             <p> This practice has a negative effect on the following resource concerns: </p>
                                             <ul>
                                                 <li><Link to={{ pathname: 'https://www.nrcs.usda.gov/Internet/NRCS_RCA/reports/data_viewer_home.html', }} target='_blank' > <text> Placeholder Resource Concern 1</text> </Link></li>
@@ -284,7 +409,7 @@ const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndi
                                                 <li><Link to={{ pathname: 'https://www.nrcs.usda.gov/Internet/NRCS_RCA/reports/data_viewer_home.html', }} target='_blank' > Placeholder Resource Concern 3 </Link></li>
                                             </ul>
                                         </div>
-                                    </div>
+                                 </div>
                                 )}
                             </div>
                         </div>

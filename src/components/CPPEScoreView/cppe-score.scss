@@ -5,7 +5,7 @@
   
   img {
     float: right;
-    padding: 0 0 4.0rem 5.0rem;
+    padding: 25px 50px 50px 60px;
     max-height: 12.625rem;
     max-width: 15.99rem;
   }
@@ -15,7 +15,7 @@
     padding: 0;
     margin: 0;
 
-    .full-component {
+    .practice-info-component {
       .overview {
         width: auto;
         min-width: 40%;
@@ -26,10 +26,10 @@
       }
 
       img {
-        float: right;
-        padding: 0 0 1.0rem 1.0rem;
-        max-height: 0.625rem;
-        max-width: 0.99rem;
+        display: left;
+        width: 40px;
+        padding: 0px 10px 5px 5px;
+        flex-direction: row;;
       }
     }
 
@@ -57,32 +57,37 @@
 
 .caution-container{
 
-    h2 {
-        font-size: 1.45rem;
+    .row-container{
+       display: flex;
+       align-items: left;
+    }
+
+    h2 { display: left;
+        font-size: 1.2rem;
         font-weight: $semi-heavy-weight;
         font-style: bold;
         padding-bottom: 0.25rem;
+      
       } 
     
-    width: 95%;
+   img{
+        display: left;
+        width: 40px;
+        padding: 10px 10px 5px 5px;
+        flex-direction: row;
+    }
+    
+
+    width: 98%;
     align-content: f;
     font-size: 1.05rem;
     line-height: 2.34375rem;
-    margin: 1.0rem 0.5rem;
+    margin-top: auto;
     margin-bottom: 1.875rem;
     background: #ced3ce;
     margin-top: 1.5rem;
     padding-left: 0.45rem;
     padding-top: 0.45rem;
-
-    img{
-        // width: 25px;
-        // height: 25px;
-        margin-left: -60px;
-        margin-right:  10px;
-        float:left
-    
-    }
 }
 
 a {
@@ -154,7 +159,7 @@ a:hover {
 }
 
 .title{
-    padding-left: 2px;
+    padding-left: 10px;
     font-size: 25px;
     font-weight: 800;
     margin-bottom: 2.5rem;
@@ -284,8 +289,8 @@ click-check{
 .details{
     flex-basis: 50%;
     padding-left: 10px;
-    overflow: auto;
-}
+    overflow: auto;} 
+
 
 .export-container{
     background-color: none;
@@ -293,3 +298,105 @@ click-check{
     border: none;
     box-shadow: none;
 }
+
+
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    flex-basis: auto;
+    width: 800px;
+    height: 200px;
+    flex-direction: row;
+    padding: 0px 10px 1px 10px;
+}
+
+.filter-dropdown{
+    flex-basis: 0;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    overflow: auto;
+}
+
+.filter-button-practice {
+    border: 1px solid $dark-blue;
+    border-radius: 4px;
+    background-color: $white;
+    width: 210px;
+    height: 36px;
+    color: $usda-blue;
+    margin-top: $large-space-size;
+    padding: 0px 0px 0px 5px;
+    font-weight: $heavy-weight;
+    font-size: $h4-font-size;
+}
+
+  .filter-selected-box{
+    width: 80px;
+    height: 36px;
+    background: #dbeefd;
+    border-radius:3px; 
+    margin-top: 10px;
+    margin-left: 5px;
+    padding: 5px 1px 1px 5px;
+    color: rgb(19, 18, 18);
+}
+
+.flexbox-vertical {
+    place-content: end left;
+    height: 120px;
+    width: 140px;
+    background: #ffffff;
+    flex-direction: column;
+    padding: 1px 1px 1px 5px;
+    overflow: auto;
+}
+
+.flexbox-select {
+    display: flex;
+    width: 100px;
+    padding: 0px 0px 0px 0px;
+    flex-direction: row;
+}
+
+.filter-button {
+    border: 1px solid $dark-blue;
+    border-radius: 4px;
+    background-color: $white;
+    width: 140px;
+    height: 36px;
+    color: $usda-blue;
+    margin-top: $large-space-size;
+    padding: 0px 0px 0px 5px;
+    font-weight: $heavy-weight;
+    font-size: $h4-font-size;
+  }
+
+  .up-arrow:after {
+    display: inline-block;
+    content: " ";
+    margin-left: 10px;
+    margin-bottom: 2px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid rgb(0, 0, 0);
+  }
+  
+  .down-arrow:after {
+    display: inline-block;
+    content: " ";
+    margin-left: 10px;
+    margin-bottom: 2px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid black;
+  }
+
+  .filter-lable{
+    display: 'inline-block';
+    margin-top: 5.5rem;
+    margin-Left: '1px';
+    margin-right: '5px';
+    font-Size:'2px'
+  }
