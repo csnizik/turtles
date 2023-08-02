@@ -2,6 +2,6 @@
 
 npm run build
 cd build
-tar -czvf ../cprifrontend.tar.gz .
+tar -czvf ../cpdifrontend.tar.gz .
 cd ../
 echo done
