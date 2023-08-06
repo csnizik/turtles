@@ -206,7 +206,7 @@ const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndi
         if (number in categoryChart) {
             return <div key={number} className="desc" style={{ paddingLeft: '20px' }}> {categoryChart[number]}</div>
         }
-        return <div style={{ paddingLeft: '20px' }} >  No Comment</div>
+        return <div style={{ paddingLeft: '20px' }} >  No Effect or N/A </div>
     }
 
     function id(value: { id: number; title: String; shortDescription: String; Id2: number; }, index: number, array: { id: number; title: String; shortDescription: String; Id2: number; }[]): value is { id: number; title: String; shortDescription: String; Id2: number; } {
@@ -373,35 +373,37 @@ const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndi
                             {isError && error}
                             <div className="details">
                                 {(flag === false) ? (<h1>...</h1>) : (
-                                    <div className='practice-item'>
+                                    <div className='right-pane-container'>
                                         <h2><GetElement array={practice} index={0} property={property} /></h2>
                                         <div className='flexdata' >
                                             {(() => {
                                                 let item = getCPPScore(practice, 0, index);
-
                                                 const numericValue = Number(item);
-
                                                 let text = `+${item}`;
                                                 if (numericValue > 0) return <div className='green-box'>{text} </div>
                                                 else if (numericValue < 0) return <div className='red-box'>{item}</div>
-                                                else return <p className='grey-box'>{item}</p>
+                                                else return <div className='grey-box'>{item}</div>
                                             })()}
 
                                             {(() => {
                                                 let item = getCPPScore(practice, 0, index);
                                                 return renderDescription(item)
                                             })()}
+                                        </div> 
+                                        <h4>Practice Category: <a href="https://www.nrcs.usda.gov/resources/guides-and-instructions/conservation-practice-standards">Climate-Smart Agriculture</a></h4>
+                                        <h4> Specification Sheet: <a href="https://www.nrcs.usda.gov/resources/guides-and-instructions/conservation-practice-standards">View the National Standard Document</a> <img  src={'../../../../images/arrow-up-right.svg'} alt="img" /></h4>
+                                        
+                                        <div className='rationale-component'>
+                                            <h3>Rationale</h3>
+                                            <p><GetElement array={practice} index={0} property={'shortDescription'} /></p>
                                         </div>
                                         <div className='practice-info-component'>
                                             <h3> Practice Information</h3>
+                                            <p><GetElement array={practice} index={0} property={'shortDescription'} /> </p>
                                             <img  alt='' src="../../../images/landscape-initiatives-images/default.jpg" />
-                                            <p><GetElement array={practice} index={0} property={'shortDescription'} /></p>
                                         </div>
-                                        <div className="caution-container">
-                                            <div className="row-container"> 
-                                                <img src={'../../../../images/ic_error_24px.svg'} alt="Warning" /> 
-                                                <h2> Caution for application </h2>
-                                            </div>
+                                        <div className="caution-container"> 
+                                                <h2> <img src={'../../../../images/ic_error_24px.svg'} alt="Warning" /> Caution for application </h2>
                                             <p> This practice has a negative effect on the following resource concerns: </p>
                                             <ul>
                                                 <li><Link to={{ pathname: 'https://www.nrcs.usda.gov/Internet/NRCS_RCA/reports/data_viewer_home.html', }} target='_blank' > <text> Placeholder Resource Concern 1</text> </Link></li>

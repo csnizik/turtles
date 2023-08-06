@@ -14,6 +14,7 @@ import CPPESCoreView from './CPPEScoreColumnView';
         <CPPESCoreView/>
       );
     });
+
   
     test('Verify CPPEScoreEntry component', async () => {
       expect(screen.getByText('Sort By:')).toBeInTheDocument();
@@ -21,6 +22,7 @@ import CPPESCoreView from './CPPEScoreColumnView';
       expect(screen.getByText('Filter by CPPE')).toBeInTheDocument();
       expect(screen.getByText('Filter by practice category')).toBeInTheDocument();
       expect(screen.getByText('Apply')).toBeInTheDocument();
+      expect(screen.getByText('Rationale')).toBeInTheDocument();
     });
 
   });
