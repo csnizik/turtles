@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect, useMemo } from 'react';
 import './cppe-score.scss'
 import { CPPESCoreEntry } from './CPPEScoreColumnEntry';
-import { useGetCPPEScoresQuery } from '../../Redux/services/api';
+import { useGetCPPEScoresQuery, useGetResourcesQuery } from '../../Redux/services/api';
 import { IIndividualResourceConcern } from '../../common/types';
 import Spinner from '../Spinner/Spinner';
 import { PracticeEntry, getCheckedEntriesKey } from './utils';
@@ -30,19 +30,12 @@ const csvFieldNameToProperty = {
 } as const;
 
 const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndividualResourceConcern, stateCode: string }) => {
-
     // Declaration and initilazations of const and properties
     const location = useLocation(); 
-    const intialpractice = [
-        {
-            id: -1,
-            Id2: 100,
-            title: 'Alley Cropping (311)',
-            shortDescription: 'Alley cropping is an agroforestry practice where agricultural or horticultural crops are grown in the alleyways between widely spaced rows of woody plants. By combining annual and perennial crops that yield varied products and profits at different times, a landowner can more effectively use available space, time, and resources.',
-        },
-    ]
+
     const [flag, setFlag] = useState(false);
     const [activeClassName, setactiveClassName] = useState<Number>();
+    const [dataCount, setdataCount] = useState<Number>(-1);
     const [activeCheckClass, setactiveCheckClass] = useState<Number[]>([]);
     const [sortBySelect, setsortBySelect] = useState<string>('');
     const [selected, setSelected] = useState<Number>(0);
@@ -84,20 +77,8 @@ const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndi
     }
 
     //Check click event handler 
-    const handleCheckClick = (id) => {
-        const index = activeCheckClass.indexOf(id);
-        if (index > -1) {
-            setactiveCheckClass([
-                ...activeCheckClass.slice(0, index),
-                ...activeCheckClass.slice(index + 1)
-            ]);
-        } else setactiveCheckClass([...activeCheckClass, id]);
-    }
     // Data from the CPPE Selection box filter 
     const [dataFromCppeCheckBox,setDataFromCppeCheckBox] = useState('');
-    const handleDataFromChild = (data) => {
-        setDataFromCppeCheckBox(data);
-    }
    
     // Sort By Event handler 
     const handleSelectChange = (value) => {
@@ -142,6 +123,7 @@ const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndi
                 return b.id - a.id;
             });
             setData(fetchData);
+            setdataCount(fetchData.length)
             setInitialData(fetchData);
             const checkedEntries = {};
             fetchData.forEach(d => {
@@ -182,18 +164,6 @@ const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndi
         return parseInt(value, 10);
     }
 
-    function GetFilter({array, index, property})
-    {   
-        if(index < 0 || index >=array.lenght){
-            return <div> Invalid index</div>
-        }
-        const value =array[index][property]; 
-        if (value === undefined) {
-           return <div> Invalid property: {property} </div>
-           //The value of property {property} at index {index} is:
-        }
-        return <div> {value} </div>;
-    }
 
     const [practiceSelected,setpPacticeSelected]= useState('');
 
@@ -209,9 +179,6 @@ const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndi
         return <div style={{ paddingLeft: '20px' }} >  No Effect or N/A </div>
     }
 
-    function id(value: { id: number; title: String; shortDescription: String; Id2: number; }, index: number, array: { id: number; title: String; shortDescription: String; Id2: number; }[]): value is { id: number; title: String; shortDescription: String; Id2: number; } {
-        throw new Error('Function not implemented.');
-    }
 
     function handleExport() {
         const exportedPractices = data.filter(practice => checkedEntries[getCheckedEntriesKey(practice)]);
@@ -271,7 +238,7 @@ const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndi
         <>
         <div className='Alert-container-box'>
             <div className='container'>
-                <p className='title'>Conservation Practice(s)</p>
+                <p className='title'>{dataCount !== -1 ? dataCount: ''} Conservation Practice(s) Impacting {resourceConcern.resourceConcernName}</p>
                 <hr />
                 <div className='filter-container' > 
                     <div className='.filter-dropdown'> 
@@ -302,7 +269,7 @@ const  CPPESCoreView = ({ resourceConcern, stateCode }: { resourceConcern: IIndi
                         {isVisable && (
                            <div className='flexbox-select'>
                             {/* <span className='filter-lable'>Active Filter: </span>  */}
-                            {filterSelections.slice(1).map((filter,index) => (
+                            {filterSelections.slice(1).map((filter) => (
                                <InputTag description={`CPPE: ${filter}`}/>
                                
                             ))}
