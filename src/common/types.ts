@@ -176,8 +176,19 @@ export interface IIndividualResourceConcern{
 
 export interface ICPPEScore{
   cppeEffectValue: number;
-  practiceId: number;
+  practiceCode: string;
   practiceName: string;
   practiceDescription: string;
   practiceCategory: number;
+  rationale: string;
+}
+
+export interface ICPPEPractice{
+  resourceConcernId: number;
+  resourceConcernName: string;
+  resourceConcernDescription: string;
+  practiceName: string;
+  practiceCode: string;
+  cppeEffectValue: number;
+  rationale: string;
 }

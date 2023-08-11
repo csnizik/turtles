@@ -1,3 +1,5 @@
+import { ICPPEPractice } from "../../common/types";
+
 export const mockedResourcesResponse = [
   {
     resourceConcernId: 1,
@@ -92,3 +94,13 @@ export const mockedPracticeVideoResponse = [
     videoLink: 'https://www.farmers.gov/conservation/conservation-at-work/all',
   },
 ];
+
+export const mockPracticeResponse: ICPPEPractice = {
+  resourceConcernId: 160,
+  practiceCode: '326',
+  resourceConcernName: 'Sediment transported to surface water',
+  resourceConcernDescription: 'Offsite transport of sediment to surface water degrades water quality and limits use for intended purpsoes',
+  practiceName: 'Clearing and Snagging',
+  cppeEffectValue: -2,
+  rationale: 'Removal of snags or large wood may re-suspend sediments into the stream.'
+}

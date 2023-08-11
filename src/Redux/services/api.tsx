@@ -15,6 +15,7 @@ import {
   IAssociatedPracticeList,
   IIndividualResourceConcern,
   ICPPEScore,
+  ICPPEPractice,
 } from '../../common/types';
 
 export const fotgApi = createApi({
@@ -76,6 +77,11 @@ export const api = createApi({
         const {resourceId, stateCode} = data;
         return `/CPPE/${resourceId}/${stateCode}`
       }
+    }),
+    // Get the negatively impacted practice resource concerns via practice code
+    getNegativeCPPEPractice: builder.query<ICPPEPractice[], string>({
+      query: (practiceCode) =>
+          `/CPPE/${practiceCode}`,
     }),
     //!Post request for Search
     postSearchData: builder.query<ISearchData[], ISearchData>({
@@ -157,5 +163,6 @@ export const {
   useGetConfigurationSettingsQuery,
   useGetIndividualResourceConcernQuery,
   useGetCPPEScoresQuery,
+  useGetNegativeCPPEPracticeQuery,
 } = api;
 export const { useGetFotgFolderUrlQuery } = fotgApi;

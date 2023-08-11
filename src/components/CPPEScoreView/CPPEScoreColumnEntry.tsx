@@ -1,6 +1,6 @@
 import { PracticeEntry } from "./utils";
 
-export const CPPESCoreEntry = (props: { hiddenKey: number; activeClassName: any; item: any; handleRowClick: (hiddenKey: number) => void; checked: boolean; handleChange: (id: PracticeEntry) => () => void }) => {
+export const CPPEScoreEntry = (props: { hiddenKey: number; activeClassName: any; item: any; handleRowClick: (hiddenKey: number) => void; checked: boolean; handleChange: (id: PracticeEntry) => () => void }) => {
     
     const {hiddenKey, activeClassName, item, handleRowClick, handleChange, checked } = props;
 
@@ -21,7 +21,7 @@ export const CPPESCoreEntry = (props: { hiddenKey: number; activeClassName: any;
                 <p className='practice-name'>{item.title}</p>
                 <input type='checkbox' className='checkbox' onChange={handleChange(item)} checked={checked} />
             </div>
-            <p className='practice-description'>{item.shortDescription}</p>
+            <p className='practice-description'>{item.rationale}</p>
             <hr />
         </div>
     )

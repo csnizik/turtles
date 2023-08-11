@@ -150,16 +150,16 @@ a:hover {
 .dropdown{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    // margin-top: 2.5rem;
 }
 .dropdown-items{
     margin-right: 1rem;
+    color:black;
 }
 .child-container{
-    
     width: 100%;
-    align-content: f;
     background: #ffffff;
-    margin-top: 2.5rem;
 }
 
 .conservation-practice-wrapper{
@@ -207,6 +207,10 @@ a:hover {
    text-align: center; 
 }
 
+.check{
+    color: black;
+}
+
 .row-click{
     cursor: pointer;
     margin-bottom: -1rem;
@@ -219,8 +223,26 @@ a:hover {
     margin-bottom: -1rem;
 }
 
+.CPPETEXT{
+    color: black;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
 .green-box{
     width: 40px;
+    background: #236430;
+    border-radius:3px; 
+    padding: 0px 6px;
+    color: white;
+    height:25px;
+    text-align: center;
+}
+
+.filter-green-box{
+    width: 30px;
+    margin-top: 10px;
     background: #236430;
     border-radius:3px; 
     padding: 0px 6px;
@@ -237,11 +259,32 @@ a:hover {
     color: white;
     height:25px;
     text-align: center;
+}
 
+.filter-red-box{
+    width: 30x;
+    margin-top: 10px;
+    background: #CD2026;
+    border-radius:3px; 
+    padding: 0px 6px;
+    color: white;
+    height:25px;
+    text-align: center;
 }
 
 .grey-box{
+    height: flex;
     width: 36px;
+    background: #75716E;
+    border-radius:3px; 
+    padding: 0px 10px;
+    color: white;
+}
+
+.filter-grey-box{
+    height: 25px;
+    width: 26px;
+    margin-top: 10px;
     background: #75716E;
     border-radius:3px; 
     padding: 0px 10px;
@@ -289,6 +332,7 @@ a:hover {
     display: flex;
     justify-content: center;
     margin-left: 0.5rem;
+    align-items: center;
 }
 
 .checkbox:focus{
@@ -333,34 +377,40 @@ click-check{
 
 .filter-container {
     display: flex;
-    justify-content: space-between;
-    flex-basis: auto;
-    width: 800px;
-    height: 200px;
-    flex-direction: row;
-    padding: 0px 10px 1px 10px;
+    align-items: center;
+    margin-left: $short-space-size;
+    // justify-content: space-between;
+    // flex-basis: auto;
+    // width: 800px;
+    // flex-direction: row;
+    // padding: 0px 10px 1px 10px;
+    // height: 36px;
 }
 
 .filter-dropdown{
-    flex-basis: 0;
-    justify-content: space-between;
-    margin-top: 5px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    overflow: auto;
+    // position: relative;
+    height: 36px;
+    // width: 150px;
+    margin-left: $short-space-size;
+    // flex-basis: 0;
+    // justify-content: space-between;
+    // margin-top: 5px;
+    // margin-left: 10px;
+    // margin-bottom: 10px;
+    // overflow: auto;
 }
 
-.filter-button-practice {
+.sort-by-select {
     border: 1px solid $dark-blue;
     border-radius: 4px;
     background-color: $white;
     width: 210px;
     height: 36px;
-    color: $usda-blue;
-    margin-top: $large-space-size;
+    color: black;
     padding: 0px 0px 0px 5px;
     font-weight: $heavy-weight;
     font-size: $h4-font-size;
+    margin-left: $short-space-size;
 }
 
   .filter-selected-box{
@@ -374,34 +424,126 @@ click-check{
     color: rgb(19, 18, 18);
 }
 
-.flexbox-vertical {
-    place-content: end left;
-    height: 120px;
-    width: 140px;
-    background: #ffffff;
-    flex-direction: column;
-    padding: 1px 1px 1px 5px;
-    overflow: auto;
+.filters-select {
+    display: flex;
+    align-items: center;
+    width: 100px;
+    padding: 0px 0px 0px 0px;
+    flex-direction: row;
+    margin: $short-space-size;
+}
+
+.filters-select-input {
+    margin-left: $short-space-size;
+}
+
+.clear-all-link {
+    margin: $short-space-size;
+    cursor: pointer;
 }
 
 .flexbox-select {
     display: flex;
-    width: 100px;
+    align-items: right;
+    width: 450px;
     padding: 0px 0px 0px 0px;
     flex-direction: row;
 }
 
-.filter-button {
+.filter-button-container {
+    position: relative;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     border: 1px solid $dark-blue;
+//     border-radius: 4px;
+//     background-color: $white;
+//     // width: 150px;
+//     height: 36px;
+//     color: $usda-blue;
+//     padding: 0px 0px 0px 5px;
+//     font-weight: $heavy-weight;
+//     font-size: $h4-font-size;
+  }
+
+.filter-button-practice {
     border: 1px solid $dark-blue;
     border-radius: 4px;
     background-color: $white;
-    width: 140px;
+    width: 210px;
     height: 36px;
-    color: $usda-blue;
-    margin-top: $large-space-size;
+    color: black;
     padding: 0px 0px 0px 5px;
     font-weight: $heavy-weight;
     font-size: $h4-font-size;
+    margin-left: 250px;
+}
+
+  //cppe dropdown
+.flexbox-vertical {
+    cursor: default;
+    position: absolute;
+    place-content: end left;
+    height: 240px;
+    width: 355px;
+    background: #ffffff;
+    flex-direction: column;
+    padding: 1px 1px 1px 5px;
+    overflow: auto;
+    position: absolute;
+    bottom: 0;
+    top: 100%;
+    z-index: 1;
+}
+  
+  .filter-button {
+    cursor: default !important;
+    position: absolute;
+    // margin: $short-space-size;
+    width: 280%;
+    border: 1px solid $dark-blue;
+    border-radius: 4px;
+    background-color: transparent;
+    height: 36px;
+    color: $usda-blue;
+    font-weight: $heavy-weight;
+    font-size: $h4-font-size;
+    // padding: 0px 5px 0px 5px;
+
+    &:focus {
+        outline: 0.25rem solid #2491ff !important;
+        outline-offset: 0;
+    }
+  }
+
+  .filter-button-label {
+    cursor: default;
+    // position: absolute;
+    width: 280%;
+    cursor: default;
+    // margin: $short-space-size;
+    border: 1px solid $dark-blue;
+    border-radius: 4px;
+    background-color: $white;
+    height: 36px;
+    color: black;
+    font-weight: $heavy-weight;
+    font-size: $h4-font-size;
+    padding: 0px 0px 0px 5px;
+  }
+
+  .apply-button {
+    cursor: default;
+    margin: $short-space-size;
+    border: 1px solid $dark-blue;
+    border-radius: 4px;
+    background-color: transparent;
+    height: 36px;
+    color: $usda-blue;
+    font-weight: $heavy-weight;
+    font-size: $h4-font-size;
+    padding: 0px 5px 0px 5px;
   }
 
   .up-arrow:after {

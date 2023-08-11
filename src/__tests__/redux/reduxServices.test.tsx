@@ -14,6 +14,7 @@ import {
   useGetResourceConcernQuery,
   useGetPracticeVideoLinkQuery,
   useGetRelatedResourceConcernCategoryQuery,
+  useGetNegativeCPPEPracticeQuery,
 } from '../../Redux/services/api';
 import { createTestStore } from '../../Redux/store';
 import {
@@ -25,6 +26,7 @@ import {
   mockedStateResponse,
   mockedCountyResponse,
   mockedSwapaCategoryResponse,
+  mockPracticeResponse,
 } from './mockedResponses';
 
 const updateTimeout = 5000;
@@ -186,5 +188,16 @@ describe('Verify redux services are working properly', () => {
     await waitForNextUpdate({ timeout: updateTimeout });
 
     expect(result.current.endpointName).toBe('getResourceConcern');
+  });
+
+  test('getNegativeCPPEPracticeQuery', async () => {
+    fetchMock.mockResponse(JSON.stringify(mockPracticeResponse));
+    const { result, waitForNextUpdate } = renderHook(
+      () => useGetNegativeCPPEPracticeQuery('326'),
+      { wrapper }
+    );
+    await waitForNextUpdate({ timeout: updateTimeout });
+
+    expect(result.current.endpointName).toBe('getResources');
   });
 });

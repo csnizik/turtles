@@ -1,29 +1,79 @@
-import {
-    cleanup,
-    render,
-    screen,
-  } from '../../common/test-utils/test_utils';
-import CPPESCoreView from './CPPEScoreColumnView';  
-  afterEach(() => {
-    cleanup();
+// import { resourceConcern } from '../../api-mocks/constants';
+import { renderHook } from '@testing-library/react-hooks';
+import { cleanup, render, screen } from '../../common/test-utils/test_utils';
+import CPPESCoreView, { download } from './CPPEScoreColumnView';
+import { IIndividualResourceConcern } from '../../common/types';
+import { useGetCPPEScoresQuery } from '../../Redux/services/api';
+
+const mockedResourcesResponse = [
+  {
+    cppeMatrixId: 189,
+    practiceName: 'Alley Cropping',
+    practiceCode: '311',
+    resourceConcernsId: 154,
+    cppeEffectValue: 5,
+    rationale:
+      'Vegetation and surface litter reduce raindrop impact and slow runoff water increasing infiltration.',
+    createdBy: 1,
+    createdDate: '2023-07-11T11:35:28.16',
+    lastModifiedBy: null,
+    lastModifiedDate: null,
+  },
+];
+
+const resourceConcern: IIndividualResourceConcern = {
+  resourceConcernId: 1,
+  resourceConcernCategoryId: 2,
+  rcSwapacategoryId: 3,
+  resourceConcernName: 'Soil',
+  resourceConcernDescription: 'Soil',
+};
+
+const stateCode = '01';
+
+afterEach(() => {
+  cleanup();
+});
+
+describe('Verify CPPEScore is rendered correctly', () => {
+  beforeEach(() => {
+    fetchMock.mockResponse(JSON.stringify(mockedResourcesResponse));
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useGetCPPEScoresQuery({
+        resourceId: resourceConcern.resourceConcernId,
+        stateCode: stateCode,
+      })
+    );
+    render(
+      <CPPESCoreView resourceConcern={resourceConcern} stateCode={stateCode} />
+    );
   });
 
-  describe('Verify CPPEScore is rendered correctly', () => {
-    beforeEach(() => {
-      render(
-        <CPPESCoreView/>
-      );
-    });
-
-  
-    test('Verify CPPEScoreEntry component', async () => {
-      expect(screen.getByText('Sort By:')).toBeInTheDocument();
-      expect(screen.getByText('Conservation Practice(s)')).toBeInTheDocument();
-      expect(screen.getByText('Filter by CPPE')).toBeInTheDocument();
-      expect(screen.getByText('Filter by practice category')).toBeInTheDocument();
-      expect(screen.getByText('Apply')).toBeInTheDocument();
-      expect(screen.getByText('Rationale')).toBeInTheDocument();
-    });
-
+  test('Verify CPPEScoreEntry component', async () => {
+    expect(screen.getByText('Sort By:')).toBeInTheDocument();
+    expect(screen.getByText('Conservation Practice(s)')).toBeInTheDocument();
+    expect(screen.getByText('Filter by CPPE')).toBeInTheDocument();
+    expect(screen.getByText('Filter by practice category')).toBeInTheDocument();
+    expect(screen.getByText('Apply')).toBeInTheDocument();
   });
-  
+
+  test('Verify Select All Check', async () => {
+    expect(screen.getByTestId('selectAll')).toBeInTheDocument();
+    expect(screen.getByTestId('selectAll')).not.toBeChecked();
+    screen.getByTestId('selectAll').click();
+    expect(screen.getByTestId('selectAll')).toBeChecked();
+  });
+});
+
+describe('Verify helper functions', () => {
+  test('Verify download', async () => {
+    const filename = 'test-filename.csv';
+    const text = 'field1,field2,field3\na,b,c';
+    const element = download(filename, text);
+    expect(element.getAttribute('href')).toBe(
+      'data:text/plain;charset=utf-8,field1%2Cfield2%2Cfield3%0Aa%2Cb%2Cc'
+    );
+    expect(element.getAttribute('download')).toBe(filename);
+    expect(element.style.display).toBe('none');
+  });
+});
