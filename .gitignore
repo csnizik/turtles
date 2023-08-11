@@ -50,3 +50,4 @@ Thumbs.db
 build
 public/assets
 src/__tests__/coverage
+cpdifrontend.tar.gz

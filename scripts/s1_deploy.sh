@@ -3,8 +3,9 @@
 # place in the /app/scripts folder with execute permission for all
 # executed from users home folder as the user, where they copied the tarball to
 echo "moving tar file to /app/tmp"
-mv cpdifrontend.tar.gz /app/tmp
-echo "changing to /app/www/html/cpdifrontend-Dev.Dev folder" CONFIRM THIS LOCATION
+mv -f cpdifrontend.tar.gz /app/tmp
+echo "changing to /app/www/html/cpdifrontend-Dev.Dev folder"
 cd /app/www/html/cpdifrontend-Dev.Dev
-echo "change to root for the next part"
-sudo su root
+echo "stopping the service"
+systemctl stop cpdifrontend-dev.dev.service
+systemctl status cpdifrontend-dev.dev.service
