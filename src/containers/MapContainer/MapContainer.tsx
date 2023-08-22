@@ -29,9 +29,8 @@ const MapContainer = ({ stateCode, setSelectedLocation }: IMapProps) => {
   const firstString = environment?.slice(0, slashindex);
   const secondString = environment?.slice(slashindex);
   var env = '';
-  if (firstString === 'greyworm') {
-    env = 'DEV';
-  } if (firstString === 'cpdiapi') {
+  if (firstString === 'cpdiapi') {
+  if (secondString === 'dev') {env = 'DEV'}
   if (secondString === 'stage') {env = 'STAGE'};
   if (secondString === 'test') {env = 'TEST'};
   if (secondString === 'uat') {env = 'UAT'};
