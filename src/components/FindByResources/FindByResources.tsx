@@ -137,9 +137,9 @@ const FindByResources = () => {
                 aria-required="true"
                 value={selectedResource}
                 onChange={handleCategoryChange}
-                aria-label={`Rescource Concern: ${selectedResourceConcern}`}
+                aria-label={`Resource Concern: ${selectedResourceConcern}`}
               >
-                <option value={-1}>All Resources (default)</option>
+                <option value={-1}>All Resource Concerns (default)</option>
                 {resourceCategory.isSuccess && resourceCategory.data
                   ? resourceCategory.data.map((resource: IResourceConcernList) => {
                       return (
@@ -169,7 +169,7 @@ const FindByResources = () => {
                 onChange={handleResourceChange}
                 aria-label={`Selected Rescource Concern: ${selectedResourceConcernName}`}
               >
-                <option value={-1}>- Select resource -</option>
+                <option value={-1}>- Select resource concern -</option>
                 {subResource.isSuccess && subResource.data
                   ? subResource.data.map((item: IResourceConcernList) => {
                       return (

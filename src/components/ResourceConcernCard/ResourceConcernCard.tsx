@@ -47,9 +47,9 @@ const ResourceConcernCardDetails = ({ setResourceConcernViewType }: any) => {
   return (
     <div className='heading' data-testid='ResourceConcern-Card'>
       {resourceConcernCategory?.length !== 1 ? (
-        <h2>{resourceConcernCategory?.length} ResourceConcerns</h2>
+        <h2>{resourceConcernCategory?.length} Resource Concerns</h2>
       ) : (
-        <h2>{resourceConcernCategory?.length} ResourceConcern</h2>
+        <h2>{resourceConcernCategory?.length} Resource Concern</h2>
       )}
       {isLoading && <Spinner />}
       {isError && error}
