@@ -10,6 +10,7 @@ import Spinner from '../Spinner/Spinner';
 import { PracticeEntry, getCheckedEntriesKey } from './utils';
 import InputTag from '../InputTag/InputTag';
 import CPPECaution from './CPPECaution';
+import CPPEScoreLegend from '../CPPESoreLegend/CPPEScoreLegend';
 
 // CSV download
 export const download = (filename: string, text: string) => {
@@ -185,14 +186,14 @@ const CPPESCoreView = ({
   // Function given the array and index return value of the property
   function GetElement({ array, index, property }) {
     if (index < 0 || index >= array.lenght) {
-      return <div> Invalid index</div>;
+      return <div>Invalid index</div>;
     }
     const value = array[index][property];
     if (value === undefined) {
       return <div> Invalid property: {property} </div>;
       //The value of property {property} at index {index} is:
     }
-    return <div> {value} </div>;
+    return <div>{value}</div>;
   }
 
   // Function return the CPPEScore for a given index
@@ -281,7 +282,8 @@ const CPPESCoreView = ({
 
   return (
     <>
-      <div className='Alert-container-box'>
+      <div className='Alert-container-box'> 
+       <CPPEScoreLegend/>
         <div className='container'>
           <p className='title'>
             {dataCount !== -1 ? dataCount : ''} Conservation Practice(s)
@@ -368,8 +370,7 @@ const CPPESCoreView = ({
           </div>
           {isVisable && (
             <div className='filters-select'>
-              <span>Active&nbsp;Filters:</span>
-              <span className='filter-lable'>Active Filter: </span>
+              <span className='filter-lable'>Active&nbsp;Filters:</span>
               {filterSelections.slice(1).map((filter) => (
                 <div key={filter} className='filters-select-input'>
                   <InputTag description={`CPPE: ${filter}`} />
@@ -393,7 +394,7 @@ const CPPESCoreView = ({
             </div>
           )}
           <div className='dropdown'>
-            <label className='check'>
+            <label className='select-all-check'>
               <input
                 type='checkbox'
                 data-testid='selectAll'
@@ -432,7 +433,7 @@ const CPPESCoreView = ({
               isSuccess &&
               data.length > 0 &&
               Object.keys(checkedEntries).length > 0 ? (
-                <div className='conservation-practices'>
+                 <div className='conservation-practices'>
                   {data.map((item) => (
                     <CPPEScoreEntry
                       key={hidKey}
@@ -449,7 +450,7 @@ const CPPESCoreView = ({
                         }))}
                     />
                   ))}
-                </div>
+               </div>
               ) : (
                 <Spinner />
               )}
@@ -466,7 +467,7 @@ const CPPESCoreView = ({
                         property={property}
                       />
                     </h2>
-                    <div className='flexdata'>
+                    <div className='cpp-score'>
                       {(() => {
                         const item = getCPPScore(practice, 0, index);
                         const numericValue = Number(item);
@@ -512,19 +513,24 @@ const CPPESCoreView = ({
                       </p>
                     </div>
                     <div className='practice-info-component'>
-                      <h3> Practice Information</h3>
-                      <p>
-                        <GetElement
-                          array={practice}
-                          index={0}
-                          property='practiceDescription'
-                        />{' '}
-                      </p>
-                      <img
-                        alt=''
-                        src='../../../images/landscape-initiatives-images/default.jpg'
-                      />
-                      {/* <p><GetElement array={practice} index={0} property={'id'} /></p> */}
+                      <div className='left'> 
+                          <h3> Practice Information</h3>
+                          <p>
+                            <GetElement
+                              array={practice}
+                              index={0}
+                              property='practiceDescription'
+                            />{' '}
+                            {/* <p>Tree/shrub establishment involves planting seedlings or cuttings, seeding, or creating conditions that promote natural regeneration.</p> */}
+                          </p>
+                      </div> 
+                      <div className='right'>
+                          <img
+                            alt=''
+                            src='../../../images/landscape-initiatives-images/default.jpg'
+                          /> 
+                         
+                       </div>   
                     </div>
                     <CPPECaution practiceCode={practice[0].Id2} />
                   </div>

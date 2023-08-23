@@ -56,7 +56,6 @@ const IndividualResourceConcernContainer = () => {
       /> */}
       {/* Impacts: TO DO Put back in the next PI */}
       {/* <ApplicationImpacts data={data} isSuccess={isSuccess} /> */}   
-      <CPPEScoreLegend/>
       {isLoading && <Spinner />}
       {isError && error}
       {isSuccess && data && (
