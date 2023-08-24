@@ -181,6 +181,8 @@ export interface ICPPEScore{
   practiceDescription: string;
   practiceCategory: number;
   rationale: string;
+  practiceCategoryId: number;
+  practiceId: number;
 }
 
 export interface ICPPEPractice{

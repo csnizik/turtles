@@ -1,15 +1,13 @@
 import { useState, useEffect, useMemo } from 'react';
 import './cppe-score.scss';
 import { CPPEScoreEntry } from './CPPEScoreColumnEntry';
-import {
-  useGetCPPEScoresQuery,
-  useGetResourcesQuery,
-} from '../../Redux/services/api';
+import { useGetCPPEScoresQuery } from '../../Redux/services/api';
 import { IIndividualResourceConcern } from '../../common/types';
 import Spinner from '../Spinner/Spinner';
 import { PracticeEntry, getCheckedEntriesKey } from './utils';
 import InputTag from '../InputTag/InputTag';
 import CPPECaution from './CPPECaution';
+import CPPEPracticeLink from './CPPEPracticeLink';
 import CPPEScoreLegend from '../CPPESoreLegend/CPPEScoreLegend';
 
 // CSV download
@@ -51,7 +49,7 @@ const CPPESCoreView = ({
 }) => {
   // Declaration and initilazations of const and properties
   const [flag, setFlag] = useState(false);
-  const [activeClassName, setactiveClassName] = useState<Number>();
+  const [activeClassName, setActiveClassName] = useState<Number>();
   const [dataCount, setdataCount] = useState<Number>(-1);
   const [initialData, setInitialData] = useState<Array<PracticeEntry>>([]);
   const [data, setData] = useState<Array<PracticeEntry>>([]);
@@ -68,8 +66,7 @@ const CPPESCoreView = ({
     [checkedEntries]
   );
   const [selectAllChecked, setSelectAllChecked] = useState(false);
-  const property = 'title';
-  const index = 'id';
+  const index = 'cppeScore';
   let hidKey: number = 0;
   const categoryChart = {
     5: 'Substantial Improvement',
@@ -99,13 +96,10 @@ const CPPESCoreView = ({
 
   // Event handlers and functions
   // Left panel Row Click event handler
-  const handleRowClick = (id: number) => {
+  const handleRowClick = (id: number, selectedPractice: PracticeEntry) => {
     setFlag(true);
-    setactiveClassName(id);
-    const ID2 = 'Id2';
-    const value = data[id][ID2];
-    const practice2 = data.filter((x) => x.Id2 === value);
-    setPractice(practice2);
+    setActiveClassName(id);
+    setPractice([selectedPractice]);
     setData(data);
   };
 
@@ -115,12 +109,12 @@ const CPPESCoreView = ({
   const handleSelectChange = (value) => {
     if (value === 'highToLowScore') {
       data.sort((a: any, b: any): any => {
-        return b.id - a.id;
+        return b.cppeScore - a.cppeScore;
       });
       setData(data);
     } else if (value === 'lowToHighScore') {
       data.sort((a: any, b: any): any => {
-        return a.id - b.id;
+        return a.cppeScore - b.cppeScore;
       });
       setData(data);
     } else if (value === 'practiceName') {
@@ -135,11 +129,11 @@ const CPPESCoreView = ({
       });
       setData(data);
     }
-    setactiveClassName(-1);
+    setActiveClassName(-1);
   };
 
   const {
-    data: getCppeScoresData,
+    data: getCppeScoresData, 
     error,
     isLoading,
     isSuccess,
@@ -154,15 +148,16 @@ const CPPESCoreView = ({
     if (getCppeScoresData !== undefined) {
       // Call API from here
       const fetchData: PracticeEntry[] = getCppeScoresData.map((p) => ({
-        id: p.cppeEffectValue,
-        Id2: p.practiceCode,
+        cppeScore: p.cppeEffectValue,
+        practiceCode: p.practiceCode,
         title: p.practiceName,
         rationale: p.rationale,
-        shortDescription: p.practiceDescription,
-        practiceCategory: p.practiceCategory,
+        practiceCategoryId: p.practiceCategoryId,
+        practiceId: p.practiceId
       }));
+
       fetchData.sort((a: any, b: any): any => {
-        return b.id - a.id;
+        return b.cppeScore - a.cppeScore;
       });
       setData(fetchData);
       setdataCount(fetchData.length);
@@ -185,8 +180,8 @@ const CPPESCoreView = ({
 
   // Function given the array and index return value of the property
   function GetElement({ array, index, property }) {
-    if (index < 0 || index >= array.lenght) {
-      return <div>Invalid index</div>;
+    if (index < 0 || index >= array.length) {
+      return <div> Invalid index</div>;
     }
     const value = array[index][property];
     if (value === undefined) {
@@ -242,7 +237,7 @@ const CPPESCoreView = ({
         `${acc}${csvFields
           .map((field) => {
             if (field === 'Effect') {
-              return categoryChart[curr.id] ?? 'No Comment';
+              return categoryChart[curr.cppeScore] ?? 'No Comment';
             }
             return `"${curr[csvFieldNameToProperty[field]]}"`;
           })
@@ -265,18 +260,18 @@ const CPPESCoreView = ({
     }
   };
 
-  const [isVisable, setIsVisable] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const handleApplyFilter = () => {
     //console.log("Submitted! Values selected are", filterSelections);
     const filter = filterSelections.slice(1).map(Number);
-    const filterData = data.filter((item) => filter.includes(item.id));
-    setIsVisable(!isVisable);
+    const filterData = data.filter((item) => filter.includes(item.cppeScore));
+    setIsVisible(!isVisible);
     setData(filterData);
   };
 
   const clearFilter = () => {
-    setIsVisable(!isVisable);
+    setIsVisible(!isVisible);
     setData(initialData);
   };
 
@@ -368,7 +363,7 @@ const CPPESCoreView = ({
               Apply
             </button>
           </div>
-          {isVisable && (
+          {isVisible && (
             <div className='filters-select'>
               <span className='filter-lable'>Active&nbsp;Filters:</span>
               {filterSelections.slice(1).map((filter) => (
@@ -459,14 +454,8 @@ const CPPESCoreView = ({
                 {flag === false ? (
                   <h1>...</h1>
                 ) : (
-                  <div className='right-pane-container'>
-                    <h2>
-                      <GetElement
-                        array={practice}
-                        index={0}
-                        property={property}
-                      />
-                    </h2>
+                  <div className='right-pane-container'>            
+                    <CPPEPracticeLink practice={practice[0]}/>
                     <div className='cpp-score'>
                       {(() => {
                         const item = getCPPScore(practice, 0, index);
@@ -532,7 +521,7 @@ const CPPESCoreView = ({
                          
                        </div>   
                     </div>
-                    <CPPECaution practiceCode={practice[0].Id2} />
+                    <CPPECaution practiceCode={practice[0].practiceCode}/>
                   </div>
                 )}
               </div>

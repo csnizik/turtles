@@ -353,7 +353,7 @@ click-check{
 .right-pane-container {
     margin: 36px 24px 36px 24px;
 
-    h2 {
+    .right-pane-header{
         color: #0068AD;
         font-size: 28px;
         font-family: Roboto;
@@ -361,6 +361,7 @@ click-check{
         font-style: bold;
         margin: 0px 0px 12px 0px;
     }
+
 
     h3 {
         font-size: 22px;
