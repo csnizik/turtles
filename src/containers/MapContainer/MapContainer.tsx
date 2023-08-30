@@ -23,17 +23,17 @@ const MapContainer = ({ stateCode, setSelectedLocation }: IMapProps) => {
       !exclusiveStateCodes.includes(stateCode),
   });
   // find environment
-  const periodindex = baseURL?.search('.');
+  const periodindex = baseURL?.search('\\.');
   const environment = baseURL?.slice(8,periodindex);
   const slashindex = environment?.search('-');
   const firstString = environment?.slice(0, slashindex);
   const secondString = environment?.slice(slashindex);
   var env = '';
   if (firstString === 'cpdiapi') {
-  if (secondString === 'dev') {env = 'DEV'}
-  if (secondString === 'stage') {env = 'STAGE'};
-  if (secondString === 'test') {env = 'TEST'};
-  if (secondString === 'uat') {env = 'UAT'};
+  if (secondString === '-dev') {env = 'DEV'}
+  if (secondString === '-stage') {env = 'STAGE'};
+  if (secondString === '-test') {env = 'TEST'};
+  if (secondString === '-uat') {env = 'UAT'};
   }else {env = 'PROD'};
 
   const results = useGetConfigurationSettingsQuery(`${env}_AGOLWebMap`);
