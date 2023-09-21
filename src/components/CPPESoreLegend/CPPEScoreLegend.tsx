@@ -19,7 +19,7 @@ const CPPEScoreLegend = (props) => {
             text = number.toString();
         }
         else {
-            className = 'grey-box';
+            className = 'white-box-gradient';
             text = number.toString();
         }
         const ScoreBox = <div className={className}>{text}</div>;

@@ -465,7 +465,7 @@ const CPPESCoreView = ({
                           return <div className='green-box'>{text} </div>;
                         if (numericValue < 0)
                           return <div className='red-box'>{item}</div>;
-                        return <div className='grey-box'>{item}</div>;
+                        return <div className='white-box'>{item}</div>;
                       })()}
 
                       {(() => {

@@ -287,16 +287,18 @@
     text-align: center;
 }
 
-.grey-box{
+.white-box{
+    width: 30px;
     height: 25px;
-    width: 36px;
-    background: #75716E;
+    background: #FFFFFF;
     border-radius:3px; 
+    border: 2px solid;
+    border-color: #B2B1B0;
     padding: 0px 10px;
-    color: white;
+    color: black;
 }
 
-.filter-grey-box{
+.filter-white-box{
     height: 25px;
     width: 26px;
     margin-top: 10px;

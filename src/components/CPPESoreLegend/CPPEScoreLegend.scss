@@ -142,12 +142,16 @@
     color: white;
 
 }
-.grey-box{
-    width: 30px;
-    background: #75716E;
+.white-box-gradient{
+    width: 36px;
+    height: 25px;
+    background: #FFFFFF;
     border-radius:3px; 
+    border: 2px solid;
+    border-color: #B2B1B0;
     padding: 0px 10px;
-    color: white;
+    padding-left: 1%;
+    color: black;
 }
 .boxes-container{
     width:97%; 
@@ -161,9 +165,11 @@
 }
 .linear-scale{
     height:20px;
-    background: linear-gradient(to right , #236430 0%,#236430 30%,#75716E 53%, #CD2026 65%,#CD2026 100%);
-     width:97%; 
-     margin:auto;
+    background: linear-gradient(to right ,#1A4B24 7%,#2D713B 7%, #2D713B 16.5%,#4D8157 16.5%,#4D8157 26%, #B2C9B7 26%, #B2C9B7 36%, #DEE8D0 36%, #DEE8D0 45.5%, #FFFFFF 45.5%, #FFFFFF 55%, #F9E4E5 55%, #F9E4E5 64.5%, #F0BCBE 64.5%, #F0BCBE 74%, #E1787D 74%, #E1787D 83.5%, #CD2026 83.5%, #CD2026 93%, #981B1E 93%, #981B1E 99%);
+    width:97%; 
+    margin:auto;
+    border: 2px solid;
+    border-color: #B2B1B0;
 }
 .end-container{
     margin-top:10px;

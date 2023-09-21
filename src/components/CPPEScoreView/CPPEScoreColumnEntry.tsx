@@ -16,7 +16,7 @@ export const CPPEScoreEntry = (props: { hiddenKey: number; activeClassName: any;
                     let text = `+${item.cppeScore}`;
                     if (item.cppeScore > 0) return <p className='green-box'>{text}</p>
                     else if (item.cppeScore < 0) return <p className='red-box'>{item.cppeScore}</p>
-                    else return <p className='grey-box'>{item.cppeScore}</p>
+                    else return <p className='white-box'>{item.cppeScore}</p>
                 })()}
                 <p className='practice-name'>{item.title}</p>
                 <input type='checkbox' className='checkbox' onChange={handleChange(item)} checked={checked} />
