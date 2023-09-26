@@ -12,6 +12,7 @@ import { usePostLandscapeInitiativesQuery } from '../../Redux/services/api';
 import './project-container.scss';
 import { projectListGroups } from './constants';
 import { DEFAULT_NATIONAL_LOCATION } from '../../common/constants';
+import NextSteps from '../../components/NextSteps';
 
 interface IProjectTypeCard {
   id: number;
@@ -236,6 +237,7 @@ const ProjectsContainer = () => {
             <ProjectListGroup isMapDisplayed noListDots />
           </>
         ) : null}
+         <NextSteps/>
       </div>
     );
   }
@@ -281,6 +283,7 @@ const ProjectsContainer = () => {
           );
         })}
       </ul>
+      <NextSteps/>
     </div>
   );
 };

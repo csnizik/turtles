@@ -102,3 +102,10 @@ export const CPPEScoreLegendData = {
   title: "Conservation Practices Ranked by Physical Effects (CPPE) | NRCS",
   disclaimer: "This page provides a screening tool to view the effectiveness of conservation practices in treating the specific resource concern at a national level. The positive CPPE score does not ensure treatment of resource concernsand may conflict with other resource concerns. Please contact your local NRCS conservation planners for professional assistance."
 }
+
+export const NextStepsData = {
+  title:"Next Steps",
+  subtitle:"Find Your Local Service Center",
+  nextStepsParghraph:"Interested in getting started? USDA Service Centers are offices where you can typically meet face-to-face with USDA, Farm Service Agency (FSA) and Natural Resources Conversation Service (NRCS) staff to discuss your vision, goals and ways USDA can help.",
+  linklable:"Find your local Service Center",
+}

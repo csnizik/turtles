@@ -25,6 +25,8 @@ import {
 } from '../../Redux/Slice/practiceSlice';
 import { currentState } from '../../Redux/Slice/stateSlice';
 import ProjectListGroup from '../../components/ProjectListGroup';
+import NextSteps from '../../components/NextSteps/NextSteps';
+
 
 const defaultPracticeViews = {
   allPractices: false,
@@ -205,6 +207,7 @@ const ConservationPracticeContainer = ({
             currentPracticeCategory={currentPracticeCategory}
           />
           <PracticeCard setPracticeViewType={setPracticeViewType} />
+          
         </>
       );
     }
@@ -259,6 +262,7 @@ const ConservationPracticeContainer = ({
         </div>
       ) : null}
       {renderPracticeContainerContent(currentViewType)}
+      <NextSteps/>
     </>
   );
 };

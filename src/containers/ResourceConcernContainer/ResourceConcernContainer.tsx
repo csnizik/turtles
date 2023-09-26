@@ -27,6 +27,7 @@ import ProjectListGroup from '../../components/ProjectListGroup';
 import ResourceConcernCategoryContainer from './ResourceConcernCategoryContainer';
 import ResourceConcernCard from '../../components/ResourceConcernCard';
 import IndividualResourceConcernContainer from './IndividualResourceConcernContainer';
+import NextSteps from '../../components/NextSteps';
 
 
 
@@ -246,6 +247,7 @@ const ResourceConcernContainer = ({
         </div>
       ) : null} */}
       {renderResourceConcernContainerContent(currentViewType)}
+      <NextSteps/>
     </>
   );
 };
