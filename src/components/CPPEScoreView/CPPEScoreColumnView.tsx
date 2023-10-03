@@ -256,7 +256,6 @@ const CPPESCoreView = ({
   const toggleExpanded = () => {
     if (!expanded) {
       setExpanded(true);
-      setFilterSelections(['']);
     } else {
       setExpanded(false);
     }
@@ -266,13 +265,38 @@ const CPPESCoreView = ({
 
   const handleApplyFilter = () => {
     //console.log("Submitted! Values selected are", filterSelections);
-    const filter = filterSelections.slice(1).map(Number);
-    const filterData = data.filter((item) => filter.includes(item.cppeScore));
-    setIsVisible(!isVisible);
-    setData(filterData);
+    let newData: any[] = [];
+    if (filterSelections.length < 2) {
+      newData = initialData;
+      setIsVisible(false);
+    } else {
+      setIsVisible(true);
+    }
+    for (let i = 1; i < filterSelections.length; i++) {
+      const filterData = initialData.filter((item) => (item.cppeScore === parseInt(filterSelections[i], 10)));
+      newData = newData.concat(filterData);
+    };
+    setData(newData);
   };
 
+  const handleFilterSelect = (event) => {
+    //console.log("Submitted! Values selected are", filterSelections);
+    if (filterSelections.includes(event.target.value)) {
+      setFilterSelections(filterSelections.filter((item) => (item !== event.target.value)));
+    } else {    
+      setFilterSelections([...filterSelections, event.target.value.toString()]);
+    }
+  };
+
+  const removeFilter = (event) => {
+    setFilterSelections(filterSelections.filter((item) => (item !== event.currentTarget.id)));
+    if (filterSelections.length <= 2) {
+      setIsVisible(false);
+    }
+  }
+
   const clearFilter = () => {
+    setFilterSelections([''])
     setIsVisible(!isVisible);
     setData(initialData);
   };
@@ -320,9 +344,11 @@ const CPPESCoreView = ({
                       >
                         <input
                           type='checkbox'
+                          checked={filterSelections.includes(platform)}
                           name={platform}
                           value={platform}
                           className='m-3 cursor-pointer'
+                          onClick={event => handleFilterSelect(event)}
                         />
                         <div className={`filter-${color}-box`}>{platform}</div>
                         {numericValue !== 0 && (
@@ -369,8 +395,8 @@ const CPPESCoreView = ({
             <div className='filters-select'>
               <span className='filter-lable'>Active&nbsp;Filters:</span>
               {filterSelections.slice(1).map((filter) => (
-                <div key={filter} className='filters-select-input'>
-                  <InputTag description={`CPPE: ${filter}`} />
+                <div id ={filter} key={filter} className='filters-select-input' onClick={removeFilter}>
+                  <InputTag description={`CPPE: ${filter}`}/>
                 </div>
               ))}
               {(() => {
