@@ -102,8 +102,9 @@ const CPPESCoreView = ({
     setPractice([selectedPractice]);
     setData(data);
   };
-
+  
   // Data from the CPPE Selection box filter
+  const [sortBySelect, setsortBySelect] = useState<string>('');
 
   // Sort By Event handler
   const handleSelectChange = (value) => {
@@ -129,6 +130,7 @@ const CPPESCoreView = ({
       });
       setData(data);
     }
+    setsortBySelect(value);
     setActiveClassName(-1);
   };
 
