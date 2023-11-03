@@ -178,7 +178,7 @@ export interface ICPPEScore{
   cppeEffectValue: number;
   practiceCode: string;
   practiceName: string;
-  practiceDescription: string;
+  practiceInfo: string;
   practiceCategory: number;
   rationale: string;
   practiceCategoryId: number;

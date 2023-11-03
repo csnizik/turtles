@@ -361,6 +361,7 @@ click-check{
         font-weight: $heavy-weight;
         font-style: bold;
         margin: 0px 0px 12px 0px;
+        cursor:pointer;
     }
 
 
@@ -440,26 +441,27 @@ click-check{
     }
 
     .left {
-        // background-color: blue;
+      // background-color: blue;
+        flex-direction: row;
         p {
             margin: 0px 0px 24px 0px;  
-            text-align: justify;
-        }
-        width: 60%;
+            text-align: start;
+            justify-content: space-around;
+        }  
+        width: 55%;
     }
 
     .right {
+        position:flex;
+        vertical-align: top;
         img {
-            position:flex; 
             width: 240px;
-            height: 104px;
+            height: 160px;
             //padding: 10px,0px,0px,10px;
-            margin: 10px 0px 0px 10px;
-            flex-direction: row;
+            margin: 40px 0px 0px 10px;
         }  
-        width: 40%;
+        width: 45%;
     }
-
 }
 
 .caution-container{

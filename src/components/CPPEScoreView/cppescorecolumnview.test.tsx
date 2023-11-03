@@ -11,9 +11,11 @@ const mockedResourcesResponse = [
     practiceName: 'Alley Cropping',
     practiceCode: '311',
     resourceConcernsId: 154,
+    practiceCategoryId: 10,
     cppeEffectValue: 5,
     rationale:
       'Vegetation and surface litter reduce raindrop impact and slow runoff water increasing infiltration.',
+    practiceInfo: 'Alley cropping can be used to  achieve objectives such as reducing surface water runoff and soil erosion, altering water table depths, reducing offsite movement of nutrients, modifying the microclimate for improved crop production, providing habitat for wildlife and beneficial insects, and increasing net carbon storage. Alley cropping can also diversify a farm enterprise by adding tree/shrub products or non-traditional or value-added crops such as sunflowers or medicinial herbs. Some common examples of alley cropping plantings include wheat, corn, soybeans, or hay planted between rows of black walnut or pecan trees.',  
     createdBy: 1,
     createdDate: '2023-07-11T11:35:28.16',
     lastModifiedBy: null,
@@ -54,6 +56,7 @@ describe('Verify CPPEScore is rendered correctly', () => {
     expect(screen.getByText('Conservation Practice(s)')).toBeInTheDocument();
     expect(screen.getByText('Filter by CPPE')).toBeInTheDocument();
     expect(screen.getByText('Filter by practice category')).toBeInTheDocument();
+    expect(screen.getByText('Practice Information')).toBeInTheDocument();
     expect(screen.getByText('Apply')).toBeInTheDocument();
   });
 

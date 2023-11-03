@@ -155,7 +155,8 @@ const CPPESCoreView = ({
         title: p.practiceName,
         rationale: p.rationale,
         practiceCategoryId: p.practiceCategoryId,
-        practiceId: p.practiceId
+        practiceId: p.practiceId,
+        practiceInfo:p.practiceInfo 
       }));
 
       fetchData.sort((a: any, b: any): any => {
@@ -482,8 +483,9 @@ const CPPESCoreView = ({
                 {flag === false ? (
                   <h1>...</h1>
                 ) : (
-                  <div className='right-pane-container'>            
-                    <CPPEPracticeLink practice={practice[0]}/>
+                  <div className='right-pane-container'>      
+                  <CPPEPracticeLink practice={practice[0]}/>    
+                    
                     <div className='cpp-score'>
                       {(() => {
                         const item = getCPPScore(practice, 0, index);
@@ -536,17 +538,16 @@ const CPPESCoreView = ({
                             <GetElement
                               array={practice}
                               index={0}
-                              property='practiceDescription'
+                              property='practiceInfo'
                             />{' '}
                             {/* <p>Tree/shrub establishment involves planting seedlings or cuttings, seeding, or creating conditions that promote natural regeneration.</p> */}
-                          </p>
+                          </p>    
                       </div> 
-                      <div className='right'>
-                          <img
+                       <div className='right'>  
+                          <img 
                             alt=''
                             src='../../../images/landscape-initiatives-images/default.jpg'
-                          /> 
-                         
+                             /> 
                        </div>   
                     </div>
                     <CPPECaution practiceCode={practice[0].practiceCode}/>
