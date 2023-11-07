@@ -32,7 +32,11 @@ const ConservationPracticeVideo = ({ selectedPracticeId }: any) => {
                 />
               )}
               {fromPdfReport && (
-                <a href={data[0].videoLink} className='video-outer-link'>
+                <a
+                  href={data[0].videoLink}
+                  className='video-outer-link'
+                  aria-label={`${data[0].videoName} Video Link`}
+                >
                   <iframe
                     name='iframeVideo'
                     className='videoImg'
